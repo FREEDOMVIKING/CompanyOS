@@ -675,6 +675,16 @@
         "companyos/actionhandoffctl",
         "handoff"
       ]
+    },
+    {
+      "id": "guarded-opportunity-action-executor",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/opportunityexecctl",
+        "run"
+      ]
     }
   ]
 }

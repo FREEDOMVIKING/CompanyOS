@@ -13420,5 +13420,61 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T19:38:44.623160+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 16128
+    }
+  },
+  {
+    "timestamp": "2026-07-18T19:38:44.756629+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 17695,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T19:38:44.907725+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 2,
+      "jobs_run": 2,
+      "failures": 0,
+      "results": [
+        {
+          "id": "executive-briefing",
+          "success": true,
+          "return_code": 0,
+          "stdout": "        \"tradeoffs\": [\n            \"Financial value is not yet quantified.\"\n          ],\n          \"recommended_outcome\": \"approve_internal_next_step\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:01:44.490281+00:00\",\n        \"updated_at\": \"2026-07-18T04:01:44.490283+00:00\"\n      }\n    ],\n    \"performance_summary\": {\n      \"headline\": \"CompanyOS performance health score: 60.0/100\",\n      \"health_score\": 60.0,\n      \"attention_items\": [\n        \"Task completion rate is below 50%.\",\n        \"Five or more CEO decisions are waiting for review.\",\n        \"$12,750.00 remains outstanding in receivables.\"\n      ]\n    },\n    \"forecast_summary\": {\n      \"headline\": \"30-day expected cash inflow forecast: $6,310.00\",\n      \"confidence_percent\": 80.0,\n      \"scenarios\": {\n        \"conservative\": 4101.5,\n        \"expected\": 6310.0,\n        \"optimistic\": 8518.5\n      },\n      \"top_risks\": [\n        \"Low task completion may delay expected cash inflow.\",\n        \"Low project completion may delay revenue recognition.\"\n      ],\n      \"top_opportunities\": [\n        \"Recover up to $12,750.00 in outstanding receivables.\"\n      ]\n    },\n    \"improvement_summary\": {\n      \"headline\": \"4 improvement opportunity(s) identified; 0 added to the backlog.\",\n      \"top_recommendations\": [\n        {\n          \"id\": \"improvement-7a8c985c7335\",\n          \"title\": \"Improve receivable recovery process\",\n          \"category\": \"finance\",\n          \"description\": \"2 invoices have $12,750.00 outstanding.\",\n          \"recommendation\": \"Prioritize owner-reviewed follow-up preparation for the largest balances.\",\n          \"impact\": 95,\n          \"urgency\": 95,\n          \"ease\": 70,\n          \"evidence\": 98,\n          \"score\": 91.85,\n          \"priority_band\": \"critical\",\n          \"source\": \"invoice_registry\",\n          \"owner_approval_required\": true,\n          \"automatic_code_changes\": false,\n          \"automatic_execution\": false,\n          \"external_action_authorized\": false,\n          \"created_at\": \"2026-07-18T19:32:14.683172+00:00\",\n          \"rank\": 1\n        },\n        {\n          \"id\": \"improvement-3cce388a9d1b\",\n          \"title\": \"Clear pending CEO decisions\",\n          \"category\": \"governance\",\n          \"description\": \"20 CEO decisions are waiting for owner review.\",\n          \"recommendation\": \"Review the highest-scoring pending decisions first.\",\n          \"impact\": 80,\n          \"urgency\": 86,\n          \"ease\": 88,\n          \"evidence\": 95,\n          \"score\": 86.0,\n          \"priority_band\": \"critical\",\n          \"source\": \"ceo_decision_queue\",\n          \"owner_approval_required\": true,\n          \"automatic_code_changes\": false,\n          \"automatic_execution\": false,\n          \"external_action_authorized\": false,\n          \"created_at\": \"2026-07-18T19:32:14.683157+00:00\",\n          \"rank\": 2\n        },\n        {\n          \"id\": \"improvement-5f0fd4340eee\",\n          \"title\": \"Reduce pending task backlog\",\n          \"category\": \"operations\",\n          \"description\": \"12 internal tasks are pending.\",\n          \"recommendation\": \"Review, group, and sequence pending internal tasks by business impact.\",\n          \"impact\": 82,\n          \"urgency\": 78,\n          \"ease\": 72,\n          \"evidence\": 90,\n          \"score\": 80.9,\n          \"priority_band\": \"high\",\n          \"source\": \"product_execution_tasks\",\n          \"owner_approval_required\": true,\n          \"automatic_code_changes\": false,\n          \"automatic_execution\": false,\n          \"external_action_authorized\": false,\n          \"created_at\": \"2026-07-18T19:32:14.683145+00:00\",\n          \"rank\": 3\n        },\n        {\n          \"id\": \"improvement-ecf77102bf65\",\n          \"title\": \"Establish internal review automations\",\n          \"category\": \"automation\",\n          \"description\": \"No automation records were found.\",\n          \"recommendation\": \"Create internal-only review schedules for priorities, decisions, and operational health.\",\n          \"impact\": 68,\n          \"urgency\": 58,\n          \"ease\": 75,\n          \"evidence\": 70,\n          \"score\": 66.45,\n          \"priority_band\": \"medium\",\n          \"source\": \"automation_registry\",\n          \"owner_approval_required\": true,\n          \"automatic_code_changes\": false,\n          \"automatic_execution\": false,\n          \"external_action_authorized\": false,\n          \"created_at\": \"2026-07-18T19:32:14.683179+00:00\",\n          \"rank\": 4\n        }\n      ]\n    },\n    \"attention_items\": [\n      \"20 CEO decision(s) are pending review.\"\n    ],\n    \"recommended_next_actions\": [\n      \"Review receivable: Sample Contractor\",\n      \"Review receivable: E2E Test Customer\",\n      \"Review follow-up: Sample Contractor\",\n      \"Recover receivable: Sample Contractor\",\n      \"Recover receivable: E2E Test Customer\"\n    ],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T19:38:44.685659+00:00",
+          "finished_at": "2026-07-18T19:38:44.821391+00:00",
+          "duration_seconds": 0.136
+        },
+        {
+          "id": "guarded-opportunity-action-executor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_action_execution_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T19:38:44.883092+00:00\",\n    \"system_ready\": false,\n    \"executed_count\": 0,\n    \"blocked_count\": 0,\n    \"failure_count\": 0,\n    \"results\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T19:38:44.822184+00:00",
+          "finished_at": "2026-07-18T19:38:44.893567+00:00",
+          "duration_seconds": 0.071
+        }
+      ]
+    }
   }
 ]
