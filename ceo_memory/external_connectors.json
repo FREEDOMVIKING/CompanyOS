@@ -1,0 +1,27 @@
+[
+  {
+    "id": "github_companyos",
+    "name": "CompanyOS GitHub",
+    "connector_type": "git_repository",
+    "module": "agents.github_connector",
+    "enabled": true,
+    "healthy": true,
+    "repository": "FREEDOMVIKING/CompanyOS",
+    "repository_url": "https://github.com/FREEDOMVIKING/CompanyOS.git",
+    "external_network_use": true,
+    "supports_spending": false,
+    "supports_publication": true,
+    "automatic_publication": false,
+    "requires_owner_approval": true,
+    "allowed_actions": [
+      "status",
+      "diff",
+      "history",
+      "stage",
+      "commit",
+      "pull",
+      "push"
+    ],
+    "updated_at": "2026-07-18T00:26:23.444382+00:00"
+  }
+]
