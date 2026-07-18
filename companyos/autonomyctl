@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+root = Path.home() / "companyos"
+memory = root / "ceo_memory"
+policy_path = memory / "high_autonomy_policy.json"
+health_path = memory / "high_autonomy_health.json"
+kill_switch = memory / "HALT_AUTONOMY"
+
+
+def load():
+    return json.loads(policy_path.read_text(encoding="utf-8"))
+
+
+def save_health(data):
+    health_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+
+action = sys.argv[1] if len(sys.argv) > 1 else "status"
+policy = load()
+
+if action == "status":
+    halted = kill_switch.exists()
+    result = {
+        "success": True,
+        "mode": policy.get("mode"),
+        "enabled": policy.get("enabled", False) and not halted,
+        "halted": halted,
+        "policy": policy,
+    }
+    save_health(result)
+    print(json.dumps(result, indent=2))
+    raise SystemExit(0)
+
+if action == "halt":
+    kill_switch.write_text("AUTONOMY HALTED\n", encoding="utf-8")
+    result = {
+        "success": True,
+        "status": "autonomy_halted",
+    }
+    save_health(result)
+    print(json.dumps(result, indent=2))
+    raise SystemExit(0)
+
+if action == "resume":
+    if kill_switch.exists():
+        kill_switch.unlink()
+    result = {
+        "success": True,
+        "status": "autonomy_resumed",
+    }
+    save_health(result)
+    print(json.dumps(result, indent=2))
+    raise SystemExit(0)
+
+print(json.dumps({
+    "success": False,
+    "error": "Unknown action",
+    "allowed": ["status", "halt", "resume"]
+}, indent=2))
+raise SystemExit(1)
