@@ -39,7 +39,7 @@
     {
       "id": "priority-ranking",
       "enabled": true,
-      "interval_seconds": 1800,
+      "interval_seconds": 600,
       "command": [
         "python",
         "companyos/priorityctl",
@@ -49,7 +49,7 @@
     {
       "id": "decision-preparation",
       "enabled": true,
-      "interval_seconds": 1800,
+      "interval_seconds": 600,
       "command": [
         "python",
         "companyos/decisionctl",
@@ -119,7 +119,7 @@
     {
       "id": "autonomous-orchestrator",
       "enabled": true,
-      "interval_seconds": 3600,
+      "interval_seconds": 900,
       "command": [
         "python",
         "companyos/orchestratorctl",
@@ -149,11 +149,21 @@
     {
       "id": "exception-recovery",
       "enabled": true,
-      "interval_seconds": 900,
+      "interval_seconds": 600,
       "command": [
         "python",
         "companyos/recoveryctl",
         "recover"
+      ]
+    },
+    {
+      "id": "resource-workload-optimizer",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/resourcctl",
+        "optimize"
       ]
     }
   ]

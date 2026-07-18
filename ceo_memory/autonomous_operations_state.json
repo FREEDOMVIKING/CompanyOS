@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 39,
+  "cycle_count": 40,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T13:29:54.468540+00:00",
@@ -35,35 +35,35 @@
       "failure_count": 0
     },
     "priority-ranking": {
-      "last_started_at": "2026-07-18T13:29:55.018530+00:00",
-      "last_started_epoch": 1784381395.0185285,
+      "last_started_at": "2026-07-18T13:57:05.653601+00:00",
+      "last_started_epoch": 1784383025.653601,
       "last_command": [
         "python",
         "companyos/priorityctl",
         "rank"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T13:29:55.176101+00:00",
+      "last_finished_at": "2026-07-18T13:57:05.767424+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.158,
-      "run_count": 17,
+      "last_duration_seconds": 0.114,
+      "run_count": 18,
       "failure_count": 0
     },
     "decision-preparation": {
-      "last_started_at": "2026-07-18T13:29:55.179043+00:00",
-      "last_started_epoch": 1784381395.1790395,
+      "last_started_at": "2026-07-18T13:57:05.767968+00:00",
+      "last_started_epoch": 1784383025.7679677,
       "last_command": [
         "python",
         "companyos/decisionctl",
         "prepare"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T13:29:55.335139+00:00",
+      "last_finished_at": "2026-07-18T13:57:05.858260+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.156,
-      "run_count": 17,
+      "last_duration_seconds": 0.09,
+      "run_count": 18,
       "failure_count": 0
     },
     "execution-plan-preparation": {
@@ -225,9 +225,25 @@
       "last_duration_seconds": 0.085,
       "run_count": 1,
       "failure_count": 0
+    },
+    "resource-workload-optimizer": {
+      "last_started_at": "2026-07-18T13:57:05.859065+00:00",
+      "last_started_epoch": 1784383025.8590648,
+      "last_command": [
+        "python",
+        "companyos/resourcctl",
+        "optimize"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T13:57:05.940402+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.081,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T13:52:12.087961+00:00",
-  "last_cycle_job_count": 1,
+  "last_cycle_at": "2026-07-18T13:57:05.941038+00:00",
+  "last_cycle_job_count": 3,
   "last_cycle_success": true
 }
