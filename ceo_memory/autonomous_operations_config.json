@@ -475,6 +475,16 @@
         "companyos/eligibilityctl",
         "run"
       ]
+    },
+    {
+      "id": "autonomous-action-dispatcher",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/dispatchctl",
+        "run"
+      ]
     }
   ]
 }
