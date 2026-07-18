@@ -305,6 +305,16 @@
         "companyos/githubintelctl",
         "analyze"
       ]
+    },
+    {
+      "id": "github-change-intelligence",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/githubchangectl",
+        "analyze"
+      ]
     }
   ]
 }

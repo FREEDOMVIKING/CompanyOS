@@ -174,5 +174,100 @@
       "status": "no_recovery_needed",
       "issues": []
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:48:15.105269+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_094757\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_094757/agents\",\n    \"backups/system_snapshot_20260718_094757/companyos\",\n    \"backups/system_snapshot_20260718_094757/ceo_memory\"\n  ],\n  \"file_count\": 431,\n  \"removed_old_backups\": [],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "autonomous-operations-unhealthy",
+            "severity": "high",
+            "recovery": "restart-scheduler"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 18405\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:github-read-connector",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "github-read-connector"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": false,
+                "return_code": 1,
+                "stdout": "on\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-fd987e87d48b\\\",\\n        \\\"title\\\": \\\"Create deployment and launch checklist\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-fe00844854d2\\\",\\n        \\\"title\\\": \\\"Review new lead\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-ae5c422396f1\\\",\\n        \\\"title\\\": \\\"Review receivable: E2E Test Customer\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-95bcc2a7d742\\\",\\n        \\\"title\\\": \\\"Recover receivable: Sample Contractor\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-7e482dfbea21\\\",\\n        \\\"title\\\": \\\"Recover receivable: E2E Test Customer\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-ba6fcf48bdd5\\\",\\n        \\\"title\\\": \\\"Advance lead: Driveway Replacement\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      },\\n      {\\n        \\\"source\\\": \\\"ceo_decision\\\",\\n        \\\"id\\\": \\\"decision-8d0619a3b216\\\",\\n        \\\"title\\\": \\\"Advance project: E2E Test Project\\\",\\n        \\\"classification\\\": \\\"owner_review\\\",\\n        \\\"reason\\\": \\\"Pending CEO decision.\\\"\\n      }\\n    ],\\n    \\\"count\\\": 20\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T14:48:09.556117+00:00\",\n      \"finished_at\": \"2026-07-18T14:48:09.642970+00:00\",\n      \"duration_seconds\": 0.087\n    },\n    {\n      \"id\": \"execution-gateway\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_gateway_cycle_complete\\\",\\n  \\\"state\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T14:48:09.721144+00:00\\\",\\n    \\\"processed_this_cycle\\\": 0,\\n    \\\"completed_total\\\": 1,\\n    \\\"pending_total\\\": 0,\\n    \\\"approval_required_total\\\": 0,\\n    \\\"halted\\\": false\\n  },\\n  \\\"results\\\": []\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T14:48:09.643959+00:00\",\n      \"finished_at\": \"2026-07-18T14:48:09.736548+00:00\",\n      \"duration_seconds\": 0.093\n    },\n    {\n      \"id\": \"github-intelligence\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"github_intelligence_analysis_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T14:48:09.848167+00:00\\\",\\n    \\\"repository\\\": \\\"FREEDOMVIKING/CompanyOS\\\",\\n    \\\"live_repository_data\\\": {\\n      \\\"name\\\": \\\"CompanyOS\\\",\\n      \\\"full_name\\\": \\\"FREEDOMVIKING/CompanyOS\\\",\\n      \\\"private\\\": true,\\n      \\\"updated_at\\\": \\\"2026-07-18T14:35:32Z\\\",\\n      \\\"default_branch\\\": \\\"main\\\"\\n    },\\n    \\\"local_git\\\": {\\n      \\\"branch\\\": \\\"main\\\",\\n      \\\"working_tree_clean\\\": false,\\n      \\\"latest_commit_hash\\\": \\\"6fbe7cd9457448ca8e0ec69bf67d478fa828a902\\\",\\n      \\\"latest_commit_time\\\": \\\"2026-07-18T09:48:05-05:00\\\",\\n      \\\"latest_commit_subject\\\": \\\"Install GitHub intelligence integration\\\"\\n    },\\n    \\\"signals\\\": [\\n      \\\"uncommitted_changes\\\"\\n    ],\\n    \\\"recommendations\\\": [\\n      \\\"Review and either commit or restore uncommitted changes.\\\"\\n    ],\\n    \\\"automatic_repository_mutation\\\": false,\\n    \\\"automatic_issue_creation\\\": false,\\n    \\\"automatic_pull_request_creation\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T14:48:09.737340+00:00\",\n      \"finished_at\": \"2026-07-18T14:48:09.865123+00:00\",\n      \"duration_seconds\": 0.128\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            },
+            {
+              "attempt": 2,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T14:48:15.073997+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 227\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
   }
 ]
