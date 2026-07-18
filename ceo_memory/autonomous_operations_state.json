@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 61,
+  "cycle_count": 62,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T14:30:52.191310+00:00",
@@ -561,9 +561,25 @@
       "last_duration_seconds": 0.092,
       "run_count": 1,
       "failure_count": 0
+    },
+    "incident-escalation": {
+      "last_started_at": "2026-07-18T15:02:18.188771+00:00",
+      "last_started_epoch": 1784386938.1887705,
+      "last_command": [
+        "python",
+        "companyos/incidentctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T15:02:18.262951+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.074,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T15:00:33.149751+00:00",
+  "last_cycle_at": "2026-07-18T15:02:18.263750+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
