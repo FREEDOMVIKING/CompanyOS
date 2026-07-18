@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 35,
+  "cycle_count": 36,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T13:29:54.468540+00:00",
@@ -161,9 +161,25 @@
       "last_duration_seconds": 0.08,
       "run_count": 1,
       "failure_count": 0
+    },
+    "autonomous-orchestrator": {
+      "last_started_at": "2026-07-18T13:40:50.504325+00:00",
+      "last_started_epoch": 1784382050.5043252,
+      "last_command": [
+        "python",
+        "companyos/orchestratorctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T13:40:51.339438+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.835,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T13:36:45.341539+00:00",
+  "last_cycle_at": "2026-07-18T13:40:51.340192+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }

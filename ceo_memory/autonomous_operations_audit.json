@@ -2118,5 +2118,255 @@
       },
       "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
     }
+  },
+  {
+    "timestamp": "2026-07-18T13:40:50.452771+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 18892
+    }
+  },
+  {
+    "timestamp": "2026-07-18T13:40:50.564886+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 24140,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T13:40:50.728372+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_status",
+      "enabled": true,
+      "running": true,
+      "pid": 24140,
+      "halted": false,
+      "loop_interval_seconds": 900,
+      "configured_job_count": 11,
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 35,
+        "jobs": {
+          "integrity-check": {
+            "last_started_at": "2026-07-18T13:29:54.468540+00:00",
+            "last_started_epoch": 1784381394.468331,
+            "last_command": [
+              "python",
+              "companyos/integrityctl",
+              "check"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:54.819594+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.351,
+            "run_count": 9,
+            "failure_count": 0
+          },
+          "opportunity-discovery": {
+            "last_started_at": "2026-07-18T13:29:54.822469+00:00",
+            "last_started_epoch": 1784381394.8224666,
+            "last_command": [
+              "python",
+              "companyos/opportunitydiscoveryctl",
+              "discover"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.016525+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.194,
+            "run_count": 17,
+            "failure_count": 0
+          },
+          "priority-ranking": {
+            "last_started_at": "2026-07-18T13:29:55.018530+00:00",
+            "last_started_epoch": 1784381395.0185285,
+            "last_command": [
+              "python",
+              "companyos/priorityctl",
+              "rank"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.176101+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.158,
+            "run_count": 17,
+            "failure_count": 0
+          },
+          "decision-preparation": {
+            "last_started_at": "2026-07-18T13:29:55.179043+00:00",
+            "last_started_epoch": 1784381395.1790395,
+            "last_command": [
+              "python",
+              "companyos/decisionctl",
+              "prepare"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.335139+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.156,
+            "run_count": 17,
+            "failure_count": 0
+          },
+          "execution-plan-preparation": {
+            "last_started_at": "2026-07-18T13:29:55.337215+00:00",
+            "last_started_epoch": 1784381395.337213,
+            "last_command": [
+              "python",
+              "companyos/executionplanctl",
+              "prepare"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.486647+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.149,
+            "run_count": 17,
+            "failure_count": 0
+          },
+          "improvement-analysis": {
+            "last_started_at": "2026-07-18T13:29:55.489733+00:00",
+            "last_started_epoch": 1784381395.4897292,
+            "last_command": [
+              "python",
+              "companyos/improvementctl",
+              "analyze"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.651055+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.161,
+            "run_count": 9,
+            "failure_count": 0
+          },
+          "performance-analytics": {
+            "last_started_at": "2026-07-18T13:29:55.653595+00:00",
+            "last_started_epoch": 1784381395.653592,
+            "last_command": [
+              "python",
+              "companyos/performancectl",
+              "collect"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.784425+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.131,
+            "run_count": 9,
+            "failure_count": 0
+          },
+          "business-forecast": {
+            "last_started_at": "2026-07-18T13:29:55.787362+00:00",
+            "last_started_epoch": 1784381395.7873585,
+            "last_command": [
+              "python",
+              "companyos/forecastctl",
+              "forecast"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.920177+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.133,
+            "run_count": 5,
+            "failure_count": 0
+          },
+          "local-backup": {
+            "last_started_at": "2026-07-18T11:29:27.236652+00:00",
+            "last_started_epoch": 1784374167.2366505,
+            "last_command": [
+              "python",
+              "companyos/integrityctl",
+              "backup"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T11:29:27.750319+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.514,
+            "run_count": 2,
+            "failure_count": 0
+          },
+          "executive-briefing": {
+            "last_started_at": "2026-07-18T13:36:45.261180+00:00",
+            "last_started_epoch": 1784381805.26118,
+            "last_command": [
+              "python",
+              "companyos/briefctl",
+              "generate"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:36:45.340808+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.08,
+            "run_count": 1,
+            "failure_count": 0
+          },
+          "autonomous-orchestrator": {
+            "last_started_at": "2026-07-18T13:40:50.504325+00:00",
+            "last_started_epoch": 1784382050.5043252,
+            "last_command": [
+              "python",
+              "companyos/orchestratorctl",
+              "run"
+            ],
+            "status": "running"
+          }
+        },
+        "last_cycle_at": "2026-07-18T13:36:45.341539+00:00",
+        "last_cycle_job_count": 1,
+        "last_cycle_success": true
+      },
+      "health": {
+        "healthy": true,
+        "running": true,
+        "halted": false,
+        "last_cycle_at": "2026-07-18T13:36:45.341539+00:00",
+        "last_cycle_job_count": 1,
+        "failure_count": 0,
+        "last_error": null
+      },
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T13:40:51.344141+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 1,
+      "jobs_run": 1,
+      "failures": 0,
+      "results": [
+        {
+          "id": "autonomous-orchestrator",
+          "success": true,
+          "return_code": 0,
+          "stdout": "\\n      \\\"top_recommendations\\\": [\\n        {\\n          \\\"id\\\": \\\"improvement-55149042e709\\\",\\n          \\\"title\\\": \\\"Shorten critical-priority response time\\\",\\n          \\\"category\\\": \\\"strategy\\\",\\n          \\\"description\\\": \\\"2 critical priorities are currently ranked.\\\",\\n          \\\"recommendation\\\": \\\"Review critical priorities before lower-value operational work.\\\",\\n          \\\"impact\\\": 92,\\n          \\\"urgency\\\": 96,\\n          \\\"ease\\\": 85,\\n          \\\"evidence\\\": 96,\\n          \\\"score\\\": 92.95,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"executive_priority_rankings\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T13:40:51.081347+00:00\\\",\\n          \\\"rank\\\": 1\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-07760cab4eab\\\",\\n          \\\"title\\\": \\\"Improve receivable recovery process\\\",\\n          \\\"category\\\": \\\"finance\\\",\\n          \\\"description\\\": \\\"2 invoices have $12,750.00 outstanding.\\\",\\n          \\\"recommendation\\\": \\\"Prioritize owner-reviewed follow-up preparation for the largest balances.\\\",\\n          \\\"impact\\\": 95,\\n          \\\"urgency\\\": 95,\\n          \\\"ease\\\": 70,\\n          \\\"evidence\\\": 98,\\n          \\\"score\\\": 91.85,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"invoice_registry\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T13:40:51.081339+00:00\\\",\\n          \\\"rank\\\": 2\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-292ce2104580\\\",\\n          \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n          \\\"category\\\": \\\"governance\\\",\\n          \\\"description\\\": \\\"20 CEO decisions are waiting for owner review.\\\",\\n          \\\"recommendation\\\": \\\"Review the highest-scoring pending decisions first.\\\",\\n          \\\"impact\\\": 80,\\n          \\\"urgency\\\": 86,\\n          \\\"ease\\\": 88,\\n          \\\"evidence\\\": 95,\\n          \\\"score\\\": 86.0,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"ceo_decision_queue\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T13:40:51.081325+00:00\\\",\\n          \\\"rank\\\": 3\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-238cc408abed\\\",\\n          \\\"title\\\": \\\"Reduce pending task backlog\\\",\\n          \\\"category\\\": \\\"operations\\\",\\n          \\\"description\\\": \\\"12 internal tasks are pending.\\\",\\n          \\\"recommendation\\\": \\\"Review, group, and sequence pending internal tasks by business impact.\\\",\\n          \\\"impact\\\": 82,\\n          \\\"urgency\\\": 78,\\n          \\\"ease\\\": 72,\\n          \\\"evidence\\\": 90,\\n          \\\"score\\\": 80.9,\\n          \\\"priority_band\\\": \\\"high\\\",\\n          \\\"source\\\": \\\"product_execution_tasks\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T13:40:51.081313+00:00\\\",\\n          \\\"rank\\\": 4\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-6d4315538a1b\\\",\\n          \\\"title\\\": \\\"Establish internal review automations\\\",\\n          \\\"category\\\": \\\"automation\\\",\\n          \\\"description\\\": \\\"No automation records were found.\\\",\\n          \\\"recommendation\\\": \\\"Create internal-only review schedules for priorities, decisions, and operational health.\\\",\\n          \\\"impact\\\": 68,\\n          \\\"urgency\\\": 58,\\n          \\\"ease\\\": 75,\\n          \\\"evidence\\\": 70,\\n          \\\"score\\\": 66.45,\\n          \\\"priority_band\\\": \\\"medium\\\",\\n          \\\"source\\\": \\\"automation_registry\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T13:40:51.081352+00:00\\\",\\n          \\\"rank\\\": 5\\n        }\\n      ]\\n    },\\n    \\\"attention_items\\\": [\\n      \\\"20 CEO decision(s) are pending review.\\\",\\n      \\\"2 critical priority item(s) require attention.\\\"\\n    ],\\n    \\\"recommended_next_actions\\\": [\\n      \\\"Review receivable: Sample Contractor\\\",\\n      \\\"Review receivable: E2E Test Customer\\\",\\n      \\\"Recover receivable: Sample Contractor\\\",\\n      \\\"Recover receivable: E2E Test Customer\\\",\\n      \\\"Advance lead: Driveway Replacement\\\"\\n    ],\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\",\n          \"duration_seconds\": 0.076,\n          \"attempt\": 1\n        }\n      ]\n    }\n  ]\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T13:40:50.504325+00:00",
+          "finished_at": "2026-07-18T13:40:51.339438+00:00",
+          "duration_seconds": 0.835
+        }
+      ]
+    }
   }
 ]

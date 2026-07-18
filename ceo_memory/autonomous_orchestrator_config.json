@@ -1,0 +1,63 @@
+{
+  "enabled": true,
+  "automatic_cycle_execution": true,
+  "continue_on_noncritical_failure": true,
+  "maximum_retries_per_step": 1,
+  "step_timeout_seconds": 300,
+  "automatic_internal_analysis": true,
+  "automatic_internal_planning": true,
+  "automatic_internal_reporting": true,
+  "automatic_local_backup": true,
+  "automatic_integrity_check": true,
+  "automatic_customer_contact": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false,
+  "pipeline": [
+    {
+      "id": "integrity",
+      "critical": true,
+      "command": ["python", "companyos/integrityctl", "check"]
+    },
+    {
+      "id": "opportunity-discovery",
+      "critical": false,
+      "command": ["python", "companyos/opportunitydiscoveryctl", "discover"]
+    },
+    {
+      "id": "priority-ranking",
+      "critical": true,
+      "command": ["python", "companyos/priorityctl", "rank"]
+    },
+    {
+      "id": "decision-preparation",
+      "critical": false,
+      "command": ["python", "companyos/decisionctl", "prepare"]
+    },
+    {
+      "id": "execution-planning",
+      "critical": false,
+      "command": ["python", "companyos/executionplanctl", "prepare"]
+    },
+    {
+      "id": "continuous-improvement",
+      "critical": false,
+      "command": ["python", "companyos/improvementctl", "analyze"]
+    },
+    {
+      "id": "performance-analytics",
+      "critical": false,
+      "command": ["python", "companyos/performancectl", "collect"]
+    },
+    {
+      "id": "business-forecast",
+      "critical": false,
+      "command": ["python", "companyos/forecastctl", "forecast"]
+    },
+    {
+      "id": "executive-brief",
+      "critical": false,
+      "command": ["python", "companyos/briefctl", "generate"]
+    }
+  ]
+}
