@@ -125,6 +125,16 @@
         "companyos/orchestratorctl",
         "run"
       ]
+    },
+    {
+      "id": "goal-strategy",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/goalctl",
+        "generate"
+      ]
     }
   ]
 }

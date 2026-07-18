@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 36,
+  "cycle_count": 37,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T13:29:54.468540+00:00",
@@ -177,9 +177,25 @@
       "last_duration_seconds": 0.835,
       "run_count": 1,
       "failure_count": 0
+    },
+    "goal-strategy": {
+      "last_started_at": "2026-07-18T13:43:26.645225+00:00",
+      "last_started_epoch": 1784382206.6452255,
+      "last_command": [
+        "python",
+        "companyos/goalctl",
+        "generate"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T13:43:26.744071+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.099,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T13:40:51.340192+00:00",
+  "last_cycle_at": "2026-07-18T13:43:26.744805+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
