@@ -835,6 +835,16 @@
         "companyos/ceodecisiongovernctl",
         "govern"
       ]
+    },
+    {
+      "id": "governed-execution-planner",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/governedplanctl",
+        "plan"
+      ]
     }
   ]
 }

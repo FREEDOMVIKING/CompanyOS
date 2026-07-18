@@ -1674,5 +1674,65 @@
         "automatic_destructive_actions": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T20:38:19.870998+00:00",
+    "action": "learn",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "learning_feedback_cycle_complete",
+      "state": {
+        "generated_at": "2026-07-18T20:38:19.869158+00:00",
+        "decision_history_count": 0,
+        "approved_decisions": 0,
+        "rejected_decisions": 0,
+        "deferred_decisions": 0,
+        "completed_improvements": 0,
+        "proposed_improvements": 5,
+        "performance_health_score": 60.0,
+        "active_goal_count": 10,
+        "weights_before": {
+          "urgency": 0.3327,
+          "profitability": 0.0068,
+          "risk_reduction": 0.3303,
+          "execution_ease": 0.328,
+          "evidence": 0.0023
+        },
+        "weights_after": {
+          "urgency": 0.3328,
+          "profitability": 0.0059,
+          "risk_reduction": 0.3307,
+          "execution_ease": 0.3287,
+          "evidence": 0.002
+        },
+        "weights_adjusted": true
+      },
+      "insights": {
+        "generated_at": "2026-07-18T20:38:19.869515+00:00",
+        "count": 3,
+        "insights": [
+          {
+            "type": "improvement_backlog",
+            "message": "Improvement backlog is growing faster than completion.",
+            "signal": "favor_execution_ease"
+          },
+          {
+            "type": "operating_health",
+            "message": "Operating health is below 70; prioritize risk reduction and execution reliability.",
+            "signal": "favor_risk_reduction"
+          },
+          {
+            "type": "goal_load",
+            "message": "Too many active goals may dilute execution focus.",
+            "signal": "increase_urgency_weight"
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
   }
 ]
