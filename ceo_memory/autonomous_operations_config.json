@@ -645,6 +645,16 @@
         "companyos/opportunityactivatectl",
         "activate"
       ]
+    },
+    {
+      "id": "opportunity-action-translation",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunitytranslatectl",
+        "translate"
+      ]
     }
   ]
 }
