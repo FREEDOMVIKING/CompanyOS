@@ -7133,5 +7133,131 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T15:54:43.746956+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 17033
+    }
+  },
+  {
+    "timestamp": "2026-07-18T15:54:43.861664+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 20569,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T15:54:44.966478+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 9,
+      "jobs_run": 9,
+      "failures": 0,
+      "results": [
+        {
+          "id": "dependency-readiness",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"readiness_check_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:54:43.899075+00:00\",\n    \"readiness_score\": 98.7,\n    \"controllers\": [\n      {\n        \"name\": \"operationsctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"recoveryctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"learningctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"resourcctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"actionctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"healthctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"missionctl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"governancectl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"outcomectl\",\n        \"ready\": true\n      },\n      {\n        \"name\": \"strategyfeedbackctl\",\n        \"ready\": true\n      }\n    ],\n    \"enabled_scheduler_jobs\": 49,\n    \"health_files_checked\": 66,\n    \"issues\": [\n      {\n        \"type\": \"unhealthy_components\",\n        \"items\": [\n          \"autonomous_operations_health.json\"\n        ]\n      }\n    ],\n    \"ready\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:43.805301+00:00",
+          "finished_at": "2026-07-18T15:54:43.911999+00:00",
+          "duration_seconds": 0.107
+        },
+        {
+          "id": "github-intelligence",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"github_intelligence_analysis_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:54:44.041964+00:00\",\n    \"repository\": \"FREEDOMVIKING/CompanyOS\",\n    \"live_repository_data\": {\n      \"name\": \"CompanyOS\",\n      \"full_name\": \"FREEDOMVIKING/CompanyOS\",\n      \"private\": true,\n      \"updated_at\": \"2026-07-18T15:34:55Z\",\n      \"default_branch\": \"main\"\n    },\n    \"local_git\": {\n      \"branch\": \"main\",\n      \"working_tree_clean\": false,\n      \"latest_commit_hash\": \"88d0b5ad2f453a69c064cb4ef915a18e857cf5b4\",\n      \"latest_commit_time\": \"2026-07-18T10:46:06-05:00\",\n      \"latest_commit_subject\": \"Install autonomous dispatcher outcome feedback loop\"\n    },\n    \"signals\": [\n      \"uncommitted_changes\"\n    ],\n    \"recommendations\": [\n      \"Review and either commit or restore uncommitted changes.\"\n    ],\n    \"automatic_repository_mutation\": false,\n    \"automatic_issue_creation\": false,\n    \"automatic_pull_request_creation\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:43.912728+00:00",
+          "finished_at": "2026-07-18T15:54:44.063775+00:00",
+          "duration_seconds": 0.151
+        },
+        {
+          "id": "github-change-intelligence",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"github_change_intelligence_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:54:44.202552+00:00\",\n    \"risk_score\": 30,\n    \"risk_band\": \"low\",\n    \"reasons\": [\n      \"10 changed file(s) detected\"\n    ],\n    \"changed_files\": [\n      \"ceo_memory/autonomous_operations_audit.json\",\n      \"ceo_memory/autonomous_operations_config.json\",\n      \"ceo_memory/autonomous_operations_state.json\",\n      \"ceo_memory/github_intelligence_health.json\",\n      \"ceo_memory/github_intelligence_report.json\",\n      \"ceo_memory/github_intelligence_state.json\",\n      \"ceo_memory/readiness_health.json\",\n      \"ceo_memory/readiness_report.json\",\n      \"ceo_memory/readiness_state.json\",\n      \"run/autonomous_operations.lock\"\n    ],\n    \"high_risk_files\": [],\n    \"diff_stat\": \"ceo_memory/autonomous_operations_audit.json  | 21 +++++++++++++++++++++\\n ceo_memory/autonomous_operations_config.json | 10 ++++++++++\\n ceo_memory/autonomous_operations_state.json  | 26 +++++++++++++-------------\\n ceo_memory/github_intelligence_health.json   |  2 +-\\n ceo_memory/github_intelligence_report.json   | 10 +++++-----\\n ceo_memory/github_intelligence_state.json    |  2 +-\\n ceo_memory/readiness_health.json             |  8 ++++----\\n ceo_memory/readiness_report.json             | 19 +++++++++++++------\\n ceo_memory/readiness_state.json              | 10 +++++-----\\n run/autonomous_operations.lock               |  2 +-\\n 10 files changed, 74 insertions(+), 36 deletions(-)\",\n    \"working_tree_status\": \"M ceo_memory/autonomous_operations_audit.json\\n M ceo_memory/autonomous_operations_config.json\\n M ceo_memory/autonomous_operations_state.json\\n M ceo_memory/github_intelligence_health.json\\n M ceo_memory/github_intelligence_report.json\\n M ceo_memory/github_intelligence_state.json\\n M ceo_memory/readiness_health.json\\n M ceo_memory/readiness_report.json\\n M ceo_memory/readiness_state.json\\n M run/autonomous_operations.lock\\n?? agents/adaptive_priority_engine.py\\n?? ceo_memory/adaptive_priority_config.json\\n?? companyos/adaptivepriorityctl\\n?? install_phase20_step7.sh\",\n    \"recommendations\": [\n      \"Run tests before push.\"\n    ],\n    \"automatic_repository_mutation\": false,\n    \"automatic_issue_creation\": false,\n    \"automatic_pull_request_creation\": false,\n    \"automatic_merge\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.064746+00:00",
+          "finished_at": "2026-07-18T15:54:44.223975+00:00",
+          "duration_seconds": 0.159
+        },
+        {
+          "id": "autonomous-preflight",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"preflight_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:54:44.311723+00:00\",\n    \"decision\": \"blocked\",\n    \"risk_score\": 30,\n    \"blockers\": [\n      \"working_tree_has_changes\"\n    ],\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.224801+00:00",
+          "finished_at": "2026-07-18T15:54:44.330228+00:00",
+          "duration_seconds": 0.105
+        },
+        {
+          "id": "autonomous-watchdog",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"watchdog_check_complete\",\n  \"state\": {\n    \"last_checked_at\": \"2026-07-18T15:54:44.418086+00:00\",\n    \"heartbeat_age_seconds\": 3340.81181,\n    \"heartbeat_stale\": false,\n    \"recovery_actions\": []\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.331038+00:00",
+          "finished_at": "2026-07-18T15:54:44.438282+00:00",
+          "duration_seconds": 0.107
+        },
+        {
+          "id": "operations-dashboard",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"operations_dashboard_generated\",\n  \"dashboard\": {\n    \"generated_at\": \"2026-07-18T15:54:44.525273+00:00\",\n    \"overall_status\": \"healthy\",\n    \"reliability_score\": 100,\n    \"systems\": {\n      \"control_cycle\": {\n        \"last_cycle_at\": \"2026-07-18T14:59:03.606263+00:00\",\n        \"cycle_success\": true,\n        \"failure_count\": 0\n      },\n      \"supervisor\": {\n        \"last_supervision_at\": \"2026-07-18T15:31:33.981918+00:00\",\n        \"consecutive_failures\": 0,\n        \"recovery_action_count\": 0\n      },\n      \"incidents\": {\n        \"last_scan_at\": \"2026-07-18T15:33:51.050569+00:00\",\n        \"incident_count\": 0,\n        \"critical_incident\": false,\n        \"autonomy_halted\": false\n      },\n      \"reliability\": {\n        \"last_scored_at\": \"2026-07-18T15:39:58.056167+00:00\",\n        \"reliability_score\": 100,\n        \"status\": \"healthy\"\n      },\n      \"resources\": {\n        \"generated_at\": \"2026-07-18T15:46:02.565398+00:00\",\n        \"status\": \"healthy\",\n        \"disk_used_percent\": 55.94,\n        \"memory_used_percent\": 69.16,\n        \"free_disk_bytes\": 105276706816,\n        \"safe_cleanup_files_removed\": 0,\n        \"automatic_spending\": false,\n        \"automatic_external_write\": false,\n        \"automatic_destructive_actions\": false\n      },\n      \"watchdog\": {\n        \"last_checked_at\": \"2026-07-18T15:54:44.418086+00:00\",\n        \"heartbeat_age_seconds\": 3340.81181,\n        \"heartbeat_stale\": false,\n        \"recovery_actions\": []\n      },\n      \"backup\": {\n        \"last_backup_at\": \"2026-07-18T15:17:40.709674+00:00\",\n        \"last_backup\": \"/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260718_151740.tar.gz\",\n        \"backup_count\": 2\n      },\n      \"github\": {\n        \"generated_at\": \"2026-07-18T15:54:44.049226+00:00\",\n        \"signal_count\": 1,\n        \"working_tree_clean\": false,\n        \"branch\": \"main\"\n      },\n      \"preflight\": {\n        \"generated_at\": \"2026-07-18T15:54:44.311723+00:00\",\n        \"decision\": \"blocked\",\n        \"risk_score\": 30,\n        \"blockers\": [\n          \"working_tree_has_changes\"\n        ],\n        \"automatic_merge\": false,\n        \"automatic_deploy\": false,\n        \"automatic_spending\": false\n      },\n      \"drift\": {\n        \"generated_at\": \"2026-07-18T15:12:15.691896+00:00\",\n        \"drift_detected\": false,\n        \"added\": [],\n        \"removed\": [],\n        \"changed\": [],\n        \"baseline_file_count\": 120,\n        \"current_file_count\": 120\n      }\n    }\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.439037+00:00",
+          "finished_at": "2026-07-18T15:54:44.538454+00:00",
+          "duration_seconds": 0.099
+        },
+        {
+          "id": "runtime-hygiene",
+          "success": true,
+          "return_code": 0,
+          "stdout": "\n      \"github_intelligence_health.json\",\n      \"github_intelligence_state.json\",\n      \"github_change_state.json\",\n      \"github_change_health.json\",\n      \"action_queue_state.json\",\n      \"action_queue_health.json\",\n      \"control_cycle_state.json\",\n      \"cycle_supervisor_report.json\",\n      \"incident_escalation_state.json\",\n      \"incident_escalation_report.json\",\n      \"drift_report.json\",\n      \"reliability_report.json\",\n      \"resource_monitor_health.json\",\n      \"state_backup_state.json\",\n      \"runtime_hygiene_state.json\",\n      \"preflight2_health.json\",\n      \"runtime_hygiene_health.json\",\n      \"preflight2_report.json\",\n      \"preflight2_state.json\",\n      \"readiness2_report.json\",\n      \"execution_eligibility_state.json\",\n      \"execution_eligibility_report.json\",\n      \"action_dispatcher_state.json\",\n      \"action_dispatcher_queue.json\",\n      \"action_dispatcher_health.json\",\n      \"adaptive_priority_state.json\",\n      \"dispatcher_feedback_state.json\",\n      \"dispatcher_feedback_health.json\",\n      \"executive_priority_audit.json\",\n      \"ceo_decision_queue.json\",\n      \"ceo_decision_history.json\",\n      \"ceo_decision_audit.json\",\n      \"decision_execution_health.json\",\n      \"continuous_improvement_health.json\",\n      \"performance_analytics_audit.json\",\n      \"performance_analytics_health.json\",\n      \"end_to_end_test_report.json\",\n      \"system_integrity_report.json\",\n      \"system_integrity_audit.json\",\n      \"system_integrity_health.json\",\n      \"high_autonomy_health.json\",\n      \"autonomous_operations_audit.json\",\n      \"autonomous_operations_state.json\",\n      \"executive_briefing_health.json\",\n      \"autonomous_orchestrator_health.json\",\n      \"executive_briefing_audit.json\",\n      \"autonomous_orchestrator_audit.json\",\n      \"goal_strategy_health.json\",\n      \"learning_feedback_audit.json\",\n      \"learning_feedback_state.json\",\n      \"exception_recovery_health.json\",\n      \"resource_workload_state.json\",\n      \"internal_action_health.json\",\n      \"resource_workload_health.json\",\n      \"resource_workload_audit.json\",\n      \"internal_action_queue.json\",\n      \"mission_control_audit.json\",\n      \"autonomous_health_report.json\",\n      \"autonomous_health_state.json\",\n      \"mission_control_brief.json\",\n      \"mission_control_health.json\",\n      \"governance_queue.json\",\n      \"governance_health.json\",\n      \"outcome_tracker_report.json\",\n      \"outcome_tracker_health.json\",\n      \"strategy_feedback_state.json\",\n      \"readiness_health.json\",\n      \"readiness_report.json\",\n      \"phase18_integration_report.json\",\n      \"phase18_integration_health.json\",\n      \"execution_gateway_audit.json\",\n      \"execution_gateway_health.json\",\n      \"github_read_health.json\",\n      \"connector_binding_state.json\",\n      \"github_read_state.json\",\n      \"github_intelligence_report.json\",\n      \"watchdog_state.json\",\n      \"github_change_report.json\",\n      \"preflight_gate_report.json\",\n      \"preflight_gate_health.json\",\n      \"action_queue_report.json\",\n      \"action_feedback_report.json\",\n      \"action_feedback_state.json\",\n      \"action_feedback_health.json\",\n      \"control_cycle_report.json\",\n      \"control_cycle_health.json\",\n      \"cycle_supervisor_state.json\",\n      \"incident_escalation_health.json\",\n      \"cycle_supervisor_health.json\",\n      \"reliability_state.json\",\n      \"reliability_health.json\",\n      \"state_backup_health.json\",\n      \"drift_health.json\",\n      \"resource_monitor_report.json\",\n      \"readiness2_state.json\",\n      \"adaptive_priority_health.json\",\n      \"readiness2_health.json\",\n      \"execution_eligibility_health.json\",\n      \"action_dispatcher_report.json\",\n      \"adaptive_priority_report.json\",\n      \"dispatcher_feedback_report.json\"\n    ],\n    \"runtime_copy_errors\": [],\n    \"git_change_count\": 21,\n    \"runtime_only_change_count\": 14,\n    \"source_change_count\": 7,\n    \"runtime_only_changes\": [\n      \" M ceo_memory/autonomous_operations_state.json\",\n      \" M ceo_memory/github_change_health.json\",\n      \" M ceo_memory/github_change_report.json\",\n      \" M ceo_memory/github_change_state.json\",\n      \" M ceo_memory/github_intelligence_health.json\",\n      \" M ceo_memory/github_intelligence_report.json\",\n      \" M ceo_memory/github_intelligence_state.json\",\n      \" M ceo_memory/preflight_gate_health.json\",\n      \" M ceo_memory/preflight_gate_report.json\",\n      \" M ceo_memory/readiness_health.json\",\n      \" M ceo_memory/readiness_report.json\",\n      \" M ceo_memory/readiness_state.json\",\n      \" M ceo_memory/watchdog_state.json\",\n      \" M run/autonomous_operations.lock\"\n    ],\n    \"source_changes\": [\n      \"M ceo_memory/autonomous_operations_audit.json\",\n      \" M ceo_memory/autonomous_operations_config.json\",\n      \" M ceo_memory/operations_dashboard.json\",\n      \"?? agents/adaptive_priority_engine.py\",\n      \"?? ceo_memory/adaptive_priority_config.json\",\n      \"?? companyos/adaptivepriorityctl\",\n      \"?? install_phase20_step7.sh\"\n    ],\n    \"working_tree_effectively_clean\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.539248+00:00",
+          "finished_at": "2026-07-18T15:54:44.690454+00:00",
+          "duration_seconds": 0.151
+        },
+        {
+          "id": "runtime-aware-preflight",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"runtime_aware_preflight_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:54:44.863755+00:00\",\n    \"decision\": \"blocked\",\n    \"blockers\": [\n      \"source_controlled_changes_present\"\n    ],\n    \"warnings\": [\n      \"14 runtime-only change(s) ignored for readiness\"\n    ],\n    \"runtime_hygiene_run\": {\n      \"success\": true,\n      \"stdout\": \"    \\\"readiness_report.json\\\",\\n      \\\"phase18_integration_report.json\\\",\\n      \\\"phase18_integration_health.json\\\",\\n      \\\"execution_gateway_audit.json\\\",\\n      \\\"execution_gateway_health.json\\\",\\n      \\\"github_read_health.json\\\",\\n      \\\"connector_binding_state.json\\\",\\n      \\\"github_read_state.json\\\",\\n      \\\"github_intelligence_report.json\\\",\\n      \\\"watchdog_state.json\\\",\\n      \\\"github_change_report.json\\\",\\n      \\\"preflight_gate_report.json\\\",\\n      \\\"preflight_gate_health.json\\\",\\n      \\\"action_queue_report.json\\\",\\n      \\\"action_feedback_report.json\\\",\\n      \\\"action_feedback_state.json\\\",\\n      \\\"action_feedback_health.json\\\",\\n      \\\"control_cycle_report.json\\\",\\n      \\\"control_cycle_health.json\\\",\\n      \\\"cycle_supervisor_state.json\\\",\\n      \\\"incident_escalation_health.json\\\",\\n      \\\"cycle_supervisor_health.json\\\",\\n      \\\"reliability_state.json\\\",\\n      \\\"reliability_health.json\\\",\\n      \\\"state_backup_health.json\\\",\\n      \\\"drift_health.json\\\",\\n      \\\"resource_monitor_report.json\\\",\\n      \\\"readiness2_state.json\\\",\\n      \\\"adaptive_priority_health.json\\\",\\n      \\\"readiness2_health.json\\\",\\n      \\\"execution_eligibility_health.json\\\",\\n      \\\"action_dispatcher_report.json\\\",\\n      \\\"adaptive_priority_report.json\\\",\\n      \\\"dispatcher_feedback_report.json\\\"\\n    ],\\n    \\\"runtime_copy_errors\\\": [],\\n    \\\"git_change_count\\\": 21,\\n    \\\"runtime_only_change_count\\\": 14,\\n    \\\"source_change_count\\\": 7,\\n    \\\"runtime_only_changes\\\": [\\n      \\\" M ceo_memory/autonomous_operations_state.json\\\",\\n      \\\" M ceo_memory/github_change_health.json\\\",\\n      \\\" M ceo_memory/github_change_report.json\\\",\\n      \\\" M ceo_memory/github_change_state.json\\\",\\n      \\\" M ceo_memory/github_intelligence_health.json\\\",\\n      \\\" M ceo_memory/github_intelligence_report.json\\\",\\n      \\\" M ceo_memory/github_intelligence_state.json\\\",\\n      \\\" M ceo_memory/preflight_gate_health.json\\\",\\n      \\\" M ceo_memory/preflight_gate_report.json\\\",\\n      \\\" M ceo_memory/readiness_health.json\\\",\\n      \\\" M ceo_memory/readiness_report.json\\\",\\n      \\\" M ceo_memory/readiness_state.json\\\",\\n      \\\" M ceo_memory/watchdog_state.json\\\",\\n      \\\" M run/autonomous_operations.lock\\\"\\n    ],\\n    \\\"source_changes\\\": [\\n      \\\"M ceo_memory/autonomous_operations_audit.json\\\",\\n      \\\" M ceo_memory/autonomous_operations_config.json\\\",\\n      \\\" M ceo_memory/operations_dashboard.json\\\",\\n      \\\"?? agents/adaptive_priority_engine.py\\\",\\n      \\\"?? ceo_memory/adaptive_priority_config.json\\\",\\n      \\\"?? companyos/adaptivepriorityctl\\\",\\n      \\\"?? install_phase20_step7.sh\\\"\\n    ],\\n    \\\"working_tree_effectively_clean\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\"\n    },\n    \"source_change_count\": 7,\n    \"runtime_only_change_count\": 14,\n    \"working_tree_effectively_clean\": false,\n    \"github_connector_healthy\": true,\n    \"change_risk_score\": 30,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_commit\": false,\n    \"automatic_push\": false,\n    \"automatic_deploy\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.691238+00:00",
+          "finished_at": "2026-07-18T15:54:44.884336+00:00",
+          "duration_seconds": 0.193
+        },
+        {
+          "id": "adaptive-action-prioritization",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"adaptive_prioritization_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:54:44.945411+00:00\",\n    \"adaptive_priorities\": [\n      {\n        \"action\": \"run-health\",\n        \"base_priority\": 95,\n        \"adjustment\": 10,\n        \"adaptive_priority\": 100,\n        \"reason\": \"Preflight is blocked; verify system health before further work.\",\n        \"outcomes\": {\n          \"success\": 1,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"base_priority\": 70,\n        \"adjustment\": 10,\n        \"adaptive_priority\": 80,\n        \"reason\": \"Keep forecast aligned with active goals.\",\n        \"outcomes\": {\n          \"success\": 1,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"base_priority\": 65,\n        \"adjustment\": 10,\n        \"adaptive_priority\": 75,\n        \"reason\": \"Summarize current repository state before owner review.\",\n        \"outcomes\": {\n          \"success\": 1,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"base_priority\": 60,\n        \"adjustment\": 10,\n        \"adaptive_priority\": 70,\n        \"reason\": \"Maintain current executive ordering.\",\n        \"outcomes\": {\n          \"success\": 1,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"base_priority\": 55,\n        \"adjustment\": 10,\n        \"adaptive_priority\": 65,\n        \"reason\": \"Keep CEO decision queue synchronized.\",\n        \"outcomes\": {\n          \"success\": 1,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"base_priority\": 50,\n        \"adjustment\": 10,\n        \"adaptive_priority\": 60,\n        \"reason\": \"Refresh measurable outcomes for the feedback loop.\",\n        \"outcomes\": {\n          \"success\": 1,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      }\n    ],\n    \"top_action\": \"run-health\",\n    \"top_priority\": 100,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:54:44.885151+00:00",
+          "finished_at": "2026-07-18T15:54:44.956316+00:00",
+          "duration_seconds": 0.071
+        }
+      ]
+    }
   }
 ]

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-18T15:23:21.819742+00:00",
-  "readiness_score": 100.0,
+  "generated_at": "2026-07-18T15:54:43.899075+00:00",
+  "readiness_score": 98.7,
   "controllers": [
     {
       "name": "operationsctl",
@@ -43,8 +43,15 @@
       "ready": true
     }
   ],
-  "enabled_scheduler_jobs": 44,
-  "health_files_checked": 61,
-  "issues": [],
-  "ready": true
+  "enabled_scheduler_jobs": 49,
+  "health_files_checked": 66,
+  "issues": [
+    {
+      "type": "unhealthy_components",
+      "items": [
+        "autonomous_operations_health.json"
+      ]
+    }
+  ],
+  "ready": false
 }
