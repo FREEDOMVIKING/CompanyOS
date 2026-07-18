@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 83,
+  "cycle_count": 84,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T16:35:57.053366+00:00",
@@ -913,9 +913,25 @@
       "last_duration_seconds": 0.118,
       "run_count": 1,
       "failure_count": 0
+    },
+    "closed-loop-selector": {
+      "last_started_at": "2026-07-18T16:37:32.801718+00:00",
+      "last_started_epoch": 1784392652.8017182,
+      "last_command": [
+        "python",
+        "companyos/closedloopctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T16:37:33.235750+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.434,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T16:36:00.619057+00:00",
-  "last_cycle_job_count": 12,
+  "last_cycle_at": "2026-07-18T16:37:33.236973+00:00",
+  "last_cycle_job_count": 1,
   "last_cycle_success": true
 }

@@ -1,0 +1,386 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+AGENTS="$ROOT/agents"
+CTL="$ROOT/companyos"
+MEM="$ROOT/ceo_memory"
+
+cd "$ROOT"
+mkdir -p "$AGENTS" "$CTL" "$MEM"
+
+echo "============================================================"
+echo " Phase 20 Step 18 - Closed-Loop Selection Coordinator"
+echo "============================================================"
+
+cat > "$MEM/closed_loop_selector_config.json" <<'JSON'
+{
+  "enabled": true,
+  "automatic_cycle": true,
+  "maximum_selected_actions": 5,
+  "minimum_final_priority": 50,
+  "require_execution_eligibility": true,
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}
+JSON
+
+cat > "$AGENTS/closed_loop_selector.py" <<'PY'
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT = Path.home() / "companyos"
+MEM = ROOT / "ceo_memory"
+
+CFG = MEM / "closed_loop_selector_config.json"
+PRIORITIES = MEM / "feedback_priority_report.json"
+ELIGIBILITY = MEM / "execution_eligibility_report.json"
+
+STATE = MEM / "closed_loop_selector_state.json"
+REPORT = MEM / "closed_loop_selector_report.json"
+HEALTH = MEM / "closed_loop_selector_health.json"
+
+CATEGORY_MAP = {
+    "refresh-priorities": "internal_reversible",
+    "refresh-decisions": "internal_reversible",
+    "refresh-forecast": "internal_read_only",
+    "refresh-brief": "internal_read_only",
+    "refresh-goals": "internal_reversible",
+    "run-learning": "internal_reversible",
+    "run-health": "internal_read_only",
+    "run-readiness": "internal_read_only",
+    "run-outcomes": "internal_read_only",
+    "github-read": "external_read_only"
+}
+
+ACTION_MAP = {
+    "refresh-priorities": ["python", "companyos/priorityctl", "rank"],
+    "refresh-decisions": ["python", "companyos/decisionctl", "prepare"],
+    "refresh-forecast": ["python", "companyos/forecastctl", "forecast"],
+    "refresh-brief": ["python", "companyos/briefctl", "generate"],
+    "refresh-goals": ["python", "companyos/goalctl", "generate"],
+    "run-learning": ["python", "companyos/learningctl", "learn"],
+    "run-health": ["python", "companyos/healthctl", "run"],
+    "run-readiness": ["python", "companyos/readiness2ctl", "run"],
+    "run-outcomes": ["python", "companyos/outcomectl", "measure"],
+    "github-read": ["python", "companyos/githubreadctl", "repos", "20"]
+}
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+def load(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+def save(path: Path, data: Any) -> None:
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    tmp.replace(path)
+
+def call(args: list[str]) -> dict[str, Any]:
+    try:
+        p = subprocess.run(args, cwd=ROOT, text=True, capture_output=True, timeout=300)
+        return {
+            "success": p.returncode == 0,
+            "return_code": p.returncode,
+            "stdout": p.stdout[-2500:],
+            "stderr": p.stderr[-1200:]
+        }
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+def cycle() -> dict[str, Any]:
+    cfg = load(CFG, {})
+
+    refresh = {
+        "feedback_priority": call(["python", "companyos/feedbackpriorityctl", "integrate"]),
+        "readiness": call(["python", "companyos/readiness2ctl", "run"]),
+        "eligibility": call(["python", "companyos/eligibilityctl", "run"])
+    }
+
+    priorities = load(PRIORITIES, {}).get("integrated_priorities", [])
+    eligibility_data = load(ELIGIBILITY, {})
+    system_ready = eligibility_data.get("system_ready") is True
+    matrix = eligibility_data.get("eligibility", {})
+
+    minimum = float(cfg.get("minimum_final_priority", 50))
+    maximum = int(cfg.get("maximum_selected_actions", 5))
+
+    selected = []
+    rejected = []
+
+    for row in priorities:
+        action = row.get("action")
+        priority = float(row.get("final_priority", 0))
+        category = CATEGORY_MAP.get(action, "internal_read_only")
+        command = ACTION_MAP.get(action)
+
+        if not command:
+            rejected.append({
+                "action": action,
+                "reason": "action_not_mapped"
+            })
+            continue
+
+        if priority < minimum:
+            rejected.append({
+                "action": action,
+                "reason": "below_minimum_final_priority",
+                "final_priority": priority
+            })
+            continue
+
+        if cfg.get("require_execution_eligibility", True):
+            if not system_ready:
+                rejected.append({
+                    "action": action,
+                    "reason": "system_not_ready",
+                    "final_priority": priority
+                })
+                continue
+            if not bool(matrix.get(category, False)):
+                rejected.append({
+                    "action": action,
+                    "reason": "category_not_eligible",
+                    "category": category,
+                    "final_priority": priority
+                })
+                continue
+
+        selected.append({
+            "action": action,
+            "category": category,
+            "final_priority": round(priority, 2),
+            "reason": row.get("reason"),
+            "command": command
+        })
+
+        if len(selected) >= maximum:
+            break
+
+    report = {
+        "generated_at": now(),
+        "system_ready": system_ready,
+        "selected_actions": selected,
+        "rejected_actions": rejected,
+        "selected_count": len(selected),
+        "rejected_count": len(rejected),
+        "refresh": refresh,
+        "automatic_external_write": False,
+        "automatic_code_changes": False,
+        "automatic_merge": False,
+        "automatic_deploy": False,
+        "automatic_publication": False,
+        "automatic_spending": False,
+        "automatic_destructive_actions": False
+    }
+
+    save(REPORT, report)
+    save(STATE, {
+        "last_cycle_at": now(),
+        "system_ready": system_ready,
+        "selected_count": len(selected),
+        "rejected_count": len(rejected),
+        "top_selected_action": selected[0]["action"] if selected else None
+    })
+    save(HEALTH, {
+        "healthy": True,
+        "last_checked_at": now(),
+        "system_ready": system_ready,
+        "selected_count": len(selected)
+    })
+
+    return {
+        "success": True,
+        "status": "closed_loop_selection_complete",
+        "report": report
+    }
+
+def status() -> dict[str, Any]:
+    return {
+        "success": True,
+        "status": "closed_loop_selector_status",
+        "state": load(STATE, {}),
+        "health": load(HEALTH, {}),
+        "report": load(REPORT, {})
+    }
+
+def main() -> int:
+    action = sys.argv[1] if len(sys.argv) > 1 else "status"
+
+    if action == "run":
+        result = cycle()
+    elif action == "status":
+        result = status()
+    else:
+        result = {
+            "success": False,
+            "status": "unknown_action",
+            "allowed": ["run", "status"]
+        }
+
+    print(json.dumps(result, indent=2))
+    return 0 if result.get("success") else 1
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+PY
+
+chmod +x "$AGENTS/closed_loop_selector.py"
+
+cat > "$CTL/closedloopctl" <<'PY'
+#!/usr/bin/env python3
+import subprocess
+import sys
+from pathlib import Path
+
+root = Path.home() / "companyos"
+agent = root / "agents" / "closed_loop_selector.py"
+
+raise SystemExit(
+    subprocess.call(
+        [sys.executable, str(agent), *sys.argv[1:]],
+        cwd=root
+    )
+)
+PY
+
+chmod +x "$CTL/closedloopctl"
+
+echo "[1/6] Compiling..."
+python -m py_compile "$AGENTS/closed_loop_selector.py" "$CTL/closedloopctl"
+
+echo "[2/6] Running closed-loop selector..."
+python "$CTL/closedloopctl" run
+
+echo "[3/6] Adding scheduler job..."
+python - <<'PY'
+import json
+from pathlib import Path
+
+p = Path.home()/"companyos"/"ceo_memory"/"autonomous_operations_config.json"
+d = json.loads(p.read_text())
+jobs = d.setdefault("jobs", [])
+
+job = {
+    "id": "closed-loop-selector",
+    "enabled": True,
+    "interval_seconds": 1800,
+    "command": ["python", "companyos/closedloopctl", "run"]
+}
+
+existing = next((x for x in jobs if x.get("id") == job["id"]), None)
+
+if existing:
+    existing.clear()
+    existing.update(job)
+else:
+    jobs.append(job)
+
+p.write_text(json.dumps(d, indent=2), encoding="utf-8")
+print(json.dumps({"success": True, "job_id": job["id"]}, indent=2))
+PY
+
+echo "[4/6] Restarting scheduler..."
+python "$CTL/operationsctl" restart
+
+echo "[5/6] Checking closed-loop status..."
+python "$CTL/closedloopctl" status
+
+echo "[6/6] Verifying..."
+python - <<'PY'
+import json
+import py_compile
+from pathlib import Path
+
+root = Path.home() / "companyos"
+errors = []
+
+required = [
+    root / "agents" / "closed_loop_selector.py",
+    root / "companyos" / "closedloopctl",
+    root / "ceo_memory" / "closed_loop_selector_config.json",
+    root / "ceo_memory" / "closed_loop_selector_state.json",
+    root / "ceo_memory" / "closed_loop_selector_report.json",
+    root / "ceo_memory" / "closed_loop_selector_health.json",
+    root / "ceo_memory" / "autonomous_operations_config.json"
+]
+
+for path in required:
+    if not path.exists() or path.stat().st_size <= 0:
+        errors.append(f"Missing/empty: {path}")
+
+for path in required[:2]:
+    try:
+        py_compile.compile(str(path), doraise=True)
+    except Exception as exc:
+        errors.append(str(exc))
+
+try:
+    cfg = json.loads(required[2].read_text())
+
+    for key in [
+        "automatic_external_write",
+        "automatic_code_changes",
+        "automatic_merge",
+        "automatic_deploy",
+        "automatic_publication",
+        "automatic_spending",
+        "automatic_destructive_actions"
+    ]:
+        if cfg.get(key) is not False:
+            errors.append(f"{key} must remain disabled")
+
+    report = json.loads(required[4].read_text())
+    if "selected_actions" not in report:
+        errors.append("Closed-loop selector report missing selected_actions")
+
+    sched = json.loads(required[6].read_text())
+    job = next(
+        (x for x in sched.get("jobs", []) if x.get("id") == "closed-loop-selector"),
+        None
+    )
+    if not job or job.get("enabled") is not True:
+        errors.append("Closed-loop selector scheduler job missing/disabled")
+
+except Exception as exc:
+    errors.append(str(exc))
+
+print("--------------------------------------------")
+print("Phase 20 Step 18 verification")
+print(f"Errors: {len(errors)}")
+print("Warnings: 0")
+
+for error in errors:
+    print("ERROR:", error)
+
+if errors:
+    raise SystemExit(1)
+PY
+
+echo
+echo "============================================================"
+echo " PHASE 20 STEP 18 INSTALLED"
+echo " CLOSED-LOOP SELECTION COORDINATOR ACTIVE"
+echo " Errors: 0"
+echo " Warnings: 0"
+echo "============================================================"
+echo
+echo "Commands:"
+echo "  python companyos/closedloopctl run"
+echo "  python companyos/closedloopctl status"
