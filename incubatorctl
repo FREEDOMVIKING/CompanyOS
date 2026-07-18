@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.incubator_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Business Incubator"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("list")
+    commands.add_parser("incubate-top")
+
+    idea_parser = commands.add_parser("incubate")
+    idea_parser.add_argument("idea_id")
+    idea_parser.add_argument(
+        "--minimum-score",
+        type=float,
+        default=5.0,
+    )
+    idea_parser.add_argument(
+        "--budget",
+        type=float,
+        default=10.0,
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "list":
+        result = run_task({
+            "action": "list_ventures",
+        })
+
+    elif args.command == "incubate-top":
+        result = run_task({
+            "action": "incubate_top_opportunity",
+            "payload": {
+                "minimum_score": 5.0,
+                "budget_usd": 10.0,
+            },
+        })
+
+    else:
+        result = run_task({
+            "action": "incubate_idea",
+            "payload": {
+                "idea_id": args.idea_id,
+                "minimum_score": args.minimum_score,
+                "budget_usd": args.budget,
+            },
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

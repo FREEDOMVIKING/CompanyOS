@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.growth_agent import run_task
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Growth Orchestrator"
+    )
+
+    parser.add_argument(
+        "command",
+        choices=[
+            "run",
+            "status",
+            "actions",
+        ],
+    )
+
+    args = parser.parse_args()
+
+    action_map = {
+        "run": "run_growth_cycle",
+        "status": "growth_status",
+        "actions": "list_growth_actions",
+    }
+
+    result = run_task({
+        "action": action_map[args.command],
+    })
+
+    print(json.dumps(result, indent=2))
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

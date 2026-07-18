@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.portfolio_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "CompanyOS Executive Portfolio Brain"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("review")
+    commands.add_parser("portfolio")
+    commands.add_parser("decisions")
+
+    approve = commands.add_parser(
+        "approve"
+    )
+    approve.add_argument("decision_id")
+
+    args = parser.parse_args()
+
+    if args.command == "review":
+        result = run_task({
+            "action": (
+                "executive_portfolio_review"
+            ),
+        })
+
+    elif args.command == "portfolio":
+        result = run_task({
+            "action": "build_portfolio",
+        })
+
+    elif args.command == "decisions":
+        result = run_task({
+            "action": (
+                "list_executive_decisions"
+            ),
+        })
+
+    else:
+        result = run_task({
+            "action": (
+                "approve_executive_decision"
+            ),
+            "payload": {
+                "decision_id": (
+                    args.decision_id
+                ),
+            },
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

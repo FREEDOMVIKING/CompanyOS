@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.crm_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS CRM"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("pipeline")
+    commands.add_parser("list")
+    commands.add_parser("customers")
+
+    create_parser = commands.add_parser("create")
+    create_parser.add_argument("--name", default="")
+    create_parser.add_argument("--organization", default="")
+    create_parser.add_argument("--email", default="")
+    create_parser.add_argument("--phone", default="")
+    create_parser.add_argument("--source", default="manual")
+    create_parser.add_argument("--project-id", default="")
+    create_parser.add_argument("--venture-id", default="")
+    create_parser.add_argument(
+        "--value",
+        type=float,
+        default=0.0,
+    )
+
+    stage_parser = commands.add_parser("stage")
+    stage_parser.add_argument("lead_id")
+    stage_parser.add_argument("stage")
+
+    note_parser = commands.add_parser("note")
+    note_parser.add_argument("lead_id")
+    note_parser.add_argument("note")
+
+    args = parser.parse_args()
+
+    if args.command == "pipeline":
+        result = run_task({
+            "action": "pipeline_summary",
+        })
+
+    elif args.command == "list":
+        result = run_task({
+            "action": "list_leads",
+            "payload": {},
+        })
+
+    elif args.command == "customers":
+        result = run_task({
+            "action": "list_customers",
+        })
+
+    elif args.command == "create":
+        result = run_task({
+            "action": "create_lead",
+            "payload": {
+                "name": args.name,
+                "organization": args.organization,
+                "email": args.email,
+                "phone": args.phone,
+                "source": args.source,
+                "project_id": args.project_id,
+                "venture_id": args.venture_id,
+                "estimated_value_usd": args.value,
+            },
+        })
+
+    elif args.command == "stage":
+        result = run_task({
+            "action": "update_lead_stage",
+            "payload": {
+                "lead_id": args.lead_id,
+                "stage": args.stage,
+            },
+        })
+
+    else:
+        result = run_task({
+            "action": "add_crm_activity",
+            "payload": {
+                "lead_id": args.lead_id,
+                "type": "note",
+                "note": args.note,
+            },
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

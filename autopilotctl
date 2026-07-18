@@ -1,0 +1,204 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+PID_FILE = MEMORY_DIR / "autopilot.pid"
+LOG_FILE = ROOT_DIR / "logs" / "autonomous_ceo.log"
+
+sys.path.insert(0, str(ROOT_DIR))
+
+from agents.autonomous_ceo_loop import status  # noqa: E402
+from agents.authority_guard import set_mode  # noqa: E402
+
+
+def read_pid() -> int | None:
+    try:
+        return int(
+            PID_FILE.read_text(encoding="utf-8").strip()
+        )
+    except (FileNotFoundError, ValueError, OSError):
+        return None
+
+
+def is_alive(pid: int | None) -> bool:
+    if not pid:
+        return False
+
+    try:
+        os.kill(pid, 0)
+        return True
+    except (ProcessLookupError, PermissionError):
+        return False
+
+
+def start(delay: int) -> dict:
+    pid = read_pid()
+
+    if is_alive(pid):
+        return {
+            "success": True,
+            "status": "already_running",
+            "pid": pid,
+        }
+
+    set_mode(
+        "operate",
+        "Owner started autonomous CEO autopilot",
+        changed_by="owner",
+    )
+
+    LOG_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    log_handle = LOG_FILE.open(
+        "a",
+        encoding="utf-8",
+    )
+
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            "-m",
+            "agents.autonomous_ceo_loop",
+            "loop",
+            "--delay",
+            str(max(30, delay)),
+        ],
+        cwd=ROOT_DIR,
+        stdout=log_handle,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+    )
+
+    time.sleep(2)
+
+    return {
+        "success": process.poll() is None,
+        "status": (
+            "autopilot_started"
+            if process.poll() is None
+            else "autopilot_failed_to_start"
+        ),
+        "pid": process.pid,
+        "delay_seconds": max(30, delay),
+        "log_file": str(LOG_FILE),
+    }
+
+
+def freeze() -> dict:
+    state = set_mode(
+        "freeze",
+        "Owner froze autonomous CEO autopilot",
+        changed_by="owner",
+    )
+
+    return {
+        "success": True,
+        "status": "autopilot_frozen",
+        "authority_state": state,
+        "pid": read_pid(),
+    }
+
+
+def resume() -> dict:
+    state = set_mode(
+        "operate",
+        "Owner resumed autonomous CEO autopilot",
+        changed_by="owner",
+    )
+
+    return {
+        "success": True,
+        "status": "autopilot_resumed",
+        "authority_state": state,
+        "pid": read_pid(),
+    }
+
+
+def stop() -> dict:
+    state = set_mode(
+        "stop",
+        "Owner stopped autonomous CEO autopilot",
+        changed_by="owner",
+    )
+
+    pid = read_pid()
+    stopped = False
+
+    if is_alive(pid):
+        try:
+            os.kill(pid, signal.SIGTERM)
+            stopped = True
+        except ProcessLookupError:
+            pass
+
+    try:
+        PID_FILE.unlink()
+    except FileNotFoundError:
+        pass
+
+    return {
+        "success": True,
+        "status": "autopilot_stopped",
+        "pid": pid,
+        "process_signal_sent": stopped,
+        "authority_state": state,
+    }
+
+
+def main() -> int:
+    command = (
+        sys.argv[1].lower()
+        if len(sys.argv) > 1
+        else "status"
+    )
+
+    if command == "start":
+        delay = 300
+
+        if "--delay" in sys.argv:
+            index = sys.argv.index("--delay")
+            try:
+                delay = int(sys.argv[index + 1])
+            except (IndexError, ValueError):
+                raise SystemExit(
+                    "--delay must be followed by seconds"
+                )
+
+        result = start(delay)
+
+    elif command == "freeze":
+        result = freeze()
+
+    elif command in {"resume", "operate"}:
+        result = resume()
+
+    elif command == "stop":
+        result = stop()
+
+    elif command == "status":
+        result = status()
+
+    else:
+        raise SystemExit(
+            "Usage: autopilotctl "
+            "{start|status|freeze|resume|stop} "
+            "[--delay SECONDS]"
+        )
+
+    print(json.dumps(result, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,508 @@
+#!/usr/bin/env python3
+
+import json
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+
+WORKFLOWS_FILE = MEMORY_DIR / "product_factory_workflows.json"
+TASKS_FILE = MEMORY_DIR / "tasks.json"
+EVENTS_FILE = MEMORY_DIR / "product_factory_events.json"
+SUMMARY_FILE = MEMORY_DIR / "product_factory_audit_summary.json"
+
+ACTIVE = {"pending", "queued", "running", "waiting"}
+SUCCESS = {"completed", "done", "success", "successful"}
+FAILED = {"failed", "error", "rejected", "cancelled"}
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def load_json(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return default
+
+
+def save_json(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp = path.with_suffix(path.suffix + ".tmp")
+    temp.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    temp.replace(path)
+
+
+def records(value: Any) -> list[dict[str, Any]]:
+    if isinstance(value, list):
+        return [item for item in value if isinstance(item, dict)]
+
+    if isinstance(value, dict):
+        return [
+            item
+            for item in value.values()
+            if isinstance(item, dict)
+        ]
+
+    return []
+
+
+def add_event(
+    workflow_id: str,
+    event_type: str,
+    details: dict[str, Any],
+) -> None:
+    events = records(load_json(EVENTS_FILE, []))
+
+    events.append({
+        "id": f"factory-event-{uuid.uuid4().hex[:12]}",
+        "workflow_id": workflow_id,
+        "event_type": event_type,
+        "details": details,
+        "created_at": now(),
+    })
+
+    save_json(EVENTS_FILE, events[-20000:])
+
+
+def current_stage(
+    workflow: dict[str, Any],
+) -> dict[str, Any] | None:
+    stages = workflow.get("stages", [])
+
+    if not isinstance(stages, list):
+        return None
+
+    try:
+        index = int(workflow.get("current_stage_index", 0) or 0)
+    except (TypeError, ValueError):
+        return None
+
+    if index < 0 or index >= len(stages):
+        return None
+
+    stage = stages[index]
+    return stage if isinstance(stage, dict) else None
+
+
+def audit_task_for(
+    workflow_id: str,
+    tasks: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    matches = [
+        task
+        for task in tasks
+        if task.get("factory_workflow_id") == workflow_id
+        and task.get("factory_stage") == "quality_audit"
+    ]
+
+    return matches[-1] if matches else None
+
+
+def resolve_project_slug(
+    workflow: dict[str, Any],
+) -> str:
+    project_id = str(
+        workflow.get("project_id", "")
+    ).strip()
+
+    if project_id:
+        return project_id
+
+    prototype_directory = str(
+        workflow.get("prototype_directory", "")
+    ).strip()
+
+    if prototype_directory:
+        return Path(prototype_directory).name
+
+    stages = workflow.get("stages", [])
+
+    if isinstance(stages, list):
+        for stage in stages:
+            if (
+                isinstance(stage, dict)
+                and stage.get("name") == "prototype_build"
+            ):
+                result = stage.get("result", {})
+
+                if isinstance(result, dict):
+                    for key in (
+                        "project_id",
+                        "project_slug",
+                    ):
+                        value = str(
+                            result.get(key, "")
+                        ).strip()
+
+                        if value:
+                            return value
+
+                    directory = str(
+                        result.get("project_directory", "")
+                        or result.get("project_dir", "")
+                    ).strip()
+
+                    if directory:
+                        return Path(directory).name
+
+    return ""
+
+
+def queue_audit_tasks() -> dict[str, Any]:
+    workflows = records(load_json(WORKFLOWS_FILE, []))
+    tasks = records(load_json(TASKS_FILE, []))
+
+    queued = []
+    skipped = []
+
+    for workflow in workflows:
+        if workflow.get("status") != "active":
+            continue
+
+        if workflow.get("current_stage") != "quality_audit":
+            continue
+
+        stage = current_stage(workflow)
+
+        if not stage:
+            continue
+
+        if stage.get("status") not in {"ready", "waiting"}:
+            continue
+
+        workflow_id = str(workflow.get("id", "")).strip()
+
+        if not workflow_id:
+            continue
+
+        existing = audit_task_for(workflow_id, tasks)
+
+        if existing:
+            status = str(existing.get("status", "")).lower()
+
+            if status in ACTIVE | SUCCESS:
+                skipped.append({
+                    "workflow_id": workflow_id,
+                    "task_id": existing.get("id"),
+                    "status": status,
+                    "reason": "Audit task already exists",
+                })
+                continue
+
+        project_slug = resolve_project_slug(workflow)
+
+        if not project_slug:
+            skipped.append({
+                "workflow_id": workflow_id,
+                "reason": "Could not determine prototype project slug",
+            })
+            continue
+
+        task_id = f"task-{uuid.uuid4().hex[:10]}"
+
+        task = {
+            "id": task_id,
+            "agent": "auditor_agent",
+            "action": "audit_project",
+            "factory_workflow_id": workflow_id,
+            "factory_stage": "quality_audit",
+            "project_id": project_slug,
+            "venture_id": workflow.get("venture_id"),
+            "priority": "high",
+            "status": "pending",
+            "attempts": 0,
+            "max_attempts": 3,
+            "payload": {
+                "project_slug": project_slug,
+                "project_id": project_slug,
+                "factory_workflow_id": workflow_id,
+            },
+            "created_by": "product_factory_audit_runner",
+            "created_at": now(),
+            "updated_at": now(),
+        }
+
+        tasks.append(task)
+
+        stage["owner"] = "auditor_agent"
+        stage["status"] = "running"
+        stage["task_id"] = task_id
+        stage["started_at"] = stage.get("started_at") or now()
+        stage["attempts"] = int(stage.get("attempts", 0) or 0) + 1
+
+        workflow["updated_at"] = now()
+
+        queued.append({
+            "workflow_id": workflow_id,
+            "task_id": task_id,
+            "project_slug": project_slug,
+        })
+
+        add_event(
+            workflow_id,
+            "quality_audit_task_queued",
+            queued[-1],
+        )
+
+    save_json(TASKS_FILE, tasks)
+    save_json(WORKFLOWS_FILE, workflows)
+
+    return {
+        "success": True,
+        "status": "factory_audit_tasks_queued",
+        "queued_count": len(queued),
+        "skipped_count": len(skipped),
+        "queued": queued,
+        "skipped": skipped,
+    }
+
+
+def normalize_result(
+    task: dict[str, Any],
+) -> dict[str, Any]:
+    result = task.get("result", {})
+
+    if isinstance(result, dict):
+        return result
+
+    return {"value": result} if result is not None else {}
+
+
+def advance_workflow(
+    workflow: dict[str, Any],
+) -> None:
+    stages = workflow.get("stages", [])
+
+    current_index = int(
+        workflow.get("current_stage_index", 5)
+        or 5
+    )
+
+    next_index = current_index + 1
+
+    if (
+        isinstance(stages, list)
+        and next_index < len(stages)
+        and isinstance(stages[next_index], dict)
+    ):
+        next_stage = stages[next_index]
+        next_stage["status"] = "ready"
+
+        workflow["current_stage_index"] = next_index
+        workflow["current_stage"] = next_stage.get("name")
+        workflow["status"] = "active"
+
+
+def sync_audit_results() -> dict[str, Any]:
+    workflows = records(load_json(WORKFLOWS_FILE, []))
+    tasks = records(load_json(TASKS_FILE, []))
+
+    advanced = []
+    failures = []
+    waiting = []
+    changed = False
+
+    for workflow in workflows:
+        if workflow.get("current_stage") != "quality_audit":
+            continue
+
+        workflow_id = str(workflow.get("id", "")).strip()
+        stage = current_stage(workflow)
+
+        if not stage:
+            continue
+
+        task = audit_task_for(workflow_id, tasks)
+
+        if task is None:
+            waiting.append({
+                "workflow_id": workflow_id,
+                "reason": "No audit task found",
+            })
+            continue
+
+        task_status = str(task.get("status", "")).lower()
+        result = normalize_result(task)
+
+        if task_status in ACTIVE:
+            waiting.append({
+                "workflow_id": workflow_id,
+                "task_id": task.get("id"),
+                "status": task_status,
+            })
+            continue
+
+        approved = (
+            result.get("success") is True
+            or result.get("status") == "approved"
+            or (
+                isinstance(result.get("report"), dict)
+                and result["report"].get("approved") is True
+            )
+        )
+
+        if task_status in SUCCESS and approved:
+            stage["status"] = "completed"
+            stage["completed_at"] = now()
+            stage["result"] = result
+
+            workflow["audit_report"] = (
+                result.get("report_file")
+            )
+            workflow["audit_approved"] = True
+
+            advance_workflow(workflow)
+
+            workflow["updated_at"] = now()
+            changed = True
+
+            item = {
+                "workflow_id": workflow_id,
+                "task_id": task.get("id"),
+                "completed_stage": "quality_audit",
+                "next_stage": workflow.get("current_stage"),
+                "report_file": result.get("report_file"),
+            }
+
+            advanced.append(item)
+
+            add_event(
+                workflow_id,
+                "quality_audit_completed",
+                item,
+            )
+
+        elif task_status in FAILED or not approved:
+            error = (
+                task.get("error")
+                or task.get("last_error")
+                or result.get("error")
+                or "Prototype failed quality audit"
+            )
+
+            stage["status"] = "failed"
+            stage["completed_at"] = now()
+            stage["result"] = result
+
+            workflow["status"] = "paused"
+            workflow["failure_stage"] = "quality_audit"
+            workflow["last_error"] = error
+            workflow["audit_approved"] = False
+            workflow["updated_at"] = now()
+
+            changed = True
+
+            item = {
+                "workflow_id": workflow_id,
+                "task_id": task.get("id"),
+                "error": error,
+                "report_file": result.get("report_file"),
+            }
+
+            failures.append(item)
+
+            add_event(
+                workflow_id,
+                "quality_audit_failed",
+                item,
+            )
+
+    if changed:
+        save_json(WORKFLOWS_FILE, workflows)
+
+    return {
+        "success": len(failures) == 0,
+        "status": "factory_audit_results_synced",
+        "advanced_count": len(advanced),
+        "failure_count": len(failures),
+        "waiting_count": len(waiting),
+        "advanced": advanced,
+        "failures": failures,
+        "waiting": waiting,
+    }
+
+
+def run_audit_cycle() -> dict[str, Any]:
+    queued = queue_audit_tasks()
+    synced = sync_audit_results()
+
+    summary = {
+        "success": (
+            queued.get("success") is True
+            and synced.get("success") is True
+        ),
+        "status": "factory_audit_cycle_complete",
+        "updated_at": now(),
+        "queue": queued,
+        "sync": synced,
+    }
+
+    save_json(SUMMARY_FILE, summary)
+    return summary
+
+
+def status() -> dict[str, Any]:
+    workflows = records(load_json(WORKFLOWS_FILE, []))
+    tasks = records(load_json(TASKS_FILE, []))
+
+    audit_tasks = [
+        task
+        for task in tasks
+        if task.get("factory_stage") == "quality_audit"
+    ]
+
+    return {
+        "success": True,
+        "status": "factory_audit_status",
+        "updated_at": now(),
+        "audit_tasks": len(audit_tasks),
+        "pending_audit_tasks": sum(
+            1
+            for task in audit_tasks
+            if str(task.get("status", "")).lower() in ACTIVE
+        ),
+        "workflows_at_quality_audit": sum(
+            1
+            for workflow in workflows
+            if workflow.get("current_stage") == "quality_audit"
+        ),
+        "workflows_at_publishing": sum(
+            1
+            for workflow in workflows
+            if workflow.get("current_stage")
+            == "publishing_preparation"
+        ),
+        "latest_summary": load_json(SUMMARY_FILE, {}),
+    }
+
+
+def run_task(
+    task: dict[str, Any],
+) -> dict[str, Any]:
+    action = task.get("action")
+
+    if action == "queue_factory_audit":
+        return queue_audit_tasks()
+
+    if action == "sync_factory_audit":
+        return sync_audit_results()
+
+    if action == "run_factory_audit_cycle":
+        return run_audit_cycle()
+
+    if action == "factory_audit_status":
+        return status()
+
+    return {
+        "success": False,
+        "error": f"Unsupported audit runner action: {action}",
+    }
+
+
+if __name__ == "__main__":
+    print(json.dumps(run_audit_cycle(), indent=2))

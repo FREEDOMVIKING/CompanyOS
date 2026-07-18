@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.profit_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Finance and Profit"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("summary")
+    commands.add_parser("expenses")
+    commands.add_parser("budgets")
+
+    expense = commands.add_parser("record-expense")
+    expense.add_argument(
+        "--description",
+        required=True,
+    )
+    expense.add_argument(
+        "--amount",
+        type=float,
+        required=True,
+    )
+    expense.add_argument(
+        "--category",
+        default="general",
+    )
+    expense.add_argument(
+        "--product-id",
+        default="",
+    )
+    expense.add_argument(
+        "--project-id",
+        default="",
+    )
+    expense.add_argument(
+        "--venture-id",
+        default="",
+    )
+    expense.add_argument(
+        "--vendor",
+        default="",
+    )
+    expense.add_argument(
+        "--test",
+        action="store_true",
+    )
+
+    budget = commands.add_parser("set-budget")
+    budget.add_argument("venture_id")
+    budget.add_argument(
+        "--amount",
+        type=float,
+        required=True,
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "summary":
+        result = run_task({
+            "action": "profit_summary",
+        })
+
+    elif args.command == "expenses":
+        result = run_task({
+            "action": "list_expenses",
+        })
+
+    elif args.command == "budgets":
+        result = run_task({
+            "action": "list_venture_budgets",
+        })
+
+    elif args.command == "record-expense":
+        result = run_task({
+            "action": "record_expense",
+            "payload": {
+                "description": args.description,
+                "amount_usd": args.amount,
+                "category": args.category,
+                "product_id": (
+                    args.product_id or None
+                ),
+                "project_id": (
+                    args.project_id or None
+                ),
+                "venture_id": (
+                    args.venture_id or None
+                ),
+                "vendor": (
+                    args.vendor or None
+                ),
+                "is_test": args.test,
+            },
+        })
+
+    else:
+        result = run_task({
+            "action": "set_venture_budget",
+            "payload": {
+                "venture_id": args.venture_id,
+                "budget_usd": args.amount,
+            },
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

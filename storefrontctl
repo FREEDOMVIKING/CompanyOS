@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.storefront_agent import run_task
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Storefront"
+    )
+
+    parser.add_argument(
+        "command",
+        choices=[
+            "build",
+            "start",
+            "stop",
+            "status",
+        ],
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "build":
+        print(json.dumps(
+            run_task({"action": "build_storefront"}),
+            indent=2,
+        ))
+        return
+
+    script = (
+        ROOT_DIR
+        / "companyos"
+        / "storefront"
+        / f"{args.command}.sh"
+    )
+
+    raise SystemExit(
+        subprocess.run(
+            ["bash", str(script)],
+            cwd=str(ROOT_DIR),
+        ).returncode
+    )
+
+
+if __name__ == "__main__":
+    main()

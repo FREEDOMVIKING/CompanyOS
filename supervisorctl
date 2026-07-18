@@ -1,0 +1,212 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+LOG_DIR = ROOT_DIR / "logs"
+
+PID_FILE = MEMORY_DIR / "supervisor.pid"
+LOG_FILE = LOG_DIR / "ceo_supervisor.log"
+
+sys.path.insert(0, str(ROOT_DIR))
+
+from agents.authority_guard import (  # noqa: E402
+    set_mode,
+)
+from agents.ceo_supervisor import (  # noqa: E402
+    health_snapshot,
+)
+
+
+def read_pid() -> int | None:
+    try:
+        return int(
+            PID_FILE.read_text(
+                encoding="utf-8"
+            ).strip()
+        )
+    except (
+        FileNotFoundError,
+        ValueError,
+        OSError,
+    ):
+        return None
+
+
+def alive(pid: int | None) -> bool:
+    if not pid:
+        return False
+
+    try:
+        os.kill(pid, 0)
+        return True
+    except (
+        ProcessLookupError,
+        PermissionError,
+    ):
+        return False
+
+
+def start() -> dict:
+    pid = read_pid()
+
+    if alive(pid):
+        return {
+            "success": True,
+            "status": "supervisor_already_running",
+            "pid": pid,
+        }
+
+    try:
+        PID_FILE.unlink()
+    except FileNotFoundError:
+        pass
+
+    set_mode(
+        "operate",
+        "Owner started CompanyOS supervisor",
+        changed_by="owner",
+    )
+
+    LOG_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    handle = LOG_FILE.open(
+        "a",
+        encoding="utf-8",
+    )
+
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            "-m",
+            "agents.ceo_supervisor",
+            "loop",
+        ],
+        cwd=ROOT_DIR,
+        stdout=handle,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+    )
+
+    time.sleep(2)
+
+    return {
+        "success": process.poll() is None,
+        "status": (
+            "supervisor_started"
+            if process.poll() is None
+            else "supervisor_failed_to_start"
+        ),
+        "pid": process.pid,
+        "log_file": str(LOG_FILE),
+    }
+
+
+def freeze_company() -> dict:
+    state = set_mode(
+        "freeze",
+        "Owner froze CompanyOS",
+        changed_by="owner",
+    )
+
+    return {
+        "success": True,
+        "status": "company_frozen",
+        "authority_state": state,
+        "supervisor_pid": read_pid(),
+    }
+
+
+def resume_company() -> dict:
+    state = set_mode(
+        "operate",
+        "Owner resumed CompanyOS",
+        changed_by="owner",
+    )
+
+    return {
+        "success": True,
+        "status": "company_resumed",
+        "authority_state": state,
+        "supervisor_pid": read_pid(),
+    }
+
+
+def stop() -> dict:
+    state = set_mode(
+        "stop",
+        "Owner stopped CompanyOS supervisor",
+        changed_by="owner",
+    )
+
+    pid = read_pid()
+    sent = False
+
+    if alive(pid):
+        try:
+            os.kill(pid, signal.SIGTERM)
+            sent = True
+        except ProcessLookupError:
+            pass
+
+    try:
+        PID_FILE.unlink()
+    except FileNotFoundError:
+        pass
+
+    return {
+        "success": True,
+        "status": "supervisor_stopped",
+        "pid": pid,
+        "signal_sent": sent,
+        "authority_state": state,
+    }
+
+
+def main() -> int:
+    command = (
+        sys.argv[1].lower()
+        if len(sys.argv) > 1
+        else "status"
+    )
+
+    if command == "start":
+        result = start()
+
+    elif command == "freeze":
+        result = freeze_company()
+
+    elif command in {
+        "resume",
+        "operate",
+    }:
+        result = resume_company()
+
+    elif command == "stop":
+        result = stop()
+
+    elif command == "status":
+        result = health_snapshot()
+
+    else:
+        raise SystemExit(
+            "Usage: supervisorctl "
+            "{start|status|freeze|resume|stop}"
+        )
+
+    print(json.dumps(result, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

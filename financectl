@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT_DIR))
+
+from agents.revenue_engine_agent import (
+    add_ledger_entry,
+    rebuild_financial_summary,
+    status,
+    venture_report,
+)
+
+
+def usage() -> None:
+    print(
+        "Usage:\n"
+        "  financectl status\n"
+        "  financectl summary\n"
+        "  financectl revenue AMOUNT [VENTURE_ID] [DESCRIPTION]\n"
+        "  financectl expense AMOUNT [VENTURE_ID] [DESCRIPTION]\n"
+        "  financectl refund AMOUNT [VENTURE_ID] [DESCRIPTION]\n"
+        "  financectl fee AMOUNT [VENTURE_ID] [DESCRIPTION]\n"
+        "  financectl venture VENTURE_ID"
+    )
+
+
+def main() -> int:
+    command = (
+        sys.argv[1].strip().lower()
+        if len(sys.argv) > 1
+        else "status"
+    )
+
+    if command == "status":
+        result = status()
+
+    elif command == "summary":
+        result = rebuild_financial_summary()
+
+    elif command == "venture":
+        if len(sys.argv) < 3:
+            usage()
+            return 1
+
+        result = venture_report(sys.argv[2])
+
+    elif command in {
+        "revenue",
+        "expense",
+        "refund",
+        "fee",
+    }:
+        if len(sys.argv) < 3:
+            usage()
+            return 1
+
+        try:
+            amount = float(sys.argv[2])
+        except ValueError:
+            raise SystemExit("Amount must be numeric")
+
+        venture_id = (
+            sys.argv[3]
+            if len(sys.argv) > 3
+            else ""
+        )
+
+        description = (
+            " ".join(sys.argv[4:])
+            if len(sys.argv) > 4
+            else ""
+        )
+
+        result = add_ledger_entry(
+            entry_type=command,
+            amount_usd=amount,
+            venture_id=venture_id,
+            description=description,
+            source="financectl",
+        )
+
+    else:
+        usage()
+        return 1
+
+    print(json.dumps(result, indent=2))
+    return 0 if result.get("success") is not False else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

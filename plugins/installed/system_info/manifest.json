@@ -1,0 +1,16 @@
+{
+  "id": "system_info",
+  "name": "System Information",
+  "version": "1.0.0",
+  "description": "Reports basic local CompanyOS and Python information.",
+  "capabilities": [
+    "python_version",
+    "disk_usage",
+    "companyos_paths"
+  ],
+  "permissions": [
+    "read_system_metadata"
+  ],
+  "entrypoint": "plugin.py",
+  "enabled_by_default": true
+}

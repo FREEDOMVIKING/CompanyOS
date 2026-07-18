@@ -1,0 +1,640 @@
+#!/usr/bin/env python3
+
+import importlib
+import json
+import os
+import subprocess
+import sys
+import time
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Callable
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+
+WORKFLOWS_FILE = MEMORY_DIR / "product_factory_workflows.json"
+TASKS_FILE = MEMORY_DIR / "tasks.json"
+STATE_FILE = MEMORY_DIR / "global_scheduler_state.json"
+EVENTS_FILE = MEMORY_DIR / "global_scheduler_events.json"
+SUMMARY_FILE = MEMORY_DIR / "global_scheduler_summary.json"
+LOCK_FILE = MEMORY_DIR / "global_scheduler.lock"
+REPORT_DIR = MEMORY_DIR / "scheduler_reports"
+
+TERMINAL_TASK_STATUSES = {
+    "completed",
+    "done",
+    "success",
+    "successful",
+    "failed",
+    "error",
+    "rejected",
+    "cancelled",
+}
+
+ACTIVE_TASK_STATUSES = {
+    "pending",
+    "queued",
+    "running",
+    "waiting",
+}
+
+STAGE_HANDLERS = {
+    "research": {
+        "module": "agents.product_factory_runner",
+        "queue": "queue_research_tasks",
+        "sync": "sync_research_results",
+    },
+    "validation": {
+        "module": "agents.product_factory_validation_runner",
+        "queue": "queue_validation_tasks",
+        "sync": "sync_validation_results",
+    },
+    "product_design": {
+        "module": "agents.product_factory_design_runner",
+        "queue": "queue_design_tasks",
+        "sync": "sync_design_results",
+    },
+    "prototype_build": {
+        "module": "agents.product_factory_prototype_runner",
+        "queue": "queue_prototype_tasks",
+        "sync": "sync_prototype_results",
+    },
+}
+
+KNOWN_FUTURE_STAGES = {
+    "quality_audit",
+    "publishing_preparation",
+    "launch_ready",
+}
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def load_json(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return default
+
+
+def save_json(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+
+    temporary.write_text(
+        json.dumps(data, indent=2),
+        encoding="utf-8",
+    )
+
+    temporary.replace(path)
+
+
+def records(value: Any) -> list[dict[str, Any]]:
+    if isinstance(value, list):
+        return [
+            item
+            for item in value
+            if isinstance(item, dict)
+        ]
+
+    if isinstance(value, dict):
+        return [
+            item
+            for item in value.values()
+            if isinstance(item, dict)
+        ]
+
+    return []
+
+
+def append_event(
+    event_type: str,
+    details: dict[str, Any],
+) -> None:
+    events = records(load_json(EVENTS_FILE, []))
+
+    events.append({
+        "id": f"scheduler-event-{uuid.uuid4().hex[:12]}",
+        "event_type": event_type,
+        "details": details,
+        "created_at": now(),
+    })
+
+    save_json(EVENTS_FILE, events[-20000:])
+
+
+def acquire_lock() -> None:
+    if LOCK_FILE.exists():
+        lock_data = load_json(LOCK_FILE, {})
+        pid = lock_data.get("pid")
+
+        if isinstance(pid, int):
+            try:
+                os.kill(pid, 0)
+            except OSError:
+                LOCK_FILE.unlink(missing_ok=True)
+            else:
+                raise RuntimeError(
+                    f"Scheduler is already running with PID {pid}."
+                )
+        else:
+            LOCK_FILE.unlink(missing_ok=True)
+
+    save_json(
+        LOCK_FILE,
+        {
+            "pid": os.getpid(),
+            "started_at": now(),
+        },
+    )
+
+
+def release_lock() -> None:
+    LOCK_FILE.unlink(missing_ok=True)
+
+
+def workflow_snapshot() -> dict[str, Any]:
+    workflows = records(load_json(WORKFLOWS_FILE, []))
+
+    stage_counts: dict[str, int] = {}
+    status_counts: dict[str, int] = {}
+
+    for workflow in workflows:
+        stage = str(workflow.get("current_stage", "unknown"))
+        status = str(workflow.get("status", "unknown"))
+
+        stage_counts[stage] = stage_counts.get(stage, 0) + 1
+        status_counts[status] = status_counts.get(status, 0) + 1
+
+    return {
+        "total": len(workflows),
+        "stage_counts": stage_counts,
+        "status_counts": status_counts,
+        "workflows": [
+            {
+                "id": workflow.get("id"),
+                "idea_name": workflow.get("idea_name"),
+                "status": workflow.get("status"),
+                "current_stage": workflow.get("current_stage"),
+                "updated_at": workflow.get("updated_at"),
+            }
+            for workflow in workflows
+        ],
+    }
+
+
+def task_snapshot() -> dict[str, Any]:
+    tasks = records(load_json(TASKS_FILE, []))
+
+    return {
+        "total": len(tasks),
+        "active": sum(
+            1
+            for task in tasks
+            if str(task.get("status", "")).lower()
+            in ACTIVE_TASK_STATUSES
+        ),
+        "completed": sum(
+            1
+            for task in tasks
+            if str(task.get("status", "")).lower()
+            in {"completed", "done", "success", "successful"}
+        ),
+        "failed": sum(
+            1
+            for task in tasks
+            if str(task.get("status", "")).lower()
+            in {"failed", "error", "rejected"}
+        ),
+    }
+
+
+def load_handler_function(
+    module_name: str,
+    function_name: str,
+) -> Callable[[], dict[str, Any]]:
+    module = importlib.import_module(module_name)
+    function = getattr(module, function_name, None)
+
+    if not callable(function):
+        raise RuntimeError(
+            f"{module_name} does not provide {function_name}()."
+        )
+
+    return function
+
+
+def call_stage_handler(
+    stage_name: str,
+    operation: str,
+) -> dict[str, Any]:
+    configuration = STAGE_HANDLERS[stage_name]
+
+    function = load_handler_function(
+        configuration["module"],
+        configuration[operation],
+    )
+
+    result = function()
+
+    if not isinstance(result, dict):
+        raise RuntimeError(
+            f"{stage_name}.{operation} returned a non-dictionary result."
+        )
+
+    return result
+
+
+def run_worker_manager(
+    max_passes: int = 10,
+) -> dict[str, Any]:
+    passes: list[dict[str, Any]] = []
+
+    for pass_number in range(1, max_passes + 1):
+        before = task_snapshot()
+
+        if before["active"] == 0:
+            break
+
+        process = subprocess.run(
+            [sys.executable, "-m", "agents.manager"],
+            cwd=ROOT_DIR,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+
+        after = task_snapshot()
+
+        passes.append({
+            "pass": pass_number,
+            "returncode": process.returncode,
+            "active_before": before["active"],
+            "active_after": after["active"],
+            "stdout": process.stdout[-4000:],
+            "stderr": process.stderr[-4000:],
+        })
+
+        if after["active"] == 0:
+            break
+
+        if (
+            after["active"] >= before["active"]
+            and process.returncode != 0
+        ):
+            break
+
+    return {
+        "success": all(
+            item["returncode"] == 0
+            for item in passes
+        ),
+        "passes": passes,
+        "remaining_active_tasks": task_snapshot()["active"],
+    }
+
+
+def queue_all_ready_stages() -> dict[str, Any]:
+    results: dict[str, Any] = {}
+
+    snapshot = workflow_snapshot()
+    current_stages = snapshot["stage_counts"]
+
+    for stage_name in STAGE_HANDLERS:
+        if current_stages.get(stage_name, 0) == 0:
+            continue
+
+        try:
+            results[stage_name] = call_stage_handler(
+                stage_name,
+                "queue",
+            )
+        except Exception as error:
+            results[stage_name] = {
+                "success": False,
+                "error": str(error),
+            }
+
+    return {
+        "success": all(
+            result.get("success") is not False
+            for result in results.values()
+        ),
+        "results": results,
+    }
+
+
+def sync_all_stage_results() -> dict[str, Any]:
+    results: dict[str, Any] = {}
+
+    for stage_name in STAGE_HANDLERS:
+        try:
+            results[stage_name] = call_stage_handler(
+                stage_name,
+                "sync",
+            )
+        except Exception as error:
+            results[stage_name] = {
+                "success": False,
+                "error": str(error),
+            }
+
+    return {
+        "success": all(
+            result.get("success") is not False
+            for result in results.values()
+        ),
+        "results": results,
+    }
+
+
+def count_advancements(
+    sync_result: dict[str, Any],
+) -> int:
+    total = 0
+
+    for result in sync_result.get("results", {}).values():
+        if not isinstance(result, dict):
+            continue
+
+        try:
+            total += int(result.get("advanced_count", 0) or 0)
+        except (TypeError, ValueError):
+            continue
+
+    return total
+
+
+def count_queued(
+    queue_result: dict[str, Any],
+) -> int:
+    total = 0
+
+    for result in queue_result.get("results", {}).values():
+        if not isinstance(result, dict):
+            continue
+
+        try:
+            total += int(result.get("queued_count", 0) or 0)
+        except (TypeError, ValueError):
+            continue
+
+    return total
+
+
+def unsupported_stage_summary() -> list[dict[str, Any]]:
+    workflows = records(load_json(WORKFLOWS_FILE, []))
+    unsupported = []
+
+    for workflow in workflows:
+        if workflow.get("status") != "active":
+            continue
+
+        stage = str(workflow.get("current_stage", ""))
+
+        if stage in KNOWN_FUTURE_STAGES:
+            unsupported.append({
+                "workflow_id": workflow.get("id"),
+                "idea_name": workflow.get("idea_name"),
+                "current_stage": stage,
+                "reason": (
+                    "Stage handler has not been installed yet."
+                ),
+            })
+
+    return unsupported
+
+
+def run_cycle(
+    max_internal_rounds: int = 8,
+) -> dict[str, Any]:
+    cycle_id = f"scheduler-cycle-{uuid.uuid4().hex[:10]}"
+    cycle_started_at = now()
+
+    before_workflows = workflow_snapshot()
+    before_tasks = task_snapshot()
+    rounds: list[dict[str, Any]] = []
+
+    append_event(
+        "scheduler_cycle_started",
+        {
+            "cycle_id": cycle_id,
+            "workflow_snapshot": before_workflows,
+            "task_snapshot": before_tasks,
+        },
+    )
+
+    for round_number in range(1, max_internal_rounds + 1):
+        queue_result = queue_all_ready_stages()
+        queued_count = count_queued(queue_result)
+
+        worker_result = run_worker_manager()
+        sync_result = sync_all_stage_results()
+        advanced_count = count_advancements(sync_result)
+
+        round_result = {
+            "round": round_number,
+            "queued_count": queued_count,
+            "advanced_count": advanced_count,
+            "queue": queue_result,
+            "workers": worker_result,
+            "sync": sync_result,
+            "workflow_snapshot": workflow_snapshot(),
+            "task_snapshot": task_snapshot(),
+        }
+
+        rounds.append(round_result)
+
+        append_event(
+            "scheduler_round_completed",
+            {
+                "cycle_id": cycle_id,
+                "round": round_number,
+                "queued_count": queued_count,
+                "advanced_count": advanced_count,
+            },
+        )
+
+        if queued_count == 0 and advanced_count == 0:
+            break
+
+    after_workflows = workflow_snapshot()
+    after_tasks = task_snapshot()
+    unsupported = unsupported_stage_summary()
+
+    success = all(
+        round_result["queue"].get("success") is not False
+        and round_result["sync"].get("success") is not False
+        for round_result in rounds
+    )
+
+    summary = {
+        "success": success,
+        "status": "global_scheduler_cycle_complete",
+        "cycle_id": cycle_id,
+        "started_at": cycle_started_at,
+        "completed_at": now(),
+        "rounds_completed": len(rounds),
+        "total_tasks_queued": sum(
+            item["queued_count"]
+            for item in rounds
+        ),
+        "total_workflow_advancements": sum(
+            item["advanced_count"]
+            for item in rounds
+        ),
+        "before": {
+            "workflows": before_workflows,
+            "tasks": before_tasks,
+        },
+        "after": {
+            "workflows": after_workflows,
+            "tasks": after_tasks,
+        },
+        "awaiting_future_handlers": unsupported,
+        "safety": {
+            "automatic_internal_execution": True,
+            "automatic_external_publication": False,
+            "automatic_spending": False,
+            "owner_approval_required_for_launch": True,
+        },
+        "rounds": rounds,
+    }
+
+    save_json(SUMMARY_FILE, summary)
+
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    save_json(
+        REPORT_DIR / f"{cycle_id}.json",
+        summary,
+    )
+
+    state = load_json(STATE_FILE, {})
+
+    if not isinstance(state, dict):
+        state = {}
+
+    state.update({
+        "enabled": True,
+        "last_cycle_id": cycle_id,
+        "last_cycle_started_at": cycle_started_at,
+        "last_cycle_completed_at": summary["completed_at"],
+        "last_cycle_success": success,
+        "cycles_completed": int(
+            state.get("cycles_completed", 0) or 0
+        ) + 1,
+        "updated_at": now(),
+    })
+
+    save_json(STATE_FILE, state)
+
+    append_event(
+        "scheduler_cycle_completed",
+        {
+            "cycle_id": cycle_id,
+            "success": success,
+            "rounds_completed": len(rounds),
+            "total_tasks_queued": summary["total_tasks_queued"],
+            "total_workflow_advancements": (
+                summary["total_workflow_advancements"]
+            ),
+            "awaiting_future_handlers": len(unsupported),
+        },
+    )
+
+    return summary
+
+
+def scheduler_status() -> dict[str, Any]:
+    return {
+        "success": True,
+        "status": "global_scheduler_status",
+        "updated_at": now(),
+        "state": load_json(STATE_FILE, {}),
+        "workflows": workflow_snapshot(),
+        "tasks": task_snapshot(),
+        "supported_stages": list(STAGE_HANDLERS),
+        "future_stages_pending_installation": sorted(
+            KNOWN_FUTURE_STAGES
+        ),
+        "awaiting_future_handlers": unsupported_stage_summary(),
+        "latest_summary": load_json(SUMMARY_FILE, {}),
+    }
+
+
+def run_loop(
+    delay_seconds: int = 300,
+) -> None:
+    if delay_seconds < 30:
+        raise ValueError(
+            "Scheduler delay must be at least 30 seconds."
+        )
+
+    acquire_lock()
+
+    try:
+        print("Global CompanyOS scheduler started.")
+        print(f"Cycle delay: {delay_seconds} seconds")
+
+        while True:
+            result = run_cycle()
+
+            print(json.dumps({
+                "cycle_id": result["cycle_id"],
+                "success": result["success"],
+                "rounds_completed": result["rounds_completed"],
+                "tasks_queued": result["total_tasks_queued"],
+                "advancements": (
+                    result["total_workflow_advancements"]
+                ),
+                "future_handlers_waiting": len(
+                    result["awaiting_future_handlers"]
+                ),
+                "completed_at": result["completed_at"],
+            }, indent=2))
+
+            print(
+                f"Sleeping for {delay_seconds} seconds..."
+            )
+
+            time.sleep(delay_seconds)
+
+    except KeyboardInterrupt:
+        print("\nGlobal scheduler stopped safely.")
+    finally:
+        release_lock()
+
+
+def run_task(
+    task: dict[str, Any],
+) -> dict[str, Any]:
+    action = task.get("action")
+
+    if action == "run_global_scheduler_cycle":
+        payload = task.get("payload", {})
+
+        if not isinstance(payload, dict):
+            payload = {}
+
+        return run_cycle(
+            max_internal_rounds=int(
+                payload.get("max_internal_rounds", 8)
+                or 8
+            )
+        )
+
+    if action == "global_scheduler_status":
+        return scheduler_status()
+
+    return {
+        "success": False,
+        "error": f"Unsupported scheduler action: {action}",
+    }
+
+
+if __name__ == "__main__":
+    print(json.dumps(run_cycle(), indent=2))

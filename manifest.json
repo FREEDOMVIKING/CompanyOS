@@ -1,0 +1,174 @@
+{
+  "core_files": [
+    "company_cycle.py",
+    "company_manager.py",
+    "ceo_company.py"
+  ],
+  "core_directories": [
+    "agents",
+    "ceo_memory",
+    "company_builds"
+  ],
+  "companyos_directories": [
+    "companyos/modules",
+    "companyos/releases",
+    "companyos/backups",
+    "companyos/logs",
+    "companyos/tests"
+  ],
+  "modules": {
+    "dashboard": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "server": "python_stdlib",
+      "default_address": "http://127.0.0.1:8765"
+    },
+    "plugins": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "registry": "companyos/plugins/registry.json",
+      "built_in_plugins": [
+        "local_storage",
+        "system_info"
+      ]
+    },
+    "monitoring": {
+      "installed": false,
+      "enabled": false
+    },
+    "execution": {
+      "installed": false,
+      "enabled": false
+    },
+    "knowledge": {
+      "installed": false,
+      "enabled": false
+    },
+    "marketplace": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "catalog": "companyos/marketplace/catalog.json",
+      "bundled_plugins": [
+        "knowledge_notes",
+        "project_metrics"
+      ]
+    },
+    "incubator": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/incubator_agent.py",
+      "workspace": "company_ventures",
+      "commands": [
+        "list",
+        "incubate",
+        "incubate-top"
+      ]
+    },
+    "crm": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/crm_agent.py",
+      "commands": [
+        "pipeline",
+        "list",
+        "customers",
+        "create",
+        "stage",
+        "note"
+      ]
+    },
+    "publisher": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/publisher_agent.py",
+      "workspace": "company_products",
+      "external_publication_requires_approval": true
+    },
+    "connectors": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "registry": "companyos/connectors/registry.json",
+      "external_publication_requires_owner_approval": true,
+      "installed_connectors": [
+        "local_marketplace"
+      ]
+    },
+    "storefront": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/storefront_agent.py",
+      "address": "http://127.0.0.1:8780",
+      "public_external_access": false
+    },
+    "sales_analytics": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/sales_agent.py",
+      "storefront_tracking": true,
+      "real_payment_processing": false
+    },
+    "customer_lifecycle": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/customer_agent.py",
+      "automatic_external_email": false,
+      "owner_approval_required": true,
+      "sales_order_sync": true
+    },
+    "finance_profit": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/profit_agent.py",
+      "tracks_test_revenue_separately": true,
+      "tracks_product_profitability": true,
+      "tracks_venture_budgets": true,
+      "real_payment_processing": false
+    },
+    "executive_portfolio": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/portfolio_agent.py",
+      "automatic_spending": false,
+      "automatic_external_actions": false,
+      "owner_approval_required": true,
+      "tracks_ventures": true,
+      "tracks_products": true,
+      "tracks_customers": true,
+      "tracks_profitability": true
+    },
+    "growth_orchestrator": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0",
+      "agent": "agents/growth_agent.py",
+      "creates_internal_tasks": true,
+      "automatic_spending": false,
+      "automatic_external_publication": false,
+      "automatic_customer_messages": false,
+      "owner_approval_required_for_expansion": true
+    },
+    "autonomous_product_factory": {
+      "installed": true,
+      "enabled": true,
+      "version": "1.0.0-step1",
+      "agent": "agents/product_factory_agent.py",
+      "persistent_workflows": true,
+      "automatic_internal_execution": true,
+      "automatic_external_publication": false,
+      "automatic_spending": false,
+      "owner_approval_required_for_launch": true
+    }
+  }
+}

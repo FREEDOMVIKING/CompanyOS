@@ -1,0 +1,139 @@
+{
+  "success": true,
+  "status": "executive_review_complete",
+  "reviewed_at": "2026-07-17T13:43:39.970872+00:00",
+  "company_health": "attention_required",
+  "department_reports": {
+    "research": {
+      "department": "research",
+      "executive": "Chief Research Officer",
+      "agents": [
+        "research_agent"
+      ],
+      "health": "attention_required",
+      "task_counts": {
+        "total": 2,
+        "pending": 0,
+        "running": 0,
+        "completed": 1,
+        "failed": 1
+      },
+      "result_counts": {
+        "total": 2,
+        "successful": 1,
+        "failed": 1
+      },
+      "recommendations": [
+        "Review failed results and recovery status."
+      ]
+    },
+    "technology": {
+      "department": "technology",
+      "executive": "Chief Technology Officer",
+      "agents": [
+        "builder_agent",
+        "recovery_agent"
+      ],
+      "health": "stable",
+      "task_counts": {
+        "total": 1,
+        "pending": 0,
+        "running": 0,
+        "completed": 1,
+        "failed": 0
+      },
+      "result_counts": {
+        "total": 1,
+        "successful": 1,
+        "failed": 0
+      },
+      "recommendations": [
+        "Continue normal department operations."
+      ]
+    },
+    "operations": {
+      "department": "operations",
+      "executive": "Chief Operating Officer",
+      "agents": [
+        "builder_agent",
+        "auditor_agent"
+      ],
+      "health": "stable",
+      "task_counts": {
+        "total": 2,
+        "pending": 0,
+        "running": 0,
+        "completed": 2,
+        "failed": 0
+      },
+      "result_counts": {
+        "total": 2,
+        "successful": 2,
+        "failed": 0
+      },
+      "recommendations": [
+        "Continue normal department operations."
+      ]
+    },
+    "marketing": {
+      "department": "marketing",
+      "executive": "Chief Marketing Officer",
+      "agents": [
+        "marketing_agent"
+      ],
+      "health": "stable",
+      "task_counts": {
+        "total": 1,
+        "pending": 0,
+        "running": 0,
+        "completed": 1,
+        "failed": 0
+      },
+      "result_counts": {
+        "total": 1,
+        "successful": 1,
+        "failed": 0
+      },
+      "recommendations": [
+        "Continue normal department operations."
+      ]
+    },
+    "finance": {
+      "department": "finance",
+      "executive": "Chief Financial Officer",
+      "agents": [
+        "finance_agent"
+      ],
+      "health": "stable",
+      "task_counts": {
+        "total": 1,
+        "pending": 0,
+        "running": 0,
+        "completed": 1,
+        "failed": 0
+      },
+      "result_counts": {
+        "total": 1,
+        "successful": 1,
+        "failed": 0
+      },
+      "recommendations": [
+        "Continue normal department operations."
+      ]
+    }
+  },
+  "company_priorities": [
+    {
+      "priority": 2,
+      "action": "review_departments",
+      "departments": [
+        "research"
+      ]
+    }
+  ],
+  "active_projects": 1,
+  "total_projects": 1,
+  "pending_tasks": 0,
+  "open_escalations": 0,
+  "available_budget_usd": 10.0
+}

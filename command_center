@@ -1,0 +1,481 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+COMPANYOS_DIR = ROOT_DIR / "companyos"
+
+SNAPSHOT_FILE = MEMORY_DIR / "command_center_snapshot.json"
+HISTORY_FILE = MEMORY_DIR / "command_center_history.json"
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def load_json(filename: str, default: Any) -> Any:
+    path = MEMORY_DIR / filename
+
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def save_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(value, indent=2),
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+
+
+def records(value: Any) -> list[dict[str, Any]]:
+    if isinstance(value, list):
+        return [
+            item
+            for item in value
+            if isinstance(item, dict)
+        ]
+
+    if isinstance(value, dict):
+        return [
+            item
+            for item in value.values()
+            if isinstance(item, dict)
+        ]
+
+    return []
+
+
+def text(value: Any, default: str = "-") -> str:
+    value = str(value or "").strip()
+    return value or default
+
+
+def count_status(
+    items: list[dict[str, Any]],
+    status_name: str,
+) -> int:
+    target = status_name.lower()
+
+    return sum(
+        1
+        for item in items
+        if text(item.get("status"), "").lower() == target
+    )
+
+
+def process_alive(pid: Any) -> bool:
+    try:
+        pid_value = int(pid)
+    except (TypeError, ValueError):
+        return False
+
+    if pid_value <= 0:
+        return False
+
+    try:
+        os.kill(pid_value, 0)
+        return True
+    except (ProcessLookupError, PermissionError):
+        return False
+
+
+def build_snapshot() -> dict[str, Any]:
+    authority = load_json("authority_state.json", {})
+    supervisor = load_json("supervisor_state.json", {})
+    autopilot = load_json("autopilot_state.json", {})
+    pipeline = load_json(
+        "autonomous_business_pipeline_summary.json",
+        {},
+    )
+    portfolio_plan = load_json(
+        "portfolio_execution_plan.json",
+        {},
+    )
+    portfolio_manager = load_json(
+        "portfolio_manager_summary.json",
+        {},
+    )
+    opportunities = records(
+        load_json("opportunities.json", [])
+    )
+    validations = records(
+        load_json("opportunity_validations.json", [])
+    )
+    workflows = records(
+        load_json("product_factory_workflows.json", [])
+    )
+    products = records(
+        load_json("products.json", [])
+    )
+    listings = records(
+        load_json("marketplace_listings.json", [])
+    )
+    tasks = records(
+        load_json("tasks.json", [])
+    )
+    results = records(
+        load_json("agent_results.json", [])
+    )
+    stalled = records(
+        load_json("portfolio_stalled_workflows.json", [])
+    )
+
+    active_priorities = records(
+        portfolio_plan.get("active_priorities", [])
+    )
+
+    top_opportunities = sorted(
+        opportunities,
+        key=lambda item: float(
+            item.get("overall_score", 0) or 0
+        ),
+        reverse=True,
+    )[:5]
+
+    latest_results = results[-5:]
+
+    snapshot = {
+        "success": True,
+        "status": "command_center_snapshot",
+        "generated_at": now(),
+        "authority": {
+            "mode": authority.get("mode"),
+            "reason": authority.get("reason"),
+            "changed_by": authority.get("changed_by"),
+            "updated_at": authority.get("updated_at"),
+        },
+        "runtime": {
+            "supervisor_running": (
+                supervisor.get("running") is True
+                and process_alive(supervisor.get("pid"))
+            ),
+            "supervisor_pid": supervisor.get("pid"),
+            "autopilot_running": (
+                autopilot.get("running") is True
+                or process_alive(autopilot.get("pid"))
+            ),
+            "autopilot_pid": autopilot.get("pid"),
+            "last_cycle_success": autopilot.get(
+                "last_cycle_success"
+            ),
+            "last_cycle_completed_at": autopilot.get(
+                "last_cycle_completed_at"
+            ),
+            "pipeline_status": pipeline.get("status"),
+            "portfolio_status": portfolio_manager.get("status"),
+        },
+        "portfolio": {
+            "opportunities": len(opportunities),
+            "validated": sum(
+                1
+                for item in validations
+                if item.get("decision") == "approved"
+            ),
+            "workflows": len(workflows),
+            "active_workflows": sum(
+                1
+                for item in workflows
+                if text(item.get("status"), "").lower()
+                not in {
+                    "completed",
+                    "cancelled",
+                    "rejected",
+                    "archived",
+                    "paused",
+                }
+            ),
+            "paused_workflows": count_status(
+                workflows,
+                "paused",
+            ),
+            "completed_workflows": count_status(
+                workflows,
+                "completed",
+            ),
+            "products": len(products),
+            "listings": len(listings),
+            "stalled_workflows": len(stalled),
+        },
+        "tasks": {
+            "total": len(tasks),
+            "waiting": sum(
+                1
+                for item in tasks
+                if text(item.get("status"), "").lower()
+                in {"waiting", "pending", "queued"}
+            ),
+            "running": count_status(tasks, "running"),
+            "completed": count_status(tasks, "completed"),
+            "failed": count_status(tasks, "failed"),
+        },
+        "active_priorities": active_priorities[:5],
+        "top_opportunities": [
+            {
+                "rank": item.get("portfolio_rank"),
+                "name": item.get("name"),
+                "score": item.get("overall_score"),
+                "risk": item.get("risk_score"),
+                "status": item.get("status"),
+            }
+            for item in top_opportunities
+        ],
+        "latest_agent_results": [
+            {
+                "agent": item.get("agent"),
+                "task_id": item.get("task_id"),
+                "success": item.get("success"),
+                "status": item.get("status"),
+                "completed_at": item.get("completed_at"),
+            }
+            for item in latest_results
+        ],
+        "recovery": {
+            "restart_count_this_hour": supervisor.get(
+                "restart_count_this_hour",
+                0,
+            ),
+            "total_restart_count": supervisor.get(
+                "total_restart_count",
+                0,
+            ),
+            "last_restart_at": supervisor.get("last_restart_at"),
+            "last_error": supervisor.get("last_error"),
+        },
+        "permissions": {
+            "internal_execution": True,
+            "automatic_spending": False,
+            "external_publication": False,
+        },
+    }
+
+    save_json(SNAPSHOT_FILE, snapshot)
+
+    history = load_json(
+        "command_center_history.json",
+        [],
+    )
+
+    if not isinstance(history, list):
+        history = []
+
+    history.append(snapshot)
+    save_json(HISTORY_FILE, history[-1000:])
+
+    return snapshot
+
+
+def print_header(title: str) -> None:
+    print()
+    print("=" * 64)
+    print(title)
+    print("=" * 64)
+
+
+def render(snapshot: dict[str, Any]) -> None:
+    authority = snapshot["authority"]
+    runtime = snapshot["runtime"]
+    portfolio = snapshot["portfolio"]
+    tasks = snapshot["tasks"]
+    recovery = snapshot["recovery"]
+
+    print_header("COMPANYOS — CEO COMMAND CENTER")
+
+    print(f"Authority mode:     {text(authority.get('mode')).upper()}")
+    print(f"Supervisor running: {runtime.get('supervisor_running')}")
+    print(f"Autopilot running:  {runtime.get('autopilot_running')}")
+    print(f"Pipeline status:    {text(runtime.get('pipeline_status'))}")
+    print(f"Portfolio status:   {text(runtime.get('portfolio_status'))}")
+    print(f"Last CEO cycle:     {text(runtime.get('last_cycle_completed_at'))}")
+
+    print_header("PORTFOLIO")
+
+    print(f"Opportunities:      {portfolio['opportunities']}")
+    print(f"Approved:           {portfolio['validated']}")
+    print(f"Workflows:          {portfolio['workflows']}")
+    print(f"Active workflows:   {portfolio['active_workflows']}")
+    print(f"Paused workflows:   {portfolio['paused_workflows']}")
+    print(f"Completed:          {portfolio['completed_workflows']}")
+    print(f"Products:           {portfolio['products']}")
+    print(f"Listings:           {portfolio['listings']}")
+    print(f"Stalled workflows:  {portfolio['stalled_workflows']}")
+
+    print_header("TASKS")
+
+    print(f"Total:              {tasks['total']}")
+    print(f"Waiting:            {tasks['waiting']}")
+    print(f"Running:            {tasks['running']}")
+    print(f"Completed:          {tasks['completed']}")
+    print(f"Failed:             {tasks['failed']}")
+
+    print_header("TOP OPPORTUNITIES")
+
+    top = snapshot.get("top_opportunities", [])
+
+    if not top:
+        print("No opportunities available.")
+    else:
+        for item in top:
+            print(
+                f"{text(item.get('rank'))}. "
+                f"{text(item.get('name'))} | "
+                f"score={text(item.get('score'))} | "
+                f"risk={text(item.get('risk'))} | "
+                f"{text(item.get('status'))}"
+            )
+
+    print_header("ACTIVE EXECUTION PRIORITIES")
+
+    priorities = snapshot.get("active_priorities", [])
+
+    if not priorities:
+        print("No active portfolio priorities.")
+    else:
+        for index, item in enumerate(priorities, start=1):
+            print(
+                f"{index}. "
+                f"{text(item.get('idea_name'))} | "
+                f"stage={text(item.get('current_stage'))} | "
+                f"priority={text(item.get('priority_score'))} | "
+                f"next={text(item.get('recommended_action'))}"
+            )
+
+    print_header("RECOVERY")
+
+    print(
+        "Restarts this hour: "
+        f"{recovery.get('restart_count_this_hour', 0)}"
+    )
+    print(
+        "Total restarts:     "
+        f"{recovery.get('total_restart_count', 0)}"
+    )
+    print(
+        "Last restart:       "
+        f"{text(recovery.get('last_restart_at'))}"
+    )
+    print(
+        "Last error:         "
+        f"{text(recovery.get('last_error'))}"
+    )
+
+    print_header("AUTHORITY")
+
+    permissions = snapshot.get("permissions", {})
+
+    print(
+        "Internal execution: "
+        f"{permissions.get('internal_execution')}"
+    )
+    print(
+        "Automatic spending: "
+        f"{permissions.get('automatic_spending')}"
+    )
+    print(
+        "External publish:   "
+        f"{permissions.get('external_publication')}"
+    )
+
+    print()
+    print(
+        "Commands: status | watch | start | freeze | "
+        "resume | stop | json"
+    )
+    print()
+
+
+def run_control(command: str) -> int:
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(COMPANYOS_DIR / "supervisorctl"),
+            command,
+        ],
+        cwd=ROOT_DIR,
+        text=True,
+    )
+
+    return result.returncode
+
+
+def watch(delay: int) -> None:
+    delay = max(2, delay)
+
+    try:
+        while True:
+            print("\033[2J\033[H", end="")
+            render(build_snapshot())
+            print(f"Refreshing every {delay} seconds. Ctrl+C exits.")
+            time.sleep(delay)
+
+    except KeyboardInterrupt:
+        print("\nCommand Center closed.")
+
+
+def main() -> int:
+    command = (
+        sys.argv[1].strip().lower()
+        if len(sys.argv) > 1
+        else "status"
+    )
+
+    if command in {"status", "dashboard"}:
+        render(build_snapshot())
+        return 0
+
+    if command == "json":
+        print(json.dumps(build_snapshot(), indent=2))
+        return 0
+
+    if command == "watch":
+        delay = 5
+
+        if len(sys.argv) > 2:
+            try:
+                delay = int(sys.argv[2])
+            except ValueError:
+                raise SystemExit(
+                    "Watch delay must be a number."
+                )
+
+        watch(delay)
+        return 0
+
+    if command in {
+        "start",
+        "freeze",
+        "resume",
+        "operate",
+        "stop",
+    }:
+        control_command = (
+            "resume"
+            if command == "operate"
+            else command
+        )
+
+        code = run_control(control_command)
+        render(build_snapshot())
+        return code
+
+    raise SystemExit(
+        "Usage: command_center "
+        "{status|json|watch [seconds]|start|freeze|resume|stop}"
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

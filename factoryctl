@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.product_factory_agent import run_task
+
+
+def print_result(result: dict) -> None:
+    print(json.dumps(result, indent=2))
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "CompanyOS Autonomous Product Factory"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    start = commands.add_parser("start")
+    start.add_argument(
+        "--idea-id",
+        default="",
+    )
+
+    commands.add_parser("status")
+    commands.add_parser("list")
+
+    advance = commands.add_parser("advance")
+    advance.add_argument("workflow_id")
+    advance.add_argument(
+        "--failed",
+        action="store_true",
+    )
+    advance.add_argument(
+        "--message",
+        default="Stage completed successfully",
+    )
+
+    pause = commands.add_parser("pause")
+    pause.add_argument("workflow_id")
+    pause.add_argument(
+        "--reason",
+        default="Paused manually",
+    )
+
+    resume = commands.add_parser("resume")
+    resume.add_argument("workflow_id")
+
+    args = parser.parse_args()
+
+    if args.command == "start":
+        result = run_task({
+            "action": "start_product_factory",
+            "payload": {
+                "idea_id": (
+                    args.idea_id or None
+                ),
+            },
+        })
+
+    elif args.command == "status":
+        result = run_task({
+            "action": "product_factory_status",
+        })
+
+    elif args.command == "list":
+        result = run_task({
+            "action": "list_product_workflows",
+        })
+
+    elif args.command == "advance":
+        result = run_task({
+            "action": "advance_product_workflow",
+            "payload": {
+                "workflow_id": args.workflow_id,
+                "stage_success": not args.failed,
+                "result": {
+                    "message": args.message,
+                    "manual_step_1_test": True,
+                },
+            },
+        })
+
+    elif args.command == "pause":
+        result = run_task({
+            "action": "pause_product_workflow",
+            "payload": {
+                "workflow_id": args.workflow_id,
+                "reason": args.reason,
+            },
+        })
+
+    else:
+        result = run_task({
+            "action": "resume_product_workflow",
+            "payload": {
+                "workflow_id": args.workflow_id,
+            },
+        })
+
+    print_result(result)
+
+
+if __name__ == "__main__":
+    main()

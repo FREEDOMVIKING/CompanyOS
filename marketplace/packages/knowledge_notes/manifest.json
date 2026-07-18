@@ -1,0 +1,17 @@
+{
+  "id": "knowledge_notes",
+  "name": "Knowledge Notes",
+  "version": "1.0.0",
+  "description": "Stores reusable business notes and playbooks.",
+  "capabilities": [
+    "create_note",
+    "read_note",
+    "list_notes",
+    "search_notes"
+  ],
+  "permissions": [
+    "companyos_knowledge_data"
+  ],
+  "entrypoint": "plugin.py",
+  "enabled_by_default": true
+}

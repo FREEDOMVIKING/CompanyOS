@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import signal
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(ROOT_DIR))
+
+from agents.authority_guard import (  # noqa: E402
+    set_mode,
+    status,
+)
+
+
+def kill_company_processes() -> list[str]:
+    patterns = [
+        "company_cycle.py",
+        "global_scheduler.py",
+        "schedulerctl loop",
+        "agents.manager",
+        "company_manager.py",
+    ]
+
+    stopped = []
+
+    for pattern in patterns:
+        result = subprocess.run(
+            ["pgrep", "-f", pattern],
+            capture_output=True,
+            text=True,
+        )
+
+        for value in result.stdout.split():
+            try:
+                pid = int(value)
+
+                if pid == os.getpid():
+                    continue
+
+                os.kill(pid, signal.SIGTERM)
+                stopped.append(
+                    f"{pattern}:{pid}"
+                )
+            except (ValueError, ProcessLookupError):
+                continue
+
+    return stopped
+
+
+def main() -> int:
+    command = (
+        sys.argv[1].strip().lower()
+        if len(sys.argv) > 1
+        else "status"
+    )
+
+    if command == "status":
+        print(json.dumps(status(), indent=2))
+        return 0
+
+    if command == "operate":
+        result = set_mode(
+            "operate",
+            "Owner enabled autonomous operation",
+            changed_by="owner",
+        )
+
+        print(json.dumps(result, indent=2))
+        return 0
+
+    if command == "freeze":
+        result = set_mode(
+            "freeze",
+            "Owner froze autonomous operation",
+            changed_by="owner",
+        )
+
+        print(json.dumps(result, indent=2))
+        return 0
+
+    if command == "stop":
+        result = set_mode(
+            "stop",
+            "Owner stopped CompanyOS",
+            changed_by="owner",
+        )
+
+        stopped = kill_company_processes()
+
+        print(json.dumps({
+            "success": True,
+            "state": result,
+            "stopped_processes": stopped,
+        }, indent=2))
+
+        return 0
+
+    print(
+        "Usage: controlctl "
+        "{status|operate|freeze|stop}",
+        file=sys.stderr,
+    )
+
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

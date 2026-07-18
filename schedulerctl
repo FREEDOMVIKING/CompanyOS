@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.global_scheduler import (
+    run_cycle,
+    run_loop,
+    scheduler_status,
+)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Global Autonomous Scheduler"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    run_parser = commands.add_parser("run")
+    run_parser.add_argument(
+        "--rounds",
+        type=int,
+        default=8,
+    )
+
+    loop_parser = commands.add_parser("loop")
+    loop_parser.add_argument(
+        "--delay",
+        type=int,
+        default=300,
+    )
+
+    commands.add_parser("status")
+
+    args = parser.parse_args()
+
+    if args.command == "run":
+        result = run_cycle(
+            max_internal_rounds=max(
+                1,
+                min(args.rounds, 50),
+            )
+        )
+
+        print(json.dumps(result, indent=2))
+
+        if result.get("success") is False:
+            raise SystemExit(1)
+
+    elif args.command == "loop":
+        run_loop(
+            delay_seconds=max(
+                30,
+                args.delay,
+            )
+        )
+
+    else:
+        print(json.dumps(
+            scheduler_status(),
+            indent=2,
+        ))
+
+
+if __name__ == "__main__":
+    main()

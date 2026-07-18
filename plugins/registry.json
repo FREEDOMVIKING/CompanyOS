@@ -1,0 +1,93 @@
+{
+  "registry_version": 1,
+  "plugins": {
+    "knowledge_notes": {
+      "id": "knowledge_notes",
+      "name": "Knowledge Notes",
+      "version": "1.0.0",
+      "description": "Stores reusable business notes and playbooks.",
+      "capabilities": [
+        "create_note",
+        "read_note",
+        "list_notes",
+        "search_notes"
+      ],
+      "permissions": [
+        "companyos_knowledge_data"
+      ],
+      "enabled": true,
+      "installed_at": "2026-07-17T14:12:30.052899+00:00",
+      "updated_at": "2026-07-17T14:37:09.853961+00:00"
+    },
+    "local_storage": {
+      "id": "local_storage",
+      "name": "Local Storage",
+      "version": "1.0.0",
+      "description": "Stores and reads approved CompanyOS plugin data.",
+      "capabilities": [
+        "write_json",
+        "read_json",
+        "list_files"
+      ],
+      "permissions": [
+        "companyos_plugin_data"
+      ],
+      "enabled": true,
+      "installed_at": "2026-07-17T13:55:43.175844+00:00",
+      "updated_at": "2026-07-17T14:37:09.854161+00:00"
+    },
+    "project_metrics": {
+      "id": "project_metrics",
+      "name": "Project Metrics",
+      "version": "1.0.0",
+      "description": "Calculates CompanyOS project and task metrics.",
+      "capabilities": [
+        "company_metrics",
+        "project_metrics",
+        "task_metrics"
+      ],
+      "permissions": [
+        "read_company_memory"
+      ],
+      "enabled": true,
+      "installed_at": "2026-07-17T14:12:30.063058+00:00",
+      "updated_at": "2026-07-17T14:37:09.854339+00:00"
+    },
+    "system_info": {
+      "id": "system_info",
+      "name": "System Information",
+      "version": "1.0.0",
+      "description": "Reports basic local CompanyOS and Python information.",
+      "capabilities": [
+        "python_version",
+        "disk_usage",
+        "companyos_paths"
+      ],
+      "permissions": [
+        "read_system_metadata"
+      ],
+      "enabled": true,
+      "installed_at": "2026-07-17T13:55:43.176037+00:00",
+      "updated_at": "2026-07-17T14:37:09.854500+00:00"
+    },
+    "web_research": {
+      "id": "web_research",
+      "name": "Web Research",
+      "version": "1.0.0",
+      "description": "Searches public web results and retrieves approved public pages.",
+      "capabilities": [
+        "search_web",
+        "fetch_public_page"
+      ],
+      "permissions": [
+        "public_network_access"
+      ],
+      "enabled": true,
+      "installed_at": "2026-07-17T14:34:40.302172+00:00",
+      "updated_at": "2026-07-17T14:37:09.854769+00:00",
+      "health": "healthy",
+      "last_health_check_at": "2026-07-17T14:37:09.976239+00:00"
+    }
+  },
+  "updated_at": "2026-07-17T14:37:09.976255+00:00"
+}

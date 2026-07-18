@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+
+import json
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+
+CONFIG_FILE = MEMORY_DIR / "startup_config.json"
+STATE_FILE = MEMORY_DIR / "startup_state.json"
+BOOT_SCRIPT = Path.home() / ".termux" / "boot" / "20-companyos"
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def load(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def save(path: Path, data: Any) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(data, indent=2),
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+
+
+def update_config(**changes: Any) -> dict[str, Any]:
+    config = load(CONFIG_FILE, {})
+
+    if not isinstance(config, dict):
+        config = {}
+
+    config.update(changes)
+    config["last_changed_at"] = now()
+    save(CONFIG_FILE, config)
+
+    return config
+
+
+def status() -> dict[str, Any]:
+    config = load(CONFIG_FILE, {})
+    state = load(STATE_FILE, {})
+
+    return {
+        "success": True,
+        "status": "startup_status",
+        "boot_script_exists": BOOT_SCRIPT.exists(),
+        "boot_script_executable": (
+            BOOT_SCRIPT.exists()
+            and bool(BOOT_SCRIPT.stat().st_mode & 0o111)
+        ),
+        "config": config,
+        "state": state,
+        "boot_script": str(BOOT_SCRIPT),
+    }
+
+
+def enable(mode: str) -> dict[str, Any]:
+    mode = mode.strip().lower()
+
+    if mode not in {"freeze", "operate"}:
+        raise SystemExit(
+            "Startup mode must be freeze or operate"
+        )
+
+    config = update_config(
+        enabled=True,
+        mode_after_boot=mode,
+    )
+
+    return {
+        "success": True,
+        "status": "startup_enabled",
+        "mode_after_boot": mode,
+        "config": config,
+    }
+
+
+def disable() -> dict[str, Any]:
+    config = update_config(enabled=False)
+
+    return {
+        "success": True,
+        "status": "startup_disabled",
+        "config": config,
+    }
+
+
+def test() -> dict[str, Any]:
+    result = subprocess.run(
+        [str(BOOT_SCRIPT)],
+        cwd=ROOT_DIR,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+
+    return {
+        "success": result.returncode == 0,
+        "status": "startup_test_complete",
+        "return_code": result.returncode,
+        "stdout": result.stdout,
+        "stderr": result.stderr,
+        "state": load(STATE_FILE, {}),
+    }
+
+
+def main() -> int:
+    command = (
+        sys.argv[1].lower()
+        if len(sys.argv) > 1
+        else "status"
+    )
+
+    if command == "enable":
+        mode = (
+            sys.argv[2].lower()
+            if len(sys.argv) > 2
+            else "freeze"
+        )
+        result = enable(mode)
+
+    elif command == "disable":
+        result = disable()
+
+    elif command == "test":
+        result = test()
+
+    elif command == "status":
+        result = status()
+
+    else:
+        raise SystemExit(
+            "Usage: startupctl "
+            "{enable [freeze|operate]|disable|test|status}"
+        )
+
+    print(json.dumps(result, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

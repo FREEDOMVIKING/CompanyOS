@@ -1,0 +1,32 @@
+{
+  "catalog_version": 1,
+  "plugins": [
+    {
+      "id": "knowledge_notes",
+      "name": "Knowledge Notes",
+      "version": "1.0.0",
+      "description": "Stores reusable business notes, playbooks, and lessons.",
+      "category": "knowledge",
+      "package": "knowledge_notes",
+      "capabilities": [
+        "create_note",
+        "read_note",
+        "list_notes",
+        "search_notes"
+      ]
+    },
+    {
+      "id": "project_metrics",
+      "name": "Project Metrics",
+      "version": "1.0.0",
+      "description": "Calculates project, task, and agent performance metrics.",
+      "category": "analytics",
+      "package": "project_metrics",
+      "capabilities": [
+        "company_metrics",
+        "project_metrics",
+        "task_metrics"
+      ]
+    }
+  ]
+}

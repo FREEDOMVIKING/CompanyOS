@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.connector_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Marketplace Connectors"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("discover")
+    commands.add_parser("list")
+    commands.add_parser("process-local")
+
+    health = commands.add_parser("health")
+    health.add_argument("connector_id")
+
+    enable = commands.add_parser("enable")
+    enable.add_argument("connector_id")
+
+    disable = commands.add_parser("disable")
+    disable.add_argument("connector_id")
+
+    publish = commands.add_parser("publish")
+    publish.add_argument("listing_id")
+    publish.add_argument(
+        "--connector",
+        default="",
+    )
+    publish.add_argument(
+        "--approve",
+        action="store_true",
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "discover":
+        result = run_task({
+            "action": "discover_connectors",
+        })
+
+    elif args.command == "list":
+        result = run_task({
+            "action": "list_connectors",
+        })
+
+    elif args.command == "process-local":
+        result = run_task({
+            "action": "process_local_queue",
+        })
+
+    elif args.command == "health":
+        result = run_task({
+            "action": "connector_health",
+            "payload": {
+                "connector_id": args.connector_id,
+            },
+        })
+
+    elif args.command == "enable":
+        result = run_task({
+            "action": "enable_connector",
+            "payload": {
+                "connector_id": args.connector_id,
+            },
+        })
+
+    elif args.command == "disable":
+        result = run_task({
+            "action": "disable_connector",
+            "payload": {
+                "connector_id": args.connector_id,
+            },
+        })
+
+    else:
+        payload = {
+            "listing_id": args.listing_id,
+            "owner_approved": args.approve,
+        }
+
+        if args.connector:
+            payload["connector_id"] = args.connector
+
+        result = run_task({
+            "action": "publish_listing",
+            "payload": payload,
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

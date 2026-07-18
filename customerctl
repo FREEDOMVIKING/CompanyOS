@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.customer_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Customer Lifecycle"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("sync")
+    commands.add_parser("summary")
+    commands.add_parser("customers")
+    commands.add_parser("followups")
+    commands.add_parser("segments")
+    commands.add_parser("create-due-drafts")
+
+    draft = commands.add_parser("draft")
+    draft.add_argument("followup_id")
+
+    args = parser.parse_args()
+
+    actions = {
+        "sync": "synchronize_customer_orders",
+        "summary": "customer_summary",
+        "customers": "list_customers",
+        "followups": "list_customer_followups",
+        "segments": "build_customer_segments",
+        "create-due-drafts": "create_due_customer_drafts",
+    }
+
+    if args.command == "draft":
+        result = run_task({
+            "action": "create_customer_followup_draft",
+            "payload": {
+                "followup_id": args.followup_id,
+            },
+        })
+    else:
+        result = run_task({
+            "action": actions[args.command],
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

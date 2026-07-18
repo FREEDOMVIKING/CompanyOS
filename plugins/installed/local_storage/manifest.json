@@ -1,0 +1,16 @@
+{
+  "id": "local_storage",
+  "name": "Local Storage",
+  "version": "1.0.0",
+  "description": "Stores and reads approved CompanyOS plugin data.",
+  "capabilities": [
+    "write_json",
+    "read_json",
+    "list_files"
+  ],
+  "permissions": [
+    "companyos_plugin_data"
+  ],
+  "entrypoint": "plugin.py",
+  "enabled_by_default": true
+}

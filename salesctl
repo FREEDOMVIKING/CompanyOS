@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from agents.sales_agent import run_task
+
+
+def output(data) -> None:
+    print(json.dumps(data, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="CompanyOS Sales Analytics"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("summary")
+    commands.add_parser("orders")
+    commands.add_parser("events")
+
+    order = commands.add_parser("record-order")
+    order.add_argument("product_id")
+    order.add_argument(
+        "--amount",
+        type=float,
+        required=True,
+    )
+    order.add_argument(
+        "--quantity",
+        type=int,
+        default=1,
+    )
+    order.add_argument(
+        "--listing-id",
+        default="",
+    )
+    order.add_argument(
+        "--payment-method",
+        default="manual",
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "summary":
+        result = run_task({
+            "action": "sales_summary",
+        })
+
+    elif args.command == "orders":
+        result = run_task({
+            "action": "list_orders",
+        })
+
+    elif args.command == "events":
+        result = run_task({
+            "action": "list_sales_events",
+        })
+
+    else:
+        result = run_task({
+            "action": "record_order",
+            "payload": {
+                "product_id": args.product_id,
+                "listing_id": (
+                    args.listing_id or None
+                ),
+                "amount_usd": args.amount,
+                "quantity": args.quantity,
+                "payment_method": args.payment_method,
+                "status": "completed",
+            },
+        })
+
+    output(result)
+
+    if result.get("success") is False:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

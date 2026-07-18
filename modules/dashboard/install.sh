@@ -1,0 +1,843 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+DASHBOARD_DIR="$ROOT_DIR/companyos/dashboard"
+MEMORY_DIR="$ROOT_DIR/ceo_memory"
+MANIFEST_FILE="$ROOT_DIR/companyos/manifest.json"
+
+echo "============================================================"
+echo " Installing CompanyOS Dashboard"
+echo "============================================================"
+
+mkdir -p \
+    "$DASHBOARD_DIR" \
+    "$DASHBOARD_DIR/logs"
+
+echo
+echo "[1/6] Creating dashboard server..."
+
+cat > "$DASHBOARD_DIR/server.py" <<'PYTHON'
+#!/usr/bin/env python3
+
+import json
+import os
+import subprocess
+import sys
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlparse
+
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+MEMORY_DIR = ROOT_DIR / "ceo_memory"
+COMPANYOS_DIR = ROOT_DIR / "companyos"
+
+HOST = os.environ.get("COMPANYOS_DASHBOARD_HOST", "127.0.0.1")
+PORT = int(os.environ.get("COMPANYOS_DASHBOARD_PORT", "8765"))
+
+FILES = {
+    "company_state": MEMORY_DIR / "company_state.json",
+    "projects": MEMORY_DIR / "projects.json",
+    "tasks": MEMORY_DIR / "tasks.json",
+    "results": MEMORY_DIR / "agent_results.json",
+    "finance": MEMORY_DIR / "finance.json",
+    "expenses": MEMORY_DIR / "expenses.json",
+    "scores": MEMORY_DIR / "opportunity_scores.json",
+    "executive": MEMORY_DIR / "executive_summary.json",
+    "learning": MEMORY_DIR / "learning_summary.json",
+    "performance": MEMORY_DIR / "agent_performance.json",
+    "escalations": MEMORY_DIR / "escalations.json",
+    "cycles": MEMORY_DIR / "company_cycles.json",
+}
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def load_json(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return default
+
+
+def normalize_list(value: Any) -> list[dict[str, Any]]:
+    if isinstance(value, list):
+        return [item for item in value if isinstance(item, dict)]
+
+    if isinstance(value, dict):
+        return [item for item in value.values() if isinstance(item, dict)]
+
+    return []
+
+
+def status_of(item: dict[str, Any]) -> str:
+    return str(item.get("status", "unknown")).lower()
+
+
+def task_summary() -> dict[str, int]:
+    tasks = normalize_list(load_json(FILES["tasks"], []))
+
+    counts = {
+        "total": len(tasks),
+        "pending": 0,
+        "running": 0,
+        "completed": 0,
+        "failed": 0,
+        "other": 0,
+    }
+
+    for task in tasks:
+        status = status_of(task)
+
+        if status in {"pending", "queued", "waiting"}:
+            counts["pending"] += 1
+        elif status == "running":
+            counts["running"] += 1
+        elif status in {"completed", "done", "success", "successful"}:
+            counts["completed"] += 1
+        elif status in {"failed", "error", "rejected"}:
+            counts["failed"] += 1
+        else:
+            counts["other"] += 1
+
+    return counts
+
+
+def project_summary() -> dict[str, int]:
+    projects = normalize_list(load_json(FILES["projects"], []))
+
+    counts = {
+        "total": len(projects),
+        "active": 0,
+        "completed": 0,
+        "failed": 0,
+    }
+
+    for project in projects:
+        status = status_of(project)
+
+        if status in {"completed", "done", "successful"}:
+            counts["completed"] += 1
+        elif status in {"failed", "cancelled", "rejected"}:
+            counts["failed"] += 1
+        else:
+            counts["active"] += 1
+
+    return counts
+
+
+def latest_cycle() -> dict[str, Any]:
+    cycles = normalize_list(load_json(FILES["cycles"], []))
+    return cycles[-1] if cycles else {}
+
+
+def process_running(pattern: str) -> bool:
+    try:
+        result = subprocess.run(
+            ["pgrep", "-f", pattern],
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        return result.returncode == 0 and bool(result.stdout.strip())
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+def build_overview() -> dict[str, Any]:
+    company = load_json(FILES["company_state"], {})
+    finance = load_json(FILES["finance"], {})
+    executive = load_json(FILES["executive"], {})
+    learning = load_json(FILES["learning"], {})
+    scores = normalize_list(load_json(FILES["scores"], []))
+    escalations = normalize_list(load_json(FILES["escalations"], []))
+
+    open_escalations = [
+        item
+        for item in escalations
+        if status_of(item) == "open"
+    ]
+
+    top_opportunity = scores[0] if scores else None
+    cycle = latest_cycle()
+
+    return {
+        "generated_at": now(),
+        "company_name": company.get("company_name", "CompanyOS"),
+        "company_status": company.get("status", "unknown"),
+        "current_goal": company.get("current_goal", ""),
+        "company_health": executive.get("company_health", "unknown"),
+        "available_budget_usd": float(
+            finance.get("available_budget_usd", 0) or 0
+        ),
+        "total_revenue_usd": float(
+            finance.get("total_revenue_usd", 0) or 0
+        ),
+        "total_expenses_usd": float(
+            finance.get("total_expenses_usd", 0) or 0
+        ),
+        "tasks": task_summary(),
+        "projects": project_summary(),
+        "open_escalations": len(open_escalations),
+        "total_lessons": learning.get("total_lessons", 0),
+        "top_opportunity": top_opportunity,
+        "latest_cycle_success": cycle.get("success"),
+        "latest_cycle_finished_at": cycle.get(
+            "cycle_finished_at"
+        ),
+        "company_loop_running": process_running(
+            "company_cycle.py --loop"
+        ),
+    }
+
+
+def dashboard_html() -> str:
+    return """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>CompanyOS Dashboard</title>
+<style>
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #0b0d10;
+  color: #f4f6f8;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 16px;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+h1, h2, h3 { margin: 0; }
+small { color: #9ba4ae; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 12px;
+}
+.card {
+  background: #15191f;
+  border: 1px solid #272d35;
+  border-radius: 14px;
+  padding: 14px;
+}
+.value {
+  font-size: 1.55rem;
+  font-weight: 750;
+  margin-top: 6px;
+}
+.section { margin-top: 18px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+}
+th, td {
+  text-align: left;
+  padding: 9px 6px;
+  border-bottom: 1px solid #2a3038;
+  vertical-align: top;
+}
+button {
+  background: #f4f6f8;
+  color: #101317;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+.good { color: #70e09b; }
+.bad { color: #ff7f7f; }
+.warn { color: #ffd479; }
+.status-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 6px;
+}
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: .78rem;
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1 id="company-name">CompanyOS</h1>
+    <small id="updated">Loading…</small>
+  </div>
+  <button onclick="refreshAll()">Refresh</button>
+</header>
+
+<div class="grid">
+  <div class="card">
+    <small>Company health</small>
+    <div class="value" id="health">—</div>
+  </div>
+  <div class="card">
+    <small>Loop status</small>
+    <div class="value" id="loop">—</div>
+  </div>
+  <div class="card">
+    <small>Available budget</small>
+    <div class="value" id="budget">$0.00</div>
+  </div>
+  <div class="card">
+    <small>Total revenue</small>
+    <div class="value" id="revenue">$0.00</div>
+  </div>
+  <div class="card">
+    <small>Active projects</small>
+    <div class="value" id="projects">0</div>
+  </div>
+  <div class="card">
+    <small>Pending tasks</small>
+    <div class="value" id="pending">0</div>
+  </div>
+  <div class="card">
+    <small>Completed tasks</small>
+    <div class="value" id="completed">0</div>
+  </div>
+  <div class="card">
+    <small>Open escalations</small>
+    <div class="value" id="escalations">0</div>
+  </div>
+</div>
+
+<div class="section card">
+  <h2>Current goal</h2>
+  <p id="goal">—</p>
+</div>
+
+<div class="section card">
+  <h2>Top opportunity</h2>
+  <div id="opportunity">No scored opportunities yet.</div>
+</div>
+
+<div class="section card">
+  <h2>Agent performance</h2>
+  <div style="overflow:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Results</th>
+          <th>Success rate</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody id="agents"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section card">
+  <h2>Projects</h2>
+  <div style="overflow:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Status</th>
+          <th>Stage</th>
+          <th>Revenue</th>
+        </tr>
+      </thead>
+      <tbody id="project-list"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section card">
+  <h2>Recent tasks</h2>
+  <div style="overflow:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Action</th>
+          <th>Status</th>
+          <th>Project</th>
+        </tr>
+      </thead>
+      <tbody id="task-list"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const money = value =>
+  new Intl.NumberFormat(
+    "en-US",
+    {style:"currency", currency:"USD"}
+  ).format(Number(value || 0));
+
+async function api(path) {
+  const response = await fetch(path, {cache: "no-store"});
+  if (!response.ok) throw new Error(await response.text());
+  return response.json();
+}
+
+function text(id, value) {
+  document.getElementById(id).textContent = value;
+}
+
+function statusClass(value) {
+  const v = String(value || "").toLowerCase();
+  if (["stable","excellent","good","completed","active"].includes(v)) {
+    return "good";
+  }
+  if (["failed","poor","attention_required","error"].includes(v)) {
+    return "bad";
+  }
+  return "warn";
+}
+
+async function refreshAll() {
+  try {
+    const [overview, agents, projects, tasks] =
+      await Promise.all([
+        api("/api/overview"),
+        api("/api/performance"),
+        api("/api/projects"),
+        api("/api/tasks")
+      ]);
+
+    text("company-name", overview.company_name);
+    text(
+      "updated",
+      "Updated " + new Date(
+        overview.generated_at
+      ).toLocaleString()
+    );
+
+    const health = document.getElementById("health");
+    health.textContent = overview.company_health;
+    health.className =
+      "value " + statusClass(overview.company_health);
+
+    const loop = document.getElementById("loop");
+    loop.textContent =
+      overview.company_loop_running ? "Running" : "Stopped";
+    loop.className =
+      "value " +
+      (overview.company_loop_running ? "good" : "warn");
+
+    text("budget", money(overview.available_budget_usd));
+    text("revenue", money(overview.total_revenue_usd));
+    text("projects", overview.projects.active);
+    text("pending", overview.tasks.pending);
+    text("completed", overview.tasks.completed);
+    text("escalations", overview.open_escalations);
+    text("goal", overview.current_goal || "No current goal");
+
+    const opportunity = overview.top_opportunity;
+    document.getElementById("opportunity").innerHTML =
+      opportunity
+      ? `<h3>${opportunity.name}</h3>
+         <p>Score: <b>${opportunity.final_score}</b> / 10</p>
+         <p>Recommendation: ${opportunity.recommendation}</p>`
+      : "No scored opportunities yet.";
+
+    const agentBody = document.getElementById("agents");
+    agentBody.innerHTML = "";
+
+    Object.entries(agents).forEach(([name, data]) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${name}</td>
+        <td>${data.total_results || 0}</td>
+        <td>${Math.round((data.success_rate || 0) * 100)}%</td>
+        <td class="${statusClass(data.rating)}">${data.rating}</td>
+      `;
+      agentBody.appendChild(row);
+    });
+
+    const projectBody =
+      document.getElementById("project-list");
+    projectBody.innerHTML = "";
+
+    projects.slice().reverse().slice(0, 20).forEach(project => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${project.name || project.id || "Unnamed"}</td>
+        <td class="${statusClass(project.status)}">
+          ${project.status || "unknown"}
+        </td>
+        <td>${project.stage || "—"}</td>
+        <td>${money(project.revenue_usd)}</td>
+      `;
+      projectBody.appendChild(row);
+    });
+
+    const taskBody = document.getElementById("task-list");
+    taskBody.innerHTML = "";
+
+    tasks.slice().reverse().slice(0, 25).forEach(task => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${task.agent || "unknown"}</td>
+        <td>${task.action || "unknown"}</td>
+        <td class="${statusClass(task.status)}">
+          ${task.status || "unknown"}
+        </td>
+        <td>${task.project_id || "—"}</td>
+      `;
+      taskBody.appendChild(row);
+    });
+  } catch (error) {
+    text("updated", "Dashboard error: " + error.message);
+  }
+}
+
+refreshAll();
+setInterval(refreshAll, 15000);
+</script>
+</body>
+</html>
+"""
+
+
+class DashboardHandler(BaseHTTPRequestHandler):
+    def send_json(self, data: Any, status: int = 200) -> None:
+        payload = json.dumps(data, indent=2).encode("utf-8")
+
+        self.send_response(status)
+        self.send_header(
+            "Content-Type",
+            "application/json; charset=utf-8",
+        )
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def send_html(self, html: str) -> None:
+        payload = html.encode("utf-8")
+
+        self.send_response(200)
+        self.send_header(
+            "Content-Type",
+            "text/html; charset=utf-8",
+        )
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def do_GET(self) -> None:
+        path = urlparse(self.path).path
+
+        if path == "/":
+            self.send_html(dashboard_html())
+            return
+
+        if path == "/api/overview":
+            self.send_json(build_overview())
+            return
+
+        if path == "/api/projects":
+            self.send_json(
+                normalize_list(load_json(FILES["projects"], []))
+            )
+            return
+
+        if path == "/api/tasks":
+            self.send_json(
+                normalize_list(load_json(FILES["tasks"], []))
+            )
+            return
+
+        if path == "/api/performance":
+            data = load_json(FILES["performance"], {})
+            self.send_json(data if isinstance(data, dict) else {})
+            return
+
+        if path == "/api/scores":
+            self.send_json(
+                normalize_list(load_json(FILES["scores"], []))
+            )
+            return
+
+        if path == "/api/finance":
+            data = load_json(FILES["finance"], {})
+            self.send_json(data if isinstance(data, dict) else {})
+            return
+
+        if path == "/api/executive":
+            data = load_json(FILES["executive"], {})
+            self.send_json(data if isinstance(data, dict) else {})
+            return
+
+        if path == "/api/learning":
+            data = load_json(FILES["learning"], {})
+            self.send_json(data if isinstance(data, dict) else {})
+            return
+
+        if path == "/health":
+            self.send_json({
+                "success": True,
+                "status": "dashboard_healthy",
+                "time": now(),
+            })
+            return
+
+        self.send_json(
+            {"success": False, "error": "Not found"},
+            status=404,
+        )
+
+    def log_message(
+        self,
+        format_string: str,
+        *args: Any,
+    ) -> None:
+        message = (
+            f"{self.address_string()} "
+            f"{format_string % args}\n"
+        )
+
+        log_path = (
+            COMPANYOS_DIR
+            / "dashboard"
+            / "logs"
+            / "access.log"
+        )
+
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with log_path.open("a", encoding="utf-8") as file:
+            file.write(message)
+
+
+def main() -> None:
+    server = ThreadingHTTPServer(
+        (HOST, PORT),
+        DashboardHandler,
+    )
+
+    print("=" * 60)
+    print("CompanyOS Dashboard")
+    print(f"Address: http://{HOST}:{PORT}")
+    print("Press Ctrl+C to stop.")
+    print("=" * 60)
+
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nDashboard stopped.")
+    finally:
+        server.server_close()
+
+
+if __name__ == "__main__":
+    main()
+PYTHON
+
+chmod +x "$DASHBOARD_DIR/server.py"
+
+echo
+echo "[2/6] Creating dashboard commands..."
+
+cat > "$DASHBOARD_DIR/start.sh" <<'START'
+#!/data/data/com.termux/files/usr/bin/bash
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+PID_FILE="$ROOT_DIR/companyos/dashboard/dashboard.pid"
+LOG_FILE="$ROOT_DIR/companyos/dashboard/logs/server.log"
+
+if [ -f "$PID_FILE" ]; then
+    OLD_PID="$(cat "$PID_FILE")"
+
+    if kill -0 "$OLD_PID" 2>/dev/null; then
+        echo "Dashboard is already running."
+        echo "PID: $OLD_PID"
+        echo "Open: http://127.0.0.1:8765"
+        exit 0
+    fi
+
+    rm -f "$PID_FILE"
+fi
+
+cd "$ROOT_DIR"
+
+nohup python companyos/dashboard/server.py \
+    >> "$LOG_FILE" 2>&1 &
+
+PID="$!"
+echo "$PID" > "$PID_FILE"
+
+sleep 2
+
+if kill -0 "$PID" 2>/dev/null; then
+    echo "Dashboard started successfully."
+    echo "PID: $PID"
+    echo
+    echo "Open this address in your phone browser:"
+    echo "http://127.0.0.1:8765"
+else
+    echo "ERROR: Dashboard failed to start."
+    echo "Check:"
+    echo "$LOG_FILE"
+    exit 1
+fi
+START
+
+cat > "$DASHBOARD_DIR/stop.sh" <<'STOP'
+#!/data/data/com.termux/files/usr/bin/bash
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+PID_FILE="$ROOT_DIR/companyos/dashboard/dashboard.pid"
+
+if [ ! -f "$PID_FILE" ]; then
+    echo "Dashboard is not running."
+    exit 0
+fi
+
+PID="$(cat "$PID_FILE")"
+
+if kill -0 "$PID" 2>/dev/null; then
+    kill "$PID"
+    echo "Dashboard stopped."
+else
+    echo "Dashboard process was not running."
+fi
+
+rm -f "$PID_FILE"
+STOP
+
+cat > "$DASHBOARD_DIR/status.sh" <<'STATUS'
+#!/data/data/com.termux/files/usr/bin/bash
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+PID_FILE="$ROOT_DIR/companyos/dashboard/dashboard.pid"
+
+if [ -f "$PID_FILE" ]; then
+    PID="$(cat "$PID_FILE")"
+
+    if kill -0 "$PID" 2>/dev/null; then
+        echo "Dashboard status: RUNNING"
+        echo "PID: $PID"
+        echo "Address: http://127.0.0.1:8765"
+        exit 0
+    fi
+fi
+
+echo "Dashboard status: STOPPED"
+exit 1
+STATUS
+
+chmod +x \
+    "$DASHBOARD_DIR/start.sh" \
+    "$DASHBOARD_DIR/stop.sh" \
+    "$DASHBOARD_DIR/status.sh"
+
+echo
+echo "[3/6] Compiling dashboard..."
+
+python -m py_compile "$DASHBOARD_DIR/server.py"
+
+echo "Dashboard syntax passed."
+
+echo
+echo "[4/6] Updating CompanyOS manifest..."
+
+python - "$MANIFEST_FILE" <<'PYTHON'
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+
+data = json.loads(path.read_text(encoding="utf-8"))
+
+modules = data.setdefault("modules", {})
+dashboard = modules.setdefault("dashboard", {})
+
+dashboard["installed"] = True
+dashboard["enabled"] = True
+dashboard["version"] = "1.0.0"
+dashboard["server"] = "python_stdlib"
+dashboard["default_address"] = "http://127.0.0.1:8765"
+
+path.write_text(
+    json.dumps(data, indent=2),
+    encoding="utf-8",
+)
+
+print("Manifest updated.")
+PYTHON
+
+echo
+echo "[5/6] Starting dashboard..."
+
+bash "$DASHBOARD_DIR/start.sh"
+
+echo
+echo "[6/6] Testing dashboard health..."
+
+python - <<'PYTHON'
+import json
+import time
+from urllib.request import urlopen
+
+url = "http://127.0.0.1:8765/health"
+
+for attempt in range(10):
+    try:
+        with urlopen(url, timeout=3) as response:
+            data = json.loads(response.read().decode("utf-8"))
+
+        if data.get("success") is True:
+            print("Dashboard health check passed.")
+            break
+
+    except Exception:
+        if attempt == 9:
+            raise
+        time.sleep(1)
+else:
+    raise SystemExit("Dashboard health check failed.")
+PYTHON
+
+echo
+echo "============================================================"
+echo " DASHBOARD MODULE INSTALLED SUCCESSFULLY"
+echo "============================================================"
+echo
+echo "Open this in your phone browser:"
+echo
+echo "  http://127.0.0.1:8765"
+echo
+echo "Dashboard commands:"
+echo
+echo "  bash companyos/dashboard/start.sh"
+echo "  bash companyos/dashboard/status.sh"
+echo "  bash companyos/dashboard/stop.sh"
