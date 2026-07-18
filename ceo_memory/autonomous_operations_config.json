@@ -425,6 +425,16 @@
         "companyos/backupctl",
         "backup"
       ]
+    },
+    {
+      "id": "operations-dashboard",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/dashboardctl",
+        "build"
+      ]
     }
   ]
 }
