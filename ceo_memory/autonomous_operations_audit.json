@@ -7937,5 +7937,51 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T16:23:10.839442+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 8094
+    }
+  },
+  {
+    "timestamp": "2026-07-18T16:23:10.955196+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 10110,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T16:23:10.993252+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 1,
+      "jobs_run": 1,
+      "failures": 0,
+      "results": [
+        {
+          "id": "confidence-priority-fusion",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"confidence_priority_fusion_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T16:23:10.966806+00:00\",\n    \"fused_priorities\": [\n      {\n        \"action\": \"run-health\",\n        \"adaptive_priority\": 95.0,\n        \"learned_score\": 50.0,\n        \"confidence\": 0.5,\n        \"fused_priority\": 63.5,\n        \"reason\": \"Preflight is blocked; verify system health before further work.\",\n        \"outcomes\": {\n          \"success\": 0,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"adaptive_priority\": 70.0,\n        \"learned_score\": 50.0,\n        \"confidence\": 0.5,\n        \"fused_priority\": 56.0,\n        \"reason\": \"Keep forecast aligned with active goals.\",\n        \"outcomes\": {\n          \"success\": 0,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"adaptive_priority\": 65.0,\n        \"learned_score\": 50.0,\n        \"confidence\": 0.5,\n        \"fused_priority\": 54.5,\n        \"reason\": \"Summarize current repository state before owner review.\",\n        \"outcomes\": {\n          \"success\": 0,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"adaptive_priority\": 60.0,\n        \"learned_score\": 50.0,\n        \"confidence\": 0.5,\n        \"fused_priority\": 53.0,\n        \"reason\": \"Maintain current executive ordering.\",\n        \"outcomes\": {\n          \"success\": 0,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"adaptive_priority\": 55.0,\n        \"learned_score\": 50.0,\n        \"confidence\": 0.5,\n        \"fused_priority\": 51.5,\n        \"reason\": \"Keep CEO decision queue synchronized.\",\n        \"outcomes\": {\n          \"success\": 0,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"adaptive_priority\": 50.0,\n        \"learned_score\": 50.0,\n        \"confidence\": 0.5,\n        \"fused_priority\": 50.0,\n        \"reason\": \"Refresh measurable outcomes for the feedback loop.\",\n        \"outcomes\": {\n          \"success\": 0,\n          \"failure\": 0,\n          \"blocked\": 0\n        }\n      }\n    ],\n    \"top_action\": \"run-health\",\n    \"top_fused_priority\": 63.5,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:23:10.890749+00:00",
+          "finished_at": "2026-07-18T16:23:10.985564+00:00",
+          "duration_seconds": 0.095
+        }
+      ]
+    }
   }
 ]
