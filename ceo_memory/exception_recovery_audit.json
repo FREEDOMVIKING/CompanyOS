@@ -124,5 +124,45 @@
       "status": "no_recovery_needed",
       "issues": []
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:22:36.231153+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_status",
+      "config": {
+        "enabled": true,
+        "automatic_exception_detection": true,
+        "automatic_retry": true,
+        "automatic_scheduler_recovery": true,
+        "automatic_integrity_recheck": true,
+        "automatic_backup_before_recovery": true,
+        "max_retries_per_issue": 2,
+        "retry_backoff_seconds": 5,
+        "maximum_recoveries_per_hour": 5,
+        "automatic_code_changes": false,
+        "automatic_destructive_actions": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      },
+      "state": {
+        "schema_version": 1,
+        "recovery_epochs": [],
+        "issue_history": [],
+        "recovery_count": 0
+      },
+      "health": {
+        "healthy": true,
+        "last_checked_at": "2026-07-18T14:16:25.153542+00:00",
+        "issue_count": 0,
+        "recovery_attempted": false,
+        "last_error": null
+      },
+      "halted": false,
+      "log": "/data/data/com.termux/files/home/companyos/logs/exception_recovery.log"
+    }
   }
 ]

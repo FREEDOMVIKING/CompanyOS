@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+import json, subprocess, sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+R=Path.home()/"companyos"; M=R/"ceo_memory"; C=R/"companyos"
+REPORT=M/"phase18_integration_report.json"; HEALTH=M/"phase18_integration_health.json"
+
+CHECKS=[
+ ("operations",["operationsctl","status"]),
+ ("recovery",["recoveryctl","status"]),
+ ("learning",["learningctl","status"]),
+ ("resources",["resourcctl","status"]),
+ ("actions",["actionctl","status"]),
+ ("health",["healthctl","status"]),
+ ("mission",["missionctl","status"]),
+ ("governance",["governancectl","status"]),
+ ("outcomes",["outcomectl","status"]),
+ ("strategy_feedback",["strategyfeedbackctl","status"]),
+ ("readiness",["readinessctl","status"])
+]
+
+def now():return datetime.now(timezone.utc).isoformat()
+def save(p,d):
+ t=p.with_suffix(p.suffix+".tmp");t.write_text(json.dumps(d,indent=2));t.replace(p)
+
+def run(name,args):
+ p=C/args[0]
+ if not p.exists(): return {"name":name,"success":False,"error":"controller_missing"}
+ try:
+  x=subprocess.run([sys.executable,str(p),*args[1:]],cwd=R,text=True,capture_output=True,timeout=120)
+  return {"name":name,"success":x.returncode==0,"return_code":x.returncode,
+          "stdout":x.stdout[-2000:],"stderr":x.stderr[-1000:]}
+ except Exception as e:return {"name":name,"success":False,"error":str(e)}
+
+def validate():
+ results=[run(n,a) for n,a in CHECKS]
+ failed=[x for x in results if not x["success"]]
+ scheduler=run("scheduler",["operationsctl","status"])
+ if not scheduler["success"]: failed.append(scheduler)
+ report={"generated_at":now(),"checks":len(results)+1,"failures":len(failed),
+         "results":results,"scheduler":scheduler,
+         "phase18_complete":len(failed)==0}
+ save(REPORT,report)
+ save(HEALTH,{"healthy":len(failed)==0,"last_validated_at":now(),
+              "checks":len(results)+1,"failures":len(failed),
+              "phase18_complete":len(failed)==0})
+ return {"success":len(failed)==0,
+         "status":"phase18_validation_complete" if not failed else "phase18_validation_failed",
+         "report":report}
+
+def status():
+ try:r=json.loads(REPORT.read_text())
+ except:r={}
+ try:h=json.loads(HEALTH.read_text())
+ except:h={}
+ return {"success":True,"status":"phase18_status","health":h,"report":r}
+
+a=sys.argv[1] if len(sys.argv)>1 else "status"
+r=validate() if a=="validate" else status() if a=="status" else {
+ "success":False,"status":"unknown_action","allowed":["validate","status"]}
+print(json.dumps(r,indent=2));raise SystemExit(0 if r.get("success") else 1)

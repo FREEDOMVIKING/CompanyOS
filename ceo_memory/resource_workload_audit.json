@@ -422,5 +422,36 @@
         "automatic_destructive_actions": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:22:36.425728+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "resource_workload_status",
+      "config": {
+        "enabled": true,
+        "automatic_workload_analysis": true,
+        "automatic_internal_job_prioritization": true,
+        "automatic_scheduler_tuning": true,
+        "minimum_interval_seconds": 600,
+        "maximum_interval_seconds": 43200,
+        "high_failure_threshold": 3,
+        "high_duration_threshold_seconds": 60,
+        "high_frequency_floor_seconds": 900,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "health": {
+        "healthy": true,
+        "last_optimized_at": "2026-07-18T13:57:05.929416+00:00",
+        "job_count": 15,
+        "changes_applied": 3,
+        "last_error": null
+      }
+    }
   }
 ]
