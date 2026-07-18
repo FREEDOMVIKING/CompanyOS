@@ -405,6 +405,16 @@
         "companyos/resourcectl",
         "run"
       ]
+    },
+    {
+      "id": "autonomous-watchdog",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/watchdogctl",
+        "run"
+      ]
     }
   ]
 }
