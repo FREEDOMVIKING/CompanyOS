@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import subprocess
+import sys
+
+
+ROOT = Path.home() / "companyos"
+SCANNER = ROOT / "agents" / "opportunity_scanner.py"
+
+
+def main() -> int:
+    if not SCANNER.exists():
+        print("Opportunity Scanner is not installed.")
+        return 1
+
+    return subprocess.call(
+        [sys.executable, str(SCANNER), *sys.argv[1:]],
+        cwd=ROOT,
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
