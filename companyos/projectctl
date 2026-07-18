@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+from pathlib import Path
+
+root = Path.home() / "companyos"
+agent = root / "agents" / "project_tracker.py"
+
+raise SystemExit(
+    subprocess.call(
+        [sys.executable, str(agent), *sys.argv[1:]],
+        cwd=root,
+    )
+)

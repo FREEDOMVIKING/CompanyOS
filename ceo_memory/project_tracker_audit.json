@@ -1,0 +1,216 @@
+[
+  {
+    "timestamp": "2026-07-18T03:23:45.602039+00:00",
+    "action": "create_project",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "project_created",
+      "project": {
+        "id": "project-d7c6da306465",
+        "customer_name": "Sample Contractor",
+        "project_name": "Driveway Replacement",
+        "amount": 12500.0,
+        "source_quote_id": "quote-792d623f64d7",
+        "status": "planning",
+        "progress_percent": 0,
+        "health": "needs_review",
+        "customer_portal_enabled": false,
+        "external_file_sharing_enabled": false,
+        "customer_notifications_enabled": false,
+        "workspace": "/data/data/com.termux/files/home/companyos/workspace/projects/project_d7c6da306465",
+        "created_at": "2026-07-18T03:23:45.601163+00:00",
+        "updated_at": "2026-07-18T03:23:45.601174+00:00"
+      },
+      "automatic_customer_portal_publication": false,
+      "automatic_customer_notifications": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:45.757422+00:00",
+    "action": "add_milestone",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "milestone_created",
+      "milestone": {
+        "id": "milestone-f75392533508",
+        "project_id": "project-d7c6da306465",
+        "title": "Confirm scope",
+        "description": "Review the approved project scope.",
+        "status": "pending",
+        "created_at": "2026-07-18T03:23:45.756794+00:00",
+        "updated_at": "2026-07-18T03:23:45.756797+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:45.852758+00:00",
+    "action": "add_milestone",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "milestone_created",
+      "milestone": {
+        "id": "milestone-e755ef433461",
+        "project_id": "project-d7c6da306465",
+        "title": "Schedule work",
+        "description": "Create an internal work schedule.",
+        "status": "pending",
+        "created_at": "2026-07-18T03:23:45.852238+00:00",
+        "updated_at": "2026-07-18T03:23:45.852241+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:45.948867+00:00",
+    "action": "add_milestone",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "milestone_created",
+      "milestone": {
+        "id": "milestone-5f8ef56673af",
+        "project_id": "project-d7c6da306465",
+        "title": "Complete project",
+        "description": "Finish work and complete internal review.",
+        "status": "pending",
+        "created_at": "2026-07-18T03:23:45.948295+00:00",
+        "updated_at": "2026-07-18T03:23:45.948298+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:46.050855+00:00",
+    "action": "add_document",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "project_document_registered",
+      "document": {
+        "id": "document-e40be7b6e64f",
+        "project_id": "project-d7c6da306465",
+        "name": "Project record",
+        "document_type": "internal_record",
+        "path": "/data/data/com.termux/files/home/companyos/ceo_memory/project_registry.json",
+        "exists": true,
+        "external_file_sharing_authorized": false,
+        "created_at": "2026-07-18T03:23:46.050446+00:00"
+      },
+      "automatic_external_file_sharing": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:46.155980+00:00",
+    "action": "projects",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "project_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "planning": 1,
+        "scheduled": 0,
+        "in_progress": 0,
+        "waiting": 0,
+        "completed": 0,
+        "cancelled": 0
+      },
+      "projects": [
+        {
+          "id": "project-d7c6da306465",
+          "customer_name": "Sample Contractor",
+          "project_name": "Driveway Replacement",
+          "amount": 12500.0,
+          "source_quote_id": "quote-792d623f64d7",
+          "status": "planning",
+          "progress_percent": 0,
+          "health": "needs_review",
+          "customer_portal_enabled": false,
+          "external_file_sharing_enabled": false,
+          "customer_notifications_enabled": false,
+          "workspace": "/data/data/com.termux/files/home/companyos/workspace/projects/project_d7c6da306465",
+          "created_at": "2026-07-18T03:23:45.601163+00:00",
+          "updated_at": "2026-07-18T03:23:45.948679+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:46.261071+00:00",
+    "action": "milestones",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "milestone_list",
+      "count": 3,
+      "statistics": {
+        "total": 3,
+        "pending": 3,
+        "in_progress": 0,
+        "completed": 0
+      },
+      "milestones": [
+        {
+          "id": "milestone-f75392533508",
+          "project_id": "project-d7c6da306465",
+          "title": "Confirm scope",
+          "description": "Review the approved project scope.",
+          "status": "pending",
+          "created_at": "2026-07-18T03:23:45.756794+00:00",
+          "updated_at": "2026-07-18T03:23:45.756797+00:00"
+        },
+        {
+          "id": "milestone-e755ef433461",
+          "project_id": "project-d7c6da306465",
+          "title": "Schedule work",
+          "description": "Create an internal work schedule.",
+          "status": "pending",
+          "created_at": "2026-07-18T03:23:45.852238+00:00",
+          "updated_at": "2026-07-18T03:23:45.852241+00:00"
+        },
+        {
+          "id": "milestone-5f8ef56673af",
+          "project_id": "project-d7c6da306465",
+          "title": "Complete project",
+          "description": "Finish work and complete internal review.",
+          "status": "pending",
+          "created_at": "2026-07-18T03:23:45.948295+00:00",
+          "updated_at": "2026-07-18T03:23:45.948298+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:23:46.364366+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "project_tracker_status",
+      "enabled": true,
+      "automatic_customer_portal_publication": false,
+      "automatic_customer_notifications": false,
+      "automatic_external_file_sharing": false,
+      "automatic_external_execution": false,
+      "automatic_spending": false,
+      "project_statistics": {
+        "total": 1,
+        "planning": 1,
+        "scheduled": 0,
+        "in_progress": 0,
+        "waiting": 0,
+        "completed": 0,
+        "cancelled": 0
+      },
+      "milestone_statistics": {
+        "total": 3,
+        "pending": 3,
+        "in_progress": 0,
+        "completed": 0
+      },
+      "health": {}
+    }
+  }
+]
