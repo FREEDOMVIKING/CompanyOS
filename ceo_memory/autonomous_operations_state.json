@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 66,
+  "cycle_count": 67,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T14:30:52.191310+00:00",
@@ -641,9 +641,25 @@
       "last_duration_seconds": 0.089,
       "run_count": 1,
       "failure_count": 0
+    },
+    "state-backup": {
+      "last_started_at": "2026-07-18T15:17:40.429333+00:00",
+      "last_started_epoch": 1784387860.4293334,
+      "last_command": [
+        "python",
+        "companyos/backupctl",
+        "backup"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T15:17:40.731868+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.303,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T15:16:32.120112+00:00",
+  "last_cycle_at": "2026-07-18T15:17:40.733047+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }

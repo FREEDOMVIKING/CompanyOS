@@ -415,6 +415,16 @@
         "companyos/watchdogctl",
         "run"
       ]
+    },
+    {
+      "id": "state-backup",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/backupctl",
+        "backup"
+      ]
     }
   ]
 }
