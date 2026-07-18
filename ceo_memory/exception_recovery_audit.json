@@ -513,5 +513,22 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T15:46:00.885514+00:00",
+    "action": "recover",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "recovery_rate_limit_reached",
+      "issues": [
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ]
+    }
   }
 ]

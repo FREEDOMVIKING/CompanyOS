@@ -485,6 +485,16 @@
         "companyos/dispatchctl",
         "run"
       ]
+    },
+    {
+      "id": "dispatcher-feedback-loop",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/dispatcherfeedbackctl",
+        "analyze"
+      ]
     }
   ]
 }
