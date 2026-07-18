@@ -565,6 +565,16 @@
         "companyos/fusedselectctl",
         "select"
       ]
+    },
+    {
+      "id": "fused-execution-plan",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/fusedplanctl",
+        "build"
+      ]
     }
   ]
 }
