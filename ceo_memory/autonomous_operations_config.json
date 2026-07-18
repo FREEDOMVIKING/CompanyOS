@@ -625,6 +625,16 @@
         "companyos/strategyorchestratorctl",
         "run"
       ]
+    },
+    {
+      "id": "strategic-opportunity-alignment",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/strategicalignctl",
+        "align"
+      ]
     }
   ]
 }
