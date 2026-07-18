@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "snapshot": {
+    "generated_at": "2026-07-18T03:40:29.683125+00:00",
+    "company_health": "stable",
+    "company_score": 77,
+    "crm": {
+      "total_leads": 1,
+      "new_leads": 1,
+      "won_leads": 0,
+      "lost_leads": 0,
+      "pipeline_value": 12500.0,
+      "won_value": 0
+    },
+    "sales": {
+      "quote_count": 1,
+      "pending_followups": 1,
+      "conversion_rate_percent": 0.0
+    },
+    "projects": {
+      "total_projects": 1,
+      "active_projects": 1,
+      "stalled_projects": 1,
+      "total_milestones": 5,
+      "completed_milestones": 0,
+      "average_completion_percent": 0.0
+    },
+    "finance": {
+      "total_invoiced": 12500.0,
+      "cash_received": 1000.0,
+      "accounts_receivable": 11500.0,
+      "recorded_expenses": 250.0,
+      "net_cash_position": 750.0,
+      "overdue_invoice_count": 1
+    },
+    "warnings": {
+      "pending_followups": 1,
+      "overdue_invoices": 1,
+      "stalled_projects": 1
+    },
+    "recommendations": [
+      {
+        "priority": "high",
+        "type": "sales",
+        "title": "Review pending follow-ups",
+        "detail": "1 follow-up(s) are waiting for owner review.",
+        "external_action_required": false
+      },
+      {
+        "priority": "high",
+        "type": "finance",
+        "title": "Review outstanding invoices",
+        "detail": "1 invoice(s) still have balances due.",
+        "external_action_required": false
+      },
+      {
+        "priority": "medium",
+        "type": "operations",
+        "title": "Review stalled projects",
+        "detail": "1 project(s) have low progress.",
+        "external_action_required": false
+      },
+      {
+        "priority": "medium",
+        "type": "crm",
+        "title": "Qualify new leads",
+        "detail": "1 new lead(s) need internal review.",
+        "external_action_required": false
+      }
+    ],
+    "executive_summary": {
+      "generated_at": "2026-07-18T03:30:38.313558+00:00",
+      "lead_count": 1,
+      "quote_count": 1,
+      "project_count": 1,
+      "milestone_count": 5,
+      "pending_followups": 1,
+      "pending_internal_tasks": 11,
+      "active_pipeline_value": 12500.0,
+      "project_completion_average": 0.0,
+      "external_actions_executed": 0,
+      "automatic_spending_executed": 0
+    },
+    "recent_activity": [
+      {
+        "id": "activity-3e95f6ae05c5",
+        "activity_type": "lead_processed",
+        "title": "Lead added to business workflow",
+        "details": {
+          "lead_id": "lead-2567cdb19ba6",
+          "customer_name": "Sample Contractor",
+          "project_name": "Driveway Replacement"
+        },
+        "created_at": "2026-07-18T03:30:38.311630+00:00"
+      },
+      {
+        "id": "activity-db766b86ceb8",
+        "activity_type": "milestones_created",
+        "title": "Project milestones generated",
+        "details": {
+          "project_id": "project-d7c6da306465",
+          "count": 2
+        },
+        "created_at": "2026-07-18T03:30:38.312194+00:00"
+      }
+    ],
+    "automatic_external_execution": false,
+    "automatic_publication": false,
+    "automatic_spending": false
+  },
+  "last_updated_at": "2026-07-18T03:40:29.683157+00:00"
+}
