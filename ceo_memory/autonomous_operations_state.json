@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 49,
+  "cycle_count": 50,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T14:30:52.191310+00:00",
@@ -291,19 +291,19 @@
       "failure_count": 0
     },
     "governance-router": {
-      "last_started_at": "2026-07-18T14:16:25.167575+00:00",
-      "last_started_epoch": 1784384185.1675742,
+      "last_started_at": "2026-07-18T14:32:15.463530+00:00",
+      "last_started_epoch": 1784385135.46353,
       "last_command": [
         "python",
         "companyos/governancectl",
         "classify"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:16:25.244847+00:00",
+      "last_finished_at": "2026-07-18T14:32:15.568439+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.077,
-      "run_count": 1,
+      "last_duration_seconds": 0.105,
+      "run_count": 2,
       "failure_count": 0
     },
     "outcome-tracker": {
@@ -385,9 +385,25 @@
       "last_duration_seconds": 0.097,
       "run_count": 1,
       "failure_count": 0
+    },
+    "permission-broker": {
+      "last_started_at": "2026-07-18T14:32:15.569210+00:00",
+      "last_started_epoch": 1784385135.5692098,
+      "last_command": [
+        "python",
+        "companyos/permissionctl",
+        "build"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T14:32:15.649874+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.081,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T14:30:53.238161+00:00",
-  "last_cycle_job_count": 8,
+  "last_cycle_at": "2026-07-18T14:32:15.650843+00:00",
+  "last_cycle_job_count": 2,
   "last_cycle_success": true
 }
