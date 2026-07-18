@@ -185,6 +185,16 @@
         "companyos/healthctl",
         "run"
       ]
+    },
+    {
+      "id": "mission-control",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/missionctl",
+        "build"
+      ]
     }
   ]
 }

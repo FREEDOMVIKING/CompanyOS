@@ -3750,5 +3750,51 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:14:52.059883+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 22590
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:14:52.173709+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 24591,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:14:52.213879+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 1,
+      "jobs_run": 1,
+      "failures": 0,
+      "results": [
+        {
+          "id": "mission-control",
+          "success": true,
+          "return_code": 0,
+          "stdout": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\",\n        \"urgency\": 70,\n        \"profitability\": 90.0,\n        \"risk_reduction\": 85,\n        \"execution_ease\": 68.0,\n        \"evidence\": 95.0,\n        \"estimated_value\": 1250.0,\n        \"score\": 78.32,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203559+00:00\",\n        \"rank\": 4\n      },\n      {\n        \"id\": \"priority-04a45526288b\",\n        \"source_type\": \"opportunity\",\n        \"source_id\": \"oppdisc-52e8af170893\",\n        \"title\": \"Advance lead: Driveway Replacement\",\n        \"category\": \"sales\",\n        \"description\": \"Move Sample Contractor from new toward an approved proposal.\",\n        \"urgency\": 70,\n        \"profitability\": 85.0,\n        \"risk_reduction\": 78.0,\n        \"execution_ease\": 72.0,\n        \"evidence\": 82.0,\n        \"estimated_value\": 12500.0,\n        \"score\": 75.72,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203571+00:00\",\n        \"rank\": 5\n      }\n    ],\n    \"top_goals\": [\n      {\n        \"id\": \"improvement-improvement-185240ba2a4b\",\n        \"title\": \"Shorten critical-priority response time\",\n        \"source\": \"continuous_improvement\",\n        \"category\": \"strategy\",\n        \"objective\": \"Review critical priorities before lower-value operational work.\",\n        \"score\": 92.95,\n        \"status\": \"active\",\n        \"owner_approval_required_for_external_action\": true,\n        \"automatic_external_execution\": false,\n        \"created_at\": \"2026-07-18T14:05:10.078602+00:00\",\n        \"rank\": 1\n      },\n      {\n        \"id\": \"improvement-improvement-e0c7742a9fad\",\n        \"title\": \"Improve receivable recovery process\",\n        \"source\": \"continuous_improvement\",\n        \"category\": \"finance\",\n        \"objective\": \"Prioritize owner-reviewed follow-up preparation for the largest balances.\",\n        \"score\": 91.85,\n        \"status\": \"active\",\n        \"owner_approval_required_for_external_action\": true,\n        \"automatic_external_execution\": false,\n        \"created_at\": \"2026-07-18T14:05:10.078604+00:00\",\n        \"rank\": 2\n      },\n      {\n        \"id\": \"priority-invoice-d7e99861931c\",\n        \"title\": \"Review receivable: Sample Contractor\",\n        \"source\": \"executive_priority\",\n        \"category\": \"finance\",\n        \"objective\": \"Invoice has $11,500.00 outstanding.\",\n        \"score\": 90.02,\n        \"status\": \"active\",\n        \"owner_approval_required_for_external_action\": true,\n        \"automatic_external_execution\": false,\n        \"created_at\": \"2026-07-18T14:05:10.078572+00:00\",\n        \"rank\": 3\n      },\n      {\n        \"id\": \"priority-e2e-invoice-001\",\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"source\": \"executive_priority\",\n        \"category\": \"finance\",\n        \"objective\": \"Invoice has $1,250.00 outstanding.\",\n        \"score\": 90.02,\n        \"status\": \"active\",\n        \"owner_approval_required_for_external_action\": true,\n        \"automatic_external_execution\": false,\n        \"created_at\": \"2026-07-18T14:05:10.078581+00:00\",\n        \"rank\": 4\n      },\n      {\n        \"id\": \"improvement-improvement-76bbc24564f6\",\n        \"title\": \"Clear pending CEO decisions\",\n        \"source\": \"continuous_improvement\",\n        \"category\": \"governance\",\n        \"objective\": \"Review the highest-scoring pending decisions first.\",\n        \"score\": 86.0,\n        \"status\": \"active\",\n        \"owner_approval_required_for_external_action\": true,\n        \"automatic_external_execution\": false,\n        \"created_at\": \"2026-07-18T14:05:10.078605+00:00\",\n        \"rank\": 5\n      }\n    ],\n    \"forecast_headline\": \"30-day expected cash inflow forecast: $6,467.75\",\n    \"forecast_confidence_percent\": 70.0,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"brief\": {\n    \"generated_at\": \"2026-07-18T14:14:52.198367+00:00\",\n    \"headline\": \"CompanyOS Mission Control\",\n    \"overall_status\": \"operational\",\n    \"attention\": [\n      \"All monitored systems are operating normally.\"\n    ],\n    \"top_priorities\": [\n      \"Review receivable: Sample Contractor\",\n      \"Review receivable: E2E Test Customer\",\n      \"Recover receivable: Sample Contractor\",\n      \"Recover receivable: E2E Test Customer\",\n      \"Advance lead: Driveway Replacement\"\n    ],\n    \"top_goals\": [\n      \"Shorten critical-priority response time\",\n      \"Improve receivable recovery process\",\n      \"Review receivable: Sample Contractor\",\n      \"Review receivable: E2E Test Customer\",\n      \"Clear pending CEO decisions\"\n    ],\n    \"forecast\": {\n      \"headline\": \"30-day expected cash inflow forecast: $6,467.75\",\n      \"confidence_percent\": 70.0\n    }\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:14:52.114009+00:00",
+          "finished_at": "2026-07-18T14:14:52.208862+00:00",
+          "duration_seconds": 0.095
+        }
+      ]
+    }
   }
 ]
