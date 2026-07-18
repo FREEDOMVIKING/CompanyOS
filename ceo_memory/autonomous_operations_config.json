@@ -655,6 +655,16 @@
         "companyos/opportunitytranslatectl",
         "translate"
       ]
+    },
+    {
+      "id": "opportunity-action-queue",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/opportunityqueuectl",
+        "coordinate"
+      ]
     }
   ]
 }
