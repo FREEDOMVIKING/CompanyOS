@@ -1,0 +1,173 @@
+[
+  {
+    "timestamp": "2026-07-18T04:37:52.711341+00:00",
+    "action": "forecast",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "business_forecast_complete",
+      "forecast": {
+        "generated_at": "2026-07-18T04:37:52.710998+00:00",
+        "forecast_horizon_days": 30,
+        "confidence_percent": 75.0,
+        "inputs": {
+          "outstanding_receivables": 11500.0,
+          "active_project_value": 12500.0,
+          "weighted_sales_pipeline": 0.0,
+          "task_completion_rate_percent": 15.38,
+          "project_completion_rate_percent": 0.0,
+          "performance_health_score": 55.0,
+          "critical_priority_count": 1,
+          "high_priority_count": 3,
+          "approved_improvement_count": 0
+        },
+        "cash_inflow_scenarios": {
+          "conservative": 4020.58,
+          "expected": 6185.5,
+          "optimistic": 8350.43
+        },
+        "operating_outlook": {
+          "delivery_factor": 0.25,
+          "receivable_recovery_rate": 0.55,
+          "risk_penalty": 0.11,
+          "improvement_bonus": 0.0
+        },
+        "automatic_code_changes": false,
+        "automatic_task_execution": false,
+        "automatic_external_execution": false,
+        "automatic_spending": false
+      },
+      "briefing": {
+        "generated_at": "2026-07-18T04:37:52.711011+00:00",
+        "headline": "30-day expected cash inflow forecast: $6,185.50",
+        "confidence_percent": 75.0,
+        "scenarios": {
+          "conservative": 4020.58,
+          "expected": 6185.5,
+          "optimistic": 8350.43
+        },
+        "top_risks": [
+          "1 critical priority item(s) may reduce forecast performance.",
+          "Low task completion may delay expected cash inflow.",
+          "Low project completion may delay revenue recognition."
+        ],
+        "top_opportunities": [
+          "Recover up to $11,500.00 in outstanding receivables."
+        ],
+        "recommended_focus": [
+          "Review critical priorities first.",
+          "Advance approved internal improvements.",
+          "Prepare owner-reviewed receivable follow-ups.",
+          "Keep external execution and spending under owner control."
+        ],
+        "automatic_code_changes": false,
+        "automatic_task_execution": false,
+        "automatic_external_execution": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T04:37:52.783418+00:00",
+    "action": "show",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "business_forecast_results",
+      "forecast": {
+        "generated_at": "2026-07-18T04:37:52.710998+00:00",
+        "forecast_horizon_days": 30,
+        "confidence_percent": 75.0,
+        "inputs": {
+          "outstanding_receivables": 11500.0,
+          "active_project_value": 12500.0,
+          "weighted_sales_pipeline": 0.0,
+          "task_completion_rate_percent": 15.38,
+          "project_completion_rate_percent": 0.0,
+          "performance_health_score": 55.0,
+          "critical_priority_count": 1,
+          "high_priority_count": 3,
+          "approved_improvement_count": 0
+        },
+        "cash_inflow_scenarios": {
+          "conservative": 4020.58,
+          "expected": 6185.5,
+          "optimistic": 8350.43
+        },
+        "operating_outlook": {
+          "delivery_factor": 0.25,
+          "receivable_recovery_rate": 0.55,
+          "risk_penalty": 0.11,
+          "improvement_bonus": 0.0
+        },
+        "automatic_code_changes": false,
+        "automatic_task_execution": false,
+        "automatic_external_execution": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T04:37:52.856081+00:00",
+    "action": "briefing",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "business_forecast_briefing",
+      "briefing": {
+        "generated_at": "2026-07-18T04:37:52.711011+00:00",
+        "headline": "30-day expected cash inflow forecast: $6,185.50",
+        "confidence_percent": 75.0,
+        "scenarios": {
+          "conservative": 4020.58,
+          "expected": 6185.5,
+          "optimistic": 8350.43
+        },
+        "top_risks": [
+          "1 critical priority item(s) may reduce forecast performance.",
+          "Low task completion may delay expected cash inflow.",
+          "Low project completion may delay revenue recognition."
+        ],
+        "top_opportunities": [
+          "Recover up to $11,500.00 in outstanding receivables."
+        ],
+        "recommended_focus": [
+          "Review critical priorities first.",
+          "Advance approved internal improvements.",
+          "Prepare owner-reviewed receivable follow-ups.",
+          "Keep external execution and spending under owner control."
+        ],
+        "automatic_code_changes": false,
+        "automatic_task_execution": false,
+        "automatic_external_execution": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T04:37:52.927518+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "business_forecasting_engine_status",
+      "enabled": true,
+      "automatic_internal_forecasting": true,
+      "automatic_scenario_generation": true,
+      "automatic_forecast_briefing": true,
+      "automatic_code_changes": false,
+      "automatic_task_execution": false,
+      "automatic_customer_contact": false,
+      "automatic_external_execution": false,
+      "automatic_publication": false,
+      "automatic_spending": false,
+      "health": {
+        "healthy": true,
+        "last_forecast_at": "2026-07-18T04:37:52.711262+00:00",
+        "confidence_percent": 75.0,
+        "expected_cash_inflow": 6185.5,
+        "last_error": null
+      }
+    }
+  }
+]
