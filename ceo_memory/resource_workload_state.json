@@ -1,79 +1,18 @@
 {
-  "generated_at": "2026-07-18T16:08:18.055171+00:00",
-  "critical_priority_count": 2,
-  "high_priority_count": 7,
-  "job_count": 50,
-  "changes_applied": 2,
-  "changes": [
-    {
-      "job_id": "exception-recovery",
-      "old_interval_seconds": 1200,
-      "new_interval_seconds": 600,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
-    {
-      "job_id": "github-read-connector",
-      "old_interval_seconds": 14400,
-      "new_interval_seconds": 28800,
-      "reasons": [
-        "recent_failures"
-      ]
-    }
-  ],
+  "generated_at": "2026-07-18T18:11:43.368818+00:00",
+  "critical_priority_count": 0,
+  "high_priority_count": 10,
+  "job_count": 62,
+  "changes_applied": 0,
+  "changes": [],
   "workload": [
-    {
-      "job_id": "priority-ranking",
-      "score": 75,
-      "current_interval_seconds": 600,
-      "recommended_interval_seconds": 600,
-      "failure_count": 0,
-      "last_duration_seconds": 0.123,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
-    {
-      "job_id": "decision-preparation",
-      "score": 75,
-      "current_interval_seconds": 600,
-      "recommended_interval_seconds": 600,
-      "failure_count": 0,
-      "last_duration_seconds": 0.108,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
-    {
-      "job_id": "autonomous-orchestrator",
-      "score": 75,
-      "current_interval_seconds": 600,
-      "recommended_interval_seconds": 600,
-      "failure_count": 0,
-      "last_duration_seconds": 0.914,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
-    {
-      "job_id": "exception-recovery",
-      "score": 75,
-      "current_interval_seconds": 1200,
-      "recommended_interval_seconds": 600,
-      "failure_count": 1,
-      "last_duration_seconds": 2.835,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
     {
       "job_id": "opportunity-discovery",
       "score": 60,
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.179,
+      "last_duration_seconds": 0.345,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -84,7 +23,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.124,
+      "last_duration_seconds": 0.311,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -95,7 +34,7 @@
       "current_interval_seconds": 7200,
       "recommended_interval_seconds": 7200,
       "failure_count": 0,
-      "last_duration_seconds": 0.121,
+      "last_duration_seconds": 0.31,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -106,7 +45,25 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.271,
+      "last_duration_seconds": 0.722,
+      "reasons": []
+    },
+    {
+      "job_id": "priority-ranking",
+      "score": 50,
+      "current_interval_seconds": 600,
+      "recommended_interval_seconds": 600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.341,
+      "reasons": []
+    },
+    {
+      "job_id": "decision-preparation",
+      "score": 50,
+      "current_interval_seconds": 600,
+      "recommended_interval_seconds": 600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.339,
       "reasons": []
     },
     {
@@ -115,7 +72,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.146,
+      "last_duration_seconds": 0.267,
       "reasons": []
     },
     {
@@ -124,7 +81,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.148,
+      "last_duration_seconds": 0.309,
       "reasons": []
     },
     {
@@ -133,7 +90,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.514,
+      "last_duration_seconds": 0.921,
       "reasons": []
     },
     {
@@ -143,6 +100,15 @@
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
       "last_duration_seconds": 0.08,
+      "reasons": []
+    },
+    {
+      "job_id": "autonomous-orchestrator",
+      "score": 50,
+      "current_interval_seconds": 600,
+      "recommended_interval_seconds": 600,
+      "failure_count": 0,
+      "last_duration_seconds": 3.28,
       "reasons": []
     },
     {
@@ -164,12 +130,21 @@
       "reasons": []
     },
     {
+      "job_id": "exception-recovery",
+      "score": 50,
+      "current_interval_seconds": 600,
+      "recommended_interval_seconds": 600,
+      "failure_count": 1,
+      "last_duration_seconds": 16.224,
+      "reasons": []
+    },
+    {
       "job_id": "resource-workload-optimizer",
       "score": 50,
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.133,
+      "last_duration_seconds": 0.246,
       "reasons": []
     },
     {
@@ -178,7 +153,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 1.423,
+      "last_duration_seconds": 3.23,
       "reasons": []
     },
     {
@@ -187,7 +162,7 @@
       "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.123,
+      "last_duration_seconds": 0.31,
       "reasons": []
     },
     {
@@ -196,7 +171,7 @@
       "current_interval_seconds": 900,
       "recommended_interval_seconds": 900,
       "failure_count": 0,
-      "last_duration_seconds": 0.122,
+      "last_duration_seconds": 0.3,
       "reasons": []
     },
     {
@@ -205,7 +180,7 @@
       "current_interval_seconds": 900,
       "recommended_interval_seconds": 900,
       "failure_count": 0,
-      "last_duration_seconds": 0.102,
+      "last_duration_seconds": 0.285,
       "reasons": []
     },
     {
@@ -214,7 +189,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.089,
+      "last_duration_seconds": 0.282,
       "reasons": []
     },
     {
@@ -232,7 +207,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.107,
+      "last_duration_seconds": 0.268,
       "reasons": []
     },
     {
@@ -241,7 +216,7 @@
       "current_interval_seconds": 900,
       "recommended_interval_seconds": 900,
       "failure_count": 0,
-      "last_duration_seconds": 0.114,
+      "last_duration_seconds": 0.313,
       "reasons": []
     },
     {
@@ -250,7 +225,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.14,
+      "last_duration_seconds": 0.251,
       "reasons": []
     },
     {
@@ -259,7 +234,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.117,
+      "last_duration_seconds": 0.238,
       "reasons": []
     },
     {
@@ -268,7 +243,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.121,
+      "last_duration_seconds": 0.273,
       "reasons": []
     },
     {
@@ -277,7 +252,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.098,
+      "last_duration_seconds": 0.282,
       "reasons": []
     },
     {
@@ -286,7 +261,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.151,
+      "last_duration_seconds": 0.487,
       "reasons": []
     },
     {
@@ -295,7 +270,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.159,
+      "last_duration_seconds": 0.723,
       "reasons": []
     },
     {
@@ -304,7 +279,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.105,
+      "last_duration_seconds": 0.267,
       "reasons": []
     },
     {
@@ -313,7 +288,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.849,
+      "last_duration_seconds": 2.284,
       "reasons": []
     },
     {
@@ -331,7 +306,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.918,
+      "last_duration_seconds": 2.772,
       "reasons": []
     },
     {
@@ -340,7 +315,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.097,
+      "last_duration_seconds": 0.264,
       "reasons": []
     },
     {
@@ -349,7 +324,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.113,
+      "last_duration_seconds": 0.249,
       "reasons": []
     },
     {
@@ -358,7 +333,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.109,
+      "last_duration_seconds": 0.274,
       "reasons": []
     },
     {
@@ -367,7 +342,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.17,
+      "last_duration_seconds": 0.275,
       "reasons": []
     },
     {
@@ -376,7 +351,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.131,
+      "last_duration_seconds": 0.288,
       "reasons": []
     },
     {
@@ -385,7 +360,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.107,
+      "last_duration_seconds": 0.265,
       "reasons": []
     },
     {
@@ -403,7 +378,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.099,
+      "last_duration_seconds": 0.258,
       "reasons": []
     },
     {
@@ -412,7 +387,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.151,
+      "last_duration_seconds": 0.294,
       "reasons": []
     },
     {
@@ -421,7 +396,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.193,
+      "last_duration_seconds": 0.507,
       "reasons": []
     },
     {
@@ -430,7 +405,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.079,
+      "last_duration_seconds": 0.295,
       "reasons": []
     },
     {
@@ -439,7 +414,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.126,
+      "last_duration_seconds": 0.262,
       "reasons": []
     },
     {
@@ -448,7 +423,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 1.529,
+      "last_duration_seconds": 0.11,
       "reasons": []
     },
     {
@@ -475,14 +450,122 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.0,
+      "last_duration_seconds": 0.095,
+      "reasons": []
+    },
+    {
+      "job_id": "adaptive-execution-plan",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.101,
+      "reasons": []
+    },
+    {
+      "job_id": "adaptive-plan-executor",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.384,
+      "reasons": []
+    },
+    {
+      "job_id": "execution-outcome-learner",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.136,
+      "reasons": []
+    },
+    {
+      "job_id": "confidence-priority-fusion",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.095,
+      "reasons": []
+    },
+    {
+      "job_id": "fused-decision-selector",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.24,
+      "reasons": []
+    },
+    {
+      "job_id": "fused-execution-plan",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.239,
+      "reasons": []
+    },
+    {
+      "job_id": "feedback-priority-integration",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.118,
+      "reasons": []
+    },
+    {
+      "job_id": "closed-loop-selector",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.434,
+      "reasons": []
+    },
+    {
+      "job_id": "readiness-recovery-coordinator",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 1.422,
+      "reasons": []
+    },
+    {
+      "job_id": "recovery-aware-closed-loop",
+      "score": 50,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 3600,
+      "failure_count": 0,
+      "last_duration_seconds": 2.022,
+      "reasons": []
+    },
+    {
+      "job_id": "strategic-goal-orchestrator",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
+      "last_duration_seconds": 3.031,
+      "reasons": []
+    },
+    {
+      "job_id": "strategic-opportunity-alignment",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.077,
       "reasons": []
     },
     {
       "job_id": "github-read-connector",
       "score": 25,
-      "current_interval_seconds": 14400,
-      "recommended_interval_seconds": 28800,
+      "current_interval_seconds": 43200,
+      "recommended_interval_seconds": 43200,
       "failure_count": 1,
       "last_duration_seconds": 0.099,
       "reasons": [

@@ -4683,5 +4683,2333 @@
         "automatic_destructive_actions": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T17:25:11.052842+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-df95b616719c",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039750+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 88.31,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039532+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 88.31,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039593+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-7f1b46cd9dc9",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039766+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039698+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039811+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,467.75.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039732+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-ede9042ddc35",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039781+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.03,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039626+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-6db7aff374aa",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.46,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:11.039646+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T17:25:11.045518+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-df95b616719c",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-7f1b46cd9dc9",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-ede9042ddc35",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-6db7aff374aa",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T17:25:27.175284+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-3c0bda22315d",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169640+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 88.23,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169534+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 88.23,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169565+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-b256e8f2f234",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169648+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169614+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169670+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,467.75.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169630+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-61a69095ddaf",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169654+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.05,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169578+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-6db7aff374aa",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.39,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:25:27.169587+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T17:25:27.170753+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-3c0bda22315d",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-b256e8f2f234",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-61a69095ddaf",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-6db7aff374aa",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T17:56:03.926652+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-48a1774bafd4",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920704+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 88.17,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920591+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 88.17,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920626+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-3fd556b5c496",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920712+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920678+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920737+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,467.75.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920694+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-eb163c795cc4",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920719+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.07,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920640+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-09fe4e44a90a",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.33,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:03.920650+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T17:56:03.921902+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-48a1774bafd4",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-3fd556b5c496",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-eb163c795cc4",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-09fe4e44a90a",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T17:56:15.309254+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-74967a601ce1",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299583+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 88.12,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299383+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 88.12,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299440+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-81b4ee307e29",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299600+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299531+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299645+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,310.00.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299565+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-1d1b5e0503b6",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299614+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.09,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299460+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-09fe4e44a90a",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.29,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T17:56:15.299479+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T17:56:15.301006+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-74967a601ce1",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-81b4ee307e29",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-1d1b5e0503b6",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-09fe4e44a90a",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T18:27:02.360602+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-c4b1d16301e8",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354585+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 88.07,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354476+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 88.07,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354509+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-4d6ee937df66",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354593+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354559+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354615+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,310.00.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354576+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-9cc4f49ef6cf",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354599+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.1,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354523+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-48f2f0e40818",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.24,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:02.354533+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T18:27:02.355591+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-c4b1d16301e8",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-4d6ee937df66",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-9cc4f49ef6cf",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-48f2f0e40818",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T18:27:18.257246+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-7b0f9c456f7f",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.251011+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 88.03,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.250901+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 88.03,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.250933+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-0e7333b00243",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.251020+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.250986+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.251043+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,310.00.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.251002+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-3828bafc2c93",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.251027+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.12,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.250946+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-48f2f0e40818",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.21,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:27:18.250959+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T18:27:18.252062+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-7b0f9c456f7f",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-0e7333b00243",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-3828bafc2c93",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-48f2f0e40818",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T18:57:57.011315+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-c662dc509303",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996090+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 87.99,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.995983+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 87.99,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996015+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-57050f7e417e",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996098+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996065+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996120+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,310.00.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996080+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-56e63441ebb6",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996104+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.13,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996028+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-f54e05ddb426",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.17,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:57:56.996038+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T18:57:57.001524+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-c662dc509303",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-57050f7e417e",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-56e63441ebb6",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-f54e05ddb426",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T18:58:09.833674+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "goal_strategy_generated",
+      "goal_count": 10,
+      "goals": [
+        {
+          "id": "improvement-improvement-9cdac51ab39a",
+          "title": "Improve receivable recovery process",
+          "source": "continuous_improvement",
+          "category": "finance",
+          "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+          "score": 91.85,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822881+00:00",
+          "rank": 1
+        },
+        {
+          "id": "priority-invoice-d7e99861931c",
+          "title": "Review receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $11,500.00 outstanding.",
+          "score": 87.96,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822677+00:00",
+          "rank": 2
+        },
+        {
+          "id": "priority-e2e-invoice-001",
+          "title": "Review receivable: E2E Test Customer",
+          "source": "executive_priority",
+          "category": "finance",
+          "objective": "Invoice has $1,250.00 outstanding.",
+          "score": 87.96,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822728+00:00",
+          "rank": 3
+        },
+        {
+          "id": "improvement-improvement-9ab626c8db4d",
+          "title": "Clear pending CEO decisions",
+          "source": "continuous_improvement",
+          "category": "governance",
+          "objective": "Review the highest-scoring pending decisions first.",
+          "score": 86.0,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822898+00:00",
+          "rank": 4
+        },
+        {
+          "id": "improve-operating-health",
+          "title": "Improve operating health score",
+          "source": "performance_analytics",
+          "category": "operations",
+          "objective": "Raise operating health above 80 from 60.0.",
+          "score": 85.25,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822826+00:00",
+          "rank": 5
+        },
+        {
+          "id": "clear-pending-decisions",
+          "title": "Clear pending CEO decisions",
+          "source": "ceo_decision_queue",
+          "category": "governance",
+          "objective": "Review 20 pending decision(s).",
+          "score": 84.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822947+00:00",
+          "rank": 6
+        },
+        {
+          "id": "protect-expected-cash-inflow",
+          "title": "Protect expected cash inflow",
+          "source": "business_forecast",
+          "category": "finance",
+          "objective": "Protect the expected forecast value of $6,310.00.",
+          "score": 82.75,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822861+00:00",
+          "rank": 7
+        },
+        {
+          "id": "improvement-improvement-3540fb68ee98",
+          "title": "Reduce pending task backlog",
+          "source": "continuous_improvement",
+          "category": "operations",
+          "objective": "Review, group, and sequence pending internal tasks by business impact.",
+          "score": 80.9,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822914+00:00",
+          "rank": 8
+        },
+        {
+          "id": "priority-followup-f51333cfa177",
+          "title": "Review follow-up: Sample Contractor",
+          "source": "executive_priority",
+          "category": "sales",
+          "objective": "Review lead and prepare owner-approved follow-up.",
+          "score": 80.13,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822750+00:00",
+          "rank": 9
+        },
+        {
+          "id": "priority-oppdisc-f54e05ddb426",
+          "title": "Recover receivable: Sample Contractor",
+          "source": "executive_priority",
+          "category": "cash_recovery",
+          "objective": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+          "score": 75.14,
+          "status": "active",
+          "owner_approval_required_for_external_action": true,
+          "automatic_external_execution": false,
+          "created_at": "2026-07-18T18:58:09.822771+00:00",
+          "rank": 10
+        }
+      ],
+      "plan": {
+        "generated_at": "2026-07-18T18:58:09.824398+00:00",
+        "strategy": [
+          {
+            "goal_id": "improvement-improvement-9cdac51ab39a",
+            "goal_title": "Improve receivable recovery process",
+            "rank": 1,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-invoice-d7e99861931c",
+            "goal_title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-e2e-invoice-001",
+            "goal_title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-9ab626c8db4d",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 4,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improve-operating-health",
+            "goal_title": "Improve operating health score",
+            "rank": 5,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "clear-pending-decisions",
+            "goal_title": "Clear pending CEO decisions",
+            "rank": 6,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "protect-expected-cash-inflow",
+            "goal_title": "Protect expected cash inflow",
+            "rank": 7,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "improvement-improvement-3540fb68ee98",
+            "goal_title": "Reduce pending task backlog",
+            "rank": 8,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-followup-f51333cfa177",
+            "goal_title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          },
+          {
+            "goal_id": "priority-oppdisc-f54e05ddb426",
+            "goal_title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "steps": [
+              "Review current evidence and constraints",
+              "Define the highest-value internal next action",
+              "Create or update internal execution tasks",
+              "Measure progress against the goal",
+              "Re-rank after new performance data arrives"
+            ],
+            "automatic_internal_execution_allowed": true,
+            "automatic_external_execution_allowed": false
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
   }
 ]

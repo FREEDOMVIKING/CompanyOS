@@ -1820,5 +1820,2370 @@
         "automatic_destructive_actions": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T17:09:44.208737+00:00",
+    "action": "optimize",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "resource_workload_optimization_complete",
+      "state": {
+        "generated_at": "2026-07-18T17:09:44.201972+00:00",
+        "critical_priority_count": 0,
+        "high_priority_count": 9,
+        "job_count": 62,
+        "changes_applied": 1,
+        "changes": [
+          {
+            "job_id": "github-read-connector",
+            "old_interval_seconds": 28800,
+            "new_interval_seconds": 43200,
+            "reasons": [
+              "recent_failures"
+            ]
+          }
+        ],
+        "workload": [
+          {
+            "job_id": "opportunity-discovery",
+            "score": 60,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.094,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "performance-analytics",
+            "score": 60,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "business-forecast",
+            "score": 60,
+            "current_interval_seconds": 7200,
+            "recommended_interval_seconds": 7200,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "integrity-check",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.214,
+            "reasons": []
+          },
+          {
+            "job_id": "priority-ranking",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.469,
+            "reasons": []
+          },
+          {
+            "job_id": "decision-preparation",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.384,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-plan-preparation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.083,
+            "reasons": []
+          },
+          {
+            "job_id": "improvement-analysis",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.114,
+            "reasons": []
+          },
+          {
+            "job_id": "local-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.514,
+            "reasons": []
+          },
+          {
+            "job_id": "executive-briefing",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.08,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.757,
+            "reasons": []
+          },
+          {
+            "job_id": "goal-strategy",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.099,
+            "reasons": []
+          },
+          {
+            "job_id": "learning-feedback",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.1,
+            "reasons": []
+          },
+          {
+            "job_id": "exception-recovery",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 1,
+            "last_duration_seconds": 3.992,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-workload-optimizer",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.07,
+            "reasons": []
+          },
+          {
+            "job_id": "internal-action-engine",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 1.012,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-health-supervisor",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.126,
+            "reasons": []
+          },
+          {
+            "job_id": "mission-control",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.122,
+            "reasons": []
+          },
+          {
+            "job_id": "governance-router",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.093,
+            "reasons": []
+          },
+          {
+            "job_id": "outcome-tracker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.147,
+            "reasons": []
+          },
+          {
+            "job_id": "strategy-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.289,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-readiness",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.138,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-gateway",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.119,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-registry",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.125,
+            "reasons": []
+          },
+          {
+            "job_id": "permission-broker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-runtime",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.162,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-binding",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.116,
+            "reasons": []
+          },
+          {
+            "job_id": "github-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.19,
+            "reasons": []
+          },
+          {
+            "job_id": "github-change-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.228,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": []
+          },
+          {
+            "job_id": "action-queue-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.802,
+            "reasons": []
+          },
+          {
+            "job_id": "action-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.084,
+            "reasons": []
+          },
+          {
+            "job_id": "unified-control-cycle",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.907,
+            "reasons": []
+          },
+          {
+            "job_id": "cycle-supervisor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.103,
+            "reasons": []
+          },
+          {
+            "job_id": "incident-escalation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.097,
+            "reasons": []
+          },
+          {
+            "job_id": "reliability-scorecard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.092,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-drift-monitor",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.169,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-capacity-monitor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.079,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-watchdog",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": []
+          },
+          {
+            "job_id": "state-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.303,
+            "reasons": []
+          },
+          {
+            "job_id": "operations-dashboard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.109,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-hygiene",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.189,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-aware-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.174,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-coordinator-v2",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.098,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-eligibility-gate",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-action-dispatcher",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.11,
+            "reasons": []
+          },
+          {
+            "job_id": "dispatcher-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.139,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-action-prioritization",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.071,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.101,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-plan-executor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.384,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-outcome-learner",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.136,
+            "reasons": []
+          },
+          {
+            "job_id": "confidence-priority-fusion",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.071,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.088,
+            "reasons": []
+          },
+          {
+            "job_id": "feedback-priority-integration",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.118,
+            "reasons": []
+          },
+          {
+            "job_id": "closed-loop-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.434,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-recovery-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 1.422,
+            "reasons": []
+          },
+          {
+            "job_id": "recovery-aware-closed-loop",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 2.022,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-goal-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.031,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-opportunity-alignment",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.077,
+            "reasons": []
+          },
+          {
+            "job_id": "github-read-connector",
+            "score": 25,
+            "current_interval_seconds": 28800,
+            "recommended_interval_seconds": 43200,
+            "failure_count": 1,
+            "last_duration_seconds": 0.099,
+            "reasons": [
+              "recent_failures"
+            ]
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T17:09:53.993221+00:00",
+    "action": "optimize",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "resource_workload_optimization_complete",
+      "state": {
+        "generated_at": "2026-07-18T17:09:53.987188+00:00",
+        "critical_priority_count": 0,
+        "high_priority_count": 9,
+        "job_count": 62,
+        "changes_applied": 0,
+        "changes": [],
+        "workload": [
+          {
+            "job_id": "opportunity-discovery",
+            "score": 60,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.094,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "performance-analytics",
+            "score": 60,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "business-forecast",
+            "score": 60,
+            "current_interval_seconds": 7200,
+            "recommended_interval_seconds": 7200,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "integrity-check",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.214,
+            "reasons": []
+          },
+          {
+            "job_id": "priority-ranking",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.469,
+            "reasons": []
+          },
+          {
+            "job_id": "decision-preparation",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.384,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-plan-preparation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.083,
+            "reasons": []
+          },
+          {
+            "job_id": "improvement-analysis",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.114,
+            "reasons": []
+          },
+          {
+            "job_id": "local-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.514,
+            "reasons": []
+          },
+          {
+            "job_id": "executive-briefing",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.08,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.757,
+            "reasons": []
+          },
+          {
+            "job_id": "goal-strategy",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.099,
+            "reasons": []
+          },
+          {
+            "job_id": "learning-feedback",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.1,
+            "reasons": []
+          },
+          {
+            "job_id": "exception-recovery",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 1,
+            "last_duration_seconds": 11.289,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-workload-optimizer",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.07,
+            "reasons": []
+          },
+          {
+            "job_id": "internal-action-engine",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 1.012,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-health-supervisor",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.126,
+            "reasons": []
+          },
+          {
+            "job_id": "mission-control",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.122,
+            "reasons": []
+          },
+          {
+            "job_id": "governance-router",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.093,
+            "reasons": []
+          },
+          {
+            "job_id": "outcome-tracker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.147,
+            "reasons": []
+          },
+          {
+            "job_id": "strategy-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.289,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-readiness",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.138,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-gateway",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.119,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-registry",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.125,
+            "reasons": []
+          },
+          {
+            "job_id": "permission-broker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-runtime",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.162,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-binding",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.116,
+            "reasons": []
+          },
+          {
+            "job_id": "github-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.19,
+            "reasons": []
+          },
+          {
+            "job_id": "github-change-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.228,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": []
+          },
+          {
+            "job_id": "action-queue-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.802,
+            "reasons": []
+          },
+          {
+            "job_id": "action-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.084,
+            "reasons": []
+          },
+          {
+            "job_id": "unified-control-cycle",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.907,
+            "reasons": []
+          },
+          {
+            "job_id": "cycle-supervisor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.103,
+            "reasons": []
+          },
+          {
+            "job_id": "incident-escalation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.097,
+            "reasons": []
+          },
+          {
+            "job_id": "reliability-scorecard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.092,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-drift-monitor",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.169,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-capacity-monitor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.079,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-watchdog",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.121,
+            "reasons": []
+          },
+          {
+            "job_id": "state-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.303,
+            "reasons": []
+          },
+          {
+            "job_id": "operations-dashboard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.109,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-hygiene",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.189,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-aware-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.174,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-coordinator-v2",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.098,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-eligibility-gate",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-action-dispatcher",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.11,
+            "reasons": []
+          },
+          {
+            "job_id": "dispatcher-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.139,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-action-prioritization",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.071,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.101,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-plan-executor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.384,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-outcome-learner",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.136,
+            "reasons": []
+          },
+          {
+            "job_id": "confidence-priority-fusion",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.071,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.088,
+            "reasons": []
+          },
+          {
+            "job_id": "feedback-priority-integration",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.118,
+            "reasons": []
+          },
+          {
+            "job_id": "closed-loop-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.434,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-recovery-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 1.422,
+            "reasons": []
+          },
+          {
+            "job_id": "recovery-aware-closed-loop",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 2.022,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-goal-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.031,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-opportunity-alignment",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.077,
+            "reasons": []
+          },
+          {
+            "job_id": "github-read-connector",
+            "score": 25,
+            "current_interval_seconds": 43200,
+            "recommended_interval_seconds": 43200,
+            "failure_count": 1,
+            "last_duration_seconds": 0.099,
+            "reasons": [
+              "recent_failures"
+            ]
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T18:11:28.371653+00:00",
+    "action": "optimize",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "resource_workload_optimization_complete",
+      "state": {
+        "generated_at": "2026-07-18T18:11:28.360330+00:00",
+        "critical_priority_count": 0,
+        "high_priority_count": 10,
+        "job_count": 62,
+        "changes_applied": 0,
+        "changes": [],
+        "workload": [
+          {
+            "job_id": "opportunity-discovery",
+            "score": 60,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.345,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "performance-analytics",
+            "score": 60,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.311,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "business-forecast",
+            "score": 60,
+            "current_interval_seconds": 7200,
+            "recommended_interval_seconds": 7200,
+            "failure_count": 0,
+            "last_duration_seconds": 0.31,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "integrity-check",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.722,
+            "reasons": []
+          },
+          {
+            "job_id": "priority-ranking",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.341,
+            "reasons": []
+          },
+          {
+            "job_id": "decision-preparation",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.339,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-plan-preparation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.267,
+            "reasons": []
+          },
+          {
+            "job_id": "improvement-analysis",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.309,
+            "reasons": []
+          },
+          {
+            "job_id": "local-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.921,
+            "reasons": []
+          },
+          {
+            "job_id": "executive-briefing",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.08,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.28,
+            "reasons": []
+          },
+          {
+            "job_id": "goal-strategy",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.099,
+            "reasons": []
+          },
+          {
+            "job_id": "learning-feedback",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.1,
+            "reasons": []
+          },
+          {
+            "job_id": "exception-recovery",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 1,
+            "last_duration_seconds": 12.661,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-workload-optimizer",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.246,
+            "reasons": []
+          },
+          {
+            "job_id": "internal-action-engine",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 3.23,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-health-supervisor",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.31,
+            "reasons": []
+          },
+          {
+            "job_id": "mission-control",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.3,
+            "reasons": []
+          },
+          {
+            "job_id": "governance-router",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.285,
+            "reasons": []
+          },
+          {
+            "job_id": "outcome-tracker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.282,
+            "reasons": []
+          },
+          {
+            "job_id": "strategy-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.289,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-readiness",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.268,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-gateway",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.313,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-registry",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.251,
+            "reasons": []
+          },
+          {
+            "job_id": "permission-broker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.238,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-runtime",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.273,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-binding",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.282,
+            "reasons": []
+          },
+          {
+            "job_id": "github-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.487,
+            "reasons": []
+          },
+          {
+            "job_id": "github-change-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.723,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.267,
+            "reasons": []
+          },
+          {
+            "job_id": "action-queue-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 2.284,
+            "reasons": []
+          },
+          {
+            "job_id": "action-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.084,
+            "reasons": []
+          },
+          {
+            "job_id": "unified-control-cycle",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 2.772,
+            "reasons": []
+          },
+          {
+            "job_id": "cycle-supervisor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.264,
+            "reasons": []
+          },
+          {
+            "job_id": "incident-escalation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.249,
+            "reasons": []
+          },
+          {
+            "job_id": "reliability-scorecard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.274,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-drift-monitor",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.275,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-capacity-monitor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.288,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-watchdog",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.265,
+            "reasons": []
+          },
+          {
+            "job_id": "state-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.303,
+            "reasons": []
+          },
+          {
+            "job_id": "operations-dashboard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.258,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-hygiene",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.294,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-aware-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.507,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-coordinator-v2",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.295,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-eligibility-gate",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.262,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-action-dispatcher",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.11,
+            "reasons": []
+          },
+          {
+            "job_id": "dispatcher-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.139,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-action-prioritization",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.071,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.101,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-plan-executor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.384,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-outcome-learner",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.136,
+            "reasons": []
+          },
+          {
+            "job_id": "confidence-priority-fusion",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.24,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.239,
+            "reasons": []
+          },
+          {
+            "job_id": "feedback-priority-integration",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.118,
+            "reasons": []
+          },
+          {
+            "job_id": "closed-loop-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.434,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-recovery-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 1.422,
+            "reasons": []
+          },
+          {
+            "job_id": "recovery-aware-closed-loop",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 2.022,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-goal-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.031,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-opportunity-alignment",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.077,
+            "reasons": []
+          },
+          {
+            "job_id": "github-read-connector",
+            "score": 25,
+            "current_interval_seconds": 43200,
+            "recommended_interval_seconds": 43200,
+            "failure_count": 1,
+            "last_duration_seconds": 0.099,
+            "reasons": [
+              "recent_failures"
+            ]
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T18:11:43.376468+00:00",
+    "action": "optimize",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "resource_workload_optimization_complete",
+      "state": {
+        "generated_at": "2026-07-18T18:11:43.368818+00:00",
+        "critical_priority_count": 0,
+        "high_priority_count": 10,
+        "job_count": 62,
+        "changes_applied": 0,
+        "changes": [],
+        "workload": [
+          {
+            "job_id": "opportunity-discovery",
+            "score": 60,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.345,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "performance-analytics",
+            "score": 60,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.311,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "business-forecast",
+            "score": 60,
+            "current_interval_seconds": 7200,
+            "recommended_interval_seconds": 7200,
+            "failure_count": 0,
+            "last_duration_seconds": 0.31,
+            "reasons": [
+              "high_priority_pressure"
+            ]
+          },
+          {
+            "job_id": "integrity-check",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.722,
+            "reasons": []
+          },
+          {
+            "job_id": "priority-ranking",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.341,
+            "reasons": []
+          },
+          {
+            "job_id": "decision-preparation",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.339,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-plan-preparation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.267,
+            "reasons": []
+          },
+          {
+            "job_id": "improvement-analysis",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.309,
+            "reasons": []
+          },
+          {
+            "job_id": "local-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.921,
+            "reasons": []
+          },
+          {
+            "job_id": "executive-briefing",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.08,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.28,
+            "reasons": []
+          },
+          {
+            "job_id": "goal-strategy",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.099,
+            "reasons": []
+          },
+          {
+            "job_id": "learning-feedback",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.1,
+            "reasons": []
+          },
+          {
+            "job_id": "exception-recovery",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 1,
+            "last_duration_seconds": 16.224,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-workload-optimizer",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.246,
+            "reasons": []
+          },
+          {
+            "job_id": "internal-action-engine",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 3.23,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-health-supervisor",
+            "score": 50,
+            "current_interval_seconds": 600,
+            "recommended_interval_seconds": 600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.31,
+            "reasons": []
+          },
+          {
+            "job_id": "mission-control",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.3,
+            "reasons": []
+          },
+          {
+            "job_id": "governance-router",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.285,
+            "reasons": []
+          },
+          {
+            "job_id": "outcome-tracker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.282,
+            "reasons": []
+          },
+          {
+            "job_id": "strategy-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.289,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-readiness",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.268,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-gateway",
+            "score": 50,
+            "current_interval_seconds": 900,
+            "recommended_interval_seconds": 900,
+            "failure_count": 0,
+            "last_duration_seconds": 0.313,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-registry",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.251,
+            "reasons": []
+          },
+          {
+            "job_id": "permission-broker",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.238,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-runtime",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.273,
+            "reasons": []
+          },
+          {
+            "job_id": "connector-binding",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.282,
+            "reasons": []
+          },
+          {
+            "job_id": "github-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.487,
+            "reasons": []
+          },
+          {
+            "job_id": "github-change-intelligence",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.723,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.267,
+            "reasons": []
+          },
+          {
+            "job_id": "action-queue-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 2.284,
+            "reasons": []
+          },
+          {
+            "job_id": "action-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.084,
+            "reasons": []
+          },
+          {
+            "job_id": "unified-control-cycle",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 2.772,
+            "reasons": []
+          },
+          {
+            "job_id": "cycle-supervisor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.264,
+            "reasons": []
+          },
+          {
+            "job_id": "incident-escalation",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.249,
+            "reasons": []
+          },
+          {
+            "job_id": "reliability-scorecard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.274,
+            "reasons": []
+          },
+          {
+            "job_id": "dependency-drift-monitor",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.275,
+            "reasons": []
+          },
+          {
+            "job_id": "resource-capacity-monitor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.288,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-watchdog",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.265,
+            "reasons": []
+          },
+          {
+            "job_id": "state-backup",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.303,
+            "reasons": []
+          },
+          {
+            "job_id": "operations-dashboard",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.258,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-hygiene",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.294,
+            "reasons": []
+          },
+          {
+            "job_id": "runtime-aware-preflight",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.507,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-coordinator-v2",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.295,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-eligibility-gate",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.262,
+            "reasons": []
+          },
+          {
+            "job_id": "autonomous-action-dispatcher",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.11,
+            "reasons": []
+          },
+          {
+            "job_id": "dispatcher-feedback-loop",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.139,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-action-prioritization",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.071,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.101,
+            "reasons": []
+          },
+          {
+            "job_id": "adaptive-plan-executor",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.384,
+            "reasons": []
+          },
+          {
+            "job_id": "execution-outcome-learner",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.136,
+            "reasons": []
+          },
+          {
+            "job_id": "confidence-priority-fusion",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.095,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-decision-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.24,
+            "reasons": []
+          },
+          {
+            "job_id": "fused-execution-plan",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.239,
+            "reasons": []
+          },
+          {
+            "job_id": "feedback-priority-integration",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.118,
+            "reasons": []
+          },
+          {
+            "job_id": "closed-loop-selector",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 0.434,
+            "reasons": []
+          },
+          {
+            "job_id": "readiness-recovery-coordinator",
+            "score": 50,
+            "current_interval_seconds": 1800,
+            "recommended_interval_seconds": 1800,
+            "failure_count": 0,
+            "last_duration_seconds": 1.422,
+            "reasons": []
+          },
+          {
+            "job_id": "recovery-aware-closed-loop",
+            "score": 50,
+            "current_interval_seconds": 3600,
+            "recommended_interval_seconds": 3600,
+            "failure_count": 0,
+            "last_duration_seconds": 2.022,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-goal-orchestrator",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 3.031,
+            "reasons": []
+          },
+          {
+            "job_id": "strategic-opportunity-alignment",
+            "score": 50,
+            "current_interval_seconds": 21600,
+            "recommended_interval_seconds": 21600,
+            "failure_count": 0,
+            "last_duration_seconds": 0.077,
+            "reasons": []
+          },
+          {
+            "job_id": "github-read-connector",
+            "score": 25,
+            "current_interval_seconds": 43200,
+            "recommended_interval_seconds": 43200,
+            "failure_count": 1,
+            "last_duration_seconds": 0.099,
+            "reasons": [
+              "recent_failures"
+            ]
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
   }
 ]
