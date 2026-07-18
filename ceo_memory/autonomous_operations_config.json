@@ -865,6 +865,16 @@
         "companyos/governedworkerctl",
         "run"
       ]
+    },
+    {
+      "id": "specialist-runtime-adapter",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/specialistruntimectl",
+        "run"
+      ]
     }
   ]
 }
