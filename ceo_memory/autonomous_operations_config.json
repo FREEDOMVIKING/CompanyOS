@@ -595,6 +595,16 @@
         "companyos/closedloopctl",
         "run"
       ]
+    },
+    {
+      "id": "readiness-recovery-coordinator",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/recovery2ctl",
+        "run"
+      ]
     }
   ]
 }

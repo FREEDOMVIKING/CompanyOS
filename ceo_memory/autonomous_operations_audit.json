@@ -8452,5 +8452,121 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T16:40:16.229130+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 21587
+    }
+  },
+  {
+    "timestamp": "2026-07-18T16:40:16.353309+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 24209,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T16:40:19.150264+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 8,
+      "jobs_run": 8,
+      "failures": 0,
+      "results": [
+        {
+          "id": "connector-binding",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"connector_binding_check_complete\",\n  \"state\": {\n    \"generated_at\": \"2026-07-18T16:40:16.388390+00:00\",\n    \"bindings\": [\n      {\n        \"connector_id\": \"github\",\n        \"registered\": true,\n        \"enabled\": true,\n        \"read_allowed\": true,\n        \"required_environment_variables\": [\n          \"GITHUB_TOKEN\"\n        ],\n        \"environment_variables_present\": [\n          \"GITHUB_TOKEN\"\n        ],\n        \"environment_variables_missing\": [],\n        \"secret_values_recorded\": false,\n        \"binding_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"email\",\n        \"registered\": true,\n        \"enabled\": false,\n        \"read_allowed\": false,\n        \"required_environment_variables\": [],\n        \"environment_variables_present\": [],\n        \"environment_variables_missing\": [],\n        \"secret_values_recorded\": false,\n        \"binding_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"calendar\",\n        \"registered\": true,\n        \"enabled\": false,\n        \"read_allowed\": false,\n        \"required_environment_variables\": [],\n        \"environment_variables_present\": [],\n        \"environment_variables_missing\": [],\n        \"secret_values_recorded\": false,\n        \"binding_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"crm\",\n        \"registered\": true,\n        \"enabled\": true,\n        \"read_allowed\": true,\n        \"required_environment_variables\": [],\n        \"environment_variables_present\": [],\n        \"environment_variables_missing\": [],\n        \"secret_values_recorded\": false,\n        \"binding_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"accounting\",\n        \"registered\": true,\n        \"enabled\": true,\n        \"read_allowed\": true,\n        \"required_environment_variables\": [],\n        \"environment_variables_present\": [],\n        \"environment_variables_missing\": [],\n        \"secret_values_recorded\": false,\n        \"binding_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"market-data\",\n        \"registered\": true,\n        \"enabled\": false,\n        \"read_allowed\": false,\n        \"required_environment_variables\": [],\n        \"environment_variables_present\": [],\n        \"environment_variables_missing\": [],\n        \"secret_values_recorded\": false,\n        \"binding_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:16.297997+00:00",
+          "finished_at": "2026-07-18T16:40:16.414193+00:00",
+          "duration_seconds": 0.116
+        },
+        {
+          "id": "action-queue-coordinator",
+          "success": true,
+          "return_code": 0,
+          "stdout": "\\\"updated_at\\\": \\\"2026-07-18T04:47:26.682009+00:00\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"decision-7e482dfbea21\\\",\\n        \\\"source_id\\\": \\\"oppdisc-76a988d89351\\\",\\n        \\\"source_type\\\": \\\"opportunity\\\",\\n        \\\"title\\\": \\\"Recover receivable: E2E Test Customer\\\",\\n        \\\"category\\\": \\\"cash_recovery\\\",\\n        \\\"description\\\": \\\"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\\\",\\n        \\\"rank\\\": 4,\\n        \\\"priority_score\\\": 81.3,\\n        \\\"priority_band\\\": \\\"high\\\",\\n        \\\"estimated_value\\\": 1250.0,\\n        \\\"status\\\": \\\"pending\\\",\\n        \\\"recommended_action\\\": \\\"owner_review\\\",\\n        \\\"explanation\\\": {\\n          \\\"why_now\\\": [\\n            \\\"The overall priority score is high.\\\",\\n            \\\"It has an estimated value of $1,250.00.\\\",\\n            \\\"Completing it would materially reduce business risk.\\\"\\n          ],\\n          \\\"tradeoffs\\\": [\\n            \\\"Owner approval is required before any external action.\\\"\\n          ],\\n          \\\"recommended_outcome\\\": \\\"owner_review_required\\\"\\n        },\\n        \\\"owner_approval_required\\\": true,\\n        \\\"external_action_authorized\\\": false,\\n        \\\"automatic_execution\\\": false,\\n        \\\"created_at\\\": \\\"2026-07-18T04:47:26.682020+00:00\\\",\\n        \\\"updated_at\\\": \\\"2026-07-18T04:47:26.682022+00:00\\\"\\n      }\\n    ],\\n    \\\"decision_counts\\\": {\\n      \\\"total\\\": 20,\\n      \\\"pending\\\": 20,\\n      \\\"approved\\\": 0,\\n      \\\"deferred\\\": 0,\\n      \\\"rejected\\\": 0\\n    },\\n    \\\"total_open_estimated_value\\\": 79500.0,\\n    \\\"automatic_decision_approval\\\": false,\\n    \\\"automatic_task_execution\\\": false,\\n    \\\"automatic_external_execution\\\": false,\\n    \\\"automatic_spending\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        },\n        \"success\": true\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"priority\": 50,\n        \"reason\": \"Refresh measurable outcomes for the feedback loop.\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"outcome_measurement_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T16:40:17.180610+00:00\\\",\\n    \\\"kpis\\\": {\\n      \\\"operating_health_score\\\": 60.0,\\n      \\\"scheduler_reliability_percent\\\": 98.28,\\n      \\\"successful_jobs\\\": 57,\\n      \\\"failed_jobs\\\": 1,\\n      \\\"internal_action_failures\\\": 0,\\n      \\\"active_goals\\\": 10\\n    },\\n    \\\"goal_outcomes\\\": [\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-2d3fc580ac45\\\",\\n        \\\"title\\\": \\\"Improve receivable recovery process\\\",\\n        \\\"rank\\\": 1,\\n        \\\"progress_score\\\": 83.9,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-invoice-d7e99861931c\\\",\\n        \\\"title\\\": \\\"Review receivable: Sample Contractor\\\",\\n        \\\"rank\\\": 2,\\n        \\\"progress_score\\\": 82.39,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-e2e-invoice-001\\\",\\n        \\\"title\\\": \\\"Review receivable: E2E Test Customer\\\",\\n        \\\"rank\\\": 3,\\n        \\\"progress_score\\\": 82.39,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-a7eeafe3b17a\\\",\\n        \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n        \\\"rank\\\": 4,\\n        \\\"progress_score\\\": 81.27,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improve-operating-health\\\",\\n        \\\"title\\\": \\\"Improve operating health score\\\",\\n        \\\"rank\\\": 5,\\n        \\\"progress_score\\\": 80.93,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"clear-pending-decisions\\\",\\n        \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n        \\\"rank\\\": 6,\\n        \\\"progress_score\\\": 80.78,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"protect-expected-cash-inflow\\\",\\n        \\\"title\\\": \\\"Protect expected cash inflow\\\",\\n        \\\"rank\\\": 7,\\n        \\\"progress_score\\\": 79.81,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-d21c001dbcb5\\\",\\n        \\\"title\\\": \\\"Reduce pending task backlog\\\",\\n        \\\"rank\\\": 8,\\n        \\\"progress_score\\\": 78.97,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-followup-f51333cfa177\\\",\\n        \\\"title\\\": \\\"Review follow-up: Sample Contractor\\\",\\n        \\\"rank\\\": 9,\\n        \\\"progress_score\\\": 78.56,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-oppdisc-8d99510a9b50\\\",\\n        \\\"title\\\": \\\"Recover receivable: Sample Contractor\\\",\\n        \\\"rank\\\": 10,\\n        \\\"progress_score\\\": 76.6,\\n        \\\"status\\\": \\\"on_track\\\"\\n      }\\n    ],\\n    \\\"needs_attention\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        },\n        \"success\": true\n      }\n    ],\n    \"failure_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:16.415246+00:00",
+          "finished_at": "2026-07-18T16:40:17.217441+00:00",
+          "duration_seconds": 0.802
+        },
+        {
+          "id": "cycle-supervisor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"cycle_supervision_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T16:40:17.297283+00:00\",\n    \"observed_cycle\": {\n      \"last_cycle_at\": \"2026-07-18T16:08:19.931612+00:00\",\n      \"cycle_success\": true,\n      \"failure_count\": 0\n    },\n    \"recovery_actions\": [],\n    \"consecutive_failures\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:17.218456+00:00",
+          "finished_at": "2026-07-18T16:40:17.321816+00:00",
+          "duration_seconds": 0.103
+        },
+        {
+          "id": "incident-escalation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"incident_scan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T16:40:17.397939+00:00\",\n    \"incident_count\": 1,\n    \"incidents\": [\n      {\n        \"severity\": \"warning\",\n        \"type\": \"system_readiness_degraded\",\n        \"issues\": [\n          {\n            \"type\": \"unhealthy_components\",\n            \"items\": [\n              \"drift_health.json\"\n            ]\n          }\n        ]\n      }\n    ],\n    \"critical_incident\": false,\n    \"autonomy_halted\": false,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:17.322879+00:00",
+          "finished_at": "2026-07-18T16:40:17.420135+00:00",
+          "duration_seconds": 0.097
+        },
+        {
+          "id": "readiness-coordinator-v2",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"readiness_coordination_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T16:40:17.504802+00:00\",\n    \"decision\": \"blocked\",\n    \"blockers\": [\n      \"runtime_aware_preflight_not_ready\"\n    ],\n    \"warnings\": [],\n    \"checks\": [\n      {\n        \"check\": \"runtime_aware_preflight\",\n        \"passed\": false\n      },\n      {\n        \"check\": \"reliability_score\",\n        \"passed\": true,\n        \"value\": 85\n      },\n      {\n        \"check\": \"watchdog_health\",\n        \"passed\": true\n      },\n      {\n        \"check\": \"critical_incident_absent\",\n        \"passed\": true\n      },\n      {\n        \"check\": \"resource_health\",\n        \"passed\": true,\n        \"value\": \"healthy\"\n      },\n      {\n        \"check\": \"recent_backup\",\n        \"passed\": true,\n        \"age_hours\": 0.0\n      },\n      {\n        \"check\": \"integrity_health\",\n        \"passed\": true\n      }\n    ],\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:17.421150+00:00",
+          "finished_at": "2026-07-18T16:40:17.519481+00:00",
+          "duration_seconds": 0.098
+        },
+        {
+          "id": "execution-eligibility-gate",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"execution_eligibility_evaluated\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T16:40:17.599967+00:00\",\n    \"readiness_decision\": \"blocked\",\n    \"system_ready\": false,\n    \"eligibility\": {\n      \"internal_read_only\": false,\n      \"internal_reversible\": false,\n      \"external_read_only\": false,\n      \"external_write\": false,\n      \"customer_contact\": false,\n      \"publication\": false,\n      \"spending\": false,\n      \"destructive_actions\": false,\n      \"credential_export\": false,\n      \"private_key_export\": false\n    },\n    \"blocked_categories\": [\n      \"internal_read_only\",\n      \"internal_reversible\",\n      \"external_read_only\",\n      \"external_write\",\n      \"customer_contact\",\n      \"publication\",\n      \"spending\",\n      \"destructive_actions\",\n      \"credential_export\",\n      \"private_key_export\"\n    ],\n    \"allowed_categories\": []\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:17.520552+00:00",
+          "finished_at": "2026-07-18T16:40:17.615288+00:00",
+          "duration_seconds": 0.095
+        },
+        {
+          "id": "adaptive-decision-selector",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"adaptive_decision_selection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T16:40:17.695965+00:00\",\n    \"system_ready\": false,\n    \"selected_actions\": [],\n    \"rejected_actions\": [\n      {\n        \"action\": \"run-health\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 95,\n        \"category\": \"internal_read_only\"\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 70,\n        \"category\": \"internal_read_only\"\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 65,\n        \"category\": \"internal_read_only\"\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 60,\n        \"category\": \"internal_reversible\"\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 55,\n        \"category\": \"internal_reversible\"\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 50,\n        \"category\": \"internal_read_only\"\n      }\n    ],\n    \"selected_count\": 0,\n    \"rejected_count\": 6,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:17.616357+00:00",
+          "finished_at": "2026-07-18T16:40:17.711451+00:00",
+          "duration_seconds": 0.095
+        },
+        {
+          "id": "readiness-recovery-coordinator",
+          "success": true,
+          "return_code": 0,
+          "stdout": "cutive_priority_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/incident_escalation_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/incident_escalation_report.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/incident_escalation_state.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/outcome_tracker_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/outcome_tracker_report.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/outcome_tracker_state.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/resource_monitor_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/resource_monitor_report.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/state_backup_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/state_backup_state.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/watchdog_state.json\\\\\\\",\\\\n      \\\\\\\" M run/autonomous_operations.lock\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"source_changes\\\\\\\": [\\\\n      \\\\\\\"M ceo_memory/action_queue_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/autonomous_operations_config.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/business_forecasting_briefing.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/business_forecasting_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/ceo_decision_briefing.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/executive_priority_briefing.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/executive_priority_rankings.json\\\\\\\",\\\\n      \\\\\\\"?? agents/readiness_recovery_coordinator.py\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/readiness_recovery_config.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/recovery2ctl\\\\\\\",\\\\n      \\\\\\\"?? install_phase20_step19.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 11,\\n    \\\"runtime_only_change_count\\\": 34,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T16:40:19.003611+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T16:40:19.102143+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T16:40:17.712536+00:00",
+          "finished_at": "2026-07-18T16:40:19.134071+00:00",
+          "duration_seconds": 1.422
+        }
+      ]
+    }
   }
 ]
