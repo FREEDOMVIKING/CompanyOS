@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 100,
+  "cycle_count": 101,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T18:42:25.526429+00:00",
@@ -1041,9 +1041,25 @@
       "last_duration_seconds": 0.133,
       "run_count": 1,
       "failure_count": 0
+    },
+    "ready-action-execution-handoff": {
+      "last_started_at": "2026-07-18T19:35:51.817074+00:00",
+      "last_started_epoch": 1784403351.8170738,
+      "last_command": [
+        "python",
+        "companyos/actionhandoffctl",
+        "handoff"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T19:35:51.912000+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.095,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T19:34:36.201509+00:00",
-  "last_cycle_job_count": 13,
+  "last_cycle_at": "2026-07-18T19:35:51.913034+00:00",
+  "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
