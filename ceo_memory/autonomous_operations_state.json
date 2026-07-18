@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 38,
+  "cycle_count": 39,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T13:29:54.468540+00:00",
@@ -209,9 +209,25 @@
       "last_duration_seconds": 0.1,
       "run_count": 1,
       "failure_count": 0
+    },
+    "exception-recovery": {
+      "last_started_at": "2026-07-18T13:52:12.002404+00:00",
+      "last_started_epoch": 1784382732.0024037,
+      "last_command": [
+        "python",
+        "companyos/recoveryctl",
+        "recover"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T13:52:12.087297+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.085,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T13:45:57.831313+00:00",
+  "last_cycle_at": "2026-07-18T13:52:12.087961+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }

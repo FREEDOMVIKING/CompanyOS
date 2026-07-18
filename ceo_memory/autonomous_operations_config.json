@@ -145,6 +145,16 @@
         "companyos/learningctl",
         "learn"
       ]
+    },
+    {
+      "id": "exception-recovery",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/recoveryctl",
+        "recover"
+      ]
     }
   ]
 }
