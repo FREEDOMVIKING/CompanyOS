@@ -5561,5 +5561,51 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:55:42.825193+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 24868
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:55:42.951072+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 27436,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:55:43.799588+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 1,
+      "jobs_run": 1,
+      "failures": 0,
+      "results": [
+        {
+          "id": "action-queue-coordinator",
+          "success": true,
+          "return_code": 0,
+          "stdout": "\": \\\"2026-07-18T04:47:26.682009+00:00\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"decision-7e482dfbea21\\\",\\n        \\\"source_id\\\": \\\"oppdisc-76a988d89351\\\",\\n        \\\"source_type\\\": \\\"opportunity\\\",\\n        \\\"title\\\": \\\"Recover receivable: E2E Test Customer\\\",\\n        \\\"category\\\": \\\"cash_recovery\\\",\\n        \\\"description\\\": \\\"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\\\",\\n        \\\"rank\\\": 4,\\n        \\\"priority_score\\\": 81.3,\\n        \\\"priority_band\\\": \\\"high\\\",\\n        \\\"estimated_value\\\": 1250.0,\\n        \\\"status\\\": \\\"pending\\\",\\n        \\\"recommended_action\\\": \\\"owner_review\\\",\\n        \\\"explanation\\\": {\\n          \\\"why_now\\\": [\\n            \\\"The overall priority score is high.\\\",\\n            \\\"It has an estimated value of $1,250.00.\\\",\\n            \\\"Completing it would materially reduce business risk.\\\"\\n          ],\\n          \\\"tradeoffs\\\": [\\n            \\\"Owner approval is required before any external action.\\\"\\n          ],\\n          \\\"recommended_outcome\\\": \\\"owner_review_required\\\"\\n        },\\n        \\\"owner_approval_required\\\": true,\\n        \\\"external_action_authorized\\\": false,\\n        \\\"automatic_execution\\\": false,\\n        \\\"created_at\\\": \\\"2026-07-18T04:47:26.682020+00:00\\\",\\n        \\\"updated_at\\\": \\\"2026-07-18T04:47:26.682022+00:00\\\"\\n      }\\n    ],\\n    \\\"decision_counts\\\": {\\n      \\\"total\\\": 20,\\n      \\\"pending\\\": 20,\\n      \\\"approved\\\": 0,\\n      \\\"deferred\\\": 0,\\n      \\\"rejected\\\": 0\\n    },\\n    \\\"total_open_estimated_value\\\": 79500.0,\\n    \\\"automatic_decision_approval\\\": false,\\n    \\\"automatic_task_execution\\\": false,\\n    \\\"automatic_external_execution\\\": false,\\n    \\\"automatic_spending\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        },\n        \"success\": true\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"priority\": 50,\n        \"reason\": \"Refresh measurable outcomes for the feedback loop.\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"outcome_measurement_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T14:55:43.737440+00:00\\\",\\n    \\\"kpis\\\": {\\n      \\\"operating_health_score\\\": 50.0,\\n      \\\"scheduler_reliability_percent\\\": 96.77,\\n      \\\"successful_jobs\\\": 30,\\n      \\\"failed_jobs\\\": 1,\\n      \\\"internal_action_failures\\\": 0,\\n      \\\"active_goals\\\": 10\\n    },\\n    \\\"goal_outcomes\\\": [\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-b8b177a852cf\\\",\\n        \\\"title\\\": \\\"Shorten critical-priority response time\\\",\\n        \\\"rank\\\": 1,\\n        \\\"progress_score\\\": 81.02,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-0d11ce0b4a40\\\",\\n        \\\"title\\\": \\\"Improve receivable recovery process\\\",\\n        \\\"rank\\\": 2,\\n        \\\"progress_score\\\": 80.52,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-invoice-d7e99861931c\\\",\\n        \\\"title\\\": \\\"Review receivable: Sample Contractor\\\",\\n        \\\"rank\\\": 3,\\n        \\\"progress_score\\\": 79.35,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-e2e-invoice-001\\\",\\n        \\\"title\\\": \\\"Review receivable: E2E Test Customer\\\",\\n        \\\"rank\\\": 4,\\n        \\\"progress_score\\\": 79.35,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-67e210642e21\\\",\\n        \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n        \\\"rank\\\": 5,\\n        \\\"progress_score\\\": 77.89,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improve-operating-health\\\",\\n        \\\"title\\\": \\\"Improve operating health score\\\",\\n        \\\"rank\\\": 6,\\n        \\\"progress_score\\\": 77.56,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"clear-pending-decisions\\\",\\n        \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n        \\\"rank\\\": 7,\\n        \\\"progress_score\\\": 77.4,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"protect-expected-cash-inflow\\\",\\n        \\\"title\\\": \\\"Protect expected cash inflow\\\",\\n        \\\"rank\\\": 8,\\n        \\\"progress_score\\\": 76.43,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-followup-f51333cfa177\\\",\\n        \\\"title\\\": \\\"Review follow-up: Sample Contractor\\\",\\n        \\\"rank\\\": 9,\\n        \\\"progress_score\\\": 75.08,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-oppdisc-20019792c0ed\\\",\\n        \\\"title\\\": \\\"Recover receivable: Sample Contractor\\\",\\n        \\\"rank\\\": 10,\\n        \\\"progress_score\\\": 73.53,\\n        \\\"status\\\": \\\"on_track\\\"\\n      }\\n    ],\\n    \\\"needs_attention\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        },\n        \"success\": true\n      }\n    ],\n    \"failure_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:55:42.899884+00:00",
+          "finished_at": "2026-07-18T14:55:43.782435+00:00",
+          "duration_seconds": 0.883
+        }
+      ]
+    }
   }
 ]
