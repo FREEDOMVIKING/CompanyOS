@@ -535,6 +535,16 @@
         "companyos/planexecutorctl",
         "run"
       ]
+    },
+    {
+      "id": "execution-outcome-learner",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/outcomelearnerctl",
+        "learn"
+      ]
     }
   ]
 }

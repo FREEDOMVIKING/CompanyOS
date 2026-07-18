@@ -654,5 +654,125 @@
         "automatic_destructive_actions": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T16:20:48.682295+00:00",
+    "action": "learn",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "learning_feedback_cycle_complete",
+      "state": {
+        "generated_at": "2026-07-18T16:20:48.681204+00:00",
+        "decision_history_count": 0,
+        "approved_decisions": 0,
+        "rejected_decisions": 0,
+        "deferred_decisions": 0,
+        "completed_improvements": 0,
+        "proposed_improvements": 5,
+        "performance_health_score": 50.0,
+        "active_goal_count": 10,
+        "weights_before": {
+          "urgency": 0.3251,
+          "profitability": 0.0742,
+          "risk_reduction": 0.3003,
+          "execution_ease": 0.2757,
+          "evidence": 0.0247
+        },
+        "weights_after": {
+          "urgency": 0.3262,
+          "profitability": 0.0645,
+          "risk_reduction": 0.3046,
+          "execution_ease": 0.2832,
+          "evidence": 0.0215
+        },
+        "weights_adjusted": true
+      },
+      "insights": {
+        "generated_at": "2026-07-18T16:20:48.681490+00:00",
+        "count": 3,
+        "insights": [
+          {
+            "type": "improvement_backlog",
+            "message": "Improvement backlog is growing faster than completion.",
+            "signal": "favor_execution_ease"
+          },
+          {
+            "type": "operating_health",
+            "message": "Operating health is below 70; prioritize risk reduction and execution reliability.",
+            "signal": "favor_risk_reduction"
+          },
+          {
+            "type": "goal_load",
+            "message": "Too many active goals may dilute execution focus.",
+            "signal": "increase_urgency_weight"
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T16:20:51.075893+00:00",
+    "action": "learn",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "learning_feedback_cycle_complete",
+      "state": {
+        "generated_at": "2026-07-18T16:20:51.074925+00:00",
+        "decision_history_count": 0,
+        "approved_decisions": 0,
+        "rejected_decisions": 0,
+        "deferred_decisions": 0,
+        "completed_improvements": 0,
+        "proposed_improvements": 5,
+        "performance_health_score": 60.0,
+        "active_goal_count": 10,
+        "weights_before": {
+          "urgency": 0.3262,
+          "profitability": 0.0645,
+          "risk_reduction": 0.3046,
+          "execution_ease": 0.2832,
+          "evidence": 0.0215
+        },
+        "weights_after": {
+          "urgency": 0.3271,
+          "profitability": 0.0561,
+          "risk_reduction": 0.3083,
+          "execution_ease": 0.2897,
+          "evidence": 0.0187
+        },
+        "weights_adjusted": true
+      },
+      "insights": {
+        "generated_at": "2026-07-18T16:20:51.075180+00:00",
+        "count": 3,
+        "insights": [
+          {
+            "type": "improvement_backlog",
+            "message": "Improvement backlog is growing faster than completion.",
+            "signal": "favor_execution_ease"
+          },
+          {
+            "type": "operating_health",
+            "message": "Operating health is below 70; prioritize risk reduction and execution reliability.",
+            "signal": "favor_risk_reduction"
+          },
+          {
+            "type": "goal_load",
+            "message": "Too many active goals may dilute execution focus.",
+            "signal": "increase_urgency_weight"
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
   }
 ]
