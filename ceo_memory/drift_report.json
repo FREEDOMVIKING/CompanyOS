@@ -1,9 +1,38 @@
 {
-  "generated_at": "2026-07-18T15:12:15.691896+00:00",
-  "drift_detected": false,
-  "added": [],
+  "generated_at": "2026-07-18T16:15:21.087459+00:00",
+  "drift_detected": true,
+  "added": [
+    "agents/action_dispatcher.py",
+    "agents/adaptive_decision_selector.py",
+    "agents/adaptive_execution_plan.py",
+    "agents/adaptive_plan_executor.py",
+    "agents/adaptive_priority_engine.py",
+    "agents/dispatcher_feedback_loop.py",
+    "agents/execution_eligibility_gate.py",
+    "agents/operations_dashboard.py",
+    "agents/readiness_coordinator.py",
+    "agents/resource_monitor.py",
+    "agents/runtime_aware_preflight.py",
+    "agents/state_backup_engine.py",
+    "agents/watchdog_engine.py",
+    "companyos/adaptivepriorityctl",
+    "companyos/backupctl",
+    "companyos/dashboardctl",
+    "companyos/decisionselectctl",
+    "companyos/dispatchctl",
+    "companyos/dispatcherfeedbackctl",
+    "companyos/eligibilityctl",
+    "companyos/executionplan2ctl",
+    "companyos/planexecutorctl",
+    "companyos/preflight2ctl",
+    "companyos/readiness2ctl",
+    "companyos/resourcectl",
+    "companyos/runtimehygienectl"
+  ],
   "removed": [],
-  "changed": [],
+  "changed": [
+    "companyos/watchdogctl"
+  ],
   "baseline_file_count": 120,
-  "current_file_count": 120
+  "current_file_count": 146
 }

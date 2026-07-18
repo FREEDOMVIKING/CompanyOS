@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 77,
+  "cycle_count": 78,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T15:31:30.800328+00:00",
@@ -595,19 +595,19 @@
       "failure_count": 0
     },
     "dependency-drift-monitor": {
-      "last_started_at": "2026-07-18T15:12:15.542762+00:00",
-      "last_started_epoch": 1784387535.5427592,
+      "last_started_at": "2026-07-18T16:15:20.939331+00:00",
+      "last_started_epoch": 1784391320.9393306,
       "last_command": [
         "python",
         "companyos/driftctl",
         "check"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T15:12:15.712689+00:00",
+      "last_finished_at": "2026-07-18T16:15:21.107862+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.17,
-      "run_count": 1,
+      "last_duration_seconds": 0.169,
+      "run_count": 2,
       "failure_count": 0
     },
     "resource-capacity-monitor": {
@@ -817,9 +817,25 @@
       "last_duration_seconds": 0.081,
       "run_count": 1,
       "failure_count": 0
+    },
+    "adaptive-plan-executor": {
+      "last_started_at": "2026-07-18T16:15:21.109003+00:00",
+      "last_started_epoch": 1784391321.1090024,
+      "last_command": [
+        "python",
+        "companyos/planexecutorctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T16:15:21.435218+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.326,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T16:12:08.226867+00:00",
-  "last_cycle_job_count": 3,
+  "last_cycle_at": "2026-07-18T16:15:21.436327+00:00",
+  "last_cycle_job_count": 2,
   "last_cycle_success": true
 }
