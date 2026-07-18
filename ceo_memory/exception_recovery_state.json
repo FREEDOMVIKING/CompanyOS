@@ -1,11 +1,10 @@
 {
   "schema_version": 1,
   "recovery_epochs": [
-    1784386095.0954046,
-    1784386742.6154864,
     1784387533.6178117,
     1784388201.6337972,
-    1784388830.552121
+    1784388830.552121,
+    1784390897.9733355
   ],
   "issue_history": [
     {
@@ -72,10 +71,28 @@
         }
       ],
       "unresolved": []
+    },
+    {
+      "timestamp": "2026-07-18T16:08:17.973368+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ],
+      "unresolved": []
     }
   ],
-  "recovery_count": 5,
-  "last_recovery_at": "2026-07-18T15:33:50.552135+00:00",
-  "last_issue_count": 1,
+  "recovery_count": 6,
+  "last_recovery_at": "2026-07-18T16:08:17.973347+00:00",
+  "last_issue_count": 2,
   "last_unresolved_count": 0
 }

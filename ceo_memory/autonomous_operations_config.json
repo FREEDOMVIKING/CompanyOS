@@ -289,7 +289,7 @@
     {
       "id": "github-read-connector",
       "enabled": true,
-      "interval_seconds": 7200,
+      "interval_seconds": 28800,
       "command": [
         "python",
         "companyos/githubreadctl",
@@ -504,6 +504,16 @@
         "python",
         "companyos/adaptivepriorityctl",
         "run"
+      ]
+    },
+    {
+      "id": "adaptive-decision-selector",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/decisionselectctl",
+        "select"
       ]
     }
   ]
