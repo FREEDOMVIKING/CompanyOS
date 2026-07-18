@@ -515,6 +515,16 @@
         "companyos/decisionselectctl",
         "select"
       ]
+    },
+    {
+      "id": "adaptive-execution-plan",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/executionplan2ctl",
+        "build"
+      ]
     }
   ]
 }

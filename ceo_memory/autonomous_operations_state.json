@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 76,
+  "cycle_count": 77,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T15:31:30.800328+00:00",
@@ -579,19 +579,19 @@
       "failure_count": 0
     },
     "reliability-scorecard": {
-      "last_started_at": "2026-07-18T15:39:57.966892+00:00",
-      "last_started_epoch": 1784389197.9668918,
+      "last_started_at": "2026-07-18T16:12:07.901359+00:00",
+      "last_started_epoch": 1784391127.9013588,
       "last_command": [
         "python",
         "companyos/reliabilityctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T15:39:58.075550+00:00",
+      "last_finished_at": "2026-07-18T16:12:08.012182+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.109,
-      "run_count": 2,
+      "last_duration_seconds": 0.111,
+      "run_count": 3,
       "failure_count": 0
     },
     "dependency-drift-monitor": {
@@ -739,19 +739,19 @@
       "failure_count": 0
     },
     "autonomous-action-dispatcher": {
-      "last_started_at": "2026-07-18T15:39:58.077324+00:00",
-      "last_started_epoch": 1784389198.077323,
+      "last_started_at": "2026-07-18T16:12:08.013180+00:00",
+      "last_started_epoch": 1784391128.0131795,
       "last_command": [
         "python",
         "companyos/dispatchctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T15:39:59.606721+00:00",
+      "last_finished_at": "2026-07-18T16:12:08.144257+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.529,
-      "run_count": 1,
+      "last_duration_seconds": 0.131,
+      "run_count": 2,
       "failure_count": 0
     },
     "dispatcher-feedback-loop": {
@@ -801,9 +801,25 @@
       "last_duration_seconds": 0.091,
       "run_count": 1,
       "failure_count": 0
+    },
+    "adaptive-execution-plan": {
+      "last_started_at": "2026-07-18T16:12:08.145265+00:00",
+      "last_started_epoch": 1784391128.1452644,
+      "last_command": [
+        "python",
+        "companyos/executionplan2ctl",
+        "build"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T16:12:08.225990+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.081,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T16:08:20.372152+00:00",
-  "last_cycle_job_count": 16,
+  "last_cycle_at": "2026-07-18T16:12:08.226867+00:00",
+  "last_cycle_job_count": 3,
   "last_cycle_success": true
 }
