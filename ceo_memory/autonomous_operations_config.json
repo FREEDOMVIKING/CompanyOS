@@ -795,6 +795,16 @@
         "companyos/multiagentroutectl",
         "route"
       ]
+    },
+    {
+      "id": "specialist-work-result-collector",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/specialistresultctl",
+        "collect"
+      ]
     }
   ]
 }

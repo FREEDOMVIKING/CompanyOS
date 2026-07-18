@@ -1594,5 +1594,66 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T20:23:32.302307+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_152328\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_152328/agents\",\n    \"backups/system_snapshot_20260718_152328/companyos\",\n    \"backups/system_snapshot_20260718_152328/ceo_memory\"\n  ],\n  \"file_count\": 848,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_125600\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:github-read-connector",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "github-read-connector"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "ceo_memory/learning_feedback_state.json\\\",\\n      \\\" M ceo_memory/mission_control_audit.json\\\",\\n      \\\" M ceo_memory/mission_control_brief.json\\\",\\n      \\\" M ceo_memory/mission_control_health.json\\\",\\n      \\\" M ceo_memory/mission_control_state.json\\\",\\n      \\\" M ceo_memory/opportunity_discovery_audit.json\\\",\\n      \\\" M ceo_memory/opportunity_discovery_health.json\\\",\\n      \\\" M ceo_memory/outcome_tracker_health.json\\\",\\n      \\\" M ceo_memory/outcome_tracker_report.json\\\",\\n      \\\" M ceo_memory/outcome_tracker_state.json\\\",\\n      \\\" M ceo_memory/performance_analytics_audit.json\\\",\\n      \\\" M ceo_memory/performance_analytics_health.json\\\",\\n      \\\" M ceo_memory/performance_analytics_report.json\\\",\\n      \\\" M ceo_memory/preflight_gate_health.json\\\",\\n      \\\" M ceo_memory/preflight_gate_report.json\\\",\\n      \\\" M ceo_memory/readiness_health.json\\\",\\n      \\\" M ceo_memory/readiness_report.json\\\",\\n      \\\" M ceo_memory/readiness_state.json\\\",\\n      \\\" M ceo_memory/resource_workload_audit.json\\\",\\n      \\\" M ceo_memory/resource_workload_health.json\\\",\\n      \\\" M ceo_memory/resource_workload_state.json\\\",\\n      \\\" M ceo_memory/strategy_feedback_health.json\\\",\\n      \\\" M ceo_memory/strategy_feedback_report.json\\\",\\n      \\\" M ceo_memory/strategy_feedback_state.json\\\",\\n      \\\" M ceo_memory/system_integrity_audit.json\\\",\\n      \\\" M ceo_memory/system_integrity_health.json\\\",\\n      \\\" M ceo_memory/system_integrity_report.json\\\",\\n      \\\" M run/autonomous_operations.lock\\\"\\n    ],\\n    \\\"source_changes\\\": [\\n      \\\"M ceo_memory/action_feedback_health.json\\\",\\n      \\\" M ceo_memory/autonomous_operations_config.json\\\",\\n      \\\" M ceo_memory/business_forecasting_briefing.json\\\",\\n      \\\" M ceo_memory/business_forecasting_results.json\\\",\\n      \\\" M ceo_memory/ceo_decision_briefing.json\\\",\\n      \\\" M ceo_memory/continuous_improvement_backlog.json\\\",\\n      \\\" M ceo_memory/continuous_improvement_briefing.json\\\",\\n      \\\" M ceo_memory/continuous_improvement_findings.json\\\",\\n      \\\" M ceo_memory/decision_execution_plans.json\\\",\\n      \\\" M ceo_memory/executive_priority_briefing.json\\\",\\n      \\\" M ceo_memory/executive_priority_config.json\\\",\\n      \\\" M ceo_memory/executive_priority_rankings.json\\\",\\n      \\\" M ceo_memory/goal_strategy_goals.json\\\",\\n      \\\" M ceo_memory/goal_strategy_plan.json\\\",\\n      \\\" M ceo_memory/learning_feedback_insights.json\\\",\\n      \\\" M ceo_memory/operations_dashboard.json\\\",\\n      \\\" M ceo_memory/opportunity_discovery_results.json\\\",\\n      \\\" M ceo_memory/performance_analytics_metrics.json\\\",\\n      \\\"?? agents/specialist_work_result_collector.py\\\",\\n      \\\"?? ceo_memory/specialist_result_config.json\\\",\\n      \\\"?? ceo_memory/specialist_work_results.json\\\",\\n      \\\"?? companyos/specialistresultctl\\\",\\n      \\\"?? install_phase21_step19.sh\\\"\\n    ],\\n    \\\"working_tree_effectively_clean\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T20:23:31.525804+00:00\",\n      \"finished_at\": \"2026-07-18T20:23:31.797024+00:00\",\n      \"duration_seconds\": 0.271\n    },\n    {\n      \"id\": \"specialist-work-result-collector\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"specialist_work_result_collection_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T20:23:31.915751+00:00\\\",\\n    \\\"prepared_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"prepared\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T20:23:31.798086+00:00\",\n      \"finished_at\": \"2026-07-18T20:23:31.932531+00:00\",\n      \"duration_seconds\": 0.135\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T20:23:32.256088+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 440\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
   }
 ]

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "recovery_epochs": [
-    1784402220.3757515,
     1784403134.056987,
     1784404109.1181002,
     1784404759.354666,
-    1784405392.5358233
+    1784405392.5358233,
+    1784406212.279855
   ],
   "issue_history": [
     {
@@ -282,10 +282,22 @@
         }
       ],
       "unresolved": []
+    },
+    {
+      "timestamp": "2026-07-18T20:23:32.279973+00:00",
+      "issues": [
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ],
+      "unresolved": []
     }
   ],
-  "recovery_count": 22,
-  "last_recovery_at": "2026-07-18T20:09:52.535882+00:00",
+  "recovery_count": 23,
+  "last_recovery_at": "2026-07-18T20:23:32.279887+00:00",
   "last_issue_count": 1,
   "last_unresolved_count": 0
 }
