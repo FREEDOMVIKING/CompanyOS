@@ -785,6 +785,16 @@
         "companyos/specialistdelegatectl",
         "plan"
       ]
+    },
+    {
+      "id": "controlled-multiagent-router",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/multiagentroutectl",
+        "route"
+      ]
     }
   ]
 }
