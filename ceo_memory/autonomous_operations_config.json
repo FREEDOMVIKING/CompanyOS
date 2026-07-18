@@ -385,6 +385,16 @@
         "companyos/reliabilityctl",
         "run"
       ]
+    },
+    {
+      "id": "dependency-drift-monitor",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/driftctl",
+        "check"
+      ]
     }
   ]
 }

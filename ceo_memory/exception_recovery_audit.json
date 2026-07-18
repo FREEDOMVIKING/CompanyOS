@@ -330,5 +330,66 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T15:12:13.618838+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_101211\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_101211/agents\",\n    \"backups/system_snapshot_20260718_101211/companyos\",\n    \"backups/system_snapshot_20260718_101211/ceo_memory\"\n  ],\n  \"file_count\": 502,\n  \"removed_old_backups\": [],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:github-read-connector",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "github-read-connector"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "    \\\\\\\"ease\\\\\\\": 72,\\\\n          \\\\\\\"evidence\\\\\\\": 90,\\\\n          \\\\\\\"score\\\\\\\": 80.9,\\\\n          \\\\\\\"priority_band\\\\\\\": \\\\\\\"high\\\\\\\",\\\\n          \\\\\\\"source\\\\\\\": \\\\\\\"product_execution_tasks\\\\\\\",\\\\n          \\\\\\\"owner_approval_required\\\\\\\": true,\\\\n          \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n          \\\\\\\"automatic_execution\\\\\\\": false,\\\\n          \\\\\\\"external_action_authorized\\\\\\\": false,\\\\n          \\\\\\\"created_at\\\\\\\": \\\\\\\"2026-07-18T15:12:12.986647+00:00\\\\\\\",\\\\n          \\\\\\\"rank\\\\\\\": 4\\\\n        },\\\\n        {\\\\n          \\\\\\\"id\\\\\\\": \\\\\\\"improvement-3dd11977302c\\\\\\\",\\\\n          \\\\\\\"title\\\\\\\": \\\\\\\"Establish internal review automations\\\\\\\",\\\\n          \\\\\\\"category\\\\\\\": \\\\\\\"automation\\\\\\\",\\\\n          \\\\\\\"description\\\\\\\": \\\\\\\"No automation records were found.\\\\\\\",\\\\n          \\\\\\\"recommendation\\\\\\\": \\\\\\\"Create internal-only review schedules for priorities, decisions, and operational health.\\\\\\\",\\\\n          \\\\\\\"impact\\\\\\\": 68,\\\\n          \\\\\\\"urgency\\\\\\\": 58,\\\\n          \\\\\\\"ease\\\\\\\": 75,\\\\n          \\\\\\\"evidence\\\\\\\": 70,\\\\n          \\\\\\\"score\\\\\\\": 66.45,\\\\n          \\\\\\\"priority_band\\\\\\\": \\\\\\\"medium\\\\\\\",\\\\n          \\\\\\\"source\\\\\\\": \\\\\\\"automation_registry\\\\\\\",\\\\n          \\\\\\\"owner_approval_required\\\\\\\": true,\\\\n          \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n          \\\\\\\"automatic_execution\\\\\\\": false,\\\\n          \\\\\\\"external_action_authorized\\\\\\\": false,\\\\n          \\\\\\\"created_at\\\\\\\": \\\\\\\"2026-07-18T15:12:12.986689+00:00\\\\\\\",\\\\n          \\\\\\\"rank\\\\\\\": 5\\\\n        }\\\\n      ]\\\\n    },\\\\n    \\\\\\\"attention_items\\\\\\\": [\\\\n      \\\\\\\"20 CEO decision(s) are pending review.\\\\\\\",\\\\n      \\\\\\\"2 critical priority item(s) require attention.\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"recommended_next_actions\\\\\\\": [\\\\n      \\\\\\\"Review receivable: Sample Contractor\\\\\\\",\\\\n      \\\\\\\"Review receivable: E2E Test Customer\\\\\\\",\\\\n      \\\\\\\"Recover receivable: Sample Contractor\\\\\\\",\\\\n      \\\\\\\"Recover receivable: E2E Test Customer\\\\\\\",\\\\n      \\\\\\\"Review follow-up: Sample Contractor\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"automatic_customer_contact\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    }\\n  ]\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T15:12:12.309530+00:00\",\n      \"finished_at\": \"2026-07-18T15:12:13.297827+00:00\",\n      \"duration_seconds\": 0.988\n    },\n    {\n      \"id\": \"autonomous-health-supervisor\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"health_supervision_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T15:12:13.369957+00:00\\\",\\n    \\\"issues_detected\\\": 0,\\n    \\\"recoveries_attempted\\\": 0,\\n    \\\"remaining_issues\\\": 0,\\n    \\\"issues\\\": [],\\n    \\\"recoveries\\\": [],\\n    \\\"remaining\\\": [],\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  },\\n  \\\"state\\\": {\\n    \\\"schema_version\\\": 1,\\n    \\\"cycle_count\\\": 14,\\n    \\\"last_cycle_at\\\": \\\"2026-07-18T15:12:13.370206+00:00\\\",\\n    \\\"last_issue_count\\\": 0,\\n    \\\"last_remaining_issue_count\\\": 0,\\n    \\\"last_recovery_count\\\": 0\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T15:12:13.298790+00:00\",\n      \"finished_at\": \"2026-07-18T15:12:13.384063+00:00\",\n      \"duration_seconds\": 0.085\n    },\n    {\n      \"id\": \"dependency-drift-monitor\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"drift_check_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T15:12:13.460025+00:00\\\",\\n    \\\"drift_detected\\\": false,\\n    \\\"added\\\": [],\\n    \\\"removed\\\": [],\\n    \\\"changed\\\": [],\\n    \\\"baseline_file_count\\\": 120,\\n    \\\"current_file_count\\\": 120\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T15:12:13.385152+00:00\",\n      \"finished_at\": \"2026-07-18T15:12:13.472717+00:00\",\n      \"duration_seconds\": 0.088\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:12:13.605072+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 262\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
   }
 ]
