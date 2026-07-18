@@ -1,0 +1,66 @@
+[
+  {
+    "timestamp": "2026-07-18T01:07:11.140847+00:00",
+    "action": "pending",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "pending_proposal_list",
+      "count": 1,
+      "proposals": [
+        {
+          "id": "proposal-27d594e92623",
+          "title": "Local Contractor Bid Organizer",
+          "priority_score": 81.57,
+          "recommendation": "recommended",
+          "risk_level": "moderate",
+          "go_hold_recommendation": "go"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:07:11.228325+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "proposal_approval_status",
+      "enabled": true,
+      "owner_approval_required": true,
+      "automatic_approval": false,
+      "automatic_factory_handoff": false,
+      "automatic_project_creation": false,
+      "automatic_spending": false,
+      "automatic_publication": false,
+      "proposal_statistics": {
+        "total": 1,
+        "pending_owner_approval": 1,
+        "approved": 0,
+        "rejected": 0,
+        "handed_to_factory": 0
+      },
+      "handoff_statistics": {
+        "total": 0,
+        "queued": 0,
+        "completed": 0,
+        "blocked": 0,
+        "failed": 0
+      },
+      "health": {}
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:07:11.377590+00:00",
+    "action": "handoff",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "factory_handoff_blocked",
+      "proposal_id": "proposal-27d594e92623",
+      "reason": "Proposal must be approved before factory handoff",
+      "current_status": "pending_owner_approval",
+      "next_command": "python companyos/approvalctl approve proposal-27d594e92623"
+    }
+  }
+]
