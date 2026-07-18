@@ -135,6 +135,16 @@
         "companyos/goalctl",
         "generate"
       ]
+    },
+    {
+      "id": "learning-feedback",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/learningctl",
+        "learn"
+      ]
     }
   ]
 }
