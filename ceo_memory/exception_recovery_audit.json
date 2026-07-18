@@ -269,5 +269,66 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:59:02.630481+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_095901\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_095901/agents\",\n    \"backups/system_snapshot_20260718_095901/companyos\",\n    \"backups/system_snapshot_20260718_095901/ceo_memory\"\n  ],\n  \"file_count\": 471,\n  \"removed_old_backups\": [],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:github-read-connector",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "github-read-connector"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\\\\\\\\\\\"improvement-improvement-67e210642e21\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Clear pending CEO decisions\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"rank\\\\\\\\\\\\\\\": 5,\\\\\\\\n        \\\\\\\\\\\\\\\"progress_score\\\\\\\\\\\\\\\": 77.94,\\\\\\\\n        \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"on_track\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"improve-operating-health\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Improve operating health score\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"rank\\\\\\\\\\\\\\\": 6,\\\\\\\\n        \\\\\\\\\\\\\\\"progress_score\\\\\\\\\\\\\\\": 77.61,\\\\\\\\n        \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"on_track\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"clear-pending-decisions\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Clear pending CEO decisions\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"rank\\\\\\\\\\\\\\\": 7,\\\\\\\\n        \\\\\\\\\\\\\\\"progress_score\\\\\\\\\\\\\\\": 77.45,\\\\\\\\n        \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"on_track\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"protect-expected-cash-inflow\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Protect expected cash inflow\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"rank\\\\\\\\\\\\\\\": 8,\\\\\\\\n        \\\\\\\\\\\\\\\"progress_score\\\\\\\\\\\\\\\": 76.48,\\\\\\\\n        \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"on_track\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"priority-followup-f51333cfa177\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Review follow-up: Sample Contractor\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"rank\\\\\\\\\\\\\\\": 9,\\\\\\\\n        \\\\\\\\\\\\\\\"progress_score\\\\\\\\\\\\\\\": 75.13,\\\\\\\\n        \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"on_track\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"priority-oppdisc-20019792c0ed\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"title\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Recover receivable: Sample Contractor\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"rank\\\\\\\\\\\\\\\": 10,\\\\\\\\n        \\\\\\\\\\\\\\\"progress_score\\\\\\\\\\\\\\\": 73.58,\\\\\\\\n        \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"on_track\\\\\\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ],\\\\\\\\n    \\\\\\\\\\\\\\\"needs_attention\\\\\\\\\\\\\\\": []\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        },\\\\n        \\\\\\\"success\\\\\\\": true\\\\n      }\\\\n    ],\\\\n    \\\\\\\"failure_count\\\\\\\": 0,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_customer_contact\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        },\\n        \\\"success\\\": true\\n      },\\n      {\\n        \\\"component\\\": \\\"feedback\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"action_feedback_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-18T14:59:02.428494+00:00\\\\\\\",\\\\n    \\\\\\\"actions_evaluated\\\\\\\": 6,\\\\n    \\\\\\\"failed_actions\\\\\\\": 0,\\\\n    \\\\\\\"failure_rate\\\\\\\": 0.0,\\\\n    \\\\\\\"learning_triggered\\\\\\\": false,\\\\n    \\\\\\\"learning_result\\\\\\\": null,\\\\n    \\\\\\\"recommendations\\\\\\\": [\\\\n      \\\\\\\"Current internal action execution is within the configured feedback threshold.\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        },\\n        \\\"success\\\": true\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"cycle_success\\\": true,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-18T14:59:01.489976+00:00\",\n      \"finished_at\": \"2026-07-18T14:59:02.467054+00:00\",\n      \"duration_seconds\": 0.977\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T14:59:02.594099+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 247\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
   }
 ]

@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-07-18T14:59:03.604789+00:00",
+  "components": [
+    {
+      "component": "preflight",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"preflight_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T14:59:02.877366+00:00\",\n    \"decision\": \"blocked\",\n    \"risk_score\": 30,\n    \"blockers\": [\n      \"working_tree_has_changes\"\n    ],\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      "success": true
+    },
+    {
+      "component": "action_queue",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "   \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"outcome_measurement_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T14:59:03.465122+00:00\\\",\\n    \\\"kpis\\\": {\\n      \\\"operating_health_score\\\": 50.0,\\n      \\\"scheduler_reliability_percent\\\": 96.97,\\n      \\\"successful_jobs\\\": 32,\\n      \\\"failed_jobs\\\": 1,\\n      \\\"internal_action_failures\\\": 0,\\n      \\\"active_goals\\\": 10\\n    },\\n    \\\"goal_outcomes\\\": [\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-b8b177a852cf\\\",\\n        \\\"title\\\": \\\"Shorten critical-priority response time\\\",\\n        \\\"rank\\\": 1,\\n        \\\"progress_score\\\": 81.07,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-0d11ce0b4a40\\\",\\n        \\\"title\\\": \\\"Improve receivable recovery process\\\",\\n        \\\"rank\\\": 2,\\n        \\\"progress_score\\\": 80.57,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-invoice-d7e99861931c\\\",\\n        \\\"title\\\": \\\"Review receivable: Sample Contractor\\\",\\n        \\\"rank\\\": 3,\\n        \\\"progress_score\\\": 79.4,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-e2e-invoice-001\\\",\\n        \\\"title\\\": \\\"Review receivable: E2E Test Customer\\\",\\n        \\\"rank\\\": 4,\\n        \\\"progress_score\\\": 79.4,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improvement-improvement-67e210642e21\\\",\\n        \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n        \\\"rank\\\": 5,\\n        \\\"progress_score\\\": 77.94,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"improve-operating-health\\\",\\n        \\\"title\\\": \\\"Improve operating health score\\\",\\n        \\\"rank\\\": 6,\\n        \\\"progress_score\\\": 77.61,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"clear-pending-decisions\\\",\\n        \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n        \\\"rank\\\": 7,\\n        \\\"progress_score\\\": 77.45,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"protect-expected-cash-inflow\\\",\\n        \\\"title\\\": \\\"Protect expected cash inflow\\\",\\n        \\\"rank\\\": 8,\\n        \\\"progress_score\\\": 76.48,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-followup-f51333cfa177\\\",\\n        \\\"title\\\": \\\"Review follow-up: Sample Contractor\\\",\\n        \\\"rank\\\": 9,\\n        \\\"progress_score\\\": 75.13,\\n        \\\"status\\\": \\\"on_track\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"priority-oppdisc-20019792c0ed\\\",\\n        \\\"title\\\": \\\"Recover receivable: Sample Contractor\\\",\\n        \\\"rank\\\": 10,\\n        \\\"progress_score\\\": 73.58,\\n        \\\"status\\\": \\\"on_track\\\"\\n      }\\n    ],\\n    \\\"needs_attention\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        },\n        \"success\": true\n      }\n    ],\n    \"failure_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      "success": true
+    },
+    {
+      "component": "feedback",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"action_feedback_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T14:59:03.563382+00:00\",\n    \"actions_evaluated\": 6,\n    \"failed_actions\": 0,\n    \"failure_rate\": 0.0,\n    \"learning_triggered\": false,\n    \"learning_result\": null,\n    \"recommendations\": [\n      \"Current internal action execution is within the configured feedback threshold.\"\n    ],\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      "success": true
+    }
+  ],
+  "failure_count": 0,
+  "cycle_success": true,
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

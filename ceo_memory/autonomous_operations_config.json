@@ -345,6 +345,16 @@
         "companyos/actionfeedbackctl",
         "learn"
       ]
+    },
+    {
+      "id": "unified-control-cycle",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/controlcyclectl",
+        "run"
+      ]
     }
   ]
 }
