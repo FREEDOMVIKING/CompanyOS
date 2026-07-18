@@ -605,6 +605,16 @@
         "companyos/recovery2ctl",
         "run"
       ]
+    },
+    {
+      "id": "recovery-aware-closed-loop",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/loopctl",
+        "run"
+      ]
     }
   ]
 }
