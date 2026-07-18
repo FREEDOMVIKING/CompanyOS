@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 116,
+  "cycle_count": 117,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T19:48:23.510562+00:00",
@@ -1297,9 +1297,25 @@
       "last_duration_seconds": 0.091,
       "run_count": 1,
       "failure_count": 0
+    },
+    "ceo-decision-governance": {
+      "last_started_at": "2026-07-18T20:31:27.830861+00:00",
+      "last_started_epoch": 1784406687.8308613,
+      "last_command": [
+        "python",
+        "companyos/ceodecisiongovernctl",
+        "govern"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:31:27.919087+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.088,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T20:29:40.399913+00:00",
+  "last_cycle_at": "2026-07-18T20:31:27.919873+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
