@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 111,
+  "cycle_count": 112,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T19:48:23.510562+00:00",
@@ -1217,9 +1217,25 @@
       "last_duration_seconds": 0.082,
       "run_count": 1,
       "failure_count": 0
+    },
+    "specialist-delegation-planner": {
+      "last_started_at": "2026-07-18T20:13:59.090368+00:00",
+      "last_started_epoch": 1784405639.0903678,
+      "last_command": [
+        "python",
+        "companyos/specialistdelegatectl",
+        "plan"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:13:59.167928+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.078,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T20:11:40.165156+00:00",
+  "last_cycle_at": "2026-07-18T20:13:59.168780+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }

@@ -775,6 +775,16 @@
         "companyos/resourceallocatectl",
         "allocate"
       ]
+    },
+    {
+      "id": "specialist-delegation-planner",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/specialistdelegatectl",
+        "plan"
+      ]
     }
   ]
 }
