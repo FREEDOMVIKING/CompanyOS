@@ -6720,5 +6720,186 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T15:33:48.771152+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 7071
+    }
+  },
+  {
+    "timestamp": "2026-07-18T15:33:48.895800+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 10119,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T15:33:50.345902+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 5,
+      "jobs_run": 5,
+      "failures": 0,
+      "results": [
+        {
+          "id": "autonomous-health-supervisor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"health_supervision_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:33:49.810289+00:00\",\n    \"issues_detected\": 0,\n    \"recoveries_attempted\": 0,\n    \"remaining_issues\": 0,\n    \"issues\": [],\n    \"recoveries\": [],\n    \"remaining\": [],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"state\": {\n    \"schema_version\": 1,\n    \"cycle_count\": 19,\n    \"last_cycle_at\": \"2026-07-18T15:33:49.810696+00:00\",\n    \"last_issue_count\": 0,\n    \"last_remaining_issue_count\": 0,\n    \"last_recovery_count\": 0\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:49.693948+00:00",
+          "finished_at": "2026-07-18T15:33:49.827993+00:00",
+          "duration_seconds": 0.134
+        },
+        {
+          "id": "permission-broker",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"permission_matrix_built\",\n  \"state\": {\n    \"generated_at\": \"2026-07-18T15:33:49.929373+00:00\",\n    \"default_deny\": true,\n    \"permissions\": [\n      {\n        \"connector_id\": \"github\",\n        \"enabled\": true,\n        \"automatic_read_allowed\": true,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": true,\n        \"write_requires_owner_approval\": true\n      },\n      {\n        \"connector_id\": \"email\",\n        \"enabled\": false,\n        \"automatic_read_allowed\": false,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"calendar\",\n        \"enabled\": false,\n        \"automatic_read_allowed\": false,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"crm\",\n        \"enabled\": true,\n        \"automatic_read_allowed\": true,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"accounting\",\n        \"enabled\": true,\n        \"automatic_read_allowed\": true,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"market-data\",\n        \"enabled\": false,\n        \"automatic_read_allowed\": false,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:49.829919+00:00",
+          "finished_at": "2026-07-18T15:33:49.950689+00:00",
+          "duration_seconds": 0.121
+        },
+        {
+          "id": "connector-runtime",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"connector_runtime_built\",\n  \"state\": {\n    \"generated_at\": \"2026-07-18T15:33:50.049999+00:00\",\n    \"adapters\": [\n      {\n        \"connector_id\": \"github\",\n        \"enabled\": true,\n        \"runtime_ready\": true,\n        \"read_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"email\",\n        \"enabled\": false,\n        \"runtime_ready\": false,\n        \"read_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"calendar\",\n        \"enabled\": false,\n        \"runtime_ready\": false,\n        \"read_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"crm\",\n        \"enabled\": true,\n        \"runtime_ready\": true,\n        \"read_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"accounting\",\n        \"enabled\": true,\n        \"runtime_ready\": true,\n        \"read_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"market-data\",\n        \"enabled\": false,\n        \"runtime_ready\": false,\n        \"read_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:49.951894+00:00",
+          "finished_at": "2026-07-18T15:33:50.079255+00:00",
+          "duration_seconds": 0.127
+        },
+        {
+          "id": "incident-escalation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"incident_scan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:33:50.181392+00:00\",\n    \"incident_count\": 0,\n    \"incidents\": [],\n    \"critical_incident\": false,\n    \"autonomy_halted\": false,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:50.080462+00:00",
+          "finished_at": "2026-07-18T15:33:50.210011+00:00",
+          "duration_seconds": 0.13
+        },
+        {
+          "id": "execution-eligibility-gate",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"execution_eligibility_evaluated\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:33:50.313087+00:00\",\n    \"readiness_decision\": \"ready\",\n    \"system_ready\": true,\n    \"eligibility\": {\n      \"internal_read_only\": true,\n      \"internal_reversible\": true,\n      \"external_read_only\": true,\n      \"external_write\": false,\n      \"customer_contact\": false,\n      \"publication\": false,\n      \"spending\": false,\n      \"destructive_actions\": false,\n      \"credential_export\": false,\n      \"private_key_export\": false\n    },\n    \"blocked_categories\": [\n      \"external_write\",\n      \"customer_contact\",\n      \"publication\",\n      \"spending\",\n      \"destructive_actions\",\n      \"credential_export\",\n      \"private_key_export\"\n    ],\n    \"allowed_categories\": [\n      \"internal_read_only\",\n      \"internal_reversible\",\n      \"external_read_only\"\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:50.211202+00:00",
+          "finished_at": "2026-07-18T15:33:50.335641+00:00",
+          "duration_seconds": 0.124
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T15:33:51.204576+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 8,
+      "jobs_run": 8,
+      "failures": 0,
+      "results": [
+        {
+          "id": "priority-ranking",
+          "success": true,
+          "return_code": 0,
+          "stdout": "dline\": \"15 priorities ranked; 5 selected for executive focus.\",\n    \"top_priorities\": [\n      {\n        \"id\": \"priority-718da5acb5e2\",\n        \"source_type\": \"invoice\",\n        \"source_id\": \"invoice-d7e99861931c\",\n        \"title\": \"Review receivable: Sample Contractor\",\n        \"category\": \"finance\",\n        \"description\": \"Invoice has $11,500.00 outstanding.\",\n        \"urgency\": 95,\n        \"profitability\": 95,\n        \"risk_reduction\": 90,\n        \"execution_ease\": 65,\n        \"evidence\": 95,\n        \"estimated_value\": 11500.0,\n        \"score\": 85.51,\n        \"priority_band\": \"critical\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T15:33:48.943239+00:00\",\n        \"rank\": 1\n      },\n      {\n        \"id\": \"priority-7abbb58649fe\",\n        \"source_type\": \"invoice\",\n        \"source_id\": \"e2e-invoice-001\",\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"category\": \"finance\",\n        \"description\": \"Invoice has $1,250.00 outstanding.\",\n        \"urgency\": 95,\n        \"profitability\": 95,\n        \"risk_reduction\": 90,\n        \"execution_ease\": 65,\n        \"evidence\": 95,\n        \"estimated_value\": 1250.0,\n        \"score\": 85.51,\n        \"priority_band\": \"critical\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T15:33:48.943249+00:00\",\n        \"rank\": 2\n      },\n      {\n        \"id\": \"priority-74321d3f8847\",\n        \"source_type\": \"opportunity\",\n        \"source_id\": \"oppdisc-48379bc52ed6\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"urgency\": 70,\n        \"profitability\": 90.0,\n        \"risk_reduction\": 85,\n        \"execution_ease\": 68.0,\n        \"evidence\": 95.0,\n        \"estimated_value\": 11500.0,\n        \"score\": 76.31,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T15:33:48.943036+00:00\",\n        \"rank\": 3\n      },\n      {\n        \"id\": \"priority-08e2b669d867\",\n        \"source_type\": \"opportunity\",\n        \"source_id\": \"oppdisc-ab4d95db8580\",\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\",\n        \"urgency\": 70,\n        \"profitability\": 90.0,\n        \"risk_reduction\": 85,\n        \"execution_ease\": 68.0,\n        \"evidence\": 95.0,\n        \"estimated_value\": 1250.0,\n        \"score\": 76.31,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T15:33:48.943057+00:00\",\n        \"rank\": 4\n      },\n      {\n        \"id\": \"priority-81fac6336316\",\n        \"source_type\": \"followup\",\n        \"source_id\": \"followup-f51333cfa177\",\n        \"title\": \"Review follow-up: Sample Contractor\",\n        \"category\": \"sales\",\n        \"description\": \"Review lead and prepare owner-approved follow-up.\",\n        \"urgency\": 82,\n        \"profitability\": 65,\n        \"risk_reduction\": 70,\n        \"execution_ease\": 78,\n        \"evidence\": 85,\n        \"estimated_value\": 0.0,\n        \"score\": 76.02,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T15:33:48.943223+00:00\",\n        \"rank\": 5\n      }\n    ],\n    \"critical_count\": 2,\n    \"high_count\": 6,\n    \"medium_count\": 7,\n    \"total_estimated_value\": 55500.0,\n    \"recommended_focus_order\": [\n      {\n        \"rank\": 1,\n        \"title\": \"Review receivable: Sample Contractor\",\n        \"category\": \"finance\",\n        \"score\": 85.51,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 2,\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"category\": \"finance\",\n        \"score\": 85.51,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 3,\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"score\": 76.31,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 4,\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"score\": 76.31,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 5,\n        \"title\": \"Review follow-up: Sample Contractor\",\n        \"category\": \"sales\",\n        \"score\": 76.02,\n        \"owner_approval_required\": true\n      }\n    ],\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:48.842168+00:00",
+          "finished_at": "2026-07-18T15:33:48.977876+00:00",
+          "duration_seconds": 0.136
+        },
+        {
+          "id": "decision-preparation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "nvoice-001\",\n        \"source_type\": \"invoice\",\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"category\": \"finance\",\n        \"description\": \"Invoice has $1,250.00 outstanding.\",\n        \"rank\": 2,\n        \"priority_score\": 91.0,\n        \"priority_band\": \"critical\",\n        \"estimated_value\": 1250.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is critical.\",\n            \"It has an estimated value of $1,250.00.\",\n            \"Delay may reduce revenue or increase operating risk.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:47:26.681993+00:00\",\n        \"updated_at\": \"2026-07-18T04:47:26.681995+00:00\"\n      },\n      {\n        \"id\": \"decision-e89592185f4a\",\n        \"source_id\": \"oppdisc-60e0812a7dc5\",\n        \"source_type\": \"opportunity\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"rank\": 2,\n        \"priority_score\": 81.3,\n        \"priority_band\": \"high\",\n        \"estimated_value\": 11500.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is high.\",\n            \"It has an estimated value of $11,500.00.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:01:44.490248+00:00\",\n        \"updated_at\": \"2026-07-18T04:01:44.490250+00:00\"\n      },\n      {\n        \"id\": \"decision-95bcc2a7d742\",\n        \"source_id\": \"oppdisc-aa15a45c9641\",\n        \"source_type\": \"opportunity\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"rank\": 3,\n        \"priority_score\": 81.3,\n        \"priority_band\": \"high\",\n        \"estimated_value\": 11500.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is high.\",\n            \"It has an estimated value of $11,500.00.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:47:26.682007+00:00\",\n        \"updated_at\": \"2026-07-18T04:47:26.682009+00:00\"\n      },\n      {\n        \"id\": \"decision-7e482dfbea21\",\n        \"source_id\": \"oppdisc-76a988d89351\",\n        \"source_type\": \"opportunity\",\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\",\n        \"rank\": 4,\n        \"priority_score\": 81.3,\n        \"priority_band\": \"high\",\n        \"estimated_value\": 1250.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is high.\",\n            \"It has an estimated value of $1,250.00.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:47:26.682020+00:00\",\n        \"updated_at\": \"2026-07-18T04:47:26.682022+00:00\"\n      }\n    ],\n    \"decision_counts\": {\n      \"total\": 20,\n      \"pending\": 20,\n      \"approved\": 0,\n      \"deferred\": 0,\n      \"rejected\": 0\n    },\n    \"total_open_estimated_value\": 79500.0,\n    \"automatic_decision_approval\": false,\n    \"automatic_task_execution\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:48.978974+00:00",
+          "finished_at": "2026-07-18T15:33:49.105595+00:00",
+          "duration_seconds": 0.127
+        },
+        {
+          "id": "exception-recovery",
+          "success": true,
+          "return_code": 0,
+          "stdout": "_seconds\\\": 0.13\\n    },\\n    {\\n      \\\"id\\\": \\\"execution-eligibility-gate\\\",\\n      \\\"success\\\": true,\\n      \\\"return_code\\\": 0,\\n      \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_eligibility_evaluated\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-18T15:33:50.313087+00:00\\\\\\\",\\\\n    \\\\\\\"readiness_decision\\\\\\\": \\\\\\\"ready\\\\\\\",\\\\n    \\\\\\\"system_ready\\\\\\\": true,\\\\n    \\\\\\\"eligibility\\\\\\\": {\\\\n      \\\\\\\"internal_read_only\\\\\\\": true,\\\\n      \\\\\\\"internal_reversible\\\\\\\": true,\\\\n      \\\\\\\"external_read_only\\\\\\\": true,\\\\n      \\\\\\\"external_write\\\\\\\": false,\\\\n      \\\\\\\"customer_contact\\\\\\\": false,\\\\n      \\\\\\\"publication\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\"\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"started_at\\\": \\\"2026-07-18T15:33:50.211202+00:00\\\",\\n      \\\"finished_at\\\": \\\"2026-07-18T15:33:50.335641+00:00\\\",\\n      \\\"duration_seconds\\\": 0.124\\n    }\\n  ]\\n}\\n\",\n            \"stderr\": \"\"\n          }\n        }\n      ]\n    },\n    {\n      \"type\": \"post-recovery-integrity-check\",\n      \"success\": true,\n      \"result\": {\n        \"success\": true,\n        \"return_code\": 0,\n        \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"system_integrity_check_passed\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T15:33:50.524071+00:00\\\",\\n    \\\"summary\\\": {\\n      \\\"errors\\\": 0,\\n      \\\"warnings\\\": 0,\\n      \\\"checked_commands\\\": 15,\\n      \\\"checked_json_files\\\": 284\\n    },\\n    \\\"errors\\\": [],\\n    \\\"warnings\\\": [],\\n    \\\"files\\\": [\\n      {\\n        \\\"path\\\": \\\"companyos/githubctl\\\",\\n        \\\"size\\\": 453,\\n        \\\"sha256\\\": \\\"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/crmctl\\\",\\n        \\\"size\\\": 273,\\n        \\\"sha256\\\": \\\"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/quotectl\\\",\\n        \\\"size\\\": 286,\\n        \\\"sha256\\\": \\\"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/salesctl\\\",\\n        \\\"size\\\": 284,\\n        \\\"sha256\\\": \\\"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/projectctl\\\",\\n        \\\"size\\\": 277,\\n        \\\"sha256\\\": \\\"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/automationctl\\\",\\n        \\\"size\\\": 288,\\n        \\\"sha256\\\": \\\"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/accountingctl\\\",\\n        \\\"size\\\": 280,\\n        \\\"sha256\\\": \\\"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/executivectl\\\",\\n        \\\"size\\\": 284,\\n        \\\"sha256\\\": \\\"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/opportunitydiscoveryctl\\\",\\n        \\\"size\\\": 290,\\n        \\\"sha256\\\": \\\"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/priorityctl\\\",\\n        \\\"size\\\": 287,\\n        \\\"sha256\\\": \\\"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/decisionctl\\\",\\n        \\\"size\\\": 281,\\n        \\\"sha256\\\": \\\"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/executionplanctl\\\",\\n        \\\"size\\\": 288,\\n        \\\"sha256\\\": \\\"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/improvementctl\\\",\\n        \\\"size\\\": 291,\\n        \\\"sha256\\\": \\\"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/performancectl\\\",\\n        \\\"size\\\": 290,\\n        \\\"sha256\\\": \\\"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\\\"\\n      },\\n      {\\n        \\\"path\\\": \\\"companyos/forecastctl\\\",\\n        \\\"size\\\": 289,\\n        \\\"sha256\\\": \\\"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\\\"\\n      }\\n    ],\\n    \\\"automatic_repairs\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_external_execution\\\": false,\\n    \\\"automatic_spending\\\": false\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      }\n    }\n  ]\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:49.106691+00:00",
+          "finished_at": "2026-07-18T15:33:50.585623+00:00",
+          "duration_seconds": 1.479
+        },
+        {
+          "id": "autonomous-health-supervisor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"health_supervision_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:33:50.691189+00:00\",\n    \"issues_detected\": 0,\n    \"recoveries_attempted\": 0,\n    \"remaining_issues\": 0,\n    \"issues\": [],\n    \"recoveries\": [],\n    \"remaining\": [],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"state\": {\n    \"schema_version\": 1,\n    \"cycle_count\": 20,\n    \"last_cycle_at\": \"2026-07-18T15:33:50.691614+00:00\",\n    \"last_issue_count\": 0,\n    \"last_remaining_issue_count\": 0,\n    \"last_recovery_count\": 0\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:50.586741+00:00",
+          "finished_at": "2026-07-18T15:33:50.712822+00:00",
+          "duration_seconds": 0.126
+        },
+        {
+          "id": "permission-broker",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"permission_matrix_built\",\n  \"state\": {\n    \"generated_at\": \"2026-07-18T15:33:50.807887+00:00\",\n    \"default_deny\": true,\n    \"permissions\": [\n      {\n        \"connector_id\": \"github\",\n        \"enabled\": true,\n        \"automatic_read_allowed\": true,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": true,\n        \"write_requires_owner_approval\": true\n      },\n      {\n        \"connector_id\": \"email\",\n        \"enabled\": false,\n        \"automatic_read_allowed\": false,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"calendar\",\n        \"enabled\": false,\n        \"automatic_read_allowed\": false,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"crm\",\n        \"enabled\": true,\n        \"automatic_read_allowed\": true,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"accounting\",\n        \"enabled\": true,\n        \"automatic_read_allowed\": true,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      },\n      {\n        \"connector_id\": \"market-data\",\n        \"enabled\": false,\n        \"automatic_read_allowed\": false,\n        \"automatic_write_allowed\": false,\n        \"write_capable\": false,\n        \"write_requires_owner_approval\": false\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:50.713921+00:00",
+          "finished_at": "2026-07-18T15:33:50.830491+00:00",
+          "duration_seconds": 0.117
+        },
+        {
+          "id": "connector-runtime",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"connector_runtime_built\",\n  \"state\": {\n    \"generated_at\": \"2026-07-18T15:33:50.929983+00:00\",\n    \"adapters\": [\n      {\n        \"connector_id\": \"github\",\n        \"enabled\": true,\n        \"runtime_ready\": true,\n        \"read_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"email\",\n        \"enabled\": false,\n        \"runtime_ready\": false,\n        \"read_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"calendar\",\n        \"enabled\": false,\n        \"runtime_ready\": false,\n        \"read_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"crm\",\n        \"enabled\": true,\n        \"runtime_ready\": true,\n        \"read_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"accounting\",\n        \"enabled\": true,\n        \"runtime_ready\": true,\n        \"read_ready\": true,\n        \"write_route\": \"execution_gateway\"\n      },\n      {\n        \"connector_id\": \"market-data\",\n        \"enabled\": false,\n        \"runtime_ready\": false,\n        \"read_ready\": false,\n        \"write_route\": \"execution_gateway\"\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:50.831557+00:00",
+          "finished_at": "2026-07-18T15:33:50.952377+00:00",
+          "duration_seconds": 0.121
+        },
+        {
+          "id": "incident-escalation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"incident_scan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:33:51.050147+00:00\",\n    \"incident_count\": 0,\n    \"incidents\": [],\n    \"critical_incident\": false,\n    \"autonomy_halted\": false,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:50.953570+00:00",
+          "finished_at": "2026-07-18T15:33:51.066637+00:00",
+          "duration_seconds": 0.113
+        },
+        {
+          "id": "execution-eligibility-gate",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"execution_eligibility_evaluated\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T15:33:51.173901+00:00\",\n    \"readiness_decision\": \"ready\",\n    \"system_ready\": true,\n    \"eligibility\": {\n      \"internal_read_only\": true,\n      \"internal_reversible\": true,\n      \"external_read_only\": true,\n      \"external_write\": false,\n      \"customer_contact\": false,\n      \"publication\": false,\n      \"spending\": false,\n      \"destructive_actions\": false,\n      \"credential_export\": false,\n      \"private_key_export\": false\n    },\n    \"blocked_categories\": [\n      \"external_write\",\n      \"customer_contact\",\n      \"publication\",\n      \"spending\",\n      \"destructive_actions\",\n      \"credential_export\",\n      \"private_key_export\"\n    ],\n    \"allowed_categories\": [\n      \"internal_read_only\",\n      \"internal_reversible\",\n      \"external_read_only\"\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T15:33:51.068563+00:00",
+          "finished_at": "2026-07-18T15:33:51.194800+00:00",
+          "duration_seconds": 0.126
+        }
+      ]
+    }
   }
 ]

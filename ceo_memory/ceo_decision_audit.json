@@ -9204,5 +9204,186 @@
         "automatic_spending": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T15:33:49.079074+00:00",
+    "action": "prepare",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "ceo_decisions_prepared",
+      "created_count": 0,
+      "open_decision_count": 20,
+      "briefing": {
+        "generated_at": "2026-07-18T15:33:49.075940+00:00",
+        "headline": "20 open CEO decision(s); 0 newly prepared.",
+        "top_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-ae5c422396f1",
+            "source_id": "e2e-invoice-001",
+            "source_type": "invoice",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "rank": 2,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 1250.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $1,250.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:47:26.681993+00:00",
+            "updated_at": "2026-07-18T04:47:26.681995+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-95bcc2a7d742",
+            "source_id": "oppdisc-aa15a45c9641",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 3,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:47:26.682007+00:00",
+            "updated_at": "2026-07-18T04:47:26.682009+00:00"
+          },
+          {
+            "id": "decision-7e482dfbea21",
+            "source_id": "oppdisc-76a988d89351",
+            "source_type": "opportunity",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "rank": 4,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 1250.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $1,250.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:47:26.682020+00:00",
+            "updated_at": "2026-07-18T04:47:26.682022+00:00"
+          }
+        ],
+        "decision_counts": {
+          "total": 20,
+          "pending": 20,
+          "approved": 0,
+          "deferred": 0,
+          "rejected": 0
+        },
+        "total_open_estimated_value": 79500.0,
+        "automatic_decision_approval": false,
+        "automatic_task_execution": false,
+        "automatic_external_execution": false,
+        "automatic_spending": false
+      }
+    }
   }
 ]

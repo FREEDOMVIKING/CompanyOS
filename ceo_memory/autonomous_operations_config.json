@@ -465,6 +465,16 @@
         "companyos/readiness2ctl",
         "run"
       ]
+    },
+    {
+      "id": "execution-eligibility-gate",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/eligibilityctl",
+        "run"
+      ]
     }
   ]
 }
