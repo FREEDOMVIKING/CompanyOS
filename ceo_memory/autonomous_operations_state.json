@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 62,
+  "cycle_count": 63,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T14:30:52.191310+00:00",
@@ -163,19 +163,19 @@
       "failure_count": 0
     },
     "autonomous-orchestrator": {
-      "last_started_at": "2026-07-18T14:53:10.451063+00:00",
-      "last_started_epoch": 1784386390.4510632,
+      "last_started_at": "2026-07-18T15:03:55.158174+00:00",
+      "last_started_epoch": 1784387035.1581702,
       "last_command": [
         "python",
         "companyos/orchestratorctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:53:11.769467+00:00",
+      "last_finished_at": "2026-07-18T15:03:56.640037+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.318,
-      "run_count": 5,
+      "last_duration_seconds": 1.482,
+      "run_count": 6,
       "failure_count": 0
     },
     "goal-strategy": {
@@ -275,35 +275,35 @@
       "failure_count": 0
     },
     "mission-control": {
-      "last_started_at": "2026-07-18T14:48:17.848652+00:00",
-      "last_started_epoch": 1784386097.8486505,
+      "last_started_at": "2026-07-18T15:03:56.640748+00:00",
+      "last_started_epoch": 1784387036.6407478,
       "last_command": [
         "python",
         "companyos/missionctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:48:17.959452+00:00",
+      "last_finished_at": "2026-07-18T15:03:56.729445+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.111,
-      "run_count": 3,
+      "last_duration_seconds": 0.089,
+      "run_count": 4,
       "failure_count": 0
     },
     "governance-router": {
-      "last_started_at": "2026-07-18T14:48:17.960149+00:00",
-      "last_started_epoch": 1784386097.960149,
+      "last_started_at": "2026-07-18T15:03:56.730875+00:00",
+      "last_started_epoch": 1784387036.730874,
       "last_command": [
         "python",
         "companyos/governancectl",
         "classify"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:48:18.072193+00:00",
+      "last_finished_at": "2026-07-18T15:03:56.813799+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.112,
-      "run_count": 3,
+      "last_duration_seconds": 0.083,
+      "run_count": 4,
       "failure_count": 0
     },
     "outcome-tracker": {
@@ -355,19 +355,19 @@
       "failure_count": 0
     },
     "execution-gateway": {
-      "last_started_at": "2026-07-18T14:48:18.074620+00:00",
-      "last_started_epoch": 1784386098.0745869,
+      "last_started_at": "2026-07-18T15:03:56.814534+00:00",
+      "last_started_epoch": 1784387036.814534,
       "last_command": [
         "python",
         "companyos/gatewayctl",
         "process"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:48:18.205070+00:00",
+      "last_finished_at": "2026-07-18T15:03:56.903071+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.131,
-      "run_count": 2,
+      "last_duration_seconds": 0.089,
+      "run_count": 3,
       "failure_count": 0
     },
     "connector-registry": {
@@ -577,9 +577,25 @@
       "last_duration_seconds": 0.074,
       "run_count": 1,
       "failure_count": 0
+    },
+    "reliability-scorecard": {
+      "last_started_at": "2026-07-18T15:03:56.904534+00:00",
+      "last_started_epoch": 1784387036.9045339,
+      "last_command": [
+        "python",
+        "companyos/reliabilityctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T15:03:56.981195+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.077,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T15:02:18.263750+00:00",
-  "last_cycle_job_count": 1,
+  "last_cycle_at": "2026-07-18T15:03:56.981962+00:00",
+  "last_cycle_job_count": 5,
   "last_cycle_success": true
 }

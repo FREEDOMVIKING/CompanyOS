@@ -1449,5 +1449,233 @@
         }
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T15:03:56.714733+00:00",
+    "action": "build",
+    "result": {
+      "success": true,
+      "status": "mission_control_updated",
+      "state": {
+        "generated_at": "2026-07-18T15:03:56.703124+00:00",
+        "system_health": {
+          "operations": true,
+          "watchdog": true,
+          "orchestrator": true,
+          "recovery": true,
+          "learning": true,
+          "resources": true,
+          "actions": true
+        },
+        "unhealthy_components": [],
+        "remaining_supervisor_issues": 0,
+        "top_priorities": [
+          {
+            "id": "priority-6c94e6bc9a4f",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 86.23,
+            "priority_band": "critical",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T15:03:55.775926+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-19eb3b21d9bf",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 86.23,
+            "priority_band": "critical",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T15:03:55.775936+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-afb25028d3dc",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-4b52f04f90c5",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 76.96,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T15:03:55.775746+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-5f552a4a943e",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-d156f3892a63",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 76.96,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T15:03:55.775763+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-aa50d130b299",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 75.82,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T15:03:55.775912+00:00",
+            "rank": 5
+          }
+        ],
+        "top_goals": [
+          {
+            "id": "improvement-improvement-b8b177a852cf",
+            "title": "Shorten critical-priority response time",
+            "source": "continuous_improvement",
+            "category": "strategy",
+            "objective": "Review critical priorities before lower-value operational work.",
+            "score": 92.95,
+            "status": "active",
+            "owner_approval_required_for_external_action": true,
+            "automatic_external_execution": false,
+            "created_at": "2026-07-18T14:37:23.905502+00:00",
+            "rank": 1
+          },
+          {
+            "id": "improvement-improvement-0d11ce0b4a40",
+            "title": "Improve receivable recovery process",
+            "source": "continuous_improvement",
+            "category": "finance",
+            "objective": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+            "score": 91.85,
+            "status": "active",
+            "owner_approval_required_for_external_action": true,
+            "automatic_external_execution": false,
+            "created_at": "2026-07-18T14:37:23.905505+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "source": "executive_priority",
+            "category": "finance",
+            "objective": "Invoice has $11,500.00 outstanding.",
+            "score": 89.24,
+            "status": "active",
+            "owner_approval_required_for_external_action": true,
+            "automatic_external_execution": false,
+            "created_at": "2026-07-18T14:37:23.905474+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "source": "executive_priority",
+            "category": "finance",
+            "objective": "Invoice has $1,250.00 outstanding.",
+            "score": 89.24,
+            "status": "active",
+            "owner_approval_required_for_external_action": true,
+            "automatic_external_execution": false,
+            "created_at": "2026-07-18T14:37:23.905483+00:00",
+            "rank": 4
+          },
+          {
+            "id": "improvement-improvement-67e210642e21",
+            "title": "Clear pending CEO decisions",
+            "source": "continuous_improvement",
+            "category": "governance",
+            "objective": "Review the highest-scoring pending decisions first.",
+            "score": 86.0,
+            "status": "active",
+            "owner_approval_required_for_external_action": true,
+            "automatic_external_execution": false,
+            "created_at": "2026-07-18T14:37:23.905508+00:00",
+            "rank": 5
+          }
+        ],
+        "forecast_headline": "30-day expected cash inflow forecast: $6,152.25",
+        "forecast_confidence_percent": 70.0,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "brief": {
+        "generated_at": "2026-07-18T15:03:56.713251+00:00",
+        "headline": "CompanyOS Mission Control",
+        "overall_status": "operational",
+        "attention": [
+          "All monitored systems are operating normally."
+        ],
+        "top_priorities": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor"
+        ],
+        "top_goals": [
+          "Shorten critical-priority response time",
+          "Improve receivable recovery process",
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Clear pending CEO decisions"
+        ],
+        "forecast": {
+          "headline": "30-day expected cash inflow forecast: $6,152.25",
+          "confidence_percent": 70.0
+        }
+      }
+    }
   }
 ]
