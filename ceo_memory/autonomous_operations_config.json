@@ -805,6 +805,16 @@
         "companyos/specialistresultctl",
         "collect"
       ]
+    },
+    {
+      "id": "specialist-insight-integration",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/specialistinsightctl",
+        "integrate"
+      ]
     }
   ]
 }

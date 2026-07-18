@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 113,
+  "cycle_count": 115,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T19:48:23.510562+00:00",
@@ -538,12 +538,12 @@
         "companyos/controlcyclectl",
         "run"
       ],
-      "status": "running",
-      "last_finished_at": "2026-07-18T19:17:06.490483+00:00",
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:23:35.778950+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 3.172,
-      "run_count": 5,
+      "last_duration_seconds": 0.889,
+      "run_count": 6,
       "failure_count": 0
     },
     "cycle-supervisor": {
@@ -659,35 +659,35 @@
       "failure_count": 0
     },
     "operations-dashboard": {
-      "last_started_at": "2026-07-18T19:50:44.902078+00:00",
-      "last_started_epoch": 1784404244.9020784,
+      "last_started_at": "2026-07-18T20:23:35.779698+00:00",
+      "last_started_epoch": 1784406215.7796981,
       "last_command": [
         "python",
         "companyos/dashboardctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:50:44.968519+00:00",
+      "last_finished_at": "2026-07-18T20:23:35.844549+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.066,
-      "run_count": 8,
+      "last_duration_seconds": 0.065,
+      "run_count": 9,
       "failure_count": 0
     },
     "runtime-hygiene": {
-      "last_started_at": "2026-07-18T19:50:44.969922+00:00",
-      "last_started_epoch": 1784404244.9699216,
+      "last_started_at": "2026-07-18T20:23:35.845359+00:00",
+      "last_started_epoch": 1784406215.8453586,
       "last_command": [
         "python",
         "companyos/runtimehygienectl",
         "isolate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:50:45.063957+00:00",
+      "last_finished_at": "2026-07-18T20:23:35.947607+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.094,
-      "run_count": 8,
+      "last_duration_seconds": 0.102,
+      "run_count": 9,
       "failure_count": 0
     },
     "runtime-aware-preflight": {
@@ -1249,9 +1249,41 @@
       "last_duration_seconds": 0.087,
       "run_count": 1,
       "failure_count": 0
+    },
+    "specialist-work-result-collector": {
+      "last_started_at": "2026-07-18T20:23:35.948441+00:00",
+      "last_started_epoch": 1784406215.948441,
+      "last_command": [
+        "python",
+        "companyos/specialistresultctl",
+        "collect"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:23:36.026683+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.078,
+      "run_count": 1,
+      "failure_count": 0
+    },
+    "specialist-insight-integration": {
+      "last_started_at": "2026-07-18T20:26:22.933698+00:00",
+      "last_started_epoch": 1784406382.9336977,
+      "last_command": [
+        "python",
+        "companyos/specialistinsightctl",
+        "integrate"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:26:23.009048+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.075,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T20:16:12.816479+00:00",
+  "last_cycle_at": "2026-07-18T20:26:23.009996+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
