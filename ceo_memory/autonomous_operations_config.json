@@ -205,6 +205,16 @@
         "companyos/governancectl",
         "classify"
       ]
+    },
+    {
+      "id": "outcome-tracker",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/outcomectl",
+        "measure"
+      ]
     }
   ]
 }
