@@ -414,5 +414,65 @@
         "last_error": null
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:37:23.795710+00:00",
+    "action": "learn",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "learning_feedback_cycle_complete",
+      "state": {
+        "generated_at": "2026-07-18T14:37:23.793980+00:00",
+        "decision_history_count": 0,
+        "approved_decisions": 0,
+        "rejected_decisions": 0,
+        "deferred_decisions": 0,
+        "completed_improvements": 0,
+        "proposed_improvements": 5,
+        "performance_health_score": 50.0,
+        "active_goal_count": 10,
+        "weights_before": {
+          "urgency": 0.319,
+          "profitability": 0.1297,
+          "risk_reduction": 0.2757,
+          "execution_ease": 0.2324,
+          "evidence": 0.0432
+        },
+        "weights_after": {
+          "urgency": 0.3209,
+          "profitability": 0.1128,
+          "risk_reduction": 0.2832,
+          "execution_ease": 0.2456,
+          "evidence": 0.0376
+        },
+        "weights_adjusted": true
+      },
+      "insights": {
+        "generated_at": "2026-07-18T14:37:23.794578+00:00",
+        "count": 3,
+        "insights": [
+          {
+            "type": "improvement_backlog",
+            "message": "Improvement backlog is growing faster than completion.",
+            "signal": "favor_execution_ease"
+          },
+          {
+            "type": "operating_health",
+            "message": "Operating health is below 70; prioritize risk reduction and execution reliability.",
+            "signal": "favor_risk_reduction"
+          },
+          {
+            "type": "goal_load",
+            "message": "Too many active goals may dilute execution focus.",
+            "signal": "increase_urgency_weight"
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      }
+    }
   }
 ]

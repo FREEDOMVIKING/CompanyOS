@@ -5122,5 +5122,122 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:37:21.472463+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 9848
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:37:21.582993+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 10828,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:37:24.147130+00:00",
+    "action": "cycle",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 5,
+      "jobs_run": 5,
+      "failures": 1,
+      "results": [
+        {
+          "id": "opportunity-discovery",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_discovery_complete\",\n  \"results\": {\n    \"generated_at\": \"2026-07-18T14:37:21.630179+00:00\",\n    \"count\": 4,\n    \"total_estimated_value\": 25250.0,\n    \"opportunities\": [\n      {\n        \"id\": \"oppdisc-7f31e53abc67\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"source\": \"invoice-d7e99861931c\",\n        \"score\": 87,\n        \"confidence\": 92,\n        \"revenue_potential\": 90,\n        \"ease_of_execution\": 68,\n        \"evidence_strength\": 95,\n        \"estimated_value\": 11500.0,\n        \"status\": \"discovered\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:37:21.630091+00:00\"\n      },\n      {\n        \"id\": \"oppdisc-03e7bfa86204\",\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\",\n        \"source\": \"e2e-invoice-001\",\n        \"score\": 87,\n        \"confidence\": 92,\n        \"revenue_potential\": 90,\n        \"ease_of_execution\": 68,\n        \"evidence_strength\": 95,\n        \"estimated_value\": 1250.0,\n        \"status\": \"discovered\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:37:21.630117+00:00\"\n      },\n      {\n        \"id\": \"oppdisc-e4f687c73134\",\n        \"title\": \"Advance lead: Driveway Replacement\",\n        \"category\": \"sales\",\n        \"description\": \"Move Sample Contractor from new toward an approved proposal.\",\n        \"source\": \"lead-2567cdb19ba6\",\n        \"score\": 80,\n        \"confidence\": 78,\n        \"revenue_potential\": 85,\n        \"ease_of_execution\": 72,\n        \"evidence_strength\": 82,\n        \"estimated_value\": 12500.0,\n        \"status\": \"discovered\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:37:21.629987+00:00\"\n      },\n      {\n        \"id\": \"oppdisc-50557bc4e376\",\n        \"title\": \"Create first customer retention offer\",\n        \"category\": \"retention\",\n        \"description\": \"Use existing customer records to design a repeat-service or maintenance offer for owner review.\",\n        \"source\": \"customer_base\",\n        \"score\": 65,\n        \"confidence\": 64,\n        \"revenue_potential\": 70,\n        \"ease_of_execution\": 66,\n        \"evidence_strength\": 58,\n        \"estimated_value\": 0,\n        \"status\": \"discovered\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:37:21.630144+00:00\"\n      }\n    ],\n    \"automatic_external_research\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_campaign_launch\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:37:21.519130+00:00",
+          "finished_at": "2026-07-18T14:37:21.649202+00:00",
+          "duration_seconds": 0.13
+        },
+        {
+          "id": "execution-plan-preparation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"decision_execution_plans_prepared\",\n  \"created_count\": 0,\n  \"plans\": [],\n  \"automatic_task_execution\": false,\n  \"automatic_external_execution\": false\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:37:21.649987+00:00",
+          "finished_at": "2026-07-18T14:37:21.746849+00:00",
+          "duration_seconds": 0.097
+        },
+        {
+          "id": "autonomous-orchestrator",
+          "success": true,
+          "return_code": 0,
+          "stdout": "n      \\\"top_recommendations\\\": [\\n        {\\n          \\\"id\\\": \\\"improvement-5ff4ce8d21eb\\\",\\n          \\\"title\\\": \\\"Shorten critical-priority response time\\\",\\n          \\\"category\\\": \\\"strategy\\\",\\n          \\\"description\\\": \\\"2 critical priorities are currently ranked.\\\",\\n          \\\"recommendation\\\": \\\"Review critical priorities before lower-value operational work.\\\",\\n          \\\"impact\\\": 92,\\n          \\\"urgency\\\": 96,\\n          \\\"ease\\\": 85,\\n          \\\"evidence\\\": 96,\\n          \\\"score\\\": 92.95,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"executive_priority_rankings\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:22.486500+00:00\\\",\\n          \\\"rank\\\": 1\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-be5bc585c6a1\\\",\\n          \\\"title\\\": \\\"Improve receivable recovery process\\\",\\n          \\\"category\\\": \\\"finance\\\",\\n          \\\"description\\\": \\\"2 invoices have $12,750.00 outstanding.\\\",\\n          \\\"recommendation\\\": \\\"Prioritize owner-reviewed follow-up preparation for the largest balances.\\\",\\n          \\\"impact\\\": 95,\\n          \\\"urgency\\\": 95,\\n          \\\"ease\\\": 70,\\n          \\\"evidence\\\": 98,\\n          \\\"score\\\": 91.85,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"invoice_registry\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:22.486494+00:00\\\",\\n          \\\"rank\\\": 2\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-2628386b1f73\\\",\\n          \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n          \\\"category\\\": \\\"governance\\\",\\n          \\\"description\\\": \\\"20 CEO decisions are waiting for owner review.\\\",\\n          \\\"recommendation\\\": \\\"Review the highest-scoring pending decisions first.\\\",\\n          \\\"impact\\\": 80,\\n          \\\"urgency\\\": 86,\\n          \\\"ease\\\": 88,\\n          \\\"evidence\\\": 95,\\n          \\\"score\\\": 86.0,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"ceo_decision_queue\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:22.486481+00:00\\\",\\n          \\\"rank\\\": 3\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-3478b667ca1b\\\",\\n          \\\"title\\\": \\\"Reduce pending task backlog\\\",\\n          \\\"category\\\": \\\"operations\\\",\\n          \\\"description\\\": \\\"12 internal tasks are pending.\\\",\\n          \\\"recommendation\\\": \\\"Review, group, and sequence pending internal tasks by business impact.\\\",\\n          \\\"impact\\\": 82,\\n          \\\"urgency\\\": 78,\\n          \\\"ease\\\": 72,\\n          \\\"evidence\\\": 90,\\n          \\\"score\\\": 80.9,\\n          \\\"priority_band\\\": \\\"high\\\",\\n          \\\"source\\\": \\\"product_execution_tasks\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:22.486470+00:00\\\",\\n          \\\"rank\\\": 4\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-aa61a3cf223c\\\",\\n          \\\"title\\\": \\\"Establish internal review automations\\\",\\n          \\\"category\\\": \\\"automation\\\",\\n          \\\"description\\\": \\\"No automation records were found.\\\",\\n          \\\"recommendation\\\": \\\"Create internal-only review schedules for priorities, decisions, and operational health.\\\",\\n          \\\"impact\\\": 68,\\n          \\\"urgency\\\": 58,\\n          \\\"ease\\\": 75,\\n          \\\"evidence\\\": 70,\\n          \\\"score\\\": 66.45,\\n          \\\"priority_band\\\": \\\"medium\\\",\\n          \\\"source\\\": \\\"automation_registry\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:22.486506+00:00\\\",\\n          \\\"rank\\\": 5\\n        }\\n      ]\\n    },\\n    \\\"attention_items\\\": [\\n      \\\"20 CEO decision(s) are pending review.\\\",\\n      \\\"2 critical priority item(s) require attention.\\\"\\n    ],\\n    \\\"recommended_next_actions\\\": [\\n      \\\"Review receivable: Sample Contractor\\\",\\n      \\\"Review receivable: E2E Test Customer\\\",\\n      \\\"Recover receivable: Sample Contractor\\\",\\n      \\\"Recover receivable: E2E Test Customer\\\",\\n      \\\"Review follow-up: Sample Contractor\\\"\\n    ],\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\",\n          \"duration_seconds\": 0.101,\n          \"attempt\": 1\n        }\n      ]\n    }\n  ]\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:37:21.748057+00:00",
+          "finished_at": "2026-07-18T14:37:22.845944+00:00",
+          "duration_seconds": 1.098
+        },
+        {
+          "id": "internal-action-engine",
+          "success": true,
+          "return_code": 0,
+          "stdout": "on tasks\\\",\\n          \\\"Measure progress against the goal\\\",\\n          \\\"Re-rank after new performance data arrives\\\"\\n        ],\\n        \\\"automatic_internal_execution_allowed\\\": true,\\n        \\\"automatic_external_execution_allowed\\\": false\\n      }\\n    ],\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\"\n    },\n    {\n      \"success\": true,\n      \"status\": \"action_executed\",\n      \"action\": \"brief-generate\",\n      \"return_code\": 0,\n      \"stdout\": \"    \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"executive_priority_rankings\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:23.658999+00:00\\\",\\n          \\\"rank\\\": 1\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-0d11ce0b4a40\\\",\\n          \\\"title\\\": \\\"Improve receivable recovery process\\\",\\n          \\\"category\\\": \\\"finance\\\",\\n          \\\"description\\\": \\\"2 invoices have $12,750.00 outstanding.\\\",\\n          \\\"recommendation\\\": \\\"Prioritize owner-reviewed follow-up preparation for the largest balances.\\\",\\n          \\\"impact\\\": 95,\\n          \\\"urgency\\\": 95,\\n          \\\"ease\\\": 70,\\n          \\\"evidence\\\": 98,\\n          \\\"score\\\": 91.85,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"invoice_registry\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:23.658991+00:00\\\",\\n          \\\"rank\\\": 2\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-67e210642e21\\\",\\n          \\\"title\\\": \\\"Clear pending CEO decisions\\\",\\n          \\\"category\\\": \\\"governance\\\",\\n          \\\"description\\\": \\\"20 CEO decisions are waiting for owner review.\\\",\\n          \\\"recommendation\\\": \\\"Review the highest-scoring pending decisions first.\\\",\\n          \\\"impact\\\": 80,\\n          \\\"urgency\\\": 86,\\n          \\\"ease\\\": 88,\\n          \\\"evidence\\\": 95,\\n          \\\"score\\\": 86.0,\\n          \\\"priority_band\\\": \\\"critical\\\",\\n          \\\"source\\\": \\\"ceo_decision_queue\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:23.658976+00:00\\\",\\n          \\\"rank\\\": 3\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-6cab66254d45\\\",\\n          \\\"title\\\": \\\"Reduce pending task backlog\\\",\\n          \\\"category\\\": \\\"operations\\\",\\n          \\\"description\\\": \\\"12 internal tasks are pending.\\\",\\n          \\\"recommendation\\\": \\\"Review, group, and sequence pending internal tasks by business impact.\\\",\\n          \\\"impact\\\": 82,\\n          \\\"urgency\\\": 78,\\n          \\\"ease\\\": 72,\\n          \\\"evidence\\\": 90,\\n          \\\"score\\\": 80.9,\\n          \\\"priority_band\\\": \\\"high\\\",\\n          \\\"source\\\": \\\"product_execution_tasks\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:23.658964+00:00\\\",\\n          \\\"rank\\\": 4\\n        },\\n        {\\n          \\\"id\\\": \\\"improvement-a7be19ae0c14\\\",\\n          \\\"title\\\": \\\"Establish internal review automations\\\",\\n          \\\"category\\\": \\\"automation\\\",\\n          \\\"description\\\": \\\"No automation records were found.\\\",\\n          \\\"recommendation\\\": \\\"Create internal-only review schedules for priorities, decisions, and operational health.\\\",\\n          \\\"impact\\\": 68,\\n          \\\"urgency\\\": 58,\\n          \\\"ease\\\": 75,\\n          \\\"evidence\\\": 70,\\n          \\\"score\\\": 66.45,\\n          \\\"priority_band\\\": \\\"medium\\\",\\n          \\\"source\\\": \\\"automation_registry\\\",\\n          \\\"owner_approval_required\\\": true,\\n          \\\"automatic_code_changes\\\": false,\\n          \\\"automatic_execution\\\": false,\\n          \\\"external_action_authorized\\\": false,\\n          \\\"created_at\\\": \\\"2026-07-18T14:37:23.659005+00:00\\\",\\n          \\\"rank\\\": 5\\n        }\\n      ]\\n    },\\n    \\\"attention_items\\\": [\\n      \\\"20 CEO decision(s) are pending review.\\\",\\n      \\\"2 critical priority item(s) require attention.\\\"\\n    ],\\n    \\\"recommended_next_actions\\\": [\\n      \\\"Review receivable: Sample Contractor\\\",\\n      \\\"Review receivable: E2E Test Customer\\\",\\n      \\\"Recover receivable: Sample Contractor\\\",\\n      \\\"Recover receivable: E2E Test Customer\\\",\\n      \\\"Review follow-up: Sample Contractor\\\"\\n    ],\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:37:22.846599+00:00",
+          "finished_at": "2026-07-18T14:37:24.042251+00:00",
+          "duration_seconds": 1.196
+        },
+        {
+          "id": "github-read-connector",
+          "success": false,
+          "return_code": 1,
+          "stdout": "{\n  \"success\": false,\n  \"status\": \"github_read_connector_not_ready\",\n  \"error\": \"GITHUB_TOKEN is not set\"\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:37:24.042913+00:00",
+          "finished_at": "2026-07-18T14:37:24.142003+00:00",
+          "duration_seconds": 0.099
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:47:57.247239+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 10828
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:47:57.363341+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 18405,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:48:03.007317+00:00",
+    "action": "stop",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "scheduler_stop_timeout",
+      "pid": 18405
+    }
   }
 ]

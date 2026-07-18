@@ -285,6 +285,26 @@
         "companyos/bindingctl",
         "bind"
       ]
+    },
+    {
+      "id": "github-read-connector",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/githubreadctl",
+        "probe"
+      ]
+    },
+    {
+      "id": "github-intelligence",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/githubintelctl",
+        "analyze"
+      ]
     }
   ]
 }
