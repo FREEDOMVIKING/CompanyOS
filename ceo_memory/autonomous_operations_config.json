@@ -615,6 +615,16 @@
         "companyos/loopctl",
         "run"
       ]
+    },
+    {
+      "id": "strategic-goal-orchestrator",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/strategyorchestratorctl",
+        "run"
+      ]
     }
   ]
 }
