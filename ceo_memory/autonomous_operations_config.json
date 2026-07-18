@@ -715,6 +715,16 @@
         "companyos/opportunitycyclectl",
         "run"
       ]
+    },
+    {
+      "id": "opportunity-portfolio-allocation",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunityportfolioctl",
+        "allocate"
+      ]
     }
   ]
 }
