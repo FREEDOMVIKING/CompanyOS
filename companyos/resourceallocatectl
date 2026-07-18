@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+import subprocess,sys
+from pathlib import Path
+r=Path.home()/"companyos"
+raise SystemExit(subprocess.call([sys.executable,str(r/"agents"/"internal_resource_allocator.py"),*sys.argv[1:]],cwd=r))

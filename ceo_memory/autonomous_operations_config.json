@@ -765,6 +765,16 @@
         "companyos/portfolioperformancectl",
         "evaluate"
       ]
+    },
+    {
+      "id": "internal-resource-allocation",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/resourceallocatectl",
+        "allocate"
+      ]
     }
   ]
 }
