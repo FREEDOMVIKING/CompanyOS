@@ -119,7 +119,7 @@
     {
       "id": "autonomous-orchestrator",
       "enabled": true,
-      "interval_seconds": 900,
+      "interval_seconds": 600,
       "command": [
         "python",
         "companyos/orchestratorctl",
@@ -289,7 +289,7 @@
     {
       "id": "github-read-connector",
       "enabled": true,
-      "interval_seconds": 3600,
+      "interval_seconds": 7200,
       "command": [
         "python",
         "companyos/githubreadctl",
@@ -334,6 +334,16 @@
         "python",
         "companyos/actionqueuectl",
         "run"
+      ]
+    },
+    {
+      "id": "action-feedback-loop",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/actionfeedbackctl",
+        "learn"
       ]
     }
   ]

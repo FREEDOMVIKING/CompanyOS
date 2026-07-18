@@ -1,32 +1,24 @@
 {
-  "generated_at": "2026-07-18T13:57:05.929264+00:00",
+  "generated_at": "2026-07-18T14:57:32.276485+00:00",
   "critical_priority_count": 2,
-  "high_priority_count": 4,
-  "job_count": 15,
-  "changes_applied": 3,
+  "high_priority_count": 6,
+  "job_count": 33,
+  "changes_applied": 2,
   "changes": [
     {
-      "job_id": "priority-ranking",
-      "old_interval_seconds": 900,
-      "new_interval_seconds": 600,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
-    {
-      "job_id": "decision-preparation",
-      "old_interval_seconds": 900,
-      "new_interval_seconds": 600,
-      "reasons": [
-        "critical_business_pressure"
-      ]
-    },
-    {
       "job_id": "autonomous-orchestrator",
-      "old_interval_seconds": 1800,
-      "new_interval_seconds": 900,
+      "old_interval_seconds": 900,
+      "new_interval_seconds": 600,
       "reasons": [
         "critical_business_pressure"
+      ]
+    },
+    {
+      "job_id": "github-read-connector",
+      "old_interval_seconds": 3600,
+      "new_interval_seconds": 7200,
+      "reasons": [
+        "recent_failures"
       ]
     }
   ],
@@ -34,10 +26,10 @@
     {
       "job_id": "priority-ranking",
       "score": 75,
-      "current_interval_seconds": 900,
+      "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.114,
+      "last_duration_seconds": 0.127,
       "reasons": [
         "critical_business_pressure"
       ]
@@ -45,10 +37,10 @@
     {
       "job_id": "decision-preparation",
       "score": 75,
-      "current_interval_seconds": 900,
+      "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.09,
+      "last_duration_seconds": 0.105,
       "reasons": [
         "critical_business_pressure"
       ]
@@ -56,10 +48,10 @@
     {
       "job_id": "autonomous-orchestrator",
       "score": 75,
-      "current_interval_seconds": 1800,
-      "recommended_interval_seconds": 900,
+      "current_interval_seconds": 900,
+      "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.835,
+      "last_duration_seconds": 1.318,
       "reasons": [
         "critical_business_pressure"
       ]
@@ -70,7 +62,7 @@
       "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.085,
+      "last_duration_seconds": 17.584,
       "reasons": [
         "critical_business_pressure"
       ]
@@ -81,7 +73,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.194,
+      "last_duration_seconds": 0.13,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -92,7 +84,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.131,
+      "last_duration_seconds": 0.114,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -114,7 +106,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.351,
+      "last_duration_seconds": 0.154,
       "reasons": []
     },
     {
@@ -123,7 +115,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.149,
+      "last_duration_seconds": 0.097,
       "reasons": []
     },
     {
@@ -132,7 +124,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.161,
+      "last_duration_seconds": 0.141,
       "reasons": []
     },
     {
@@ -177,8 +169,172 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
+      "last_duration_seconds": 0.081,
+      "reasons": []
+    },
+    {
+      "job_id": "internal-action-engine",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 1.196,
+      "reasons": []
+    },
+    {
+      "job_id": "autonomous-health-supervisor",
+      "score": 50,
+      "current_interval_seconds": 600,
+      "recommended_interval_seconds": 600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.118,
+      "reasons": []
+    },
+    {
+      "job_id": "mission-control",
+      "score": 50,
+      "current_interval_seconds": 900,
+      "recommended_interval_seconds": 900,
+      "failure_count": 0,
+      "last_duration_seconds": 0.111,
+      "reasons": []
+    },
+    {
+      "job_id": "governance-router",
+      "score": 50,
+      "current_interval_seconds": 900,
+      "recommended_interval_seconds": 900,
+      "failure_count": 0,
+      "last_duration_seconds": 0.112,
+      "reasons": []
+    },
+    {
+      "job_id": "outcome-tracker",
+      "score": 50,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 3600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.09,
+      "reasons": []
+    },
+    {
+      "job_id": "strategy-feedback-loop",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.289,
+      "reasons": []
+    },
+    {
+      "job_id": "dependency-readiness",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.119,
+      "reasons": []
+    },
+    {
+      "job_id": "execution-gateway",
+      "score": 50,
+      "current_interval_seconds": 900,
+      "recommended_interval_seconds": 900,
+      "failure_count": 0,
+      "last_duration_seconds": 0.131,
+      "reasons": []
+    },
+    {
+      "job_id": "connector-registry",
+      "score": 50,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 3600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.097,
+      "reasons": []
+    },
+    {
+      "job_id": "permission-broker",
+      "score": 50,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 3600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.081,
+      "reasons": []
+    },
+    {
+      "job_id": "connector-runtime",
+      "score": 50,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 3600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.08,
+      "reasons": []
+    },
+    {
+      "job_id": "connector-binding",
+      "score": 50,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 3600,
+      "failure_count": 0,
+      "last_duration_seconds": 0.091,
+      "reasons": []
+    },
+    {
+      "job_id": "github-intelligence",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.191,
+      "reasons": []
+    },
+    {
+      "job_id": "github-change-intelligence",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.141,
+      "reasons": []
+    },
+    {
+      "job_id": "autonomous-preflight",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.088,
+      "reasons": []
+    },
+    {
+      "job_id": "action-queue-coordinator",
+      "score": 50,
+      "current_interval_seconds": 1800,
+      "recommended_interval_seconds": 1800,
+      "failure_count": 0,
+      "last_duration_seconds": 0.883,
+      "reasons": []
+    },
+    {
+      "job_id": "action-feedback-loop",
+      "score": 50,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 21600,
+      "failure_count": 0,
       "last_duration_seconds": 0.0,
       "reasons": []
+    },
+    {
+      "job_id": "github-read-connector",
+      "score": 25,
+      "current_interval_seconds": 3600,
+      "recommended_interval_seconds": 7200,
+      "failure_count": 1,
+      "last_duration_seconds": 0.099,
+      "reasons": [
+        "recent_failures"
+      ]
     }
   ],
   "automatic_customer_contact": false,
