@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "environment_only_secrets": true,
+  "never_store_secret_values": true,
+  "automatic_read_bindings": true,
+  "automatic_write_bindings": false,
+  "require_gateway_for_writes": true,
+  "bindings": {
+    "github": {"required_env": ["GITHUB_TOKEN"], "read_only_default": true},
+    "email": {"required_env": [], "read_only_default": true},
+    "calendar": {"required_env": [], "read_only_default": true},
+    "crm": {"required_env": [], "read_only_default": true},
+    "accounting": {"required_env": [], "read_only_default": true},
+    "market-data": {"required_env": [], "read_only_default": true}
+  }
+}
