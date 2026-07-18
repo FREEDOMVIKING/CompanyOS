@@ -725,6 +725,16 @@
         "companyos/opportunityportfolioctl",
         "allocate"
       ]
+    },
+    {
+      "id": "portfolio-capacity-guard",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/portfoliocapacityctl",
+        "evaluate"
+      ]
     }
   ]
 }

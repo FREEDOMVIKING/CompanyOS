@@ -14130,5 +14130,61 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T20:01:43.578728+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 550
+    }
+  },
+  {
+    "timestamp": "2026-07-18T20:01:43.711614+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 2906,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T20:01:45.948444+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 2,
+      "jobs_run": 2,
+      "failures": 0,
+      "results": [
+        {
+          "id": "recovery-aware-closed-loop",
+          "success": true,
+          "return_code": 0,
+          "stdout": "_absent\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"resource_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"value\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"recent_backup\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"age_hours\\\\\\\": 0.0\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"integrity_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      }\\\\n    ],\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      \\\"eligibility\\\": {\\n        \\\"success\\\": true,\\n        \\\"return_code\\\": 0,\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_eligibility_evaluated\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-18T20:01:45.557647+00:00\\\\\\\",\\\\n    \\\\\\\"readiness_decision\\\\\\\": \\\\\\\"blocked\\\\\\\",\\\\n    \\\\\\\"system_ready\\\\\\\": false,\\\\n    \\\\\\\"eligibility\\\\\\\": {\\\\n      \\\\\\\"internal_read_only\\\\\\\": false,\\\\n      \\\\\\\"internal_reversible\\\\\\\": false,\\\\n      \\\\\\\"external_read_only\\\\\\\": false,\\\\n      \\\\\\\"external_write\\\\\\\": false,\\\\n      \\\\\\\"customer_contact\\\\\\\": false,\\\\n      \\\\\\\"publication\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\",\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": []\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      }\\n    },\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"fused_plan_build\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"fused_execution_plan_built\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T20:01:45.663642+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"plan\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"planned_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false,\\n    \\\"credential_export\\\": false,\\n    \\\"private_key_export\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"guarded_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T20:01:45.742231+00:00\\\",\\n    \\\"results\\\": [],\\n    \\\"executed_count\\\": 0,\\n    \\\"failed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"post_execution_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-18T20:01:45.821426+00:00\\\",\\n    \\\"adjustments\\\": [],\\n    \\\"action_count\\\": 0,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T20:01:43.642548+00:00",
+          "finished_at": "2026-07-18T20:01:45.852802+00:00",
+          "duration_seconds": 2.21
+        },
+        {
+          "id": "portfolio-capacity-guard",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_capacity_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T20:01:45.917074+00:00\",\n    \"input_count\": 0,\n    \"accepted_count\": 0,\n    \"rejected_count\": 0,\n    \"category_counts\": {},\n    \"accepted\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T20:01:45.853985+00:00",
+          "finished_at": "2026-07-18T20:01:45.929459+00:00",
+          "duration_seconds": 0.075
+        }
+      ]
+    }
   }
 ]

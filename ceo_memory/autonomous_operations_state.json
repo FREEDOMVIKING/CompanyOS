@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 106,
+  "cycle_count": 107,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T19:48:23.510562+00:00",
@@ -947,19 +947,19 @@
       "failure_count": 0
     },
     "recovery-aware-closed-loop": {
-      "last_started_at": "2026-07-18T19:01:37.824896+00:00",
-      "last_started_epoch": 1784401297.8248944,
+      "last_started_at": "2026-07-18T20:01:43.642548+00:00",
+      "last_started_epoch": 1784404903.6425483,
       "last_command": [
         "python",
         "companyos/loopctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:01:42.224773+00:00",
+      "last_finished_at": "2026-07-18T20:01:45.852802+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 4.4,
-      "run_count": 2,
+      "last_duration_seconds": 2.21,
+      "run_count": 3,
       "failure_count": 0
     },
     "strategic-goal-orchestrator": {
@@ -1137,9 +1137,25 @@
       "last_duration_seconds": 0.131,
       "run_count": 1,
       "failure_count": 0
+    },
+    "portfolio-capacity-guard": {
+      "last_started_at": "2026-07-18T20:01:45.853985+00:00",
+      "last_started_epoch": 1784404905.8539848,
+      "last_command": [
+        "python",
+        "companyos/portfoliocapacityctl",
+        "evaluate"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:01:45.929459+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.075,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T19:59:19.675995+00:00",
-  "last_cycle_job_count": 6,
+  "last_cycle_at": "2026-07-18T20:01:45.930673+00:00",
+  "last_cycle_job_count": 2,
   "last_cycle_success": true
 }
