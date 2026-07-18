@@ -315,6 +315,16 @@
         "companyos/githubchangectl",
         "analyze"
       ]
+    },
+    {
+      "id": "autonomous-preflight",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/preflightctl",
+        "run"
+      ]
     }
   ]
 }
