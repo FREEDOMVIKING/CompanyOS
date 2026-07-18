@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 46,
+  "cycle_count": 47,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T13:29:54.468540+00:00",
@@ -163,19 +163,19 @@
       "failure_count": 0
     },
     "autonomous-orchestrator": {
-      "last_started_at": "2026-07-18T14:05:08.020028+00:00",
-      "last_started_epoch": 1784383508.0200276,
+      "last_started_at": "2026-07-18T14:21:16.323005+00:00",
+      "last_started_epoch": 1784384476.3230047,
       "last_command": [
         "python",
         "companyos/orchestratorctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:05:09.013018+00:00",
+      "last_finished_at": "2026-07-18T14:21:17.542423+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.993,
-      "run_count": 2,
+      "last_duration_seconds": 1.219,
+      "run_count": 3,
       "failure_count": 0
     },
     "goal-strategy": {
@@ -337,9 +337,25 @@
       "last_duration_seconds": 0.289,
       "run_count": 1,
       "failure_count": 0
+    },
+    "dependency-readiness": {
+      "last_started_at": "2026-07-18T14:21:17.543154+00:00",
+      "last_started_epoch": 1784384477.5431535,
+      "last_command": [
+        "python",
+        "companyos/readinessctl",
+        "check"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T14:21:17.625362+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.082,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T14:19:51.907587+00:00",
-  "last_cycle_job_count": 4,
+  "last_cycle_at": "2026-07-18T14:21:17.626023+00:00",
+  "last_cycle_job_count": 2,
   "last_cycle_success": true
 }

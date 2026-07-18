@@ -225,6 +225,16 @@
         "companyos/strategyfeedbackctl",
         "adapt"
       ]
+    },
+    {
+      "id": "dependency-readiness",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/readinessctl",
+        "check"
+      ]
     }
   ]
 }
