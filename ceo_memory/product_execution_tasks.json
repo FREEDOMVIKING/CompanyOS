@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "task-b732482cc136",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 1,
+      "name": "Define customer and problem validation plan",
+      "type": "research",
+      "phase": "discovery",
+      "priority": 100,
+      "description": "Create the validation plan for Local Contractor Bid Organizer, including customer questions, assumptions and success criteria.",
+      "deliverables": [
+        "Target customer summary",
+        "Problem validation checklist",
+        "Validation interview questions",
+        "Go or hold criteria"
+      ],
+      "status": "pending",
+      "blocked_by": [],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102343+00:00",
+      "updated_at": "2026-07-18T01:25:00.102350+00:00"
+    },
+    {
+      "id": "task-e21cc9fe897a",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 2,
+      "name": "Create product requirements document",
+      "type": "design",
+      "phase": "planning",
+      "priority": 95,
+      "description": "Define the MVP scope for Local Contractor Bid Organizer using these initial features: Lead and customer tracking, Bid and estimate status, Follow-up reminders, Job notes and activity history, Basic sales pipeline dashboard.",
+      "deliverables": [
+        "Product requirements document",
+        "MVP scope",
+        "Out-of-scope list",
+        "Acceptance criteria"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-b732482cc136"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102358+00:00",
+      "updated_at": "2026-07-18T01:25:00.102360+00:00"
+    },
+    {
+      "id": "task-eb820b859cf3",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 3,
+      "name": "Design core user workflow",
+      "type": "design",
+      "phase": "design",
+      "priority": 90,
+      "description": "Map the main user journey from first use through successful completion of the core workflow.",
+      "deliverables": [
+        "User flow",
+        "Screen list",
+        "Navigation plan",
+        "Error-state plan"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-e21cc9fe897a"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102365+00:00",
+      "updated_at": "2026-07-18T01:25:00.102366+00:00"
+    },
+    {
+      "id": "task-82d38d4f9b65",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 4,
+      "name": "Define project data model",
+      "type": "development",
+      "phase": "architecture",
+      "priority": 88,
+      "description": "Define the entities, records and relationships required by the MVP.",
+      "deliverables": [
+        "Data model",
+        "Field definitions",
+        "Storage plan",
+        "Data validation rules"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-eb820b859cf3"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102370+00:00",
+      "updated_at": "2026-07-18T01:25:00.102371+00:00"
+    },
+    {
+      "id": "task-c8d5cc150ca3",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 5,
+      "name": "Build MVP project structure",
+      "type": "development",
+      "phase": "build",
+      "priority": 85,
+      "description": "Create the initial project structure, configuration, modules and local runtime.",
+      "deliverables": [
+        "Runnable project skeleton",
+        "Configuration files",
+        "Module structure",
+        "Local start command"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-82d38d4f9b65"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102375+00:00",
+      "updated_at": "2026-07-18T01:25:00.102376+00:00"
+    },
+    {
+      "id": "task-bd393b27b270",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 6,
+      "name": "Build core MVP workflow",
+      "type": "development",
+      "phase": "build",
+      "priority": 82,
+      "description": "Implement the primary workflow required to solve the customer's main problem.",
+      "deliverables": [
+        "Core workflow implementation",
+        "Input validation",
+        "State tracking",
+        "Basic error handling"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-c8d5cc150ca3"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102380+00:00",
+      "updated_at": "2026-07-18T01:25:00.102381+00:00"
+    },
+    {
+      "id": "task-e8fd6aeae630",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 7,
+      "name": "Create internal test suite",
+      "type": "testing",
+      "phase": "testing",
+      "priority": 78,
+      "description": "Create repeatable tests for the main product workflow and expected failure conditions.",
+      "deliverables": [
+        "Core workflow tests",
+        "Validation tests",
+        "Failure-path tests",
+        "Test report"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-bd393b27b270"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102384+00:00",
+      "updated_at": "2026-07-18T01:25:00.102386+00:00"
+    },
+    {
+      "id": "task-3b87f6c647c7",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 8,
+      "name": "Run product validation review",
+      "type": "validation",
+      "phase": "validation",
+      "priority": 74,
+      "description": "Review the MVP against the proposal, acceptance criteria and customer problem.",
+      "deliverables": [
+        "Validation report",
+        "Missing requirements list",
+        "Defect list",
+        "Go or revise recommendation"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-e8fd6aeae630"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102390+00:00",
+      "updated_at": "2026-07-18T01:25:00.102391+00:00"
+    },
+    {
+      "id": "task-37e3324efffd",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 9,
+      "name": "Create product documentation",
+      "type": "documentation",
+      "phase": "documentation",
+      "priority": 70,
+      "description": "Create installation, usage and maintenance documentation.",
+      "deliverables": [
+        "README",
+        "Installation instructions",
+        "User instructions",
+        "Maintenance notes"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-3b87f6c647c7"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102395+00:00",
+      "updated_at": "2026-07-18T01:25:00.102396+00:00"
+    },
+    {
+      "id": "task-4ae37c5a4935",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "order": 10,
+      "name": "Create deployment and launch checklist",
+      "type": "deployment_planning",
+      "phase": "launch_planning",
+      "priority": 65,
+      "description": "Prepare an internal deployment and launch checklist. No external publication is authorized.",
+      "deliverables": [
+        "Deployment checklist",
+        "Launch readiness checklist",
+        "Rollback plan",
+        "Owner approval requirements"
+      ],
+      "status": "pending",
+      "blocked_by": [
+        "task-37e3324efffd"
+      ],
+      "internal_execution_allowed": true,
+      "external_execution_allowed": false,
+      "external_spending_allowed": false,
+      "external_publication_allowed": false,
+      "attempts": 0,
+      "result": null,
+      "last_error": null,
+      "created_at": "2026-07-18T01:25:00.102399+00:00",
+      "updated_at": "2026-07-18T01:25:00.102401+00:00"
+    }
+  ],
+  "statistics": {
+    "total": 10,
+    "pending": 10,
+    "in_progress": 0,
+    "completed": 0,
+    "blocked": 0,
+    "failed": 0
+  },
+  "last_updated_at": "2026-07-18T01:25:00.102417+00:00"
+}

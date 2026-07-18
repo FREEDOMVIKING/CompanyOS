@@ -1,31 +1,19 @@
 {
-  "schema_version": 1,
-  "proposals": [
+  "projects": [
     {
-      "id": "proposal-27d594e92623",
-      "opportunity_id": "opp-143d73aae0f0",
+      "id": "project-handoff-3ec98437177f4a",
+      "name": "Local Contractor Bid Organizer",
       "title": "Local Contractor Bid Organizer",
-      "proposal_title": "Business Proposal: Local Contractor Bid Organizer",
-      "status": "handed_to_factory",
-      "owner_approval_required": true,
-      "approved_by_owner": true,
-      "factory_handoff_status": "completed",
-      "executive_summary": "Local Contractor Bid Organizer is a proposed local_services product for Residential and light-commercial contractors. It addresses the problem that Small contractors often track bids, customer notes and job status through scattered messages and paper. The proposed solution is: A simple mobile dashboard for leads, estimates, bid status and customer follow-up.",
+      "source": "approved_proposal_handoff",
+      "proposal_id": "proposal-27d594e92623",
+      "opportunity_id": "opp-143d73aae0f0",
+      "status": "planned",
+      "stage": "planning",
+      "priority_score": 81.57,
+      "target_customer": "Residential and light-commercial contractors",
       "customer_problem": "Small contractors often track bids, customer notes and job status through scattered messages and paper.",
       "proposed_solution": "A simple mobile dashboard for leads, estimates, bid status and customer follow-up.",
-      "target_customer": "Residential and light-commercial contractors",
       "revenue_model": "Monthly subscription",
-      "priority_score": 81.57,
-      "confidence_score": 86.25,
-      "recommendation": "recommended",
-      "risk_level": "moderate",
-      "estimated_launch_window": "2-4 weeks",
-      "strategic_reasons": [
-        "Strong fit with current CompanyOS capabilities",
-        "High estimated market demand",
-        "Recurring-income business model",
-        "Strong niche or operational advantage"
-      ],
       "objectives": [
         "Validate demand for Local Contractor Bid Organizer",
         "Build a usable minimum viable product",
@@ -86,21 +74,6 @@
           ]
         }
       ],
-      "revenue_hypothesis": {
-        "model": "Monthly subscription",
-        "pricing_hypothesis": {
-          "entry_price_monthly": 19,
-          "target_price_monthly": 39,
-          "premium_price_monthly": 79
-        },
-        "example_revenue": {
-          "10_customers_monthly": 390,
-          "25_customers_monthly": 975,
-          "100_customers_monthly": 3900
-        },
-        "financial_projection_is_estimate": true,
-        "requires_market_validation": true
-      },
       "risks": [
         {
           "risk": "Customer demand may be weaker than estimated",
@@ -126,27 +99,19 @@
         "Early customer testing can be performed before public launch",
         "The proposed revenue model is Monthly subscription"
       ],
-      "go_hold_recommendation": "go",
+      "factory_permissions": {
+        "internal_planning": true,
+        "internal_design": true,
+        "internal_build": true,
+        "internal_testing": true,
+        "external_publication": false,
+        "external_spending": false,
+        "external_execution": false
+      },
       "automatic_spending": false,
       "automatic_publication": false,
-      "automatic_project_creation": false,
-      "created_at": "2026-07-18T00:56:30.269465+00:00",
-      "updated_at": "2026-07-18T01:13:55.307797+00:00",
-      "owner_decision_at": "2026-07-18T01:11:59.165649+00:00",
-      "owner_decision": "approved",
-      "owner_decision_reason": "Approved to begin internal Product Factory planning",
-      "approved_at": "2026-07-18T01:11:59.165652+00:00",
-      "factory_handoff_id": "handoff-3ec98437177f4a",
-      "factory_project_id": "project-handoff-3ec98437177f4a"
+      "created_at": "2026-07-18T01:13:55.307447+00:00",
+      "updated_at": "2026-07-18T01:13:55.307456+00:00"
     }
-  ],
-  "statistics": {
-    "total": 1,
-    "pending_owner_approval": 0,
-    "approved": 0,
-    "rejected": 0,
-    "held": 0,
-    "handed_to_factory": 1
-  },
-  "last_updated_at": "2026-07-18T01:13:55.307804+00:00"
+  ]
 }

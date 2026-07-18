@@ -62,5 +62,204 @@
       "current_status": "pending_owner_approval",
       "next_command": "python companyos/approvalctl approve proposal-27d594e92623"
     }
+  },
+  {
+    "timestamp": "2026-07-18T01:11:59.166514+00:00",
+    "action": "approved",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "proposal_approved",
+      "proposal_id": "proposal-27d594e92623",
+      "title": "Local Contractor Bid Organizer",
+      "previous_status": "pending_owner_approval",
+      "proposal_status": "approved",
+      "reason": "Approved to begin internal Product Factory planning",
+      "owner_approval_recorded": true,
+      "automatic_factory_handoff": false,
+      "automatic_spending": false,
+      "automatic_publication": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:12:37.277621+00:00",
+    "action": "process",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "factory_handoff_queue_processed",
+      "processed": 0,
+      "completed": 0,
+      "failed": 0,
+      "factory_registry": "/data/data/com.termux/files/home/companyos/ceo_memory/factory_projects.json",
+      "results": [],
+      "automatic_spending": false,
+      "automatic_publication": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:12:45.064825+00:00",
+    "action": "handoffs",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "factory_handoff_list",
+      "count": 0,
+      "statistics": {
+        "total": 0,
+        "queued": 0,
+        "completed": 0,
+        "blocked": 0,
+        "failed": 0
+      },
+      "handoffs": []
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:12:46.209297+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "proposal_approval_status",
+      "enabled": true,
+      "owner_approval_required": true,
+      "automatic_approval": false,
+      "automatic_factory_handoff": false,
+      "automatic_project_creation": false,
+      "automatic_spending": false,
+      "automatic_publication": false,
+      "proposal_statistics": {
+        "total": 1,
+        "pending_owner_approval": 0,
+        "approved": 1,
+        "rejected": 0,
+        "held": 0,
+        "handed_to_factory": 0
+      },
+      "handoff_statistics": {
+        "total": 0,
+        "queued": 0,
+        "completed": 0,
+        "blocked": 0,
+        "failed": 0
+      },
+      "health": {
+        "healthy": true,
+        "last_processed_at": "2026-07-18T01:12:37.277474+00:00",
+        "processed": 0,
+        "completed": 0,
+        "failed": 0,
+        "factory_registry": "/data/data/com.termux/files/home/companyos/ceo_memory/factory_projects.json",
+        "last_error": null
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:13:36.052762+00:00",
+    "action": "handoff",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "factory_handoff_queued",
+      "handoff_id": "handoff-3ec98437177f4a",
+      "proposal_id": "proposal-27d594e92623",
+      "project_name": "Local Contractor Bid Organizer",
+      "internal_factory_execution_allowed": true,
+      "external_publication": false,
+      "external_spending": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:13:55.308268+00:00",
+    "action": "process",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "factory_handoff_queue_processed",
+      "processed": 1,
+      "completed": 1,
+      "failed": 0,
+      "factory_registry": "/data/data/com.termux/files/home/companyos/ceo_memory/factory_projects.json",
+      "results": [
+        {
+          "success": true,
+          "status": "handoff_completed",
+          "handoff_id": "handoff-3ec98437177f4a",
+          "factory_project_id": "project-handoff-3ec98437177f4a",
+          "factory_registry": "/data/data/com.termux/files/home/companyos/ceo_memory/factory_projects.json",
+          "project_name": "Local Contractor Bid Organizer"
+        }
+      ],
+      "automatic_spending": false,
+      "automatic_publication": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:14:26.532968+00:00",
+    "action": "handoffs",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "factory_handoff_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "queued": 0,
+        "completed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "handoffs": [
+        {
+          "id": "handoff-3ec98437177f4a",
+          "proposal_id": "proposal-27d594e92623",
+          "project_name": "Local Contractor Bid Organizer",
+          "status": "completed",
+          "factory_project_id": "project-handoff-3ec98437177f4a",
+          "last_error": null
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:14:27.489355+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "proposal_approval_status",
+      "enabled": true,
+      "owner_approval_required": true,
+      "automatic_approval": false,
+      "automatic_factory_handoff": false,
+      "automatic_project_creation": false,
+      "automatic_spending": false,
+      "automatic_publication": false,
+      "proposal_statistics": {
+        "total": 1,
+        "pending_owner_approval": 0,
+        "approved": 0,
+        "rejected": 0,
+        "held": 0,
+        "handed_to_factory": 1
+      },
+      "handoff_statistics": {
+        "total": 1,
+        "queued": 0,
+        "completed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "health": {
+        "healthy": true,
+        "last_processed_at": "2026-07-18T01:13:55.308129+00:00",
+        "processed": 1,
+        "completed": 1,
+        "failed": 0,
+        "factory_registry": "/data/data/com.termux/files/home/companyos/ceo_memory/factory_projects.json",
+        "last_error": null
+      }
+    }
   }
 ]

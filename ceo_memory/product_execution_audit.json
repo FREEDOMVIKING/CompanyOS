@@ -1,0 +1,272 @@
+[
+  {
+    "timestamp": "2026-07-18T01:25:00.102827+00:00",
+    "action": "plan",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "product_execution_plan_created",
+      "plan_id": "plan-9436647bad33",
+      "project_id": "project-handoff-3ec98437177f4a",
+      "project_name": "Local Contractor Bid Organizer",
+      "tasks_created": 10,
+      "automatic_internal_execution": false,
+      "automatic_external_execution": false,
+      "automatic_spending": false,
+      "automatic_publication": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:25:00.199210+00:00",
+    "action": "plans",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "product_execution_plan_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "planned": 1,
+        "active": 0,
+        "completed": 0,
+        "blocked": 0
+      },
+      "plans": [
+        {
+          "id": "plan-9436647bad33",
+          "project_id": "project-handoff-3ec98437177f4a",
+          "project_name": "Local Contractor Bid Organizer",
+          "status": "planned",
+          "current_phase": "discovery",
+          "total_tasks": 10,
+          "completed_tasks": 0,
+          "progress_percent": 0
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:25:00.288594+00:00",
+    "action": "tasks",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "product_execution_task_list",
+      "count": 10,
+      "statistics": {
+        "total": 10,
+        "pending": 10,
+        "in_progress": 0,
+        "completed": 0,
+        "blocked": 0,
+        "failed": 0
+      },
+      "tasks": [
+        {
+          "id": "task-b732482cc136",
+          "plan_id": "plan-9436647bad33",
+          "order": 1,
+          "name": "Define customer and problem validation plan",
+          "type": "research",
+          "phase": "discovery",
+          "priority": 100,
+          "status": "pending",
+          "blocked_by": []
+        },
+        {
+          "id": "task-e21cc9fe897a",
+          "plan_id": "plan-9436647bad33",
+          "order": 2,
+          "name": "Create product requirements document",
+          "type": "design",
+          "phase": "planning",
+          "priority": 95,
+          "status": "pending",
+          "blocked_by": [
+            "task-b732482cc136"
+          ]
+        },
+        {
+          "id": "task-eb820b859cf3",
+          "plan_id": "plan-9436647bad33",
+          "order": 3,
+          "name": "Design core user workflow",
+          "type": "design",
+          "phase": "design",
+          "priority": 90,
+          "status": "pending",
+          "blocked_by": [
+            "task-e21cc9fe897a"
+          ]
+        },
+        {
+          "id": "task-82d38d4f9b65",
+          "plan_id": "plan-9436647bad33",
+          "order": 4,
+          "name": "Define project data model",
+          "type": "development",
+          "phase": "architecture",
+          "priority": 88,
+          "status": "pending",
+          "blocked_by": [
+            "task-eb820b859cf3"
+          ]
+        },
+        {
+          "id": "task-c8d5cc150ca3",
+          "plan_id": "plan-9436647bad33",
+          "order": 5,
+          "name": "Build MVP project structure",
+          "type": "development",
+          "phase": "build",
+          "priority": 85,
+          "status": "pending",
+          "blocked_by": [
+            "task-82d38d4f9b65"
+          ]
+        },
+        {
+          "id": "task-bd393b27b270",
+          "plan_id": "plan-9436647bad33",
+          "order": 6,
+          "name": "Build core MVP workflow",
+          "type": "development",
+          "phase": "build",
+          "priority": 82,
+          "status": "pending",
+          "blocked_by": [
+            "task-c8d5cc150ca3"
+          ]
+        },
+        {
+          "id": "task-e8fd6aeae630",
+          "plan_id": "plan-9436647bad33",
+          "order": 7,
+          "name": "Create internal test suite",
+          "type": "testing",
+          "phase": "testing",
+          "priority": 78,
+          "status": "pending",
+          "blocked_by": [
+            "task-bd393b27b270"
+          ]
+        },
+        {
+          "id": "task-3b87f6c647c7",
+          "plan_id": "plan-9436647bad33",
+          "order": 8,
+          "name": "Run product validation review",
+          "type": "validation",
+          "phase": "validation",
+          "priority": 74,
+          "status": "pending",
+          "blocked_by": [
+            "task-e8fd6aeae630"
+          ]
+        },
+        {
+          "id": "task-37e3324efffd",
+          "plan_id": "plan-9436647bad33",
+          "order": 9,
+          "name": "Create product documentation",
+          "type": "documentation",
+          "phase": "documentation",
+          "priority": 70,
+          "status": "pending",
+          "blocked_by": [
+            "task-3b87f6c647c7"
+          ]
+        },
+        {
+          "id": "task-4ae37c5a4935",
+          "plan_id": "plan-9436647bad33",
+          "order": 10,
+          "name": "Create deployment and launch checklist",
+          "type": "deployment_planning",
+          "phase": "launch_planning",
+          "priority": 65,
+          "status": "pending",
+          "blocked_by": [
+            "task-37e3324efffd"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:25:00.384831+00:00",
+    "action": "next",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "next_execution_task",
+      "task": {
+        "id": "task-b732482cc136",
+        "plan_id": "plan-9436647bad33",
+        "project_id": "project-handoff-3ec98437177f4a",
+        "project_name": "Local Contractor Bid Organizer",
+        "order": 1,
+        "name": "Define customer and problem validation plan",
+        "type": "research",
+        "phase": "discovery",
+        "priority": 100,
+        "description": "Create the validation plan for Local Contractor Bid Organizer, including customer questions, assumptions and success criteria.",
+        "deliverables": [
+          "Target customer summary",
+          "Problem validation checklist",
+          "Validation interview questions",
+          "Go or hold criteria"
+        ],
+        "status": "pending",
+        "blocked_by": [],
+        "internal_execution_allowed": true,
+        "external_execution_allowed": false,
+        "external_spending_allowed": false,
+        "external_publication_allowed": false,
+        "attempts": 0,
+        "result": null,
+        "last_error": null,
+        "created_at": "2026-07-18T01:25:00.102343+00:00",
+        "updated_at": "2026-07-18T01:25:00.102350+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:25:00.475885+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "product_execution_pipeline_status",
+      "enabled": true,
+      "automatic_planning": false,
+      "automatic_internal_execution": false,
+      "automatic_external_execution": false,
+      "automatic_spending": false,
+      "automatic_publication": false,
+      "plan_statistics": {
+        "total": 1,
+        "planned": 1,
+        "active": 0,
+        "completed": 0,
+        "blocked": 0
+      },
+      "task_statistics": {
+        "total": 10,
+        "pending": 10,
+        "in_progress": 0,
+        "completed": 0,
+        "blocked": 0,
+        "failed": 0
+      },
+      "health": {
+        "healthy": true,
+        "last_planned_at": "2026-07-18T01:25:00.102740+00:00",
+        "last_error": null,
+        "latest_plan_id": "plan-9436647bad33",
+        "latest_project_id": "project-handoff-3ec98437177f4a",
+        "tasks_created": 10
+      }
+    }
+  }
+]
