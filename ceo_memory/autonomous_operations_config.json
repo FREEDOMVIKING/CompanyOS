@@ -235,6 +235,16 @@
         "companyos/readinessctl",
         "check"
       ]
+    },
+    {
+      "id": "execution-gateway",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/gatewayctl",
+        "process"
+      ]
     }
   ]
 }

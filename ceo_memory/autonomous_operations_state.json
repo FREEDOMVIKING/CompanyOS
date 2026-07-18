@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 47,
+  "cycle_count": 48,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T13:29:54.468540+00:00",
@@ -211,19 +211,19 @@
       "failure_count": 0
     },
     "exception-recovery": {
-      "last_started_at": "2026-07-18T14:16:25.066031+00:00",
-      "last_started_epoch": 1784384185.0660315,
+      "last_started_at": "2026-07-18T14:29:15.088039+00:00",
+      "last_started_epoch": 1784384955.0880387,
       "last_command": [
         "python",
         "companyos/recoveryctl",
         "recover"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T14:16:25.166862+00:00",
+      "last_finished_at": "2026-07-18T14:29:15.207021+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.101,
-      "run_count": 3,
+      "last_duration_seconds": 0.119,
+      "run_count": 4,
       "failure_count": 0
     },
     "resource-workload-optimizer": {
@@ -353,9 +353,25 @@
       "last_duration_seconds": 0.082,
       "run_count": 1,
       "failure_count": 0
+    },
+    "execution-gateway": {
+      "last_started_at": "2026-07-18T14:29:15.207748+00:00",
+      "last_started_epoch": 1784384955.2077477,
+      "last_command": [
+        "python",
+        "companyos/gatewayctl",
+        "process"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T14:29:15.294727+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.087,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T14:21:17.626023+00:00",
+  "last_cycle_at": "2026-07-18T14:29:15.295289+00:00",
   "last_cycle_job_count": 2,
   "last_cycle_success": true
 }
