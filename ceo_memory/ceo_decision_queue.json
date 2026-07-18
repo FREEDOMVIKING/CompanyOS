@@ -444,14 +444,163 @@
       "automatic_execution": false,
       "created_at": "2026-07-18T04:01:44.490366+00:00",
       "updated_at": "2026-07-18T04:01:44.490368+00:00"
+    },
+    {
+      "id": "decision-ae5c422396f1",
+      "source_id": "e2e-invoice-001",
+      "source_type": "invoice",
+      "title": "Review receivable: E2E Test Customer",
+      "category": "finance",
+      "description": "Invoice has $1,250.00 outstanding.",
+      "rank": 2,
+      "priority_score": 91.0,
+      "priority_band": "critical",
+      "estimated_value": 1250.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is critical.",
+          "It has an estimated value of $1,250.00.",
+          "Delay may reduce revenue or increase operating risk.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.681993+00:00",
+      "updated_at": "2026-07-18T04:47:26.681995+00:00"
+    },
+    {
+      "id": "decision-95bcc2a7d742",
+      "source_id": "oppdisc-aa15a45c9641",
+      "source_type": "opportunity",
+      "title": "Recover receivable: Sample Contractor",
+      "category": "cash_recovery",
+      "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+      "rank": 3,
+      "priority_score": 81.3,
+      "priority_band": "high",
+      "estimated_value": 11500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $11,500.00.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682007+00:00",
+      "updated_at": "2026-07-18T04:47:26.682009+00:00"
+    },
+    {
+      "id": "decision-7e482dfbea21",
+      "source_id": "oppdisc-76a988d89351",
+      "source_type": "opportunity",
+      "title": "Recover receivable: E2E Test Customer",
+      "category": "cash_recovery",
+      "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+      "rank": 4,
+      "priority_score": 81.3,
+      "priority_band": "high",
+      "estimated_value": 1250.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $1,250.00.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682020+00:00",
+      "updated_at": "2026-07-18T04:47:26.682022+00:00"
+    },
+    {
+      "id": "decision-ba6fcf48bdd5",
+      "source_id": "oppdisc-f83dbe7c8e35",
+      "source_type": "opportunity",
+      "title": "Advance lead: Driveway Replacement",
+      "category": "sales",
+      "description": "Move Sample Contractor from new toward an approved proposal.",
+      "rank": 5,
+      "priority_score": 77.5,
+      "priority_band": "high",
+      "estimated_value": 12500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $12,500.00.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682028+00:00",
+      "updated_at": "2026-07-18T04:47:26.682030+00:00"
+    },
+    {
+      "id": "decision-8d0619a3b216",
+      "source_id": "e2e-project-001",
+      "source_type": "project",
+      "title": "Advance project: E2E Test Project",
+      "category": "operations",
+      "description": "Project is 35% complete and currently in_progress.",
+      "rank": 12,
+      "priority_score": 64.5,
+      "priority_band": "medium",
+      "estimated_value": 5000.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It has an estimated value of $5,000.00.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682040+00:00",
+      "updated_at": "2026-07-18T04:47:26.682042+00:00"
     }
   ],
   "statistics": {
-    "total": 15,
-    "pending": 15,
+    "total": 20,
+    "pending": 20,
     "approved": 0,
     "deferred": 0,
     "rejected": 0
   },
-  "last_updated_at": "2026-07-18T04:01:44.490378+00:00"
+  "last_updated_at": "2026-07-18T04:47:26.682052+00:00"
 }

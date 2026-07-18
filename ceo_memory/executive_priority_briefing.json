@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "briefing": {
-    "generated_at": "2026-07-18T03:54:16.362649+00:00",
+    "generated_at": "2026-07-18T04:47:26.575077+00:00",
     "headline": "15 priorities ranked; 5 selected for executive focus.",
     "top_priorities": [
       {
-        "id": "priority-f54c357647fd",
+        "id": "priority-70f36ec4050b",
         "source_type": "invoice",
         "source_id": "invoice-d7e99861931c",
         "title": "Review receivable: Sample Contractor",
@@ -22,13 +22,34 @@
         "recommended_action": "owner_review",
         "owner_approval_required": true,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T03:54:16.362099+00:00",
+        "created_at": "2026-07-18T04:47:26.574376+00:00",
         "rank": 1
       },
       {
-        "id": "priority-c6d2a7fd0e13",
+        "id": "priority-515dbd681805",
+        "source_type": "invoice",
+        "source_id": "e2e-invoice-001",
+        "title": "Review receivable: E2E Test Customer",
+        "category": "finance",
+        "description": "Invoice has $1,250.00 outstanding.",
+        "urgency": 95,
+        "profitability": 95,
+        "risk_reduction": 90,
+        "execution_ease": 65,
+        "evidence": 95,
+        "estimated_value": 1250.0,
+        "score": 91.0,
+        "priority_band": "critical",
+        "recommended_action": "owner_review",
+        "owner_approval_required": true,
+        "external_action_authorized": false,
+        "created_at": "2026-07-18T04:47:26.574387+00:00",
+        "rank": 2
+      },
+      {
+        "id": "priority-e98cebc17177",
         "source_type": "opportunity",
-        "source_id": "oppdisc-60e0812a7dc5",
+        "source_id": "oppdisc-aa15a45c9641",
         "title": "Recover receivable: Sample Contractor",
         "category": "cash_recovery",
         "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
@@ -43,13 +64,34 @@
         "recommended_action": "owner_review",
         "owner_approval_required": true,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T03:54:16.361926+00:00",
-        "rank": 2
+        "created_at": "2026-07-18T04:47:26.574178+00:00",
+        "rank": 3
       },
       {
-        "id": "priority-5974ae877676",
+        "id": "priority-cbd07270f950",
         "source_type": "opportunity",
-        "source_id": "oppdisc-982ee88708bc",
+        "source_id": "oppdisc-76a988d89351",
+        "title": "Recover receivable: E2E Test Customer",
+        "category": "cash_recovery",
+        "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+        "urgency": 70,
+        "profitability": 90.0,
+        "risk_reduction": 85,
+        "execution_ease": 68.0,
+        "evidence": 95.0,
+        "estimated_value": 1250.0,
+        "score": 81.3,
+        "priority_band": "high",
+        "recommended_action": "owner_review",
+        "owner_approval_required": true,
+        "external_action_authorized": false,
+        "created_at": "2026-07-18T04:47:26.574197+00:00",
+        "rank": 4
+      },
+      {
+        "id": "priority-e623586c7813",
+        "source_type": "opportunity",
+        "source_id": "oppdisc-f83dbe7c8e35",
         "title": "Advance lead: Driveway Replacement",
         "category": "sales",
         "description": "Move Sample Contractor from new toward an approved proposal.",
@@ -64,56 +106,14 @@
         "recommended_action": "owner_review",
         "owner_approval_required": true,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T03:54:16.361946+00:00",
-        "rank": 3
-      },
-      {
-        "id": "priority-e39757156c78",
-        "source_type": "followup",
-        "source_id": "followup-f51333cfa177",
-        "title": "Review follow-up: Sample Contractor",
-        "category": "sales",
-        "description": "Review lead and prepare owner-approved follow-up.",
-        "urgency": 82,
-        "profitability": 65,
-        "risk_reduction": 70,
-        "execution_ease": 78,
-        "evidence": 85,
-        "estimated_value": 0.0,
-        "score": 74.4,
-        "priority_band": "high",
-        "recommended_action": "owner_review",
-        "owner_approval_required": true,
-        "external_action_authorized": false,
-        "created_at": "2026-07-18T03:54:16.362083+00:00",
-        "rank": 4
-      },
-      {
-        "id": "priority-f54daac4bf68",
-        "source_type": "internal_task",
-        "source_id": "task-eb820b859cf3",
-        "title": "Design core user workflow",
-        "category": "operations",
-        "description": "Map the main user journey from first use through successful completion of the core workflow.",
-        "urgency": 90.0,
-        "profitability": 45,
-        "risk_reduction": 55,
-        "execution_ease": 75,
-        "evidence": 80,
-        "estimated_value": 0.0,
-        "score": 67.0,
-        "priority_band": "medium",
-        "recommended_action": "internal_execution_review",
-        "owner_approval_required": false,
-        "external_action_authorized": false,
-        "created_at": "2026-07-18T03:54:16.361973+00:00",
+        "created_at": "2026-07-18T04:47:26.574209+00:00",
         "rank": 5
       }
     ],
-    "critical_count": 1,
-    "high_count": 3,
-    "medium_count": 11,
-    "total_estimated_value": 48000.0,
+    "critical_count": 2,
+    "high_count": 4,
+    "medium_count": 9,
+    "total_estimated_value": 55500.0,
     "recommended_focus_order": [
       {
         "rank": 1,
@@ -124,35 +124,35 @@
       },
       {
         "rank": 2,
+        "title": "Review receivable: E2E Test Customer",
+        "category": "finance",
+        "score": 91.0,
+        "owner_approval_required": true
+      },
+      {
+        "rank": 3,
         "title": "Recover receivable: Sample Contractor",
         "category": "cash_recovery",
         "score": 81.3,
         "owner_approval_required": true
       },
       {
-        "rank": 3,
-        "title": "Advance lead: Driveway Replacement",
-        "category": "sales",
-        "score": 77.5,
-        "owner_approval_required": true
-      },
-      {
         "rank": 4,
-        "title": "Review follow-up: Sample Contractor",
-        "category": "sales",
-        "score": 74.4,
+        "title": "Recover receivable: E2E Test Customer",
+        "category": "cash_recovery",
+        "score": 81.3,
         "owner_approval_required": true
       },
       {
         "rank": 5,
-        "title": "Design core user workflow",
-        "category": "operations",
-        "score": 67.0,
-        "owner_approval_required": false
+        "title": "Advance lead: Driveway Replacement",
+        "category": "sales",
+        "score": 77.5,
+        "owner_approval_required": true
       }
     ],
     "automatic_external_execution": false,
     "automatic_spending": false
   },
-  "last_updated_at": "2026-07-18T03:54:16.362676+00:00"
+  "last_updated_at": "2026-07-18T04:47:26.575104+00:00"
 }
