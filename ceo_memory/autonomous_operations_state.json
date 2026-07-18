@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 60,
+  "cycle_count": 61,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T14:30:52.191310+00:00",
@@ -545,9 +545,25 @@
       "last_duration_seconds": 0.918,
       "run_count": 1,
       "failure_count": 0
+    },
+    "cycle-supervisor": {
+      "last_started_at": "2026-07-18T15:00:33.057422+00:00",
+      "last_started_epoch": 1784386833.0574222,
+      "last_command": [
+        "python",
+        "companyos/supervisorctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T15:00:33.149201+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.092,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T14:59:03.663967+00:00",
-  "last_cycle_job_count": 5,
+  "last_cycle_at": "2026-07-18T15:00:33.149751+00:00",
+  "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
