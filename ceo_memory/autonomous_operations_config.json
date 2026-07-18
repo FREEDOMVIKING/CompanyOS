@@ -705,6 +705,16 @@
         "companyos/opportunityrerankctl",
         "rerank"
       ]
+    },
+    {
+      "id": "adaptive-opportunity-cycle",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunitycyclectl",
+        "run"
+      ]
     }
   ]
 }
