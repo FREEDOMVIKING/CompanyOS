@@ -268,5 +268,182 @@
         "tasks_created": 10
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T01:41:19.593652+00:00",
+    "action": "plans",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "product_execution_plan_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "planned": 0,
+        "active": 1,
+        "completed": 0,
+        "blocked": 0
+      },
+      "plans": [
+        {
+          "id": "plan-9436647bad33",
+          "project_id": "project-handoff-3ec98437177f4a",
+          "project_name": "Local Contractor Bid Organizer",
+          "status": "active",
+          "current_phase": "design",
+          "total_tasks": 10,
+          "completed_tasks": 2,
+          "progress_percent": 20.0
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T01:41:19.679676+00:00",
+    "action": "tasks",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "product_execution_task_list",
+      "count": 10,
+      "statistics": {
+        "total": 10,
+        "pending": 8,
+        "in_progress": 0,
+        "completed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "tasks": [
+        {
+          "id": "task-b732482cc136",
+          "plan_id": "plan-9436647bad33",
+          "order": 1,
+          "name": "Define customer and problem validation plan",
+          "type": "research",
+          "phase": "discovery",
+          "priority": 100,
+          "status": "completed",
+          "blocked_by": []
+        },
+        {
+          "id": "task-e21cc9fe897a",
+          "plan_id": "plan-9436647bad33",
+          "order": 2,
+          "name": "Create product requirements document",
+          "type": "design",
+          "phase": "planning",
+          "priority": 95,
+          "status": "completed",
+          "blocked_by": [
+            "task-b732482cc136"
+          ]
+        },
+        {
+          "id": "task-eb820b859cf3",
+          "plan_id": "plan-9436647bad33",
+          "order": 3,
+          "name": "Design core user workflow",
+          "type": "design",
+          "phase": "design",
+          "priority": 90,
+          "status": "pending",
+          "blocked_by": [
+            "task-e21cc9fe897a"
+          ]
+        },
+        {
+          "id": "task-82d38d4f9b65",
+          "plan_id": "plan-9436647bad33",
+          "order": 4,
+          "name": "Define project data model",
+          "type": "development",
+          "phase": "architecture",
+          "priority": 88,
+          "status": "pending",
+          "blocked_by": [
+            "task-eb820b859cf3"
+          ]
+        },
+        {
+          "id": "task-c8d5cc150ca3",
+          "plan_id": "plan-9436647bad33",
+          "order": 5,
+          "name": "Build MVP project structure",
+          "type": "development",
+          "phase": "build",
+          "priority": 85,
+          "status": "pending",
+          "blocked_by": [
+            "task-82d38d4f9b65"
+          ]
+        },
+        {
+          "id": "task-bd393b27b270",
+          "plan_id": "plan-9436647bad33",
+          "order": 6,
+          "name": "Build core MVP workflow",
+          "type": "development",
+          "phase": "build",
+          "priority": 82,
+          "status": "pending",
+          "blocked_by": [
+            "task-c8d5cc150ca3"
+          ]
+        },
+        {
+          "id": "task-e8fd6aeae630",
+          "plan_id": "plan-9436647bad33",
+          "order": 7,
+          "name": "Create internal test suite",
+          "type": "testing",
+          "phase": "testing",
+          "priority": 78,
+          "status": "pending",
+          "blocked_by": [
+            "task-bd393b27b270"
+          ]
+        },
+        {
+          "id": "task-3b87f6c647c7",
+          "plan_id": "plan-9436647bad33",
+          "order": 8,
+          "name": "Run product validation review",
+          "type": "validation",
+          "phase": "validation",
+          "priority": 74,
+          "status": "pending",
+          "blocked_by": [
+            "task-e8fd6aeae630"
+          ]
+        },
+        {
+          "id": "task-37e3324efffd",
+          "plan_id": "plan-9436647bad33",
+          "order": 9,
+          "name": "Create product documentation",
+          "type": "documentation",
+          "phase": "documentation",
+          "priority": 70,
+          "status": "pending",
+          "blocked_by": [
+            "task-3b87f6c647c7"
+          ]
+        },
+        {
+          "id": "task-4ae37c5a4935",
+          "plan_id": "plan-9436647bad33",
+          "order": 10,
+          "name": "Create deployment and launch checklist",
+          "type": "deployment_planning",
+          "phase": "launch_planning",
+          "priority": 65,
+          "status": "pending",
+          "blocked_by": [
+            "task-37e3324efffd"
+          ]
+        }
+      ]
+    }
   }
 ]
