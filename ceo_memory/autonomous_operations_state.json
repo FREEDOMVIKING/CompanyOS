@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 108,
+  "cycle_count": 109,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T19:48:23.510562+00:00",
@@ -867,35 +867,35 @@
       "failure_count": 0
     },
     "fused-decision-selector": {
-      "last_started_at": "2026-07-18T19:34:33.820713+00:00",
-      "last_started_epoch": 1784403273.8207111,
+      "last_started_at": "2026-07-18T20:08:35.246554+00:00",
+      "last_started_epoch": 1784405315.2465544,
       "last_command": [
         "python",
         "companyos/fusedselectctl",
         "select"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:34:33.907078+00:00",
+      "last_finished_at": "2026-07-18T20:08:35.372120+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.086,
-      "run_count": 4,
+      "last_duration_seconds": 0.126,
+      "run_count": 5,
       "failure_count": 0
     },
     "fused-execution-plan": {
-      "last_started_at": "2026-07-18T19:34:33.908674+00:00",
-      "last_started_epoch": 1784403273.9086733,
+      "last_started_at": "2026-07-18T20:08:35.373049+00:00",
+      "last_started_epoch": 1784405315.373049,
       "last_command": [
         "python",
         "companyos/fusedplanctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:34:33.991306+00:00",
+      "last_finished_at": "2026-07-18T20:08:35.478970+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.083,
-      "run_count": 4,
+      "last_duration_seconds": 0.106,
+      "run_count": 5,
       "failure_count": 0
     },
     "feedback-priority-integration": {
@@ -915,35 +915,35 @@
       "failure_count": 0
     },
     "closed-loop-selector": {
-      "last_started_at": "2026-07-18T19:34:33.992318+00:00",
-      "last_started_epoch": 1784403273.992318,
+      "last_started_at": "2026-07-18T20:08:35.479800+00:00",
+      "last_started_epoch": 1784405315.4797995,
       "last_command": [
         "python",
         "companyos/closedloopctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:34:34.305489+00:00",
+      "last_finished_at": "2026-07-18T20:08:35.897318+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.313,
-      "run_count": 3,
+      "last_duration_seconds": 0.418,
+      "run_count": 4,
       "failure_count": 0
     },
     "readiness-recovery-coordinator": {
-      "last_started_at": "2026-07-18T19:34:34.306424+00:00",
-      "last_started_epoch": 1784403274.3064237,
+      "last_started_at": "2026-07-18T20:08:35.898559+00:00",
+      "last_started_epoch": 1784405315.898559,
       "last_command": [
         "python",
         "companyos/recovery2ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:34:35.886470+00:00",
+      "last_finished_at": "2026-07-18T20:08:37.211540+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.58,
-      "run_count": 3,
+      "last_duration_seconds": 1.313,
+      "run_count": 4,
       "failure_count": 0
     },
     "recovery-aware-closed-loop": {
@@ -1027,35 +1027,35 @@
       "failure_count": 0
     },
     "opportunity-action-queue": {
-      "last_started_at": "2026-07-18T19:34:36.061059+00:00",
-      "last_started_epoch": 1784403276.061056,
+      "last_started_at": "2026-07-18T20:08:37.212565+00:00",
+      "last_started_epoch": 1784405317.212565,
       "last_command": [
         "python",
         "companyos/opportunityqueuectl",
         "coordinate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:34:36.194416+00:00",
+      "last_finished_at": "2026-07-18T20:08:37.334197+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.133,
-      "run_count": 1,
+      "last_duration_seconds": 0.122,
+      "run_count": 2,
       "failure_count": 0
     },
     "ready-action-execution-handoff": {
-      "last_started_at": "2026-07-18T19:35:51.817074+00:00",
-      "last_started_epoch": 1784403351.8170738,
+      "last_started_at": "2026-07-18T20:08:37.335443+00:00",
+      "last_started_epoch": 1784405317.335442,
       "last_command": [
         "python",
         "companyos/actionhandoffctl",
         "handoff"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T19:35:51.912000+00:00",
+      "last_finished_at": "2026-07-18T20:08:37.422913+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.095,
-      "run_count": 1,
+      "last_duration_seconds": 0.087,
+      "run_count": 2,
       "failure_count": 0
     },
     "guarded-opportunity-action-executor": {
@@ -1153,9 +1153,41 @@
       "last_duration_seconds": 0.075,
       "run_count": 1,
       "failure_count": 0
+    },
+    "portfolio-rebalance": {
+      "last_started_at": "2026-07-18T20:08:37.423825+00:00",
+      "last_started_epoch": 1784405317.4238253,
+      "last_command": [
+        "python",
+        "companyos/portfoliorebalancectl",
+        "rebalance"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:08:37.498587+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.075,
+      "run_count": 1,
+      "failure_count": 0
+    },
+    "opportunity-lifecycle": {
+      "last_started_at": "2026-07-18T20:08:37.499411+00:00",
+      "last_started_epoch": 1784405317.499411,
+      "last_command": [
+        "python",
+        "companyos/opportunitylifecyclectl",
+        "evaluate"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:08:37.570076+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.071,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T20:07:20.965642+00:00",
-  "last_cycle_job_count": 20,
+  "last_cycle_at": "2026-07-18T20:08:37.570971+00:00",
+  "last_cycle_job_count": 8,
   "last_cycle_success": true
 }

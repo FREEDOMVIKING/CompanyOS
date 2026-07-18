@@ -745,6 +745,16 @@
         "companyos/portfoliorebalancectl",
         "rebalance"
       ]
+    },
+    {
+      "id": "opportunity-lifecycle",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunitylifecyclectl",
+        "evaluate"
+      ]
     }
   ]
 }
