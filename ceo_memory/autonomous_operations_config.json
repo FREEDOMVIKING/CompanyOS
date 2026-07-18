@@ -1,0 +1,74 @@
+{
+  "enabled": true,
+  "loop_interval_seconds": 900,
+  "maximum_jobs_per_cycle": 20,
+  "stop_cycle_on_job_failure": false,
+  "require_autonomy_not_halted": true,
+  "automatic_local_execution": true,
+  "automatic_internal_analysis": true,
+  "automatic_internal_reporting": true,
+  "automatic_backups": true,
+  "automatic_integrity_checks": true,
+  "automatic_git_stage": false,
+  "automatic_git_commit": false,
+  "automatic_git_push": false,
+  "automatic_customer_contact": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "jobs": [
+    {
+      "id": "integrity-check",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": ["python", "companyos/integrityctl", "check"]
+    },
+    {
+      "id": "opportunity-discovery",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": ["python", "companyos/opportunitydiscoveryctl", "discover"]
+    },
+    {
+      "id": "priority-ranking",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": ["python", "companyos/priorityctl", "rank"]
+    },
+    {
+      "id": "decision-preparation",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": ["python", "companyos/decisionctl", "prepare"]
+    },
+    {
+      "id": "execution-plan-preparation",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": ["python", "companyos/executionplanctl", "prepare"]
+    },
+    {
+      "id": "improvement-analysis",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": ["python", "companyos/improvementctl", "analyze"]
+    },
+    {
+      "id": "performance-analytics",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": ["python", "companyos/performancectl", "collect"]
+    },
+    {
+      "id": "business-forecast",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": ["python", "companyos/forecastctl", "forecast"]
+    },
+    {
+      "id": "local-backup",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": ["python", "companyos/integrityctl", "backup"]
+    }
+  ]
+}
