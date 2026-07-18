@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-18T14:30:53.219972+00:00",
+  "connectors": [
+    {
+      "id": "github",
+      "name": "GitHub",
+      "type": "code_repository",
+      "read": true,
+      "write": true,
+      "enabled": true,
+      "last_discovered_at": "2026-07-18T14:30:53.219946+00:00"
+    },
+    {
+      "id": "email",
+      "name": "Email",
+      "type": "communications",
+      "read": true,
+      "write": false,
+      "enabled": false,
+      "last_discovered_at": "2026-07-18T14:30:53.219958+00:00"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "type": "scheduling",
+      "read": true,
+      "write": false,
+      "enabled": false,
+      "last_discovered_at": "2026-07-18T14:30:53.219962+00:00"
+    },
+    {
+      "id": "crm",
+      "name": "CRM",
+      "type": "business_data",
+      "read": true,
+      "write": false,
+      "enabled": true,
+      "last_discovered_at": "2026-07-18T14:30:53.219965+00:00"
+    },
+    {
+      "id": "accounting",
+      "name": "Accounting",
+      "type": "finance_data",
+      "read": true,
+      "write": false,
+      "enabled": true,
+      "last_discovered_at": "2026-07-18T14:30:53.219967+00:00"
+    },
+    {
+      "id": "market-data",
+      "name": "Market Data",
+      "type": "external_data",
+      "read": true,
+      "write": false,
+      "enabled": false,
+      "last_discovered_at": "2026-07-18T14:30:53.219969+00:00"
+    }
+  ]
+}
