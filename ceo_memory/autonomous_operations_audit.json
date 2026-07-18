@@ -3394,5 +3394,361 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:09:47.012059+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 17530
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:09:47.121420+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 22590,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:09:47.279417+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_status",
+      "enabled": true,
+      "running": true,
+      "pid": 22590,
+      "halted": false,
+      "loop_interval_seconds": 900,
+      "configured_job_count": 17,
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 41,
+        "jobs": {
+          "integrity-check": {
+            "last_started_at": "2026-07-18T13:29:54.468540+00:00",
+            "last_started_epoch": 1784381394.468331,
+            "last_command": [
+              "python",
+              "companyos/integrityctl",
+              "check"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:54.819594+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.351,
+            "run_count": 9,
+            "failure_count": 0
+          },
+          "opportunity-discovery": {
+            "last_started_at": "2026-07-18T14:05:07.797674+00:00",
+            "last_started_epoch": 1784383507.797674,
+            "last_command": [
+              "python",
+              "companyos/opportunitydiscoveryctl",
+              "discover"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T14:05:07.927324+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.13,
+            "run_count": 18,
+            "failure_count": 0
+          },
+          "priority-ranking": {
+            "last_started_at": "2026-07-18T14:09:47.064309+00:00",
+            "last_started_epoch": 1784383787.0643096,
+            "last_command": [
+              "python",
+              "companyos/priorityctl",
+              "rank"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T14:09:47.242307+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.178,
+            "run_count": 19,
+            "failure_count": 0
+          },
+          "decision-preparation": {
+            "last_started_at": "2026-07-18T14:09:47.242888+00:00",
+            "last_started_epoch": 1784383787.2428882,
+            "last_command": [
+              "python",
+              "companyos/decisionctl",
+              "prepare"
+            ],
+            "status": "running",
+            "last_finished_at": "2026-07-18T13:57:05.858260+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.09,
+            "run_count": 18,
+            "failure_count": 0
+          },
+          "execution-plan-preparation": {
+            "last_started_at": "2026-07-18T14:05:07.927994+00:00",
+            "last_started_epoch": 1784383507.927994,
+            "last_command": [
+              "python",
+              "companyos/executionplanctl",
+              "prepare"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T14:05:08.018933+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.091,
+            "run_count": 18,
+            "failure_count": 0
+          },
+          "improvement-analysis": {
+            "last_started_at": "2026-07-18T13:29:55.489733+00:00",
+            "last_started_epoch": 1784381395.4897292,
+            "last_command": [
+              "python",
+              "companyos/improvementctl",
+              "analyze"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.651055+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.161,
+            "run_count": 9,
+            "failure_count": 0
+          },
+          "performance-analytics": {
+            "last_started_at": "2026-07-18T13:29:55.653595+00:00",
+            "last_started_epoch": 1784381395.653592,
+            "last_command": [
+              "python",
+              "companyos/performancectl",
+              "collect"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.784425+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.131,
+            "run_count": 9,
+            "failure_count": 0
+          },
+          "business-forecast": {
+            "last_started_at": "2026-07-18T13:29:55.787362+00:00",
+            "last_started_epoch": 1784381395.7873585,
+            "last_command": [
+              "python",
+              "companyos/forecastctl",
+              "forecast"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:29:55.920177+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.133,
+            "run_count": 5,
+            "failure_count": 0
+          },
+          "local-backup": {
+            "last_started_at": "2026-07-18T11:29:27.236652+00:00",
+            "last_started_epoch": 1784374167.2366505,
+            "last_command": [
+              "python",
+              "companyos/integrityctl",
+              "backup"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T11:29:27.750319+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.514,
+            "run_count": 2,
+            "failure_count": 0
+          },
+          "executive-briefing": {
+            "last_started_at": "2026-07-18T13:36:45.261180+00:00",
+            "last_started_epoch": 1784381805.26118,
+            "last_command": [
+              "python",
+              "companyos/briefctl",
+              "generate"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:36:45.340808+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.08,
+            "run_count": 1,
+            "failure_count": 0
+          },
+          "autonomous-orchestrator": {
+            "last_started_at": "2026-07-18T14:05:08.020028+00:00",
+            "last_started_epoch": 1784383508.0200276,
+            "last_command": [
+              "python",
+              "companyos/orchestratorctl",
+              "run"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T14:05:09.013018+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.993,
+            "run_count": 2,
+            "failure_count": 0
+          },
+          "goal-strategy": {
+            "last_started_at": "2026-07-18T13:43:26.645225+00:00",
+            "last_started_epoch": 1784382206.6452255,
+            "last_command": [
+              "python",
+              "companyos/goalctl",
+              "generate"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:43:26.744071+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.099,
+            "run_count": 1,
+            "failure_count": 0
+          },
+          "learning-feedback": {
+            "last_started_at": "2026-07-18T13:45:57.730745+00:00",
+            "last_started_epoch": 1784382357.7307446,
+            "last_command": [
+              "python",
+              "companyos/learningctl",
+              "learn"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:45:57.830452+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.1,
+            "run_count": 1,
+            "failure_count": 0
+          },
+          "exception-recovery": {
+            "last_started_at": "2026-07-18T14:05:09.013667+00:00",
+            "last_started_epoch": 1784383509.013667,
+            "last_command": [
+              "python",
+              "companyos/recoveryctl",
+              "recover"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T14:05:09.135758+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.122,
+            "run_count": 2,
+            "failure_count": 0
+          },
+          "resource-workload-optimizer": {
+            "last_started_at": "2026-07-18T13:57:05.859065+00:00",
+            "last_started_epoch": 1784383025.8590648,
+            "last_command": [
+              "python",
+              "companyos/resourcctl",
+              "optimize"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T13:57:05.940402+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 0.081,
+            "run_count": 1,
+            "failure_count": 0
+          },
+          "internal-action-engine": {
+            "last_started_at": "2026-07-18T14:05:09.136792+00:00",
+            "last_started_epoch": 1784383509.1367917,
+            "last_command": [
+              "python",
+              "companyos/actionctl",
+              "execute"
+            ],
+            "status": "success",
+            "last_finished_at": "2026-07-18T14:05:10.204300+00:00",
+            "last_success": true,
+            "last_return_code": 0,
+            "last_duration_seconds": 1.068,
+            "run_count": 1,
+            "failure_count": 0
+          }
+        },
+        "last_cycle_at": "2026-07-18T14:05:10.205091+00:00",
+        "last_cycle_job_count": 5,
+        "last_cycle_success": true
+      },
+      "health": {
+        "healthy": true,
+        "running": true,
+        "halted": false,
+        "last_cycle_at": "2026-07-18T14:05:10.205091+00:00",
+        "last_cycle_job_count": 5,
+        "failure_count": 0,
+        "last_error": null
+      },
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:09:47.436795+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 3,
+      "jobs_run": 3,
+      "failures": 0,
+      "results": [
+        {
+          "id": "priority-ranking",
+          "success": true,
+          "return_code": 0,
+          "stdout": "ranked; 5 selected for executive focus.\",\n    \"top_priorities\": [\n      {\n        \"id\": \"priority-d6bd5eb69d3f\",\n        \"source_type\": \"invoice\",\n        \"source_id\": \"invoice-d7e99861931c\",\n        \"title\": \"Review receivable: Sample Contractor\",\n        \"category\": \"finance\",\n        \"description\": \"Invoice has $11,500.00 outstanding.\",\n        \"urgency\": 95,\n        \"profitability\": 95,\n        \"risk_reduction\": 90,\n        \"execution_ease\": 65,\n        \"evidence\": 95,\n        \"estimated_value\": 11500.0,\n        \"score\": 87.72,\n        \"priority_band\": \"critical\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203727+00:00\",\n        \"rank\": 1\n      },\n      {\n        \"id\": \"priority-778267794812\",\n        \"source_type\": \"invoice\",\n        \"source_id\": \"e2e-invoice-001\",\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"category\": \"finance\",\n        \"description\": \"Invoice has $1,250.00 outstanding.\",\n        \"urgency\": 95,\n        \"profitability\": 95,\n        \"risk_reduction\": 90,\n        \"execution_ease\": 65,\n        \"evidence\": 95,\n        \"estimated_value\": 1250.0,\n        \"score\": 87.72,\n        \"priority_band\": \"critical\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203737+00:00\",\n        \"rank\": 2\n      },\n      {\n        \"id\": \"priority-02d5353e3a43\",\n        \"source_type\": \"opportunity\",\n        \"source_id\": \"oppdisc-cec7315894b4\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"urgency\": 70,\n        \"profitability\": 90.0,\n        \"risk_reduction\": 85,\n        \"execution_ease\": 68.0,\n        \"evidence\": 95.0,\n        \"estimated_value\": 11500.0,\n        \"score\": 78.32,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203541+00:00\",\n        \"rank\": 3\n      },\n      {\n        \"id\": \"priority-b3c224f5aa39\",\n        \"source_type\": \"opportunity\",\n        \"source_id\": \"oppdisc-fc7adb628ae8\",\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\",\n        \"urgency\": 70,\n        \"profitability\": 90.0,\n        \"risk_reduction\": 85,\n        \"execution_ease\": 68.0,\n        \"evidence\": 95.0,\n        \"estimated_value\": 1250.0,\n        \"score\": 78.32,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203559+00:00\",\n        \"rank\": 4\n      },\n      {\n        \"id\": \"priority-04a45526288b\",\n        \"source_type\": \"opportunity\",\n        \"source_id\": \"oppdisc-52e8af170893\",\n        \"title\": \"Advance lead: Driveway Replacement\",\n        \"category\": \"sales\",\n        \"description\": \"Move Sample Contractor from new toward an approved proposal.\",\n        \"urgency\": 70,\n        \"profitability\": 85.0,\n        \"risk_reduction\": 78.0,\n        \"execution_ease\": 72.0,\n        \"evidence\": 82.0,\n        \"estimated_value\": 12500.0,\n        \"score\": 75.72,\n        \"priority_band\": \"high\",\n        \"recommended_action\": \"owner_review\",\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"created_at\": \"2026-07-18T14:09:47.203571+00:00\",\n        \"rank\": 5\n      }\n    ],\n    \"critical_count\": 2,\n    \"high_count\": 4,\n    \"medium_count\": 9,\n    \"total_estimated_value\": 55500.0,\n    \"recommended_focus_order\": [\n      {\n        \"rank\": 1,\n        \"title\": \"Review receivable: Sample Contractor\",\n        \"category\": \"finance\",\n        \"score\": 87.72,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 2,\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"category\": \"finance\",\n        \"score\": 87.72,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 3,\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"score\": 78.32,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 4,\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"score\": 78.32,\n        \"owner_approval_required\": true\n      },\n      {\n        \"rank\": 5,\n        \"title\": \"Advance lead: Driveway Replacement\",\n        \"category\": \"sales\",\n        \"score\": 75.72,\n        \"owner_approval_required\": true\n      }\n    ],\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:09:47.064309+00:00",
+          "finished_at": "2026-07-18T14:09:47.242307+00:00",
+          "duration_seconds": 0.178
+        },
+        {
+          "id": "decision-preparation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "nvoice-001\",\n        \"source_type\": \"invoice\",\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"category\": \"finance\",\n        \"description\": \"Invoice has $1,250.00 outstanding.\",\n        \"rank\": 2,\n        \"priority_score\": 91.0,\n        \"priority_band\": \"critical\",\n        \"estimated_value\": 1250.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is critical.\",\n            \"It has an estimated value of $1,250.00.\",\n            \"Delay may reduce revenue or increase operating risk.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:47:26.681993+00:00\",\n        \"updated_at\": \"2026-07-18T04:47:26.681995+00:00\"\n      },\n      {\n        \"id\": \"decision-e89592185f4a\",\n        \"source_id\": \"oppdisc-60e0812a7dc5\",\n        \"source_type\": \"opportunity\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"rank\": 2,\n        \"priority_score\": 81.3,\n        \"priority_band\": \"high\",\n        \"estimated_value\": 11500.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is high.\",\n            \"It has an estimated value of $11,500.00.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:01:44.490248+00:00\",\n        \"updated_at\": \"2026-07-18T04:01:44.490250+00:00\"\n      },\n      {\n        \"id\": \"decision-95bcc2a7d742\",\n        \"source_id\": \"oppdisc-aa15a45c9641\",\n        \"source_type\": \"opportunity\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.\",\n        \"rank\": 3,\n        \"priority_score\": 81.3,\n        \"priority_band\": \"high\",\n        \"estimated_value\": 11500.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is high.\",\n            \"It has an estimated value of $11,500.00.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:47:26.682007+00:00\",\n        \"updated_at\": \"2026-07-18T04:47:26.682009+00:00\"\n      },\n      {\n        \"id\": \"decision-7e482dfbea21\",\n        \"source_id\": \"oppdisc-76a988d89351\",\n        \"source_type\": \"opportunity\",\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"category\": \"cash_recovery\",\n        \"description\": \"Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.\",\n        \"rank\": 4,\n        \"priority_score\": 81.3,\n        \"priority_band\": \"high\",\n        \"estimated_value\": 1250.0,\n        \"status\": \"pending\",\n        \"recommended_action\": \"owner_review\",\n        \"explanation\": {\n          \"why_now\": [\n            \"The overall priority score is high.\",\n            \"It has an estimated value of $1,250.00.\",\n            \"Completing it would materially reduce business risk.\"\n          ],\n          \"tradeoffs\": [\n            \"Owner approval is required before any external action.\"\n          ],\n          \"recommended_outcome\": \"owner_review_required\"\n        },\n        \"owner_approval_required\": true,\n        \"external_action_authorized\": false,\n        \"automatic_execution\": false,\n        \"created_at\": \"2026-07-18T04:47:26.682020+00:00\",\n        \"updated_at\": \"2026-07-18T04:47:26.682022+00:00\"\n      }\n    ],\n    \"decision_counts\": {\n      \"total\": 20,\n      \"pending\": 20,\n      \"approved\": 0,\n      \"deferred\": 0,\n      \"rejected\": 0\n    },\n    \"total_open_estimated_value\": 79500.0,\n    \"automatic_decision_approval\": false,\n    \"automatic_task_execution\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:09:47.242888+00:00",
+          "finished_at": "2026-07-18T14:09:47.341763+00:00",
+          "duration_seconds": 0.099
+        },
+        {
+          "id": "autonomous-health-supervisor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"health_supervision_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-18T14:09:47.412397+00:00\",\n    \"issues_detected\": 0,\n    \"recoveries_attempted\": 0,\n    \"remaining_issues\": 0,\n    \"issues\": [],\n    \"recoveries\": [],\n    \"remaining\": [],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"state\": {\n    \"schema_version\": 1,\n    \"cycle_count\": 2,\n    \"last_cycle_at\": \"2026-07-18T14:09:47.412628+00:00\",\n    \"last_issue_count\": 0,\n    \"last_remaining_issue_count\": 0,\n    \"last_recovery_count\": 0\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:09:47.342435+00:00",
+          "finished_at": "2026-07-18T14:09:47.432010+00:00",
+          "duration_seconds": 0.09
+        }
+      ]
+    }
   }
 ]
