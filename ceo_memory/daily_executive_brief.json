@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-18T15:12:15.318246+00:00",
+  "generated_at": "2026-07-18T15:15:29.964578+00:00",
   "headline": "CompanyOS Autonomous Executive Brief",
   "system_health": {
     "integrity": {
       "healthy": true,
-      "last_checked_at": "2026-07-18T15:12:13.916584+00:00",
+      "last_checked_at": "2026-07-18T15:15:29.186563+00:00",
       "error_count": 0,
       "warning_count": 0,
       "last_error": null
@@ -13,9 +13,9 @@
       "healthy": true,
       "watchdog_running": true,
       "scheduler_running": true,
-      "scheduler_pid": 2900,
+      "scheduler_pid": 16799,
       "halted": false,
-      "last_checked_at": "2026-07-18T15:10:30.848202+00:00",
+      "last_checked_at": "2026-07-18T15:14:33.858709+00:00",
       "recovery_attempted": false,
       "recovery_success": null,
       "last_error": null
@@ -24,15 +24,15 @@
       "healthy": true,
       "running": true,
       "halted": false,
-      "last_cycle_at": "2026-07-18T15:12:13.473663+00:00",
-      "last_cycle_job_count": 3,
+      "last_cycle_at": "2026-07-18T15:12:15.716124+00:00",
+      "last_cycle_job_count": 8,
       "failure_count": 0,
       "last_error": null
     }
   },
   "top_priorities": [
     {
-      "id": "priority-8b57e55d9afc",
+      "id": "priority-908b278299ba",
       "source_type": "invoice",
       "source_id": "invoice-d7e99861931c",
       "title": "Review receivable: Sample Contractor",
@@ -44,16 +44,16 @@
       "execution_ease": 65,
       "evidence": 95,
       "estimated_value": 11500.0,
-      "score": 85.84,
+      "score": 85.51,
       "priority_band": "critical",
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-18T15:12:14.048339+00:00",
+      "created_at": "2026-07-18T15:15:29.383717+00:00",
       "rank": 1
     },
     {
-      "id": "priority-50143576423f",
+      "id": "priority-92c45ba2251e",
       "source_type": "invoice",
       "source_id": "e2e-invoice-001",
       "title": "Review receivable: E2E Test Customer",
@@ -65,18 +65,18 @@
       "execution_ease": 65,
       "evidence": 95,
       "estimated_value": 1250.0,
-      "score": 85.84,
+      "score": 85.51,
       "priority_band": "critical",
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-18T15:12:14.048350+00:00",
+      "created_at": "2026-07-18T15:15:29.383723+00:00",
       "rank": 2
     },
     {
-      "id": "priority-89c4d56efb5f",
+      "id": "priority-0589b07e716d",
       "source_type": "opportunity",
-      "source_id": "oppdisc-22b8cd289f33",
+      "source_id": "oppdisc-e9050697f129",
       "title": "Recover receivable: Sample Contractor",
       "category": "cash_recovery",
       "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
@@ -86,18 +86,18 @@
       "execution_ease": 68.0,
       "evidence": 95.0,
       "estimated_value": 11500.0,
-      "score": 76.61,
+      "score": 76.31,
       "priority_band": "high",
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-18T15:12:14.048137+00:00",
+      "created_at": "2026-07-18T15:15:29.383601+00:00",
       "rank": 3
     },
     {
-      "id": "priority-f4c9baf3f764",
+      "id": "priority-128f7e79d48d",
       "source_type": "opportunity",
-      "source_id": "oppdisc-4229e021d9d1",
+      "source_id": "oppdisc-5feff6d97d37",
       "title": "Recover receivable: E2E Test Customer",
       "category": "cash_recovery",
       "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
@@ -107,16 +107,16 @@
       "execution_ease": 68.0,
       "evidence": 95.0,
       "estimated_value": 1250.0,
-      "score": 76.61,
+      "score": 76.31,
       "priority_band": "high",
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-18T15:12:14.048155+00:00",
+      "created_at": "2026-07-18T15:15:29.383613+00:00",
       "rank": 4
     },
     {
-      "id": "priority-2eeac7ca3cdb",
+      "id": "priority-50b8e3a70159",
       "source_type": "followup",
       "source_id": "followup-f51333cfa177",
       "title": "Review follow-up: Sample Contractor",
@@ -128,12 +128,12 @@
       "execution_ease": 78,
       "evidence": 85,
       "estimated_value": 0.0,
-      "score": 75.93,
+      "score": 76.02,
       "priority_band": "high",
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-18T15:12:14.048317+00:00",
+      "created_at": "2026-07-18T15:15:29.383709+00:00",
       "rank": 5
     }
   ],
@@ -322,7 +322,7 @@
     "headline": "5 improvement opportunity(s) identified; 0 added to the backlog.",
     "top_recommendations": [
       {
-        "id": "improvement-d883ed1da4fc",
+        "id": "improvement-313d33fa2fee",
         "title": "Shorten critical-priority response time",
         "category": "strategy",
         "description": "2 critical priorities are currently ranked.",
@@ -338,11 +338,11 @@
         "automatic_code_changes": false,
         "automatic_execution": false,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T15:12:14.843381+00:00",
+        "created_at": "2026-07-18T15:15:29.678749+00:00",
         "rank": 1
       },
       {
-        "id": "improvement-c4c540f6cd78",
+        "id": "improvement-7c7ecf09970e",
         "title": "Improve receivable recovery process",
         "category": "finance",
         "description": "2 invoices have $12,750.00 outstanding.",
@@ -358,11 +358,11 @@
         "automatic_code_changes": false,
         "automatic_execution": false,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T15:12:14.843370+00:00",
+        "created_at": "2026-07-18T15:15:29.678742+00:00",
         "rank": 2
       },
       {
-        "id": "improvement-317e787d176d",
+        "id": "improvement-5a94920db39c",
         "title": "Clear pending CEO decisions",
         "category": "governance",
         "description": "20 CEO decisions are waiting for owner review.",
@@ -378,11 +378,11 @@
         "automatic_code_changes": false,
         "automatic_execution": false,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T15:12:14.843342+00:00",
+        "created_at": "2026-07-18T15:15:29.678728+00:00",
         "rank": 3
       },
       {
-        "id": "improvement-a2b37c12432f",
+        "id": "improvement-2be5985f6a94",
         "title": "Reduce pending task backlog",
         "category": "operations",
         "description": "12 internal tasks are pending.",
@@ -398,11 +398,11 @@
         "automatic_code_changes": false,
         "automatic_execution": false,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T15:12:14.843301+00:00",
+        "created_at": "2026-07-18T15:15:29.678717+00:00",
         "rank": 4
       },
       {
-        "id": "improvement-03cdfc7ed383",
+        "id": "improvement-be8b4de37e13",
         "title": "Establish internal review automations",
         "category": "automation",
         "description": "No automation records were found.",
@@ -418,7 +418,7 @@
         "automatic_code_changes": false,
         "automatic_execution": false,
         "external_action_authorized": false,
-        "created_at": "2026-07-18T15:12:14.843389+00:00",
+        "created_at": "2026-07-18T15:15:29.678754+00:00",
         "rank": 5
       }
     ]

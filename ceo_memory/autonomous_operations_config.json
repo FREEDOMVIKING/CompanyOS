@@ -395,6 +395,16 @@
         "companyos/driftctl",
         "check"
       ]
+    },
+    {
+      "id": "resource-capacity-monitor",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/resourcectl",
+        "run"
+      ]
     }
   ]
 }
