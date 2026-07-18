@@ -3796,5 +3796,61 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-18T14:16:25.013215+00:00",
+    "action": "stop",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_stopped",
+      "pid": 24591
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:16:25.126122+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 25518,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T14:16:25.250212+00:00",
+    "action": "cycle",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 2,
+      "jobs_run": 2,
+      "failures": 0,
+      "results": [
+        {
+          "id": "exception-recovery",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"no_recovery_needed\",\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:16:25.066031+00:00",
+          "finished_at": "2026-07-18T14:16:25.166862+00:00",
+          "duration_seconds": 0.101
+        },
+        {
+          "id": "governance-router",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"governance_routing_complete\",\n  \"queue\": {\n    \"generated_at\": \"2026-07-18T14:16:25.234536+00:00\",\n    \"items\": [\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-b15b3d04d036\",\n        \"title\": \"Review receivable: Sample Contractor\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-e89592185f4a\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-e58ee52eaedc\",\n        \"title\": \"Advance lead: Driveway Replacement\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-01e1d8180ae5\",\n        \"title\": \"Review follow-up: Sample Contractor\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-5200616ae55a\",\n        \"title\": \"Design core user workflow\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-ab2f096501a2\",\n        \"title\": \"Define project data model\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-ce2e87d03613\",\n        \"title\": \"Build MVP project structure\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-04ab4ab06425\",\n        \"title\": \"Build core MVP workflow\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-c872d23cb9ca\",\n        \"title\": \"Advance project: Driveway Replacement\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-8c968e9f4bfa\",\n        \"title\": \"Create internal test suite\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-c435c6d57929\",\n        \"title\": \"Create first customer retention offer\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-75ba15b100d3\",\n        \"title\": \"Run product validation review\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-4faf8795729c\",\n        \"title\": \"Create product documentation\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-fd987e87d48b\",\n        \"title\": \"Create deployment and launch checklist\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-fe00844854d2\",\n        \"title\": \"Review new lead\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-ae5c422396f1\",\n        \"title\": \"Review receivable: E2E Test Customer\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-95bcc2a7d742\",\n        \"title\": \"Recover receivable: Sample Contractor\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-7e482dfbea21\",\n        \"title\": \"Recover receivable: E2E Test Customer\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-ba6fcf48bdd5\",\n        \"title\": \"Advance lead: Driveway Replacement\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      },\n      {\n        \"source\": \"ceo_decision\",\n        \"id\": \"decision-8d0619a3b216\",\n        \"title\": \"Advance project: E2E Test Project\",\n        \"classification\": \"owner_review\",\n        \"reason\": \"Pending CEO decision.\"\n      }\n    ],\n    \"count\": 20\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-18T14:16:25.167575+00:00",
+          "finished_at": "2026-07-18T14:16:25.244847+00:00",
+          "duration_seconds": 0.077
+        }
+      ]
+    }
   }
 ]

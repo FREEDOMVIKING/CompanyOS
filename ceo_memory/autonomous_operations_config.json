@@ -195,6 +195,16 @@
         "companyos/missionctl",
         "build"
       ]
+    },
+    {
+      "id": "governance-router",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/governancectl",
+        "classify"
+      ]
     }
   ]
 }
