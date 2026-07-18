@@ -685,6 +685,16 @@
         "companyos/opportunityexecctl",
         "run"
       ]
+    },
+    {
+      "id": "opportunity-outcome-feedback",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunityoutcomectl",
+        "analyze"
+      ]
     }
   ]
 }
