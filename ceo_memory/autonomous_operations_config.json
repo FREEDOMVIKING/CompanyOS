@@ -845,6 +845,16 @@
         "companyos/governedplanctl",
         "plan"
       ]
+    },
+    {
+      "id": "governed-internal-execution-queue",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/governedqueuectl",
+        "enqueue"
+      ]
     }
   ]
 }
