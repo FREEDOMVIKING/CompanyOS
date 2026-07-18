@@ -38633,5 +38633,2979 @@
         "automatic_spending": false
       }
     }
+  },
+  {
+    "timestamp": "2026-07-18T21:03:45.405578+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:03:45.351214+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:03:42.595707+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "watchdog_running": true,
+            "scheduler_running": true,
+            "scheduler_pid": 7178,
+            "halted": false,
+            "last_checked_at": "2026-07-18T21:02:25.518589+00:00",
+            "recovery_attempted": false,
+            "recovery_success": null,
+            "last_error": null
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T20:48:39.762047+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-91a48ee34c19",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:03:43.230092+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-fdff303079b7",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:03:43.230119+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-b4c6d301fe2e",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.62,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:03:43.230060+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-57e3fdbcbea5",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-cc001c7df755",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:03:43.229591+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-3ec623bb2a7d",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b9c086761f60",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:03:43.229634+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-7a4d98999faa",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:03:44.346031+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-5ae033cff052",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:03:44.345929+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-c916bfc24900",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:03:44.345863+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-0b468458753d",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:03:44.346084+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T21:19:18.729706+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:19:18.694206+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:15.954104+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "watchdog_running": true,
+            "scheduler_running": true,
+            "scheduler_pid": 7178,
+            "halted": false,
+            "last_checked_at": "2026-07-18T21:18:27.014716+00:00",
+            "recovery_attempted": false,
+            "recovery_success": null,
+            "last_error": null
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T21:04:12.170602+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-bcb2d0a8f4d5",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581575+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-80ff91c9f065",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581701+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-60b632131937",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.62,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581495+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-51656e2ee44e",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-5345e267bcb6",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.580592+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-98aad67f14eb",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b04b284f5906",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.580661+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-e4c9a43f5695",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:17.663731+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-cf736045126c",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:17.663673+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-d798e8d18961",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:17.663628+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-e1893a9b8864",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:17.663757+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T21:19:23.678220+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:19:23.624467+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:21.366685+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "watchdog_running": true,
+            "scheduler_running": true,
+            "scheduler_pid": 7178,
+            "halted": false,
+            "last_checked_at": "2026-07-18T21:18:27.014716+00:00",
+            "recovery_attempted": false,
+            "recovery_success": null,
+            "last_error": null
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T21:04:12.170602+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-bcb2d0a8f4d5",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581575+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-80ff91c9f065",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581701+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-60b632131937",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.62,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581495+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-51656e2ee44e",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-5345e267bcb6",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.580592+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-98aad67f14eb",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b04b284f5906",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.580661+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-d24a0638897c",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785354+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-ff83b6f757b6",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785300+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-126473758066",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785257+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-b1da3a52119e",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785379+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T21:19:26.549247+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:19:26.520417+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:21.366685+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "watchdog_running": true,
+            "scheduler_running": true,
+            "scheduler_pid": 7178,
+            "halted": false,
+            "last_checked_at": "2026-07-18T21:18:27.014716+00:00",
+            "recovery_attempted": false,
+            "recovery_success": null,
+            "last_error": null
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T21:04:12.170602+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-bcb2d0a8f4d5",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581575+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-80ff91c9f065",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.46,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581701+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-60b632131937",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.62,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.581495+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-51656e2ee44e",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-5345e267bcb6",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.580592+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-98aad67f14eb",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b04b284f5906",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:16.580661+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-d24a0638897c",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785354+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-ff83b6f757b6",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785300+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-126473758066",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785257+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-b1da3a52119e",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:22.785379+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T21:19:37.786994+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:19:37.757569+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:35.373175+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:28.891135+00:00",
+            "heartbeat_age_seconds": 3353.124044,
+            "heartbeat_stale": false,
+            "recovery_actions": []
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T21:19:33.776942+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-e0bb913a4514",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.45,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.847326+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-ff0b7e4f9c0b",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.45,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.847353+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-56968ba93c98",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.63,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.847294+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-3bc3a9c0f10d",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-5345e267bcb6",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.846855+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-f4b31f9f3ac6",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b04b284f5906",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.846915+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-6a96fb6558aa",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843521+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-18b67e6a9f81",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843468+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-d1b5592b8989",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843425+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-df94f661847a",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843546+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T21:19:40.476683+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:19:40.447478+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:35.373175+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:28.891135+00:00",
+            "heartbeat_age_seconds": 3353.124044,
+            "heartbeat_stale": false,
+            "recovery_actions": []
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T21:19:33.776942+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-e0bb913a4514",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.45,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.847326+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-ff0b7e4f9c0b",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.45,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.847353+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-56968ba93c98",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.63,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.847294+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-3bc3a9c0f10d",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-5345e267bcb6",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.846855+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-f4b31f9f3ac6",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b04b284f5906",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.44,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:26.846915+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-6a96fb6558aa",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843521+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-18b67e6a9f81",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843468+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-d1b5592b8989",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843425+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-df94f661847a",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843546+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T21:26:28.692604+00:00",
+    "action": "generate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "executive_brief_generated",
+      "brief": {
+        "generated_at": "2026-07-18T21:26:28.676130+00:00",
+        "headline": "CompanyOS Autonomous Executive Brief",
+        "system_health": {
+          "integrity": {
+            "healthy": true,
+            "last_checked_at": "2026-07-18T21:19:35.373175+00:00",
+            "error_count": 0,
+            "warning_count": 0,
+            "last_error": null
+          },
+          "watchdog": {
+            "healthy": true,
+            "watchdog_running": true,
+            "scheduler_running": true,
+            "scheduler_pid": 7178,
+            "halted": false,
+            "last_checked_at": "2026-07-18T21:24:29.365972+00:00",
+            "recovery_attempted": false,
+            "recovery_success": null,
+            "last_error": null
+          },
+          "autonomous_operations": {
+            "healthy": true,
+            "running": true,
+            "halted": false,
+            "last_cycle_at": "2026-07-18T21:19:43.675101+00:00",
+            "last_cycle_job_count": 20,
+            "failure_count": 0,
+            "last_error": null
+          }
+        },
+        "top_priorities": [
+          {
+            "id": "priority-94073f767c27",
+            "source_type": "invoice",
+            "source_id": "invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 11500.0,
+            "score": 83.43,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:40.823349+00:00",
+            "rank": 1
+          },
+          {
+            "id": "priority-a0ea5e23f96e",
+            "source_type": "invoice",
+            "source_id": "e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "category": "finance",
+            "description": "Invoice has $1,250.00 outstanding.",
+            "urgency": 95,
+            "profitability": 95,
+            "risk_reduction": 90,
+            "execution_ease": 65,
+            "evidence": 95,
+            "estimated_value": 1250.0,
+            "score": 83.43,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:40.823375+00:00",
+            "rank": 2
+          },
+          {
+            "id": "priority-d2b85be7666b",
+            "source_type": "followup",
+            "source_id": "followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "urgency": 82,
+            "profitability": 65,
+            "risk_reduction": 70,
+            "execution_ease": 78,
+            "evidence": 85,
+            "estimated_value": 0.0,
+            "score": 76.64,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:40.823319+00:00",
+            "rank": 3
+          },
+          {
+            "id": "priority-53642e8f1be1",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-5345e267bcb6",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 11500.0,
+            "score": 74.42,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:40.822901+00:00",
+            "rank": 4
+          },
+          {
+            "id": "priority-ae3134eb3385",
+            "source_type": "opportunity",
+            "source_id": "oppdisc-b04b284f5906",
+            "title": "Recover receivable: E2E Test Customer",
+            "category": "cash_recovery",
+            "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+            "urgency": 70,
+            "profitability": 90.0,
+            "risk_reduction": 85,
+            "execution_ease": 68.0,
+            "evidence": 95.0,
+            "estimated_value": 1250.0,
+            "score": 74.42,
+            "priority_band": "high",
+            "recommended_action": "owner_review",
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "created_at": "2026-07-18T21:19:40.822947+00:00",
+            "rank": 5
+          }
+        ],
+        "pending_decisions": [
+          {
+            "id": "decision-b15b3d04d036",
+            "source_id": "invoice-d7e99861931c",
+            "source_type": "invoice",
+            "title": "Review receivable: Sample Contractor",
+            "category": "finance",
+            "description": "Invoice has $11,500.00 outstanding.",
+            "rank": 1,
+            "priority_score": 91.0,
+            "priority_band": "critical",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is critical.",
+                "It has an estimated value of $11,500.00.",
+                "Delay may reduce revenue or increase operating risk.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490231+00:00",
+            "updated_at": "2026-07-18T04:01:44.490234+00:00"
+          },
+          {
+            "id": "decision-e89592185f4a",
+            "source_id": "oppdisc-60e0812a7dc5",
+            "source_type": "opportunity",
+            "title": "Recover receivable: Sample Contractor",
+            "category": "cash_recovery",
+            "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+            "rank": 2,
+            "priority_score": 81.3,
+            "priority_band": "high",
+            "estimated_value": 11500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $11,500.00.",
+                "Completing it would materially reduce business risk."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490248+00:00",
+            "updated_at": "2026-07-18T04:01:44.490250+00:00"
+          },
+          {
+            "id": "decision-e58ee52eaedc",
+            "source_id": "oppdisc-982ee88708bc",
+            "source_type": "opportunity",
+            "title": "Advance lead: Driveway Replacement",
+            "category": "sales",
+            "description": "Move Sample Contractor from new toward an approved proposal.",
+            "rank": 3,
+            "priority_score": 77.5,
+            "priority_band": "high",
+            "estimated_value": 12500.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "It has an estimated value of $12,500.00.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490262+00:00",
+            "updated_at": "2026-07-18T04:01:44.490263+00:00"
+          },
+          {
+            "id": "decision-01e1d8180ae5",
+            "source_id": "followup-f51333cfa177",
+            "source_type": "followup",
+            "title": "Review follow-up: Sample Contractor",
+            "category": "sales",
+            "description": "Review lead and prepare owner-approved follow-up.",
+            "rank": 4,
+            "priority_score": 74.4,
+            "priority_band": "high",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "owner_review",
+            "explanation": {
+              "why_now": [
+                "The overall priority score is high.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified.",
+                "Owner approval is required before any external action."
+              ],
+              "recommended_outcome": "owner_review_required"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490273+00:00",
+            "updated_at": "2026-07-18T04:01:44.490274+00:00"
+          },
+          {
+            "id": "decision-5200616ae55a",
+            "source_id": "task-eb820b859cf3",
+            "source_type": "internal_task",
+            "title": "Design core user workflow",
+            "category": "operations",
+            "description": "Map the main user journey from first use through successful completion of the core workflow.",
+            "rank": 5,
+            "priority_score": 67.0,
+            "priority_band": "medium",
+            "estimated_value": 0.0,
+            "status": "pending",
+            "recommended_action": "internal_execution_review",
+            "explanation": {
+              "why_now": [
+                "The item is important but not immediately critical.",
+                "Delay may reduce revenue or increase operating risk.",
+                "It appears practical to move forward internally."
+              ],
+              "tradeoffs": [
+                "Financial value is not yet quantified."
+              ],
+              "recommended_outcome": "approve_internal_next_step"
+            },
+            "owner_approval_required": true,
+            "external_action_authorized": false,
+            "automatic_execution": false,
+            "created_at": "2026-07-18T04:01:44.490281+00:00",
+            "updated_at": "2026-07-18T04:01:44.490283+00:00"
+          }
+        ],
+        "performance_summary": {
+          "headline": "CompanyOS performance health score: 60.0/100",
+          "health_score": 60.0,
+          "attention_items": [
+            "Task completion rate is below 50%.",
+            "Five or more CEO decisions are waiting for review.",
+            "$12,750.00 remains outstanding in receivables."
+          ]
+        },
+        "forecast_summary": {
+          "headline": "30-day expected cash inflow forecast: $6,310.00",
+          "confidence_percent": 80.0,
+          "scenarios": {
+            "conservative": 4101.5,
+            "expected": 6310.0,
+            "optimistic": 8518.5
+          },
+          "top_risks": [
+            "Low task completion may delay expected cash inflow.",
+            "Low project completion may delay revenue recognition."
+          ],
+          "top_opportunities": [
+            "Recover up to $12,750.00 in outstanding receivables."
+          ]
+        },
+        "improvement_summary": {
+          "headline": "4 improvement opportunity(s) identified; 0 added to the backlog.",
+          "top_recommendations": [
+            {
+              "id": "improvement-6a96fb6558aa",
+              "title": "Improve receivable recovery process",
+              "category": "finance",
+              "description": "2 invoices have $12,750.00 outstanding.",
+              "recommendation": "Prioritize owner-reviewed follow-up preparation for the largest balances.",
+              "impact": 95,
+              "urgency": 95,
+              "ease": 70,
+              "evidence": 98,
+              "score": 91.85,
+              "priority_band": "critical",
+              "source": "invoice_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843521+00:00",
+              "rank": 1
+            },
+            {
+              "id": "improvement-18b67e6a9f81",
+              "title": "Clear pending CEO decisions",
+              "category": "governance",
+              "description": "20 CEO decisions are waiting for owner review.",
+              "recommendation": "Review the highest-scoring pending decisions first.",
+              "impact": 80,
+              "urgency": 86,
+              "ease": 88,
+              "evidence": 95,
+              "score": 86.0,
+              "priority_band": "critical",
+              "source": "ceo_decision_queue",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843468+00:00",
+              "rank": 2
+            },
+            {
+              "id": "improvement-d1b5592b8989",
+              "title": "Reduce pending task backlog",
+              "category": "operations",
+              "description": "12 internal tasks are pending.",
+              "recommendation": "Review, group, and sequence pending internal tasks by business impact.",
+              "impact": 82,
+              "urgency": 78,
+              "ease": 72,
+              "evidence": 90,
+              "score": 80.9,
+              "priority_band": "high",
+              "source": "product_execution_tasks",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843425+00:00",
+              "rank": 3
+            },
+            {
+              "id": "improvement-df94f661847a",
+              "title": "Establish internal review automations",
+              "category": "automation",
+              "description": "No automation records were found.",
+              "recommendation": "Create internal-only review schedules for priorities, decisions, and operational health.",
+              "impact": 68,
+              "urgency": 58,
+              "ease": 75,
+              "evidence": 70,
+              "score": 66.45,
+              "priority_band": "medium",
+              "source": "automation_registry",
+              "owner_approval_required": true,
+              "automatic_code_changes": false,
+              "automatic_execution": false,
+              "external_action_authorized": false,
+              "created_at": "2026-07-18T21:19:36.843546+00:00",
+              "rank": 4
+            }
+          ]
+        },
+        "attention_items": [
+          "20 CEO decision(s) are pending review."
+        ],
+        "recommended_next_actions": [
+          "Review receivable: Sample Contractor",
+          "Review receivable: E2E Test Customer",
+          "Review follow-up: Sample Contractor",
+          "Recover receivable: Sample Contractor",
+          "Recover receivable: E2E Test Customer"
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false
+      }
+    }
   }
 ]

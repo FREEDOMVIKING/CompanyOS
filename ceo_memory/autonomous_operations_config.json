@@ -855,6 +855,16 @@
         "companyos/governedqueuectl",
         "enqueue"
       ]
+    },
+    {
+      "id": "governed-internal-worker",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/governedworkerctl",
+        "run"
+      ]
     }
   ]
 }
