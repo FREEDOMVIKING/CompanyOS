@@ -435,6 +435,16 @@
         "companyos/dashboardctl",
         "build"
       ]
+    },
+    {
+      "id": "runtime-hygiene",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/runtimehygienectl",
+        "isolate"
+      ]
     }
   ]
 }

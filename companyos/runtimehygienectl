@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import shutil
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT = Path.home() / "companyos"
+MEM = ROOT / "ceo_memory"
+RUNTIME = ROOT / "runtime"
+
+CFG = MEM / "runtime_hygiene_config.json"
+STATE = MEM / "runtime_hygiene_state.json"
+HEALTH = MEM / "runtime_hygiene_health.json"
+
+RUNTIME_SUFFIXES = (
+    "_state.json",
+    "_health.json",
+    "_report.json",
+    "_audit.json",
+    "_cache.json",
+    "_brief.json",
+    "_queue.json",
+    "_history.json",
+)
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+def load(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+def save(path: Path, data: Any) -> None:
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    tmp.replace(path)
+
+def git(*args: str) -> dict[str, Any]:
+    proc = subprocess.run(
+        ["git", *args],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        timeout=60,
+    )
+    return {
+        "success": proc.returncode == 0,
+        "stdout": proc.stdout.strip(),
+        "stderr": proc.stderr.strip(),
+    }
+
+def is_runtime_file(path: Path) -> bool:
+    name = path.name
+    return any(name.endswith(suffix) for suffix in RUNTIME_SUFFIXES) or name == "HALT_AUTONOMY"
+
+def isolate() -> dict[str, Any]:
+    cfg = load(CFG, {})
+    RUNTIME.mkdir(parents=True, exist_ok=True)
+
+    copied = []
+    skipped = []
+
+    for path in MEM.iterdir():
+        if not path.is_file() or not is_runtime_file(path):
+            continue
+
+        dest = RUNTIME / path.name
+        try:
+            shutil.copy2(path, dest)
+            copied.append(path.name)
+        except Exception as exc:
+            skipped.append({"file": path.name, "error": str(exc)})
+
+    status = git("status", "--porcelain")
+    lines = status.get("stdout", "").splitlines() if status.get("success") else []
+
+    runtime_only = []
+    source_changes = []
+
+    for line in lines:
+        file_part = line[3:] if len(line) > 3 else ""
+        normalized = file_part.replace("\\", "/")
+        if (
+            normalized.startswith("ceo_memory/")
+            and is_runtime_file(Path(normalized))
+        ) or normalized.startswith(("logs/", "run/", "runtime/", "backups/state_snapshots/")):
+            runtime_only.append(line)
+        else:
+            source_changes.append(line)
+
+    state = {
+        "generated_at": now(),
+        "runtime_files_copied": copied,
+        "runtime_copy_errors": skipped,
+        "git_change_count": len(lines),
+        "runtime_only_change_count": len(runtime_only),
+        "source_change_count": len(source_changes),
+        "runtime_only_changes": runtime_only,
+        "source_changes": source_changes,
+        "working_tree_effectively_clean": len(source_changes) == 0,
+    }
+    save(STATE, state)
+    save(
+        HEALTH,
+        {
+            "healthy": True,
+            "last_checked_at": now(),
+            "working_tree_effectively_clean": len(source_changes) == 0,
+            "source_change_count": len(source_changes),
+            "runtime_only_change_count": len(runtime_only),
+        },
+    )
+    return {"success": True, "status": "runtime_hygiene_complete", "state": state}
+
+def status() -> dict[str, Any]:
+    return {
+        "success": True,
+        "status": "runtime_hygiene_status",
+        "config": load(CFG, {}),
+        "state": load(STATE, {}),
+        "health": load(HEALTH, {}),
+    }
+
+def main() -> int:
+    action = sys.argv[1] if len(sys.argv) > 1 else "status"
+
+    if action == "isolate":
+        result = isolate()
+    elif action == "status":
+        result = status()
+    else:
+        result = {
+            "success": False,
+            "status": "unknown_action",
+            "allowed": ["isolate", "status"],
+        }
+
+    print(json.dumps(result, indent=2))
+    return 0 if result.get("success") else 1
+
+if __name__ == "__main__":
+    raise SystemExit(main())

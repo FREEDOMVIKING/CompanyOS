@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 68,
+  "cycle_count": 69,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T14:30:52.191310+00:00",
@@ -275,35 +275,35 @@
       "failure_count": 0
     },
     "mission-control": {
-      "last_started_at": "2026-07-18T15:03:56.640748+00:00",
-      "last_started_epoch": 1784387036.6407478,
+      "last_started_at": "2026-07-18T15:21:47.111636+00:00",
+      "last_started_epoch": 1784388107.111636,
       "last_command": [
         "python",
         "companyos/missionctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T15:03:56.729445+00:00",
+      "last_finished_at": "2026-07-18T15:21:47.276035+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.089,
-      "run_count": 4,
+      "last_duration_seconds": 0.164,
+      "run_count": 5,
       "failure_count": 0
     },
     "governance-router": {
-      "last_started_at": "2026-07-18T15:03:56.730875+00:00",
-      "last_started_epoch": 1784387036.730874,
+      "last_started_at": "2026-07-18T15:21:47.277059+00:00",
+      "last_started_epoch": 1784388107.2770588,
       "last_command": [
         "python",
         "companyos/governancectl",
         "classify"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T15:03:56.813799+00:00",
+      "last_finished_at": "2026-07-18T15:21:47.394216+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.083,
-      "run_count": 4,
+      "last_duration_seconds": 0.117,
+      "run_count": 5,
       "failure_count": 0
     },
     "outcome-tracker": {
@@ -355,19 +355,19 @@
       "failure_count": 0
     },
     "execution-gateway": {
-      "last_started_at": "2026-07-18T15:03:56.814534+00:00",
-      "last_started_epoch": 1784387036.814534,
+      "last_started_at": "2026-07-18T15:21:47.395198+00:00",
+      "last_started_epoch": 1784388107.3951979,
       "last_command": [
         "python",
         "companyos/gatewayctl",
         "process"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T15:03:56.903071+00:00",
+      "last_finished_at": "2026-07-18T15:21:47.523083+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.089,
-      "run_count": 3,
+      "last_duration_seconds": 0.128,
+      "run_count": 4,
       "failure_count": 0
     },
     "connector-registry": {
@@ -673,9 +673,25 @@
       "last_duration_seconds": 0.081,
       "run_count": 1,
       "failure_count": 0
+    },
+    "runtime-hygiene": {
+      "last_started_at": "2026-07-18T15:21:47.524171+00:00",
+      "last_started_epoch": 1784388107.524171,
+      "last_command": [
+        "python",
+        "companyos/runtimehygienectl",
+        "isolate"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T15:21:47.634656+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.111,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T15:18:53.296518+00:00",
-  "last_cycle_job_count": 3,
+  "last_cycle_at": "2026-07-18T15:21:47.635560+00:00",
+  "last_cycle_job_count": 4,
   "last_cycle_success": true
 }
