@@ -815,6 +815,16 @@
         "companyos/specialistinsightctl",
         "integrate"
       ]
+    },
+    {
+      "id": "ceo-insight-decision-synthesis",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/ceoinsightdecisionctl",
+        "synthesize"
+      ]
     }
   ]
 }

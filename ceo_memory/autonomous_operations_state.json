@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 115,
+  "cycle_count": 116,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-18T19:48:23.510562+00:00",
@@ -1281,9 +1281,25 @@
       "last_duration_seconds": 0.075,
       "run_count": 1,
       "failure_count": 0
+    },
+    "ceo-insight-decision-synthesis": {
+      "last_started_at": "2026-07-18T20:29:40.308121+00:00",
+      "last_started_epoch": 1784406580.3081217,
+      "last_command": [
+        "python",
+        "companyos/ceoinsightdecisionctl",
+        "synthesize"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-18T20:29:40.399139+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.091,
+      "run_count": 1,
+      "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-18T20:26:23.009996+00:00",
+  "last_cycle_at": "2026-07-18T20:29:40.399913+00:00",
   "last_cycle_job_count": 1,
   "last_cycle_success": true
 }
