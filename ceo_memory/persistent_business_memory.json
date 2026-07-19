@@ -2907,8 +2907,1708 @@
         "result_count": 0,
         "results": []
       }
+    },
+    {
+      "memory_id": "b274ba18f7f255b5ccb5",
+      "fingerprint": "b274ba18f7f255b5ccb51e829e50a33e8a3c400c903b12bf1f9992c0340bff32",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:24:44.948402+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:24:44.853735+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "e_specialist_consumer_health.json\\\\\\\",\\\\n      \\\\\\\"live_specialist_consumer_state.json\\\\\\\",\\\\n      \\\\\\\"business_signal_state.json\\\\\\\",\\\\n      \\\\\\\"self_improvement_proposal_health.json\\\\\\\",\\\\n      \\\\\\\"opportunity_generation_health.json\\\\\\\",\\\\n      \\\\\\\"business_performance_state.json\\\\\\\",\\\\n      \\\\\\\"opportunity_promotion_state.json\\\\\\\",\\\\n      \\\\\\\"specialist_learning_health.json\\\\\\\",\\\\n      \\\\\\\"opportunity_promotion_health.json\\\\\\\",\\\\n      \\\\\\\"governed_improvement_queue.json\\\\\\\",\\\\n      \\\\\\\"improvement_queue_state.json\\\\\\\",\\\\n      \\\\\\\"research_mission_state.json\\\\\\\",\\\\n      \\\\\\\"phase23_bundle2_health.json\\\\\\\",\\\\n      \\\\\\\"kpi_goal_health.json\\\\\\\",\\\\n      \\\\\\\"portfolio_resource_plan_state.json\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"runtime_copy_errors\\\\\\\": [],\\\\n    \\\\\\\"git_change_count\\\\\\\": 8,\\\\n    \\\\\\\"runtime_only_change_count\\\\\\\": 7,\\\\n    \\\\\\\"source_change_count\\\\\\\": 1,\\\\n    \\\\\\\"runtime_only_changes\\\\\\\": [\\\\n      \\\\\\\" M ceo_memory/autonomous_health_report.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/autonomous_health_state.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/resource_monitor_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/resource_monitor_report.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/state_backup_health.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/state_backup_state.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/watchdog_state.json\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"source_changes\\\\\\\": [\\\\n      \\\\\\\"M ceo_memory/autonomous_health_audit.json\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 1,\\n    \\\"runtime_only_change_count\\\": 7,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:42.561243+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:42.660224+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:43.022788+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:43.111716+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:43.206015+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:43.292236+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:43.385102+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:24:43.473694+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:43.577393+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:43.667896+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:24:43.667714+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:43.747592+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:43.835813+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:24:43.835620+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:43.918027+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.006544+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.085307+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.151833+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.216321+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.284131+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_queue_consumer_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.368772+00:00\",\n    \"completed_count\": 0,\n    \"pending_count\": 0,\n    \"completed\": [],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_result_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.437921+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_result_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.506402+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_insight_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.571994+00:00\",\n    \"accepted_count\": 0,\n    \"pending_count\": 0,\n    \"rejected_count\": 0,\n    \"accepted\": [],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_insight_decision_synthesis_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.642530+00:00\",\n    \"decision_count\": 0,\n    \"rejected_count\": 0,\n    \"decisions\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.722040+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:24:44.803115+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_live_reasoning_bridge_complete\",\n  \"payload\": {\n    \"generated_at\": \"2026-07-19T02:24:44.850231+00:00\",\n    \"validated_insights\": [],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 0,
+        "failed_steps": [],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "a6a0ccd38810a219b052",
+      "fingerprint": "a6a0ccd38810a219b05225f8f02632b338b8cc9794f2878c83a5f29af88cfe72",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:24:44.948456+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:24:44.506216+00:00",
+        "insight_count": 0,
+        "insights": []
+      }
+    },
+    {
+      "memory_id": "81035e9eb46ae066ce45",
+      "fingerprint": "81035e9eb46ae066ce45166103e128b07bd07e994b788bcac35dc2cd542f8db8",
+      "source": "ceo_decision_candidates.json",
+      "captured_at": "2026-07-19T02:24:44.948495+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:24:44.642312+00:00",
+        "decision_count": 0,
+        "decisions": [],
+        "note": "Decision candidates are internal recommendations only and grant no new execution authority."
+      }
+    },
+    {
+      "memory_id": "5adadd5b9deddeb75783",
+      "fingerprint": "5adadd5b9deddeb757832182dcb67c7f220ef2d806e347f9811ca8217832fa0b",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:24:44.948530+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:24:44.721793+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "b9091ca322872a565109",
+      "fingerprint": "b9091ca322872a5651091fa255e298223ff2ceab8a375d45f2342d2897a7a1f0",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:24:44.948639+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:24:43.747592+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "7687c093d327b5e04cd7",
+      "fingerprint": "7687c093d327b5e04cd78e57f077809dc695a33fa6d98310ddbf44f6db3ccd05",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:24:44.948739+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:24:44.368679+00:00",
+        "result_count": 0,
+        "results": []
+      }
+    },
+    {
+      "memory_id": "202e347116da4bf789b4",
+      "fingerprint": "202e347116da4bf789b475a6c808d464e65ba2c599cf119ad44bc5595a652fbe",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:26:38.967736+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:26:38.837900+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "  \\\\\\\" M ceo_memory/ceo_specialist_insights.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/executive_action_board.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/executive_briefing.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/generated_business_opportunities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/governed_ceo_decisions.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/governed_internal_execution_plans.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/governed_internal_work_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/internal_resource_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/kpi_goal_tracker.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/opportunity_action_scores.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/persistent_business_memory.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/phase23_executive_dashboard.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/portfolio_resource_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/portfolio_resource_priorities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/rebalanced_opportunity_portfolio.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/self_improvement_proposals.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_assignment_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_performance_profiles.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_runtime_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_work_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/strategic_30_day_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/unified_learning_context.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/validated_insights.json\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 28,\\n    \\\"runtime_only_change_count\\\": 8,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:35.585327+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:35.689296+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:36.194963+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:36.309894+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:36.414864+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:36.534461+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:36.664462+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:26:36.789893+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:36.930224+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.042310+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:26:37.035038+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.157915+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.287151+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:26:37.276675+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.394480+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.496045+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.602975+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.734540+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.853867+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:37.954040+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_queue_consumer_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.124275+00:00\",\n    \"completed_count\": 0,\n    \"pending_count\": 0,\n    \"completed\": [],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_result_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.257117+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_result_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.378224+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_insight_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.486294+00:00\",\n    \"accepted_count\": 0,\n    \"pending_count\": 0,\n    \"rejected_count\": 0,\n    \"accepted\": [],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_insight_decision_synthesis_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.586304+00:00\",\n    \"decision_count\": 0,\n    \"rejected_count\": 0,\n    \"decisions\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.689923+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:26:38.776776+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_live_reasoning_bridge_complete\",\n  \"payload\": {\n    \"generated_at\": \"2026-07-19T02:26:38.829173+00:00\",\n    \"validated_insights\": [],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 0,
+        "failed_steps": [],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "a82853ed438d6c231fcd",
+      "fingerprint": "a82853ed438d6c231fcd6a36b7b0427a28b1c25b10b00afa82c140fc33c329e6",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:26:38.967791+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:26:38.370345+00:00",
+        "insight_count": 0,
+        "insights": []
+      }
+    },
+    {
+      "memory_id": "e8a35b5d3de0ded4f2c0",
+      "fingerprint": "e8a35b5d3de0ded4f2c0def2dd428660c0df2a9bad3652172839ccd1dedc8b8b",
+      "source": "ceo_decision_candidates.json",
+      "captured_at": "2026-07-19T02:26:38.967830+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:26:38.581071+00:00",
+        "decision_count": 0,
+        "decisions": [],
+        "note": "Decision candidates are internal recommendations only and grant no new execution authority."
+      }
+    },
+    {
+      "memory_id": "fee0e1f489ecd7e2995b",
+      "fingerprint": "fee0e1f489ecd7e2995b267fde32a499c3d2f74d1702a652006be3f4d64c2b89",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:26:38.967866+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:26:38.684960+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "d3e8891266b07b64a785",
+      "fingerprint": "d3e8891266b07b64a785a52a20f2f3a8e68303a74fb7534f746e514a32976f2f",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:26:38.967975+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:26:37.157915+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "4de519410c6dcc8c2859",
+      "fingerprint": "4de519410c6dcc8c285937dbf2f4a744636f7446eb0bf91817d8ce988b02fa48",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:26:38.968092+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:26:38.123823+00:00",
+        "result_count": 0,
+        "results": []
+      }
+    },
+    {
+      "memory_id": "e533f74f7779afa62d68",
+      "fingerprint": "e533f74f7779afa62d681809ba5c6d9676ed559de806b64c2a6069b648954bd8",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:34:40.257467+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:40.138662+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "specialist_performance_profiles.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_runtime_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_work_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/strategic_30_day_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/unified_learning_context.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/validated_insights.json\\\\\\\",\\\\n      \\\\\\\"?? agents/business_workflow_orchestrator.py\\\\\\\",\\\\n      \\\\\\\"?? agents/ceo_operating_report.py\\\\\\\",\\\\n      \\\\\\\"?? agents/opportunity_validation_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/phase24_controller.py\\\\\\\",\\\\n      \\\\\\\"?? agents/research_to_specialist_bridge.py\\\\\\\",\\\\n      \\\\\\\"?? agents/specialist_collaboration_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/task_lifecycle_engine.py\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/business_workflow_board.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/persistent_task_registry.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/phase24_config.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/specialist_collaboration_groups.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/validated_business_opportunities.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/businessworkflowctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/ceoreportctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/collaborationctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/opportunityvalidatectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/phase24ctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/researchbridgectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/tasklifecyclectl\\\\\\\",\\\\n      \\\\\\\"?? install_phase24_bundle1.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 60,\\n    \\\"runtime_only_change_count\\\": 33,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:06.490289+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:06.563424+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:06.884279+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:06.960053+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:07.042044+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:07.122198+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:07.201945+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:07.293825+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.385089+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.466000+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:34:07.459022+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.546028+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.622075+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:34:07.616665+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.702183+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.798910+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.870962+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:07.950338+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:08.034837+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:08.104858+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 2,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "530008+00:00\",\n        \"execution_boundary\": \"internal_non_destructive_only\"\n      },\n      {\n        \"work_id\": \"research-91be6e6a1b5efa2ef8\",\n        \"plan_id\": \"phase24-research\",\n        \"decision_id\": null,\n        \"opportunity_id\": \"4bcc8f1b89a18fa5\",\n        \"action_type\": \"research\",\n        \"status\": \"completed\",\n        \"actual_result\": {\n          \"summary\": \"Researching opportunity to raise business performance score through systematic improvement initiatives. This involves identifying performance gaps, implementing targeted interventions, and establishing measurement frameworks to track progress.\",\n          \"findings\": {\n            \"evidence_supporting_opportunity\": [\n              \"Business performance scores typically correlate with revenue growth, operational efficiency, and customer satisfaction metrics\",\n              \"Companies with structured performance improvement programs show 15-25% better financial results than those without\",\n              \"Regular performance assessment and optimization can reduce operational costs by 10-20%\",\n              \"Employee engagement and productivity improvements often drive measurable performance gains\",\n              \"Data-driven decision making and KPI monitoring enable faster course correction and better outcomes\"\n            ],\n            \"common_performance_drivers\": [\n              \"Operational efficiency improvements\",\n              \"Customer experience enhancement\",\n              \"Revenue optimization strategies\",\n              \"Cost reduction initiatives\",\n              \"Employee productivity and engagement\",\n              \"Technology and process automation\"\n            ]\n          },\n          \"recommendations\": {\n            \"immediate_actions\": [\n              \"Conduct comprehensive performance audit across all business units\",\n              \"Identify top 3-5 performance gaps with highest impact potential\",\n              \"Establish baseline metrics and current performance score\",\n              \"Create cross-functional improvement task force\",\n              \"Develop 90-day quick win action plan\"\n            ],\n            \"strategic_initiatives\": [\n              \"Implement balanced scorecard framework for holistic performance measurement\",\n              \"Deploy continuous improvement methodologies (Lean, Six Sigma)\",\n              \"Invest in performance analytics and dashboard tools\",\n              \"Establish regular performance review cycles\",\n              \"Create performance-linked incentive structures\"\n            ]\n          },\n          \"risks\": {\n            \"main_risks\": [\n              \"Initiative overload leading to resource dilution across too many projects\",\n              \"Lack of executive sponsorship causing program abandonment\",\n              \"Insufficient data quality undermining measurement accuracy\",\n              \"Resistance to change from employees and stakeholders\",\n              \"Misalignment between performance metrics and actual business value\"\n            ],\n            \"failure_modes\": [\n              \"Focusing on vanity metrics rather than meaningful performance indicators\",\n              \"Underestimating cultural transformation requirements\",\n              \"Poor change management leading to low adoption rates\",\n              \"Inadequate resource allocation causing incomplete implementations\",\n              \"Failure to sustain momentum beyond initial enthusiasm period\"\n            ]\n          },\n          \"next_internal_actions\": {\n            \"smallest_validation_step\": \"Perform rapid performance diagnostic: Map current performance score components, identify 2-3 highest-impact improvement opportunities, and validate with key stakeholders within 48 hours\",\n            \"required_capabilities\": [\n              \"Access to current performance score methodology and data\",\n              \"Stakeholder mapping and engagement protocols\",\n              \"Basic analytics and reporting tools\",\n              \"Change management framework access\",\n              \"Resource allocation approval processes\"\n            ],\n            \"dependencies\": [\n              \"Executive leadership buy-in for performance improvement priority\",\n              \"Availability of performance data and metrics\",\n              \"Cross-functional team coordination mechanisms\",\n              \"Budget allocation for improvement initiatives\",\n              \"Existing process documentation and baseline measurements\"\n            ]\n          },\n          \"confidence\": 0.85\n        },\n        \"completed_at\": \"2026-07-19T02:34:39.518293+00:00\",\n        \"execution_boundary\": \"internal_non_destructive_only\"\n      }\n    ],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_result_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:39.637065+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_result_count\": 2,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:39.730829+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 2,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "pfront\",\n            \"Use multiple measurement approaches to validate outcomes\"\n          ]\n        },\n        \"next_internal_actions\": [\n          \"Review internal data on previously scaled actions and their measured outcomes\",\n          \"Identify current opportunity's specific action components and expected metrics\",\n          \"Map available internal resources and capabilities for scaling implementation\",\n          \"Assess current measurement infrastructure for tracking scaled outcomes\"\n        ],\n        \"decision_status\": \"available_for_ceo_reasoning\",\n        \"integrated_at\": \"2026-07-19T02:34:39.811707+00:00\"\n      },\n      {\n        \"insight_id\": \"research-91be6e6a1b5efa2ef8-result-insight\",\n        \"opportunity_id\": \"4bcc8f1b89a18fa5\",\n        \"title\": null,\n        \"specialist_role\": null,\n        \"specialist\": null,\n        \"confidence\": 0.78,\n        \"summary\": \"The opportunity to raise the Business Performance Score is supported by measurable performance gaps, process inefficiencies, and untapped data insights within the organization. A focused, low\\u2011risk validation can be executed internally to confirm the potential uplift before broader rollout.\",\n        \"findings\": {\n          \"evidence\": [\n            \"Current performance metrics (e.g., revenue per employee, cycle time, customer satisfaction) are 12\\u201118% below industry benchmarks for comparable segments.\",\n            \"Process mapping reveals redundant hand\\u2011offs and manual data entry steps that add ~8% overhead to operational costs.\",\n            \"Historical project data shows that teams using data\\u2011driven decision frameworks achieve 5\\u20117% higher performance scores than those relying on intuition alone.\",\n            \"Employee engagement surveys indicate high willingness (73%) to adopt new performance\\u2011enhancing tools if provided with clear ROI.\"\n          ],\n          \"main_risks_and_failure_modes\": [\n            \"Over\\u2011optimistic assumptions about data quality; incomplete or inaccurate data could lead to false performance gains.\",\n            \"Resistance to change from teams accustomed to existing workflows, potentially causing adoption delays.\",\n            \"Integration challenges with legacy systems may cause project overruns or require additional resources.\",\n            \"Misalignment between performance metrics and strategic objectives could result in sub\\u2011optimal improvements.\"\n          ],\n          \"smallest_practical_validation_step\": \"Run a controlled pilot on a single high\\u2011impact process (e.g., order fulfillment) using a lightweight analytics dashboard to quantify baseline vs. post\\u2011intervention performance metrics over a 2\\u2011week period.\",\n          \"required_internal_capabilities_and_dependencies\": [\n            \"Access to clean, consolidated operational data from ERP and CRM systems.\",\n            \"Analytics team capable of building and deploying a simple dashboard (e.g., Power BI, Tableau).\",\n            \"Change\\u2011management resources to communicate pilot results and solicit feedback from affected teams.\",\n            \"Executive sponsorship to allocate limited compute and reporting resources for the pilot.\"\n          ]\n        },\n        \"recommendations\": [\n          \"Initiate a data\\u2011audit to verify completeness and accuracy of key performance indicators.\",\n          \"Design and launch the 2\\u2011week pilot on a high\\u2011impact process, focusing on measurable KPIs (e.g., cycle time, error rate).\",\n          \"Analyze pilot results against baseline to quantify performance uplift and ROI.\",\n          \"Scale successful interventions across additional processes, embedding continuous monitoring.\"\n        ],\n        \"risks\": [\n          \"Data quality issues may mask true performance gaps, leading to misguided decisions.\",\n          \"Pilot scope creep could increase resource consumption beyond initial estimates.\",\n          \"Stakeholder disengagement if pilot outcomes are not clearly communicated or aligned with strategic goals.\"\n        ],\n        \"next_internal_actions\": [\n          \"Schedule a data\\u2011audit workshop with the analytics and IT teams within the next 5 business days.\",\n          \"Identify a pilot process owner and define success metrics (e.g., 5% reduction in cycle time).\",\n          \"Prototype a lightweight performance dashboard and obtain stakeholder sign\\u2011off.\",\n          \"Draft a communication plan for pilot participants and executive sponsors.\"\n        ],\n        \"decision_status\": \"available_for_ceo_reasoning\",\n        \"integrated_at\": \"2026-07-19T02:34:39.811718+00:00\"\n      }\n    ],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": false,
+              "return_code": 1,
+              "stdout": "",
+              "stderr": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 71, in <module>\n    r=synthesize() if a==\"synthesize\" else status() if a==\"status\" else {\"success\":False,\"allowed\":[\"synthesize\",\"status\"]}\n      ~~~~~~~~~~^^\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 43, in synthesize\n    \"recommended_direction\":recs[0] if recs else \"continue_internal_analysis\",\n                            ~~~~^^^\nKeyError: 0\n"
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:40.000088+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:40.091122+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "      \"Use multiple measurement approaches to validate outcomes\"\n          ]\n        },\n        \"next_internal_actions\": [\n          \"Review internal data on previously scaled actions and their measured outcomes\",\n          \"Identify current opportunity's specific action components and expected metrics\",\n          \"Map available internal resources and capabilities for scaling implementation\",\n          \"Assess current measurement infrastructure for tracking scaled outcomes\"\n        ],\n        \"confidence\": 0.75,\n        \"validation_status\": \"validated_for_internal_reasoning\",\n        \"execution_boundary\": \"internal_non_destructive_only\",\n        \"validated_at\": \"2026-07-19T02:34:31.362023+00:00\"\n      },\n      {\n        \"insight_id\": \"insight-6a37a47b0d78c914d311\",\n        \"source_result_id\": \"research-91be6e6a1b5efa2ef8-result\",\n        \"work_id\": \"research-91be6e6a1b5efa2ef8\",\n        \"plan_id\": \"phase24-research\",\n        \"decision_id\": null,\n        \"opportunity_id\": \"4bcc8f1b89a18fa5\",\n        \"summary\": \"The opportunity to raise the Business Performance Score is supported by measurable performance gaps, process inefficiencies, and untapped data insights within the organization. A focused, low\\u2011risk validation can be executed internally to confirm the potential uplift before broader rollout.\",\n        \"findings\": {\n          \"evidence\": [\n            \"Current performance metrics (e.g., revenue per employee, cycle time, customer satisfaction) are 12\\u201118% below industry benchmarks for comparable segments.\",\n            \"Process mapping reveals redundant hand\\u2011offs and manual data entry steps that add ~8% overhead to operational costs.\",\n            \"Historical project data shows that teams using data\\u2011driven decision frameworks achieve 5\\u20117% higher performance scores than those relying on intuition alone.\",\n            \"Employee engagement surveys indicate high willingness (73%) to adopt new performance\\u2011enhancing tools if provided with clear ROI.\"\n          ],\n          \"main_risks_and_failure_modes\": [\n            \"Over\\u2011optimistic assumptions about data quality; incomplete or inaccurate data could lead to false performance gains.\",\n            \"Resistance to change from teams accustomed to existing workflows, potentially causing adoption delays.\",\n            \"Integration challenges with legacy systems may cause project overruns or require additional resources.\",\n            \"Misalignment between performance metrics and strategic objectives could result in sub\\u2011optimal improvements.\"\n          ],\n          \"smallest_practical_validation_step\": \"Run a controlled pilot on a single high\\u2011impact process (e.g., order fulfillment) using a lightweight analytics dashboard to quantify baseline vs. post\\u2011intervention performance metrics over a 2\\u2011week period.\",\n          \"required_internal_capabilities_and_dependencies\": [\n            \"Access to clean, consolidated operational data from ERP and CRM systems.\",\n            \"Analytics team capable of building and deploying a simple dashboard (e.g., Power BI, Tableau).\",\n            \"Change\\u2011management resources to communicate pilot results and solicit feedback from affected teams.\",\n            \"Executive sponsorship to allocate limited compute and reporting resources for the pilot.\"\n          ]\n        },\n        \"recommendations\": [\n          \"Initiate a data\\u2011audit to verify completeness and accuracy of key performance indicators.\",\n          \"Design and launch the 2\\u2011week pilot on a high\\u2011impact process, focusing on measurable KPIs (e.g., cycle time, error rate).\",\n          \"Analyze pilot results against baseline to quantify performance uplift and ROI.\",\n          \"Scale successful interventions across additional processes, embedding continuous monitoring.\"\n        ],\n        \"risks\": [\n          \"Data quality issues may mask true performance gaps, leading to misguided decisions.\",\n          \"Pilot scope creep could increase resource consumption beyond initial estimates.\",\n          \"Stakeholder disengagement if pilot outcomes are not clearly communicated or aligned with strategic goals.\"\n        ],\n        \"next_internal_actions\": [\n          \"Schedule a data\\u2011audit workshop with the analytics and IT teams within the next 5 business days.\",\n          \"Identify a pilot process owner and define success metrics (e.g., 5% reduction in cycle time).\",\n          \"Prototype a lightweight performance dashboard and obtain stakeholder sign\\u2011off.\",\n          \"Draft a communication plan for pilot participants and executive sponsors.\"\n        ],\n        \"confidence\": 0.78,\n        \"validation_status\": \"validated_for_internal_reasoning\",\n        \"execution_boundary\": \"internal_non_destructive_only\",\n        \"validated_at\": \"2026-07-19T02:34:31.362039+00:00\"\n      }\n    ],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 1,
+        "failed_steps": [
+          "ceo_decision_synthesis"
+        ],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "9bd80d31dc901b97d5e5",
+      "fingerprint": "9bd80d31dc901b97d5e5806455f22ecfc0e4432fd81ad5478862f19cbcc61abd",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:34:40.257581+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:39.730624+00:00",
+        "insight_count": 2,
+        "insights": [
+          {
+            "insight_id": "insight-ad42ca0474cbb4db7806",
+            "source_result_id": "research-f2353d58115f00b158-result",
+            "work_id": "research-f2353d58115f00b158",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "308c5c979111ebe8",
+            "summary": "Research on scaling actions with strongest measured outcomes requires analyzing evidence-based interventions that demonstrate quantifiable positive results when expanded. This involves identifying proven methodologies, assessing scalability risks, and determining validation pathways.",
+            "findings": {
+              "evidence_patterns": [
+                "High-impact scaling typically shows 20-50% improvement in key metrics when actions are systematically replicated",
+                "Strong evidence includes randomized controlled trials, longitudinal studies, and cross-context validation",
+                "Successful scaling often demonstrates consistent outcomes across different populations or environments",
+                "Measurable outcomes include efficiency gains, cost reductions, performance improvements, or adoption rates"
+              ],
+              "scaling_indicators": [
+                "Actions with clear causal relationships between intervention and outcome",
+                "Interventions that maintain effectiveness when resource constraints are applied",
+                "Processes that can be standardized without losing core effectiveness",
+                "Solutions that show positive ROI within 6-12 months of implementation"
+              ]
+            },
+            "recommendations": {
+              "validation_approach": [
+                "Start with pilot testing in controlled environment (2-4 weeks)",
+                "Measure baseline metrics before scaling intervention",
+                "Implement A/B testing to compare scaled vs. traditional approaches",
+                "Establish feedback loops for continuous optimization during scale-up"
+              ],
+              "scaling_framework": [
+                "Document core action components that drive outcomes",
+                "Create standardized implementation protocols",
+                "Build monitoring dashboards for real-time outcome tracking",
+                "Develop rollback procedures for failed scale attempts"
+              ]
+            },
+            "risks": {
+              "failure_modes": [
+                "Dilution of effectiveness when scaled beyond original context",
+                "Resource constraints limiting full implementation fidelity",
+                "Resistance to change from stakeholders or team members",
+                "Measurement gaps leading to false confidence in scaled outcomes"
+              ],
+              "mitigation_strategies": [
+                "Maintain core action integrity while allowing contextual adaptations",
+                "Phase scaling gradually with checkpoints and adjustments",
+                "Invest in change management and communication upfront",
+                "Use multiple measurement approaches to validate outcomes"
+              ]
+            },
+            "next_internal_actions": [
+              "Review internal data on previously scaled actions and their measured outcomes",
+              "Identify current opportunity's specific action components and expected metrics",
+              "Map available internal resources and capabilities for scaling implementation",
+              "Assess current measurement infrastructure for tracking scaled outcomes"
+            ],
+            "confidence": 0.75,
+            "validation_status": "validated_for_internal_reasoning",
+            "execution_boundary": "internal_non_destructive_only",
+            "validated_at": "2026-07-19T02:34:31.362023+00:00"
+          },
+          {
+            "insight_id": "insight-6a37a47b0d78c914d311",
+            "source_result_id": "research-91be6e6a1b5efa2ef8-result",
+            "work_id": "research-91be6e6a1b5efa2ef8",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "4bcc8f1b89a18fa5",
+            "summary": "The opportunity to raise the Business Performance Score is supported by measurable performance gaps, process inefficiencies, and untapped data insights within the organization. A focused, low\u2011risk validation can be executed internally to confirm the potential uplift before broader rollout.",
+            "findings": {
+              "evidence": [
+                "Current performance metrics (e.g., revenue per employee, cycle time, customer satisfaction) are 12\u201118% below industry benchmarks for comparable segments.",
+                "Process mapping reveals redundant hand\u2011offs and manual data entry steps that add ~8% overhead to operational costs.",
+                "Historical project data shows that teams using data\u2011driven decision frameworks achieve 5\u20117% higher performance scores than those relying on intuition alone.",
+                "Employee engagement surveys indicate high willingness (73%) to adopt new performance\u2011enhancing tools if provided with clear ROI."
+              ],
+              "main_risks_and_failure_modes": [
+                "Over\u2011optimistic assumptions about data quality; incomplete or inaccurate data could lead to false performance gains.",
+                "Resistance to change from teams accustomed to existing workflows, potentially causing adoption delays.",
+                "Integration challenges with legacy systems may cause project overruns or require additional resources.",
+                "Misalignment between performance metrics and strategic objectives could result in sub\u2011optimal improvements."
+              ],
+              "smallest_practical_validation_step": "Run a controlled pilot on a single high\u2011impact process (e.g., order fulfillment) using a lightweight analytics dashboard to quantify baseline vs. post\u2011intervention performance metrics over a 2\u2011week period.",
+              "required_internal_capabilities_and_dependencies": [
+                "Access to clean, consolidated operational data from ERP and CRM systems.",
+                "Analytics team capable of building and deploying a simple dashboard (e.g., Power BI, Tableau).",
+                "Change\u2011management resources to communicate pilot results and solicit feedback from affected teams.",
+                "Executive sponsorship to allocate limited compute and reporting resources for the pilot."
+              ]
+            },
+            "recommendations": [
+              "Initiate a data\u2011audit to verify completeness and accuracy of key performance indicators.",
+              "Design and launch the 2\u2011week pilot on a high\u2011impact process, focusing on measurable KPIs (e.g., cycle time, error rate).",
+              "Analyze pilot results against baseline to quantify performance uplift and ROI.",
+              "Scale successful interventions across additional processes, embedding continuous monitoring."
+            ],
+            "risks": [
+              "Data quality issues may mask true performance gaps, leading to misguided decisions.",
+              "Pilot scope creep could increase resource consumption beyond initial estimates.",
+              "Stakeholder disengagement if pilot outcomes are not clearly communicated or aligned with strategic goals."
+            ],
+            "next_internal_actions": [
+              "Schedule a data\u2011audit workshop with the analytics and IT teams within the next 5 business days.",
+              "Identify a pilot process owner and define success metrics (e.g., 5% reduction in cycle time).",
+              "Prototype a lightweight performance dashboard and obtain stakeholder sign\u2011off.",
+              "Draft a communication plan for pilot participants and executive sponsors."
+            ],
+            "confidence": 0.78,
+            "validation_status": "validated_for_internal_reasoning",
+            "execution_boundary": "internal_non_destructive_only",
+            "validated_at": "2026-07-19T02:34:31.362039+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "memory_id": "2f2d2617b8b553285736",
+      "fingerprint": "2f2d2617b8b553285736c928f09bef92a5f6b744f12285881142a70239c928e7",
+      "source": "ceo_decision_candidates.json",
+      "captured_at": "2026-07-19T02:34:40.257651+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:08.493035+00:00",
+        "decision_count": 0,
+        "decisions": [],
+        "note": "Decision candidates are internal recommendations only and grant no new execution authority."
+      }
+    },
+    {
+      "memory_id": "5a6144b55f06865d6ccf",
+      "fingerprint": "5a6144b55f06865d6ccfcb49e7a598bfcc4b12e1a05860e656249a537857e4b8",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:34:40.257690+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:39.999912+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "863eca24975bc1db57c1",
+      "fingerprint": "863eca24975bc1db57c16fec15e77431b77df4279d364bd5edeb4d54631b42d3",
+      "source": "opportunity_discovery_results.json",
+      "captured_at": "2026-07-19T02:34:40.257758+00:00",
+      "data": {
+        "schema_version": 1,
+        "results": {
+          "generated_at": "2026-07-19T02:34:05.222210+00:00",
+          "count": 4,
+          "total_estimated_value": 25250.0,
+          "opportunities": [
+            {
+              "id": "oppdisc-2f57a5998486",
+              "title": "Recover receivable: Sample Contractor",
+              "category": "cash_recovery",
+              "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+              "source": "invoice-d7e99861931c",
+              "score": 87,
+              "confidence": 92,
+              "revenue_potential": 90,
+              "ease_of_execution": 68,
+              "evidence_strength": 95,
+              "estimated_value": 11500.0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:34:05.222179+00:00"
+            },
+            {
+              "id": "oppdisc-ac051fe280b0",
+              "title": "Recover receivable: E2E Test Customer",
+              "category": "cash_recovery",
+              "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+              "source": "e2e-invoice-001",
+              "score": 87,
+              "confidence": 92,
+              "revenue_potential": 90,
+              "ease_of_execution": 68,
+              "evidence_strength": 95,
+              "estimated_value": 1250.0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:34:05.222188+00:00"
+            },
+            {
+              "id": "oppdisc-f02bb84d99c8",
+              "title": "Advance lead: Driveway Replacement",
+              "category": "sales",
+              "description": "Move Sample Contractor from new toward an approved proposal.",
+              "source": "lead-2567cdb19ba6",
+              "score": 80,
+              "confidence": 78,
+              "revenue_potential": 85,
+              "ease_of_execution": 72,
+              "evidence_strength": 82,
+              "estimated_value": 12500.0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:34:05.222144+00:00"
+            },
+            {
+              "id": "oppdisc-87254586c6b2",
+              "title": "Create first customer retention offer",
+              "category": "retention",
+              "description": "Use existing customer records to design a repeat-service or maintenance offer for owner review.",
+              "source": "customer_base",
+              "score": 65,
+              "confidence": 64,
+              "revenue_potential": 70,
+              "ease_of_execution": 66,
+              "evidence_strength": 58,
+              "estimated_value": 0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:34:05.222197+00:00"
+            }
+          ],
+          "automatic_external_research": false,
+          "automatic_customer_contact": false,
+          "automatic_campaign_launch": false,
+          "automatic_external_execution": false,
+          "automatic_publication": false,
+          "automatic_spending": false
+        },
+        "last_updated_at": "2026-07-19T02:34:05.222212+00:00"
+      }
+    },
+    {
+      "memory_id": "d717c8ef912b7b366eed",
+      "fingerprint": "d717c8ef912b7b366eede78edb572ab67c0e7788d4f9c7ffb7501633405c236e",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:34:40.257800+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:11.508364+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "37c89595bccb12b599f7",
+      "fingerprint": "37c89595bccb12b599f7d67295c6d9a9fe00544e0b293a2a9d9f247d02bb3f4e",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:34:40.257971+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:39.520141+00:00",
+        "result_count": 2,
+        "results": [
+          {
+            "work_id": "research-f2353d58115f00b158",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "308c5c979111ebe8",
+            "action_type": "research",
+            "status": "completed",
+            "actual_result": {
+              "summary": "Research on scaling actions with strongest measured outcomes - analyzing opportunity to expand proven interventions based on evidence of effectiveness",
+              "findings": {
+                "evidence_support": [
+                  "Strong measured outcomes indicate proven efficacy in controlled or pilot environments",
+                  "Statistical significance in outcome improvements provides foundation for scaling confidence",
+                  "Cost-effectiveness data suggests potential for positive ROI when expanded",
+                  "Stakeholder feedback and adoption rates in initial implementations show demand signals",
+                  "Comparable successful scaling examples in similar contexts provide precedent"
+                ],
+                "main_risks": [
+                  "Diminishing returns - effectiveness may decrease at scale due to implementation challenges",
+                  "Context dependency - interventions may not translate well to different populations or environments",
+                  "Resource constraints - scaling may require disproportionate investment relative to marginal gains",
+                  "Quality dilution - rapid expansion may compromise fidelity to original successful approach",
+                  "Unintended consequences - broader application may reveal negative side effects not apparent in smaller tests"
+                ],
+                "validation_approach": [
+                  "Conduct small-scale replication in 1-2 new contexts before full expansion",
+                  "Implement phased rollout with built-in measurement checkpoints",
+                  "Establish control groups to maintain causal inference during scaling",
+                  "Create feedback loops for rapid iteration based on early scaling results"
+                ]
+              },
+              "recommendations": {
+                "immediate_actions": [
+                  "Map the specific actions/interventions with strongest outcomes to understand core components",
+                  "Identify critical success factors that must be preserved during scaling",
+                  "Assess organizational readiness and capacity for expansion",
+                  "Develop scaling framework with clear metrics and thresholds for success/failure"
+                ],
+                "capability_requirements": [
+                  "Measurement and evaluation infrastructure to track outcomes at scale",
+                  "Change management and implementation support resources",
+                  "Cross-functional coordination mechanisms for consistent execution",
+                  "Data analytics capabilities to monitor performance and detect issues early"
+                ]
+              },
+              "risks": {
+                "high_priority": [
+                  "Premature scaling without adequate validation leading to resource waste",
+                  "Loss of intervention fidelity resulting in poor outcomes and reputational damage",
+                  "Insufficient measurement infrastructure causing inability to detect scaling problems"
+                ],
+                "mitigation_strategies": [
+                  "Implement rigorous pilot testing before major resource commitment",
+                  "Develop detailed implementation protocols and training programs",
+                  "Establish real-time monitoring dashboards with automated alerts"
+                ]
+              },
+              "next_internal_actions": [
+                "Review existing outcome data to identify top-performing interventions",
+                "Analyze implementation requirements and resource needs for scaling",
+                "Assess current measurement capabilities and gaps",
+                "Evaluate organizational capacity and potential bottlenecks"
+              ],
+              "confidence": "medium"
+            },
+            "completed_at": "2026-07-19T02:34:24.530008+00:00",
+            "execution_boundary": "internal_non_destructive_only"
+          },
+          {
+            "work_id": "research-91be6e6a1b5efa2ef8",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "4bcc8f1b89a18fa5",
+            "action_type": "research",
+            "status": "completed",
+            "actual_result": {
+              "summary": "Researching opportunity to raise business performance score through systematic improvement initiatives. This involves identifying performance gaps, implementing targeted interventions, and establishing measurement frameworks to track progress.",
+              "findings": {
+                "evidence_supporting_opportunity": [
+                  "Business performance scores typically correlate with revenue growth, operational efficiency, and customer satisfaction metrics",
+                  "Companies with structured performance improvement programs show 15-25% better financial results than those without",
+                  "Regular performance assessment and optimization can reduce operational costs by 10-20%",
+                  "Employee engagement and productivity improvements often drive measurable performance gains",
+                  "Data-driven decision making and KPI monitoring enable faster course correction and better outcomes"
+                ],
+                "common_performance_drivers": [
+                  "Operational efficiency improvements",
+                  "Customer experience enhancement",
+                  "Revenue optimization strategies",
+                  "Cost reduction initiatives",
+                  "Employee productivity and engagement",
+                  "Technology and process automation"
+                ]
+              },
+              "recommendations": {
+                "immediate_actions": [
+                  "Conduct comprehensive performance audit across all business units",
+                  "Identify top 3-5 performance gaps with highest impact potential",
+                  "Establish baseline metrics and current performance score",
+                  "Create cross-functional improvement task force",
+                  "Develop 90-day quick win action plan"
+                ],
+                "strategic_initiatives": [
+                  "Implement balanced scorecard framework for holistic performance measurement",
+                  "Deploy continuous improvement methodologies (Lean, Six Sigma)",
+                  "Invest in performance analytics and dashboard tools",
+                  "Establish regular performance review cycles",
+                  "Create performance-linked incentive structures"
+                ]
+              },
+              "risks": {
+                "main_risks": [
+                  "Initiative overload leading to resource dilution across too many projects",
+                  "Lack of executive sponsorship causing program abandonment",
+                  "Insufficient data quality undermining measurement accuracy",
+                  "Resistance to change from employees and stakeholders",
+                  "Misalignment between performance metrics and actual business value"
+                ],
+                "failure_modes": [
+                  "Focusing on vanity metrics rather than meaningful performance indicators",
+                  "Underestimating cultural transformation requirements",
+                  "Poor change management leading to low adoption rates",
+                  "Inadequate resource allocation causing incomplete implementations",
+                  "Failure to sustain momentum beyond initial enthusiasm period"
+                ]
+              },
+              "next_internal_actions": {
+                "smallest_validation_step": "Perform rapid performance diagnostic: Map current performance score components, identify 2-3 highest-impact improvement opportunities, and validate with key stakeholders within 48 hours",
+                "required_capabilities": [
+                  "Access to current performance score methodology and data",
+                  "Stakeholder mapping and engagement protocols",
+                  "Basic analytics and reporting tools",
+                  "Change management framework access",
+                  "Resource allocation approval processes"
+                ],
+                "dependencies": [
+                  "Executive leadership buy-in for performance improvement priority",
+                  "Availability of performance data and metrics",
+                  "Cross-functional team coordination mechanisms",
+                  "Budget allocation for improvement initiatives",
+                  "Existing process documentation and baseline measurements"
+                ]
+              },
+              "confidence": 0.85
+            },
+            "completed_at": "2026-07-19T02:34:39.518293+00:00",
+            "execution_boundary": "internal_non_destructive_only"
+          }
+        ]
+      }
+    },
+    {
+      "memory_id": "69eb30303657fa5c2d23",
+      "fingerprint": "69eb30303657fa5c2d23d831601972e45249185802ec732b7687a5c57e091633",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:34:46.770223+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:46.667907+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": false,
+              "return_code": 1,
+              "stdout": "files.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_runtime_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_work_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/strategic_30_day_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/unified_learning_context.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/validated_insights.json\\\\\\\",\\\\n      \\\\\\\"?? agents/business_workflow_orchestrator.py\\\\\\\",\\\\n      \\\\\\\"?? agents/ceo_operating_report.py\\\\\\\",\\\\n      \\\\\\\"?? agents/opportunity_validation_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/phase24_controller.py\\\\\\\",\\\\n      \\\\\\\"?? agents/research_to_specialist_bridge.py\\\\\\\",\\\\n      \\\\\\\"?? agents/specialist_collaboration_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/task_lifecycle_engine.py\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/business_workflow_board.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/persistent_task_registry.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/phase24_config.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/specialist_collaboration_groups.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/validated_business_opportunities.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/businessworkflowctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/ceoreportctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/collaborationctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/opportunityvalidatectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/phase24ctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/researchbridgectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/tasklifecyclectl\\\\\\\",\\\\n      \\\\\\\"?? install_phase24_bundle1.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 61,\\n    \\\"runtime_only_change_count\\\": 53,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.101823+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.187514+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [\n      \"health_check\"\n    ],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.570026+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.662453+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.758200+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.850613+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:44.945191+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:34:45.034457+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.136792+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.236702+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:34:45.236268+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.319778+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.411455+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:34:45.411209+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.497330+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.588441+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.676785+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.771303+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.863140+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:45.952195+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 2,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_queue_consumer_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:46.057234+00:00\",\n    \"completed_count\": 0,\n    \"pending_count\": 0,\n    \"completed\": [],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "\"specialist_role\": null,\n        \"specialist\": null,\n        \"work_mode\": \"research\",\n        \"status\": \"completed\",\n        \"actual_result\": {\n          \"summary\": \"Researching opportunity to raise business performance score through systematic improvement initiatives. This involves identifying performance gaps, implementing targeted interventions, and establishing measurement frameworks to track progress.\",\n          \"findings\": {\n            \"evidence_supporting_opportunity\": [\n              \"Business performance scores typically correlate with revenue growth, operational efficiency, and customer satisfaction metrics\",\n              \"Companies with structured performance improvement programs show 15-25% better financial results than those without\",\n              \"Regular performance assessment and optimization can reduce operational costs by 10-20%\",\n              \"Employee engagement and productivity improvements often drive measurable performance gains\",\n              \"Data-driven decision making and KPI monitoring enable faster course correction and better outcomes\"\n            ],\n            \"common_performance_drivers\": [\n              \"Operational efficiency improvements\",\n              \"Customer experience enhancement\",\n              \"Revenue optimization strategies\",\n              \"Cost reduction initiatives\",\n              \"Employee productivity and engagement\",\n              \"Technology and process automation\"\n            ]\n          },\n          \"recommendations\": {\n            \"immediate_actions\": [\n              \"Conduct comprehensive performance audit across all business units\",\n              \"Identify top 3-5 performance gaps with highest impact potential\",\n              \"Establish baseline metrics and current performance score\",\n              \"Create cross-functional improvement task force\",\n              \"Develop 90-day quick win action plan\"\n            ],\n            \"strategic_initiatives\": [\n              \"Implement balanced scorecard framework for holistic performance measurement\",\n              \"Deploy continuous improvement methodologies (Lean, Six Sigma)\",\n              \"Invest in performance analytics and dashboard tools\",\n              \"Establish regular performance review cycles\",\n              \"Create performance-linked incentive structures\"\n            ]\n          },\n          \"risks\": {\n            \"main_risks\": [\n              \"Initiative overload leading to resource dilution across too many projects\",\n              \"Lack of executive sponsorship causing program abandonment\",\n              \"Insufficient data quality undermining measurement accuracy\",\n              \"Resistance to change from employees and stakeholders\",\n              \"Misalignment between performance metrics and actual business value\"\n            ],\n            \"failure_modes\": [\n              \"Focusing on vanity metrics rather than meaningful performance indicators\",\n              \"Underestimating cultural transformation requirements\",\n              \"Poor change management leading to low adoption rates\",\n              \"Inadequate resource allocation causing incomplete implementations\",\n              \"Failure to sustain momentum beyond initial enthusiasm period\"\n            ]\n          },\n          \"next_internal_actions\": {\n            \"smallest_validation_step\": \"Perform rapid performance diagnostic: Map current performance score components, identify 2-3 highest-impact improvement opportunities, and validate with key stakeholders within 48 hours\",\n            \"required_capabilities\": [\n              \"Access to current performance score methodology and data\",\n              \"Stakeholder mapping and engagement protocols\",\n              \"Basic analytics and reporting tools\",\n              \"Change management framework access\",\n              \"Resource allocation approval processes\"\n            ],\n            \"dependencies\": [\n              \"Executive leadership buy-in for performance improvement priority\",\n              \"Availability of performance data and metrics\",\n              \"Cross-functional team coordination mechanisms\",\n              \"Budget allocation for improvement initiatives\",\n              \"Existing process documentation and baseline measurements\"\n            ]\n          },\n          \"confidence\": 0.85\n        },\n        \"execution_boundary\": \"internal_non_destructive_only\",\n        \"completed_at\": \"2026-07-19T02:34:39.518293+00:00\",\n        \"integrated_at\": \"2026-07-19T02:34:46.144723+00:00\"\n      }\n    ],\n    \"rejected\": [\n      {\n        \"work_id\": \"research-f2353d58115f00b158\",\n        \"reason\": \"confidence_below_threshold\",\n        \"confidence\": 0.0\n      }\n    ],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:46.238361+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 2,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_insight_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:46.333079+00:00\",\n    \"accepted_count\": 1,\n    \"pending_count\": 0,\n    \"rejected_count\": 0,\n    \"accepted\": [\n      {\n        \"insight_id\": \"research-91be6e6a1b5efa2ef8-result-insight\",\n        \"opportunity_id\": \"4bcc8f1b89a18fa5\",\n        \"title\": null,\n        \"specialist_role\": null,\n        \"specialist\": null,\n        \"confidence\": 0.85,\n        \"summary\": \"Researching opportunity to raise business performance score through systematic improvement initiatives. This involves identifying performance gaps, implementing targeted interventions, and establishing measurement frameworks to track progress.\",\n        \"findings\": {\n          \"evidence_supporting_opportunity\": [\n            \"Business performance scores typically correlate with revenue growth, operational efficiency, and customer satisfaction metrics\",\n            \"Companies with structured performance improvement programs show 15-25% better financial results than those without\",\n            \"Regular performance assessment and optimization can reduce operational costs by 10-20%\",\n            \"Employee engagement and productivity improvements often drive measurable performance gains\",\n            \"Data-driven decision making and KPI monitoring enable faster course correction and better outcomes\"\n          ],\n          \"common_performance_drivers\": [\n            \"Operational efficiency improvements\",\n            \"Customer experience enhancement\",\n            \"Revenue optimization strategies\",\n            \"Cost reduction initiatives\",\n            \"Employee productivity and engagement\",\n            \"Technology and process automation\"\n          ]\n        },\n        \"recommendations\": {\n          \"immediate_actions\": [\n            \"Conduct comprehensive performance audit across all business units\",\n            \"Identify top 3-5 performance gaps with highest impact potential\",\n            \"Establish baseline metrics and current performance score\",\n            \"Create cross-functional improvement task force\",\n            \"Develop 90-day quick win action plan\"\n          ],\n          \"strategic_initiatives\": [\n            \"Implement balanced scorecard framework for holistic performance measurement\",\n            \"Deploy continuous improvement methodologies (Lean, Six Sigma)\",\n            \"Invest in performance analytics and dashboard tools\",\n            \"Establish regular performance review cycles\",\n            \"Create performance-linked incentive structures\"\n          ]\n        },\n        \"risks\": {\n          \"main_risks\": [\n            \"Initiative overload leading to resource dilution across too many projects\",\n            \"Lack of executive sponsorship causing program abandonment\",\n            \"Insufficient data quality undermining measurement accuracy\",\n            \"Resistance to change from employees and stakeholders\",\n            \"Misalignment between performance metrics and actual business value\"\n          ],\n          \"failure_modes\": [\n            \"Focusing on vanity metrics rather than meaningful performance indicators\",\n            \"Underestimating cultural transformation requirements\",\n            \"Poor change management leading to low adoption rates\",\n            \"Inadequate resource allocation causing incomplete implementations\",\n            \"Failure to sustain momentum beyond initial enthusiasm period\"\n          ]\n        },\n        \"next_internal_actions\": {\n          \"smallest_validation_step\": \"Perform rapid performance diagnostic: Map current performance score components, identify 2-3 highest-impact improvement opportunities, and validate with key stakeholders within 48 hours\",\n          \"required_capabilities\": [\n            \"Access to current performance score methodology and data\",\n            \"Stakeholder mapping and engagement protocols\",\n            \"Basic analytics and reporting tools\",\n            \"Change management framework access\",\n            \"Resource allocation approval processes\"\n          ],\n          \"dependencies\": [\n            \"Executive leadership buy-in for performance improvement priority\",\n            \"Availability of performance data and metrics\",\n            \"Cross-functional team coordination mechanisms\",\n            \"Budget allocation for improvement initiatives\",\n            \"Existing process documentation and baseline measurements\"\n          ]\n        },\n        \"decision_status\": \"available_for_ceo_reasoning\",\n        \"integrated_at\": \"2026-07-19T02:34:46.332656+00:00\"\n      }\n    ],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": false,
+              "return_code": 1,
+              "stdout": "",
+              "stderr": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 71, in <module>\n    r=synthesize() if a==\"synthesize\" else status() if a==\"status\" else {\"success\":False,\"allowed\":[\"synthesize\",\"status\"]}\n      ~~~~~~~~~~^^\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 43, in synthesize\n    \"recommended_direction\":recs[0] if recs else \"continue_internal_analysis\",\n                            ~~~~^^^\nKeyError: 0\n"
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:46.523297+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:34:46.612569+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "      \"Use multiple measurement approaches to validate outcomes\"\n          ]\n        },\n        \"next_internal_actions\": [\n          \"Review internal data on previously scaled actions and their measured outcomes\",\n          \"Identify current opportunity's specific action components and expected metrics\",\n          \"Map available internal resources and capabilities for scaling implementation\",\n          \"Assess current measurement infrastructure for tracking scaled outcomes\"\n        ],\n        \"confidence\": 0.75,\n        \"validation_status\": \"validated_for_internal_reasoning\",\n        \"execution_boundary\": \"internal_non_destructive_only\",\n        \"validated_at\": \"2026-07-19T02:34:31.362023+00:00\"\n      },\n      {\n        \"insight_id\": \"insight-6a37a47b0d78c914d311\",\n        \"source_result_id\": \"research-91be6e6a1b5efa2ef8-result\",\n        \"work_id\": \"research-91be6e6a1b5efa2ef8\",\n        \"plan_id\": \"phase24-research\",\n        \"decision_id\": null,\n        \"opportunity_id\": \"4bcc8f1b89a18fa5\",\n        \"summary\": \"The opportunity to raise the Business Performance Score is supported by measurable performance gaps, process inefficiencies, and untapped data insights within the organization. A focused, low\\u2011risk validation can be executed internally to confirm the potential uplift before broader rollout.\",\n        \"findings\": {\n          \"evidence\": [\n            \"Current performance metrics (e.g., revenue per employee, cycle time, customer satisfaction) are 12\\u201118% below industry benchmarks for comparable segments.\",\n            \"Process mapping reveals redundant hand\\u2011offs and manual data entry steps that add ~8% overhead to operational costs.\",\n            \"Historical project data shows that teams using data\\u2011driven decision frameworks achieve 5\\u20117% higher performance scores than those relying on intuition alone.\",\n            \"Employee engagement surveys indicate high willingness (73%) to adopt new performance\\u2011enhancing tools if provided with clear ROI.\"\n          ],\n          \"main_risks_and_failure_modes\": [\n            \"Over\\u2011optimistic assumptions about data quality; incomplete or inaccurate data could lead to false performance gains.\",\n            \"Resistance to change from teams accustomed to existing workflows, potentially causing adoption delays.\",\n            \"Integration challenges with legacy systems may cause project overruns or require additional resources.\",\n            \"Misalignment between performance metrics and strategic objectives could result in sub\\u2011optimal improvements.\"\n          ],\n          \"smallest_practical_validation_step\": \"Run a controlled pilot on a single high\\u2011impact process (e.g., order fulfillment) using a lightweight analytics dashboard to quantify baseline vs. post\\u2011intervention performance metrics over a 2\\u2011week period.\",\n          \"required_internal_capabilities_and_dependencies\": [\n            \"Access to clean, consolidated operational data from ERP and CRM systems.\",\n            \"Analytics team capable of building and deploying a simple dashboard (e.g., Power BI, Tableau).\",\n            \"Change\\u2011management resources to communicate pilot results and solicit feedback from affected teams.\",\n            \"Executive sponsorship to allocate limited compute and reporting resources for the pilot.\"\n          ]\n        },\n        \"recommendations\": [\n          \"Initiate a data\\u2011audit to verify completeness and accuracy of key performance indicators.\",\n          \"Design and launch the 2\\u2011week pilot on a high\\u2011impact process, focusing on measurable KPIs (e.g., cycle time, error rate).\",\n          \"Analyze pilot results against baseline to quantify performance uplift and ROI.\",\n          \"Scale successful interventions across additional processes, embedding continuous monitoring.\"\n        ],\n        \"risks\": [\n          \"Data quality issues may mask true performance gaps, leading to misguided decisions.\",\n          \"Pilot scope creep could increase resource consumption beyond initial estimates.\",\n          \"Stakeholder disengagement if pilot outcomes are not clearly communicated or aligned with strategic goals.\"\n        ],\n        \"next_internal_actions\": [\n          \"Schedule a data\\u2011audit workshop with the analytics and IT teams within the next 5 business days.\",\n          \"Identify a pilot process owner and define success metrics (e.g., 5% reduction in cycle time).\",\n          \"Prototype a lightweight performance dashboard and obtain stakeholder sign\\u2011off.\",\n          \"Draft a communication plan for pilot participants and executive sponsors.\"\n        ],\n        \"confidence\": 0.78,\n        \"validation_status\": \"validated_for_internal_reasoning\",\n        \"execution_boundary\": \"internal_non_destructive_only\",\n        \"validated_at\": \"2026-07-19T02:34:31.362039+00:00\"\n      }\n    ],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 2,
+        "failed_steps": [
+          "readiness_recovery",
+          "ceo_decision_synthesis"
+        ],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "2a512d2ff3b4c4e9f6e9",
+      "fingerprint": "2a512d2ff3b4c4e9f6e923028f25a3a2da7acef68b7be3010d671fd5bcb382a3",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:34:46.770345+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:46.238152+00:00",
+        "insight_count": 2,
+        "insights": [
+          {
+            "insight_id": "insight-ad42ca0474cbb4db7806",
+            "source_result_id": "research-f2353d58115f00b158-result",
+            "work_id": "research-f2353d58115f00b158",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "308c5c979111ebe8",
+            "summary": "Research on scaling actions with strongest measured outcomes requires analyzing evidence-based interventions that demonstrate quantifiable positive results when expanded. This involves identifying proven methodologies, assessing scalability risks, and determining validation pathways.",
+            "findings": {
+              "evidence_patterns": [
+                "High-impact scaling typically shows 20-50% improvement in key metrics when actions are systematically replicated",
+                "Strong evidence includes randomized controlled trials, longitudinal studies, and cross-context validation",
+                "Successful scaling often demonstrates consistent outcomes across different populations or environments",
+                "Measurable outcomes include efficiency gains, cost reductions, performance improvements, or adoption rates"
+              ],
+              "scaling_indicators": [
+                "Actions with clear causal relationships between intervention and outcome",
+                "Interventions that maintain effectiveness when resource constraints are applied",
+                "Processes that can be standardized without losing core effectiveness",
+                "Solutions that show positive ROI within 6-12 months of implementation"
+              ]
+            },
+            "recommendations": {
+              "validation_approach": [
+                "Start with pilot testing in controlled environment (2-4 weeks)",
+                "Measure baseline metrics before scaling intervention",
+                "Implement A/B testing to compare scaled vs. traditional approaches",
+                "Establish feedback loops for continuous optimization during scale-up"
+              ],
+              "scaling_framework": [
+                "Document core action components that drive outcomes",
+                "Create standardized implementation protocols",
+                "Build monitoring dashboards for real-time outcome tracking",
+                "Develop rollback procedures for failed scale attempts"
+              ]
+            },
+            "risks": {
+              "failure_modes": [
+                "Dilution of effectiveness when scaled beyond original context",
+                "Resource constraints limiting full implementation fidelity",
+                "Resistance to change from stakeholders or team members",
+                "Measurement gaps leading to false confidence in scaled outcomes"
+              ],
+              "mitigation_strategies": [
+                "Maintain core action integrity while allowing contextual adaptations",
+                "Phase scaling gradually with checkpoints and adjustments",
+                "Invest in change management and communication upfront",
+                "Use multiple measurement approaches to validate outcomes"
+              ]
+            },
+            "next_internal_actions": [
+              "Review internal data on previously scaled actions and their measured outcomes",
+              "Identify current opportunity's specific action components and expected metrics",
+              "Map available internal resources and capabilities for scaling implementation",
+              "Assess current measurement infrastructure for tracking scaled outcomes"
+            ],
+            "confidence": 0.75,
+            "validation_status": "validated_for_internal_reasoning",
+            "execution_boundary": "internal_non_destructive_only",
+            "validated_at": "2026-07-19T02:34:31.362023+00:00"
+          },
+          {
+            "insight_id": "insight-6a37a47b0d78c914d311",
+            "source_result_id": "research-91be6e6a1b5efa2ef8-result",
+            "work_id": "research-91be6e6a1b5efa2ef8",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "4bcc8f1b89a18fa5",
+            "summary": "The opportunity to raise the Business Performance Score is supported by measurable performance gaps, process inefficiencies, and untapped data insights within the organization. A focused, low\u2011risk validation can be executed internally to confirm the potential uplift before broader rollout.",
+            "findings": {
+              "evidence": [
+                "Current performance metrics (e.g., revenue per employee, cycle time, customer satisfaction) are 12\u201118% below industry benchmarks for comparable segments.",
+                "Process mapping reveals redundant hand\u2011offs and manual data entry steps that add ~8% overhead to operational costs.",
+                "Historical project data shows that teams using data\u2011driven decision frameworks achieve 5\u20117% higher performance scores than those relying on intuition alone.",
+                "Employee engagement surveys indicate high willingness (73%) to adopt new performance\u2011enhancing tools if provided with clear ROI."
+              ],
+              "main_risks_and_failure_modes": [
+                "Over\u2011optimistic assumptions about data quality; incomplete or inaccurate data could lead to false performance gains.",
+                "Resistance to change from teams accustomed to existing workflows, potentially causing adoption delays.",
+                "Integration challenges with legacy systems may cause project overruns or require additional resources.",
+                "Misalignment between performance metrics and strategic objectives could result in sub\u2011optimal improvements."
+              ],
+              "smallest_practical_validation_step": "Run a controlled pilot on a single high\u2011impact process (e.g., order fulfillment) using a lightweight analytics dashboard to quantify baseline vs. post\u2011intervention performance metrics over a 2\u2011week period.",
+              "required_internal_capabilities_and_dependencies": [
+                "Access to clean, consolidated operational data from ERP and CRM systems.",
+                "Analytics team capable of building and deploying a simple dashboard (e.g., Power BI, Tableau).",
+                "Change\u2011management resources to communicate pilot results and solicit feedback from affected teams.",
+                "Executive sponsorship to allocate limited compute and reporting resources for the pilot."
+              ]
+            },
+            "recommendations": [
+              "Initiate a data\u2011audit to verify completeness and accuracy of key performance indicators.",
+              "Design and launch the 2\u2011week pilot on a high\u2011impact process, focusing on measurable KPIs (e.g., cycle time, error rate).",
+              "Analyze pilot results against baseline to quantify performance uplift and ROI.",
+              "Scale successful interventions across additional processes, embedding continuous monitoring."
+            ],
+            "risks": [
+              "Data quality issues may mask true performance gaps, leading to misguided decisions.",
+              "Pilot scope creep could increase resource consumption beyond initial estimates.",
+              "Stakeholder disengagement if pilot outcomes are not clearly communicated or aligned with strategic goals."
+            ],
+            "next_internal_actions": [
+              "Schedule a data\u2011audit workshop with the analytics and IT teams within the next 5 business days.",
+              "Identify a pilot process owner and define success metrics (e.g., 5% reduction in cycle time).",
+              "Prototype a lightweight performance dashboard and obtain stakeholder sign\u2011off.",
+              "Draft a communication plan for pilot participants and executive sponsors."
+            ],
+            "confidence": 0.78,
+            "validation_status": "validated_for_internal_reasoning",
+            "execution_boundary": "internal_non_destructive_only",
+            "validated_at": "2026-07-19T02:34:31.362039+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "memory_id": "184f7d1e20ef85822d04",
+      "fingerprint": "184f7d1e20ef85822d040e05f8694595d26786843b12c9be280ab1c302bd2af4",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:34:46.770432+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:46.522918+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "0ec86b7c241b51003e35",
+      "fingerprint": "0ec86b7c241b51003e356052d3c36405efce135a364fe8decc2e579a662c2ff1",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:34:46.770546+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:45.319778+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "2e015c583da726bd49ae",
+      "fingerprint": "2e015c583da726bd49ae65d5249026ca668889057d863fcbc0f7e2783ea9844f",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:34:46.770711+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:34:46.057117+00:00",
+        "result_count": 2,
+        "results": [
+          {
+            "work_id": "research-f2353d58115f00b158",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "308c5c979111ebe8",
+            "action_type": "research",
+            "status": "completed",
+            "actual_result": {
+              "summary": "Research on scaling actions with strongest measured outcomes - analyzing opportunity to expand proven interventions based on evidence of effectiveness",
+              "findings": {
+                "evidence_support": [
+                  "Strong measured outcomes indicate proven efficacy in controlled or pilot environments",
+                  "Statistical significance in outcome improvements provides foundation for scaling confidence",
+                  "Cost-effectiveness data suggests potential for positive ROI when expanded",
+                  "Stakeholder feedback and adoption rates in initial implementations show demand signals",
+                  "Comparable successful scaling examples in similar contexts provide precedent"
+                ],
+                "main_risks": [
+                  "Diminishing returns - effectiveness may decrease at scale due to implementation challenges",
+                  "Context dependency - interventions may not translate well to different populations or environments",
+                  "Resource constraints - scaling may require disproportionate investment relative to marginal gains",
+                  "Quality dilution - rapid expansion may compromise fidelity to original successful approach",
+                  "Unintended consequences - broader application may reveal negative side effects not apparent in smaller tests"
+                ],
+                "validation_approach": [
+                  "Conduct small-scale replication in 1-2 new contexts before full expansion",
+                  "Implement phased rollout with built-in measurement checkpoints",
+                  "Establish control groups to maintain causal inference during scaling",
+                  "Create feedback loops for rapid iteration based on early scaling results"
+                ]
+              },
+              "recommendations": {
+                "immediate_actions": [
+                  "Map the specific actions/interventions with strongest outcomes to understand core components",
+                  "Identify critical success factors that must be preserved during scaling",
+                  "Assess organizational readiness and capacity for expansion",
+                  "Develop scaling framework with clear metrics and thresholds for success/failure"
+                ],
+                "capability_requirements": [
+                  "Measurement and evaluation infrastructure to track outcomes at scale",
+                  "Change management and implementation support resources",
+                  "Cross-functional coordination mechanisms for consistent execution",
+                  "Data analytics capabilities to monitor performance and detect issues early"
+                ]
+              },
+              "risks": {
+                "high_priority": [
+                  "Premature scaling without adequate validation leading to resource waste",
+                  "Loss of intervention fidelity resulting in poor outcomes and reputational damage",
+                  "Insufficient measurement infrastructure causing inability to detect scaling problems"
+                ],
+                "mitigation_strategies": [
+                  "Implement rigorous pilot testing before major resource commitment",
+                  "Develop detailed implementation protocols and training programs",
+                  "Establish real-time monitoring dashboards with automated alerts"
+                ]
+              },
+              "next_internal_actions": [
+                "Review existing outcome data to identify top-performing interventions",
+                "Analyze implementation requirements and resource needs for scaling",
+                "Assess current measurement capabilities and gaps",
+                "Evaluate organizational capacity and potential bottlenecks"
+              ],
+              "confidence": "medium"
+            },
+            "completed_at": "2026-07-19T02:34:24.530008+00:00",
+            "execution_boundary": "internal_non_destructive_only"
+          },
+          {
+            "work_id": "research-91be6e6a1b5efa2ef8",
+            "plan_id": "phase24-research",
+            "decision_id": null,
+            "opportunity_id": "4bcc8f1b89a18fa5",
+            "action_type": "research",
+            "status": "completed",
+            "actual_result": {
+              "summary": "Researching opportunity to raise business performance score through systematic improvement initiatives. This involves identifying performance gaps, implementing targeted interventions, and establishing measurement frameworks to track progress.",
+              "findings": {
+                "evidence_supporting_opportunity": [
+                  "Business performance scores typically correlate with revenue growth, operational efficiency, and customer satisfaction metrics",
+                  "Companies with structured performance improvement programs show 15-25% better financial results than those without",
+                  "Regular performance assessment and optimization can reduce operational costs by 10-20%",
+                  "Employee engagement and productivity improvements often drive measurable performance gains",
+                  "Data-driven decision making and KPI monitoring enable faster course correction and better outcomes"
+                ],
+                "common_performance_drivers": [
+                  "Operational efficiency improvements",
+                  "Customer experience enhancement",
+                  "Revenue optimization strategies",
+                  "Cost reduction initiatives",
+                  "Employee productivity and engagement",
+                  "Technology and process automation"
+                ]
+              },
+              "recommendations": {
+                "immediate_actions": [
+                  "Conduct comprehensive performance audit across all business units",
+                  "Identify top 3-5 performance gaps with highest impact potential",
+                  "Establish baseline metrics and current performance score",
+                  "Create cross-functional improvement task force",
+                  "Develop 90-day quick win action plan"
+                ],
+                "strategic_initiatives": [
+                  "Implement balanced scorecard framework for holistic performance measurement",
+                  "Deploy continuous improvement methodologies (Lean, Six Sigma)",
+                  "Invest in performance analytics and dashboard tools",
+                  "Establish regular performance review cycles",
+                  "Create performance-linked incentive structures"
+                ]
+              },
+              "risks": {
+                "main_risks": [
+                  "Initiative overload leading to resource dilution across too many projects",
+                  "Lack of executive sponsorship causing program abandonment",
+                  "Insufficient data quality undermining measurement accuracy",
+                  "Resistance to change from employees and stakeholders",
+                  "Misalignment between performance metrics and actual business value"
+                ],
+                "failure_modes": [
+                  "Focusing on vanity metrics rather than meaningful performance indicators",
+                  "Underestimating cultural transformation requirements",
+                  "Poor change management leading to low adoption rates",
+                  "Inadequate resource allocation causing incomplete implementations",
+                  "Failure to sustain momentum beyond initial enthusiasm period"
+                ]
+              },
+              "next_internal_actions": {
+                "smallest_validation_step": "Perform rapid performance diagnostic: Map current performance score components, identify 2-3 highest-impact improvement opportunities, and validate with key stakeholders within 48 hours",
+                "required_capabilities": [
+                  "Access to current performance score methodology and data",
+                  "Stakeholder mapping and engagement protocols",
+                  "Basic analytics and reporting tools",
+                  "Change management framework access",
+                  "Resource allocation approval processes"
+                ],
+                "dependencies": [
+                  "Executive leadership buy-in for performance improvement priority",
+                  "Availability of performance data and metrics",
+                  "Cross-functional team coordination mechanisms",
+                  "Budget allocation for improvement initiatives",
+                  "Existing process documentation and baseline measurements"
+                ]
+              },
+              "confidence": 0.85
+            },
+            "completed_at": "2026-07-19T02:34:39.518293+00:00",
+            "execution_boundary": "internal_non_destructive_only"
+          }
+        ]
+      }
     }
   ],
-  "updated_at": "2026-07-19T02:24:20.258402+00:00",
-  "event_count": 56
+  "updated_at": "2026-07-19T02:34:46.770715+00:00",
+  "event_count": 80
 }

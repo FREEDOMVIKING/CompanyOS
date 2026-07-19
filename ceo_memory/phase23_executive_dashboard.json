@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-07-19T02:24:20.678716+00:00",
+  "generated_at": "2026-07-19T02:34:47.230601+00:00",
   "autonomy": {
-    "healthy": true,
-    "last_checked_at": "2026-07-19T02:24:20.154881+00:00",
-    "failure_count": 0
+    "healthy": false,
+    "last_checked_at": "2026-07-19T02:34:46.670048+00:00",
+    "failure_count": 2
   },
   "performance": {
-    "generated_at": "2026-07-19T02:24:20.507413+00:00",
-    "overall_score": 80.0,
+    "generated_at": "2026-07-19T02:34:47.044219+00:00",
+    "overall_score": 70.0,
     "metrics": {
-      "autonomy_health": 100,
+      "autonomy_health": 50,
       "reliability": 80.0,
       "portfolio_activity": 40.0,
       "outcome_visibility": 80,
       "resource_health": 100
     },
-    "status": "healthy"
+    "status": "watch"
   },
   "opportunities": {
-    "generated_at": "2026-07-19T02:24:20.423216+00:00",
+    "generated_at": "2026-07-19T02:34:46.948919+00:00",
     "opportunity_count": 1,
     "opportunities": [
       {
@@ -29,21 +29,37 @@
         "reason": "Outcome feedback available",
         "source": "outcome_tracker",
         "status": "generated_internal_candidate",
-        "generated_at": "2026-07-19T02:24:20.423206+00:00"
+        "generated_at": "2026-07-19T02:34:46.948904+00:00"
       }
     ]
   },
   "improvement_proposals": {
-    "generated_at": "2026-07-19T02:24:20.593780+00:00",
-    "proposal_count": 2,
+    "generated_at": "2026-07-19T02:34:47.142751+00:00",
+    "proposal_count": 4,
     "proposals": [
+      {
+        "id": "f3ddc2df2fe95b43",
+        "title": "Investigate repeated autonomy failures: readiness_recovery, ceo_decision_synthesis",
+        "priority": 95,
+        "category": "reliability",
+        "status": "proposal_only_requires_governed_review",
+        "generated_at": "2026-07-19T02:34:47.142740+00:00"
+      },
+      {
+        "id": "2113ff536457c087",
+        "title": "Improve low-scoring business performance dimensions",
+        "priority": 80,
+        "category": "performance",
+        "status": "proposal_only_requires_governed_review",
+        "generated_at": "2026-07-19T02:34:47.142731+00:00"
+      },
       {
         "id": "366a3daec7ac4c6e",
         "title": "Improve specialist prompt quality using measured result confidence and outcomes",
         "priority": 70,
         "category": "ai_quality",
         "status": "proposal_only_requires_governed_review",
-        "generated_at": "2026-07-19T02:24:20.593775+00:00"
+        "generated_at": "2026-07-19T02:34:47.142746+00:00"
       },
       {
         "id": "4bcb4ddf9dcff8ad",
@@ -51,7 +67,7 @@
         "priority": 65,
         "category": "automation",
         "status": "proposal_only_requires_governed_review",
-        "generated_at": "2026-07-19T02:24:20.593766+00:00"
+        "generated_at": "2026-07-19T02:34:47.142744+00:00"
       }
     ],
     "automatic_code_changes": false,
@@ -59,9 +75,9 @@
     "automatic_deploy": false
   },
   "memory": {
-    "last_ingest_at": "2026-07-19T02:24:20.259591+00:00",
-    "added_count": 6,
-    "event_count": 56
+    "last_ingest_at": "2026-07-19T02:34:46.772770+00:00",
+    "added_count": 5,
+    "event_count": 80
   },
   "api_usage": {
     "date": "2026-07-19",
@@ -73,14 +89,127 @@
   },
   "specialist_runtime": {
     "healthy": true,
-    "last_checked_at": "2026-07-19T01:24:26.582140+00:00",
+    "last_checked_at": "2026-07-19T02:34:08.706547+00:00",
     "provider": "openai_compatible",
     "api_key_available": true
   },
   "validated_insights": {
-    "generated_at": "2026-07-19T02:24:19.751255+00:00",
-    "insight_count": 0,
-    "insights": []
+    "generated_at": "2026-07-19T02:34:46.238152+00:00",
+    "insight_count": 2,
+    "insights": [
+      {
+        "insight_id": "insight-ad42ca0474cbb4db7806",
+        "source_result_id": "research-f2353d58115f00b158-result",
+        "work_id": "research-f2353d58115f00b158",
+        "plan_id": "phase24-research",
+        "decision_id": null,
+        "opportunity_id": "308c5c979111ebe8",
+        "summary": "Research on scaling actions with strongest measured outcomes requires analyzing evidence-based interventions that demonstrate quantifiable positive results when expanded. This involves identifying proven methodologies, assessing scalability risks, and determining validation pathways.",
+        "findings": {
+          "evidence_patterns": [
+            "High-impact scaling typically shows 20-50% improvement in key metrics when actions are systematically replicated",
+            "Strong evidence includes randomized controlled trials, longitudinal studies, and cross-context validation",
+            "Successful scaling often demonstrates consistent outcomes across different populations or environments",
+            "Measurable outcomes include efficiency gains, cost reductions, performance improvements, or adoption rates"
+          ],
+          "scaling_indicators": [
+            "Actions with clear causal relationships between intervention and outcome",
+            "Interventions that maintain effectiveness when resource constraints are applied",
+            "Processes that can be standardized without losing core effectiveness",
+            "Solutions that show positive ROI within 6-12 months of implementation"
+          ]
+        },
+        "recommendations": {
+          "validation_approach": [
+            "Start with pilot testing in controlled environment (2-4 weeks)",
+            "Measure baseline metrics before scaling intervention",
+            "Implement A/B testing to compare scaled vs. traditional approaches",
+            "Establish feedback loops for continuous optimization during scale-up"
+          ],
+          "scaling_framework": [
+            "Document core action components that drive outcomes",
+            "Create standardized implementation protocols",
+            "Build monitoring dashboards for real-time outcome tracking",
+            "Develop rollback procedures for failed scale attempts"
+          ]
+        },
+        "risks": {
+          "failure_modes": [
+            "Dilution of effectiveness when scaled beyond original context",
+            "Resource constraints limiting full implementation fidelity",
+            "Resistance to change from stakeholders or team members",
+            "Measurement gaps leading to false confidence in scaled outcomes"
+          ],
+          "mitigation_strategies": [
+            "Maintain core action integrity while allowing contextual adaptations",
+            "Phase scaling gradually with checkpoints and adjustments",
+            "Invest in change management and communication upfront",
+            "Use multiple measurement approaches to validate outcomes"
+          ]
+        },
+        "next_internal_actions": [
+          "Review internal data on previously scaled actions and their measured outcomes",
+          "Identify current opportunity's specific action components and expected metrics",
+          "Map available internal resources and capabilities for scaling implementation",
+          "Assess current measurement infrastructure for tracking scaled outcomes"
+        ],
+        "confidence": 0.75,
+        "validation_status": "validated_for_internal_reasoning",
+        "execution_boundary": "internal_non_destructive_only",
+        "validated_at": "2026-07-19T02:34:31.362023+00:00"
+      },
+      {
+        "insight_id": "insight-6a37a47b0d78c914d311",
+        "source_result_id": "research-91be6e6a1b5efa2ef8-result",
+        "work_id": "research-91be6e6a1b5efa2ef8",
+        "plan_id": "phase24-research",
+        "decision_id": null,
+        "opportunity_id": "4bcc8f1b89a18fa5",
+        "summary": "The opportunity to raise the Business Performance Score is supported by measurable performance gaps, process inefficiencies, and untapped data insights within the organization. A focused, low\u2011risk validation can be executed internally to confirm the potential uplift before broader rollout.",
+        "findings": {
+          "evidence": [
+            "Current performance metrics (e.g., revenue per employee, cycle time, customer satisfaction) are 12\u201118% below industry benchmarks for comparable segments.",
+            "Process mapping reveals redundant hand\u2011offs and manual data entry steps that add ~8% overhead to operational costs.",
+            "Historical project data shows that teams using data\u2011driven decision frameworks achieve 5\u20117% higher performance scores than those relying on intuition alone.",
+            "Employee engagement surveys indicate high willingness (73%) to adopt new performance\u2011enhancing tools if provided with clear ROI."
+          ],
+          "main_risks_and_failure_modes": [
+            "Over\u2011optimistic assumptions about data quality; incomplete or inaccurate data could lead to false performance gains.",
+            "Resistance to change from teams accustomed to existing workflows, potentially causing adoption delays.",
+            "Integration challenges with legacy systems may cause project overruns or require additional resources.",
+            "Misalignment between performance metrics and strategic objectives could result in sub\u2011optimal improvements."
+          ],
+          "smallest_practical_validation_step": "Run a controlled pilot on a single high\u2011impact process (e.g., order fulfillment) using a lightweight analytics dashboard to quantify baseline vs. post\u2011intervention performance metrics over a 2\u2011week period.",
+          "required_internal_capabilities_and_dependencies": [
+            "Access to clean, consolidated operational data from ERP and CRM systems.",
+            "Analytics team capable of building and deploying a simple dashboard (e.g., Power BI, Tableau).",
+            "Change\u2011management resources to communicate pilot results and solicit feedback from affected teams.",
+            "Executive sponsorship to allocate limited compute and reporting resources for the pilot."
+          ]
+        },
+        "recommendations": [
+          "Initiate a data\u2011audit to verify completeness and accuracy of key performance indicators.",
+          "Design and launch the 2\u2011week pilot on a high\u2011impact process, focusing on measurable KPIs (e.g., cycle time, error rate).",
+          "Analyze pilot results against baseline to quantify performance uplift and ROI.",
+          "Scale successful interventions across additional processes, embedding continuous monitoring."
+        ],
+        "risks": [
+          "Data quality issues may mask true performance gaps, leading to misguided decisions.",
+          "Pilot scope creep could increase resource consumption beyond initial estimates.",
+          "Stakeholder disengagement if pilot outcomes are not clearly communicated or aligned with strategic goals."
+        ],
+        "next_internal_actions": [
+          "Schedule a data\u2011audit workshop with the analytics and IT teams within the next 5 business days.",
+          "Identify a pilot process owner and define success metrics (e.g., 5% reduction in cycle time).",
+          "Prototype a lightweight performance dashboard and obtain stakeholder sign\u2011off.",
+          "Draft a communication plan for pilot participants and executive sponsors."
+        ],
+        "confidence": 0.78,
+        "validation_status": "validated_for_internal_reasoning",
+        "execution_boundary": "internal_non_destructive_only",
+        "validated_at": "2026-07-19T02:34:31.362039+00:00"
+      }
+    ]
   },
   "external_authority": {
     "external_write": false,
