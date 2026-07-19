@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+
+import sys
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from agents.phase50_opportunity_engine.opportunity_engine import (
+    status as engine_status,
+    process
+)
+
+from agents.phase50_opportunity_engine.discovery_intake import (
+    status as discovery_status,
+    submit,
+    run_intake
+)
+
+
+def output(data):
+    print(json.dumps(data, indent=2))
+
+
+def test_opportunity():
+    return {
+        "name": "Phase 50 Test Opportunity",
+        "market": "AI automation",
+        "source": "phase50_internal_test",
+        "confidence_score": 90,
+        "scores": {
+            "market_demand": 90,
+            "profit_potential": 85,
+            "speed_to_revenue": 80,
+            "startup_cost": 85,
+            "automation_potential": 95,
+            "competitive_advantage": 75,
+            "strategic_fit": 90
+        }
+    }
+
+
+def discovery_test_opportunity():
+    return {
+        "name": "Phase 50 Discovery Pipeline Test",
+        "market": "business automation services",
+        "source": "phase50_discovery_test",
+        "confidence_score": 88,
+        "scores": {
+            "market_demand": 92,
+            "profit_potential": 88,
+            "speed_to_revenue": 82,
+            "startup_cost": 90,
+            "automation_potential": 94,
+            "competitive_advantage": 78,
+            "strategic_fit": 90
+        }
+    }
+
+
+def main():
+    command = sys.argv[1].lower() if len(sys.argv) > 1 else "status"
+
+    if command == "status":
+        output({
+            "success": True,
+            "status": "phase50_status",
+            "engine": engine_status(),
+            "discovery": discovery_status()
+        })
+        return 0
+
+    if command == "test":
+        output(process([test_opportunity()]))
+        return 0
+
+    if command == "discovery-test":
+        submitted = submit(discovery_test_opportunity())
+        processed = run_intake()
+
+        output({
+            "success": True,
+            "status": "phase50_discovery_test_complete",
+            "submitted": submitted,
+            "processed": processed
+        })
+        return 0
+
+    if command == "intake":
+        output(run_intake())
+        return 0
+
+    if command == "discovery-status":
+        output(discovery_status())
+        return 0
+
+    output({
+        "success": False,
+        "status": "unknown_command",
+        "command": command,
+        "available_commands": [
+            "status",
+            "test",
+            "discovery-test",
+            "intake",
+            "discovery-status"
+        ]
+    })
+
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

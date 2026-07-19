@@ -1,0 +1,25 @@
+{
+  "phase": 50,
+  "name": "Autonomous Opportunity Discovery and Qualification Engine",
+  "enabled": true,
+  "components": [
+    "opportunity_scoring",
+    "weighted_qualification",
+    "confidence_filtering",
+    "duplicate_protection",
+    "discovery_intake",
+    "persistent_opportunity_memory",
+    "discovery_history"
+  ],
+  "integration": {
+    "phase49_preserved": true,
+    "controller": "companyos/phase50ctl",
+    "verification": "companyos/verify_phase50.py"
+  },
+  "safety": {
+    "reject_illegal_or_prohibited": true,
+    "reject_unbounded_financial_risk": true,
+    "owner_approval_for_irreversible_external_actions": true,
+    "owner_approval_for_financial_commitments": true
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-19T21:57:11.975273+00:00",
+  "generated_at": "2026-07-19T23:29:00.114461+00:00",
   "overall_status": "degraded",
-  "reliability_score": 40,
+  "reliability_score": 60,
   "systems": {
     "control_cycle": {
       "last_cycle_at": "2026-07-19T21:22:40.358325+00:00",
@@ -9,9 +9,9 @@
       "failure_count": 1
     },
     "supervisor": {
-      "last_supervision_at": "2026-07-19T20:59:12.575754+00:00",
-      "consecutive_failures": 0,
-      "recovery_action_count": 3
+      "last_supervision_at": "2026-07-19T23:13:37.816360+00:00",
+      "consecutive_failures": 2,
+      "recovery_action_count": 0
     },
     "incidents": {
       "last_scan_at": "2026-07-19T03:01:27.663110+00:00",
@@ -20,32 +20,26 @@
       "autonomy_halted": false
     },
     "reliability": {
-      "last_scored_at": "2026-07-19T21:41:44.840283+00:00",
-      "reliability_score": 40,
+      "last_scored_at": "2026-07-19T23:13:38.408764+00:00",
+      "reliability_score": 60,
       "status": "degraded"
     },
     "resources": {
-      "generated_at": "2026-07-19T21:41:45.172519+00:00",
+      "generated_at": "2026-07-19T23:13:39.374765+00:00",
       "status": "healthy",
-      "disk_used_percent": 57.75,
-      "memory_used_percent": 70.61,
-      "free_disk_bytes": 100939984896,
+      "disk_used_percent": 57.76,
+      "memory_used_percent": 70.76,
+      "free_disk_bytes": 100914098176,
       "safe_cleanup_files_removed": 0,
       "automatic_spending": false,
       "automatic_external_write": false,
       "automatic_destructive_actions": false
     },
     "watchdog": {
-      "last_checked_at": "2026-07-19T21:24:43.272298+00:00",
-      "heartbeat_age_seconds": 122.913921,
+      "last_checked_at": "2026-07-19T22:27:40.695317+00:00",
+      "heartbeat_age_seconds": 3900.336937,
       "heartbeat_stale": false,
-      "recovery_actions": [],
-      "restart_epochs": [
-        1784496380.3301566
-      ],
-      "last_restart_epoch": 1784496380.3301566,
-      "last_restart_at": "2026-07-19T21:26:20.330171+00:00",
-      "restart_count": 1
+      "recovery_actions": []
     },
     "backup": {
       "last_backup_at": "2026-07-19T21:57:11.710980+00:00",
@@ -53,13 +47,13 @@
       "backup_count": 12
     },
     "github": {
-      "generated_at": "2026-07-19T21:57:04.861124+00:00",
+      "generated_at": "2026-07-19T23:28:59.156089+00:00",
       "signal_count": 1,
       "working_tree_clean": false,
       "branch": "main"
     },
     "preflight": {
-      "generated_at": "2026-07-19T21:41:43.918135+00:00",
+      "generated_at": "2026-07-19T23:13:37.550579+00:00",
       "decision": "blocked",
       "risk_score": 30,
       "blockers": [
@@ -71,7 +65,7 @@
       "automatic_spending": false
     },
     "drift": {
-      "generated_at": "2026-07-19T20:59:39.165711+00:00",
+      "generated_at": "2026-07-19T23:13:39.063263+00:00",
       "drift_detected": true,
       "added": [
         "agents/action_dispatcher.py",
@@ -226,6 +220,8 @@
         "agents/phase47_allowlist_manager.py",
         "agents/phase47_communications_runtime.py",
         "agents/phase48_smtp_provider.py",
+        "agents/phase49_campaign_engine.py",
+        "agents/phase49_campaign_manager.py",
         "agents/platform_architect_engine.py",
         "agents/portfolio_capacity_guard.py",
         "agents/portfolio_capital_planner.py",
@@ -437,6 +433,8 @@
         "companyos/phase47allowlistctl",
         "companyos/phase47ctl",
         "companyos/phase48ctl",
+        "companyos/phase49campaignctl",
+        "companyos/phase49ctl",
         "companyos/planexecutorctl",
         "companyos/platformarchitectctl",
         "companyos/portfoliocapacityctl",
@@ -501,7 +499,7 @@
         "companyos/watchdogctl"
       ],
       "baseline_file_count": 120,
-      "current_file_count": 538
+      "current_file_count": 542
     }
   }
 }

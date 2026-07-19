@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "mode": "autonomous_discovery_bounded_execution",
+  "max_opportunities_per_cycle": 25,
+  "minimum_qualification_score": 65,
+  "minimum_confidence_score": 60,
+  "scoring": {
+    "market_demand": 20,
+    "profit_potential": 20,
+    "speed_to_revenue": 15,
+    "startup_cost": 15,
+    "automation_potential": 15,
+    "competitive_advantage": 10,
+    "strategic_fit": 5
+  },
+  "rules": {
+    "deduplicate_opportunities": true,
+    "require_evidence": true,
+    "reject_illegal_or_prohibited": true,
+    "reject_unbounded_financial_risk": true,
+    "require_owner_approval_for_irreversible_external_actions": true,
+    "require_owner_approval_for_financial_commitments": true
+  }
+}
