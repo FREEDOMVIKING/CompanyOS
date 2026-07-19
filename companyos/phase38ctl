@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+import json,subprocess,sys
+from pathlib import Path
+r=Path.home()/"companyos"
+p=subprocess.run([sys.executable,"companyos/phase38broadcastctl","status"],cwd=r,text=True,capture_output=True)
+try:d=json.loads(p.stdout)
+except:d={"success":False,"status":"invalid_status_output","stdout":p.stdout,"stderr":p.stderr}
+print(json.dumps({"success":p.returncode==0 and d.get("success"),"status":"phase38_ready","broadcast":d},indent=2))
+raise SystemExit(0 if p.returncode==0 and d.get("success") else 1)

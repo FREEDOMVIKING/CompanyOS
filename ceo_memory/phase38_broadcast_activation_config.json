@@ -1,0 +1,56 @@
+{
+  "enabled": true,
+  "global_broadcast_enabled": false,
+  "require_phase37_pass": true,
+  "require_kill_switch_off": true,
+  "require_registered_destination": true,
+  "require_idempotency": true,
+  "require_confirmation": true,
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "canary_limits": {
+    "solana": {
+      "SOL": {
+        "enabled": false,
+        "max_amount_native": 0.001,
+        "max_amount_usd": 10
+      },
+      "USDT-SPL": {
+        "enabled": false,
+        "max_amount_native": 10,
+        "max_amount_usd": 10
+      },
+      "USDC-SPL": {
+        "enabled": false,
+        "max_amount_native": 10,
+        "max_amount_usd": 10
+      }
+    },
+    "evm": {
+      "ETH": {
+        "enabled": false,
+        "max_amount_native": 0.003,
+        "max_amount_usd": 10
+      },
+      "USDT-ERC20": {
+        "enabled": false,
+        "max_amount_native": 10,
+        "max_amount_usd": 10
+      },
+      "USDC-ERC20": {
+        "enabled": false,
+        "max_amount_native": 10,
+        "max_amount_usd": 10
+      }
+    },
+    "bitcoin": {
+      "BTC": {
+        "enabled": false,
+        "max_amount_native": 1e-05,
+        "max_amount_usd": 10
+      }
+    }
+  },
+  "promotion_requires_confirmed_canary": true,
+  "emergency_off_at": "2026-07-19T16:36:22.102267+00:00"
+}
