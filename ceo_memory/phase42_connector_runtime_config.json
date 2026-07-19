@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "fail_closed": true,
+  "max_jobs_per_cycle": 10,
+  "connectors": {
+    "communications": {
+      "enabled": true,
+      "command_env": "COMPANYOS_COMMUNICATIONS_COMMAND"
+    },
+    "publication": {
+      "enabled": true,
+      "command_env": "COMPANYOS_PUBLICATION_COMMAND"
+    },
+    "deployment": {
+      "enabled": true,
+      "command_env": "COMPANYOS_DEPLOYMENT_COMMAND"
+    }
+  },
+  "require_delivery_receipt": true,
+  "require_idempotency": true,
+  "never_log_secrets": true
+}

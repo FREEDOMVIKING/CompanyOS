@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+import subprocess,sys
+from pathlib import Path
+r=Path.home()/"companyos"
+raise SystemExit(subprocess.call(
+    [sys.executable,str(r/"agents"/"phase42_connector_runtime.py"),*sys.argv[1:]],
+    cwd=r
+))
