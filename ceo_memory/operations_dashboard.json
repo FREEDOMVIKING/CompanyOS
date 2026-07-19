@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-07-19T18:40:41.979168+00:00",
-  "overall_status": "healthy",
-  "reliability_score": 85,
+  "generated_at": "2026-07-19T21:57:11.975273+00:00",
+  "overall_status": "degraded",
+  "reliability_score": 40,
   "systems": {
     "control_cycle": {
-      "last_cycle_at": "2026-07-19T18:40:40.952708+00:00",
-      "cycle_success": true,
-      "failure_count": 0
+      "last_cycle_at": "2026-07-19T21:22:40.358325+00:00",
+      "cycle_success": false,
+      "failure_count": 1
     },
     "supervisor": {
-      "last_supervision_at": "2026-07-19T18:20:27.811666+00:00",
+      "last_supervision_at": "2026-07-19T20:59:12.575754+00:00",
       "consecutive_failures": 0,
-      "recovery_action_count": 0
+      "recovery_action_count": 3
     },
     "incidents": {
       "last_scan_at": "2026-07-19T03:01:27.663110+00:00",
@@ -20,40 +20,46 @@
       "autonomy_halted": false
     },
     "reliability": {
-      "last_scored_at": "2026-07-19T18:20:27.989318+00:00",
-      "reliability_score": 85,
-      "status": "healthy"
+      "last_scored_at": "2026-07-19T21:41:44.840283+00:00",
+      "reliability_score": 40,
+      "status": "degraded"
     },
     "resources": {
-      "generated_at": "2026-07-19T18:35:41.278021+00:00",
+      "generated_at": "2026-07-19T21:41:45.172519+00:00",
       "status": "healthy",
-      "disk_used_percent": 57.64,
-      "memory_used_percent": 74.55,
-      "free_disk_bytes": 101218078720,
+      "disk_used_percent": 57.75,
+      "memory_used_percent": 70.61,
+      "free_disk_bytes": 100939984896,
       "safe_cleanup_files_removed": 0,
       "automatic_spending": false,
       "automatic_external_write": false,
       "automatic_destructive_actions": false
     },
     "watchdog": {
-      "last_checked_at": "2026-07-19T18:40:41.836368+00:00",
-      "heartbeat_age_seconds": 0.883646,
+      "last_checked_at": "2026-07-19T21:24:43.272298+00:00",
+      "heartbeat_age_seconds": 122.913921,
       "heartbeat_stale": false,
-      "recovery_actions": []
+      "recovery_actions": [],
+      "restart_epochs": [
+        1784496380.3301566
+      ],
+      "last_restart_epoch": 1784496380.3301566,
+      "last_restart_at": "2026-07-19T21:26:20.330171+00:00",
+      "restart_count": 1
     },
     "backup": {
-      "last_backup_at": "2026-07-19T18:35:43.494403+00:00",
-      "last_backup": "/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260719_183541.tar.gz",
+      "last_backup_at": "2026-07-19T21:57:11.710980+00:00",
+      "last_backup": "/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260719_215707.tar.gz",
       "backup_count": 12
     },
     "github": {
-      "generated_at": "2026-07-19T18:40:38.666008+00:00",
+      "generated_at": "2026-07-19T21:57:04.861124+00:00",
       "signal_count": 1,
       "working_tree_clean": false,
       "branch": "main"
     },
     "preflight": {
-      "generated_at": "2026-07-19T18:40:39.584277+00:00",
+      "generated_at": "2026-07-19T21:41:43.918135+00:00",
       "decision": "blocked",
       "risk_score": 30,
       "blockers": [
@@ -65,7 +71,7 @@
       "automatic_spending": false
     },
     "drift": {
-      "generated_at": "2026-07-19T18:40:41.681276+00:00",
+      "generated_at": "2026-07-19T20:59:39.165711+00:00",
       "drift_detected": true,
       "added": [
         "agents/action_dispatcher.py",
@@ -215,6 +221,11 @@
         "agents/phase44_opportunity_revenue_engine.py",
         "agents/phase44_opportunity_submitter.py",
         "agents/phase45_decision_action_planner.py",
+        "agents/phase46_goal_strategy_engine.py",
+        "agents/phase46_goal_submitter.py",
+        "agents/phase47_allowlist_manager.py",
+        "agents/phase47_communications_runtime.py",
+        "agents/phase48_smtp_provider.py",
         "agents/platform_architect_engine.py",
         "agents/portfolio_capacity_guard.py",
         "agents/portfolio_capital_planner.py",
@@ -421,6 +432,11 @@
         "companyos/phase44ctl",
         "companyos/phase44opportunityctl",
         "companyos/phase45ctl",
+        "companyos/phase46ctl",
+        "companyos/phase46goalctl",
+        "companyos/phase47allowlistctl",
+        "companyos/phase47ctl",
+        "companyos/phase48ctl",
         "companyos/planexecutorctl",
         "companyos/platformarchitectctl",
         "companyos/portfoliocapacityctl",
@@ -485,7 +501,7 @@
         "companyos/watchdogctl"
       ],
       "baseline_file_count": 120,
-      "current_file_count": 528
+      "current_file_count": 538
     }
   }
 }

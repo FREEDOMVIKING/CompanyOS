@@ -179,7 +179,7 @@
     {
       "id": "autonomous-health-supervisor",
       "enabled": true,
-      "interval_seconds": 2400,
+      "interval_seconds": 9600,
       "command": [
         "python",
         "companyos/healthctl",
@@ -329,7 +329,7 @@
     {
       "id": "action-queue-coordinator",
       "enabled": true,
-      "interval_seconds": 1800,
+      "interval_seconds": 14400,
       "command": [
         "python",
         "companyos/actionqueuectl",
@@ -349,7 +349,7 @@
     {
       "id": "unified-control-cycle",
       "enabled": true,
-      "interval_seconds": 3600,
+      "interval_seconds": 14400,
       "command": [
         "python",
         "companyos/controlcyclectl",
@@ -359,7 +359,7 @@
     {
       "id": "cycle-supervisor",
       "enabled": true,
-      "interval_seconds": 1800,
+      "interval_seconds": 3600,
       "command": [
         "python",
         "companyos/supervisorctl",
@@ -409,7 +409,7 @@
     {
       "id": "autonomous-watchdog",
       "enabled": true,
-      "interval_seconds": 1800,
+      "interval_seconds": 3600,
       "command": [
         "python",
         "companyos/watchdogctl",
@@ -599,7 +599,7 @@
     {
       "id": "readiness-recovery-coordinator",
       "enabled": true,
-      "interval_seconds": 1800,
+      "interval_seconds": 7200,
       "command": [
         "python",
         "companyos/recovery2ctl",
@@ -609,7 +609,7 @@
     {
       "id": "recovery-aware-closed-loop",
       "enabled": true,
-      "interval_seconds": 3600,
+      "interval_seconds": 14400,
       "command": [
         "python",
         "companyos/loopctl",
@@ -929,7 +929,7 @@
     {
       "id": "phase23-adaptive-business-intelligence",
       "enabled": true,
-      "interval_seconds": 7200,
+      "interval_seconds": 28800,
       "command": [
         "python",
         "companyos/phase23ctl",
@@ -939,7 +939,7 @@
     {
       "id": "phase23-adaptive-execution-learning",
       "enabled": true,
-      "interval_seconds": 7200,
+      "interval_seconds": 28800,
       "command": [
         "python",
         "companyos/phase23bundle2ctl",
@@ -949,7 +949,7 @@
     {
       "id": "phase23-strategic-autonomy-portfolio",
       "enabled": true,
-      "interval_seconds": 10800,
+      "interval_seconds": 21600,
       "command": [
         "python",
         "companyos/phase23bundle3ctl",
@@ -979,7 +979,7 @@
     {
       "id": "phase24-governed-execution-operations",
       "enabled": true,
-      "interval_seconds": 10800,
+      "interval_seconds": 21600,
       "command": [
         "python",
         "companyos/phase24bundle3ctl",
@@ -1083,7 +1083,7 @@
     {
       "id": "phase34-autonomous-treasury",
       "enabled": true,
-      "interval_seconds": 900,
+      "interval_seconds": 7200,
       "command": [
         "python",
         "companyos/autonomoustreasuryctl",

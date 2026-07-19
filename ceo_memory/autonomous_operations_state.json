@@ -1,133 +1,133 @@
 {
   "schema_version": 1,
-  "cycle_count": 228,
+  "cycle_count": 255,
   "jobs": {
     "integrity-check": {
-      "last_started_at": "2026-07-19T18:05:44.206419+00:00",
-      "last_started_epoch": 1784484344.206419,
+      "last_started_at": "2026-07-19T21:26:18.458631+00:00",
+      "last_started_epoch": 1784496378.4586298,
       "last_command": [
         "python",
         "companyos/integrityctl",
         "check"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:05:44.930104+00:00",
+      "last_finished_at": "2026-07-19T21:26:20.236844+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.724,
-      "run_count": 36,
+      "last_duration_seconds": 1.778,
+      "run_count": 39,
       "failure_count": 0
     },
     "opportunity-discovery": {
-      "last_started_at": "2026-07-19T18:35:35.167073+00:00",
-      "last_started_epoch": 1784486135.1669345,
+      "last_started_at": "2026-07-19T21:56:50.500197+00:00",
+      "last_started_epoch": 1784498210.500141,
       "last_command": [
         "python",
         "companyos/opportunitydiscoveryctl",
         "discover"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:35.480627+00:00",
+      "last_finished_at": "2026-07-19T21:56:50.981466+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.314,
-      "run_count": 69,
+      "last_duration_seconds": 0.481,
+      "run_count": 74,
       "failure_count": 0
     },
     "priority-ranking": {
-      "last_started_at": "2026-07-19T19:01:44.351471+00:00",
-      "last_started_epoch": 1784487704.351373,
+      "last_started_at": "2026-07-19T22:12:18.532089+00:00",
+      "last_started_epoch": 1784499138.531914,
       "last_command": [
         "python",
         "companyos/priorityctl",
         "rank"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:44.751251+00:00",
+      "last_finished_at": "2026-07-19T22:12:20.009010+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.4,
-      "run_count": 133,
+      "last_duration_seconds": 1.477,
+      "run_count": 143,
       "failure_count": 0
     },
     "decision-preparation": {
-      "last_started_at": "2026-07-19T19:01:44.755248+00:00",
-      "last_started_epoch": 1784487704.7552469,
+      "last_started_at": "2026-07-19T22:12:20.010184+00:00",
+      "last_started_epoch": 1784499140.010184,
       "last_command": [
         "python",
         "companyos/decisionctl",
         "prepare"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:45.034456+00:00",
+      "last_finished_at": "2026-07-19T22:12:20.200895+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.279,
-      "run_count": 133,
+      "last_duration_seconds": 0.191,
+      "run_count": 143,
       "failure_count": 0
     },
     "execution-plan-preparation": {
-      "last_started_at": "2026-07-19T18:35:36.045089+00:00",
-      "last_started_epoch": 1784486136.045086,
+      "last_started_at": "2026-07-19T21:56:52.264998+00:00",
+      "last_started_epoch": 1784498212.2649963,
       "last_command": [
         "python",
         "companyos/executionplanctl",
         "prepare"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:36.226257+00:00",
+      "last_finished_at": "2026-07-19T21:56:52.565306+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.181,
-      "run_count": 69,
+      "last_duration_seconds": 0.3,
+      "run_count": 74,
       "failure_count": 0
     },
     "improvement-analysis": {
-      "last_started_at": "2026-07-19T18:05:45.254669+00:00",
-      "last_started_epoch": 1784484345.254669,
+      "last_started_at": "2026-07-19T21:26:20.240609+00:00",
+      "last_started_epoch": 1784496380.2406085,
       "last_command": [
         "python",
         "companyos/improvementctl",
         "analyze"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:05:45.371054+00:00",
+      "last_finished_at": "2026-07-19T21:26:20.579087+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.116,
-      "run_count": 36,
+      "last_duration_seconds": 0.339,
+      "run_count": 39,
       "failure_count": 0
     },
     "performance-analytics": {
-      "last_started_at": "2026-07-19T18:05:45.372191+00:00",
-      "last_started_epoch": 1784484345.3721905,
+      "last_started_at": "2026-07-19T21:26:20.583666+00:00",
+      "last_started_epoch": 1784496380.5836642,
       "last_command": [
         "python",
         "companyos/performancectl",
         "collect"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:05:45.480337+00:00",
+      "last_finished_at": "2026-07-19T21:26:20.883501+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.108,
-      "run_count": 36,
+      "last_duration_seconds": 0.3,
+      "run_count": 39,
       "failure_count": 0
     },
     "business-forecast": {
-      "last_started_at": "2026-07-19T19:03:51.502682+00:00",
-      "last_started_epoch": 1784487831.502681,
+      "last_started_at": "2026-07-19T21:05:54.886976+00:00",
+      "last_started_epoch": 1784495154.8869722,
       "last_command": [
         "python",
         "companyos/forecastctl",
         "forecast"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:51.741669+00:00",
+      "last_finished_at": "2026-07-19T21:05:55.210951+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.239,
-      "run_count": 19,
+      "last_duration_seconds": 0.324,
+      "run_count": 20,
       "failure_count": 0
     },
     "local-backup": {
@@ -147,291 +147,291 @@
       "failure_count": 0
     },
     "executive-briefing": {
-      "last_started_at": "2026-07-19T13:57:15.002474+00:00",
-      "last_started_epoch": 1784469435.002474,
+      "last_started_at": "2026-07-19T20:00:19.339172+00:00",
+      "last_started_epoch": 1784491219.3391666,
       "last_command": [
         "python",
         "companyos/briefctl",
         "generate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:57:15.131882+00:00",
+      "last_finished_at": "2026-07-19T20:00:19.625624+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.129,
-      "run_count": 5,
+      "last_duration_seconds": 0.287,
+      "run_count": 6,
       "failure_count": 0
     },
     "autonomous-orchestrator": {
-      "last_started_at": "2026-07-19T19:01:45.035545+00:00",
-      "last_started_epoch": 1784487705.035545,
+      "last_started_at": "2026-07-19T22:12:20.202296+00:00",
+      "last_started_epoch": 1784499140.2022958,
       "last_command": [
         "python",
         "companyos/orchestratorctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:47.479141+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.041553+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 2.444,
-      "run_count": 115,
+      "last_duration_seconds": 1.839,
+      "run_count": 125,
       "failure_count": 0
     },
     "goal-strategy": {
-      "last_started_at": "2026-07-19T14:12:30.121371+00:00",
-      "last_started_epoch": 1784470350.121369,
+      "last_started_at": "2026-07-19T20:24:54.067688+00:00",
+      "last_started_epoch": 1784492694.0676856,
       "last_command": [
         "python",
         "companyos/goalctl",
         "generate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T14:12:30.333610+00:00",
+      "last_finished_at": "2026-07-19T20:24:54.502514+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.213,
-      "run_count": 5,
+      "last_duration_seconds": 0.435,
+      "run_count": 6,
       "failure_count": 0
     },
     "learning-feedback": {
-      "last_started_at": "2026-07-19T14:12:30.340828+00:00",
-      "last_started_epoch": 1784470350.3408241,
+      "last_started_at": "2026-07-19T20:24:54.507769+00:00",
+      "last_started_epoch": 1784492694.5077674,
       "last_command": [
         "python",
         "companyos/learningctl",
         "learn"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T14:12:30.536512+00:00",
+      "last_finished_at": "2026-07-19T20:24:54.879455+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.196,
-      "run_count": 5,
+      "last_duration_seconds": 0.372,
+      "run_count": 6,
       "failure_count": 0
     },
     "exception-recovery": {
-      "last_started_at": "2026-07-19T08:37:43.130453+00:00",
-      "last_started_epoch": 1784450263.1304505,
+      "last_started_at": "2026-07-19T20:40:05.678169+00:00",
+      "last_started_epoch": 1784493605.6781669,
       "last_command": [
         "python",
         "companyos/recoveryctl",
         "recover"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T08:40:48.624801+00:00",
+      "last_finished_at": "2026-07-19T20:42:03.532133+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 185.495,
-      "run_count": 68,
+      "last_duration_seconds": 117.854,
+      "run_count": 69,
       "failure_count": 1
     },
     "resource-workload-optimizer": {
-      "last_started_at": "2026-07-19T18:05:46.840378+00:00",
-      "last_started_epoch": 1784484346.8403773,
+      "last_started_at": "2026-07-19T21:26:20.885640+00:00",
+      "last_started_epoch": 1784496380.8856385,
       "last_command": [
         "python",
         "companyos/resourcctl",
         "optimize"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:05:47.069000+00:00",
+      "last_finished_at": "2026-07-19T21:26:21.234548+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.229,
-      "run_count": 27,
+      "last_duration_seconds": 0.349,
+      "run_count": 30,
       "failure_count": 0
     },
     "internal-action-engine": {
-      "last_started_at": "2026-07-19T18:40:36.147681+00:00",
-      "last_started_epoch": 1784486436.1476798,
+      "last_started_at": "2026-07-19T21:56:58.071893+00:00",
+      "last_started_epoch": 1784498218.071888,
       "last_command": [
         "python",
         "companyos/actionctl",
         "execute"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:37.927670+00:00",
+      "last_finished_at": "2026-07-19T21:57:02.773577+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.78,
-      "run_count": 52,
+      "last_duration_seconds": 4.702,
+      "run_count": 57,
       "failure_count": 0
     },
     "autonomous-health-supervisor": {
-      "last_started_at": "2026-07-19T18:35:39.165355+00:00",
-      "last_started_epoch": 1784486139.1653535,
+      "last_started_at": "2026-07-19T21:21:30.324926+00:00",
+      "last_started_epoch": 1784496090.3249238,
       "last_command": [
         "python",
         "companyos/healthctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T18:35:39.354651+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 0.189,
-      "run_count": 73,
-      "failure_count": 1
+      "status": "failed",
+      "last_finished_at": "2026-07-19T21:21:48.319394+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 17.995,
+      "run_count": 76,
+      "failure_count": 4
     },
     "mission-control": {
-      "last_started_at": "2026-07-19T19:01:47.483284+00:00",
-      "last_started_epoch": 1784487707.4832828,
+      "last_started_at": "2026-07-19T22:12:22.042778+00:00",
+      "last_started_epoch": 1784499142.0427778,
       "last_command": [
         "python",
         "companyos/missionctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:48.554010+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.159905+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.071,
-      "run_count": 100,
+      "last_duration_seconds": 0.117,
+      "run_count": 110,
       "failure_count": 0
     },
     "governance-router": {
-      "last_started_at": "2026-07-19T19:01:48.560606+00:00",
-      "last_started_epoch": 1784487708.5606039,
+      "last_started_at": "2026-07-19T22:12:22.161013+00:00",
+      "last_started_epoch": 1784499142.161013,
       "last_command": [
         "python",
         "companyos/governancectl",
         "classify"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:48.736123+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.281937+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.176,
-      "run_count": 100,
+      "last_duration_seconds": 0.121,
+      "run_count": 110,
       "failure_count": 0
     },
     "outcome-tracker": {
-      "last_started_at": "2026-07-19T18:05:49.085798+00:00",
-      "last_started_epoch": 1784484349.0857975,
+      "last_started_at": "2026-07-19T21:26:21.237024+00:00",
+      "last_started_epoch": 1784496381.2370226,
       "last_command": [
         "python",
         "companyos/outcomectl",
         "measure"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:05:49.205129+00:00",
+      "last_finished_at": "2026-07-19T21:26:21.524323+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.119,
-      "run_count": 27,
+      "last_duration_seconds": 0.287,
+      "run_count": 30,
       "failure_count": 0
     },
     "strategy-feedback-loop": {
-      "last_started_at": "2026-07-19T14:55:31.367032+00:00",
-      "last_started_epoch": 1784472931.3670297,
+      "last_started_at": "2026-07-19T20:58:53.267647+00:00",
+      "last_started_epoch": 1784494733.2676454,
       "last_command": [
         "python",
         "companyos/strategyfeedbackctl",
         "adapt"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T14:55:32.205661+00:00",
+      "last_finished_at": "2026-07-19T20:58:53.705978+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.839,
-      "run_count": 5,
+      "last_duration_seconds": 0.438,
+      "run_count": 6,
       "failure_count": 0
     },
     "dependency-readiness": {
-      "last_started_at": "2026-07-19T18:40:37.929213+00:00",
-      "last_started_epoch": 1784486437.9292119,
+      "last_started_at": "2026-07-19T21:57:03.544068+00:00",
+      "last_started_epoch": 1784498223.544063,
       "last_command": [
         "python",
         "companyos/readinessctl",
         "check"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:38.059886+00:00",
+      "last_finished_at": "2026-07-19T21:57:03.859854+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.131,
-      "run_count": 52,
+      "last_duration_seconds": 0.316,
+      "run_count": 57,
       "failure_count": 0
     },
     "execution-gateway": {
-      "last_started_at": "2026-07-19T19:01:48.739432+00:00",
-      "last_started_epoch": 1784487708.7394311,
+      "last_started_at": "2026-07-19T22:12:22.282980+00:00",
+      "last_started_epoch": 1784499142.2829797,
       "last_command": [
         "python",
         "companyos/gatewayctl",
         "process"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:48.887164+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.386583+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.148,
-      "run_count": 99,
+      "last_duration_seconds": 0.104,
+      "run_count": 109,
       "failure_count": 0
     },
     "connector-registry": {
-      "last_started_at": "2026-07-19T18:40:38.060859+00:00",
-      "last_started_epoch": 1784486438.0608582,
+      "last_started_at": "2026-07-19T22:12:22.387626+00:00",
+      "last_started_epoch": 1784499142.387626,
       "last_command": [
         "python",
         "companyos/connectorctl",
         "discover"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:38.143126+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.476515+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.082,
-      "run_count": 27,
+      "last_duration_seconds": 0.089,
+      "run_count": 30,
       "failure_count": 0
     },
     "permission-broker": {
-      "last_started_at": "2026-07-19T18:40:38.144150+00:00",
-      "last_started_epoch": 1784486438.1441498,
+      "last_started_at": "2026-07-19T22:12:22.477726+00:00",
+      "last_started_epoch": 1784499142.4777262,
       "last_command": [
         "python",
         "companyos/permissionctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:38.264845+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.606937+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.121,
-      "run_count": 27,
+      "last_duration_seconds": 0.129,
+      "run_count": 30,
       "failure_count": 0
     },
     "connector-runtime": {
-      "last_started_at": "2026-07-19T18:40:38.266012+00:00",
-      "last_started_epoch": 1784486438.266012,
+      "last_started_at": "2026-07-19T22:12:22.607956+00:00",
+      "last_started_epoch": 1784499142.6079557,
       "last_command": [
         "python",
         "companyos/runtimectl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:38.385425+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.710996+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.119,
-      "run_count": 27,
+      "last_duration_seconds": 0.103,
+      "run_count": 30,
       "failure_count": 0
     },
     "connector-binding": {
-      "last_started_at": "2026-07-19T18:40:38.386811+00:00",
-      "last_started_epoch": 1784486438.3868105,
+      "last_started_at": "2026-07-19T22:12:22.712022+00:00",
+      "last_started_epoch": 1784499142.7120216,
       "last_command": [
         "python",
         "companyos/bindingctl",
         "bind"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:38.506517+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.821033+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.12,
-      "run_count": 27,
+      "last_duration_seconds": 0.109,
+      "run_count": 30,
       "failure_count": 0
     },
     "github-read-connector": {
@@ -451,307 +451,307 @@
       "failure_count": 2
     },
     "github-intelligence": {
-      "last_started_at": "2026-07-19T18:40:38.507591+00:00",
-      "last_started_epoch": 1784486438.507591,
+      "last_started_at": "2026-07-19T21:57:04.223465+00:00",
+      "last_started_epoch": 1784498224.2234638,
       "last_command": [
         "python",
         "companyos/githubintelctl",
         "analyze"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:38.683060+00:00",
+      "last_finished_at": "2026-07-19T21:57:04.915462+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.175,
-      "run_count": 51,
+      "last_duration_seconds": 0.692,
+      "run_count": 56,
       "failure_count": 0
     },
     "github-change-intelligence": {
-      "last_started_at": "2026-07-19T18:40:38.684280+00:00",
-      "last_started_epoch": 1784486438.6842804,
+      "last_started_at": "2026-07-19T21:57:04.922206+00:00",
+      "last_started_epoch": 1784498224.9222035,
       "last_command": [
         "python",
         "companyos/githubchangectl",
         "analyze"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:39.317369+00:00",
+      "last_finished_at": "2026-07-19T21:57:07.003325+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.633,
-      "run_count": 51,
+      "last_duration_seconds": 2.081,
+      "run_count": 56,
       "failure_count": 0
     },
     "autonomous-preflight": {
-      "last_started_at": "2026-07-19T19:01:48.890116+00:00",
-      "last_started_epoch": 1784487708.890115,
+      "last_started_at": "2026-07-19T22:12:22.822395+00:00",
+      "last_started_epoch": 1784499142.8223941,
       "last_command": [
         "python",
         "companyos/preflightctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:01:49.002298+00:00",
+      "last_finished_at": "2026-07-19T22:12:22.917112+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.112,
-      "run_count": 50,
+      "last_duration_seconds": 0.095,
+      "run_count": 55,
       "failure_count": 0
     },
     "action-queue-coordinator": {
-      "last_started_at": "2026-07-19T19:01:49.005452+00:00",
-      "last_started_epoch": 1784487709.00545,
+      "last_started_at": "2026-07-19T20:03:20.533672+00:00",
+      "last_started_epoch": 1784491400.5336704,
       "last_command": [
         "python",
         "companyos/actionqueuectl",
         "run"
       ],
       "status": "failed",
-      "last_finished_at": "2026-07-19T19:01:57.789495+00:00",
+      "last_finished_at": "2026-07-19T20:03:40.520323+00:00",
       "last_success": false,
       "last_return_code": 1,
-      "last_duration_seconds": 8.784,
-      "run_count": 50,
-      "failure_count": 1
+      "last_duration_seconds": 19.987,
+      "run_count": 51,
+      "failure_count": 2
     },
     "action-feedback-loop": {
-      "last_started_at": "2026-07-19T15:32:15.999192+00:00",
-      "last_started_epoch": 1784475135.9991903,
+      "last_started_at": "2026-07-19T21:41:43.970763+00:00",
+      "last_started_epoch": 1784497303.970759,
       "last_command": [
         "python",
         "companyos/actionfeedbackctl",
         "learn"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T15:32:16.116827+00:00",
+      "last_finished_at": "2026-07-19T21:41:44.262006+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.118,
-      "run_count": 5,
+      "last_duration_seconds": 0.291,
+      "run_count": 6,
       "failure_count": 0
     },
     "unified-control-cycle": {
-      "last_started_at": "2026-07-19T18:40:39.324013+00:00",
-      "last_started_epoch": 1784486439.324011,
+      "last_started_at": "2026-07-19T19:44:17.290689+00:00",
+      "last_started_epoch": 1784490257.290688,
       "last_command": [
         "python",
         "companyos/controlcyclectl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T18:40:40.997229+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 1.673,
-      "run_count": 26,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T19:44:26.135326+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 8.845,
+      "run_count": 27,
+      "failure_count": 1
     },
     "cycle-supervisor": {
-      "last_started_at": "2026-07-19T19:03:51.743152+00:00",
-      "last_started_epoch": 1784487831.7431512,
+      "last_started_at": "2026-07-19T22:12:22.918361+00:00",
+      "last_started_epoch": 1784499142.9183605,
       "last_command": [
         "python",
         "companyos/supervisorctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:51.910842+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.019858+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.168,
-      "run_count": 50,
-      "failure_count": 0
+      "last_duration_seconds": 0.102,
+      "run_count": 54,
+      "failure_count": 1
     },
     "incident-escalation": {
-      "last_started_at": "2026-07-19T19:03:51.917881+00:00",
-      "last_started_epoch": 1784487831.9178765,
+      "last_started_at": "2026-07-19T22:12:23.020971+00:00",
+      "last_started_epoch": 1784499143.0209708,
       "last_command": [
         "python",
         "companyos/incidentctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:52.096879+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.122681+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.179,
-      "run_count": 50,
+      "last_duration_seconds": 0.102,
+      "run_count": 55,
       "failure_count": 0
     },
     "reliability-scorecard": {
-      "last_started_at": "2026-07-19T19:03:52.101196+00:00",
-      "last_started_epoch": 1784487832.1011944,
+      "last_started_at": "2026-07-19T22:12:23.124386+00:00",
+      "last_started_epoch": 1784499143.1243854,
       "last_command": [
         "python",
         "companyos/reliabilityctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:52.278974+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.236235+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.178,
-      "run_count": 50,
+      "last_duration_seconds": 0.112,
+      "run_count": 55,
       "failure_count": 0
     },
     "dependency-drift-monitor": {
-      "last_started_at": "2026-07-19T18:40:41.004648+00:00",
-      "last_started_epoch": 1784486441.0046456,
+      "last_started_at": "2026-07-19T22:12:23.237688+00:00",
+      "last_started_epoch": 1784499143.237688,
       "last_command": [
         "python",
         "companyos/driftctl",
         "check"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:41.709722+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.560168+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.705,
-      "run_count": 26,
+      "last_duration_seconds": 0.322,
+      "run_count": 29,
       "failure_count": 0
     },
     "resource-capacity-monitor": {
-      "last_started_at": "2026-07-19T19:03:52.286097+00:00",
-      "last_started_epoch": 1784487832.2860937,
+      "last_started_at": "2026-07-19T22:12:23.561275+00:00",
+      "last_started_epoch": 1784499143.5612745,
       "last_command": [
         "python",
         "companyos/resourcectl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:52.462882+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.647931+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.177,
-      "run_count": 50,
+      "last_duration_seconds": 0.087,
+      "run_count": 55,
       "failure_count": 0
     },
     "autonomous-watchdog": {
-      "last_started_at": "2026-07-19T18:40:41.710877+00:00",
-      "last_started_epoch": 1784486441.710877,
+      "last_started_at": "2026-07-19T21:22:13.237161+00:00",
+      "last_started_epoch": 1784496133.2371602,
       "last_command": [
         "python",
         "companyos/watchdogctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T18:40:41.853308+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 0.142,
-      "run_count": 48,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T21:22:40.469402+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 27.232,
+      "run_count": 52,
+      "failure_count": 1
     },
     "state-backup": {
-      "last_started_at": "2026-07-19T15:47:09.770476+00:00",
-      "last_started_epoch": 1784476029.7704756,
+      "last_started_at": "2026-07-19T21:57:07.006665+00:00",
+      "last_started_epoch": 1784498227.0066643,
       "last_command": [
         "python",
         "companyos/backupctl",
         "backup"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T15:47:11.645143+00:00",
+      "last_finished_at": "2026-07-19T21:57:11.750681+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.875,
-      "run_count": 5,
+      "last_duration_seconds": 4.744,
+      "run_count": 6,
       "failure_count": 0
     },
     "operations-dashboard": {
-      "last_started_at": "2026-07-19T18:40:41.859590+00:00",
-      "last_started_epoch": 1784486441.8595862,
+      "last_started_at": "2026-07-19T21:57:11.756214+00:00",
+      "last_started_epoch": 1784498231.7562122,
       "last_command": [
         "python",
         "companyos/dashboardctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:41.997370+00:00",
+      "last_finished_at": "2026-07-19T21:57:12.015336+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.138,
-      "run_count": 47,
+      "last_duration_seconds": 0.259,
+      "run_count": 52,
       "failure_count": 0
     },
     "runtime-hygiene": {
-      "last_started_at": "2026-07-19T18:40:42.004189+00:00",
-      "last_started_epoch": 1784486442.004186,
+      "last_started_at": "2026-07-19T21:57:12.017653+00:00",
+      "last_started_epoch": 1784498232.0176523,
       "last_command": [
         "python",
         "companyos/runtimehygienectl",
         "isolate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:42.375915+00:00",
+      "last_finished_at": "2026-07-19T21:57:12.928056+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.372,
-      "run_count": 46,
+      "last_duration_seconds": 0.91,
+      "run_count": 51,
       "failure_count": 0
     },
     "runtime-aware-preflight": {
-      "last_started_at": "2026-07-19T18:40:42.380549+00:00",
-      "last_started_epoch": 1784486442.380546,
+      "last_started_at": "2026-07-19T21:57:12.932318+00:00",
+      "last_started_epoch": 1784498232.9323173,
       "last_command": [
         "python",
         "companyos/preflight2ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:42.857049+00:00",
+      "last_finished_at": "2026-07-19T21:57:13.793158+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.477,
-      "run_count": 43,
+      "last_duration_seconds": 0.861,
+      "run_count": 48,
       "failure_count": 0
     },
     "readiness-coordinator-v2": {
-      "last_started_at": "2026-07-19T18:40:42.863241+00:00",
-      "last_started_epoch": 1784486442.8632388,
+      "last_started_at": "2026-07-19T21:57:13.798044+00:00",
+      "last_started_epoch": 1784498233.7980409,
       "last_command": [
         "python",
         "companyos/readiness2ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:42.998665+00:00",
+      "last_finished_at": "2026-07-19T21:57:14.117421+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.136,
-      "run_count": 39,
+      "last_duration_seconds": 0.319,
+      "run_count": 44,
       "failure_count": 0
     },
     "execution-eligibility-gate": {
-      "last_started_at": "2026-07-19T18:40:43.002390+00:00",
-      "last_started_epoch": 1784486443.0023887,
+      "last_started_at": "2026-07-19T21:57:14.121318+00:00",
+      "last_started_epoch": 1784498234.1213167,
       "last_command": [
         "python",
         "companyos/eligibilityctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:44.093190+00:00",
+      "last_finished_at": "2026-07-19T21:57:14.399737+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.091,
-      "run_count": 37,
+      "last_duration_seconds": 0.278,
+      "run_count": 42,
       "failure_count": 0
     },
     "autonomous-action-dispatcher": {
-      "last_started_at": "2026-07-19T18:40:44.101556+00:00",
-      "last_started_epoch": 1784486444.1015534,
+      "last_started_at": "2026-07-19T21:57:14.404455+00:00",
+      "last_started_epoch": 1784498234.4044533,
       "last_command": [
         "python",
         "companyos/dispatchctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:44.266995+00:00",
+      "last_finished_at": "2026-07-19T21:57:14.735536+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.166,
-      "run_count": 36,
+      "last_duration_seconds": 0.331,
+      "run_count": 41,
       "failure_count": 0
     },
     "dispatcher-feedback-loop": {
@@ -771,196 +771,196 @@
       "failure_count": 0
     },
     "adaptive-action-prioritization": {
-      "last_started_at": "2026-07-19T13:16:54.205057+00:00",
-      "last_started_epoch": 1784467014.205057,
+      "last_started_at": "2026-07-19T19:20:18.156176+00:00",
+      "last_started_epoch": 1784488818.1561747,
       "last_command": [
         "python",
         "companyos/adaptivepriorityctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:16:54.303409+00:00",
+      "last_finished_at": "2026-07-19T19:20:18.316565+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.098,
-      "run_count": 4,
+      "last_duration_seconds": 0.16,
+      "run_count": 5,
       "failure_count": 0
     },
     "adaptive-decision-selector": {
-      "last_started_at": "2026-07-19T19:03:52.470048+00:00",
-      "last_started_epoch": 1784487832.4700441,
+      "last_started_at": "2026-07-19T22:12:23.650265+00:00",
+      "last_started_epoch": 1784499143.6502643,
       "last_command": [
         "python",
         "companyos/decisionselectctl",
         "select"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:52.662173+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.758809+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.192,
-      "run_count": 32,
+      "last_duration_seconds": 0.109,
+      "run_count": 37,
       "failure_count": 0
     },
     "adaptive-execution-plan": {
-      "last_started_at": "2026-07-19T19:03:52.666581+00:00",
-      "last_started_epoch": 1784487832.6665792,
+      "last_started_at": "2026-07-19T22:12:23.760135+00:00",
+      "last_started_epoch": 1784499143.7601354,
       "last_command": [
         "python",
         "companyos/executionplan2ctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:52.833078+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.854240+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.167,
-      "run_count": 31,
+      "last_duration_seconds": 0.094,
+      "run_count": 36,
       "failure_count": 0
     },
     "adaptive-plan-executor": {
-      "last_started_at": "2026-07-19T18:40:44.274341+00:00",
-      "last_started_epoch": 1784486444.2743387,
+      "last_started_at": "2026-07-19T21:57:14.739901+00:00",
+      "last_started_epoch": 1784498234.7398987,
       "last_command": [
         "python",
         "companyos/planexecutorctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:40:44.713563+00:00",
+      "last_finished_at": "2026-07-19T21:57:15.795946+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.439,
-      "run_count": 29,
+      "last_duration_seconds": 1.056,
+      "run_count": 34,
       "failure_count": 0
     },
     "execution-outcome-learner": {
-      "last_started_at": "2026-07-19T13:23:07.153457+00:00",
-      "last_started_epoch": 1784467387.1534574,
+      "last_started_at": "2026-07-19T19:24:27.141707+00:00",
+      "last_started_epoch": 1784489067.1417055,
       "last_command": [
         "python",
         "companyos/outcomelearnerctl",
         "learn"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:07.230793+00:00",
+      "last_finished_at": "2026-07-19T19:24:27.431257+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.077,
-      "run_count": 4,
+      "last_duration_seconds": 0.29,
+      "run_count": 5,
       "failure_count": 0
     },
     "confidence-priority-fusion": {
-      "last_started_at": "2026-07-19T13:23:07.231829+00:00",
-      "last_started_epoch": 1784467387.2318287,
+      "last_started_at": "2026-07-19T19:24:27.432717+00:00",
+      "last_started_epoch": 1784489067.432717,
       "last_command": [
         "python",
         "companyos/fusionctl",
         "fuse"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:07.318440+00:00",
+      "last_finished_at": "2026-07-19T19:24:27.588293+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.087,
-      "run_count": 4,
+      "last_duration_seconds": 0.156,
+      "run_count": 5,
       "failure_count": 0
     },
     "fused-decision-selector": {
-      "last_started_at": "2026-07-19T19:03:52.838592+00:00",
-      "last_started_epoch": 1784487832.838592,
+      "last_started_at": "2026-07-19T22:12:23.855388+00:00",
+      "last_started_epoch": 1784499143.8553877,
       "last_command": [
         "python",
         "companyos/fusedselectctl",
         "select"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:53.029348+00:00",
+      "last_finished_at": "2026-07-19T22:12:23.949322+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.191,
-      "run_count": 27,
+      "last_duration_seconds": 0.094,
+      "run_count": 31,
       "failure_count": 0
     },
     "fused-execution-plan": {
-      "last_started_at": "2026-07-19T19:03:53.033216+00:00",
-      "last_started_epoch": 1784487833.033214,
+      "last_started_at": "2026-07-19T22:12:23.950624+00:00",
+      "last_started_epoch": 1784499143.950624,
       "last_command": [
         "python",
         "companyos/fusedplanctl",
         "build"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:53.208259+00:00",
+      "last_finished_at": "2026-07-19T22:12:24.038582+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.175,
-      "run_count": 27,
+      "last_duration_seconds": 0.088,
+      "run_count": 31,
       "failure_count": 0
     },
     "feedback-priority-integration": {
-      "last_started_at": "2026-07-19T14:33:50.159006+00:00",
-      "last_started_epoch": 1784471630.159006,
+      "last_started_at": "2026-07-19T20:43:44.694283+00:00",
+      "last_started_epoch": 1784493824.6942804,
       "last_command": [
         "python",
         "companyos/feedbackpriorityctl",
         "integrate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T14:33:50.248732+00:00",
+      "last_finished_at": "2026-07-19T20:43:44.945742+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.09,
-      "run_count": 4,
+      "last_duration_seconds": 0.252,
+      "run_count": 5,
       "failure_count": 0
     },
     "closed-loop-selector": {
-      "last_started_at": "2026-07-19T19:03:53.209622+00:00",
-      "last_started_epoch": 1784487833.2096224,
+      "last_started_at": "2026-07-19T21:24:17.753234+00:00",
+      "last_started_epoch": 1784496257.7532327,
       "last_command": [
         "python",
         "companyos/closedloopctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:53.982331+00:00",
+      "last_finished_at": "2026-07-19T21:24:18.868615+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.773,
-      "run_count": 24,
+      "last_duration_seconds": 1.115,
+      "run_count": 27,
       "failure_count": 0
     },
     "readiness-recovery-coordinator": {
-      "last_started_at": "2026-07-19T18:35:39.951521+00:00",
-      "last_started_epoch": 1784486139.9515154,
+      "last_started_at": "2026-07-19T21:01:42.328089+00:00",
+      "last_started_epoch": 1784494902.3280873,
       "last_command": [
         "python",
         "companyos/recovery2ctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T18:35:44.509178+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 4.558,
-      "run_count": 21,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T21:02:05.419285+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 23.091,
+      "run_count": 24,
+      "failure_count": 3
     },
     "recovery-aware-closed-loop": {
-      "last_started_at": "2026-07-19T18:20:28.873084+00:00",
-      "last_started_epoch": 1784485228.8730838,
+      "last_started_at": "2026-07-19T21:24:18.873127+00:00",
+      "last_started_epoch": 1784496258.8731241,
       "last_command": [
         "python",
         "companyos/loopctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T18:20:32.540050+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 3.667,
-      "run_count": 13,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T21:24:47.271865+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 28.399,
+      "run_count": 15,
+      "failure_count": 2
     },
     "strategic-goal-orchestrator": {
       "last_started_at": "2026-07-19T17:09:21.851407+00:00",
@@ -979,307 +979,307 @@
       "failure_count": 0
     },
     "strategic-opportunity-alignment": {
-      "last_started_at": "2026-07-19T13:23:13.721573+00:00",
-      "last_started_epoch": 1784467393.7215734,
+      "last_started_at": "2026-07-19T19:24:27.589734+00:00",
+      "last_started_epoch": 1784489067.5897338,
       "last_command": [
         "python",
         "companyos/strategicalignctl",
         "align"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:13.844715+00:00",
+      "last_finished_at": "2026-07-19T19:24:27.747237+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.123,
-      "run_count": 3,
+      "last_duration_seconds": 0.158,
+      "run_count": 4,
       "failure_count": 0
     },
     "opportunity-activation-pipeline": {
-      "last_started_at": "2026-07-19T13:23:13.852313+00:00",
-      "last_started_epoch": 1784467393.8523104,
+      "last_started_at": "2026-07-19T19:24:27.748669+00:00",
+      "last_started_epoch": 1784489067.748669,
       "last_command": [
         "python",
         "companyos/opportunityactivatectl",
         "activate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:14.007207+00:00",
+      "last_finished_at": "2026-07-19T19:24:28.037721+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.155,
-      "run_count": 3,
+      "last_duration_seconds": 0.289,
+      "run_count": 4,
       "failure_count": 0
     },
     "opportunity-action-translation": {
-      "last_started_at": "2026-07-19T13:23:14.014414+00:00",
-      "last_started_epoch": 1784467394.0144103,
+      "last_started_at": "2026-07-19T19:24:28.039107+00:00",
+      "last_started_epoch": 1784489068.0391068,
       "last_command": [
         "python",
         "companyos/opportunitytranslatectl",
         "translate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:14.157435+00:00",
+      "last_finished_at": "2026-07-19T19:24:28.277871+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.143,
-      "run_count": 3,
+      "last_duration_seconds": 0.239,
+      "run_count": 4,
       "failure_count": 0
     },
     "opportunity-action-queue": {
-      "last_started_at": "2026-07-19T18:35:44.516257+00:00",
-      "last_started_epoch": 1784486144.5162532,
+      "last_started_at": "2026-07-19T21:26:21.528854+00:00",
+      "last_started_epoch": 1784496381.5288522,
       "last_command": [
         "python",
         "companyos/opportunityqueuectl",
         "coordinate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:44.694239+00:00",
+      "last_finished_at": "2026-07-19T21:26:21.811943+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.178,
-      "run_count": 15,
+      "last_duration_seconds": 0.283,
+      "run_count": 19,
       "failure_count": 0
     },
     "ready-action-execution-handoff": {
-      "last_started_at": "2026-07-19T18:35:44.700760+00:00",
-      "last_started_epoch": 1784486144.7007573,
+      "last_started_at": "2026-07-19T21:41:45.798878+00:00",
+      "last_started_epoch": 1784497305.7988756,
       "last_command": [
         "python",
         "companyos/actionhandoffctl",
         "handoff"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:44.881655+00:00",
+      "last_finished_at": "2026-07-19T21:41:46.094930+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.181,
-      "run_count": 15,
+      "last_duration_seconds": 0.296,
+      "run_count": 19,
       "failure_count": 0
     },
     "guarded-opportunity-action-executor": {
-      "last_started_at": "2026-07-19T18:35:44.890017+00:00",
-      "last_started_epoch": 1784486144.890014,
+      "last_started_at": "2026-07-19T21:41:46.099280+00:00",
+      "last_started_epoch": 1784497306.0992787,
       "last_command": [
         "python",
         "companyos/opportunityexecctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:45.049437+00:00",
+      "last_finished_at": "2026-07-19T21:41:46.404510+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.159,
-      "run_count": 15,
+      "last_duration_seconds": 0.305,
+      "run_count": 19,
       "failure_count": 0
     },
     "opportunity-outcome-feedback": {
-      "last_started_at": "2026-07-19T13:23:14.623330+00:00",
-      "last_started_epoch": 1784467394.623327,
+      "last_started_at": "2026-07-19T19:24:28.789415+00:00",
+      "last_started_epoch": 1784489068.7894154,
       "last_command": [
         "python",
         "companyos/opportunityoutcomectl",
         "analyze"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:14.769168+00:00",
+      "last_finished_at": "2026-07-19T19:24:28.954140+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.146,
-      "run_count": 3,
+      "last_duration_seconds": 0.165,
+      "run_count": 4,
       "failure_count": 0
     },
     "learned-opportunity-reranking": {
-      "last_started_at": "2026-07-19T13:23:14.776716+00:00",
-      "last_started_epoch": 1784467394.776712,
+      "last_started_at": "2026-07-19T19:24:28.955612+00:00",
+      "last_started_epoch": 1784489068.9556115,
       "last_command": [
         "python",
         "companyos/opportunityrerankctl",
         "rerank"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:14.927396+00:00",
+      "last_finished_at": "2026-07-19T19:24:29.118136+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.151,
-      "run_count": 3,
+      "last_duration_seconds": 0.163,
+      "run_count": 4,
       "failure_count": 0
     },
     "adaptive-opportunity-cycle": {
-      "last_started_at": "2026-07-19T13:23:14.934957+00:00",
-      "last_started_epoch": 1784467394.934954,
+      "last_started_at": "2026-07-19T19:24:29.119610+00:00",
+      "last_started_epoch": 1784489069.11961,
       "last_command": [
         "python",
         "companyos/opportunitycyclectl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:16.210140+00:00",
+      "last_finished_at": "2026-07-19T19:24:31.412670+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.275,
-      "run_count": 3,
+      "last_duration_seconds": 2.293,
+      "run_count": 4,
       "failure_count": 0
     },
     "opportunity-portfolio-allocation": {
-      "last_started_at": "2026-07-19T13:23:16.211398+00:00",
-      "last_started_epoch": 1784467396.211398,
+      "last_started_at": "2026-07-19T19:24:31.415726+00:00",
+      "last_started_epoch": 1784489071.4157186,
       "last_command": [
         "python",
         "companyos/opportunityportfolioctl",
         "allocate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:16.322646+00:00",
+      "last_finished_at": "2026-07-19T19:24:31.697012+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.111,
-      "run_count": 3,
+      "last_duration_seconds": 0.281,
+      "run_count": 4,
       "failure_count": 0
     },
     "portfolio-capacity-guard": {
-      "last_started_at": "2026-07-19T13:23:16.323651+00:00",
-      "last_started_epoch": 1784467396.3236506,
+      "last_started_at": "2026-07-19T19:24:31.701622+00:00",
+      "last_started_epoch": 1784489071.7016213,
       "last_command": [
         "python",
         "companyos/portfoliocapacityctl",
         "evaluate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:23:16.453260+00:00",
+      "last_finished_at": "2026-07-19T19:24:31.970867+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.13,
-      "run_count": 3,
+      "last_duration_seconds": 0.269,
+      "run_count": 4,
       "failure_count": 0
     },
     "portfolio-rebalance": {
-      "last_started_at": "2026-07-19T13:38:27.010022+00:00",
-      "last_started_epoch": 1784468307.010022,
+      "last_started_at": "2026-07-19T19:45:07.334416+00:00",
+      "last_started_epoch": 1784490307.3344128,
       "last_command": [
         "python",
         "companyos/portfoliorebalancectl",
         "rebalance"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:27.139336+00:00",
+      "last_finished_at": "2026-07-19T19:45:07.553361+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.129,
-      "run_count": 3,
+      "last_duration_seconds": 0.219,
+      "run_count": 4,
       "failure_count": 0
     },
     "opportunity-lifecycle": {
-      "last_started_at": "2026-07-19T13:38:27.147650+00:00",
-      "last_started_epoch": 1784468307.1476462,
+      "last_started_at": "2026-07-19T19:45:07.562068+00:00",
+      "last_started_epoch": 1784490307.5620613,
       "last_command": [
         "python",
         "companyos/opportunitylifecyclectl",
         "evaluate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:27.316608+00:00",
+      "last_finished_at": "2026-07-19T19:45:07.779874+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.169,
-      "run_count": 3,
+      "last_duration_seconds": 0.218,
+      "run_count": 4,
       "failure_count": 0
     },
     "portfolio-performance-readiness": {
-      "last_started_at": "2026-07-19T13:38:27.318923+00:00",
-      "last_started_epoch": 1784468307.3189228,
+      "last_started_at": "2026-07-19T19:45:07.784468+00:00",
+      "last_started_epoch": 1784490307.784466,
       "last_command": [
         "python",
         "companyos/portfolioperformancectl",
         "evaluate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:27.426380+00:00",
+      "last_finished_at": "2026-07-19T19:45:08.010052+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.108,
-      "run_count": 3,
+      "last_duration_seconds": 0.226,
+      "run_count": 4,
       "failure_count": 0
     },
     "internal-resource-allocation": {
-      "last_started_at": "2026-07-19T13:38:27.432188+00:00",
-      "last_started_epoch": 1784468307.4321856,
+      "last_started_at": "2026-07-19T19:45:08.012435+00:00",
+      "last_started_epoch": 1784490308.012434,
       "last_command": [
         "python",
         "companyos/resourceallocatectl",
         "allocate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:27.580169+00:00",
+      "last_finished_at": "2026-07-19T19:45:08.248021+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.148,
-      "run_count": 3,
+      "last_duration_seconds": 0.236,
+      "run_count": 4,
       "failure_count": 0
     },
     "specialist-delegation-planner": {
-      "last_started_at": "2026-07-19T13:38:27.586878+00:00",
-      "last_started_epoch": 1784468307.5868747,
+      "last_started_at": "2026-07-19T19:45:08.252541+00:00",
+      "last_started_epoch": 1784490308.25254,
       "last_command": [
         "python",
         "companyos/specialistdelegatectl",
         "plan"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:27.878110+00:00",
+      "last_finished_at": "2026-07-19T19:45:08.512447+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.291,
-      "run_count": 3,
+      "last_duration_seconds": 0.26,
+      "run_count": 4,
       "failure_count": 0
     },
     "controlled-multiagent-router": {
-      "last_started_at": "2026-07-19T13:38:27.886528+00:00",
-      "last_started_epoch": 1784468307.886527,
+      "last_started_at": "2026-07-19T19:45:08.514793+00:00",
+      "last_started_epoch": 1784490308.5147927,
       "last_command": [
         "python",
         "companyos/multiagentroutectl",
         "route"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:28.132358+00:00",
+      "last_finished_at": "2026-07-19T19:45:08.729962+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.246,
-      "run_count": 3,
+      "last_duration_seconds": 0.215,
+      "run_count": 4,
       "failure_count": 0
     },
     "specialist-work-result-collector": {
-      "last_started_at": "2026-07-19T13:38:28.143630+00:00",
-      "last_started_epoch": 1784468308.1436281,
+      "last_started_at": "2026-07-19T19:45:08.738956+00:00",
+      "last_started_epoch": 1784490308.7389545,
       "last_command": [
         "python",
         "companyos/specialistresultctl",
         "collect"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:38:28.370553+00:00",
+      "last_finished_at": "2026-07-19T19:45:08.998850+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.227,
-      "run_count": 3,
+      "last_duration_seconds": 0.26,
+      "run_count": 4,
       "failure_count": 0
     },
     "specialist-insight-integration": {
-      "last_started_at": "2026-07-19T13:44:39.268187+00:00",
-      "last_started_epoch": 1784468679.2681863,
+      "last_started_at": "2026-07-19T19:45:09.003222+00:00",
+      "last_started_epoch": 1784490309.0032194,
       "last_command": [
         "python",
         "companyos/specialistinsightctl",
         "integrate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:44:39.359427+00:00",
+      "last_finished_at": "2026-07-19T19:45:09.275646+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.091,
-      "run_count": 3,
+      "last_duration_seconds": 0.272,
+      "run_count": 4,
       "failure_count": 0
     },
     "ceo-insight-decision-synthesis": {
@@ -1299,147 +1299,147 @@
       "failure_count": 1
     },
     "ceo-decision-governance": {
-      "last_started_at": "2026-07-19T13:44:39.360502+00:00",
-      "last_started_epoch": 1784468679.3605013,
+      "last_started_at": "2026-07-19T19:45:09.278061+00:00",
+      "last_started_epoch": 1784490309.27806,
       "last_command": [
         "python",
         "companyos/ceodecisiongovernctl",
         "govern"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:44:39.487290+00:00",
+      "last_finished_at": "2026-07-19T19:45:09.562858+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.127,
-      "run_count": 3,
+      "last_duration_seconds": 0.285,
+      "run_count": 4,
       "failure_count": 0
     },
     "governed-execution-planner": {
-      "last_started_at": "2026-07-19T13:44:39.488442+00:00",
-      "last_started_epoch": 1784468679.4884417,
+      "last_started_at": "2026-07-19T19:45:09.569143+00:00",
+      "last_started_epoch": 1784490309.569142,
       "last_command": [
         "python",
         "companyos/governedplanctl",
         "plan"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:44:39.606358+00:00",
+      "last_finished_at": "2026-07-19T19:45:09.782742+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.118,
-      "run_count": 3,
+      "last_duration_seconds": 0.214,
+      "run_count": 4,
       "failure_count": 0
     },
     "governed-internal-execution-queue": {
-      "last_started_at": "2026-07-19T13:44:39.607463+00:00",
-      "last_started_epoch": 1784468679.6074631,
+      "last_started_at": "2026-07-19T20:09:26.668924+00:00",
+      "last_started_epoch": 1784491766.6689224,
       "last_command": [
         "python",
         "companyos/governedqueuectl",
         "enqueue"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:44:39.723484+00:00",
+      "last_finished_at": "2026-07-19T20:09:26.893978+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.116,
-      "run_count": 3,
+      "last_duration_seconds": 0.225,
+      "run_count": 4,
       "failure_count": 0
     },
     "governed-internal-worker": {
-      "last_started_at": "2026-07-19T18:20:32.541025+00:00",
-      "last_started_epoch": 1784485232.5410247,
+      "last_started_at": "2026-07-19T20:59:39.909428+00:00",
+      "last_started_epoch": 1784494779.909427,
       "last_command": [
         "python",
         "companyos/governedworkerctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:20:32.619764+00:00",
+      "last_finished_at": "2026-07-19T20:59:40.034566+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.079,
-      "run_count": 9,
+      "last_duration_seconds": 0.125,
+      "run_count": 11,
       "failure_count": 0
     },
     "specialist-runtime-adapter": {
-      "last_started_at": "2026-07-19T18:35:45.054571+00:00",
-      "last_started_epoch": 1784486145.054569,
+      "last_started_at": "2026-07-19T21:26:21.821668+00:00",
+      "last_started_epoch": 1784496381.8216631,
       "last_command": [
         "python",
         "companyos/specialistruntimectl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:45.297967+00:00",
+      "last_finished_at": "2026-07-19T21:26:22.281555+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.243,
-      "run_count": 8,
+      "last_duration_seconds": 0.46,
+      "run_count": 10,
       "failure_count": 0
     },
     "live-specialist-task-bridge": {
-      "last_started_at": "2026-07-19T18:35:45.305019+00:00",
-      "last_started_epoch": 1784486145.305016,
+      "last_started_at": "2026-07-19T21:41:46.409137+00:00",
+      "last_started_epoch": 1784497306.4091344,
       "last_command": [
         "python",
         "companyos/specialistbridgectl",
         "bridge"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:45.491006+00:00",
+      "last_finished_at": "2026-07-19T21:41:46.715079+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.186,
-      "run_count": 10,
+      "last_duration_seconds": 0.306,
+      "run_count": 14,
       "failure_count": 0
     },
     "live-specialist-queue-consumer": {
-      "last_started_at": "2026-07-19T18:35:45.497385+00:00",
-      "last_started_epoch": 1784486145.4973824,
+      "last_started_at": "2026-07-19T21:41:46.719783+00:00",
+      "last_started_epoch": 1784497306.7197819,
       "last_command": [
         "python",
         "companyos/livespecialistctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:45.680286+00:00",
+      "last_finished_at": "2026-07-19T21:41:47.161022+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.183,
-      "run_count": 10,
+      "last_duration_seconds": 0.441,
+      "run_count": 14,
       "failure_count": 0
     },
     "live-specialist-result-bridge": {
-      "last_started_at": "2026-07-19T18:35:45.687812+00:00",
-      "last_started_epoch": 1784486145.687809,
+      "last_started_at": "2026-07-19T21:41:47.165360+00:00",
+      "last_started_epoch": 1784497307.1653585,
       "last_command": [
         "python",
         "companyos/liveresultbridgectl",
         "integrate"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:45.845651+00:00",
+      "last_finished_at": "2026-07-19T21:41:47.469015+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.158,
-      "run_count": 10,
+      "last_duration_seconds": 0.304,
+      "run_count": 14,
       "failure_count": 0
     },
     "validated-insight-refresh": {
-      "last_started_at": "2026-07-19T18:35:45.856246+00:00",
-      "last_started_epoch": 1784486145.8562415,
+      "last_started_at": "2026-07-19T21:41:47.476366+00:00",
+      "last_started_epoch": 1784497307.4763627,
       "last_command": [
         "python",
         "companyos/insightrefreshctl",
         "refresh"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:46.001966+00:00",
+      "last_finished_at": "2026-07-19T21:41:47.792189+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.146,
-      "run_count": 9,
+      "last_duration_seconds": 0.316,
+      "run_count": 13,
       "failure_count": 0
     },
     "autonomous-ai-operations-core": {
@@ -1459,52 +1459,52 @@
       "failure_count": 1
     },
     "phase23-adaptive-business-intelligence": {
-      "last_started_at": "2026-07-19T17:09:29.394912+00:00",
-      "last_started_epoch": 1784480969.3949094,
+      "last_started_at": "2026-07-19T19:24:33.564175+00:00",
+      "last_started_epoch": 1784489073.5641742,
       "last_command": [
         "python",
         "companyos/phase23ctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T17:09:39.928941+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 10.534,
-      "run_count": 3,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T19:25:00.041084+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 26.477,
+      "run_count": 4,
+      "failure_count": 1
     },
     "phase23-adaptive-execution-learning": {
-      "last_started_at": "2026-07-19T17:09:39.930395+00:00",
-      "last_started_epoch": 1784480979.930395,
+      "last_started_at": "2026-07-19T19:26:32.226247+00:00",
+      "last_started_epoch": 1784489192.2262466,
       "last_command": [
         "python",
         "companyos/phase23bundle2ctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T17:09:48.275578+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 8.345,
-      "run_count": 3,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T19:26:56.746715+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 24.521,
+      "run_count": 4,
+      "failure_count": 1
     },
     "phase23-strategic-autonomy-portfolio": {
-      "last_started_at": "2026-07-19T17:09:48.284622+00:00",
-      "last_started_epoch": 1784480988.2846198,
+      "last_started_at": "2026-07-19T20:59:40.710759+00:00",
+      "last_started_epoch": 1784494780.710758,
       "last_command": [
         "python",
         "companyos/phase23bundle3ctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T17:10:03.361405+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 15.077,
-      "run_count": 3,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T21:00:11.811028+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 31.1,
+      "run_count": 4,
+      "failure_count": 1
     },
     "phase24-business-workflow-orchestration": {
       "last_started_at": "2026-07-19T15:32:21.425003+00:00",
@@ -1539,20 +1539,20 @@
       "failure_count": 1
     },
     "phase24-governed-execution-operations": {
-      "last_started_at": "2026-07-19T17:10:03.363051+00:00",
-      "last_started_epoch": 1784481003.3630502,
+      "last_started_at": "2026-07-19T21:03:49.239642+00:00",
+      "last_started_epoch": 1784495029.239641,
       "last_command": [
         "python",
         "companyos/phase24bundle3ctl",
         "run"
       ],
-      "status": "success",
-      "last_finished_at": "2026-07-19T17:10:19.267469+00:00",
-      "last_success": true,
-      "last_return_code": 0,
-      "last_duration_seconds": 15.904,
-      "run_count": 3,
-      "failure_count": 0
+      "status": "failed",
+      "last_finished_at": "2026-07-19T21:04:28.422697+00:00",
+      "last_success": false,
+      "last_return_code": 1,
+      "last_duration_seconds": 39.183,
+      "run_count": 4,
+      "failure_count": 1
     },
     "phase24-executive-delivery-governance": {
       "last_started_at": "2026-07-19T17:55:09.942374+00:00",
@@ -1587,19 +1587,19 @@
       "failure_count": 0
     },
     "phase25-hybrid-ai-orchestration": {
-      "last_started_at": "2026-07-19T17:32:18.323293+00:00",
-      "last_started_epoch": 1784482338.3232932,
+      "last_started_at": "2026-07-19T20:09:28.570417+00:00",
+      "last_started_epoch": 1784491768.5704145,
       "last_command": [
         "python",
         "companyos/phase25bundle1ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T17:32:19.563360+00:00",
+      "last_finished_at": "2026-07-19T20:09:32.052426+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.24,
-      "run_count": 2,
+      "last_duration_seconds": 3.482,
+      "run_count": 3,
       "failure_count": 0
     },
     "phase25-autonomous-ceo-cycle": {
@@ -1619,257 +1619,257 @@
       "failure_count": 0
     },
     "phase26-authority-execution-core": {
-      "last_started_at": "2026-07-19T17:32:19.564540+00:00",
-      "last_started_epoch": 1784482339.56454,
+      "last_started_at": "2026-07-19T20:09:32.056120+00:00",
+      "last_started_epoch": 1784491772.0561187,
       "last_command": [
         "python",
         "companyos/phase26authorityctl"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T17:32:20.131207+00:00",
+      "last_finished_at": "2026-07-19T20:09:33.384392+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.567,
-      "run_count": 2,
+      "last_duration_seconds": 1.328,
+      "run_count": 3,
       "failure_count": 0
     },
     "phase27-execution-connectors": {
-      "last_started_at": "2026-07-19T18:35:46.007289+00:00",
-      "last_started_epoch": 1784486146.007286,
+      "last_started_at": "2026-07-19T21:26:22.292728+00:00",
+      "last_started_epoch": 1784496382.2927225,
       "last_command": [
         "python",
         "companyos/phase27ctl"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:35:46.375574+00:00",
+      "last_finished_at": "2026-07-19T21:26:22.910453+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.368,
-      "run_count": 4,
+      "last_duration_seconds": 0.618,
+      "run_count": 6,
       "failure_count": 0
     },
     "phase28-self-evolving-platform": {
-      "last_started_at": "2026-07-19T13:57:21.127185+00:00",
-      "last_started_epoch": 1784469441.127185,
+      "last_started_at": "2026-07-19T20:09:33.920183+00:00",
+      "last_started_epoch": 1784491773.9201815,
       "last_command": [
         "python",
         "companyos/phase28ctl"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T13:57:22.140709+00:00",
+      "last_finished_at": "2026-07-19T20:09:35.846789+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.014,
-      "run_count": 1,
+      "last_duration_seconds": 1.927,
+      "run_count": 2,
       "failure_count": 0
     },
     "phase29-crypto-treasury-monitor": {
-      "last_started_at": "2026-07-19T19:03:53.989986+00:00",
-      "last_started_epoch": 1784487833.989984,
+      "last_started_at": "2026-07-19T21:41:47.796172+00:00",
+      "last_started_epoch": 1784497307.7961705,
       "last_command": [
         "python",
         "companyos/phase29ctl"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:54.779462+00:00",
+      "last_finished_at": "2026-07-19T21:41:49.084155+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.79,
-      "run_count": 8,
+      "last_duration_seconds": 1.288,
+      "run_count": 13,
       "failure_count": 0
     },
     "phase30-live-treasury-monitor": {
-      "last_started_at": "2026-07-19T19:03:54.785396+00:00",
-      "last_started_epoch": 1784487834.785392,
+      "last_started_at": "2026-07-19T21:26:24.139611+00:00",
+      "last_started_epoch": 1784496384.139605,
       "last_command": [
         "python",
         "companyos/phase30ctl"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:56.207036+00:00",
+      "last_finished_at": "2026-07-19T21:26:26.007316+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 1.422,
-      "run_count": 7,
+      "last_duration_seconds": 1.868,
+      "run_count": 11,
       "failure_count": 0
     },
     "phase31-multi-asset-treasury": {
-      "last_started_at": "2026-07-19T19:03:56.217871+00:00",
-      "last_started_epoch": 1784487836.2178667,
+      "last_started_at": "2026-07-19T21:26:26.018826+00:00",
+      "last_started_epoch": 1784496386.018821,
       "last_command": [
         "python",
         "companyos/phase31ctl"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:58.490983+00:00",
+      "last_finished_at": "2026-07-19T21:26:28.758896+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 2.273,
-      "run_count": 5,
+      "last_duration_seconds": 2.74,
+      "run_count": 9,
       "failure_count": 0
     },
     "phase34-autonomous-treasury": {
-      "last_started_at": "2026-07-19T19:03:58.498562+00:00",
-      "last_started_epoch": 1784487838.4985595,
+      "last_started_at": "2026-07-19T21:26:28.764369+00:00",
+      "last_started_epoch": 1784496388.7643666,
       "last_command": [
         "python",
         "companyos/autonomoustreasuryctl",
         "run"
       ],
       "status": "failed",
-      "last_finished_at": "2026-07-19T19:03:59.309290+00:00",
+      "last_finished_at": "2026-07-19T21:26:29.755558+00:00",
       "last_success": false,
       "last_return_code": 1,
-      "last_duration_seconds": 0.811,
-      "run_count": 3,
-      "failure_count": 3
+      "last_duration_seconds": 0.991,
+      "run_count": 5,
+      "failure_count": 5
     },
     "phase35-ceo-treasury-bridge": {
-      "last_started_at": "2026-07-19T19:03:59.315296+00:00",
-      "last_started_epoch": 1784487839.3152938,
+      "last_started_at": "2026-07-19T21:26:29.759344+00:00",
+      "last_started_epoch": 1784496389.7593434,
       "last_command": [
         "python",
         "companyos/ceotreasurybridgectl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:59.503202+00:00",
+      "last_finished_at": "2026-07-19T21:26:30.023636+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.188,
-      "run_count": 3,
+      "last_duration_seconds": 0.264,
+      "run_count": 7,
       "failure_count": 0
     },
     "phase39-production-orchestrator": {
-      "last_started_at": "2026-07-19T19:03:59.511372+00:00",
-      "last_started_epoch": 1784487839.5113695,
+      "last_started_at": "2026-07-19T21:26:30.028260+00:00",
+      "last_started_epoch": 1784496390.0282586,
       "last_command": [
         "python",
         "companyos/phase39ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:59.717501+00:00",
+      "last_finished_at": "2026-07-19T21:26:30.301259+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.206,
-      "run_count": 3,
+      "last_duration_seconds": 0.273,
+      "run_count": 7,
       "failure_count": 0
     },
     "phase40-ceo-production-integration": {
-      "last_started_at": "2026-07-19T19:03:59.718992+00:00",
-      "last_started_epoch": 1784487839.7189913,
+      "last_started_at": "2026-07-19T21:26:30.311073+00:00",
+      "last_started_epoch": 1784496390.311064,
       "last_command": [
         "python",
         "companyos/phase40ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:03:59.883366+00:00",
+      "last_finished_at": "2026-07-19T21:26:30.579448+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.164,
-      "run_count": 3,
+      "last_duration_seconds": 0.268,
+      "run_count": 7,
       "failure_count": 0
     },
     "phase41-external-operations-router": {
-      "last_started_at": "2026-07-19T19:03:59.890492+00:00",
-      "last_started_epoch": 1784487839.8904865,
+      "last_started_at": "2026-07-19T21:26:30.584019+00:00",
+      "last_started_epoch": 1784496390.5840166,
       "last_command": [
         "python",
         "companyos/phase41ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:04:00.074562+00:00",
+      "last_finished_at": "2026-07-19T21:26:30.851526+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.184,
-      "run_count": 3,
+      "last_duration_seconds": 0.268,
+      "run_count": 6,
       "failure_count": 0
     },
     "phase42-external-connector-runtime": {
-      "last_started_at": "2026-07-19T19:04:00.079170+00:00",
-      "last_started_epoch": 1784487840.0791678,
+      "last_started_at": "2026-07-19T21:26:30.856023+00:00",
+      "last_started_epoch": 1784496390.8560214,
       "last_command": [
         "python",
         "companyos/phase42ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:04:00.250488+00:00",
+      "last_finished_at": "2026-07-19T21:26:31.170848+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.171,
-      "run_count": 2,
+      "last_duration_seconds": 0.315,
+      "run_count": 5,
       "failure_count": 0
     },
     "phase43-autonomous-business-operations-loop": {
-      "last_started_at": "2026-07-19T19:04:00.258080+00:00",
-      "last_started_epoch": 1784487840.2580776,
+      "last_started_at": "2026-07-19T21:26:31.181012+00:00",
+      "last_started_epoch": 1784496391.1810076,
       "last_command": [
         "python",
         "companyos/phase43ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T19:04:00.858669+00:00",
+      "last_finished_at": "2026-07-19T21:26:32.068801+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.601,
-      "run_count": 2,
+      "last_duration_seconds": 0.888,
+      "run_count": 5,
       "failure_count": 0
     },
     "phase44-autonomous-opportunity-revenue-engine": {
-      "last_started_at": "2026-07-19T18:46:34.921735+00:00",
-      "last_started_epoch": 1784486794.9217343,
+      "last_started_at": "2026-07-19T21:26:32.079660+00:00",
+      "last_started_epoch": 1784496392.0796556,
       "last_command": [
         "python",
         "companyos/phase44ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:46:35.247681+00:00",
+      "last_finished_at": "2026-07-19T21:26:33.296326+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.326,
-      "run_count": 1,
+      "last_duration_seconds": 1.217,
+      "run_count": 4,
       "failure_count": 0
     },
     "phase45-autonomous-decision-action-planner": {
-      "last_started_at": "2026-07-19T18:46:35.248713+00:00",
-      "last_started_epoch": 1784486795.2487128,
+      "last_started_at": "2026-07-19T21:26:33.308157+00:00",
+      "last_started_epoch": 1784496393.3081517,
       "last_command": [
         "python",
         "companyos/phase45ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:46:35.572569+00:00",
+      "last_finished_at": "2026-07-19T21:26:34.456085+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.324,
-      "run_count": 1,
+      "last_duration_seconds": 1.148,
+      "run_count": 4,
       "failure_count": 0
     },
     "phase46-autonomous-goal-strategy-engine": {
-      "last_started_at": "2026-07-19T18:46:35.573653+00:00",
-      "last_started_epoch": 1784486795.573653,
+      "last_started_at": "2026-07-19T21:06:04.944463+00:00",
+      "last_started_epoch": 1784495164.9444609,
       "last_command": [
         "python",
         "companyos/phase46ctl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-19T18:46:36.361532+00:00",
+      "last_finished_at": "2026-07-19T21:06:07.467130+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.788,
-      "run_count": 1,
+      "last_duration_seconds": 2.523,
+      "run_count": 2,
       "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-19T19:04:00.866193+00:00",
+  "last_cycle_at": "2026-07-19T22:12:24.039659+00:00",
   "last_cycle_job_count": 20,
-  "last_cycle_success": false
+  "last_cycle_success": true
 }

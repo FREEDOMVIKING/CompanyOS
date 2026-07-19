@@ -1,6 +1,21 @@
 {
-  "generated_at": "2026-07-19T17:55:49.499694+00:00",
-  "failure_count": 0,
-  "replan_action_count": 0,
-  "actions": []
+  "generated_at": "2026-07-19T21:04:26.903973+00:00",
+  "failure_count": 2,
+  "replan_action_count": 2,
+  "actions": [
+    {
+      "source": "phase24",
+      "failed_step": "phase23_bundle3",
+      "recommended_action": "Re-run prerequisite health checks, refresh upstream state, then retry the failed internal step.",
+      "status": "replan_recommended",
+      "external_action": false
+    },
+    {
+      "source": "autonomy",
+      "failed_step": "readiness_recovery",
+      "recommended_action": "Re-run prerequisite health checks, refresh upstream state, then retry the failed internal step.",
+      "status": "replan_recommended",
+      "external_action": false
+    }
+  ]
 }

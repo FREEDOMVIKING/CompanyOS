@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-19T17:55:47.021152+00:00",
+  "generated_at": "2026-07-19T21:04:24.041468+00:00",
   "source_count": 6,
   "sources": {
     "specialist_performance_profiles.json": {
-      "generated_at": "2026-07-19T17:55:45.601027+00:00",
+      "generated_at": "2026-07-19T21:04:22.326311+00:00",
       "profile_count": 6,
       "profiles": [
         {
@@ -45,7 +45,7 @@
       ]
     },
     "validated_insights.json": {
-      "generated_at": "2026-07-19T17:55:44.359640+00:00",
+      "generated_at": "2026-07-19T21:04:19.960324+00:00",
       "insight_count": 22,
       "insights": [
         {
@@ -957,16 +957,32 @@
       ]
     },
     "self_improvement_proposals.json": {
-      "generated_at": "2026-07-19T17:55:45.403670+00:00",
-      "proposal_count": 2,
+      "generated_at": "2026-07-19T21:04:21.963663+00:00",
+      "proposal_count": 4,
       "proposals": [
+        {
+          "id": "0eaa518a7b975300",
+          "title": "Investigate repeated autonomy failures: readiness_recovery",
+          "priority": 95,
+          "category": "reliability",
+          "status": "proposal_only_requires_governed_review",
+          "generated_at": "2026-07-19T21:04:21.963638+00:00"
+        },
+        {
+          "id": "2113ff536457c087",
+          "title": "Improve low-scoring business performance dimensions",
+          "priority": 80,
+          "category": "performance",
+          "status": "proposal_only_requires_governed_review",
+          "generated_at": "2026-07-19T21:04:21.963614+00:00"
+        },
         {
           "id": "366a3daec7ac4c6e",
           "title": "Improve specialist prompt quality using measured result confidence and outcomes",
           "priority": 70,
           "category": "ai_quality",
           "status": "proposal_only_requires_governed_review",
-          "generated_at": "2026-07-19T17:55:45.403664+00:00"
+          "generated_at": "2026-07-19T21:04:21.963651+00:00"
         },
         {
           "id": "4bcb4ddf9dcff8ad",
@@ -974,7 +990,7 @@
           "priority": 65,
           "category": "automation",
           "status": "proposal_only_requires_governed_review",
-          "generated_at": "2026-07-19T17:55:45.403650+00:00"
+          "generated_at": "2026-07-19T21:04:21.963645+00:00"
         }
       ],
       "automatic_code_changes": false,
@@ -982,103 +998,103 @@
       "automatic_deploy": false
     },
     "business_performance_scorecard.json": {
-      "generated_at": "2026-07-19T17:55:45.311545+00:00",
-      "overall_score": 80.0,
+      "generated_at": "2026-07-19T21:04:21.805872+00:00",
+      "overall_score": 70.0,
       "metrics": {
-        "autonomy_health": 100,
+        "autonomy_health": 50,
         "reliability": 80.0,
         "portfolio_activity": 40.0,
         "outcome_visibility": 80,
         "resource_health": 100
       },
-      "status": "healthy"
+      "status": "watch"
     },
     "outcome_tracker_report.json": {
-      "generated_at": "2026-07-19T17:39:50.611240+00:00",
+      "generated_at": "2026-07-19T20:24:56.419928+00:00",
       "kpis": {
         "operating_health_score": 60.0,
-        "scheduler_reliability_percent": 98.21,
-        "successful_jobs": 110,
-        "failed_jobs": 2,
+        "scheduler_reliability_percent": 92.31,
+        "successful_jobs": 108,
+        "failed_jobs": 9,
         "internal_action_failures": 0,
         "active_goals": 10
       },
       "goal_outcomes": [
         {
-          "id": "improvement-improvement-d444c05d4b29",
+          "id": "improvement-improvement-5d66bc557b8d",
           "title": "Improve receivable recovery process",
           "rank": 1,
-          "progress_score": 83.88,
+          "progress_score": 82.41,
           "status": "on_track"
         },
         {
           "id": "priority-invoice-d7e99861931c",
           "title": "Review receivable: Sample Contractor",
           "rank": 2,
-          "progress_score": 82.04,
+          "progress_score": 80.56,
           "status": "on_track"
         },
         {
           "id": "priority-e2e-invoice-001",
           "title": "Review receivable: E2E Test Customer",
           "rank": 3,
-          "progress_score": 82.04,
+          "progress_score": 80.56,
           "status": "on_track"
         },
         {
-          "id": "improvement-improvement-cbe3769bffbd",
+          "id": "improvement-improvement-a558965e9fab",
           "title": "Clear pending CEO decisions",
           "rank": 4,
-          "progress_score": 81.25,
+          "progress_score": 79.78,
           "status": "on_track"
         },
         {
           "id": "improve-operating-health",
           "title": "Improve operating health score",
           "rank": 5,
-          "progress_score": 80.92,
+          "progress_score": 79.44,
           "status": "on_track"
         },
         {
           "id": "clear-pending-decisions",
           "title": "Clear pending CEO decisions",
           "rank": 6,
-          "progress_score": 80.76,
+          "progress_score": 79.28,
           "status": "on_track"
         },
         {
           "id": "protect-expected-cash-inflow",
           "title": "Protect expected cash inflow",
           "rank": 7,
-          "progress_score": 79.79,
+          "progress_score": 78.31,
           "status": "on_track"
         },
         {
-          "id": "improvement-improvement-689e47fedfb1",
+          "id": "improvement-improvement-9baf32f51078",
           "title": "Reduce pending task backlog",
           "rank": 8,
-          "progress_score": 78.96,
+          "progress_score": 77.48,
           "status": "on_track"
         },
         {
           "id": "priority-followup-f51333cfa177",
           "title": "Review follow-up: Sample Contractor",
           "rank": 9,
-          "progress_score": 78.64,
+          "progress_score": 77.17,
           "status": "on_track"
         },
         {
-          "id": "priority-oppdisc-1965493eeed1",
+          "id": "priority-oppdisc-254702b80830",
           "title": "Recover receivable: Sample Contractor",
           "rank": 10,
-          "progress_score": 76.28,
+          "progress_score": 74.81,
           "status": "on_track"
         }
       ],
       "needs_attention": []
     },
     "provider_health_report.json": {
-      "generated_at": "2026-07-19T17:55:45.692696+00:00",
+      "generated_at": "2026-07-19T21:04:22.477218+00:00",
       "provider": "openai_compatible",
       "model": "gpt-4.1-mini",
       "completed_count": 0,
