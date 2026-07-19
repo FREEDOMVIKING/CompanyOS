@@ -1,36 +1,36 @@
 {
-  "generated_at": "2026-07-19T08:40:54.376312+00:00",
-  "average_goal_progress": 79.89,
+  "generated_at": "2026-07-19T14:55:32.169257+00:00",
+  "average_goal_progress": 80.44,
   "signals": [
     {
-      "goal_id": "improvement-improvement-7530cfd0fa1e",
+      "goal_id": "improvement-improvement-4708b2eb649e",
       "signal": "maintain_or_expand",
-      "progress_score": 83.32
+      "progress_score": 83.86
     },
     {
       "goal_id": "priority-invoice-d7e99861931c",
       "signal": "maintain_or_expand",
-      "progress_score": 81.48
+      "progress_score": 82.02
     },
     {
       "goal_id": "priority-e2e-invoice-001",
       "signal": "maintain_or_expand",
-      "progress_score": 81.48
+      "progress_score": 82.02
     },
     {
-      "goal_id": "improvement-improvement-d977860b5813",
+      "goal_id": "improvement-improvement-31e25a303fac",
       "signal": "maintain_or_expand",
-      "progress_score": 80.69
+      "progress_score": 81.23
     },
     {
       "goal_id": "improve-operating-health",
       "signal": "maintain_or_expand",
-      "progress_score": 80.35
+      "progress_score": 80.9
     },
     {
       "goal_id": "clear-pending-decisions",
       "signal": "maintain_or_expand",
-      "progress_score": 80.2
+      "progress_score": 80.74
     }
   ],
   "feedback_actions": [
@@ -39,7 +39,7 @@
       "result": {
         "success": true,
         "return_code": 0,
-        "stdout": "{\n  \"success\": true,\n  \"status\": \"learning_feedback_cycle_complete\",\n  \"state\": {\n    \"generated_at\": \"2026-07-19T08:40:54.022193+00:00\",\n    \"decision_history_count\": 0,\n    \"approved_decisions\": 0,\n    \"rejected_decisions\": 0,\n    \"deferred_decisions\": 0,\n    \"completed_improvements\": 0,\n    \"proposed_improvements\": 5,\n    \"performance_health_score\": 60.0,\n    \"active_goal_count\": 10,\n    \"weights_before\": {\n      \"urgency\": 0.3332,\n      \"profitability\": 0.0003,\n      \"risk_reduction\": 0.3331,\n      \"execution_ease\": 0.3331,\n      \"evidence\": 0.0003\n    },\n    \"weights_after\": {\n      \"urgency\": 0.3332,\n      \"profitability\": 0.0003,\n      \"risk_reduction\": 0.3331,\n      \"execution_ease\": 0.3331,\n      \"evidence\": 0.0003\n    },\n    \"weights_adjusted\": false\n  },\n  \"insights\": {\n    \"generated_at\": \"2026-07-19T08:40:54.023296+00:00\",\n    \"count\": 3,\n    \"insights\": [\n      {\n        \"type\": \"improvement_backlog\",\n        \"message\": \"Improvement backlog is growing faster than completion.\",\n        \"signal\": \"favor_execution_ease\"\n      },\n      {\n        \"type\": \"operating_health\",\n        \"message\": \"Operating health is below 70; prioritize risk reduction and execution reliability.\",\n        \"signal\": \"favor_risk_reduction\"\n      },\n      {\n        \"type\": \"goal_load\",\n        \"message\": \"Too many active goals may dilute execution focus.\",\n        \"signal\": \"increase_urgency_weight\"\n      }\n    ],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"learning_feedback_cycle_complete\",\n  \"state\": {\n    \"generated_at\": \"2026-07-19T14:55:31.636174+00:00\",\n    \"decision_history_count\": 0,\n    \"approved_decisions\": 0,\n    \"rejected_decisions\": 0,\n    \"deferred_decisions\": 0,\n    \"completed_improvements\": 0,\n    \"proposed_improvements\": 5,\n    \"performance_health_score\": 60.0,\n    \"active_goal_count\": 10,\n    \"weights_before\": {\n      \"urgency\": 0.3332,\n      \"profitability\": 0.0003,\n      \"risk_reduction\": 0.3331,\n      \"execution_ease\": 0.3331,\n      \"evidence\": 0.0003\n    },\n    \"weights_after\": {\n      \"urgency\": 0.3332,\n      \"profitability\": 0.0003,\n      \"risk_reduction\": 0.3331,\n      \"execution_ease\": 0.3331,\n      \"evidence\": 0.0003\n    },\n    \"weights_adjusted\": false\n  },\n  \"insights\": {\n    \"generated_at\": \"2026-07-19T14:55:31.636652+00:00\",\n    \"count\": 3,\n    \"insights\": [\n      {\n        \"type\": \"improvement_backlog\",\n        \"message\": \"Improvement backlog is growing faster than completion.\",\n        \"signal\": \"favor_execution_ease\"\n      },\n      {\n        \"type\": \"operating_health\",\n        \"message\": \"Operating health is below 70; prioritize risk reduction and execution reliability.\",\n        \"signal\": \"favor_risk_reduction\"\n      },\n      {\n        \"type\": \"goal_load\",\n        \"message\": \"Too many active goals may dilute execution focus.\",\n        \"signal\": \"increase_urgency_weight\"\n      }\n    ],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
         "stderr": ""
       }
     },
@@ -48,7 +48,7 @@
       "result": {
         "success": true,
         "return_code": 0,
-        "stdout": "       \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"protect-expected-cash-inflow\",\n        \"goal_title\": \"Protect expected cash inflow\",\n        \"rank\": 7,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"improvement-improvement-7a277a27279f\",\n        \"goal_title\": \"Reduce pending task backlog\",\n        \"rank\": 8,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"priority-followup-f51333cfa177\",\n        \"goal_title\": \"Review follow-up: Sample Contractor\",\n        \"rank\": 9,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"priority-oppdisc-b6762521fee6\",\n        \"goal_title\": \"Recover receivable: Sample Contractor\",\n        \"rank\": 10,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      }\n    ],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stdout": "       \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"protect-expected-cash-inflow\",\n        \"goal_title\": \"Protect expected cash inflow\",\n        \"rank\": 7,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"improvement-improvement-986a0f1dd567\",\n        \"goal_title\": \"Reduce pending task backlog\",\n        \"rank\": 8,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"priority-followup-f51333cfa177\",\n        \"goal_title\": \"Review follow-up: Sample Contractor\",\n        \"rank\": 9,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      },\n      {\n        \"goal_id\": \"priority-oppdisc-5e9691cc6e9e\",\n        \"goal_title\": \"Recover receivable: Sample Contractor\",\n        \"rank\": 10,\n        \"steps\": [\n          \"Review current evidence and constraints\",\n          \"Define the highest-value internal next action\",\n          \"Create or update internal execution tasks\",\n          \"Measure progress against the goal\",\n          \"Re-rank after new performance data arrives\"\n        ],\n        \"automatic_internal_execution_allowed\": true,\n        \"automatic_external_execution_allowed\": false\n      }\n    ],\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
         "stderr": ""
       }
     }

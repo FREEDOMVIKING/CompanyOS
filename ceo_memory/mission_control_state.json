@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-19T14:32:49.664706+00:00",
+  "generated_at": "2026-07-19T15:10:50.346909+00:00",
   "system_health": {
-    "operations": true,
+    "operations": false,
     "watchdog": true,
     "orchestrator": true,
     "recovery": true,
@@ -9,11 +9,13 @@
     "resources": true,
     "actions": true
   },
-  "unhealthy_components": [],
+  "unhealthy_components": [
+    "operations"
+  ],
   "remaining_supervisor_issues": 0,
   "top_priorities": [
     {
-      "id": "priority-5e6b07ce3ede",
+      "id": "priority-62e031104e6c",
       "source_type": "invoice",
       "source_id": "invoice-d7e99861931c",
       "title": "Review receivable: Sample Contractor",
@@ -30,11 +32,11 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T14:32:45.785188+00:00",
+      "created_at": "2026-07-19T15:10:45.282116+00:00",
       "rank": 1
     },
     {
-      "id": "priority-4e01aaa38473",
+      "id": "priority-048e9701336a",
       "source_type": "invoice",
       "source_id": "e2e-invoice-001",
       "title": "Review receivable: E2E Test Customer",
@@ -51,11 +53,11 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T14:32:45.785200+00:00",
+      "created_at": "2026-07-19T15:10:45.282126+00:00",
       "rank": 2
     },
     {
-      "id": "priority-dd57ac30d713",
+      "id": "priority-ddce90f286cd",
       "source_type": "followup",
       "source_id": "followup-f51333cfa177",
       "title": "Review follow-up: Sample Contractor",
@@ -72,13 +74,13 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T14:32:45.785175+00:00",
+      "created_at": "2026-07-19T15:10:45.282101+00:00",
       "rank": 3
     },
     {
-      "id": "priority-16c9ef057682",
+      "id": "priority-e336c8ed34bf",
       "source_type": "opportunity",
-      "source_id": "oppdisc-b5680c8fbbd6",
+      "source_id": "oppdisc-594101e1f0af",
       "title": "Recover receivable: Sample Contractor",
       "category": "cash_recovery",
       "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
@@ -93,13 +95,13 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T14:32:45.784989+00:00",
+      "created_at": "2026-07-19T15:10:45.281916+00:00",
       "rank": 4
     },
     {
-      "id": "priority-b979da8103c6",
+      "id": "priority-8abb11d57cfb",
       "source_type": "opportunity",
-      "source_id": "oppdisc-6795e6b6e676",
+      "source_id": "oppdisc-a104dca3a713",
       "title": "Recover receivable: E2E Test Customer",
       "category": "cash_recovery",
       "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
@@ -114,13 +116,13 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T14:32:45.785009+00:00",
+      "created_at": "2026-07-19T15:10:45.281936+00:00",
       "rank": 5
     }
   ],
   "top_goals": [
     {
-      "id": "improvement-improvement-4708b2eb649e",
+      "id": "improvement-improvement-d2d657da69e1",
       "title": "Improve receivable recovery process",
       "source": "continuous_improvement",
       "category": "finance",
@@ -129,7 +131,7 @@
       "status": "active",
       "owner_approval_required_for_external_action": true,
       "automatic_external_execution": false,
-      "created_at": "2026-07-19T14:32:49.056203+00:00",
+      "created_at": "2026-07-19T15:10:50.047888+00:00",
       "rank": 1
     },
     {
@@ -142,7 +144,7 @@
       "status": "active",
       "owner_approval_required_for_external_action": true,
       "automatic_external_execution": false,
-      "created_at": "2026-07-19T14:32:49.056151+00:00",
+      "created_at": "2026-07-19T15:10:50.047834+00:00",
       "rank": 2
     },
     {
@@ -155,11 +157,11 @@
       "status": "active",
       "owner_approval_required_for_external_action": true,
       "automatic_external_execution": false,
-      "created_at": "2026-07-19T14:32:49.056169+00:00",
+      "created_at": "2026-07-19T15:10:50.047853+00:00",
       "rank": 3
     },
     {
-      "id": "improvement-improvement-31e25a303fac",
+      "id": "improvement-improvement-5f65a8f0c1f4",
       "title": "Clear pending CEO decisions",
       "source": "continuous_improvement",
       "category": "governance",
@@ -168,7 +170,7 @@
       "status": "active",
       "owner_approval_required_for_external_action": true,
       "automatic_external_execution": false,
-      "created_at": "2026-07-19T14:32:49.056207+00:00",
+      "created_at": "2026-07-19T15:10:50.047892+00:00",
       "rank": 4
     },
     {
@@ -181,7 +183,7 @@
       "status": "active",
       "owner_approval_required_for_external_action": true,
       "automatic_external_execution": false,
-      "created_at": "2026-07-19T14:32:49.056192+00:00",
+      "created_at": "2026-07-19T15:10:50.047876+00:00",
       "rank": 5
     }
   ],
