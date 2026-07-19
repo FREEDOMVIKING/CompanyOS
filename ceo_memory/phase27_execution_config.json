@@ -1,0 +1,32 @@
+{
+  "enabled": true,
+  "financial": {
+    "daily_total_limit_usd": 20000,
+    "single_transaction_auto_approval_limit_usd": 15000,
+    "connector_mode": "configured_only",
+    "require_balance_check": true,
+    "require_destination_allowlist_or_owner_approval": true,
+    "require_audit_log": true
+  },
+  "communications": {
+    "enabled": true,
+    "connector_mode": "configured_only",
+    "require_identity_profile": true,
+    "contractual_commitments_require_owner_approval": true,
+    "mass_outreach_requires_owner_approval": true
+  },
+  "publication": {
+    "enabled": true,
+    "connector_mode": "configured_only",
+    "require_target_registration": true,
+    "paid_campaigns_require_owner_approval": true
+  },
+  "deployment": {
+    "enabled": true,
+    "connector_mode": "configured_only",
+    "require_target_registration": true,
+    "require_tests": true,
+    "require_health_check": true,
+    "automatic_rollback": true
+  }
+}

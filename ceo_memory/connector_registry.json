@@ -1,60 +1,45 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-07-19T13:01:28.196973+00:00",
   "connectors": [
     {
-      "id": "github",
-      "name": "GitHub",
-      "type": "code_repository",
-      "read": true,
-      "write": true,
-      "enabled": true,
-      "last_discovered_at": "2026-07-19T13:01:28.196857+00:00"
-    },
-    {
-      "id": "email",
-      "name": "Email",
-      "type": "communications",
-      "read": true,
-      "write": false,
+      "connector_id": "a36accfa28aa928158",
+      "kind": "financial",
+      "name": "primary-financial",
       "enabled": false,
-      "last_discovered_at": "2026-07-19T13:01:28.196901+00:00"
+      "configured": false,
+      "credential_env": null,
+      "target": null,
+      "created_at": "2026-07-19T13:48:18.518440+00:00"
     },
     {
-      "id": "calendar",
-      "name": "Calendar",
-      "type": "scheduling",
-      "read": true,
-      "write": false,
+      "connector_id": "7b058c4373cfd0668c",
+      "kind": "communications",
+      "name": "primary-communications",
       "enabled": false,
-      "last_discovered_at": "2026-07-19T13:01:28.196915+00:00"
+      "configured": false,
+      "credential_env": null,
+      "target": null,
+      "created_at": "2026-07-19T13:48:18.616985+00:00"
     },
     {
-      "id": "crm",
-      "name": "CRM",
-      "type": "business_data",
-      "read": true,
-      "write": false,
-      "enabled": true,
-      "last_discovered_at": "2026-07-19T13:01:28.196928+00:00"
-    },
-    {
-      "id": "accounting",
-      "name": "Accounting",
-      "type": "finance_data",
-      "read": true,
-      "write": false,
-      "enabled": true,
-      "last_discovered_at": "2026-07-19T13:01:28.196941+00:00"
-    },
-    {
-      "id": "market-data",
-      "name": "Market Data",
-      "type": "external_data",
-      "read": true,
-      "write": false,
+      "connector_id": "ec63b79bc9e4256095",
+      "kind": "publication",
+      "name": "primary-publication",
       "enabled": false,
-      "last_discovered_at": "2026-07-19T13:01:28.196953+00:00"
+      "configured": false,
+      "credential_env": null,
+      "target": null,
+      "created_at": "2026-07-19T13:48:18.722549+00:00"
+    },
+    {
+      "connector_id": "7c2fa53c775a5c70a3",
+      "kind": "deployment",
+      "name": "primary-deployment",
+      "enabled": false,
+      "configured": false,
+      "credential_env": null,
+      "target": null,
+      "created_at": "2026-07-19T13:48:18.828398+00:00"
     }
-  ]
+  ],
+  "note": "No connector executes until explicitly configured with credentials and a registered target/account."
 }
