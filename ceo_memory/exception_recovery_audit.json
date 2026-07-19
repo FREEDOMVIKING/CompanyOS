@@ -3633,5 +3633,1141 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-19T03:28:34.114353+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_222817\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_222817/agents\",\n    \"backups/system_snapshot_20260718_222817/companyos\",\n    \"backups/system_snapshot_20260718_222817/ceo_memory\"\n  ],\n  \"file_count\": 1354,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_201825\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "eview_only\\\\\\\",\\\\n        \\\\\\\"send_authorized\\\\\\\": false,\\\\n        \\\\\\\"created_at\\\\\\\": \\\\\\\"2026-07-19T03:28:32.932011+00:00\\\\\\\"\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"finance_forecast\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"finance_forecast_bridge_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T03:28:33.028652+00:00\\\\\\\",\\\\n    \\\\\\\"forecast\\\\\\\": {},\\\\n    \\\\\\\"accounting\\\\\\\": {},\\\\n    \\\\\\\"pipeline_priority_count\\\\\\\": 1,\\\\n    \\\\\\\"status\\\\\\\": \\\\\\\"internal_finance_forecast_context\\\\\\\",\\\\n    \\\\\\\"spending_authorized\\\\\\\": false,\\\\n    \\\\\\\"fund_transfer_authorized\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"execution_readiness\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_readiness_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T03:28:33.116511+00:00\\\\\\\",\\\\n    \\\\\\\"project_count\\\\\\\": 1,\\\\n    \\\\\\\"projects\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"project_id\\\\\\\": \\\\\\\"aa8b2250e864db3220\\\\\\\",\\\\n        \\\\\\\"title\\\\\\\": \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\",\\\\n        \\\\\\\"readiness_score\\\\\\\": 49.5,\\\\n        \\\\\\\"status\\\\\\\": \\\\\\\"needs_more_preparation\\\\\\\",\\\\n        \\\\\\\"external_execution_authorized\\\\\\\": false\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"daily_ceo_brief\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"daily_ceo_brief_complete\\\\\\\",\\\\n  \\\\\\\"brief\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T03:28:33.204493+00:00\\\\\\\",\\\\n    \\\\\\\"headline\\\\\\\": \\\\\\\"CompanyOS Daily CEO Brief\\\\\\\",\\\\n    \\\\\\\"business_performance\\\\\\\": 80.0,\\\\n    \\\\\\\"top_market_signals\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"signal_id\\\\\\\": \\\\\\\"45ab7928fe79dd72\\\\\\\",\\\\n        \\\\\\\"type\\\\\\\": \\\\\\\"outcomes\\\\\\\",\\\\n        \\\\\\\"strength\\\\\\\": 60,\\\\n        \\\\\\\"source\\\\\\\": \\\\\\\"outcome_tracker\\\\\\\",\\\\n        \\\\\\\"status\\\\\\\": \\\\\\\"internal_market_signal\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"signal_id\\\\\\\": \\\\\\\"aa8b2250e864db32\\\\\\\",\\\\n        \\\\\\\"type\\\\\\\": \\\\\\\"opportunity\\\\\\\",\\\\n        \\\\\\\"strength\\\\\\\": 60.0,\\\\n        \\\\\\\"source\\\\\\\": \\\\\\\"outcome_tracker\\\\\\\",\\\\n        \\\\\\\"title\\\\\\\": \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\",\\\\n        \\\\\\\"status\\\\\\\": \\\\\\\"internal_market_signal\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"top_customer_priorities\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"priority_id\\\\\\\": \\\\\\\"7de01e0aa80d23c9\\\\\\\",\\\\n        \\\\\\\"title\\\\\\\": \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\",\\\\n        \\\\\\\"priority_score\\\\\\\": 60.0,\\\\n        \\\\\\\"source\\\\\\\": \\\\\\\"generated_business_opportunities.json\\\\\\\",\\\\n        \\\\\\\"status\\\\\\\": \\\\\\\"internal_priority_only\\\\\\\",\\\\n        \\\\\\\"customer_contact_authorized\\\\\\\": false\\\\n      }\\\\n    ],\\\\n    \\\\\\\"proposal_draft_count\\\\\\\": 1,\\\\n    \\\\\\\"execution_readiness\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"project_id\\\\\\\": \\\\\\\"aa8b2250e864db3220\\\\\\\",\\\\n        \\\\\\\"title\\\\\\\": \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\",\\\\n        \\\\\\\"readiness_score\\\\\\\": 49.5,\\\\n        \\\\\\\"status\\\\\\\": \\\\\\\"needs_more_preparation\\\\\\\",\\\\n        \\\\\\\"external_execution_authorized\\\\\\\": false\\\\n      }\\\\n    ],\\\\n    \\\\\\\"risk_count\\\\\\\": 22,\\\\n    \\\\\\\"pending_approval_count\\\\\\\": 2,\\\\n    \\\\\\\"external_authority_granted\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:28:22.544832+00:00\",\n      \"finished_at\": \"2026-07-19T03:28:33.239115+00:00\",\n      \"duration_seconds\": 10.694\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T03:28:34.071907+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:44:16.505308+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_224403\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_224403/agents\",\n    \"backups/system_snapshot_20260718_224403/companyos\",\n    \"backups/system_snapshot_20260718_224403/ceo_memory\"\n  ],\n  \"file_count\": 1357,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_203250\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "finance_forecast_bridge.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/phase24_bundle5_config.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/customerpriorityctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/dailyceobriefctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/executionreadinessctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/financeforecastctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/marketintelligencectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/phase24bundle5ctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/proposaldraftctl\\\\\\\",\\\\n      \\\\\\\"?? install_phase24_bundle5.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 82,\\n    \\\"runtime_only_change_count\\\": 84,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:44:11.760106+00:00\",\n      \"finished_at\": \"2026-07-19T03:44:12.126595+00:00\",\n      \"duration_seconds\": 0.367\n    },\n    {\n      \"id\": \"readiness-coordinator-v2\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:44:12.239990+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.26\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:44:12.131153+00:00\",\n      \"finished_at\": \"2026-07-19T03:44:12.261693+00:00\",\n      \"duration_seconds\": 0.131\n    },\n    {\n      \"id\": \"execution-eligibility-gate\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:44:12.379523+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:44:12.265043+00:00\",\n      \"finished_at\": \"2026-07-19T03:44:12.393202+00:00\",\n      \"duration_seconds\": 0.128\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "    \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      }\\\\n    ],\\\\n    \\\\\\\"top_action\\\\\\\": \\\\\\\"run-health\\\\\\\",\\\\n    \\\\\\\"top_priority\\\\\\\": 95,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false,\\n    \\\"credential_export\\\": false,\\n    \\\"private_key_export\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:44:13.051345+00:00\",\n      \"finished_at\": \"2026-07-19T03:44:13.713923+00:00\",\n      \"duration_seconds\": 0.663\n    },\n    {\n      \"id\": \"fused-decision-selector\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"fused_decision_selection_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:44:13.927506+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"selected_actions\\\": [],\\n    \\\"rejected_actions\\\": [\\n      {\\n        \\\"action\\\": \\\"run-health\\\",\\n        \\\"fused_priority\\\": 63.5,\\n        \\\"category\\\": \\\"internal_read_only\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-forecast\\\",\\n        \\\"fused_priority\\\": 56.0,\\n        \\\"category\\\": \\\"internal_read_only\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-brief\\\",\\n        \\\"fused_priority\\\": 54.5,\\n        \\\"category\\\": \\\"internal_read_only\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-priorities\\\",\\n        \\\"fused_priority\\\": 53.0,\\n        \\\"category\\\": \\\"internal_reversible\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-decisions\\\",\\n        \\\"fused_priority\\\": 51.5,\\n        \\\"category\\\": \\\"internal_reversible\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"run-outcomes\\\",\\n        \\\"fused_priority\\\": 50.0,\\n        \\\"category\\\": \\\"internal_read_only\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\"\\n      }\\n    ],\\n    \\\"selected_count\\\": 0,\\n    \\\"rejected_count\\\": 6,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:44:13.718046+00:00\",\n      \"finished_at\": \"2026-07-19T03:44:13.959769+00:00\",\n      \"duration_seconds\": 0.242\n    },\n    {\n      \"id\": \"specialist-runtime-adapter\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"specialist_runtime_cycle_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:44:14.334492+00:00\\\",\\n    \\\"completed_count\\\": 0,\\n    \\\"pending_count\\\": 0,\\n    \\\"completed\\\": [],\\n    \\\"pending\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:44:13.967989+00:00\",\n      \"finished_at\": \"2026-07-19T03:44:14.383982+00:00\",\n      \"duration_seconds\": 0.416\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T03:44:16.414244+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:59:51.424891+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_225931\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_225931/agents\",\n    \"backups/system_snapshot_20260718_225931/companyos\",\n    \"backups/system_snapshot_20260718_225931/ceo_memory\"\n  ],\n  \"file_count\": 1357,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_204811\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "tion\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\",\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": []\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failed_recovery_actions\\\": [],\\n    \\\"recovery_attempted\\\": true,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:59:40.190798+00:00\",\n      \"finished_at\": \"2026-07-19T03:59:45.895091+00:00\",\n      \"duration_seconds\": 5.704\n    },\n    {\n      \"id\": \"opportunity-action-queue\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:59:46.110532+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:59:45.899522+00:00\",\n      \"finished_at\": \"2026-07-19T03:59:46.159287+00:00\",\n      \"duration_seconds\": 0.26\n    },\n    {\n      \"id\": \"ready-action-execution-handoff\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:59:46.406138+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:59:46.167326+00:00\",\n      \"finished_at\": \"2026-07-19T03:59:46.455182+00:00\",\n      \"duration_seconds\": 0.288\n    },\n    {\n      \"id\": \"guarded-opportunity-action-executor\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:59:46.685084+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:59:46.464540+00:00\",\n      \"finished_at\": \"2026-07-19T03:59:46.738389+00:00\",\n      \"duration_seconds\": 0.274\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "ccess\\\": true,\\n  \\\"status\\\": \\\"live_specialist_result_bridge_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:59:48.818208+00:00\\\",\\n    \\\"added_count\\\": 0,\\n    \\\"rejected_count\\\": 9,\\n    \\\"total_result_count\\\": 20,\\n    \\\"added\\\": [],\\n    \\\"rejected\\\": [\\n      {\\n        \\\"work_id\\\": \\\"research-f2353d58115f00b158\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-2\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-3-result-insight-decision-plan-step-2\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-3-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.15\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:59:48.574304+00:00\",\n      \"finished_at\": \"2026-07-19T03:59:48.861159+00:00\",\n      \"duration_seconds\": 0.287\n    },\n    {\n      \"id\": \"validated-insight-refresh\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"validated_insight_refresh_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T03:59:49.086715+00:00\\\",\\n    \\\"added_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"total_insight_count\\\": 21,\\n    \\\"added\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T03:59:48.866409+00:00\",\n      \"finished_at\": \"2026-07-19T03:59:49.128880+00:00\",\n      \"duration_seconds\": 0.263\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T03:59:51.318644+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T04:15:32.711718+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_231505\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_231505/agents\",\n    \"backups/system_snapshot_20260718_231505/companyos\",\n    \"backups/system_snapshot_20260718_231505/ceo_memory\"\n  ],\n  \"file_count\": 1357,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_210121\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "se,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"action\\\": \\\"eligibility_refresh\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_eligibility_evaluated\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T04:15:26.967829+00:00\\\\\\\",\\\\n    \\\\\\\"readiness_decision\\\\\\\": \\\\\\\"blocked\\\\\\\",\\\\n    \\\\\\\"system_ready\\\\\\\": false,\\\\n    \\\\\\\"eligibility\\\\\\\": {\\\\n      \\\\\\\"internal_read_only\\\\\\\": false,\\\\n      \\\\\\\"internal_reversible\\\\\\\": false,\\\\n      \\\\\\\"external_read_only\\\\\\\": false,\\\\n      \\\\\\\"external_write\\\\\\\": false,\\\\n      \\\\\\\"customer_contact\\\\\\\": false,\\\\n      \\\\\\\"publication\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\",\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": []\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failed_recovery_actions\\\": [],\\n    \\\"recovery_attempted\\\": true,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:15:20.832363+00:00\",\n      \"finished_at\": \"2026-07-19T04:15:27.063769+00:00\",\n      \"duration_seconds\": 6.232\n    },\n    {\n      \"id\": \"opportunity-action-queue\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:15:27.302654+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:15:27.074261+00:00\",\n      \"finished_at\": \"2026-07-19T04:15:27.348650+00:00\",\n      \"duration_seconds\": 0.274\n    },\n    {\n      \"id\": \"ready-action-execution-handoff\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:15:27.554812+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:15:27.351981+00:00\",\n      \"finished_at\": \"2026-07-19T04:15:27.599469+00:00\",\n      \"duration_seconds\": 0.248\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "ccess\\\": true,\\n  \\\"status\\\": \\\"live_specialist_result_bridge_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:15:29.910227+00:00\\\",\\n    \\\"added_count\\\": 0,\\n    \\\"rejected_count\\\": 9,\\n    \\\"total_result_count\\\": 20,\\n    \\\"added\\\": [],\\n    \\\"rejected\\\": [\\n      {\\n        \\\"work_id\\\": \\\"research-f2353d58115f00b158\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-2\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-3-result-insight-decision-plan-step-2\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-3-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.0\\n      },\\n      {\\n        \\\"work_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\",\\n        \\\"reason\\\": \\\"confidence_below_threshold\\\",\\n        \\\"confidence\\\": 0.15\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:15:29.659891+00:00\",\n      \"finished_at\": \"2026-07-19T04:15:29.945826+00:00\",\n      \"duration_seconds\": 0.286\n    },\n    {\n      \"id\": \"validated-insight-refresh\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"validated_insight_refresh_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:15:30.214684+00:00\\\",\\n    \\\"added_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"total_insight_count\\\": 21,\\n    \\\"added\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:15:29.947850+00:00\",\n      \"finished_at\": \"2026-07-19T04:15:30.265567+00:00\",\n      \"duration_seconds\": 0.318\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T04:15:32.573884+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T04:31:56.269783+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_233055\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_233055/agents\",\n    \"backups/system_snapshot_20260718_233055/companyos\",\n    \"backups/system_snapshot_20260718_233055/ceo_memory\"\n  ],\n  \"file_count\": 1357,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_211637\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": " },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:31:01.945795+00:00\",\n      \"finished_at\": \"2026-07-19T04:31:02.196915+00:00\",\n      \"duration_seconds\": 0.251\n    },\n    {\n      \"id\": \"autonomous-action-dispatcher\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"dispatch_blocked_system_not_ready\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:31:02.414417+00:00\\\",\\n    \\\"status\\\": \\\"dispatch_blocked_system_not_ready\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"queued_count\\\": 6,\\n    \\\"executed_count\\\": 0,\\n    \\\"results\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:31:02.199519+00:00\",\n      \"finished_at\": \"2026-07-19T04:31:02.453961+00:00\",\n      \"duration_seconds\": 0.254\n    },\n    {\n      \"id\": \"adaptive-decision-selector\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"adaptive_decision_selection_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:31:02.632191+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"selected_actions\\\": [],\\n    \\\"rejected_actions\\\": [\\n      {\\n        \\\"action\\\": \\\"run-health\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\",\\n        \\\"adaptive_priority\\\": 95,\\n        \\\"category\\\": \\\"internal_read_only\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-forecast\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\",\\n        \\\"adaptive_priority\\\": 70,\\n        \\\"category\\\": \\\"internal_read_only\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-brief\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\",\\n        \\\"adaptive_priority\\\": 65,\\n        \\\"category\\\": \\\"internal_read_only\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-priorities\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\",\\n        \\\"adaptive_priority\\\": 60,\\n        \\\"category\\\": \\\"internal_reversible\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-decisions\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\",\\n        \\\"adaptive_priority\\\": 55,\\n        \\\"category\\\": \\\"internal_reversible\\\"\\n      },\\n      {\\n        \\\"action\\\": \\\"run-outcomes\\\",\\n        \\\"reason\\\": \\\"system_not_ready\\\",\\n        \\\"adaptive_priority\\\": 50,\\n        \\\"category\\\": \\\"internal_read_only\\\"\\n      }\\n    ],\\n    \\\"selected_count\\\": 0,\\n    \\\"rejected_count\\\": 6,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:31:02.457411+00:00\",\n      \"finished_at\": \"2026-07-19T04:31:02.694790+00:00\",\n      \"duration_seconds\": 0.237\n    },\n    {\n      \"id\": \"adaptive-execution-plan\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"adaptive_execution_plan_built\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T04:31:02.925055+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"plan\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"planned_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:31:02.698785+00:00\",\n      \"finished_at\": \"2026-07-19T04:31:02.962644+00:00\",\n      \"duration_seconds\": 0.264\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "47.547147+00:00\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"provider_health\\\\\\\": {\\\\n      \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T04:31:52.710901+00:00\\\\\\\",\\\\n      \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n      \\\\\\\"model\\\\\\\": \\\\\\\"openrouter/free\\\\\\\",\\\\n      \\\\\\\"completed_count\\\\\\\": 0,\\\\n      \\\\\\\"pending_count\\\\\\\": 0,\\\\n      \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\",\\\\n      \\\\\\\"recommended_model\\\\\\\": \\\\\\\"openrouter/free\\\\\\\"\\\\n    },\\\\n    \\\\\\\"top_specialist_profiles\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"review\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 8,\\\\n        \\\\\\\"average_confidence\\\\\\\": 9.986,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"research\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 1,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.85,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"analyze\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 6,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.732,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"prioritize\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 3,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.73,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"plan\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 2,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.5,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"developing\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"recommended_focus\\\\\\\": [\\\\n      \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"external_authority_granted\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"watchdog\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"autonomy_watchdog_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T04:31:53.841935+00:00\\\\\\\",\\\\n    \\\\\\\"healthy\\\\\\\": true,\\\\n    \\\\\\\"failure_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_components\\\\\\\": [],\\\\n    \\\\\\\"checks\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"phase23\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:31:52.156676+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"autonomy\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:31:50.279607+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"specialist_runtime\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:31:19.451314+00:00\\\\\\\",\\\\n          \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n          \\\\\\\"api_key_available\\\\\\\": true\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"provider\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:31:52.723065+00:00\\\\\\\",\\\\n          \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"memory\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:31:50.744968+00:00\\\\\\\",\\\\n          \\\\\\\"event_count\\\\\\\": 266\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:31:36.443224+00:00\",\n      \"finished_at\": \"2026-07-19T04:31:53.950927+00:00\",\n      \"duration_seconds\": 17.508\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T04:31:56.154959+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T04:47:40.647104+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_234707\",\n  \"copied\": [\n    \"backups/system_snapshot_20260718_234707/agents\",\n    \"backups/system_snapshot_20260718_234707/companyos\",\n    \"backups/system_snapshot_20260718_234707/ceo_memory\"\n  ],\n  \"file_count\": 1357,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_213406\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "c_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"reprioritization_result\\\": {\\n      \\\"success\\\": true,\\n      \\\"return_code\\\": 0,\\n      \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"adaptive_prioritization_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T04:47:14.581274+00:00\\\\\\\",\\\\n    \\\\\\\"adaptive_priorities\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"action\\\\\\\": \\\\\\\"run-health\\\\\\\",\\\\n        \\\\\\\"base_priority\\\\\\\": 95,\\\\n        \\\\\\\"adjustment\\\\\\\": 0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 95,\\\\n        \\\\\\\"reason\\\\\\\": \\\\\\\"Preflight is blocked; verify system health before further work.\\\\\\\",\\\\n        \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"action\\\\\\\": \\\\\\\"refresh-forecast\\\\\\\",\\\\n        \\\\\\\"base_priority\\\\\\\": 70,\\\\n        \\\\\\\"adjustment\\\\\\\": 0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 70,\\\\n        \\\\\\\"reason\\\\\\\": \\\\\\\"Keep forecast aligned with active goals.\\\\\\\",\\\\n        \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"action\\\\\\\": \\\\\\\"refresh-brief\\\\\\\",\\\\n        \\\\\\\"base_priority\\\\\\\": 65,\\\\n        \\\\\\\"adjustment\\\\\\\": 0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 65,\\\\n        \\\\\\\"reason\\\\\\\": \\\\\\\"Summarize current repository state before owner review.\\\\\\\",\\\\n        \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"action\\\\\\\": \\\\\\\"refresh-priorities\\\\\\\",\\\\n        \\\\\\\"base_priority\\\\\\\": 60,\\\\n        \\\\\\\"adjustment\\\\\\\": 0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 60,\\\\n        \\\\\\\"reason\\\\\\\": \\\\\\\"Maintain current executive ordering.\\\\\\\",\\\\n        \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"action\\\\\\\": \\\\\\\"refresh-decisions\\\\\\\",\\\\n        \\\\\\\"base_priority\\\\\\\": 55,\\\\n        \\\\\\\"adjustment\\\\\\\": 0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 55,\\\\n        \\\\\\\"reason\\\\\\\": \\\\\\\"Keep CEO decision queue synchronized.\\\\\\\",\\\\n        \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"action\\\\\\\": \\\\\\\"run-outcomes\\\\\\\",\\\\n        \\\\\\\"base_priority\\\\\\\": 50,\\\\n        \\\\\\\"adjustment\\\\\\\": 0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 50,\\\\n        \\\\\\\"reason\\\\\\\": \\\\\\\"Refresh measurable outcomes for the feedback loop.\\\\\\\",\\\\n        \\\\\\\"outcomes\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": 0,\\\\n          \\\\\\\"failure\\\\\\\": 0,\\\\n          \\\\\\\"blocked\\\\\\\": 0\\\\n        }\\\\n      }\\\\n    ],\\\\n    \\\\\\\"top_action\\\\\\\": \\\\\\\"run-health\\\\\\\",\\\\n    \\\\\\\"top_priority\\\\\\\": 95,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false,\\n    \\\"credential_export\\\": false,\\n    \\\"private_key_export\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:47:14.268710+00:00\",\n      \"finished_at\": \"2026-07-19T04:47:14.630217+00:00\",\n      \"duration_seconds\": 0.362\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": ":47.547147+00:00\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"provider_health\\\\\\\": {\\\\n      \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T04:47:38.993081+00:00\\\\\\\",\\\\n      \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n      \\\\\\\"model\\\\\\\": \\\\\\\"openrouter/free\\\\\\\",\\\\n      \\\\\\\"completed_count\\\\\\\": 0,\\\\n      \\\\\\\"pending_count\\\\\\\": 0,\\\\n      \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\",\\\\n      \\\\\\\"recommended_model\\\\\\\": \\\\\\\"openrouter/free\\\\\\\"\\\\n    },\\\\n    \\\\\\\"top_specialist_profiles\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"review\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 8,\\\\n        \\\\\\\"average_confidence\\\\\\\": 9.986,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"research\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 1,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.85,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"analyze\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 6,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.732,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"prioritize\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 3,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.73,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"plan\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 2,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.5,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"developing\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"recommended_focus\\\\\\\": [\\\\n      \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"external_authority_granted\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"watchdog\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"autonomy_watchdog_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T04:47:39.459643+00:00\\\\\\\",\\\\n    \\\\\\\"healthy\\\\\\\": true,\\\\n    \\\\\\\"failure_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_components\\\\\\\": [],\\\\n    \\\\\\\"checks\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"phase23\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:47:38.758804+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"autonomy\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:47:37.905438+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"specialist_runtime\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:47:23.250590+00:00\\\\\\\",\\\\n          \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n          \\\\\\\"api_key_available\\\\\\\": true\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"provider\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:47:38.993958+00:00\\\\\\\",\\\\n          \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"memory\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T04:47:38.131040+00:00\\\\\\\",\\\\n          \\\\\\\"event_count\\\\\\\": 280\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T04:47:31.205346+00:00\",\n      \"finished_at\": \"2026-07-19T04:47:39.503854+00:00\",\n      \"duration_seconds\": 8.299\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T04:47:40.599588+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T05:03:37.794385+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260719_000301\",\n  \"copied\": [\n    \"backups/system_snapshot_20260719_000301/agents\",\n    \"backups/system_snapshot_20260719_000301/companyos\",\n    \"backups/system_snapshot_20260719_000301/ceo_memory\"\n  ],\n  \"file_count\": 1357,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_213545\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "      }\\n      },\\n      {\\n        \\\"step\\\": \\\"guarded_execution\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"guarded_execution_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:03:13.525976+00:00\\\\\\\",\\\\n    \\\\\\\"results\\\\\\\": [],\\\\n    \\\\\\\"executed_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_count\\\\\\\": 0,\\\\n    \\\\\\\"blocked_count\\\\\\\": 0,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"post_execution_feedback\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_feedback_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:03:13.665257+00:00\\\\\\\",\\\\n    \\\\\\\"adjustments\\\\\\\": [],\\\\n    \\\\\\\"action_count\\\\\\\": 0,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:03:09.407103+00:00\",\n      \"finished_at\": \"2026-07-19T05:03:13.708547+00:00\",\n      \"duration_seconds\": 4.301\n    },\n    {\n      \"id\": \"opportunity-action-queue\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T05:03:13.826794+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:03:13.710134+00:00\",\n      \"finished_at\": \"2026-07-19T05:03:13.843061+00:00\",\n      \"duration_seconds\": 0.133\n    },\n    {\n      \"id\": \"ready-action-execution-handoff\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T05:03:13.963986+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:03:13.850289+00:00\",\n      \"finished_at\": \"2026-07-19T05:03:13.979431+00:00\",\n      \"duration_seconds\": 0.129\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": ":47.547147+00:00\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"provider_health\\\\\\\": {\\\\n      \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:03:35.834908+00:00\\\\\\\",\\\\n      \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n      \\\\\\\"model\\\\\\\": \\\\\\\"openrouter/free\\\\\\\",\\\\n      \\\\\\\"completed_count\\\\\\\": 0,\\\\n      \\\\\\\"pending_count\\\\\\\": 0,\\\\n      \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\",\\\\n      \\\\\\\"recommended_model\\\\\\\": \\\\\\\"openrouter/free\\\\\\\"\\\\n    },\\\\n    \\\\\\\"top_specialist_profiles\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"review\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 8,\\\\n        \\\\\\\"average_confidence\\\\\\\": 9.986,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"research\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 1,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.85,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"analyze\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 6,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.732,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"prioritize\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 3,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.73,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"plan\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 2,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.5,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"developing\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"recommended_focus\\\\\\\": [\\\\n      \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"external_authority_granted\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"watchdog\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"autonomy_watchdog_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:03:36.594221+00:00\\\\\\\",\\\\n    \\\\\\\"healthy\\\\\\\": true,\\\\n    \\\\\\\"failure_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_components\\\\\\\": [],\\\\n    \\\\\\\"checks\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"phase23\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:03:35.521841+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"autonomy\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:03:34.503260+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"specialist_runtime\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:03:15.284531+00:00\\\\\\\",\\\\n          \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n          \\\\\\\"api_key_available\\\\\\\": true\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"provider\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:03:35.835499+00:00\\\\\\\",\\\\n          \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"memory\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:03:34.765884+00:00\\\\\\\",\\\\n          \\\\\\\"event_count\\\\\\\": 294\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:03:27.414655+00:00\",\n      \"finished_at\": \"2026-07-19T05:03:36.633555+00:00\",\n      \"duration_seconds\": 9.219\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T05:03:37.734553+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T05:19:57.615833+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260719_001853\",\n  \"copied\": [\n    \"backups/system_snapshot_20260719_001853/agents\",\n    \"backups/system_snapshot_20260719_001853/companyos\",\n    \"backups/system_snapshot_20260719_001853/ceo_memory\"\n  ],\n  \"file_count\": 1358,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_214414\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "e\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"external_read_only\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"external_write\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"customer_contact\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"publication\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"spending\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"destructive_actions\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"credential_export\\\\\\\\\\\\\\\",\\\\\\\\n      \\\\\\\\\\\\\\\"private_key_export\\\\\\\\\\\\\\\"\\\\\\\\n    ],\\\\\\\\n    \\\\\\\\\\\\\\\"allowed_categories\\\\\\\\\\\\\\\": []\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n        \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n      }\\\\n    },\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"fused_plan_build\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"fused_execution_plan_built\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:19:12.668862+00:00\\\\\\\",\\\\n    \\\\\\\"system_ready\\\\\\\": false,\\\\n    \\\\\\\"plan\\\\\\\": [],\\\\n    \\\\\\\"rejected\\\\\\\": [],\\\\n    \\\\\\\"planned_count\\\\\\\": 0,\\\\n    \\\\\\\"rejected_count\\\\\\\": 0,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false,\\\\n    \\\\\\\"credential_export\\\\\\\": false,\\\\n    \\\\\\\"private_key_export\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"guarded_execution\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"guarded_execution_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:19:12.755118+00:00\\\\\\\",\\\\n    \\\\\\\"results\\\\\\\": [],\\\\n    \\\\\\\"executed_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_count\\\\\\\": 0,\\\\n    \\\\\\\"blocked_count\\\\\\\": 0,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"post_execution_feedback\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_feedback_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:19:12.836387+00:00\\\\\\\",\\\\n    \\\\\\\"adjustments\\\\\\\": [],\\\\n    \\\\\\\"action_count\\\\\\\": 0,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:19:07.375028+00:00\",\n      \"finished_at\": \"2026-07-19T05:19:12.873167+00:00\",\n      \"duration_seconds\": 5.498\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "02:34:47.547147+00:00\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"provider_health\\\\\\\": {\\\\n      \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:19:56.404859+00:00\\\\\\\",\\\\n      \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n      \\\\\\\"model\\\\\\\": \\\\\\\"gpt-4.1-mini\\\\\\\",\\\\n      \\\\\\\"completed_count\\\\\\\": 0,\\\\n      \\\\\\\"pending_count\\\\\\\": 0,\\\\n      \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\",\\\\n      \\\\\\\"recommended_model\\\\\\\": \\\\\\\"gpt-4.1-mini\\\\\\\"\\\\n    },\\\\n    \\\\\\\"top_specialist_profiles\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"review\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 8,\\\\n        \\\\\\\"average_confidence\\\\\\\": 9.986,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"research\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 1,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.85,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"analysis\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 1,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.85,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"strong\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"analyze\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 6,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.732,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"specialist_role\\\\\\\": \\\\\\\"prioritize\\\\\\\",\\\\n        \\\\\\\"samples\\\\\\\": 3,\\\\n        \\\\\\\"average_confidence\\\\\\\": 0.73,\\\\n        \\\\\\\"performance_band\\\\\\\": \\\\\\\"good\\\\\\\"\\\\n      }\\\\n    ],\\\\n    \\\\\\\"recommended_focus\\\\\\\": [\\\\n      \\\\\\\"Scale actions with strongest measured outcomes\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"external_authority_granted\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"watchdog\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"autonomy_watchdog_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:19:56.803479+00:00\\\\\\\",\\\\n    \\\\\\\"healthy\\\\\\\": true,\\\\n    \\\\\\\"failure_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_components\\\\\\\": [],\\\\n    \\\\\\\"checks\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"phase23\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:19:56.227227+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"autonomy\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:19:55.516760+00:00\\\\\\\",\\\\n          \\\\\\\"failure_count\\\\\\\": 0\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"specialist_runtime\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:19:47.758493+00:00\\\\\\\",\\\\n          \\\\\\\"provider\\\\\\\": \\\\\\\"openai_compatible\\\\\\\",\\\\n          \\\\\\\"api_key_available\\\\\\\": true\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"provider\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:19:56.405298+00:00\\\\\\\",\\\\n          \\\\\\\"provider_state\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"component\\\\\\\": \\\\\\\"memory\\\\\\\",\\\\n        \\\\\\\"healthy\\\\\\\": true,\\\\n        \\\\\\\"data\\\\\\\": {\\\\n          \\\\\\\"healthy\\\\\\\": true,\\\\n          \\\\\\\"last_checked_at\\\\\\\": \\\\\\\"2026-07-19T05:19:55.703665+00:00\\\\\\\",\\\\n          \\\\\\\"event_count\\\\\\\": 308\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:19:50.118028+00:00\",\n      \"finished_at\": \"2026-07-19T05:19:56.846623+00:00\",\n      \"duration_seconds\": 6.729\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T05:19:57.570619+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 663\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
   }
 ]

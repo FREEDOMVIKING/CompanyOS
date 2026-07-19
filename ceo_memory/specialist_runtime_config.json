@@ -1,9 +1,9 @@
 {
   "enabled": true,
   "provider": "openai_compatible",
-  "model": "openrouter/free",
-  "base_url": "https://openrouter.ai/api/v1",
-  "api_key_env": "OPENROUTER_API_KEY",
+  "model": "gpt-4.1-mini",
+  "base_url": "https://api.openai.com/v1",
+  "api_key_env": "OPENAI_API_KEY",
   "timeout_seconds": 120,
   "maximum_items_per_cycle": 5,
   "minimum_confidence": 0.5,
@@ -15,5 +15,17 @@
   "automatic_code_changes": false,
   "automatic_merge": false,
   "automatic_deploy": false,
-  "automatic_destructive_actions": false
+  "automatic_destructive_actions": false,
+  "fallback_enabled": true,
+  "fallback_provider": "local_llama",
+  "fallback_model": "local",
+  "fallback_base_url": "http://127.0.0.1:8080/v1",
+  "fallback_on_http_codes": [
+    408,
+    429,
+    500,
+    502,
+    503,
+    504
+  ]
 }

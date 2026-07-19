@@ -149,7 +149,7 @@
     {
       "id": "exception-recovery",
       "enabled": true,
-      "interval_seconds": 600,
+      "interval_seconds": 1200,
       "command": [
         "python",
         "companyos/recoveryctl",
@@ -919,7 +919,7 @@
     {
       "id": "autonomous-ai-operations-core",
       "enabled": true,
-      "interval_seconds": 14400,
+      "interval_seconds": 43200,
       "command": [
         "python",
         "companyos/autonomyctl",
@@ -993,6 +993,26 @@
       "command": [
         "python",
         "companyos/phase24bundle4ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-revenue-intelligence-executive",
+      "enabled": true,
+      "interval_seconds": 14400,
+      "command": [
+        "python",
+        "companyos/phase24bundle5ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase25-hybrid-ai-orchestration",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": [
+        "python",
+        "companyos/phase25bundle1ctl",
         "run"
       ]
     }

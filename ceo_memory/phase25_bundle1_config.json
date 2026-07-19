@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "primary_provider": "openai",
+  "fallback_provider": "local_llama",
+  "primary_model": "gpt-4.1-mini",
+  "fallback_model": "local",
+  "fallback_base_url": "http://127.0.0.1:8080/v1",
+  "local_health_url": "http://127.0.0.1:8080/health",
+  "provider_timeout_seconds": 20,
+  "fallback_http_codes": [408, 429, 500, 502, 503, 504],
+  "routing_policy": "primary_then_local_fallback",
+  "maximum_retry_attempts": 2,
+  "automatic_internal_recovery": true,
+  "automatic_external_write": false,
+  "automatic_customer_contact": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_fund_transfer": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_destructive_actions": false
+}

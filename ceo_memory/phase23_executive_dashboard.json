@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-19T03:19:53.786426+00:00",
+  "generated_at": "2026-07-19T05:19:56.206588+00:00",
   "autonomy": {
     "healthy": true,
-    "last_checked_at": "2026-07-19T03:19:53.050318+00:00",
+    "last_checked_at": "2026-07-19T05:19:55.516760+00:00",
     "failure_count": 0
   },
   "performance": {
-    "generated_at": "2026-07-19T03:19:53.543081+00:00",
+    "generated_at": "2026-07-19T05:19:56.008272+00:00",
     "overall_score": 80.0,
     "metrics": {
       "autonomy_health": 100,
@@ -18,7 +18,7 @@
     "status": "healthy"
   },
   "opportunities": {
-    "generated_at": "2026-07-19T03:19:53.446892+00:00",
+    "generated_at": "2026-07-19T05:19:55.907374+00:00",
     "opportunity_count": 1,
     "opportunities": [
       {
@@ -29,12 +29,12 @@
         "reason": "Outcome feedback available",
         "source": "outcome_tracker",
         "status": "generated_internal_candidate",
-        "generated_at": "2026-07-19T03:19:53.446872+00:00"
+        "generated_at": "2026-07-19T05:19:55.907360+00:00"
       }
     ]
   },
   "improvement_proposals": {
-    "generated_at": "2026-07-19T03:19:53.666545+00:00",
+    "generated_at": "2026-07-19T05:19:56.113559+00:00",
     "proposal_count": 2,
     "proposals": [
       {
@@ -43,7 +43,7 @@
         "priority": 70,
         "category": "ai_quality",
         "status": "proposal_only_requires_governed_review",
-        "generated_at": "2026-07-19T03:19:53.666536+00:00"
+        "generated_at": "2026-07-19T05:19:56.113554+00:00"
       },
       {
         "id": "4bcb4ddf9dcff8ad",
@@ -51,7 +51,7 @@
         "priority": 65,
         "category": "automation",
         "status": "proposal_only_requires_governed_review",
-        "generated_at": "2026-07-19T03:19:53.666516+00:00"
+        "generated_at": "2026-07-19T05:19:56.113542+00:00"
       }
     ],
     "automatic_code_changes": false,
@@ -59,9 +59,9 @@
     "automatic_deploy": false
   },
   "memory": {
-    "last_ingest_at": "2026-07-19T03:19:53.220091+00:00",
+    "last_ingest_at": "2026-07-19T05:19:55.703308+00:00",
     "added_count": 6,
-    "event_count": 227
+    "event_count": 308
   },
   "api_usage": {
     "date": "2026-07-19",
@@ -73,13 +73,13 @@
   },
   "specialist_runtime": {
     "healthy": true,
-    "last_checked_at": "2026-07-19T02:35:47.471171+00:00",
+    "last_checked_at": "2026-07-19T05:19:47.758493+00:00",
     "provider": "openai_compatible",
-    "api_key_available": false
+    "api_key_available": true
   },
   "validated_insights": {
-    "generated_at": "2026-07-19T03:19:52.474940+00:00",
-    "insight_count": 21,
+    "generated_at": "2026-07-19T05:19:55.046681+00:00",
+    "insight_count": 22,
     "insights": [
       {
         "insight_id": "insight-ad42ca0474cbb4db7806",
@@ -953,6 +953,39 @@
         "validation_status": "validated_for_internal_reasoning",
         "execution_boundary": "internal_non_destructive_only",
         "validated_at": "2026-07-19T03:09:33.457677+00:00"
+      },
+      {
+        "insight_id": "insight-ac9dd3ceefda80277937",
+        "source_result_id": "local-ai-fallback-test-001-result",
+        "work_id": "local-ai-fallback-test-001",
+        "plan_id": "local-ai-test",
+        "decision_id": "local-ai-test",
+        "opportunity_id": "local-ai-test",
+        "summary": "Improving internal planning efficiency in CompanyOS can significantly enhance productivity and decision-making capabilities.",
+        "findings": [
+          "Current planning tools are outdated and do not align with modern project management best practices.",
+          "Lack of integration between planning tools and other internal systems can lead to information silos and inefficiencies.",
+          "Insufficient use of AI and machine learning for predictive analytics and optimization of planning processes."
+        ],
+        "recommendations": [
+          "Implement a comprehensive AI-driven planning tool that integrates with existing systems.",
+          "Enhance the use of AI for predictive analytics to optimize resource allocation and project timelines.",
+          "Develop a centralized system for sharing and accessing planning data across departments."
+        ],
+        "risks": [
+          "Potential for increased complexity in system integration and data management.",
+          "Risk of data privacy and security breaches if not properly managed.",
+          "Increased costs associated with the development and maintenance of new systems."
+        ],
+        "next_internal_actions": [
+          "Conduct a pilot test of an AI-driven planning tool to evaluate its effectiveness.",
+          "Collaborate with IT teams to integrate AI tools with existing systems.",
+          "Develop a comprehensive data sharing policy to ensure data security and privacy."
+        ],
+        "confidence": 0.9,
+        "validation_status": "validated_for_internal_reasoning",
+        "execution_boundary": "internal_non_destructive_only",
+        "validated_at": "2026-07-19T05:19:41.125927+00:00"
       }
     ]
   },
