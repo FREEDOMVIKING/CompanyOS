@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "daily_total_limit_usd": 20000,
+  "single_transaction_auto_limit_usd": 15000,
+  "require_owner_approval_above_single_limit": true,
+  "require_owner_approval_above_daily_limit": true,
+  "require_balance_check": true,
+  "require_asset_network_match": true,
+  "require_destination_validation": true,
+  "require_reason": true,
+  "require_receipt_after_broadcast": true,
+  "automatic_signing": false,
+  "automatic_broadcast": false,
+  "supported_routes": {
+    "solana": ["SOL", "USDT-SPL", "USDC-SPL"],
+    "evm": ["ETH", "USDT-ERC20", "USDC-ERC20"],
+    "bitcoin": ["BTC"]
+  }
+}
