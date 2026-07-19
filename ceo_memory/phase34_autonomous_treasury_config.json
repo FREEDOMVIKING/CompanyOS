@@ -17,11 +17,32 @@
   "automatic_broadcast": true,
   "kill_switch": false,
   "supported_live_routes": {
-    "solana": ["SOL"]
+    "solana": [
+      "SOL",
+      "USDT-SPL",
+      "USDC-SPL"
+    ],
+    "evm": [
+      "ETH",
+      "USDT-ERC20",
+      "USDC-ERC20"
+    ],
+    "bitcoin": [
+      "BTC"
+    ]
   },
   "future_routes": {
-    "solana": ["USDT-SPL", "USDC-SPL"],
-    "evm": ["ETH", "USDT-ERC20", "USDC-ERC20"],
-    "bitcoin": ["BTC"]
+    "solana": [
+      "USDT-SPL",
+      "USDC-SPL"
+    ],
+    "evm": [
+      "ETH",
+      "USDT-ERC20",
+      "USDC-ERC20"
+    ],
+    "bitcoin": [
+      "BTC"
+    ]
   }
 }

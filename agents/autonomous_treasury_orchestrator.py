@@ -69,7 +69,13 @@ def run():
         if chain=="solana" and asset=="SOL":
             rc,r=execute_sol(pid)
         else:
-            rc,r=1,{"success":False,"status":"executor_not_implemented"}
+            px=subprocess.run(
+              [sys.executable,"companyos/multichainexecutionctl","execute",pid],
+              cwd=ROOT,text=True,capture_output=True,timeout=300
+            )
+            rc=px.returncode
+            try:r=json.loads(px.stdout)
+            except:r={"success":False,"status":"invalid_multichain_executor_output","stdout":px.stdout[-2000:],"stderr":px.stderr[-1000:]}
 
         row={"proposal_id":pid,"success":rc==0 and bool(r.get("success")),"execution":r}
         results.append(row);audit(row)

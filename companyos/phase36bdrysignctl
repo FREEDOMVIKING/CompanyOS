@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+source "$HOME/.companyos_secrets"
+exec node "$HOME/.companyos_secure/phase36b_dry_sign_validation.js"

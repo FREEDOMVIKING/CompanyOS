@@ -1,0 +1,26 @@
+{
+  "enabled": true,
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "signer_command_env": "MULTICHAIN_SIGNER_COMMAND",
+  "routes": {
+    "solana": ["SOL", "USDT-SPL", "USDC-SPL"],
+    "evm": ["ETH", "USDT-ERC20", "USDC-ERC20"],
+    "bitcoin": ["BTC"]
+  },
+  "token_contracts": {
+    "evm": {
+      "USDT-ERC20": {"contract":"0xdAC17F958D2ee523a2206206994597C13D831ec7","decimals":6},
+      "USDC-ERC20": {"contract":"0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","decimals":6}
+    },
+    "solana": {
+      "USDT-SPL": {"mint":"Es9vMFrzaCERmJfrF4H2FYD4UQJk6de4M5GvQ7D6n5n","decimals":6},
+      "USDC-SPL": {"mint":"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","decimals":6}
+    }
+  },
+  "bitcoin": {
+    "fee_rate_sat_vb_default": 8,
+    "dust_limit_sats": 546,
+    "address_type": "p2wpkh"
+  }
+}

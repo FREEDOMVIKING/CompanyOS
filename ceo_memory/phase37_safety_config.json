@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "broadcast_enabled": false,
+  "require_phase32_authorization": true,
+  "require_registered_destination": true,
+  "require_supported_route": true,
+  "require_fresh_balance_check": true,
+  "require_fee_estimate": true,
+  "require_preflight_or_dry_sign": true,
+  "require_idempotency_key": true,
+  "require_confirmation_tracking_when_live": true,
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "max_requests_per_cycle": 10,
+  "stop_on_first_failure": true,
+  "supported_routes": {
+    "solana": ["SOL", "USDT-SPL", "USDC-SPL"],
+    "evm": ["ETH", "USDT-ERC20", "USDC-ERC20"],
+    "bitcoin": ["BTC"]
+  }
+}
