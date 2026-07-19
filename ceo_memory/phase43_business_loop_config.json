@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "mode": "continuous_governed_business_operations",
+  "max_actions_per_cycle": 10,
+  "max_retry_attempts": 3,
+  "retry_backoff_seconds": 30,
+  "require_phase41_router": true,
+  "require_phase42_receipts": true,
+  "require_idempotency": true,
+  "require_receipt_before_learning": true,
+  "feed_outcomes_to_ceo_memory": true,
+  "retry_only_transient_failures": true,
+  "financial_actions_stay_under_existing_treasury_controls": true,
+  "external_actions_fail_closed": true
+}

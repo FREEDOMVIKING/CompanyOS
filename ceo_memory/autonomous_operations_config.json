@@ -1083,7 +1083,7 @@
     {
       "id": "phase34-autonomous-treasury",
       "enabled": true,
-      "interval_seconds": 60,
+      "interval_seconds": 900,
       "command": [
         "python",
         "companyos/autonomoustreasuryctl",
@@ -1137,6 +1137,16 @@
       "command": [
         "python",
         "companyos/phase42ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase43-autonomous-business-operations-loop",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/phase43ctl",
         "run"
       ]
     }

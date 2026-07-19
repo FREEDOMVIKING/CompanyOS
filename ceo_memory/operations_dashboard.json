@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-19T17:25:00.935637+00:00",
+  "generated_at": "2026-07-19T18:05:50.723147+00:00",
   "overall_status": "healthy",
   "reliability_score": 85,
   "systems": {
     "control_cycle": {
-      "last_cycle_at": "2026-07-19T16:33:01.903444+00:00",
+      "last_cycle_at": "2026-07-19T17:39:50.778535+00:00",
       "cycle_success": true,
       "failure_count": 0
     },
     "supervisor": {
-      "last_supervision_at": "2026-07-19T17:03:42.066587+00:00",
+      "last_supervision_at": "2026-07-19T17:39:50.886718+00:00",
       "consecutive_failures": 0,
       "recovery_action_count": 0
     },
@@ -20,40 +20,40 @@
       "autonomy_halted": false
     },
     "reliability": {
-      "last_scored_at": "2026-07-19T17:03:42.401563+00:00",
+      "last_scored_at": "2026-07-19T17:39:51.090972+00:00",
       "reliability_score": 85,
       "status": "healthy"
     },
     "resources": {
-      "generated_at": "2026-07-19T17:10:05.427583+00:00",
+      "generated_at": "2026-07-19T17:55:38.727454+00:00",
       "status": "healthy",
-      "disk_used_percent": 57.62,
-      "memory_used_percent": 74.74,
-      "free_disk_bytes": 101266640896,
+      "disk_used_percent": 57.61,
+      "memory_used_percent": 70.12,
+      "free_disk_bytes": 101291372544,
       "safe_cleanup_files_removed": 0,
       "automatic_spending": false,
       "automatic_external_write": false,
       "automatic_destructive_actions": false
     },
     "watchdog": {
-      "last_checked_at": "2026-07-19T17:25:00.832674+00:00",
-      "heartbeat_age_seconds": 3118.929217,
+      "last_checked_at": "2026-07-19T18:05:50.595927+00:00",
+      "heartbeat_age_seconds": 1559.817377,
       "heartbeat_stale": false,
       "recovery_actions": []
     },
     "backup": {
-      "last_backup_at": "2026-07-19T17:10:09.176401+00:00",
-      "last_backup": "/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260719_171005.tar.gz",
+      "last_backup_at": "2026-07-19T17:55:41.950762+00:00",
+      "last_backup": "/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260719_175539.tar.gz",
       "backup_count": 12
     },
     "github": {
-      "generated_at": "2026-07-19T17:24:59.104771+00:00",
+      "generated_at": "2026-07-19T18:05:49.633396+00:00",
       "signal_count": 1,
       "working_tree_clean": false,
       "branch": "main"
     },
     "preflight": {
-      "generated_at": "2026-07-19T17:03:40.579597+00:00",
+      "generated_at": "2026-07-19T17:39:49.784651+00:00",
       "decision": "blocked",
       "risk_score": 30,
       "blockers": [
@@ -65,7 +65,7 @@
       "automatic_spending": false
     },
     "drift": {
-      "generated_at": "2026-07-19T16:33:03.005877+00:00",
+      "generated_at": "2026-07-19T17:39:51.398105+00:00",
       "drift_detected": true,
       "added": [
         "agents/action_dispatcher.py",
@@ -198,6 +198,19 @@
         "agents/phase35_controller.py",
         "agents/phase37_broadcast_gate.py",
         "agents/phase37_safety_controller.py",
+        "agents/phase37a_e2e_verify.py",
+        "agents/phase37a_queue_cleanup.py",
+        "agents/phase38_broadcast_gate.py",
+        "agents/phase38_canary_guard.py",
+        "agents/phase38a_sol_canary.py",
+        "agents/phase38b_activation_controller.py",
+        "agents/phase38b_bootstrap_sol_canary.py",
+        "agents/phase39_production_orchestrator.py",
+        "agents/phase40_ceo_production_bridge.py",
+        "agents/phase40_decision_submitter.py",
+        "agents/phase41_action_submitter.py",
+        "agents/phase41_external_operations_router.py",
+        "agents/phase42_connector_runtime.py",
         "agents/platform_architect_engine.py",
         "agents/portfolio_capacity_guard.py",
         "agents/portfolio_capital_planner.py",
@@ -286,6 +299,7 @@
         "companyos/closedloopctl",
         "companyos/collaborationctl",
         "companyos/communicationsauthorityctl",
+        "companyos/communicationsctl",
         "companyos/connectorreadinessctl",
         "companyos/connectorregistryctl",
         "companyos/controlcenterctl",
@@ -295,6 +309,7 @@
         "companyos/decisionselectctl",
         "companyos/deliveryctl",
         "companyos/deploymentauthorityctl",
+        "companyos/deploymentctl",
         "companyos/depositmonitorctl",
         "companyos/dispatchctl",
         "companyos/dispatcherfeedbackctl",
@@ -382,8 +397,22 @@
         "companyos/phase34ctl",
         "companyos/phase35ctl",
         "companyos/phase36bdrysignctl",
+        "companyos/phase37acleanupctl",
+        "companyos/phase37ae2ectl",
         "companyos/phase37broadcastctl",
         "companyos/phase37ctl",
+        "companyos/phase38asolcanaryctl",
+        "companyos/phase38bbootstrapctl",
+        "companyos/phase38bctl",
+        "companyos/phase38broadcastctl",
+        "companyos/phase38canaryguardctl",
+        "companyos/phase38ctl",
+        "companyos/phase39ctl",
+        "companyos/phase40ctl",
+        "companyos/phase40decisionctl",
+        "companyos/phase41actionctl",
+        "companyos/phase41ctl",
+        "companyos/phase42ctl",
         "companyos/planexecutorctl",
         "companyos/platformarchitectctl",
         "companyos/portfoliocapacityctl",
@@ -396,6 +425,7 @@
         "companyos/proposaldraftctl",
         "companyos/providerhealthctl",
         "companyos/publicationauthorityctl",
+        "companyos/publicationctl",
         "companyos/readiness2ctl",
         "companyos/recovery2ctl",
         "companyos/replanctl",
@@ -447,7 +477,7 @@
         "companyos/watchdogctl"
       ],
       "baseline_file_count": 120,
-      "current_file_count": 490
+      "current_file_count": 520
     }
   }
 }
