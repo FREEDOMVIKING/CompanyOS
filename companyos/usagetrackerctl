@@ -3,11 +3,9 @@ import subprocess, sys
 from pathlib import Path
 
 root = Path.home() / "companyos"
-agent = root / "agents" / "autonomy_controller.py"
-
 raise SystemExit(
     subprocess.call(
-        [sys.executable, str(agent), *sys.argv[1:]],
+        [sys.executable, str(root / "agents" / "api_usage_tracker.py"), *sys.argv[1:]],
         cwd=root
     )
 )

@@ -915,6 +915,16 @@
         "companyos/insightrefreshctl",
         "refresh"
       ]
+    },
+    {
+      "id": "autonomous-ai-operations-core",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/autonomyctl",
+        "run"
+      ]
     }
   ]
 }

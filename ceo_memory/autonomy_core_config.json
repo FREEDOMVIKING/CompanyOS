@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "automatic_cycle": true,
+  "max_specialist_tasks_per_cycle": 5,
+  "max_cycle_failures_before_stop": 3,
+  "cycle_dedup_ttl_seconds": 86400,
+  "api_daily_request_limit": 150,
+  "api_daily_token_budget": 250000,
+  "retry": {
+    "max_attempts": 3,
+    "base_delay_seconds": 2,
+    "max_delay_seconds": 30,
+    "retry_http_codes": [408, 429, 500, 502, 503, 504]
+  },
+  "fallback_models": [
+    "openrouter/free"
+  ],
+  "automatic_external_write": false,
+  "automatic_customer_contact": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_fund_transfer": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_destructive_actions": false
+}
