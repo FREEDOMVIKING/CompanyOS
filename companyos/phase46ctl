@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+import subprocess,sys
+from pathlib import Path
+r=Path.home()/"companyos"
+raise SystemExit(subprocess.call(
+    [sys.executable,str(r/"agents"/"phase46_goal_strategy_engine.py"),*sys.argv[1:]],
+    cwd=r
+))
