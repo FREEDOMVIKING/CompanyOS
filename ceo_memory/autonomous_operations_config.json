@@ -885,6 +885,16 @@
         "companyos/specialistbridgectl",
         "bridge"
       ]
+    },
+    {
+      "id": "live-specialist-queue-consumer",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/livespecialistctl",
+        "run"
+      ]
     }
   ]
 }
