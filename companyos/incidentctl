@@ -2,4 +2,4 @@
 import subprocess,sys
 from pathlib import Path
 r=Path.home()/"companyos"
-raise SystemExit(subprocess.call([sys.executable,str(r/"agents"/"incident_escalation_engine.py"),*sys.argv[1:]],cwd=r))
+raise SystemExit(subprocess.call([sys.executable,str(r/"agents"/"incident_response_engine.py"),*sys.argv[1:]],cwd=r))

@@ -6438,5 +6438,1154 @@
         "last_recovery_count": 1
       }
     }
+  },
+  {
+    "timestamp": "2026-07-19T02:35:42.509821+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:35:42.508540+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 209,
+        "last_cycle_at": "2026-07-19T02:35:42.508771+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:35:45.694627+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:35:45.693321+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 210,
+        "last_cycle_at": "2026-07-19T02:35:45.693570+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:35:47.808363+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:35:47.807099+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 211,
+        "last_cycle_at": "2026-07-19T02:35:47.807343+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:44:14.760047+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:44:14.748223+00:00",
+        "issues_detected": 1,
+        "recoveries_attempted": 1,
+        "remaining_issues": 0,
+        "issues": [
+          {
+            "component": "operations",
+            "type": "unhealthy",
+            "severity": "high",
+            "details": {
+              "healthy": false,
+              "running": true,
+              "halted": false,
+              "last_cycle_at": "2026-07-19T02:35:51.546432+00:00",
+              "last_cycle_job_count": 20,
+              "failure_count": 2,
+              "last_error": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 71, in <module>\n    r=synthesize() if a==\"synthesize\" else status() if a==\"status\" else {\"success\":False,\"allowed\":[\"synthesize\",\"status\"]}\n      ~~~~~~~~~~^^\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 43, in synthesize\n    \"recommended_direction\":recs[0] if recs else \"continue_internal_analysis\",\n                            ~~~~^^^\nKeyError: 0\n"
+            }
+          }
+        ],
+        "recoveries": [
+          {
+            "issue": {
+              "component": "operations",
+              "type": "unhealthy",
+              "severity": "high",
+              "details": {
+                "healthy": false,
+                "running": true,
+                "halted": false,
+                "last_cycle_at": "2026-07-19T02:35:51.546432+00:00",
+                "last_cycle_job_count": 20,
+                "failure_count": 2,
+                "last_error": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 71, in <module>\n    r=synthesize() if a==\"synthesize\" else status() if a==\"status\" else {\"success\":False,\"allowed\":[\"synthesize\",\"status\"]}\n      ~~~~~~~~~~^^\n  File \"/data/data/com.termux/files/home/companyos/agents/ceo_insight_decision_synthesizer.py\", line 43, in synthesize\n    \"recommended_direction\":recs[0] if recs else \"continue_internal_analysis\",\n                            ~~~~^^^\nKeyError: 0\n"
+              }
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_started\",\n  \"pid\": 26244,\n  \"log\": \"/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log\"\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 212,
+        "last_cycle_at": "2026-07-19T02:44:14.757994+00:00",
+        "last_issue_count": 1,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 1
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:44:16.466121+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:44:16.464681+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 213,
+        "last_cycle_at": "2026-07-19T02:44:16.464990+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:44:22.707285+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:44:22.706147+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 214,
+        "last_cycle_at": "2026-07-19T02:44:22.706363+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:44:36.061534+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:44:36.060299+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 215,
+        "last_cycle_at": "2026-07-19T02:44:36.060527+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:44:42.620792+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:44:42.619309+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 216,
+        "last_cycle_at": "2026-07-19T02:44:42.619624+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:45:53.216912+00:00",
+    "action": "supervise",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "health_supervision_attention_required",
+      "report": {
+        "generated_at": "2026-07-19T02:45:53.206401+00:00",
+        "issues_detected": 1,
+        "recoveries_attempted": 1,
+        "remaining_issues": 1,
+        "issues": [
+          {
+            "component": "operations",
+            "type": "unhealthy",
+            "severity": "high",
+            "details": {
+              "healthy": false,
+              "running": true,
+              "halted": false,
+              "last_cycle_at": "2026-07-19T02:44:48.680641+00:00",
+              "last_cycle_job_count": 4,
+              "failure_count": 2,
+              "last_error": ""
+            }
+          }
+        ],
+        "recoveries": [
+          {
+            "issue": {
+              "component": "operations",
+              "type": "unhealthy",
+              "severity": "high",
+              "details": {
+                "healthy": false,
+                "running": true,
+                "halted": false,
+                "last_cycle_at": "2026-07-19T02:44:48.680641+00:00",
+                "last_cycle_job_count": 4,
+                "failure_count": 2,
+                "last_error": ""
+              }
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 30443\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "remaining": [
+          {
+            "component": "operations",
+            "type": "unhealthy",
+            "severity": "high",
+            "details": {
+              "healthy": false,
+              "running": true,
+              "halted": false,
+              "last_cycle_at": "2026-07-19T02:44:48.680641+00:00",
+              "last_cycle_job_count": 4,
+              "failure_count": 2,
+              "last_error": ""
+            }
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 217,
+        "last_cycle_at": "2026-07-19T02:45:53.214438+00:00",
+        "last_issue_count": 1,
+        "last_remaining_issue_count": 1,
+        "last_recovery_count": 1
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:45:53.641608+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:45:53.638528+00:00",
+        "issues_detected": 1,
+        "recoveries_attempted": 1,
+        "remaining_issues": 0,
+        "issues": [
+          {
+            "component": "operations",
+            "type": "unhealthy",
+            "severity": "high",
+            "details": {
+              "healthy": false,
+              "running": true,
+              "halted": false,
+              "last_cycle_at": "2026-07-19T02:44:48.680641+00:00",
+              "last_cycle_job_count": 4,
+              "failure_count": 2,
+              "last_error": ""
+            }
+          }
+        ],
+        "recoveries": [
+          {
+            "issue": {
+              "component": "operations",
+              "type": "unhealthy",
+              "severity": "high",
+              "details": {
+                "healthy": false,
+                "running": true,
+                "halted": false,
+                "last_cycle_at": "2026-07-19T02:44:48.680641+00:00",
+                "last_cycle_job_count": 4,
+                "failure_count": 2,
+                "last_error": ""
+              }
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_started\",\n  \"pid\": 30498,\n  \"log\": \"/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log\"\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 218,
+        "last_cycle_at": "2026-07-19T02:45:53.639137+00:00",
+        "last_issue_count": 1,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 1
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:46:40.279103+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:46:40.277790+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 219,
+        "last_cycle_at": "2026-07-19T02:46:40.278005+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:48:15.898714+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:48:15.896775+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 220,
+        "last_cycle_at": "2026-07-19T02:48:15.897112+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:48:22.262558+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:48:22.260970+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 221,
+        "last_cycle_at": "2026-07-19T02:48:22.261216+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:48:28.957956+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:48:28.956378+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 222,
+        "last_cycle_at": "2026-07-19T02:48:28.956603+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:48:36.239145+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:48:36.237725+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 223,
+        "last_cycle_at": "2026-07-19T02:48:36.237954+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:49:18.853360+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:49:18.852069+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 224,
+        "last_cycle_at": "2026-07-19T02:49:18.852282+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:50:58.889755+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:50:58.886717+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 225,
+        "last_cycle_at": "2026-07-19T02:50:58.887433+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T02:51:46.709408+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T02:51:46.691843+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 226,
+        "last_cycle_at": "2026-07-19T02:51:46.701943+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:06.751989+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:06.732224+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 227,
+        "last_cycle_at": "2026-07-19T03:01:06.742225+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:07.908285+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:07.904549+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 228,
+        "last_cycle_at": "2026-07-19T03:01:07.905148+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:09.641486+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:09.637746+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 229,
+        "last_cycle_at": "2026-07-19T03:01:09.638347+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:14.334144+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:14.330374+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 230,
+        "last_cycle_at": "2026-07-19T03:01:14.330975+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:23.234760+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:23.230998+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 231,
+        "last_cycle_at": "2026-07-19T03:01:23.231632+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:24.364357+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:24.360622+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 232,
+        "last_cycle_at": "2026-07-19T03:01:24.361183+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:26.110369+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:26.106470+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 233,
+        "last_cycle_at": "2026-07-19T03:01:26.107121+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:51.059913+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:51.057682+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 234,
+        "last_cycle_at": "2026-07-19T03:01:51.058058+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:01:55.623687+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:01:55.621557+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 235,
+        "last_cycle_at": "2026-07-19T03:01:55.621960+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:02:16.985618+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:02:16.984134+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 236,
+        "last_cycle_at": "2026-07-19T03:02:16.984344+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:04:52.220187+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:04:52.218715+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 237,
+        "last_cycle_at": "2026-07-19T03:04:52.218927+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:06:02.461035+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:06:02.458084+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 238,
+        "last_cycle_at": "2026-07-19T03:06:02.458656+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:08:36.951764+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:08:36.948678+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 239,
+        "last_cycle_at": "2026-07-19T03:08:36.949173+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:11:27.004288+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:11:26.996876+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 240,
+        "last_cycle_at": "2026-07-19T03:11:27.002148+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:11:30.758130+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:11:30.756635+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 241,
+        "last_cycle_at": "2026-07-19T03:11:30.756870+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-19T03:11:33.547375+00:00",
+    "action": "supervise",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "health_supervision_complete",
+      "report": {
+        "generated_at": "2026-07-19T03:11:33.545879+00:00",
+        "issues_detected": 0,
+        "recoveries_attempted": 0,
+        "remaining_issues": 0,
+        "issues": [],
+        "recoveries": [],
+        "remaining": [],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 242,
+        "last_cycle_at": "2026-07-19T03:11:33.546125+00:00",
+        "last_issue_count": 0,
+        "last_remaining_issue_count": 0,
+        "last_recovery_count": 0
+      }
+    }
   }
 ]

@@ -1,10 +1,43 @@
 {
-  "generated_at": "2026-07-19T01:48:20.365877+00:00",
+  "generated_at": "2026-07-19T03:01:20.754617+00:00",
   "critical_priority_count": 0,
-  "high_priority_count": 10,
-  "job_count": 91,
-  "changes_applied": 0,
-  "changes": [],
+  "high_priority_count": 11,
+  "job_count": 96,
+  "changes_applied": 4,
+  "changes": [
+    {
+      "job_id": "autonomous-health-supervisor",
+      "old_interval_seconds": 1200,
+      "new_interval_seconds": 2400,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "autonomous-ai-operations-core",
+      "old_interval_seconds": 7200,
+      "new_interval_seconds": 14400,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "phase24-business-workflow-orchestration",
+      "old_interval_seconds": 21600,
+      "new_interval_seconds": 43200,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "phase24-project-execution-incubation",
+      "old_interval_seconds": 21600,
+      "new_interval_seconds": 43200,
+      "reasons": [
+        "recent_failures"
+      ]
+    }
+  ],
   "workload": [
     {
       "job_id": "opportunity-discovery",
@@ -12,7 +45,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.316,
+      "last_duration_seconds": 0.398,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -23,7 +56,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.389,
+      "last_duration_seconds": 0.31,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -34,7 +67,7 @@
       "current_interval_seconds": 7200,
       "recommended_interval_seconds": 7200,
       "failure_count": 0,
-      "last_duration_seconds": 0.37,
+      "last_duration_seconds": 0.298,
       "reasons": [
         "high_priority_pressure"
       ]
@@ -45,7 +78,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 1.169,
+      "last_duration_seconds": 1.226,
       "reasons": []
     },
     {
@@ -54,7 +87,7 @@
       "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.236,
+      "last_duration_seconds": 0.349,
       "reasons": []
     },
     {
@@ -63,7 +96,7 @@
       "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 0.274,
+      "last_duration_seconds": 0.279,
       "reasons": []
     },
     {
@@ -72,7 +105,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.139,
+      "last_duration_seconds": 0.201,
       "reasons": []
     },
     {
@@ -81,7 +114,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.367,
+      "last_duration_seconds": 0.3,
       "reasons": []
     },
     {
@@ -108,7 +141,7 @@
       "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 0,
-      "last_duration_seconds": 3.106,
+      "last_duration_seconds": 2.858,
       "reasons": []
     },
     {
@@ -117,7 +150,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.114,
+      "last_duration_seconds": 0.101,
       "reasons": []
     },
     {
@@ -126,7 +159,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.106,
+      "last_duration_seconds": 0.093,
       "reasons": []
     },
     {
@@ -135,7 +168,7 @@
       "current_interval_seconds": 600,
       "recommended_interval_seconds": 600,
       "failure_count": 1,
-      "last_duration_seconds": 9.322,
+      "last_duration_seconds": 17.939,
       "reasons": []
     },
     {
@@ -144,7 +177,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.323,
+      "last_duration_seconds": 0.251,
       "reasons": []
     },
     {
@@ -153,16 +186,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 3.95,
-      "reasons": []
-    },
-    {
-      "job_id": "autonomous-health-supervisor",
-      "score": 50,
-      "current_interval_seconds": 600,
-      "recommended_interval_seconds": 600,
-      "failure_count": 0,
-      "last_duration_seconds": 0.093,
+      "last_duration_seconds": 1.279,
       "reasons": []
     },
     {
@@ -171,7 +195,7 @@
       "current_interval_seconds": 900,
       "recommended_interval_seconds": 900,
       "failure_count": 0,
-      "last_duration_seconds": 0.152,
+      "last_duration_seconds": 0.091,
       "reasons": []
     },
     {
@@ -180,7 +204,7 @@
       "current_interval_seconds": 900,
       "recommended_interval_seconds": 900,
       "failure_count": 0,
-      "last_duration_seconds": 0.092,
+      "last_duration_seconds": 0.09,
       "reasons": []
     },
     {
@@ -189,7 +213,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.095,
+      "last_duration_seconds": 0.087,
       "reasons": []
     },
     {
@@ -198,7 +222,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 1.313,
+      "last_duration_seconds": 0.256,
       "reasons": []
     },
     {
@@ -207,7 +231,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.09,
+      "last_duration_seconds": 0.075,
       "reasons": []
     },
     {
@@ -216,7 +240,7 @@
       "current_interval_seconds": 900,
       "recommended_interval_seconds": 900,
       "failure_count": 0,
-      "last_duration_seconds": 0.099,
+      "last_duration_seconds": 0.089,
       "reasons": []
     },
     {
@@ -225,7 +249,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.101,
+      "last_duration_seconds": 0.104,
       "reasons": []
     },
     {
@@ -234,7 +258,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.089,
+      "last_duration_seconds": 0.101,
       "reasons": []
     },
     {
@@ -243,7 +267,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.095,
+      "last_duration_seconds": 0.081,
       "reasons": []
     },
     {
@@ -252,7 +276,16 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.09,
+      "last_duration_seconds": 0.074,
+      "reasons": []
+    },
+    {
+      "job_id": "github-read-connector",
+      "score": 50,
+      "current_interval_seconds": 43200,
+      "recommended_interval_seconds": 43200,
+      "failure_count": 1,
+      "last_duration_seconds": 0.47,
       "reasons": []
     },
     {
@@ -261,7 +294,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.163,
+      "last_duration_seconds": 0.114,
       "reasons": []
     },
     {
@@ -270,7 +303,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.193,
+      "last_duration_seconds": 0.185,
       "reasons": []
     },
     {
@@ -279,7 +312,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.265,
+      "last_duration_seconds": 0.07,
       "reasons": []
     },
     {
@@ -288,7 +321,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 2.426,
+      "last_duration_seconds": 0.586,
       "reasons": []
     },
     {
@@ -306,7 +339,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 2.52,
+      "last_duration_seconds": 1.524,
       "reasons": []
     },
     {
@@ -315,7 +348,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.255,
+      "last_duration_seconds": 0.118,
       "reasons": []
     },
     {
@@ -324,7 +357,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.25,
+      "last_duration_seconds": 0.087,
       "reasons": []
     },
     {
@@ -333,7 +366,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.274,
+      "last_duration_seconds": 0.086,
       "reasons": []
     },
     {
@@ -342,7 +375,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.145,
+      "last_duration_seconds": 0.1,
       "reasons": []
     },
     {
@@ -351,7 +384,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.102,
+      "last_duration_seconds": 0.075,
       "reasons": []
     },
     {
@@ -360,7 +393,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.102,
+      "last_duration_seconds": 0.079,
       "reasons": []
     },
     {
@@ -378,7 +411,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.091,
+      "last_duration_seconds": 0.087,
       "reasons": []
     },
     {
@@ -387,7 +420,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.336,
+      "last_duration_seconds": 0.107,
       "reasons": []
     },
     {
@@ -396,7 +429,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.263,
+      "last_duration_seconds": 0.195,
       "reasons": []
     },
     {
@@ -405,7 +438,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.312,
+      "last_duration_seconds": 0.076,
       "reasons": []
     },
     {
@@ -414,7 +447,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.077,
+      "last_duration_seconds": 0.086,
       "reasons": []
     },
     {
@@ -423,7 +456,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.111,
+      "last_duration_seconds": 0.084,
       "reasons": []
     },
     {
@@ -450,7 +483,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.079,
+      "last_duration_seconds": 0.072,
       "reasons": []
     },
     {
@@ -459,7 +492,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.08,
+      "last_duration_seconds": 0.239,
       "reasons": []
     },
     {
@@ -468,7 +501,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.244,
+      "last_duration_seconds": 0.753,
       "reasons": []
     },
     {
@@ -495,7 +528,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.079,
+      "last_duration_seconds": 0.276,
       "reasons": []
     },
     {
@@ -504,7 +537,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.076,
+      "last_duration_seconds": 0.298,
       "reasons": []
     },
     {
@@ -522,7 +555,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.327,
+      "last_duration_seconds": 1.073,
       "reasons": []
     },
     {
@@ -531,7 +564,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 1.583,
+      "last_duration_seconds": 4.843,
       "reasons": []
     },
     {
@@ -540,7 +573,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 3.0,
+      "last_duration_seconds": 2.304,
       "reasons": []
     },
     {
@@ -576,7 +609,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.162,
+      "last_duration_seconds": 0.317,
       "reasons": []
     },
     {
@@ -585,7 +618,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.094,
+      "last_duration_seconds": 0.302,
       "reasons": []
     },
     {
@@ -594,7 +627,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.102,
+      "last_duration_seconds": 0.086,
       "reasons": []
     },
     {
@@ -603,7 +636,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.123,
+      "last_duration_seconds": 0.085,
       "reasons": []
     },
     {
@@ -612,7 +645,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.098,
+      "last_duration_seconds": 0.096,
       "reasons": []
     },
     {
@@ -621,7 +654,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.101,
+      "last_duration_seconds": 0.071,
       "reasons": []
     },
     {
@@ -630,7 +663,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.777,
+      "last_duration_seconds": 0.696,
       "reasons": []
     },
     {
@@ -639,7 +672,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.131,
+      "last_duration_seconds": 0.079,
       "reasons": []
     },
     {
@@ -648,7 +681,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.075,
+      "last_duration_seconds": 0.073,
       "reasons": []
     },
     {
@@ -657,7 +690,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.075,
+      "last_duration_seconds": 0.076,
       "reasons": []
     },
     {
@@ -666,7 +699,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.071,
+      "last_duration_seconds": 0.073,
       "reasons": []
     },
     {
@@ -675,7 +708,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.15,
+      "last_duration_seconds": 0.075,
       "reasons": []
     },
     {
@@ -684,7 +717,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.082,
+      "last_duration_seconds": 0.086,
       "reasons": []
     },
     {
@@ -693,7 +726,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.078,
+      "last_duration_seconds": 0.077,
       "reasons": []
     },
     {
@@ -702,7 +735,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.087,
+      "last_duration_seconds": 0.085,
       "reasons": []
     },
     {
@@ -711,7 +744,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.078,
+      "last_duration_seconds": 0.065,
       "reasons": []
     },
     {
@@ -720,16 +753,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.075,
-      "reasons": []
-    },
-    {
-      "job_id": "ceo-insight-decision-synthesis",
-      "score": 50,
-      "current_interval_seconds": 21600,
-      "recommended_interval_seconds": 21600,
-      "failure_count": 0,
-      "last_duration_seconds": 0.091,
+      "last_duration_seconds": 0.07,
       "reasons": []
     },
     {
@@ -738,7 +762,7 @@
       "current_interval_seconds": 21600,
       "recommended_interval_seconds": 21600,
       "failure_count": 0,
-      "last_duration_seconds": 0.088,
+      "last_duration_seconds": 0.082,
       "reasons": []
     },
     {
@@ -765,7 +789,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.102,
+      "last_duration_seconds": 0.076,
       "reasons": []
     },
     {
@@ -774,7 +798,7 @@
       "current_interval_seconds": 3600,
       "recommended_interval_seconds": 3600,
       "failure_count": 0,
-      "last_duration_seconds": 0.148,
+      "last_duration_seconds": 0.095,
       "reasons": []
     },
     {
@@ -783,7 +807,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.099,
+      "last_duration_seconds": 0.075,
       "reasons": []
     },
     {
@@ -792,7 +816,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.115,
+      "last_duration_seconds": 0.136,
       "reasons": []
     },
     {
@@ -801,7 +825,7 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.103,
+      "last_duration_seconds": 0.071,
       "reasons": []
     },
     {
@@ -810,25 +834,87 @@
       "current_interval_seconds": 1800,
       "recommended_interval_seconds": 1800,
       "failure_count": 0,
-      "last_duration_seconds": 0.074,
+      "last_duration_seconds": 0.073,
       "reasons": []
     },
     {
-      "job_id": "autonomous-ai-operations-core",
+      "job_id": "phase23-adaptive-business-intelligence",
       "score": 50,
-      "current_interval_seconds": 3600,
-      "recommended_interval_seconds": 3600,
+      "current_interval_seconds": 7200,
+      "recommended_interval_seconds": 7200,
       "failure_count": 0,
-      "last_duration_seconds": 3.894,
+      "last_duration_seconds": 4.391,
       "reasons": []
     },
     {
-      "job_id": "github-read-connector",
+      "job_id": "phase23-adaptive-execution-learning",
+      "score": 50,
+      "current_interval_seconds": 7200,
+      "recommended_interval_seconds": 7200,
+      "failure_count": 0,
+      "last_duration_seconds": 8.302,
+      "reasons": []
+    },
+    {
+      "job_id": "phase23-strategic-autonomy-portfolio",
+      "score": 50,
+      "current_interval_seconds": 10800,
+      "recommended_interval_seconds": 10800,
+      "failure_count": 0,
+      "last_duration_seconds": 5.681,
+      "reasons": []
+    },
+    {
+      "job_id": "autonomous-health-supervisor",
+      "score": 25,
+      "current_interval_seconds": 1200,
+      "recommended_interval_seconds": 2400,
+      "failure_count": 1,
+      "last_duration_seconds": 5.3,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "ceo-insight-decision-synthesis",
       "score": 25,
       "current_interval_seconds": 43200,
       "recommended_interval_seconds": 43200,
       "failure_count": 1,
-      "last_duration_seconds": 0.099,
+      "last_duration_seconds": 0.084,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "autonomous-ai-operations-core",
+      "score": 25,
+      "current_interval_seconds": 7200,
+      "recommended_interval_seconds": 14400,
+      "failure_count": 1,
+      "last_duration_seconds": 4.061,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "phase24-business-workflow-orchestration",
+      "score": 25,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 43200,
+      "failure_count": 1,
+      "last_duration_seconds": 6.449,
+      "reasons": [
+        "recent_failures"
+      ]
+    },
+    {
+      "job_id": "phase24-project-execution-incubation",
+      "score": 25,
+      "current_interval_seconds": 21600,
+      "recommended_interval_seconds": 43200,
+      "failure_count": 1,
+      "last_duration_seconds": 6.793,
       "reasons": [
         "recent_failures"
       ]

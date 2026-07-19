@@ -179,7 +179,7 @@
     {
       "id": "autonomous-health-supervisor",
       "enabled": true,
-      "interval_seconds": 600,
+      "interval_seconds": 2400,
       "command": [
         "python",
         "companyos/healthctl",
@@ -819,7 +819,7 @@
     {
       "id": "ceo-insight-decision-synthesis",
       "enabled": true,
-      "interval_seconds": 21600,
+      "interval_seconds": 43200,
       "command": [
         "python",
         "companyos/ceoinsightdecisionctl",
@@ -919,7 +919,7 @@
     {
       "id": "autonomous-ai-operations-core",
       "enabled": true,
-      "interval_seconds": 3600,
+      "interval_seconds": 14400,
       "command": [
         "python",
         "companyos/autonomyctl",
@@ -959,10 +959,30 @@
     {
       "id": "phase24-business-workflow-orchestration",
       "enabled": true,
-      "interval_seconds": 10800,
+      "interval_seconds": 43200,
       "command": [
         "python",
         "companyos/phase24ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-project-execution-incubation",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase24bundle2ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-governed-execution-operations",
+      "enabled": true,
+      "interval_seconds": 10800,
+      "command": [
+        "python",
+        "companyos/phase24bundle3ctl",
         "run"
       ]
     }

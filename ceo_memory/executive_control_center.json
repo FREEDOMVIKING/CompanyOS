@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-07-19T03:11:41.030384+00:00",
+  "system_health": "healthy",
+  "pending_approval_count": 2,
+  "registered_external_action_count": 2,
+  "execution_receipt_count": 29,
+  "connector_readiness": [
+    {
+      "connector": "openrouter",
+      "configured": true,
+      "capability": "ai_reasoning",
+      "external_side_effects": false
+    },
+    {
+      "connector": "github",
+      "configured": true,
+      "capability": "source_control",
+      "external_side_effects": true
+    },
+    {
+      "connector": "crm",
+      "configured": false,
+      "capability": "customer_records",
+      "external_side_effects": false
+    },
+    {
+      "connector": "accounting",
+      "configured": false,
+      "capability": "finance_records",
+      "external_side_effects": false
+    }
+  ],
+  "incident_count": 0,
+  "project_count": 1,
+  "external_authority_granted": false,
+  "control_note": "External actions remain blocked until explicit approval changes authority state."
+}
