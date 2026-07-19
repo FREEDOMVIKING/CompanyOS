@@ -47153,5 +47153,231 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-19T19:03:51.625229+00:00",
+    "action": "start",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "scheduler_started",
+      "pid": 20024,
+      "log": "/data/data/com.termux/files/home/companyos/logs/autonomous_operations.log"
+    }
+  },
+  {
+    "timestamp": "2026-07-19T19:04:00.967883+00:00",
+    "action": "cycle",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "autonomous_operations_cycle_complete",
+      "force": false,
+      "jobs_due": 20,
+      "jobs_run": 20,
+      "failures": 1,
+      "results": [
+        {
+          "id": "business-forecast",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"business_forecast_complete\",\n  \"forecast\": {\n    \"generated_at\": \"2026-07-19T19:03:51.670085+00:00\",\n    \"forecast_horizon_days\": 30,\n    \"confidence_percent\": 80.0,\n    \"inputs\": {\n      \"outstanding_receivables\": 12750.0,\n      \"active_project_value\": 17500.0,\n      \"weighted_sales_pipeline\": 0.0,\n      \"task_completion_rate_percent\": 14.29,\n      \"project_completion_rate_percent\": 0.0,\n      \"performance_health_score\": 60.0,\n      \"critical_priority_count\": 0,\n      \"high_priority_count\": 11,\n      \"approved_improvement_count\": 0\n    },\n    \"cash_inflow_scenarios\": {\n      \"conservative\": 3998.96,\n      \"expected\": 6152.25,\n      \"optimistic\": 8305.54\n    },\n    \"operating_outlook\": {\n      \"delivery_factor\": 0.25,\n      \"receivable_recovery_rate\": 0.55,\n      \"risk_penalty\": 0.22,\n      \"improvement_bonus\": 0.0\n    },\n    \"automatic_code_changes\": false,\n    \"automatic_task_execution\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  },\n  \"briefing\": {\n    \"generated_at\": \"2026-07-19T19:03:51.670170+00:00\",\n    \"headline\": \"30-day expected cash inflow forecast: $6,152.25\",\n    \"confidence_percent\": 80.0,\n    \"scenarios\": {\n      \"conservative\": 3998.96,\n      \"expected\": 6152.25,\n      \"optimistic\": 8305.54\n    },\n    \"top_risks\": [\n      \"Low task completion may delay expected cash inflow.\",\n      \"Low project completion may delay revenue recognition.\"\n    ],\n    \"top_opportunities\": [\n      \"Recover up to $12,750.00 in outstanding receivables.\"\n    ],\n    \"recommended_focus\": [\n      \"Review critical priorities first.\",\n      \"Advance approved internal improvements.\",\n      \"Prepare owner-reviewed receivable follow-ups.\",\n      \"Keep external execution and spending under owner control.\"\n    ],\n    \"automatic_code_changes\": false,\n    \"automatic_task_execution\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:51.502682+00:00",
+          "finished_at": "2026-07-19T19:03:51.741669+00:00",
+          "duration_seconds": 0.239
+        },
+        {
+          "id": "cycle-supervisor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"cycle_supervision_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:51.884157+00:00\",\n    \"observed_cycle\": {\n      \"last_cycle_at\": \"2026-07-19T18:40:40.952708+00:00\",\n      \"cycle_success\": true,\n      \"failure_count\": 0\n    },\n    \"recovery_actions\": [],\n    \"consecutive_failures\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:51.743152+00:00",
+          "finished_at": "2026-07-19T19:03:51.910842+00:00",
+          "duration_seconds": 0.168
+        },
+        {
+          "id": "incident-escalation",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"incident_triage_complete\",\n  \"queue\": {\n    \"generated_at\": \"2026-07-19T19:03:52.065216+00:00\",\n    \"incident_count\": 0,\n    \"incidents\": []\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:51.917881+00:00",
+          "finished_at": "2026-07-19T19:03:52.096879+00:00",
+          "duration_seconds": 0.179
+        },
+        {
+          "id": "reliability-scorecard",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"reliability_score_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:52.245891+00:00\",\n    \"reliability_score\": 85,\n    \"status\": \"healthy\",\n    \"checks\": [\n      {\n        \"component\": \"control_cycle\",\n        \"healthy\": true,\n        \"weight\": 25,\n        \"source_exists\": true\n      },\n      {\n        \"component\": \"cycle_supervisor\",\n        \"healthy\": true,\n        \"weight\": 20,\n        \"source_exists\": true\n      },\n      {\n        \"component\": \"incident_escalation\",\n        \"healthy\": true,\n        \"weight\": 25,\n        \"source_exists\": true\n      },\n      {\n        \"component\": \"exception_recovery\",\n        \"healthy\": true,\n        \"weight\": 15,\n        \"source_exists\": true\n      },\n      {\n        \"component\": \"readiness\",\n        \"healthy\": false,\n        \"weight\": 15,\n        \"source_exists\": true\n      }\n    ],\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:52.101196+00:00",
+          "finished_at": "2026-07-19T19:03:52.278974+00:00",
+          "duration_seconds": 0.178
+        },
+        {
+          "id": "resource-capacity-monitor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"resource_check_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:52.442192+00:00\",\n    \"status\": \"healthy\",\n    \"disk_used_percent\": 57.64,\n    \"memory_used_percent\": 71.15,\n    \"free_disk_bytes\": 101210230784,\n    \"safe_cleanup_files_removed\": 0,\n    \"automatic_spending\": false,\n    \"automatic_external_write\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:52.286097+00:00",
+          "finished_at": "2026-07-19T19:03:52.462882+00:00",
+          "duration_seconds": 0.177
+        },
+        {
+          "id": "adaptive-decision-selector",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"adaptive_decision_selection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:52.635097+00:00\",\n    \"system_ready\": false,\n    \"selected_actions\": [],\n    \"rejected_actions\": [\n      {\n        \"action\": \"run-health\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 95,\n        \"category\": \"internal_read_only\"\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 70,\n        \"category\": \"internal_read_only\"\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 65,\n        \"category\": \"internal_read_only\"\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 60,\n        \"category\": \"internal_reversible\"\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 55,\n        \"category\": \"internal_reversible\"\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"reason\": \"system_not_ready\",\n        \"adaptive_priority\": 50,\n        \"category\": \"internal_read_only\"\n      }\n    ],\n    \"selected_count\": 0,\n    \"rejected_count\": 6,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:52.470048+00:00",
+          "finished_at": "2026-07-19T19:03:52.662173+00:00",
+          "duration_seconds": 0.192
+        },
+        {
+          "id": "adaptive-execution-plan",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"adaptive_execution_plan_built\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:52.806659+00:00\",\n    \"system_ready\": false,\n    \"plan\": [],\n    \"rejected\": [],\n    \"planned_count\": 0,\n    \"rejected_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:52.666581+00:00",
+          "finished_at": "2026-07-19T19:03:52.833078+00:00",
+          "duration_seconds": 0.167
+        },
+        {
+          "id": "fused-decision-selector",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"fused_decision_selection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:52.996917+00:00\",\n    \"system_ready\": false,\n    \"selected_actions\": [],\n    \"rejected_actions\": [\n      {\n        \"action\": \"run-health\",\n        \"fused_priority\": 63.5,\n        \"category\": \"internal_read_only\",\n        \"reason\": \"system_not_ready\"\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"fused_priority\": 56.0,\n        \"category\": \"internal_read_only\",\n        \"reason\": \"system_not_ready\"\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"fused_priority\": 54.5,\n        \"category\": \"internal_read_only\",\n        \"reason\": \"system_not_ready\"\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"fused_priority\": 53.0,\n        \"category\": \"internal_reversible\",\n        \"reason\": \"system_not_ready\"\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"fused_priority\": 51.5,\n        \"category\": \"internal_reversible\",\n        \"reason\": \"system_not_ready\"\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"fused_priority\": 50.0,\n        \"category\": \"internal_read_only\",\n        \"reason\": \"system_not_ready\"\n      }\n    ],\n    \"selected_count\": 0,\n    \"rejected_count\": 6,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:52.838592+00:00",
+          "finished_at": "2026-07-19T19:03:53.029348+00:00",
+          "duration_seconds": 0.191
+        },
+        {
+          "id": "fused-execution-plan",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"fused_execution_plan_built\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:53.183293+00:00\",\n    \"system_ready\": false,\n    \"plan\": [],\n    \"rejected\": [],\n    \"planned_count\": 0,\n    \"rejected_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false,\n    \"credential_export\": false,\n    \"private_key_export\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:53.033216+00:00",
+          "finished_at": "2026-07-19T19:03:53.208259+00:00",
+          "duration_seconds": 0.175
+        },
+        {
+          "id": "closed-loop-selector",
+          "success": true,
+          "return_code": 0,
+          "stdout": "feedback_adjustment\\\": 0.0,\\n        \\\"feedback_confidence\\\": 0.0,\\n        \\\"final_priority\\\": 56.0,\\n        \\\"reason\\\": \\\"Keep forecast aligned with active goals.\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"learned_score\\\": 50.0,\\n        \\\"adaptive_priority\\\": 70.0\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-brief\\\",\\n        \\\"base_fused_priority\\\": 54.5,\\n        \\\"feedback_adjustment\\\": 0.0,\\n        \\\"feedback_confidence\\\": 0.0,\\n        \\\"final_priority\\\": 54.5,\\n        \\\"reason\\\": \\\"Summarize current repository state before owner review.\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"learned_score\\\": 50.0,\\n        \\\"adaptive_priority\\\": 65.0\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-priorities\\\",\\n        \\\"base_fused_priority\\\": 53.0,\\n        \\\"feedback_adjustment\\\": 0.0,\\n        \\\"feedback_confidence\\\": 0.0,\\n        \\\"final_priority\\\": 53.0,\\n        \\\"reason\\\": \\\"Maintain current executive ordering.\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"learned_score\\\": 50.0,\\n        \\\"adaptive_priority\\\": 60.0\\n      },\\n      {\\n        \\\"action\\\": \\\"refresh-decisions\\\",\\n        \\\"base_fused_priority\\\": 51.5,\\n        \\\"feedback_adjustment\\\": 0.0,\\n        \\\"feedback_confidence\\\": 0.0,\\n        \\\"final_priority\\\": 51.5,\\n        \\\"reason\\\": \\\"Keep CEO decision queue synchronized.\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"learned_score\\\": 50.0,\\n        \\\"adaptive_priority\\\": 55.0\\n      },\\n      {\\n        \\\"action\\\": \\\"run-outcomes\\\",\\n        \\\"base_fused_priority\\\": 50.0,\\n        \\\"feedback_adjustment\\\": 0.0,\\n        \\\"feedback_confidence\\\": 0.0,\\n        \\\"final_priority\\\": 50.0,\\n        \\\"reason\\\": \\\"Refresh measurable outcomes for the feedback loop.\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"learned_score\\\": 50.0,\\n        \\\"adaptive_priority\\\": 50.0\\n      }\\n    ],\\n    \\\"top_action\\\": \\\"run-health\\\",\\n    \\\"top_priority\\\": 63.5,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      },\n      \"readiness\": {\n        \"success\": true,\n        \"return_code\": 0,\n        \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T19:03:53.711360+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.47\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      },\n      \"eligibility\": {\n        \"success\": true,\n        \"return_code\": 0,\n        \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T19:03:53.900571+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      }\n    },\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:53.209622+00:00",
+          "finished_at": "2026-07-19T19:03:53.982331+00:00",
+          "duration_seconds": 0.773
+        },
+        {
+          "id": "phase29-crypto-treasury-monitor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase29_crypto_treasury_core_ready\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:54.733341+00:00\",\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"steps\": [\n      {\n        \"step\": \"deposit_monitor\",\n        \"success\": true,\n        \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"deposit_monitor_cycle_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T19:03:54.524696+00:00\\\",\\n    \\\"wallet_count\\\": 3,\\n    \\\"results\\\": [\\n      {\\n        \\\"wallet_id\\\": \\\"c9dc938395e4f9eea1\\\",\\n        \\\"chain\\\": \\\"bitcoin\\\",\\n        \\\"return_code\\\": 2,\\n        \\\"status\\\": \\\"scan_failed\\\",\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": false,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"signer_not_configured\\\\\\\",\\\\n  \\\\\\\"chain\\\\\\\": \\\\\\\"bitcoin\\\\\\\",\\\\n  \\\\\\\"missing_env\\\\\\\": [\\\\n    \\\\\\\"BITCOIN_RPC_URL\\\\\\\",\\\\n    \\\\\\\"BITCOIN_SIGNER_COMMAND\\\\\\\"\\\\n  ],\\\\n  \\\\\\\"mode\\\\\\\": \\\\\\\"scan\\\\\\\"\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      {\\n        \\\"wallet_id\\\": \\\"ea6dfbc69b23d1c0da\\\",\\n        \\\"chain\\\": \\\"solana\\\",\\n        \\\"return_code\\\": 2,\\n        \\\"status\\\": \\\"scan_failed\\\",\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": false,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"signer_not_configured\\\\\\\",\\\\n  \\\\\\\"chain\\\\\\\": \\\\\\\"solana\\\\\\\",\\\\n  \\\\\\\"missing_env\\\\\\\": [\\\\n    \\\\\\\"SOLANA_SIGNER_COMMAND\\\\\\\"\\\\n  ],\\\\n  \\\\\\\"mode\\\\\\\": \\\\\\\"scan\\\\\\\"\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      {\\n        \\\"wallet_id\\\": \\\"c4ad78cf817e3f5b10\\\",\\n        \\\"chain\\\": \\\"evm\\\",\\n        \\\"return_code\\\": 2,\\n        \\\"status\\\": \\\"scan_failed\\\",\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": false,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"signer_not_configured\\\\\\\",\\\\n  \\\\\\\"chain\\\\\\\": \\\\\\\"evm\\\\\\\",\\\\n  \\\\\\\"missing_env\\\\\\\": [\\\\n    \\\\\\\"EVM_RPC_URL\\\\\\\",\\\\n    \\\\\\\"EVM_SIGNER_COMMAND\\\\\\\"\\\\n  ],\\\\n  \\\\\\\"mode\\\\\\\": \\\\\\\"scan\\\\\\\"\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      }\\n    ]\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      },\n      {\n        \"step\": \"policy_smoke_test\",\n        \"success\": true,\n        \"stdout\": \"{\\n  \\\"allowed_for_auto_sign\\\": true,\\n  \\\"requires_owner_approval\\\": false,\\n  \\\"blocked\\\": false,\\n  \\\"reasons\\\": [],\\n  \\\"daily_spent_usd\\\": 0,\\n  \\\"daily_remaining_usd\\\": 20000.0,\\n  \\\"single_auto_limit_usd\\\": 15000\\n}\\n\",\n        \"stderr\": \"\"\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:53.989986+00:00",
+          "finished_at": "2026-07-19T19:03:54.779462+00:00",
+          "duration_seconds": 0.79
+        },
+        {
+          "id": "phase30-live-treasury-monitor",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase30_live_treasury_monitor_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:56.164889+00:00\",\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"steps\": [\n      {\n        \"step\": \"rpc_health\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"treasury_rpc_health_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T19:03:55.507686+00:00\\\",\\n    \\\"chains\\\": {\\n      \\\"solana\\\": {\\n        \\\"configured\\\": true,\\n        \\\"reachable\\\": true,\\n        \\\"http_status\\\": 200\\n      },\\n      \\\"evm\\\": {\\n        \\\"configured\\\": false,\\n        \\\"reachable\\\": false\\n      },\\n      \\\"bitcoin\\\": {\\n        \\\"configured\\\": false,\\n        \\\"reachable\\\": false\\n      }\\n    },\\n    \\\"healthy\\\": true\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"live_balances\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"live_balance_monitor_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T19:03:55.950557+00:00\\\",\\n    \\\"wallet_count\\\": 3,\\n    \\\"balances\\\": [\\n      {\\n        \\\"wallet_id\\\": \\\"c9dc938395e4f9eea1\\\",\\n        \\\"chain\\\": \\\"bitcoin\\\",\\n        \\\"address\\\": \\\"bc1qw5r54zpk7adcg25qmk30gsq9uk6t5kejtaz56r\\\",\\n        \\\"checked_at\\\": \\\"2026-07-19T19:03:55.742996+00:00\\\",\\n        \\\"status\\\": \\\"rpc_not_configured\\\",\\n        \\\"balance\\\": null\\n      },\\n      {\\n        \\\"wallet_id\\\": \\\"ea6dfbc69b23d1c0da\\\",\\n        \\\"chain\\\": \\\"solana\\\",\\n        \\\"address\\\": \\\"5DRKXC4SD4TfSTPG8aQej7kBbzrtX8Tgpn4PgRbTnCnQ\\\",\\n        \\\"checked_at\\\": \\\"2026-07-19T19:03:55.743027+00:00\\\",\\n        \\\"status\\\": \\\"ok\\\",\\n        \\\"native_asset\\\": \\\"SOL\\\",\\n        \\\"balance\\\": 0.266639793\\n      },\\n      {\\n        \\\"wallet_id\\\": \\\"c4ad78cf817e3f5b10\\\",\\n        \\\"chain\\\": \\\"evm\\\",\\n        \\\"address\\\": \\\"0xE57C8d32F81fCc98076026619c3eD8a04c65dFc8\\\",\\n        \\\"checked_at\\\": \\\"2026-07-19T19:03:55.950473+00:00\\\",\\n        \\\"status\\\": \\\"rpc_not_configured\\\",\\n        \\\"balance\\\": null\\n      }\\n    ]\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"treasury_events\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"treasury_event_generation_complete\\\",\\n  \\\"event_count\\\": 2\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:54.785396+00:00",
+          "finished_at": "2026-07-19T19:03:56.207036+00:00",
+          "duration_seconds": 1.422
+        },
+        {
+          "id": "phase31-multi-asset-treasury",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase31_multi_asset_treasury_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:58.445024+00:00\",\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"steps\": [\n      {\n        \"step\": \"multi_asset_balances\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"multi_asset_balance_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T19:03:58.225612+00:00\\\",\\n    \\\"wallet_count\\\": 3,\\n    \\\"balances\\\": [\\n      {\\n        \\\"wallet_id\\\": \\\"c9dc938395e4f9eea1\\\",\\n        \\\"chain\\\": \\\"bitcoin\\\",\\n        \\\"address\\\": \\\"bc1qw5r54zpk7adcg25qmk30gsq9uk6t5kejtaz56r\\\",\\n        \\\"checked_at\\\": \\\"2026-07-19T19:03:56.579575+00:00\\\",\\n        \\\"assets\\\": {\\n          \\\"BTC\\\": 1.772e-05\\n        },\\n        \\\"status\\\": \\\"ok\\\",\\n        \\\"rpc_used\\\": \\\"https://blockstream.info/api\\\"\\n      },\\n      {\\n        \\\"wallet_id\\\": \\\"ea6dfbc69b23d1c0da\\\",\\n        \\\"chain\\\": \\\"solana\\\",\\n        \\\"address\\\": \\\"5DRKXC4SD4TfSTPG8aQej7kBbzrtX8Tgpn4PgRbTnCnQ\\\",\\n        \\\"checked_at\\\": \\\"2026-07-19T19:03:57.035219+00:00\\\",\\n        \\\"assets\\\": {\\n          \\\"SOL\\\": 0.266639793,\\n          \\\"USDT-SPL\\\": 0.0,\\n          \\\"USDC-SPL\\\": 0.0\\n        },\\n        \\\"status\\\": \\\"ok\\\",\\n        \\\"rpc_used\\\": \\\"https://api.mainnet-beta.solana.com\\\"\\n      },\\n      {\\n        \\\"wallet_id\\\": \\\"c4ad78cf817e3f5b10\\\",\\n        \\\"chain\\\": \\\"evm\\\",\\n        \\\"address\\\": \\\"0xE57C8d32F81fCc98076026619c3eD8a04c65dFc8\\\",\\n        \\\"checked_at\\\": \\\"2026-07-19T19:03:57.405260+00:00\\\",\\n        \\\"assets\\\": {\\n          \\\"ETH\\\": 0.0,\\n          \\\"USDT-ERC20\\\": 0.0,\\n          \\\"USDC-ERC20\\\": 0.0\\n        },\\n        \\\"status\\\": \\\"ok\\\",\\n        \\\"rpc_used\\\": \\\"https://ethereum.publicnode.com\\\"\\n      }\\n    ]\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"multi_asset_events\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"multi_asset_event_generation_complete\\\",\\n  \\\"event_count\\\": 2\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:56.217871+00:00",
+          "finished_at": "2026-07-19T19:03:58.490983+00:00",
+          "duration_seconds": 2.273
+        },
+        {
+          "id": "phase34-autonomous-treasury",
+          "success": false,
+          "return_code": 1,
+          "stdout": "{\n  \"success\": false,\n  \"status\": \"autonomous_treasury_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:59.265349+00:00\",\n    \"ready_count\": 2,\n    \"executed_count\": 0,\n    \"failure_count\": 1,\n    \"results\": [\n      {\n        \"proposal_id\": \"fe2b71252da61dd700c106\",\n        \"success\": false,\n        \"execution\": {\n          \"success\": false,\n          \"status\": \"invalid_multichain_executor_output\",\n          \"stdout\": \"\",\n          \"stderr\": \"ome/companyos/agents/multichain_execution_adapter.py\\\", line 104, in <module>\\n    r=execute(sys.argv[2]) if a==\\\"execute\\\" else {\\\"success\\\":True,\\\"status\\\":\\\"multichain_adapter_ready\\\",\\n      ~~~~~~~^^^^^^^^^^^^^\\n  File \\\"/data/data/com.termux/files/home/companyos/agents/multichain_execution_adapter.py\\\", line 100, in execute\\n    if p[\\\"chain\\\"]==\\\"bitcoin\\\":return btc(p)\\n                                    ~~~^^^\\n  File \\\"/data/data/com.termux/files/home/companyos/agents/multichain_execution_adapter.py\\\", line 85, in btc\\n    s=signer({\\\"action\\\":\\\"sign_btc_p2wpkh_transaction\\\",\\\"source\\\":p[\\\"source\\\"],\\\"destination\\\":p[\\\"destination\\\"],\\n              \\\"send_sats\\\":str(need),\\\"change_sats\\\":str(change),\\\"utxos\\\":selected})\\n  File \\\"/data/data/com.termux/files/home/companyos/agents/multichain_execution_adapter.py\\\", line 21, in signer\\n    if not cmd:raise RuntimeError(\\\"MULTICHAIN_SIGNER_COMMAND missing\\\")\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nRuntimeError: MULTICHAIN_SIGNER_COMMAND missing\\n\"\n        }\n      }\n    ]\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:58.498562+00:00",
+          "finished_at": "2026-07-19T19:03:59.309290+00:00",
+          "duration_seconds": 0.811
+        },
+        {
+          "id": "phase35-ceo-treasury-bridge",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_treasury_bridge_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:59.478154+00:00\",\n    \"pending_count\": 0,\n    \"result_count\": 0,\n    \"results\": []\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:59.315296+00:00",
+          "finished_at": "2026-07-19T19:03:59.503202+00:00",
+          "duration_seconds": 0.188
+        },
+        {
+          "id": "phase39-production-orchestrator",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase39_production_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:59.684694+00:00\",\n    \"request_count\": 0,\n    \"processed_count\": 0,\n    \"failure_count\": 0,\n    \"results\": []\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:59.511372+00:00",
+          "finished_at": "2026-07-19T19:03:59.717501+00:00",
+          "duration_seconds": 0.206
+        },
+        {
+          "id": "phase40-ceo-production-integration",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase40_ceo_production_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:03:59.862402+00:00\",\n    \"pending_count\": 0,\n    \"processed_count\": 0,\n    \"failure_count\": 0,\n    \"results\": [],\n    \"pipeline\": null\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:59.718992+00:00",
+          "finished_at": "2026-07-19T19:03:59.883366+00:00",
+          "duration_seconds": 0.164
+        },
+        {
+          "id": "phase41-external-operations-router",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase41_external_operations_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:04:00.046328+00:00\",\n    \"pending_count\": 0,\n    \"processed_count\": 0,\n    \"failure_count\": 0,\n    \"results\": []\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:03:59.890492+00:00",
+          "finished_at": "2026-07-19T19:04:00.074562+00:00",
+          "duration_seconds": 0.184
+        },
+        {
+          "id": "phase42-external-connector-runtime",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase42_connector_cycle_complete\",\n  \"results\": []\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:04:00.079170+00:00",
+          "finished_at": "2026-07-19T19:04:00.250488+00:00",
+          "duration_seconds": 0.171
+        },
+        {
+          "id": "phase43-autonomous-business-operations-loop",
+          "success": true,
+          "return_code": 0,
+          "stdout": "{\n  \"success\": true,\n  \"status\": \"phase43_business_operations_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T19:04:00.821263+00:00\",\n    \"phase41\": {\n      \"return_code\": 0,\n      \"result\": {\n        \"success\": true,\n        \"status\": \"phase41_external_operations_cycle_complete\",\n        \"report\": {\n          \"generated_at\": \"2026-07-19T19:04:00.614207+00:00\",\n          \"pending_count\": 0,\n          \"processed_count\": 0,\n          \"failure_count\": 0,\n          \"results\": []\n        }\n      }\n    },\n    \"phase42\": {\n      \"return_code\": 0,\n      \"result\": {\n        \"success\": true,\n        \"status\": \"phase42_connector_cycle_complete\",\n        \"results\": []\n      }\n    },\n    \"receipt_results\": [],\n    \"retry_results\": [],\n    \"retry_phase42\": null,\n    \"learning_event_count\": 2,\n    \"failure_count\": 0\n  }\n}\n",
+          "stderr": "",
+          "started_at": "2026-07-19T19:04:00.258080+00:00",
+          "finished_at": "2026-07-19T19:04:00.858669+00:00",
+          "duration_seconds": 0.601
+        }
+      ]
+    }
   }
 ]
