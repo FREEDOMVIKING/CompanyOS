@@ -1,59 +1,59 @@
 {
-  "generated_at": "2026-07-19T01:22:26.869942+00:00",
+  "generated_at": "2026-07-19T02:01:27.053678+00:00",
   "overall_status": "healthy",
   "reliability_score": 85,
   "systems": {
     "control_cycle": {
-      "last_cycle_at": "2026-07-19T00:35:58.894348+00:00",
+      "last_cycle_at": "2026-07-19T01:48:26.292684+00:00",
       "cycle_success": true,
       "failure_count": 0
     },
     "supervisor": {
-      "last_supervision_at": "2026-07-19T01:06:56.418842+00:00",
+      "last_supervision_at": "2026-07-19T01:48:26.410925+00:00",
       "consecutive_failures": 0,
       "recovery_action_count": 0
     },
     "incidents": {
-      "last_scan_at": "2026-07-19T01:06:56.669258+00:00",
+      "last_scan_at": "2026-07-19T01:48:26.529339+00:00",
       "incident_count": 1,
       "critical_incident": false,
       "autonomy_halted": false
     },
     "reliability": {
-      "last_scored_at": "2026-07-19T01:06:56.944785+00:00",
+      "last_scored_at": "2026-07-19T01:48:26.660992+00:00",
       "reliability_score": 85,
       "status": "healthy"
     },
     "resources": {
-      "generated_at": "2026-07-19T01:22:26.669865+00:00",
+      "generated_at": "2026-07-19T02:01:26.877216+00:00",
       "status": "healthy",
-      "disk_used_percent": 56.09,
-      "memory_used_percent": 68.97,
-      "free_disk_bytes": 104913969152,
+      "disk_used_percent": 56.11,
+      "memory_used_percent": 69.01,
+      "free_disk_bytes": 104865431552,
       "safe_cleanup_files_removed": 0,
       "automatic_spending": false,
       "automatic_external_write": false,
       "automatic_destructive_actions": false
     },
     "watchdog": {
-      "last_checked_at": "2026-07-19T01:22:26.770167+00:00",
-      "heartbeat_age_seconds": 2787.875811,
+      "last_checked_at": "2026-07-19T02:01:26.961425+00:00",
+      "heartbeat_age_seconds": 780.668733,
       "heartbeat_stale": false,
       "recovery_actions": []
     },
     "backup": {
-      "last_backup_at": "2026-07-19T01:18:43.149912+00:00",
-      "last_backup": "/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260719_011842.tar.gz",
+      "last_backup_at": "2026-07-19T02:01:25.154138+00:00",
+      "last_backup": "/data/data/com.termux/files/home/companyos/backups/state_snapshots/companyos_state_20260719_020124.tar.gz",
       "backup_count": 12
     },
     "github": {
-      "generated_at": "2026-07-19T01:22:26.376613+00:00",
+      "generated_at": "2026-07-19T02:01:26.374379+00:00",
       "signal_count": 1,
       "working_tree_clean": false,
       "branch": "main"
     },
     "preflight": {
-      "generated_at": "2026-07-19T01:06:53.720375+00:00",
+      "generated_at": "2026-07-19T01:48:25.004237+00:00",
       "decision": "blocked",
       "risk_score": 30,
       "blockers": [
@@ -64,7 +64,7 @@
       "automatic_spending": false
     },
     "drift": {
-      "generated_at": "2026-07-19T00:51:21.717259+00:00",
+      "generated_at": "2026-07-19T02:01:26.779669+00:00",
       "drift_detected": true,
       "added": [
         "agents/action_dispatcher.py",
@@ -74,15 +74,22 @@
         "agents/adaptive_opportunity_cycle.py",
         "agents/adaptive_plan_executor.py",
         "agents/adaptive_priority_engine.py",
+        "agents/ai_retry_policy.py",
+        "agents/api_usage_tracker.py",
+        "agents/autonomy_controller.py",
+        "agents/business_signal_engine.py",
         "agents/ceo_decision_governance_gate.py",
         "agents/ceo_insight_decision_synthesizer.py",
+        "agents/ceo_live_reasoning_bridge.py",
         "agents/closed_loop_selector.py",
         "agents/confidence_priority_fusion.py",
         "agents/controlled_multiagent_router.py",
+        "agents/cycle_deduplicator.py",
         "agents/dispatcher_feedback_loop.py",
         "agents/execution_eligibility_gate.py",
         "agents/execution_feedback_bridge.py",
         "agents/execution_outcome_learner.py",
+        "agents/executive_dashboard_engine.py",
         "agents/feedback_priority_integrator.py",
         "agents/fused_decision_selector.py",
         "agents/fused_execution_plan.py",
@@ -91,15 +98,23 @@
         "agents/governed_internal_worker.py",
         "agents/guarded_plan_executor.py",
         "agents/internal_resource_allocator.py",
+        "agents/live_specialist_queue_consumer.py",
+        "agents/live_specialist_result_bridge.py",
+        "agents/live_specialist_task_bridge.py",
+        "agents/model_fallback_router.py",
         "agents/operations_dashboard.py",
         "agents/opportunity_action_executor.py",
         "agents/opportunity_action_translator.py",
         "agents/opportunity_activation_pipeline.py",
+        "agents/opportunity_generation_engine.py",
         "agents/opportunity_learned_reranker.py",
         "agents/opportunity_lifecycle_manager.py",
         "agents/opportunity_outcome_feedback.py",
         "agents/opportunity_portfolio_allocator.py",
         "agents/opportunity_queue_coordinator.py",
+        "agents/performance_scoring_engine.py",
+        "agents/persistent_memory_engine.py",
+        "agents/phase23_controller.py",
         "agents/portfolio_capacity_guard.py",
         "agents/portfolio_performance_manager.py",
         "agents/portfolio_rebalance_engine.py",
@@ -108,6 +123,7 @@
         "agents/recovery_closed_loop_controller.py",
         "agents/resource_monitor.py",
         "agents/runtime_aware_preflight.py",
+        "agents/self_improvement_proposal_engine.py",
         "agents/specialist_delegation_planner.py",
         "agents/specialist_insight_integrator.py",
         "agents/specialist_runtime_adapter.py",
@@ -115,10 +131,12 @@
         "agents/state_backup_engine.py",
         "agents/strategic_goal_orchestrator.py",
         "agents/strategic_opportunity_alignment.py",
+        "agents/validated_insight_refresh.py",
         "agents/watchdog_engine.py",
         "companyos/actionhandoffctl",
         "companyos/adaptivepriorityctl",
         "companyos/backupctl",
+        "companyos/businesssignalctl",
         "companyos/ceodecisiongovernctl",
         "companyos/ceoinsightdecisionctl",
         "companyos/closedloopctl",
@@ -129,6 +147,7 @@
         "companyos/eligibilityctl",
         "companyos/executionfeedbackctl",
         "companyos/executionplan2ctl",
+        "companyos/executivedashboardctl",
         "companyos/feedbackpriorityctl",
         "companyos/fusedplanctl",
         "companyos/fusedselectctl",
@@ -137,11 +156,17 @@
         "companyos/governedqueuectl",
         "companyos/governedworkerctl",
         "companyos/guardedexecctl",
+        "companyos/improvementproposalctl",
+        "companyos/insightrefreshctl",
+        "companyos/liveresultbridgectl",
+        "companyos/livespecialistctl",
         "companyos/loopctl",
+        "companyos/memoryctl",
         "companyos/multiagentroutectl",
         "companyos/opportunityactivatectl",
         "companyos/opportunitycyclectl",
         "companyos/opportunityexecctl",
+        "companyos/opportunitygenctl",
         "companyos/opportunitylifecyclectl",
         "companyos/opportunityoutcomectl",
         "companyos/opportunityportfolioctl",
@@ -149,6 +174,8 @@
         "companyos/opportunityrerankctl",
         "companyos/opportunitytranslatectl",
         "companyos/outcomelearnerctl",
+        "companyos/performancecorectl",
+        "companyos/phase23ctl",
         "companyos/planexecutorctl",
         "companyos/portfoliocapacityctl",
         "companyos/portfolioperformancectl",
@@ -159,19 +186,22 @@
         "companyos/resourceallocatectl",
         "companyos/resourcectl",
         "companyos/runtimehygienectl",
+        "companyos/specialistbridgectl",
         "companyos/specialistdelegatectl",
         "companyos/specialistinsightctl",
         "companyos/specialistresultctl",
         "companyos/specialistruntimectl",
         "companyos/strategicalignctl",
-        "companyos/strategyorchestratorctl"
+        "companyos/strategyorchestratorctl",
+        "companyos/usagetrackerctl"
       ],
       "removed": [],
       "changed": [
+        "companyos/autonomyctl",
         "companyos/watchdogctl"
       ],
       "baseline_file_count": 120,
-      "current_file_count": 218
+      "current_file_count": 247
     }
   }
 }
