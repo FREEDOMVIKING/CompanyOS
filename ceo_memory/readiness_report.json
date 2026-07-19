@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-19T18:40:38.034095+00:00",
-  "readiness_score": 99.03,
+  "generated_at": "2026-07-19T19:01:56.815862+00:00",
+  "readiness_score": 98.07,
   "controllers": [
     {
       "name": "operationsctl",
@@ -43,12 +43,14 @@
       "ready": true
     }
   ],
-  "enabled_scheduler_jobs": 116,
+  "enabled_scheduler_jobs": 117,
   "health_files_checked": 196,
   "issues": [
     {
       "type": "unhealthy_components",
       "items": [
+        "autonomous_operations_health.json",
+        "mission_control_health.json",
         "github_read_health.json",
         "drift_health.json"
       ]
