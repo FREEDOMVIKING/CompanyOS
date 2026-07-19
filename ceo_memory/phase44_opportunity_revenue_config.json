@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "mode": "autonomous_opportunity_to_revenue",
+  "max_opportunities_per_cycle": 10,
+  "minimum_priority_score": 55,
+  "minimum_expected_value_usd": 25,
+  "require_evidence": true,
+  "require_registered_external_action_type": true,
+  "require_phase41_router": true,
+  "require_phase43_feedback_loop": true,
+  "require_financial_actions_to_use_existing_treasury_controls": true,
+  "allowed_action_types": [
+    "business_email",
+    "customer_message",
+    "public_publish",
+    "deploy_existing_approved_target",
+    "treasury_transfer"
+  ],
+  "blocked_without_owner_approval": [
+    "contractual_commitment",
+    "mass_outreach",
+    "paid_ad_campaign",
+    "new_production_target"
+  ],
+  "scoring_weights": {
+    "expected_value": 0.30,
+    "probability_of_success": 0.20,
+    "urgency": 0.15,
+    "strategic_fit": 0.15,
+    "execution_readiness": 0.10,
+    "risk_penalty": 0.10
+  }
+}
