@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-19T15:10:50.346909+00:00",
+  "generated_at": "2026-07-19T15:26:05.473666+00:00",
   "system_health": {
-    "operations": false,
+    "operations": true,
     "watchdog": true,
     "orchestrator": true,
     "recovery": true,
@@ -9,13 +9,11 @@
     "resources": true,
     "actions": true
   },
-  "unhealthy_components": [
-    "operations"
-  ],
+  "unhealthy_components": [],
   "remaining_supervisor_issues": 0,
   "top_priorities": [
     {
-      "id": "priority-62e031104e6c",
+      "id": "priority-05a1a5349ad4",
       "source_type": "invoice",
       "source_id": "invoice-d7e99861931c",
       "title": "Review receivable: Sample Contractor",
@@ -32,11 +30,11 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T15:10:45.282116+00:00",
+      "created_at": "2026-07-19T15:26:03.832914+00:00",
       "rank": 1
     },
     {
-      "id": "priority-048e9701336a",
+      "id": "priority-ab0dbca8d5ef",
       "source_type": "invoice",
       "source_id": "e2e-invoice-001",
       "title": "Review receivable: E2E Test Customer",
@@ -53,11 +51,11 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T15:10:45.282126+00:00",
+      "created_at": "2026-07-19T15:26:03.832927+00:00",
       "rank": 2
     },
     {
-      "id": "priority-ddce90f286cd",
+      "id": "priority-2a02844dc97c",
       "source_type": "followup",
       "source_id": "followup-f51333cfa177",
       "title": "Review follow-up: Sample Contractor",
@@ -74,13 +72,13 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T15:10:45.282101+00:00",
+      "created_at": "2026-07-19T15:26:03.832897+00:00",
       "rank": 3
     },
     {
-      "id": "priority-e336c8ed34bf",
+      "id": "priority-155b254156e9",
       "source_type": "opportunity",
-      "source_id": "oppdisc-594101e1f0af",
+      "source_id": "oppdisc-e2ba916b1082",
       "title": "Recover receivable: Sample Contractor",
       "category": "cash_recovery",
       "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
@@ -95,13 +93,13 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T15:10:45.281916+00:00",
+      "created_at": "2026-07-19T15:26:03.832677+00:00",
       "rank": 4
     },
     {
-      "id": "priority-8abb11d57cfb",
+      "id": "priority-fc484ffae746",
       "source_type": "opportunity",
-      "source_id": "oppdisc-a104dca3a713",
+      "source_id": "oppdisc-c7891855fe83",
       "title": "Recover receivable: E2E Test Customer",
       "category": "cash_recovery",
       "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
@@ -116,7 +114,7 @@
       "recommended_action": "owner_review",
       "owner_approval_required": true,
       "external_action_authorized": false,
-      "created_at": "2026-07-19T15:10:45.281936+00:00",
+      "created_at": "2026-07-19T15:26:03.832700+00:00",
       "rank": 5
     }
   ],

@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "execution_mode": "policy_gated_autonomous",
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "max_transactions_per_cycle": 5,
+  "minimum_seconds_between_broadcasts": 10,
+  "require_phase32_authorization": true,
+  "require_registered_destination": true,
+  "require_live_balance_check": true,
+  "require_preflight": true,
+  "require_confirmation": true,
+  "stop_on_first_execution_failure": true,
+  "automatic_receiving": true,
+  "automatic_execution": true,
+  "automatic_signing": true,
+  "automatic_broadcast": true,
+  "kill_switch": false,
+  "supported_live_routes": {
+    "solana": ["SOL"]
+  },
+  "future_routes": {
+    "solana": ["USDT-SPL", "USDC-SPL"],
+    "evm": ["ETH", "USDT-ERC20", "USDC-ERC20"],
+    "bitcoin": ["BTC"]
+  }
+}
