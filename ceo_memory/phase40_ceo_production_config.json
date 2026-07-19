@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "mode": "structured_decision_to_governed_execution",
+  "require_explicit_treasury_action_type": true,
+  "require_structured_fields": true,
+  "require_phase38b_promotion": true,
+  "require_registered_destination": true,
+  "require_phase32_policy": true,
+  "require_phase37_safety": true,
+  "require_phase39_execution": true,
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "max_decisions_per_cycle": 5,
+  "stop_on_first_failure": true,
+  "allowed_production_routes": {
+    "solana": ["SOL"]
+  }
+}
