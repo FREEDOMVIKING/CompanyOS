@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "treasury_mode": "crypto_only",
+  "receiving": {
+    "automatic": true,
+    "chains": ["solana", "evm", "bitcoin"],
+    "assets": ["SOL", "USDT-SPL", "USDC-SPL", "ETH", "USDT-ERC20", "USDC-ERC20", "BTC"]
+  },
+  "outgoing": {
+    "automatic_signing_enabled": true,
+    "daily_total_limit_usd": 20000,
+    "single_transaction_auto_limit_usd": 15000,
+    "above_single_limit_requires_owner_approval": true,
+    "above_daily_limit_requires_owner_approval": true,
+    "require_balance_check": true,
+    "require_network_match": true,
+    "require_destination_validation": true,
+    "require_preflight_when_supported": true,
+    "require_audit_log": true
+  },
+  "signer": {
+    "mode": "dedicated_treasury_signer",
+    "never_store_private_keys_in_repo": true,
+    "never_write_private_keys_to_logs": true,
+    "never_put_private_keys_in_ai_prompts": true
+  }
+}
