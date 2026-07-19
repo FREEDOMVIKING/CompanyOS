@@ -907,8 +907,1008 @@
         "result_count": 0,
         "results": []
       }
+    },
+    {
+      "memory_id": "5f0f3edcb19299224ab0",
+      "fingerprint": "5f0f3edcb19299224ab0888e389bf4b3b937ffcadbbc6dff275cc55be5a94544",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:17:13.420611+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:13.329733+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "\\n      \\\\\\\" M ceo_memory/internal_resource_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/opportunity_action_scores.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/opportunity_discovery_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/performance_analytics_metrics.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/portfolio_resource_priorities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/rebalanced_opportunity_portfolio.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/retired_opportunities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_assignment_plan.json\\\\\\\",\\\\n      \\\\\\\"?? agents/autonomy_watchdog.py\\\\\\\",\\\\n      \\\\\\\"?? agents/improvement_queue_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/opportunity_promotion_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/phase23_bundle2_controller.py\\\\\\\",\\\\n      \\\\\\\"?? agents/provider_health_router.py\\\\\\\",\\\\n      \\\\\\\"?? agents/specialist_performance_learner.py\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/executive_briefing.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/phase23_bundle2_config.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/specialist_performance_profiles.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/autonomywatchdogctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/executivebriefctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/improvementqueuectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/opportunitypromotectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/phase23bundle2ctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/providerhealthctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/specialistlearningctl\\\\\\\",\\\\n      \\\\\\\"?? install_phase23_bundle2.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 37,\\n    \\\"runtime_only_change_count\\\": 50,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.216376+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.293794+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.594009+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.661903+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.737883+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.815044+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.900290+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:11.969765+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.053564+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.134750+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:17:12.134467+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.210950+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.286064+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:17:12.285768+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.362441+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.439426+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.515916+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.591788+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.666117+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.734247+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_queue_consumer_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.827483+00:00\",\n    \"completed_count\": 0,\n    \"pending_count\": 0,\n    \"completed\": [],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_result_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.906074+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_result_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:12.983873+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_insight_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:13.053048+00:00\",\n    \"accepted_count\": 0,\n    \"pending_count\": 0,\n    \"rejected_count\": 0,\n    \"accepted\": [],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_insight_decision_synthesis_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:13.130470+00:00\",\n    \"decision_count\": 0,\n    \"rejected_count\": 0,\n    \"decisions\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:13.202390+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:13.281071+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_live_reasoning_bridge_complete\",\n  \"payload\": {\n    \"generated_at\": \"2026-07-19T02:17:13.325663+00:00\",\n    \"validated_insights\": [],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 0,
+        "failed_steps": [],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "b6a238a36d3b5a31c031",
+      "fingerprint": "b6a238a36d3b5a31c0312159acd88368b75231df19544273af17f0442d3ae9c3",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:17:13.420667+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:12.983689+00:00",
+        "insight_count": 0,
+        "insights": []
+      }
+    },
+    {
+      "memory_id": "d174582594b025549aed",
+      "fingerprint": "d174582594b025549aed4f6b9143269ef9513cabfb9aaf8b127cefab1925fc09",
+      "source": "ceo_decision_candidates.json",
+      "captured_at": "2026-07-19T02:17:13.420709+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:13.130179+00:00",
+        "decision_count": 0,
+        "decisions": [],
+        "note": "Decision candidates are internal recommendations only and grant no new execution authority."
+      }
+    },
+    {
+      "memory_id": "6208bc5211faf314de2a",
+      "fingerprint": "6208bc5211faf314de2af901a341d114527010d64da3a759ee2d6f051cc45833",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:17:13.420755+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:13.202192+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "146da8db33c5df3e5c8c",
+      "fingerprint": "146da8db33c5df3e5c8c5de3404c4e93390f5c43f03d67564e6653d600292475",
+      "source": "opportunity_discovery_results.json",
+      "captured_at": "2026-07-19T02:17:13.420831+00:00",
+      "data": {
+        "schema_version": 1,
+        "results": {
+          "generated_at": "2026-07-19T02:16:34.186680+00:00",
+          "count": 4,
+          "total_estimated_value": 25250.0,
+          "opportunities": [
+            {
+              "id": "oppdisc-4edc51b22948",
+              "title": "Recover receivable: Sample Contractor",
+              "category": "cash_recovery",
+              "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+              "source": "invoice-d7e99861931c",
+              "score": 87,
+              "confidence": 92,
+              "revenue_potential": 90,
+              "ease_of_execution": 68,
+              "evidence_strength": 95,
+              "estimated_value": 11500.0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:16:34.186507+00:00"
+            },
+            {
+              "id": "oppdisc-de598f902f54",
+              "title": "Recover receivable: E2E Test Customer",
+              "category": "cash_recovery",
+              "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+              "source": "e2e-invoice-001",
+              "score": 87,
+              "confidence": 92,
+              "revenue_potential": 90,
+              "ease_of_execution": 68,
+              "evidence_strength": 95,
+              "estimated_value": 1250.0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:16:34.186561+00:00"
+            },
+            {
+              "id": "oppdisc-7c8e45322199",
+              "title": "Advance lead: Driveway Replacement",
+              "category": "sales",
+              "description": "Move Sample Contractor from new toward an approved proposal.",
+              "source": "lead-2567cdb19ba6",
+              "score": 80,
+              "confidence": 78,
+              "revenue_potential": 85,
+              "ease_of_execution": 72,
+              "evidence_strength": 82,
+              "estimated_value": 12500.0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:16:34.186337+00:00"
+            },
+            {
+              "id": "oppdisc-10cab4b27a29",
+              "title": "Create first customer retention offer",
+              "category": "retention",
+              "description": "Use existing customer records to design a repeat-service or maintenance offer for owner review.",
+              "source": "customer_base",
+              "score": 65,
+              "confidence": 64,
+              "revenue_potential": 70,
+              "ease_of_execution": 66,
+              "evidence_strength": 58,
+              "estimated_value": 0,
+              "status": "discovered",
+              "owner_approval_required": true,
+              "external_action_authorized": false,
+              "created_at": "2026-07-19T02:16:34.186610+00:00"
+            }
+          ],
+          "automatic_external_research": false,
+          "automatic_customer_contact": false,
+          "automatic_campaign_launch": false,
+          "automatic_external_execution": false,
+          "automatic_publication": false,
+          "automatic_spending": false
+        },
+        "last_updated_at": "2026-07-19T02:16:34.186694+00:00"
+      }
+    },
+    {
+      "memory_id": "3e1e37af4190f0152b58",
+      "fingerprint": "3e1e37af4190f0152b58f601f54c5f80864ecf6fa891da33773de20c6455988a",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:17:13.420874+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:12.210950+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "332abc8a262a98ed691d",
+      "fingerprint": "332abc8a262a98ed691d3c587e5fe9518f124f584e78b5e5a7c87f8cf9856d58",
+      "source": "outcome_tracker_report.json",
+      "captured_at": "2026-07-19T02:17:13.420972+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:01:26.128314+00:00",
+        "kpis": {
+          "operating_health_score": 60.0,
+          "scheduler_reliability_percent": 98.9,
+          "successful_jobs": 90,
+          "failed_jobs": 1,
+          "internal_action_failures": 0,
+          "active_goals": 10
+        },
+        "goal_outcomes": [
+          {
+            "id": "improvement-improvement-74248b151a70",
+            "title": "Improve receivable recovery process",
+            "rank": 1,
+            "progress_score": 84.06,
+            "status": "on_track"
+          },
+          {
+            "id": "priority-invoice-d7e99861931c",
+            "title": "Review receivable: Sample Contractor",
+            "rank": 2,
+            "progress_score": 82.21,
+            "status": "on_track"
+          },
+          {
+            "id": "priority-e2e-invoice-001",
+            "title": "Review receivable: E2E Test Customer",
+            "rank": 3,
+            "progress_score": 82.21,
+            "status": "on_track"
+          },
+          {
+            "id": "improvement-improvement-0c53d5c3062f",
+            "title": "Clear pending CEO decisions",
+            "rank": 4,
+            "progress_score": 81.43,
+            "status": "on_track"
+          },
+          {
+            "id": "improve-operating-health",
+            "title": "Improve operating health score",
+            "rank": 5,
+            "progress_score": 81.09,
+            "status": "on_track"
+          },
+          {
+            "id": "clear-pending-decisions",
+            "title": "Clear pending CEO decisions",
+            "rank": 6,
+            "progress_score": 80.93,
+            "status": "on_track"
+          },
+          {
+            "id": "protect-expected-cash-inflow",
+            "title": "Protect expected cash inflow",
+            "rank": 7,
+            "progress_score": 79.96,
+            "status": "on_track"
+          },
+          {
+            "id": "improvement-improvement-ea14bec51373",
+            "title": "Reduce pending task backlog",
+            "rank": 8,
+            "progress_score": 79.13,
+            "status": "on_track"
+          },
+          {
+            "id": "priority-followup-f51333cfa177",
+            "title": "Review follow-up: Sample Contractor",
+            "rank": 9,
+            "progress_score": 78.81,
+            "status": "on_track"
+          },
+          {
+            "id": "priority-oppdisc-0547762c7ae2",
+            "title": "Recover receivable: Sample Contractor",
+            "rank": 10,
+            "progress_score": 76.45,
+            "status": "on_track"
+          }
+        ],
+        "needs_attention": []
+      }
+    },
+    {
+      "memory_id": "9fd73ca54b480a947e31",
+      "fingerprint": "9fd73ca54b480a947e319d68de2974f782b15830ef290a7c8818664b9215a925",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:17:13.421007+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:12.827390+00:00",
+        "result_count": 0,
+        "results": []
+      }
+    },
+    {
+      "memory_id": "072f458bc99f2ad6e0eb",
+      "fingerprint": "072f458bc99f2ad6e0ebf672d8451ad8613fcde4da0b05e1ef15fb22ed93871a",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:17:15.473828+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:15.379394+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "son\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/performance_analytics_metrics.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/portfolio_resource_priorities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/rebalanced_opportunity_portfolio.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/retired_opportunities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_assignment_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_runtime_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_work_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/validated_insights.json\\\\\\\",\\\\n      \\\\\\\"?? agents/autonomy_watchdog.py\\\\\\\",\\\\n      \\\\\\\"?? agents/improvement_queue_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/opportunity_promotion_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/phase23_bundle2_controller.py\\\\\\\",\\\\n      \\\\\\\"?? agents/provider_health_router.py\\\\\\\",\\\\n      \\\\\\\"?? agents/specialist_performance_learner.py\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/executive_briefing.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/phase23_bundle2_config.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/specialist_performance_profiles.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/autonomywatchdogctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/executivebriefctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/improvementqueuectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/opportunitypromotectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/phase23bundle2ctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/providerhealthctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/specialistlearningctl\\\\\\\",\\\\n      \\\\\\\"?? install_phase23_bundle2.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 41,\\n    \\\"runtime_only_change_count\\\": 50,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.045003+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.135878+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.463490+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.545927+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.622579+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.714062+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.795763+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:13.870352+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:13.969530+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.051117+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:17:14.050842+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.130794+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.198021+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:17:14.197766+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.276439+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.363750+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.438507+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.523504+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.618571+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.708799+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_queue_consumer_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.821903+00:00\",\n    \"completed_count\": 0,\n    \"pending_count\": 0,\n    \"completed\": [],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_result_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.914365+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_result_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:14.999268+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_insight_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:15.091174+00:00\",\n    \"accepted_count\": 0,\n    \"pending_count\": 0,\n    \"rejected_count\": 0,\n    \"accepted\": [],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_insight_decision_synthesis_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:15.160254+00:00\",\n    \"decision_count\": 0,\n    \"rejected_count\": 0,\n    \"decisions\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:15.240724+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:15.331073+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_live_reasoning_bridge_complete\",\n  \"payload\": {\n    \"generated_at\": \"2026-07-19T02:17:15.375900+00:00\",\n    \"validated_insights\": [],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 0,
+        "failed_steps": [],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "4e7c2f3a03acc1b82547",
+      "fingerprint": "4e7c2f3a03acc1b825476959a3ea7d2e6d6d8b29bdbd93fc9b313a4b36603bce",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:17:15.473890+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:14.999103+00:00",
+        "insight_count": 0,
+        "insights": []
+      }
+    },
+    {
+      "memory_id": "9a61fb80a88b9bd5a420",
+      "fingerprint": "9a61fb80a88b9bd5a42026dcb5d782ce24ff4c49c9a351cf8f7363faf5eab40f",
+      "source": "ceo_decision_candidates.json",
+      "captured_at": "2026-07-19T02:17:15.473933+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:15.160054+00:00",
+        "decision_count": 0,
+        "decisions": [],
+        "note": "Decision candidates are internal recommendations only and grant no new execution authority."
+      }
+    },
+    {
+      "memory_id": "42415dcb8d1c06063346",
+      "fingerprint": "42415dcb8d1c060633467365cf61400b7d089e34785107f03efa0b3c3bbdd199",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:17:15.473972+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:15.240460+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "f9891cd757590b9f6c5d",
+      "fingerprint": "f9891cd757590b9f6c5d18b2630fd5f46bb9bff55be3f26d7e269e5a2dbe68a6",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:17:15.474079+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:14.130794+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "8aa36a8128894b361ad7",
+      "fingerprint": "8aa36a8128894b361ad7a68789af9bbfe3d8a3c88a15389ab71d73fdf3f47f1f",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:17:15.474181+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:14.821820+00:00",
+        "result_count": 0,
+        "results": []
+      }
+    },
+    {
+      "memory_id": "499dfbdd4cb0f18e8fe0",
+      "fingerprint": "499dfbdd4cb0f18e8fe0b26365b7a56f0e7c62bdb997001d028e6c21cdd4980a",
+      "source": "autonomy_core_report.json",
+      "captured_at": "2026-07-19T02:17:22.923381+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:22.761965+00:00",
+        "steps": [
+          {
+            "step": "readiness_recovery",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "d.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/portfolio_resource_priorities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/rebalanced_opportunity_portfolio.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/retired_opportunities.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/self_improvement_proposals.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_assignment_plan.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_runtime_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/specialist_work_results.json\\\\\\\",\\\\n      \\\\\\\" M ceo_memory/validated_insights.json\\\\\\\",\\\\n      \\\\\\\"?? agents/autonomy_watchdog.py\\\\\\\",\\\\n      \\\\\\\"?? agents/improvement_queue_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/opportunity_promotion_engine.py\\\\\\\",\\\\n      \\\\\\\"?? agents/phase23_bundle2_controller.py\\\\\\\",\\\\n      \\\\\\\"?? agents/provider_health_router.py\\\\\\\",\\\\n      \\\\\\\"?? agents/specialist_performance_learner.py\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/executive_briefing.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/phase23_bundle2_config.json\\\\\\\",\\\\n      \\\\\\\"?? ceo_memory/specialist_performance_profiles.json\\\\\\\",\\\\n      \\\\\\\"?? companyos/autonomywatchdogctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/executivebriefctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/improvementqueuectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/opportunitypromotectl\\\\\\\",\\\\n      \\\\\\\"?? companyos/phase23bundle2ctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/providerhealthctl\\\\\\\",\\\\n      \\\\\\\"?? companyos/specialistlearningctl\\\\\\\",\\\\n      \\\\\\\"?? install_phase23_bundle2.sh\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"working_tree_effectively_clean\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\"\\n    },\\n    \\\"source_change_count\\\": 52,\\n    \\\"runtime_only_change_count\\\": 50,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": true,\\n    \\\"change_risk_score\\\": 30,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:17.764832+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": 85\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:17.904180+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "opportunity_cycle",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_activation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:18.452965+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"activated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"activated\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"translation\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_translation_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:18.638094+00:00\\\",\\n    \\\"translated_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"actions\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"queue_coordination\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:18.812609+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"execution_handoff\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:18.920728+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"guarded_execution\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:19.041706+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"step\": \"outcome_feedback\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_outcome_feedback_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T02:17:19.160757+00:00\\\",\\n    \\\"updates\\\": [],\\n    \\\"ranked_actions\\\": [],\\n    \\\"top_action\\\": null,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failure_count\": 0,\n    \"failed_steps\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_allocation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"opportunity_portfolio_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:19.308782+00:00\",\n    \"eligible_count\": 0,\n    \"selected_count\": 0,\n    \"active_portfolio\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_rebalance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_rebalance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:19.413252+00:00\",\n    \"active_count\": 0,\n    \"removed\": [],\n    \"replacements\": [],\n    \"replacement_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"portfolio\": {\n    \"generated_at\": \"2026-07-19T02:17:19.412900+00:00\",\n    \"active_count\": 0,\n    \"opportunities\": []\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "portfolio_performance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"portfolio_performance_evaluation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:19.561316+00:00\",\n    \"evaluated_count\": 0,\n    \"priority_count\": 0,\n    \"ranked\": [],\n    \"priority_candidates\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "internal_resources",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_resource_allocation_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:19.689462+00:00\",\n    \"candidate_count\": 0,\n    \"allocation_count\": 0,\n    \"allocations\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  },\n  \"plan\": {\n    \"generated_at\": \"2026-07-19T02:17:19.689125+00:00\",\n    \"total_attention_units\": 100,\n    \"allocated_units\": 0,\n    \"allocations\": [],\n    \"note\": \"Attention units are internal planning weights only; no money or external resources are moved.\"\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_delegation",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_delegation_plan_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:19.816541+00:00\",\n    \"assignment_count\": 0,\n    \"assignments\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "multiagent_routing",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"controlled_multiagent_routing_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:19.956673+00:00\",\n    \"queued_count\": 0,\n    \"blocked_count\": 0,\n    \"queued\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_result_requests",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_work_result_collection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:20.115515+00:00\",\n    \"prepared_count\": 0,\n    \"blocked_count\": 0,\n    \"prepared\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_queue",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_queue_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:20.258434+00:00\",\n    \"added_count\": 0,\n    \"total_queued_count\": 0,\n    \"blocked_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_worker",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_internal_worker_cycle_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:20.385944+00:00\",\n    \"processed_count\": 0,\n    \"blocked_count\": 0,\n    \"processed\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "specialist_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:20.526936+00:00\",\n    \"added_count\": 0,\n    \"blocked_count\": 0,\n    \"total_task_count\": 0,\n    \"added\": [],\n    \"blocked\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "live_specialists",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_queue_consumer_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:20.676504+00:00\",\n    \"completed_count\": 0,\n    \"pending_count\": 0,\n    \"completed\": [],\n    \"pending\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "result_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"live_specialist_result_bridge_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:21.785128+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_result_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "validated_insights",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"validated_insight_refresh_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:21.918604+00:00\",\n    \"added_count\": 0,\n    \"rejected_count\": 0,\n    \"total_insight_count\": 0,\n    \"added\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_insight_integration",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"specialist_insight_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:22.137129+00:00\",\n    \"accepted_count\": 0,\n    \"pending_count\": 0,\n    \"rejected_count\": 0,\n    \"accepted\": [],\n    \"pending\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_decision_synthesis",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_insight_decision_synthesis_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:22.342460+00:00\",\n    \"decision_count\": 0,\n    \"rejected_count\": 0,\n    \"decisions\": [],\n    \"rejected\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_governance",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_decision_governance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:22.549233+00:00\",\n    \"approved_count\": 0,\n    \"held_count\": 0,\n    \"approved\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "governed_planning",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"governed_execution_planning_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T02:17:22.695175+00:00\",\n    \"plan_count\": 0,\n    \"held_count\": 0,\n    \"plans\": [],\n    \"held\": [],\n    \"automatic_external_write\": false,\n    \"automatic_customer_contact\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_fund_transfer\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "step": "ceo_reasoning_bridge",
+            "result": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_live_reasoning_bridge_complete\",\n  \"payload\": {\n    \"generated_at\": \"2026-07-19T02:17:22.755028+00:00\",\n    \"validated_insights\": [],\n    \"decision_candidates\": [],\n    \"reasoning_boundary\": \"internal_non_destructive_only\",\n    \"external_authority_granted\": false\n  }\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "failure_count": 0,
+        "failed_steps": [],
+        "api_key_available": true,
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "6904c5c9617a4393c352",
+      "fingerprint": "6904c5c9617a4393c352ca669f86dfba898a436079ad0004ef62a84e84e0c451",
+      "source": "validated_insights.json",
+      "captured_at": "2026-07-19T02:17:22.923534+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:21.918176+00:00",
+        "insight_count": 0,
+        "insights": []
+      }
+    },
+    {
+      "memory_id": "385e050cb97f9f0e82f4",
+      "fingerprint": "385e050cb97f9f0e82f4755248de8efc67428f2e7b71c4a331c62b42a4cda7c4",
+      "source": "ceo_decision_candidates.json",
+      "captured_at": "2026-07-19T02:17:22.923653+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:22.341620+00:00",
+        "decision_count": 0,
+        "decisions": [],
+        "note": "Decision candidates are internal recommendations only and grant no new execution authority."
+      }
+    },
+    {
+      "memory_id": "e03b5eb9815ee302639a",
+      "fingerprint": "e03b5eb9815ee302639a54e9a8d11aa7cc5316a7047d0256db5f12ca8aa754a8",
+      "source": "governed_ceo_decisions.json",
+      "captured_at": "2026-07-19T02:17:22.923768+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:22.548568+00:00",
+        "approved_count": 0,
+        "held_count": 0,
+        "approved": [],
+        "held": [],
+        "note": "Governance approval does not grant external, financial, deployment, publication, or destructive authority."
+      }
+    },
+    {
+      "memory_id": "9363910cd47a5327a185",
+      "fingerprint": "9363910cd47a5327a185d99003fa8b0be76b31aafe8da669d65debcdf95d1261",
+      "source": "portfolio_performance_report.json",
+      "captured_at": "2026-07-19T02:17:22.924054+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:19.561316+00:00",
+        "evaluated_count": 0,
+        "priority_count": 0,
+        "ranked": [],
+        "priority_candidates": [],
+        "automatic_external_write": false,
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_fund_transfer": false,
+        "automatic_code_changes": false,
+        "automatic_merge": false,
+        "automatic_deploy": false,
+        "automatic_destructive_actions": false
+      }
+    },
+    {
+      "memory_id": "fc14b54a593650db4447",
+      "fingerprint": "fc14b54a593650db444712db855ccfc0386d259bd27f76d427a3f4516c68d8a4",
+      "source": "specialist_runtime_results.json",
+      "captured_at": "2026-07-19T02:17:22.924343+00:00",
+      "data": {
+        "generated_at": "2026-07-19T02:17:20.676250+00:00",
+        "result_count": 0,
+        "results": []
+      }
     }
   ],
-  "updated_at": "2026-07-19T02:01:23.624330+00:00",
-  "event_count": 16
+  "updated_at": "2026-07-19T02:17:22.924352+00:00",
+  "event_count": 36
 }
