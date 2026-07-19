@@ -1,0 +1,32 @@
+{
+  "enabled": true,
+  "poll_interval_seconds": 300,
+  "chains": {
+    "solana": {
+      "enabled": true,
+      "rpc_url_env": "SOLANA_RPC_URL",
+      "native_asset": "SOL",
+      "track_tokens": ["USDT-SPL", "USDC-SPL"]
+    },
+    "evm": {
+      "enabled": true,
+      "rpc_url_env": "EVM_RPC_URL",
+      "native_asset": "ETH",
+      "track_tokens": ["USDT-ERC20", "USDC-ERC20"]
+    },
+    "bitcoin": {
+      "enabled": true,
+      "rpc_url_env": "BITCOIN_RPC_URL",
+      "native_asset": "BTC"
+    }
+  },
+  "confirmation_policy": {
+    "solana_min_confirmations": 1,
+    "evm_min_confirmations": 2,
+    "bitcoin_min_confirmations": 2
+  },
+  "automatic_receipt_ingest": true,
+  "automatic_balance_updates": true,
+  "automatic_treasury_event_generation": true,
+  "automatic_outgoing_execution": false
+}
