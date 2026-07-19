@@ -11,23 +11,42 @@
   "production_routes": {
     "solana": {
       "SOL": {
-        "enabled": false,
+        "enabled": true,
         "canary_required": true,
         "max_single_usd": 15000,
-        "max_daily_usd": 20000
+        "max_daily_usd": 20000,
+        "promoted_at": "2026-07-19T17:05:29.264783+00:00"
       }
     },
     "evm": {
-      "ETH": {"enabled": false, "canary_required": true},
-      "USDT-ERC20": {"enabled": false, "canary_required": true},
-      "USDC-ERC20": {"enabled": false, "canary_required": true}
+      "ETH": {
+        "enabled": false,
+        "canary_required": true
+      },
+      "USDT-ERC20": {
+        "enabled": false,
+        "canary_required": true
+      },
+      "USDC-ERC20": {
+        "enabled": false,
+        "canary_required": true
+      }
     },
     "bitcoin": {
-      "BTC": {"enabled": false, "canary_required": true}
+      "BTC": {
+        "enabled": false,
+        "canary_required": true
+      }
     },
     "solana_tokens": {
-      "USDT-SPL": {"enabled": false, "canary_required": true},
-      "USDC-SPL": {"enabled": false, "canary_required": true}
+      "USDT-SPL": {
+        "enabled": false,
+        "canary_required": true
+      },
+      "USDC-SPL": {
+        "enabled": false,
+        "canary_required": true
+      }
     }
   }
 }

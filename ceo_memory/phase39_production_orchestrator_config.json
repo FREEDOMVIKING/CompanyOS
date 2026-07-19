@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "mode": "controlled_autonomous_production",
+  "require_phase35_bridge": true,
+  "require_phase37_safety": true,
+  "require_phase38b_promotion": true,
+  "require_registered_destination": true,
+  "require_idempotency": true,
+  "require_fresh_balance_check": true,
+  "require_preflight": true,
+  "require_confirmation": true,
+  "require_kill_switch_off": true,
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "max_requests_per_cycle": 5,
+  "stop_on_first_failure": true,
+  "production_routes": {
+    "solana": ["SOL"]
+  }
+}
