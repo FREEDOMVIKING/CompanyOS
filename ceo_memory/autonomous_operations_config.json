@@ -875,6 +875,16 @@
         "companyos/specialistruntimectl",
         "run"
       ]
+    },
+    {
+      "id": "live-specialist-task-bridge",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/specialistbridgectl",
+        "bridge"
+      ]
     }
   ]
 }

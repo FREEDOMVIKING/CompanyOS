@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T20:38:27.965757+00:00",
+  "generated_at": "2026-07-19T00:51:21.717259+00:00",
   "drift_detected": true,
   "added": [
     "agents/action_dispatcher.py",
@@ -22,6 +22,8 @@
     "agents/fused_decision_selector.py",
     "agents/fused_execution_plan.py",
     "agents/governed_decision_execution_planner.py",
+    "agents/governed_internal_execution_queue.py",
+    "agents/governed_internal_worker.py",
     "agents/guarded_plan_executor.py",
     "agents/internal_resource_allocator.py",
     "agents/operations_dashboard.py",
@@ -43,6 +45,7 @@
     "agents/runtime_aware_preflight.py",
     "agents/specialist_delegation_planner.py",
     "agents/specialist_insight_integrator.py",
+    "agents/specialist_runtime_adapter.py",
     "agents/specialist_work_result_collector.py",
     "agents/state_backup_engine.py",
     "agents/strategic_goal_orchestrator.py",
@@ -66,6 +69,8 @@
     "companyos/fusedselectctl",
     "companyos/fusionctl",
     "companyos/governedplanctl",
+    "companyos/governedqueuectl",
+    "companyos/governedworkerctl",
     "companyos/guardedexecctl",
     "companyos/loopctl",
     "companyos/multiagentroutectl",
@@ -92,6 +97,7 @@
     "companyos/specialistdelegatectl",
     "companyos/specialistinsightctl",
     "companyos/specialistresultctl",
+    "companyos/specialistruntimectl",
     "companyos/strategicalignctl",
     "companyos/strategyorchestratorctl"
   ],
@@ -100,5 +106,5 @@
     "companyos/watchdogctl"
   ],
   "baseline_file_count": 120,
-  "current_file_count": 212
+  "current_file_count": 218
 }
