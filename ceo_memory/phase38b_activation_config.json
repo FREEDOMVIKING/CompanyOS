@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "require_confirmed_canary": true,
+  "require_phase37_safety": true,
+  "require_phase38_route_armed": true,
+  "require_registered_destination": true,
+  "require_idempotency": true,
+  "require_confirmation": true,
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "production_routes": {
+    "solana": {
+      "SOL": {
+        "enabled": false,
+        "canary_required": true,
+        "max_single_usd": 15000,
+        "max_daily_usd": 20000
+      }
+    },
+    "evm": {
+      "ETH": {"enabled": false, "canary_required": true},
+      "USDT-ERC20": {"enabled": false, "canary_required": true},
+      "USDC-ERC20": {"enabled": false, "canary_required": true}
+    },
+    "bitcoin": {
+      "BTC": {"enabled": false, "canary_required": true}
+    },
+    "solana_tokens": {
+      "USDT-SPL": {"enabled": false, "canary_required": true},
+      "USDC-SPL": {"enabled": false, "canary_required": true}
+    }
+  }
+}
