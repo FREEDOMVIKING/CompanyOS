@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cycle_count": 139,
+  "cycle_count": 140,
   "jobs": {
     "integrity-check": {
       "last_started_at": "2026-07-19T01:06:25.985746+00:00",
@@ -1363,23 +1363,71 @@
       "failure_count": 0
     },
     "specialist-runtime-adapter": {
-      "last_started_at": "2026-07-18T21:30:47.423462+00:00",
-      "last_started_epoch": 1784410247.4234622,
+      "last_started_at": "2026-07-19T01:24:26.450914+00:00",
+      "last_started_epoch": 1784424266.450914,
       "last_command": [
         "python",
         "companyos/specialistruntimectl",
         "run"
       ],
       "status": "success",
-      "last_finished_at": "2026-07-18T21:30:47.632392+00:00",
+      "last_finished_at": "2026-07-19T01:24:26.599087+00:00",
       "last_success": true,
       "last_return_code": 0,
-      "last_duration_seconds": 0.209,
+      "last_duration_seconds": 0.148,
+      "run_count": 2,
+      "failure_count": 0
+    },
+    "live-specialist-task-bridge": {
+      "last_started_at": "2026-07-19T01:24:26.600271+00:00",
+      "last_started_epoch": 1784424266.6002707,
+      "last_command": [
+        "python",
+        "companyos/specialistbridgectl",
+        "bridge"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-19T01:24:26.698802+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.099,
+      "run_count": 1,
+      "failure_count": 0
+    },
+    "live-specialist-queue-consumer": {
+      "last_started_at": "2026-07-19T01:24:26.699702+00:00",
+      "last_started_epoch": 1784424266.6997023,
+      "last_command": [
+        "python",
+        "companyos/livespecialistctl",
+        "run"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-19T01:24:26.814846+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.115,
+      "run_count": 1,
+      "failure_count": 0
+    },
+    "live-specialist-result-bridge": {
+      "last_started_at": "2026-07-19T01:24:26.816182+00:00",
+      "last_started_epoch": 1784424266.816182,
+      "last_command": [
+        "python",
+        "companyos/liveresultbridgectl",
+        "integrate"
+      ],
+      "status": "success",
+      "last_finished_at": "2026-07-19T01:24:26.919303+00:00",
+      "last_success": true,
+      "last_return_code": 0,
+      "last_duration_seconds": 0.103,
       "run_count": 1,
       "failure_count": 0
     }
   },
-  "last_cycle_at": "2026-07-19T01:22:28.021716+00:00",
-  "last_cycle_job_count": 20,
+  "last_cycle_at": "2026-07-19T01:24:26.920516+00:00",
+  "last_cycle_job_count": 4,
   "last_cycle_success": true
 }

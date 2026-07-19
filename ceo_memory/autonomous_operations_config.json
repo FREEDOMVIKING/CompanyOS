@@ -895,6 +895,16 @@
         "companyos/livespecialistctl",
         "run"
       ]
+    },
+    {
+      "id": "live-specialist-result-bridge",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/liveresultbridgectl",
+        "integrate"
+      ]
     }
   ]
 }
