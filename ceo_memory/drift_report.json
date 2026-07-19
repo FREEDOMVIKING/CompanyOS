@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T04:31:59.291651+00:00",
+  "generated_at": "2026-07-19T10:59:03.085801+00:00",
   "drift_detected": true,
   "added": [
     "agents/action_dispatcher.py",
@@ -9,7 +9,11 @@
     "agents/adaptive_opportunity_cycle.py",
     "agents/adaptive_plan_executor.py",
     "agents/adaptive_priority_engine.py",
+    "agents/ai_provenance_engine.py",
+    "agents/ai_provider_health_engine.py",
+    "agents/ai_recovery_manager.py",
     "agents/ai_retry_policy.py",
+    "agents/ai_task_router.py",
     "agents/api_usage_tracker.py",
     "agents/approval_gateway.py",
     "agents/approval_policy_engine.py",
@@ -58,6 +62,7 @@
     "agents/live_specialist_queue_consumer.py",
     "agents/live_specialist_result_bridge.py",
     "agents/live_specialist_task_bridge.py",
+    "agents/local_ai_startup_guard.py",
     "agents/market_intelligence_engine.py",
     "agents/milestone_tracker.py",
     "agents/model_fallback_router.py",
@@ -85,6 +90,7 @@
     "agents/phase24_bundle4_controller.py",
     "agents/phase24_bundle5_controller.py",
     "agents/phase24_controller.py",
+    "agents/phase25_bundle1_controller.py",
     "agents/portfolio_capacity_guard.py",
     "agents/portfolio_capital_planner.py",
     "agents/portfolio_decision_engine.py",
@@ -109,6 +115,7 @@
     "agents/specialist_insight_integrator.py",
     "agents/specialist_performance_learner.py",
     "agents/specialist_runtime_adapter.py",
+    "agents/specialist_runtime_adapter.py.backup",
     "agents/specialist_team_builder.py",
     "agents/specialist_work_result_collector.py",
     "agents/state_backup_engine.py",
@@ -122,6 +129,10 @@
     "companyos/actionhandoffctl",
     "companyos/actionregistryctl",
     "companyos/adaptivepriorityctl",
+    "companyos/aiprovenancectl",
+    "companyos/aiproviderhealthctl",
+    "companyos/airecoveryctl",
+    "companyos/aitaskrouterctl",
     "companyos/approvalgatewayctl",
     "companyos/approvalpolicyctl",
     "companyos/autonomywatchdogctl",
@@ -168,6 +179,7 @@
     "companyos/learningmergectl",
     "companyos/liveresultbridgectl",
     "companyos/livespecialistctl",
+    "companyos/localaiguardctl",
     "companyos/loopctl",
     "companyos/marketintelligencectl",
     "companyos/memoryctl",
@@ -197,6 +209,7 @@
     "companyos/phase24bundle4ctl",
     "companyos/phase24bundle5ctl",
     "companyos/phase24ctl",
+    "companyos/phase25bundle1ctl",
     "companyos/planexecutorctl",
     "companyos/portfoliocapacityctl",
     "companyos/portfoliocapitalctl",
@@ -238,5 +251,5 @@
     "companyos/watchdogctl"
   ],
   "baseline_file_count": 120,
-  "current_file_count": 347
+  "current_file_count": 360
 }

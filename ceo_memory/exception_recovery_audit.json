@@ -4769,5 +4769,573 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-07-19T05:47:20.690543+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260719_004616\",\n  \"copied\": [\n    \"backups/system_snapshot_20260719_004616/agents\",\n    \"backups/system_snapshot_20260719_004616/companyos\",\n    \"backups/system_snapshot_20260719_004616/ceo_memory\"\n  ],\n  \"file_count\": 1401,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_220102\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\",\\\\n        \\\\\\\"confidence\\\\\\\": 0.5,\\\\n        \\\\\\\"learned_score\\\\\\\": 50.0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 50.0\\\\n      }\\\\n    ],\\\\n    \\\\\\\"top_action\\\\\\\": \\\\\\\"run-health\\\\\\\",\\\\n    \\\\\\\"top_priority\\\\\\\": 63.5,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      \\\"readiness\\\": {\\n        \\\"success\\\": true,\\n        \\\"return_code\\\": 0,\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"readiness_coordination_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:46:23.801364+00:00\\\\\\\",\\\\n    \\\\\\\"decision\\\\\\\": \\\\\\\"blocked\\\\\\\",\\\\n    \\\\\\\"blockers\\\\\\\": [\\\\n      \\\\\\\"runtime_aware_preflight_not_ready\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"warnings\\\\\\\": [],\\\\n    \\\\\\\"checks\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"runtime_aware_preflight\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": false\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"reliability_score\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"value\\\\\\\": 85\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"watchdog_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"critical_incident_absent\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"resource_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"value\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"recent_backup\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"age_hours\\\\\\\": 0.25\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"integrity_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      }\\\\n    ],\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      \\\"eligibility\\\": {\\n        \\\"success\\\": true,\\n        \\\"return_code\\\": 0,\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_eligibility_evaluated\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T05:46:24.046506+00:00\\\\\\\",\\\\n    \\\\\\\"readiness_decision\\\\\\\": \\\\\\\"blocked\\\\\\\",\\\\n    \\\\\\\"system_ready\\\\\\\": false,\\\\n    \\\\\\\"eligibility\\\\\\\": {\\\\n      \\\\\\\"internal_read_only\\\\\\\": false,\\\\n      \\\\\\\"internal_reversible\\\\\\\": false,\\\\n      \\\\\\\"external_read_only\\\\\\\": false,\\\\n      \\\\\\\"external_write\\\\\\\": false,\\\\n      \\\\\\\"customer_contact\\\\\\\": false,\\\\n      \\\\\\\"publication\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\",\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": []\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      }\\n    },\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:46:23.082389+00:00\",\n      \"finished_at\": \"2026-07-19T05:46:24.159486+00:00\",\n      \"duration_seconds\": 1.077\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\\\\\\\\\\\\\": true,\\\\\\\\n      \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": 200,\\\\\\\\n      \\\\\\\\\\\\\\\"base_url\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"http://127.0.0.1:8080/v1\\\\\\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\\\\\\"routing_policy\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"healthy\\\\\\\\\\\\\\\": true\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"step\\\\\\\": \\\\\\\"task_router\\\\\\\",\\\\n        \\\\\\\"result\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": true,\\\\n          \\\\\\\"return_code\\\\\\\": 0,\\\\n          \\\\\\\"stdout\\\\\\\": \\\\\\\"sight-decision-plan-step-3\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-3-result-insight-decision-plan-step-4\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local-ai-fallback-test-001\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"analysis\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T05:47:15.194762+00:00\",\n      \"finished_at\": \"2026-07-19T05:47:18.368440+00:00\",\n      \"duration_seconds\": 3.174\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T05:47:20.591439+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 682\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T06:19:08.995146+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260719_011753\",\n  \"copied\": [\n    \"backups/system_snapshot_20260719_011753/agents\",\n    \"backups/system_snapshot_20260719_011753/companyos\",\n    \"backups/system_snapshot_20260719_011753/ceo_memory\"\n  ],\n  \"file_count\": 1401,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_222817\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "ion\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\",\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": []\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failed_recovery_actions\\\": [],\\n    \\\"recovery_attempted\\\": true,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T06:18:02.383557+00:00\",\n      \"finished_at\": \"2026-07-19T06:18:08.428940+00:00\",\n      \"duration_seconds\": 6.045\n    },\n    {\n      \"id\": \"opportunity-action-queue\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_queue_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T06:18:08.668390+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"ready_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"ready_actions\\\": [],\\n    \\\"blocked_actions\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T06:18:08.431203+00:00\",\n      \"finished_at\": \"2026-07-19T06:18:08.696258+00:00\",\n      \"duration_seconds\": 0.265\n    },\n    {\n      \"id\": \"ready-action-execution-handoff\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"action_execution_handoff_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T06:18:08.866246+00:00\\\",\\n    \\\"accepted_count\\\": 0,\\n    \\\"rejected_count\\\": 0,\\n    \\\"accepted\\\": [],\\n    \\\"rejected\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T06:18:08.699589+00:00\",\n      \"finished_at\": \"2026-07-19T06:18:08.903113+00:00\",\n      \"duration_seconds\": 0.204\n    },\n    {\n      \"id\": \"guarded-opportunity-action-executor\",\n      \"success\": true,\n      \"return_code\": 0,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"opportunity_action_execution_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-07-19T06:18:09.164792+00:00\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"executed_count\\\": 0,\\n    \\\"blocked_count\\\": 0,\\n    \\\"failure_count\\\": 0,\\n    \\\"results\\\": [],\\n    \\\"blocked\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T06:18:08.907480+00:00\",\n      \"finished_at\": \"2026-07-19T06:18:09.206166+00:00\",\n      \"duration_seconds\": 0.299\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\\\\\\\\\\\\\": true,\\\\\\\\n      \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": 200,\\\\\\\\n      \\\\\\\\\\\\\\\"base_url\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"http://127.0.0.1:8080/v1\\\\\\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\\\\\\"routing_policy\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"healthy\\\\\\\\\\\\\\\": true\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"step\\\\\\\": \\\\\\\"task_router\\\\\\\",\\\\n        \\\\\\\"result\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": true,\\\\n          \\\\\\\"return_code\\\\\\\": 0,\\\\n          \\\\\\\"stdout\\\\\\\": \\\\\\\"sight-decision-plan-step-3\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-3-result-insight-decision-plan-step-4\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local-ai-fallback-test-001\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"analysis\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T06:19:03.191869+00:00\",\n      \"finished_at\": \"2026-07-19T06:19:06.687879+00:00\",\n      \"duration_seconds\": 3.496\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T06:19:08.911620+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 682\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T07:06:13.785870+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260719_020455\",\n  \"copied\": [\n    \"backups/system_snapshot_20260719_020455/agents\",\n    \"backups/system_snapshot_20260719_020455/companyos\",\n    \"backups/system_snapshot_20260719_020455/ceo_memory\"\n  ],\n  \"file_count\": 1401,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_224403\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\",\\\\n        \\\\\\\"confidence\\\\\\\": 0.5,\\\\n        \\\\\\\"learned_score\\\\\\\": 50.0,\\\\n        \\\\\\\"adaptive_priority\\\\\\\": 50.0\\\\n      }\\\\n    ],\\\\n    \\\\\\\"top_action\\\\\\\": \\\\\\\"run-health\\\\\\\",\\\\n    \\\\\\\"top_priority\\\\\\\": 63.5,\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      \\\"readiness\\\": {\\n        \\\"success\\\": true,\\n        \\\"return_code\\\": 0,\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"readiness_coordination_complete\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T07:05:05.619938+00:00\\\\\\\",\\\\n    \\\\\\\"decision\\\\\\\": \\\\\\\"blocked\\\\\\\",\\\\n    \\\\\\\"blockers\\\\\\\": [\\\\n      \\\\\\\"runtime_aware_preflight_not_ready\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"warnings\\\\\\\": [],\\\\n    \\\\\\\"checks\\\\\\\": [\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"runtime_aware_preflight\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": false\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"reliability_score\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"value\\\\\\\": 85\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"watchdog_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"critical_incident_absent\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"resource_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"value\\\\\\\": \\\\\\\"healthy\\\\\\\"\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"recent_backup\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true,\\\\n        \\\\\\\"age_hours\\\\\\\": 0.77\\\\n      },\\\\n      {\\\\n        \\\\\\\"check\\\\\\\": \\\\\\\"integrity_health\\\\\\\",\\\\n        \\\\\\\"passed\\\\\\\": true\\\\n      }\\\\n    ],\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      },\\n      \\\"eligibility\\\": {\\n        \\\"success\\\": true,\\n        \\\"return_code\\\": 0,\\n        \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"execution_eligibility_evaluated\\\\\\\",\\\\n  \\\\\\\"report\\\\\\\": {\\\\n    \\\\\\\"generated_at\\\\\\\": \\\\\\\"2026-07-19T07:05:05.738419+00:00\\\\\\\",\\\\n    \\\\\\\"readiness_decision\\\\\\\": \\\\\\\"blocked\\\\\\\",\\\\n    \\\\\\\"system_ready\\\\\\\": false,\\\\n    \\\\\\\"eligibility\\\\\\\": {\\\\n      \\\\\\\"internal_read_only\\\\\\\": false,\\\\n      \\\\\\\"internal_reversible\\\\\\\": false,\\\\n      \\\\\\\"external_read_only\\\\\\\": false,\\\\n      \\\\\\\"external_write\\\\\\\": false,\\\\n      \\\\\\\"customer_contact\\\\\\\": false,\\\\n      \\\\\\\"publication\\\\\\\": false,\\\\n      \\\\\\\"spending\\\\\\\": false,\\\\n      \\\\\\\"destructive_actions\\\\\\\": false,\\\\n      \\\\\\\"credential_export\\\\\\\": false,\\\\n      \\\\\\\"private_key_export\\\\\\\": false\\\\n    },\\\\n    \\\\\\\"blocked_categories\\\\\\\": [\\\\n      \\\\\\\"internal_read_only\\\\\\\",\\\\n      \\\\\\\"internal_reversible\\\\\\\",\\\\n      \\\\\\\"external_read_only\\\\\\\",\\\\n      \\\\\\\"external_write\\\\\\\",\\\\n      \\\\\\\"customer_contact\\\\\\\",\\\\n      \\\\\\\"publication\\\\\\\",\\\\n      \\\\\\\"spending\\\\\\\",\\\\n      \\\\\\\"destructive_actions\\\\\\\",\\\\n      \\\\\\\"credential_export\\\\\\\",\\\\n      \\\\\\\"private_key_export\\\\\\\"\\\\n    ],\\\\n    \\\\\\\"allowed_categories\\\\\\\": []\\\\n  }\\\\n}\\\\n\\\",\\n        \\\"stderr\\\": \\\"\\\"\\n      }\\n    },\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T07:05:05.207015+00:00\",\n      \"finished_at\": \"2026-07-19T07:05:05.805963+00:00\",\n      \"duration_seconds\": 0.599\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\\\\\\\\\\\\\": true,\\\\\\\\n      \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": 200,\\\\\\\\n      \\\\\\\\\\\\\\\"base_url\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"http://127.0.0.1:8080/v1\\\\\\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\\\\\\"routing_policy\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"healthy\\\\\\\\\\\\\\\": true\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"step\\\\\\\": \\\\\\\"task_router\\\\\\\",\\\\n        \\\\\\\"result\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": true,\\\\n          \\\\\\\"return_code\\\\\\\": 0,\\\\n          \\\\\\\"stdout\\\\\\\": \\\\\\\"sight-decision-plan-step-3\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-3-result-insight-decision-plan-step-4\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local-ai-fallback-test-001\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"analysis\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T07:06:09.183782+00:00\",\n      \"finished_at\": \"2026-07-19T07:06:11.636889+00:00\",\n      \"duration_seconds\": 2.453\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T07:06:13.717052+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 682\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-19T08:40:48.572669+00:00",
+    "action": "recover",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "exception_recovery_complete",
+      "issues": [
+        {
+          "id": "job-failure:ceo-insight-decision-synthesis",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "ceo-insight-decision-synthesis"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        }
+      ],
+      "unresolved": [],
+      "actions": [
+        {
+          "type": "backup",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_backup_created\",\n  \"backup_path\": \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260719_033743\",\n  \"copied\": [\n    \"backups/system_snapshot_20260719_033743/agents\",\n    \"backups/system_snapshot_20260719_033743/companyos\",\n    \"backups/system_snapshot_20260719_033743/ceo_memory\"\n  ],\n  \"file_count\": 1401,\n  \"removed_old_backups\": [\n    \"/data/data/com.termux/files/home/companyos/backups/system_snapshot_20260718_225931\"\n  ],\n  \"automatic_repairs\": false,\n  \"automatic_external_execution\": false\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:ceo-insight-decision-synthesis",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "ceo-insight-decision-synthesis"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\\\\\\"generated_at\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"2026-07-19T08:38:25.027520+00:00\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"system_ready\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\": [],\\\\\\\\n    \\\\\\\\\\\\\\\"rejected\\\\\\\\\\\\\\\": [],\\\\\\\\n    \\\\\\\\\\\\\\\"planned_count\\\\\\\\\\\\\\\": 0,\\\\\\\\n    \\\\\\\\\\\\\\\"rejected_count\\\\\\\\\\\\\\\": 0,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_external_write\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_code_changes\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_merge\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_deploy\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_publication\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_spending\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_destructive_actions\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"credential_export\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"private_key_export\\\\\\\\\\\\\\\": false\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"step\\\\\\\": \\\\\\\"guarded_execution\\\\\\\",\\\\n        \\\\\\\"result\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": true,\\\\n          \\\\\\\"return_code\\\\\\\": 0,\\\\n          \\\\\\\"stdout\\\\\\\": \\\\\\\"{\\\\\\\\n  \\\\\\\\\\\\\\\"success\\\\\\\\\\\\\\\": true,\\\\\\\\n  \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"guarded_execution_complete\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\\\\\\"report\\\\\\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\\\\\\"generated_at\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"2026-07-19T08:38:25.255934+00:00\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"results\\\\\\\\\\\\\\\": [],\\\\\\\\n    \\\\\\\\\\\\\\\"executed_count\\\\\\\\\\\\\\\": 0,\\\\\\\\n    \\\\\\\\\\\\\\\"failed_count\\\\\\\\\\\\\\\": 0,\\\\\\\\n    \\\\\\\\\\\\\\\"blocked_count\\\\\\\\\\\\\\\": 0,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_external_write\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_code_changes\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_merge\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_deploy\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_publication\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_spending\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_destructive_actions\\\\\\\\\\\\\\\": false\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"step\\\\\\\": \\\\\\\"post_execution_feedback\\\\\\\",\\\\n        \\\\\\\"result\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": true,\\\\n          \\\\\\\"return_code\\\\\\\": 0,\\\\n          \\\\\\\"stdout\\\\\\\": \\\\\\\"{\\\\\\\\n  \\\\\\\\\\\\\\\"success\\\\\\\\\\\\\\\": true,\\\\\\\\n  \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"execution_feedback_complete\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\\\\\\"report\\\\\\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\\\\\\"generated_at\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"2026-07-19T08:38:25.507084+00:00\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"adjustments\\\\\\\\\\\\\\\": [],\\\\\\\\n    \\\\\\\\\\\\\\\"action_count\\\\\\\\\\\\\\\": 0,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_external_write\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_code_changes\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_merge\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_deploy\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_publication\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_spending\\\\\\\\\\\\\\\": false,\\\\\\\\n    \\\\\\\\\\\\\\\"automatic_destructive_actions\\\\\\\\\\\\\\\": false\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      }\\\\n    ],\\\\n    \\\\\\\"failure_count\\\\\\\": 0,\\\\n    \\\\\\\"failed_steps\\\\\\\": [],\\\\n    \\\\\\\"automatic_external_write\\\\\\\": false,\\\\n    \\\\\\\"automatic_code_changes\\\\\\\": false,\\\\n    \\\\\\\"automatic_git_reset\\\\\\\": false,\\\\n    \\\\\\\"automatic_git_clean\\\\\\\": false,\\\\n    \\\\\\\"automatic_merge\\\\\\\": false,\\\\n    \\\\\\\"automatic_deploy\\\\\\\": false,\\\\n    \\\\\\\"automatic_publication\\\\\\\": false,\\\\n    \\\\\\\"automatic_spending\\\\\\\": false,\\\\n    \\\\\\\"automatic_destructive_actions\\\\\\\": false\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failed_steps\\\": [],\\n    \\\"failure_count\\\": 0,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T08:38:15.759673+00:00\",\n      \"finished_at\": \"2026-07-19T08:38:25.646863+00:00\",\n      \"duration_seconds\": 9.887\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:autonomous-ai-operations-core",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "autonomous-ai-operations-core"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "rnal resource allocation and decision-making validation.\\\\\\\",\\\\n  \\\\\\\"findings\\\\\\\": [\\\\n    {\\\\n      \\\\\\\"type\\\\\\\": \\\\\\\"governance_status\\\\\\\",\\\\n      \\\\\\\"detail\\\\\\\": \\\\\\\"Decision parameters are currently locked within the governance framework; no external state changes detected.\\\\\\\"\\\\n    },\\\\n    {\\\\n      \\\\\\\"type\\\\\\\": \\\\\\\"resource_availability\\\\\\\",\\\\n      \\\\\\\"detail\\\\\\\": \\\\\\\"Internal computational resources are sufficient for simulation and predictive modeling of the next phase.\\\\\\\"\\\\n    },\\\\n    {\\\\n      \\\\\\\"type\\\\\\\": \\\\\\\"dependency_mapping\\\\\\\",\\\\n      \\\\\\\"detail\\\\\\\": \\\\\\\"The next phase requires validation of the current decision's impact on downstream operational modules.\\\\\\\"\\\\n    }\\\\n  ],\\\\n  \\\\\\\"recommendations\\\\\\\": [\\\\n    \\\\\\\"Initiate a non-destructive simulation of the decision outcome to identify potential edge-case failures.\\\\\\\",\\\\n    \\\\\\\"Cross-reference the decision parameters against the current system constraints to ensure compliance.\\\\\\\"\\\\n  ],\\\\n  \\\\\\\"risks\\\\\\\": [\\\\n    {\\\\n      \\\\\\\"level\\\\\\\": \\\\\\\"low\\\\\\\",\\\\n      \\\\\\\"description\\\\\\\": \\\\\\\"Potential divergence between simulated outcomes and real-world execution if environmental variables are highly volatile.\\\\\\\"\\\\n    }\\\\n  ],\\\\n  \\\\\\\"next_internal_actions\\\\\\\": [\\\\n    \\\\\\\"Run predictive impact simulation for opportunity 4bcc8f1b89a18fa5.\\\\\\\",\\\\n    \\\\\\\"Generate a comparative report between the governed decision and baseline operational metrics.\\\\\\\",\\\\n    \\\\\\\"Update the internal decision log with simulation results.\\\\\\\"\\\\n  ],\\\\n  \\\\\\\"confidence\\\\\\\": 0.92\\\\n}\\\\n```\\\",\\n        \\\"source_insight_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"recommended_direction\\\": \\\"continue_internal_analysis\\\",\\n        \\\"supporting_recommendations\\\": [],\\n        \\\"known_risks\\\": [],\\n        \\\"proposed_internal_actions\\\": [],\\n        \\\"decision_class\\\": \\\"internal_candidate\\\",\\n        \\\"status\\\": \\\"ready_for_ceo_internal_review\\\",\\n        \\\"created_at\\\": \\\"2026-07-19T07:06:00.353197+00:00\\\",\\n        \\\"governance_status\\\": \\\"approved_internal_only\\\",\\n        \\\"execution_authority\\\": \\\"internal_non_destructive_only\\\",\\n        \\\"governed_at\\\": \\\"2026-07-19T08:38:33.750164+00:00\\\"\\n      },\\n      {\\n        \\\"decision_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision\\\",\\n        \\\"opportunity_id\\\": \\\"4bcc8f1b89a18fa5\\\",\\n        \\\"title\\\": \\\"Untitled internal decision\\\",\\n        \\\"source_insight_id\\\": \\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"recommended_direction\\\": \\\"continue_internal_analysis\\\",\\n        \\\"supporting_recommendations\\\": [],\\n        \\\"known_risks\\\": [],\\n        \\\"proposed_internal_actions\\\": [],\\n        \\\"decision_class\\\": \\\"internal_candidate\\\",\\n        \\\"status\\\": \\\"ready_for_ceo_internal_review\\\",\\n        \\\"created_at\\\": \\\"2026-07-19T07:06:00.353202+00:00\\\",\\n        \\\"governance_status\\\": \\\"approved_internal_only\\\",\\n        \\\"execution_authority\\\": \\\"internal_non_destructive_only\\\",\\n        \\\"governed_at\\\": \\\"2026-07-19T08:38:33.750178+00:00\\\"\\n      }\\n    ],\\n    \\\"held\\\": [],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_customer_contact\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_fund_transfer\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T08:38:33.520738+00:00\",\n      \"finished_at\": \"2026-07-19T08:38:33.795213+00:00\",\n      \"duration_seconds\": 0.275\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-business-workflow-orchestration",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-business-workflow-orchestration"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "\\\\\\\\\\\\\\\": true,\\\\\\\\n      \\\\\\\\\\\\\\\"status\\\\\\\\\\\\\\\": 200,\\\\\\\\n      \\\\\\\\\\\\\\\"base_url\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"http://127.0.0.1:8080/v1\\\\\\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\\\\\\"routing_policy\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\\\\\\"healthy\\\\\\\\\\\\\\\": true\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      },\\\\n      {\\\\n        \\\\\\\"step\\\\\\\": \\\\\\\"task_router\\\\\\\",\\\\n        \\\\\\\"result\\\\\\\": {\\\\n          \\\\\\\"success\\\\\\\": true,\\\\n          \\\\\\\"return_code\\\\\\\": 0,\\\\n          \\\\\\\"stdout\\\\\\\": \\\\\\\"sight-decision-plan-step-3\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-3-result-insight-decision-plan-step-3-result-insight-decision-plan-step-4\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"review\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"research-91be6e6a1b5efa2ef8-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-2-result-insight-decision-plan-step-1\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"plan\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      },\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\\\\\\"work_id\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local-ai-fallback-test-001\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"action_type\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"analysis\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"primary_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"openai\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"fallback_provider\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"local_llama\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"route\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"primary_then_local_fallback\\\\\\\\\\\\\\\",\\\\\\\\n        \\\\\\\\\\\\\\\"local_available\\\\\\\\\\\\\\\": true,\\\\\\\\n        \\\\\\\\\\\\\\\"execution_boundary\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"internal_non_destructive_only\\\\\\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\\\\\\",\\\\n          \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\"\\\\n        }\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ],\\n    \\\"failure_count\\\": 0,\\n    \\\"failed_steps\\\": []\\n  }\\n}\\n\",\n      \"stderr\": \"\",\n      \"started_at\": \"2026-07-19T08:40:43.036326+00:00\",\n      \"finished_at\": \"2026-07-19T08:40:46.593337+00:00\",\n      \"duration_seconds\": 3.557\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "issue-recovery",
+          "issue": {
+            "id": "job-failure:phase24-project-execution-incubation",
+            "severity": "medium",
+            "recovery": "run-scheduler-cycle",
+            "job_id": "phase24-project-execution-incubation"
+          },
+          "resolved": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "result": {
+                "success": true,
+                "return_code": 0,
+                "stdout": "{\n  \"success\": true,\n  \"status\": \"autonomous_operations_cycle_complete\",\n  \"force\": false,\n  \"jobs_due\": 0,\n  \"jobs_run\": 0,\n  \"failures\": 0,\n  \"results\": []\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "post-recovery-integrity-check",
+          "success": true,
+          "result": {
+            "success": true,
+            "return_code": 0,
+            "stdout": "{\n  \"success\": true,\n  \"status\": \"system_integrity_check_passed\",\n  \"report\": {\n    \"generated_at\": \"2026-07-19T08:40:48.478729+00:00\",\n    \"summary\": {\n      \"errors\": 0,\n      \"warnings\": 0,\n      \"checked_commands\": 15,\n      \"checked_json_files\": 682\n    },\n    \"errors\": [],\n    \"warnings\": [],\n    \"files\": [\n      {\n        \"path\": \"companyos/githubctl\",\n        \"size\": 453,\n        \"sha256\": \"0147d26ab2e6ec2aa09d8830369b625b7e599155c140b23d9e02e45927e211f7\"\n      },\n      {\n        \"path\": \"companyos/crmctl\",\n        \"size\": 273,\n        \"sha256\": \"a43e98a32f09a6e9517eed7f161702162c6ebcca2cb50269c5995a6f69703d1c\"\n      },\n      {\n        \"path\": \"companyos/quotectl\",\n        \"size\": 286,\n        \"sha256\": \"189b58f4ed27cfbc544ae6505da9ed77332fd610301cc88a3b18d3f66eab7b6d\"\n      },\n      {\n        \"path\": \"companyos/salesctl\",\n        \"size\": 284,\n        \"sha256\": \"ca42960f26f83a44dd89bf3459b6b15778ba314a9c243504ee5fa0a1e45e4d89\"\n      },\n      {\n        \"path\": \"companyos/projectctl\",\n        \"size\": 277,\n        \"sha256\": \"fc9ed3991139d53b59dd226c12ac3dfee5b9f1bd61236c8b570b1482c4bab2ed\"\n      },\n      {\n        \"path\": \"companyos/automationctl\",\n        \"size\": 288,\n        \"sha256\": \"1c6d5c51fa41b0e7e71808ee6ac2723c8fe7c331dd44179e39bb6dccb58ecc06\"\n      },\n      {\n        \"path\": \"companyos/accountingctl\",\n        \"size\": 280,\n        \"sha256\": \"d56b1f01c83ab13add779786defad6996766dcbd31decac2aa509acf96bb86af\"\n      },\n      {\n        \"path\": \"companyos/executivectl\",\n        \"size\": 284,\n        \"sha256\": \"e67fcd44a2da1536f2ea7440846e88879fbb3a50301dadc6ea577c882c12e968\"\n      },\n      {\n        \"path\": \"companyos/opportunitydiscoveryctl\",\n        \"size\": 290,\n        \"sha256\": \"eb38ceca61047e526549097fdc03ea467e459cfad64af2d735a02065ebb31a60\"\n      },\n      {\n        \"path\": \"companyos/priorityctl\",\n        \"size\": 287,\n        \"sha256\": \"530e2516fe8abbebe1777617c43e554c849e6ebef47b02c37c6100605ea54e64\"\n      },\n      {\n        \"path\": \"companyos/decisionctl\",\n        \"size\": 281,\n        \"sha256\": \"7ff2819c8b9372a44daff659f85b6a468d9bb30ca9161c84082fb42acf630bfe\"\n      },\n      {\n        \"path\": \"companyos/executionplanctl\",\n        \"size\": 288,\n        \"sha256\": \"22f2cf422838c9107da925741ac31c28095dc081ffcc56f7666b9c1ddd874861\"\n      },\n      {\n        \"path\": \"companyos/improvementctl\",\n        \"size\": 291,\n        \"sha256\": \"5a569c7c09147fad76b6877692d47f496dc8f5f6854d7720d3c7ca9f92ebce23\"\n      },\n      {\n        \"path\": \"companyos/performancectl\",\n        \"size\": 290,\n        \"sha256\": \"e231c7f3ac60e4de855cb8aa4fa3bd28f74fd7340d36e271586cf558584504d3\"\n      },\n      {\n        \"path\": \"companyos/forecastctl\",\n        \"size\": 289,\n        \"sha256\": \"b036437b90987454dc75135677ea2c60097073a9e6e63a9ffc8c5d7024f546bf\"\n      }\n    ],\n    \"automatic_repairs\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_external_execution\": false,\n    \"automatic_spending\": false\n  }\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    }
   }
 ]

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-19T03:28:46.227015+00:00",
+  "generated_at": "2026-07-19T08:40:33.338905+00:00",
   "source_count": 6,
   "sources": {
     "specialist_performance_profiles.json": {
-      "generated_at": "2026-07-19T03:28:45.393514+00:00",
-      "profile_count": 5,
+      "generated_at": "2026-07-19T08:40:30.642093+00:00",
+      "profile_count": 6,
       "profiles": [
         {
           "specialist_role": "review",
@@ -14,6 +14,12 @@
         },
         {
           "specialist_role": "research",
+          "samples": 1,
+          "average_confidence": 0.85,
+          "performance_band": "strong"
+        },
+        {
+          "specialist_role": "analysis",
           "samples": 1,
           "average_confidence": 0.85,
           "performance_band": "strong"
@@ -39,8 +45,8 @@
       ]
     },
     "validated_insights.json": {
-      "generated_at": "2026-07-19T03:28:44.106151+00:00",
-      "insight_count": 21,
+      "generated_at": "2026-07-19T08:40:27.181723+00:00",
+      "insight_count": 22,
       "insights": [
         {
           "insight_id": "insight-ad42ca0474cbb4db7806",
@@ -914,11 +920,44 @@
           "validation_status": "validated_for_internal_reasoning",
           "execution_boundary": "internal_non_destructive_only",
           "validated_at": "2026-07-19T03:09:33.457677+00:00"
+        },
+        {
+          "insight_id": "insight-ac9dd3ceefda80277937",
+          "source_result_id": "local-ai-fallback-test-001-result",
+          "work_id": "local-ai-fallback-test-001",
+          "plan_id": "local-ai-test",
+          "decision_id": "local-ai-test",
+          "opportunity_id": "local-ai-test",
+          "summary": "Improving internal planning efficiency in CompanyOS can significantly enhance productivity and decision-making capabilities.",
+          "findings": [
+            "Current planning tools are outdated and do not align with modern project management best practices.",
+            "Lack of integration between planning tools and other internal systems can lead to information silos and inefficiencies.",
+            "Insufficient use of AI and machine learning for predictive analytics and optimization of planning processes."
+          ],
+          "recommendations": [
+            "Implement a comprehensive AI-driven planning tool that integrates with existing systems.",
+            "Enhance the use of AI for predictive analytics to optimize resource allocation and project timelines.",
+            "Develop a centralized system for sharing and accessing planning data across departments."
+          ],
+          "risks": [
+            "Potential for increased complexity in system integration and data management.",
+            "Risk of data privacy and security breaches if not properly managed.",
+            "Increased costs associated with the development and maintenance of new systems."
+          ],
+          "next_internal_actions": [
+            "Conduct a pilot test of an AI-driven planning tool to evaluate its effectiveness.",
+            "Collaborate with IT teams to integrate AI tools with existing systems.",
+            "Develop a comprehensive data sharing policy to ensure data security and privacy."
+          ],
+          "confidence": 0.9,
+          "validation_status": "validated_for_internal_reasoning",
+          "execution_boundary": "internal_non_destructive_only",
+          "validated_at": "2026-07-19T05:19:41.125927+00:00"
         }
       ]
     },
     "self_improvement_proposals.json": {
-      "generated_at": "2026-07-19T03:28:45.146997+00:00",
+      "generated_at": "2026-07-19T08:40:30.077157+00:00",
       "proposal_count": 2,
       "proposals": [
         {
@@ -927,7 +966,7 @@
           "priority": 70,
           "category": "ai_quality",
           "status": "proposal_only_requires_governed_review",
-          "generated_at": "2026-07-19T03:28:45.146990+00:00"
+          "generated_at": "2026-07-19T08:40:30.077132+00:00"
         },
         {
           "id": "4bcb4ddf9dcff8ad",
@@ -935,7 +974,7 @@
           "priority": 65,
           "category": "automation",
           "status": "proposal_only_requires_governed_review",
-          "generated_at": "2026-07-19T03:28:45.146979+00:00"
+          "generated_at": "2026-07-19T08:40:30.077082+00:00"
         }
       ],
       "automatic_code_changes": false,
@@ -943,7 +982,7 @@
       "automatic_deploy": false
     },
     "business_performance_scorecard.json": {
-      "generated_at": "2026-07-19T03:28:45.041189+00:00",
+      "generated_at": "2026-07-19T08:40:29.800083+00:00",
       "overall_score": 80.0,
       "metrics": {
         "autonomy_health": 100,
@@ -955,97 +994,97 @@
       "status": "healthy"
     },
     "outcome_tracker_report.json": {
-      "generated_at": "2026-07-19T03:11:41.779649+00:00",
+      "generated_at": "2026-07-19T08:37:56.703107+00:00",
       "kpis": {
         "operating_health_score": 60.0,
-        "scheduler_reliability_percent": 95.83,
-        "successful_jobs": 92,
+        "scheduler_reliability_percent": 95.96,
+        "successful_jobs": 95,
         "failed_jobs": 4,
         "internal_action_failures": 0,
         "active_goals": 10
       },
       "goal_outcomes": [
         {
-          "id": "improvement-improvement-7398d572c883",
+          "id": "improvement-improvement-d83257eca98e",
           "title": "Improve receivable recovery process",
           "rank": 1,
-          "progress_score": 83.29,
+          "progress_score": 83.32,
           "status": "on_track"
         },
         {
           "id": "priority-invoice-d7e99861931c",
           "title": "Review receivable: Sample Contractor",
           "rank": 2,
-          "progress_score": 81.45,
+          "progress_score": 81.48,
           "status": "on_track"
         },
         {
           "id": "priority-e2e-invoice-001",
           "title": "Review receivable: E2E Test Customer",
           "rank": 3,
-          "progress_score": 81.45,
+          "progress_score": 81.48,
           "status": "on_track"
         },
         {
-          "id": "improvement-improvement-52c0b465b867",
+          "id": "improvement-improvement-c483870726a3",
           "title": "Clear pending CEO decisions",
           "rank": 4,
-          "progress_score": 80.66,
+          "progress_score": 80.69,
           "status": "on_track"
         },
         {
           "id": "improve-operating-health",
           "title": "Improve operating health score",
           "rank": 5,
-          "progress_score": 80.32,
+          "progress_score": 80.35,
           "status": "on_track"
         },
         {
           "id": "clear-pending-decisions",
           "title": "Clear pending CEO decisions",
           "rank": 6,
-          "progress_score": 80.16,
+          "progress_score": 80.2,
           "status": "on_track"
         },
         {
           "id": "protect-expected-cash-inflow",
           "title": "Protect expected cash inflow",
           "rank": 7,
-          "progress_score": 79.2,
+          "progress_score": 79.23,
           "status": "on_track"
         },
         {
-          "id": "improvement-improvement-f3419c2fdb5f",
+          "id": "improvement-improvement-69381c7a7c35",
           "title": "Reduce pending task backlog",
           "rank": 8,
-          "progress_score": 78.36,
+          "progress_score": 78.39,
           "status": "on_track"
         },
         {
           "id": "priority-followup-f51333cfa177",
           "title": "Review follow-up: Sample Contractor",
           "rank": 9,
-          "progress_score": 78.05,
+          "progress_score": 78.08,
           "status": "on_track"
         },
         {
-          "id": "priority-oppdisc-e4ea7b2442bc",
+          "id": "priority-oppdisc-b6762521fee6",
           "title": "Recover receivable: Sample Contractor",
           "rank": 10,
-          "progress_score": 75.69,
+          "progress_score": 75.72,
           "status": "on_track"
         }
       ],
       "needs_attention": []
     },
     "provider_health_report.json": {
-      "generated_at": "2026-07-19T03:28:45.488772+00:00",
+      "generated_at": "2026-07-19T08:40:30.886153+00:00",
       "provider": "openai_compatible",
-      "model": "openrouter/free",
+      "model": "gpt-4.1-mini",
       "completed_count": 0,
       "pending_count": 0,
       "provider_state": "healthy",
-      "recommended_model": "openrouter/free"
+      "recommended_model": "gpt-4.1-mini"
     }
   },
   "purpose": "Unified internal learning context for future prioritization and planning."
