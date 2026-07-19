@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-19T16:17:46.041792+00:00",
+  "generated_at": "2026-07-19T16:48:24.841488+00:00",
   "overall_status": "healthy",
   "reliability_score": 85,
   "systems": {
     "control_cycle": {
-      "last_cycle_at": "2026-07-19T15:26:09.914592+00:00",
+      "last_cycle_at": "2026-07-19T16:33:01.903444+00:00",
       "cycle_success": true,
       "failure_count": 0
     },
     "supervisor": {
-      "last_supervision_at": "2026-07-19T16:02:28.936101+00:00",
+      "last_supervision_at": "2026-07-19T16:33:02.204763+00:00",
       "consecutive_failures": 0,
       "recovery_action_count": 0
     },
@@ -20,24 +20,24 @@
       "autonomy_halted": false
     },
     "reliability": {
-      "last_scored_at": "2026-07-19T16:02:29.252163+00:00",
+      "last_scored_at": "2026-07-19T16:33:02.602352+00:00",
       "reliability_score": 85,
       "status": "healthy"
     },
     "resources": {
-      "generated_at": "2026-07-19T16:02:29.394952+00:00",
+      "generated_at": "2026-07-19T16:33:03.184698+00:00",
       "status": "healthy",
       "disk_used_percent": 57.62,
-      "memory_used_percent": 75.42,
-      "free_disk_bytes": 101265113088,
+      "memory_used_percent": 71.87,
+      "free_disk_bytes": 101260894208,
       "safe_cleanup_files_removed": 0,
       "automatic_spending": false,
       "automatic_external_write": false,
       "automatic_destructive_actions": false
     },
     "watchdog": {
-      "last_checked_at": "2026-07-19T16:17:45.894997+00:00",
-      "heartbeat_age_seconds": 3095.98039,
+      "last_checked_at": "2026-07-19T16:48:24.735005+00:00",
+      "heartbeat_age_seconds": 922.831548,
       "heartbeat_stale": false,
       "recovery_actions": []
     },
@@ -47,13 +47,13 @@
       "backup_count": 12
     },
     "github": {
-      "generated_at": "2026-07-19T16:17:44.923622+00:00",
+      "generated_at": "2026-07-19T16:48:24.233151+00:00",
       "signal_count": 1,
       "working_tree_clean": false,
       "branch": "main"
     },
     "preflight": {
-      "generated_at": "2026-07-19T16:02:27.618038+00:00",
+      "generated_at": "2026-07-19T16:32:59.791777+00:00",
       "decision": "blocked",
       "risk_score": 30,
       "blockers": [
@@ -65,7 +65,7 @@
       "automatic_spending": false
     },
     "drift": {
-      "generated_at": "2026-07-19T15:26:11.001894+00:00",
+      "generated_at": "2026-07-19T16:33:03.005877+00:00",
       "drift_detected": true,
       "added": [
         "agents/action_dispatcher.py",
@@ -87,6 +87,7 @@
         "agents/approval_policy_engine.py",
         "agents/architecture_memory_engine.py",
         "agents/autonomous_ceo_cycle.py",
+        "agents/autonomous_treasury_orchestrator.py",
         "agents/autonomy_controller.py",
         "agents/autonomy_watchdog.py",
         "agents/business_incubation_engine.py",
@@ -99,6 +100,8 @@
         "agents/ceo_operating_report.py",
         "agents/ceo_portfolio_manager.py",
         "agents/ceo_synthesis_engine.py",
+        "agents/ceo_treasury_bridge_engine.py",
+        "agents/ceo_treasury_request_engine.py",
         "agents/closed_loop_selector.py",
         "agents/confidence_priority_fusion.py",
         "agents/connector_readiness_engine.py",
@@ -152,6 +155,7 @@
         "agents/model_fallback_router.py",
         "agents/multi_asset_balance_engine.py",
         "agents/multi_asset_event_engine.py",
+        "agents/multichain_execution_adapter.py",
         "agents/operations_dashboard.py",
         "agents/operations_observability_engine.py",
         "agents/opportunity_action_executor.py",
@@ -190,6 +194,10 @@
         "agents/phase32_controller.py",
         "agents/phase33a_controller.py",
         "agents/phase33c_controller.py",
+        "agents/phase34_controller.py",
+        "agents/phase35_controller.py",
+        "agents/phase37_broadcast_gate.py",
+        "agents/phase37_safety_controller.py",
         "agents/platform_architect_engine.py",
         "agents/portfolio_capacity_guard.py",
         "agents/portfolio_capital_planner.py",
@@ -239,7 +247,9 @@
         "agents/transaction_approval_bridge.py",
         "agents/transaction_proposal_engine.py",
         "agents/transaction_signing_queue.py",
+        "agents/treasury_destination_registry.py",
         "agents/treasury_event_engine.py",
+        "agents/treasury_kill_switch.py",
         "agents/treasury_policy_engine.py",
         "agents/treasury_registry_engine.py",
         "agents/treasury_rpc_health.py",
@@ -260,6 +270,7 @@
         "companyos/approvalpolicyctl",
         "companyos/architecturememoryctl",
         "companyos/autonomousceocyclectl",
+        "companyos/autonomoustreasuryctl",
         "companyos/autonomywatchdogctl",
         "companyos/backupctl",
         "companyos/businesssignalctl",
@@ -270,6 +281,8 @@
         "companyos/ceoportfolioctl",
         "companyos/ceoreportctl",
         "companyos/ceosynthesisctl",
+        "companyos/ceotreasurybridgectl",
+        "companyos/ceotreasuryrequestctl",
         "companyos/closedloopctl",
         "companyos/collaborationctl",
         "companyos/communicationsauthorityctl",
@@ -327,6 +340,7 @@
         "companyos/multiagentroutectl",
         "companyos/multiassetbalancectl",
         "companyos/multiasseteventctl",
+        "companyos/multichainexecutionctl",
         "companyos/observabilityctl",
         "companyos/opportunityactivatectl",
         "companyos/opportunitycyclectl",
@@ -365,6 +379,11 @@
         "companyos/phase32ctl",
         "companyos/phase33actl",
         "companyos/phase33cctl",
+        "companyos/phase34ctl",
+        "companyos/phase35ctl",
+        "companyos/phase36bdrysignctl",
+        "companyos/phase37broadcastctl",
+        "companyos/phase37ctl",
         "companyos/planexecutorctl",
         "companyos/platformarchitectctl",
         "companyos/portfoliocapacityctl",
@@ -411,7 +430,9 @@
         "companyos/transactionapprovalctl",
         "companyos/transactionproposalctl",
         "companyos/transactionsigningqueuectl",
+        "companyos/treasurydestinationctl",
         "companyos/treasuryeventctl",
+        "companyos/treasurykillswitchctl",
         "companyos/treasurypolicyctl",
         "companyos/treasuryregistryctl",
         "companyos/treasuryrpchealthctl",
@@ -426,7 +447,7 @@
         "companyos/watchdogctl"
       ],
       "baseline_file_count": 120,
-      "current_file_count": 469
+      "current_file_count": 490
     }
   }
 }

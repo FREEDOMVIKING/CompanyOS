@@ -18,9 +18,37 @@ def run(args):
     return p.returncode,r
 
 def registered_destination():
-    for x in load(DESTS,{"destinations":[]}).get("destinations",[]):
-        if x.get("enabled") and x.get("chain")=="solana":
+    destinations = load(DESTS, {"destinations": []}).get("destinations", [])
+
+    # Prefer the explicitly labeled canary wallet.
+    for x in destinations:
+        if (
+            x.get("enabled")
+            and x.get("chain") == "solana"
+            and x.get("label") == "SOL Canary Destination"
+        ):
             return x.get("address")
+
+    # Fallback: use any enabled Solana destination that is not the primary treasury source.
+    primary = next(
+        (
+            x.get("address")
+            for x in destinations
+            if x.get("enabled")
+            and x.get("chain") == "solana"
+            and x.get("label") == "Primary Solana"
+        ),
+        None,
+    )
+
+    for x in destinations:
+        if (
+            x.get("enabled")
+            and x.get("chain") == "solana"
+            and x.get("address") != primary
+        ):
+            return x.get("address")
+
     return None
 
 def main():
