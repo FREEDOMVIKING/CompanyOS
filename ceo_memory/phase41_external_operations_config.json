@@ -1,0 +1,53 @@
+{
+  "enabled": true,
+  "mode": "autonomous_external_operations",
+  "max_actions_per_cycle": 10,
+  "stop_on_first_failure": false,
+  "routes": {
+    "treasury_transfer": {
+      "enabled": true,
+      "handler": "phase40",
+      "owner_approval_required": false
+    },
+    "business_email": {
+      "enabled": true,
+      "handler": "communications",
+      "owner_approval_required": false
+    },
+    "customer_message": {
+      "enabled": true,
+      "handler": "communications",
+      "owner_approval_required": false
+    },
+    "public_publish": {
+      "enabled": true,
+      "handler": "publication",
+      "owner_approval_required": false
+    },
+    "deploy_existing_approved_target": {
+      "enabled": true,
+      "handler": "deployment",
+      "owner_approval_required": false
+    },
+    "contractual_commitment": {
+      "enabled": true,
+      "handler": "approval_queue",
+      "owner_approval_required": true
+    },
+    "mass_outreach": {
+      "enabled": true,
+      "handler": "approval_queue",
+      "owner_approval_required": true
+    },
+    "paid_ad_campaign": {
+      "enabled": true,
+      "handler": "approval_queue",
+      "owner_approval_required": true
+    },
+    "new_production_target": {
+      "enabled": true,
+      "handler": "approval_queue",
+      "owner_approval_required": true
+    }
+  }
+}
