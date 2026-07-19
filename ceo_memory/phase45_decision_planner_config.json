@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "mode": "autonomous_bounded_action_planning",
+  "max_opportunities_per_cycle": 5,
+  "max_steps_per_plan": 8,
+  "minimum_priority_score": 55,
+  "require_phase44_qualified_opportunity": true,
+  "require_structured_plan": true,
+  "require_action_type_allowlist": true,
+  "require_existing_governance_paths": true,
+  "require_result_validation": true,
+  "require_learning_feedback": true,
+  "allowed_action_types": [
+    "business_email",
+    "customer_message",
+    "public_publish",
+    "deploy_existing_approved_target",
+    "treasury_transfer"
+  ],
+  "approval_gated_action_types": [
+    "contractual_commitment",
+    "mass_outreach",
+    "paid_ad_campaign",
+    "new_production_target"
+  ],
+  "financial_actions_stay_under_existing_treasury_controls": true,
+  "external_actions_fail_closed": true
+}
