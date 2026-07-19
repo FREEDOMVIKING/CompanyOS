@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "chain": "solana",
+  "supported_assets": ["SOL"],
+  "single_transaction_auto_limit_usd": 15000,
+  "daily_total_limit_usd": 20000,
+  "require_phase32_authorization": true,
+  "require_live_balance_check": true,
+  "require_recent_blockhash": true,
+  "require_preflight": true,
+  "require_confirmation": true,
+  "confirmation_commitment": "confirmed",
+  "max_confirmation_wait_seconds": 90,
+  "automatic_signing": true,
+  "automatic_broadcast": true,
+  "signer_mode": "external_local_signer_command",
+  "signer_command_env": "SOLANA_SIGNER_COMMAND",
+  "rpc_url_env": "SOLANA_RPC_URL",
+  "never_store_private_key_in_repo": true,
+  "never_log_private_key": true,
+  "never_send_private_key_to_ai": true
+}
