@@ -64,6 +64,23 @@ def score(o,cfg):
     return round(max(0,min(100,total)),2)
 
 def normalize_opportunity(o):
+    # Phase 17 may return plain strings as discovery results.
+    # Normalize them into opportunity dictionaries before processing.
+    if isinstance(o, str):
+        o = {
+            "title": o,
+            "description": o,
+            "source": "phase17",
+            "evidence": [o]
+        }
+    elif not isinstance(o, dict):
+        o = {
+            "title": str(o),
+            "description": str(o),
+            "source": "phase17",
+            "evidence": [str(o)]
+        }
+
     oid=o.get("opportunity_id")
     if not oid:
         seed=json.dumps(o,sort_keys=True)
