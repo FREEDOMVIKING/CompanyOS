@@ -1,0 +1,49 @@
+{
+  "enabled": true,
+  "owner_controlled": true,
+  "financial_authority": {
+    "enabled": true,
+    "daily_total_limit_usd": 20000,
+    "single_transaction_auto_approval_limit_usd": 15000,
+    "above_single_limit_requires_owner_approval": true,
+    "above_daily_limit_requires_owner_approval": true,
+    "default_deny_on_limit_error": true,
+    "audit_all_transactions": true,
+    "allowed_asset_classes": ["USD", "USDC", "USDT", "SOL", "ETH"],
+    "allowed_accounts": [],
+    "blocked_accounts": []
+  },
+  "communications_authority": {
+    "enabled": true,
+    "automatic_business_email": true,
+    "automatic_customer_messaging": true,
+    "automatic_api_messaging": true,
+    "contractual_commitments_require_owner_approval": true,
+    "legal_admissions_require_owner_approval": true,
+    "mass_outreach_requires_owner_approval": true
+  },
+  "publication_authority": {
+    "enabled": true,
+    "automatic_publication": true,
+    "allowed_targets": [],
+    "paid_ad_campaigns_require_owner_approval": true,
+    "regulated_claims_require_owner_approval": true
+  },
+  "deployment_authority": {
+    "enabled": true,
+    "automatic_deploy_to_approved_targets": true,
+    "approved_targets": [],
+    "require_tests_before_deploy": true,
+    "require_health_check_after_deploy": true,
+    "automatic_rollback_on_failure": true,
+    "new_production_target_requires_owner_approval": true
+  },
+  "self_development_authority": {
+    "enabled": true,
+    "automatic_internal_code_creation": true,
+    "automatic_internal_agent_creation": true,
+    "automatic_sandbox_testing": true,
+    "automatic_internal_promotion_after_tests": true,
+    "external_production_promotion_requires_target_authority": true
+  }
+}
