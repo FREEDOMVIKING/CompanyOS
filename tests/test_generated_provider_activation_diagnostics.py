@@ -1,351 +1,415 @@
-"""Tests for generated_provider_activation_diagnostics."""
-
 from __future__ import annotations
 
-import generated_provider_activation_diagnostics as pkg
-from generated_provider_activation_diagnostics import core
-from generated_provider_activation_diagnostics import diagnose_provider_activation
+import pytest
+
+from generated_provider_activation_diagnostics import (
+    diagnose_provider_activation,
+    ProviderActivationDiagnosticsError,
+)
 
 
-def test_package_exposes_public_function():
-    assert callable(pkg.diagnose_provider_activation)
-    assert pkg.diagnose_provider_activation is core.diagnose_provider_activation
-
-
-def test_empty_input_is_safe():
-    result = diagnose_provider_activation(None)
+def test_empty_input_returns_empty_state_report():
+    result = diagnose_provider_activation()
     assert result["success"] is True
-    assert result["provider_count"] == 0
+    assert result["status"] == "provider_activation_diagnostics_complete"
+    assert result["summary"]["total_providers"] == 0
+    assert result["summary"]["overall_status"] == "empty"
+    assert result["summary"]["activation_ready"] == 0
     assert result["providers"] == []
-    assert result["summary"]["healthy"] is True
-    assert result["recommendations"]
+    assert result["external_actions_performed"] is False
+    assert result["network_access_performed"] is False
+    assert result["financial_actions_performed"] is False
 
 
-def test_empty_dict_is_safe():
-    result = diagnose_provider_activation({})
-    assert result["success"] is True
-    assert result["provider_count"] == 0
-    assert result["issue_count"] == 0
+def test_none_input_returns_empty_state_report():
+    result = diagnose_provider_activation(None)
+    assert result["summary"]["total_providers"] == 0
 
 
-def test_malformed_string_input_is_safe():
-    result = diagnose_provider_activation("not-a-dict")
-    assert result["success"] is True
-    assert result["provider_count"] == 0
-    assert result.get("malformed_input") is True
+def test_empty_list_returns_empty_state_report():
+    result = diagnose_provider_activation([])
+    assert result["summary"]["total_providers"] == 0
 
 
-def test_malformed_container_type_is_safe():
-    result = diagnose_provider_activation(42)
-    assert result["success"] is True
-    assert result["provider_count"] == 0
-    assert result.get("malformed_input") is True
-
-
-def test_active_provider_is_usable():
-    result = diagnose_provider_activation(
+def test_fully_active_primary_and_fallback_is_healthy():
+    providers = [
         {
-            "openai": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            }
-        }
-    )
-    assert result["provider_count"] == 1
-    assert result["usable_count"] == 1
-    provider = result["providers"][0]
-    assert provider["provider"] == "openai"
-    assert provider["usable"] is True
-    assert provider["issues"] == []
-    assert result["summary"]["healthy"] is True
-
-
-def test_not_configured_provider_has_high_severity_issue():
-    result = diagnose_provider_activation(
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
         {
-            "openai": {
-                "activation_state": "inactive",
-                "configured": False,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    assert provider["configured"] is False
-    assert provider["usable"] is False
-    codes = [i["code"] for i in provider["issues"]]
-    assert "not_configured" in codes
-    assert any(i["severity"] == "high" for i in provider["issues"])
-    assert result["summary"]["healthy"] is False
+            "provider": "local_llama",
+            "role": "fallback",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    assert result["summary"]["total_providers"] == 2
+    assert result["summary"]["activation_ready"] == 2
+    assert result["summary"]["primary_ready"] is True
+    assert result["summary"]["fallback_ready"] is True
+    assert result["summary"]["overall_status"] == "healthy"
+    assert result["summary"]["severity_counts"]["ok"] == 2
+    assert all(p["activation_ready"] for p in result["providers"])
 
 
-def test_missing_credentials_flagged():
-    result = diagnose_provider_activation(
+def test_failed_provider_is_high_severity_and_critical():
+    providers = [
         {
-            "openai": {
-                "activation_state": "configured",
-                "configured": True,
-                "credentials_present": False,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    codes = [i["code"] for i in provider["issues"]]
-    assert "missing_credentials" in codes
-    assert provider["usable"] is False
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "failed",
+            "configured": True,
+            "usable": False,
+            "reachable": False,
+            "healthy": False,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["activation_state"] == "failed"
+    assert diag["severity"] == "high"
+    assert diag["activation_ready"] is False
+    assert "activation_failed" in diag["issues"]
+    assert result["summary"]["overall_status"] == "critical"
+    assert result["summary"]["severity_counts"]["high"] == 1
 
 
-def test_active_but_unreachable_flagged():
-    result = diagnose_provider_activation(
+def test_degraded_provider_is_medium_severity():
+    providers = [
         {
-            "local_llama": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": False,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    codes = [i["code"] for i in provider["issues"]]
-    assert "active_but_unreachable" in codes
-    assert provider["usable"] is False
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "degraded",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["severity"] == "medium"
+    assert diag["activation_ready"] is False
+    assert result["summary"]["overall_status"] == "degraded"
 
 
-def test_failed_activation_with_last_error():
-    result = diagnose_provider_activation(
+def test_pending_provider_is_medium_severity_and_attention():
+    providers = [
         {
-            "openai": {
-                "activation_state": "failed",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": False,
-                "last_error": "auth token rejected",
-            }
-        }
-    )
-    provider = result["providers"][0]
-    codes = [i["code"] for i in provider["issues"]]
-    assert "activation_failed" in codes
-    assert provider["last_error"] == "auth token rejected"
-    assert any("auth token rejected" in r for r in provider["recommendations"])
+            "provider": "local_llama",
+            "role": "fallback",
+            "activation_state": "pending",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["severity"] == "medium"
+    assert diag["activation_ready"] is False
+    assert "activation_pending" in diag["issues"]
 
 
-def test_degraded_provider_is_usable_but_flagged():
-    result = diagnose_provider_activation(
+def test_unknown_state_is_low_severity():
+    providers = [
         {
-            "openai": {
-                "activation_state": "degraded",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    codes = [i["code"] for i in provider["issues"]]
-    assert "activation_degraded" in codes
-    assert provider["usable"] is True
+            "provider": "mystery",
+            "role": "secondary",
+            "activation_state": "weird",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["activation_state"] == "unknown"
+    assert "activation_state_unknown" in diag["issues"]
+    assert diag["severity"] == "low"
 
 
-def test_degraded_and_unreachable_not_usable():
-    result = diagnose_provider_activation(
-        {
-            "openai": {
-                "activation_state": "degraded",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": False,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    assert provider["usable"] is False
+def test_missing_optional_fields_default_safely():
+    providers = [
+        {"provider": "openai"},
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["provider"] == "openai"
+    assert diag["role"] == "unknown"
+    assert diag["activation_state"] == "unknown"
+    assert diag["configured"] is None
+    assert diag["usable"] is None
+    assert diag["reachable"] is None
+    assert diag["healthy"] is None
+    assert diag["activation_ready"] is False
 
 
-def test_unknown_provider_flagged():
-    result = diagnose_provider_activation(
-        {
-            "mystery_provider": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    assert provider["known"] is False
-    codes = [i["code"] for i in provider["issues"]]
-    assert "unknown_provider" in codes
+def test_missing_provider_name_defaults_to_unnamed():
+    providers = [
+        {"activation_state": "active", "configured": True, "usable": True,
+         "reachable": True, "healthy": True},
+    ]
+    result = diagnose_provider_activation(providers)
+    assert result["providers"][0]["provider"] == "unnamed_provider"
 
 
-def test_invalid_activation_state_normalized_to_unknown():
-    result = diagnose_provider_activation(
-        {
-            "openai": {
-                "activation_state": "bogus_state",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    assert provider["activation_state"] == "unknown"
+def test_name_mapping_input_sets_provider_name():
+    providers = {
+        "openai": {
+            "role": "primary",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+        "local_llama": {
+            "role": "fallback",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    }
+    result = diagnose_provider_activation(providers)
+    names = {p["provider"] for p in result["providers"]}
+    assert names == {"openai", "local_llama"}
+    assert result["summary"]["activation_ready"] == 2
 
 
-def test_non_dict_entry_handled_safely():
-    result = diagnose_provider_activation({"openai": "broken"})
-    provider = result["providers"][0]
-    assert provider["activation_state"] == "unknown"
-    assert provider["configured"] is False
-    codes = [i["code"] for i in provider["issues"]]
-    assert "malformed_entry" in codes
-
-
-def test_list_input_with_name_field():
-    result = diagnose_provider_activation(
-        [
+def test_providers_key_mapping_input():
+    providers = {
+        "providers": [
             {
                 "provider": "openai",
+                "role": "primary",
                 "activation_state": "active",
                 "configured": True,
-                "credentials_present": True,
+                "usable": True,
                 "reachable": True,
-            }
+                "healthy": True,
+            },
         ]
-    )
-    assert result["provider_count"] == 1
+    }
+    result = diagnose_provider_activation(providers)
+    assert result["summary"]["total_providers"] == 1
     assert result["providers"][0]["provider"] == "openai"
 
 
-def test_list_input_with_name_alias():
-    result = diagnose_provider_activation(
-        [
-            {
-                "name": "local_llama",
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            }
-        ]
-    )
-    assert result["provider_count"] == 1
-    assert result["providers"][0]["provider"] == "local_llama"
+def test_providers_key_with_none_is_empty():
+    result = diagnose_provider_activation({"providers": None})
+    assert result["summary"]["total_providers"] == 0
 
 
-def test_list_input_skips_malformed_entries():
-    result = diagnose_provider_activation(
-        [
-            "not-a-dict",
-            {"activation_state": "active"},
-            {
-                "provider": "openai",
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            },
-        ]
-    )
-    assert result["provider_count"] == 1
-    assert result["providers"][0]["provider"] == "openai"
+def test_string_input_raises():
+    with pytest.raises(ProviderActivationDiagnosticsError):
+        diagnose_provider_activation("openai")
 
 
-def test_duplicate_providers_deduplicated():
-    result = diagnose_provider_activation(
+def test_non_mapping_list_entry_raises():
+    with pytest.raises(ProviderActivationDiagnosticsError):
+        diagnose_provider_activation(["openai"])
+
+
+def test_non_mapping_provider_value_raises():
+    with pytest.raises(ProviderActivationDiagnosticsError):
+        diagnose_provider_activation({"openai": "active"})
+
+
+def test_non_list_providers_field_raises():
+    with pytest.raises(ProviderActivationDiagnosticsError):
+        diagnose_provider_activation({"providers": {"openai": {}}})
+
+
+def test_non_string_mapping_key_raises():
+    with pytest.raises(ProviderActivationDiagnosticsError):
+        diagnose_provider_activation({1: {}})
+
+
+def test_unsupported_input_type_raises():
+    with pytest.raises(ProviderActivationDiagnosticsError):
+        diagnose_provider_activation(42)
+
+
+def test_include_records_false_omits_providers():
+    providers = [
         {
-            "openai": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            },
-            "openai_dup": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            },
-        }
-    )
-    names = [p["provider"] for p in result["providers"]]
-    assert "openai" in names
-    assert "openai_dup" in names
-    assert len(names) == 2
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers, include_records=False)
+    assert "providers" not in result
+    assert result["summary"]["total_providers"] == 1
 
 
-def test_inactive_but_ready_flagged_low_severity():
-    result = diagnose_provider_activation(
+def test_recommendations_present_for_mixed_states():
+    providers = [
+        {"provider": "openai", "role": "primary", "activation_state": "failed",
+         "configured": True, "usable": False, "reachable": False, "healthy": False},
+        {"provider": "local_llama", "role": "fallback", "activation_state": "pending",
+         "configured": True, "usable": True, "reachable": True, "healthy": True},
+    ]
+    result = diagnose_provider_activation(providers)
+    recs = result["summary"]["recommendations"]
+    assert any("primary" in r for r in recs)
+    assert any("fallback" in r for r in recs)
+    assert any("failed" in r for r in recs)
+    assert any("pending" in r for r in recs)
+
+
+def test_state_field_alias_works():
+    providers = [
         {
-            "openai": {
-                "activation_state": "inactive",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            }
-        }
-    )
-    provider = result["providers"][0]
-    codes = [i["code"] for i in provider["issues"]]
-    assert "inactive_but_ready" in codes
-    assert all(
-        i["severity"] == "low"
-        for i in provider["issues"]
-        if i["code"] == "inactive_but_ready"
-    )
+            "provider": "openai",
+            "role": "primary",
+            "state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    assert result["providers"][0]["activation_state"] == "active"
+    assert result["providers"][0]["activation_ready"] is True
 
 
-def test_global_recommendations_when_no_usable_providers():
-    result = diagnose_provider_activation(
+def test_non_bool_configured_is_ignored_safely():
+    providers = [
         {
-            "openai": {
-                "activation_state": "inactive",
-                "configured": False,
-            }
-        }
-    )
-    assert result["usable_count"] == 0
-    assert any("usable" in r for r in result["recommendations"])
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "active",
+            "configured": "yes",
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["configured"] is None
+    assert diag["activation_ready"] is True
 
 
-def test_output_is_json_serializable_structure():
-    import json
-
-    result = diagnose_provider_activation(
+def test_inactive_provider_is_low_severity():
+    providers = [
         {
-            "openai": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-                "last_error": None,
-            }
-        }
-    )
-    serialized = json.dumps(result)
-    assert json.loads(serialized) == result
+            "provider": "legacy",
+            "role": "standby",
+            "activation_state": "inactive",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    diag = result["providers"][0]
+    assert diag["severity"] == "low"
+    assert "activation_inactive" in diag["issues"]
+    assert diag["activation_ready"] is False
 
 
-def test_deterministic_ordering():
-    result = diagnose_provider_activation(
+def test_all_ready_recommendation_present():
+    providers = [
         {
-            "zeta": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            },
-            "alpha": {
-                "activation_state": "active",
-                "configured": True,
-                "credentials_present": True,
-                "reachable": True,
-            },
-        }
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+        {
+            "provider": "local_llama",
+            "role": "fallback",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    assert any("activation-ready" in r for r in result["summary"]["recommendations"])
+
+
+def test_no_external_or_network_flags_are_false():
+    result = diagnose_provider_activation(
+        [{"provider": "openai", "activation_state": "active",
+          "configured": True, "usable": True, "reachable": True, "healthy": True}]
     )
-    names = [p["provider"] for p in result["providers"]]
-    assert names == ["alpha", "zeta"]
+    assert result["external_actions_performed"] is False
+    assert result["network_access_performed"] is False
+    assert result["financial_actions_performed"] is False
+
+
+def test_tuple_input_accepted():
+    providers = (
+        {
+            "provider": "openai",
+            "role": "primary",
+            "activation_state": "active",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+            "healthy": True,
+        },
+    )
+    result = diagnose_provider_activation(providers)
+    assert result["summary"]["total_providers"] == 1
+
+
+def test_role_normalization_unknown_value():
+    providers = [
+        {"provider": "x", "role": "weird", "activation_state": "active",
+         "configured": True, "usable": True, "reachable": True, "healthy": True},
+    ]
+    result = diagnose_provider_activation(providers)
+    assert result["providers"][0]["role"] == "unknown"
+
+
+def test_summary_counts_are_consistent():
+    providers = [
+        {"provider": "a", "role": "primary", "activation_state": "active",
+         "configured": True, "usable": True, "reachable": True, "healthy": True},
+        {"provider": "b", "role": "fallback", "activation_state": "failed",
+         "configured": True, "usable": False, "reachable": False, "healthy": False},
+        {"provider": "c", "role": "secondary", "activation_state": "degraded",
+         "configured": True, "usable": True, "reachable": True, "healthy": True},
+        {"provider": "d", "role": "standby", "activation_state": "pending",
+         "configured": True, "usable": True, "reachable": True, "healthy": True},
+    ]
+    result = diagnose_provider_activation(providers)
+    s = result["summary"]
+    assert s["total_providers"] == 4
+    assert s["active"] == 1
+    assert s["failed"] == 1
+    assert s["degraded"] == 1
+    assert s["pending"] == 1
+    assert s["activation_ready"] == 1
+    assert s["severity_counts"]["high"] == 1
+    assert s["severity_counts"]["medium"] == 2
+    assert s["overall_status"] == "critical"
