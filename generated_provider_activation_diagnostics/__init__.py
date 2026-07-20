@@ -1,8 +1,8 @@
-"""Internal provider activation diagnostics for CompanyOS.
+"""Provider activation diagnostics for CompanyOS.
 
-This package provides a pure-Python, side-effect free capability that
-inspects provider activation/health data and returns structured diagnostics.
-No network, financial, or external actions are performed.
+This package provides internal, read-only diagnostics for AI provider
+activation states. It performs no network access, no financial actions,
+and no external actions.
 """
 
 from .core import diagnose_provider_activation

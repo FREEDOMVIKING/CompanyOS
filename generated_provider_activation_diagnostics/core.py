@@ -1,282 +1,176 @@
 """Core implementation for provider activation diagnostics.
 
-The public entry point is :func:`diagnose_provider_activation`, which accepts
-optional provider health, provenance, and routing-plan payloads and returns a
-structured diagnostic report. All inputs are validated defensively; malformed
-or empty inputs are handled safely and never raise.
+The :func:`diagnose_provider_activation` function inspects a structured
+description of provider activation records and returns a structured
+diagnostic report. It is intentionally pure: no I/O, no network, and no
+side effects.
 """
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Iterable
+
+REQUIRED_FIELDS = ("provider", "configured", "usable")
 
 
-def _is_dict(value: Any) -> bool:
-    return isinstance(value, dict)
-
-
-def _safe_int(value: Any, default: int = 0) -> int:
-    try:
-        if isinstance(value, bool):
-            return int(value)
-        return int(value)
-    except (TypeError, ValueError):
-        return default
-
-
-def _safe_bool(value: Any, default: bool = False) -> bool:
+def _is_truthy(value: Any) -> bool:
+    """Return True for values commonly interpreted as enabled/true."""
     if isinstance(value, bool):
         return value
-    return default
-
-
-def _safe_str(value: Any, default: str = "") -> str:
     if isinstance(value, str):
-        return value
-    return default
+        return value.strip().lower() in {"1", "true", "yes", "on", "enabled"}
+    if isinstance(value, (int, float)):
+        return value != 0
+    return False
 
 
-def _coerce_dict(value: Any) -> Dict[str, Any]:
-    if _is_dict(value):
-        return value
-    return {}
+def _coerce_providers(providers: Any) -> list[dict[str, Any]]:
+    """Normalize the input into a list of provider dictionaries."""
+    if providers is None:
+        return []
 
+    if isinstance(providers, dict):
+        # A single provider dict.
+        if "provider" in providers or "configured" in providers:
+            return [providers]
+        # A mapping of provider names to provider dicts.
+        result: list[dict[str, Any]] = []
+        for name, value in providers.items():
+            if isinstance(value, dict):
+                merged = dict(value)
+                merged.setdefault("provider", str(name))
+                result.append(merged)
+            else:
+                result.append({"provider": str(name), "configured": value})
+        return result
 
-def _coerce_list(value: Any) -> List[Any]:
-    if isinstance(value, list):
-        return value
+    if isinstance(providers, list):
+        result = []
+        for item in providers:
+            if isinstance(item, dict):
+                result.append(item)
+            elif isinstance(item, str):
+                result.append({"provider": item})
+            else:
+                result.append({"provider": str(item)})
+        return result
+
+    if isinstance(providers, (str, int, float, bool)):
+        return [{"provider": str(providers)}]
+
     return []
 
 
-def _summarize_provider_block(block: Any, name: str) -> Dict[str, Any]:
-    block = _coerce_dict(block)
+def _diagnose_single(provider: dict[str, Any], index: int) -> dict[str, Any]:
+    """Build a diagnostic record for a single provider entry."""
+    name = provider.get("provider")
+    missing_fields = [
+        field for field in REQUIRED_FIELDS if field not in provider
+    ]
+
+    configured = _is_truthy(provider.get("configured", False))
+    usable = _is_truthy(provider.get("usable", False))
+    reachable = _is_truthy(provider.get("reachable", False))
+
+    issues: list[str] = []
+
+    if not name:
+        issues.append("missing_provider_name")
+    if missing_fields:
+        issues.append(f"missing_fields:{','.join(missing_fields)}")
+    if configured and not usable:
+        issues.append("configured_but_not_usable")
+    if usable and not configured:
+        issues.append("usable_without_configuration")
+    if "reachable" in provider and usable and not reachable:
+        issues.append("usable_but_not_reachable")
+
+    if configured and usable:
+        activation_state = "active"
+    elif configured and not usable:
+        activation_state = "configured_inactive"
+    elif not configured and usable:
+        activation_state = "usable_unconfigured"
+    else:
+        activation_state = "inactive"
+
     return {
-        "provider": _safe_str(block.get("provider"), name),
-        "configured": _safe_bool(block.get("configured")),
-        "usable": _safe_bool(block.get("usable"), _safe_bool(block.get("reachable"))),
-        "reachable": _safe_bool(block.get("reachable")),
-        "status": block.get("status"),
-        "note": _safe_str(block.get("note")),
+        "index": index,
+        "provider": name if name else f"unnamed_{index}",
+        "configured": configured,
+        "usable": usable,
+        "reachable": reachable if "reachable" in provider else None,
+        "activation_state": activation_state,
+        "missing_fields": missing_fields,
+        "issues": issues,
+        "valid": len(issues) == 0,
     }
 
 
-def _analyze_provenance(events: Any) -> Dict[str, Any]:
-    events = _coerce_list(events)
-    counts: Dict[str, int] = {}
-    failures = 0
-    confidences: List[float] = []
-
-    for event in events:
-        if not _is_dict(event):
-            continue
-        provider = _safe_str(event.get("provider_used"), "unknown")
-        counts[provider] = counts.get(provider, 0) + 1
-        if event.get("primary_failure"):
-            failures += 1
-        confidence = event.get("confidence")
-        try:
-            if confidence is not None:
-                confidences.append(float(confidence))
-        except (TypeError, ValueError):
-            continue
-
-    avg_confidence = (
-        round(sum(confidences) / len(confidences), 4) if confidences else None
-    )
-
-    return {
-        "event_count": len(events),
-        "provider_counts": counts,
-        "primary_failures": failures,
-        "average_confidence": avg_confidence,
-    }
-
-
-def _analyze_routing_plan(plan: Any) -> Dict[str, Any]:
-    plan = _coerce_dict(plan)
-    routes = _coerce_list(plan.get("routes"))
-    primary = 0
-    fallback = 0
-    local_available = 0
-
-    for route in routes:
-        if not _is_dict(route):
-            continue
-        if _safe_str(route.get("primary_provider")):
-            primary += 1
-        if _safe_str(route.get("fallback_provider")):
-            fallback += 1
-        if _safe_bool(route.get("local_available")):
-            local_available += 1
-
-    return {
-        "route_count": _safe_int(plan.get("route_count"), len(routes)),
-        "primary_provider_routes": primary,
-        "fallback_provider_routes": fallback,
-        "local_available_routes": local_available,
-    }
-
-
-def _build_issues(
-    health: Dict[str, Any],
-    provenance_summary: Dict[str, Any],
-    routing_summary: Dict[str, Any],
-) -> List[Dict[str, Any]]:
-    issues: List[Dict[str, Any]] = []
-
-    primary = _summarize_provider_block(health.get("primary"), "primary")
-    fallback = _summarize_provider_block(health.get("fallback"), "fallback")
-
-    if not primary["configured"]:
-        issues.append({
-            "code": "primary_not_configured",
-            "severity": "high",
-            "message": "Primary provider is not configured.",
-            "provider": primary["provider"],
-        })
-
-    if not primary["usable"]:
-        issues.append({
-            "code": "primary_not_usable",
-            "severity": "high",
-            "message": "Primary provider is configured but not usable.",
-            "provider": primary["provider"],
-        })
-
-    if not fallback["configured"]:
-        issues.append({
-            "code": "fallback_not_configured",
-            "severity": "medium",
-            "message": "Fallback provider is not configured.",
-            "provider": fallback["provider"],
-        })
-
-    if fallback["configured"] and not fallback["reachable"]:
-        issues.append({
-            "code": "fallback_not_reachable",
-            "severity": "medium",
-            "message": "Fallback provider is configured but not reachable.",
-            "provider": fallback["provider"],
-        })
-
-    if not _safe_bool(health.get("healthy")):
-        issues.append({
-            "code": "overall_unhealthy",
-            "severity": "high",
-            "message": "Overall provider health is reported as unhealthy.",
-        })
-
-    if provenance_summary["event_count"] > 0:
-        failure_rate = (
-            provenance_summary["primary_failures"]
-            / provenance_summary["event_count"]
-        )
-        if failure_rate >= 0.25:
-            issues.append({
-                "code": "elevated_primary_failure_rate",
-                "severity": "medium",
-                "message": "Primary failure rate in provenance log is elevated.",
-                "failure_rate": round(failure_rate, 4),
-            })
-
-    if (
-        routing_summary["route_count"] > 0
-        and routing_summary["local_available_routes"] == 0
-    ):
-        issues.append({
-            "code": "no_local_fallback_available",
-            "severity": "low",
-            "message": "Routing plan has routes but none report local fallback availability.",
-        })
-
-    return issues
-
-
-def _build_recommendations(issues: List[Dict[str, Any]]) -> List[str]:
-    codes = {issue.get("code") for issue in issues}
-    recs: List[str] = []
-
-    if "primary_not_configured" in codes:
-        recs.append("Configure the primary provider credentials before activation.")
-    if "primary_not_usable" in codes:
-        recs.append("Validate primary provider usability before routing work to it.")
-    if "fallback_not_configured" in codes:
-        recs.append("Configure a fallback provider for resilience.")
-    if "fallback_not_reachable" in codes:
-        recs.append("Check fallback provider connectivity and health endpoint.")
-    if "overall_unhealthy" in codes:
-        recs.append("Resolve provider health issues before enabling automated routing.")
-    if "elevated_primary_failure_rate" in codes:
-        recs.append("Review recent primary provider failures and consider temporary fallback bias.")
-    if "no_local_fallback_available" in codes:
-        recs.append("Ensure at least one route has a reachable local fallback.")
-    if not recs:
-        recs.append("Provider activation diagnostics found no actionable issues.")
-    return recs
-
-
-def diagnose_provider_activation(
-    health_report: Optional[Dict[str, Any]] = None,
-    provenance_log: Optional[Dict[str, Any]] = None,
-    routing_plan: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
-    """Return structured diagnostics for provider activation state.
-
-    This function performs no network, financial, or external actions. It
-    inspects the provided payloads and returns a deterministic diagnostic
-    report. Empty or malformed inputs are handled safely.
+def diagnose_provider_activation(providers: Any = None) -> dict[str, Any]:
+    """Diagnose provider activation records.
 
     Parameters
     ----------
-    health_report:
-        Optional provider health report payload.
-    provenance_log:
-        Optional AI provenance log payload.
-    routing_plan:
-        Optional AI task routing plan payload.
+    providers:
+        Either a single provider dict, a mapping of provider names to
+        provider dicts, a list of provider dicts, or ``None``. Malformed
+        inputs are handled safely and reported in the diagnostics.
 
     Returns
     -------
     dict
-        Structured diagnostic report with keys: ``success``, ``status``,
-        ``providers``, ``provenance``, ``routing``, ``issues``,
-        ``recommendations``, and ``external_actions_performed``.
+        A structured diagnostic report containing:
+
+        - ``provider_count``: number of provider entries analyzed.
+        - ``active_count``: number of providers in the ``active`` state.
+        - ``inactive_count``: number of providers in the ``inactive`` state.
+        - ``configured_inactive_count``: providers configured but not usable.
+        - ``usable_unconfigured_count``: providers usable but not configured.
+        - ``issue_count``: total number of issues detected.
+        - ``healthy``: True when every provider is valid and at least one is active.
+        - ``providers``: per-provider diagnostic records.
+        - ``summary``: human-readable summary string.
     """
-    health = _coerce_dict(health_report)
-    provenance = _coerce_dict(provenance_log)
-    routing = _coerce_dict(routing_plan)
+    normalized = _coerce_providers(providers)
+    diagnostics = [
+        _diagnose_single(entry, index)
+        for index, entry in enumerate(normalized)
+    ]
 
-    primary = _summarize_provider_block(health.get("primary"), "primary")
-    fallback = _summarize_provider_block(health.get("fallback"), "fallback")
-
-    provenance_summary = _analyze_provenance(provenance.get("events"))
-    routing_summary = _analyze_routing_plan(routing)
-
-    issues = _build_issues(health, provenance_summary, routing_summary)
-    recommendations = _build_recommendations(issues)
-
-    activation_ready = (
-        primary["configured"]
-        and primary["usable"]
-        and (fallback["configured"] and fallback["reachable"] or fallback["configured"])
-        and not any(i["severity"] == "high" for i in issues)
+    active_count = sum(1 for d in diagnostics if d["activation_state"] == "active")
+    inactive_count = sum(1 for d in diagnostics if d["activation_state"] == "inactive")
+    configured_inactive_count = sum(
+        1 for d in diagnostics if d["activation_state"] == "configured_inactive"
     )
+    usable_unconfigured_count = sum(
+        1 for d in diagnostics if d["activation_state"] == "usable_unconfigured"
+    )
+    issue_count = sum(len(d["issues"]) for d in diagnostics)
+    valid_count = sum(1 for d in diagnostics if d["valid"])
+
+    healthy = bool(diagnostics) and valid_count == len(diagnostics) and active_count >= 1
+
+    if not diagnostics:
+        summary = "No providers were provided for diagnostics."
+    elif healthy:
+        summary = f"All {len(diagnostics)} provider(s) are valid and at least one is active."
+    else:
+        summary = (
+            f"{issue_count} issue(s) detected across {len(diagnostics)} provider(s); "
+            f"{active_count} active, {configured_inactive_count} configured_inactive, "
+            f"{usable_unconfigured_count} usable_unconfigured, {inactive_count} inactive."
+        )
 
     return {
-        "success": True,
-        "status": "provider_activation_diagnostics_complete",
-        "activation_ready": bool(activation_ready),
-        "providers": {
-            "primary": primary,
-            "fallback": fallback,
-            "overall_healthy": _safe_bool(health.get("healthy")),
-        },
-        "provenance": provenance_summary,
-        "routing": routing_summary,
-        "issues": issues,
-        "issue_count": len(issues),
-        "recommendations": recommendations,
-        "external_actions_performed": False,
-        "network_access_performed": False,
-        "financial_actions_performed": False,
+        "provider_count": len(diagnostics),
+        "active_count": active_count,
+        "inactive_count": inactive_count,
+        "configured_inactive_count": configured_inactive_count,
+        "usable_unconfigured_count": usable_unconfigured_count,
+        "valid_count": valid_count,
+        "issue_count": issue_count,
+        "healthy": healthy,
+        "providers": diagnostics,
+        "summary": summary,
     }
