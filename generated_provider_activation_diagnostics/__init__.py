@@ -1,11 +1,17 @@
-"""generated_provider_activation_diagnostics
+"""Provider activation diagnostics for CompanyOS.
 
-Internal CompanyOS capability for diagnosing AI provider activation state.
-This module is purely diagnostic: it inspects provider configuration data and
-produces structured diagnostic results. It performs no network access, no
-financial actions, and no external actions.
+This package provides internal, read-only diagnostics for AI provider
+activation state. It performs no network access and no external actions.
 """
 
-from .core import diagnose_provider_activation
+from generated_provider_activation_diagnostics.core import (
+    diagnose_provider_activation,
+    ProviderActivationDiagnostics,
+)
 
-__all__ = ["diagnose_provider_activation"]
+__all__ = [
+    "diagnose_provider_activation",
+    "ProviderActivationDiagnostics",
+]
+
+__version__ = "1.0.0"

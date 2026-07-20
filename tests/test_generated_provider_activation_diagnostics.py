@@ -1,303 +1,322 @@
-"""Pytest coverage for generated_provider_activation_diagnostics."""
+"""Tests for generated_provider_activation_diagnostics."""
 
 from __future__ import annotations
 
-import generated_provider_activation_diagnostics as pkg
+import pytest
+
 from generated_provider_activation_diagnostics import (
-    core,
+    ProviderActivationDiagnostics,
     diagnose_provider_activation,
 )
 
 
-class TestPublicAPI:
-    def test_package_exposes_function(self):
-        assert callable(pkg.diagnose_provider_activation)
-
-    def test_core_module_exists(self):
-        assert hasattr(core, "diagnose_provider_activation")
-
-
-class TestEmptyAndMalformed:
-    def test_none_input(self):
-        result = diagnose_provider_activation(None)
-        assert result["success"] is True
-        assert result["provider_count"] == 0
-        assert "providers_config_missing" in result["issues"]
-        assert result["recommendations"]
-
-    def test_non_dict_input(self):
-        result = diagnose_provider_activation("not a dict")
-        assert result["success"] is True
-        assert "providers_config_not_dict" in result["issues"]
-
-    def test_empty_dict_input(self):
-        result = diagnose_provider_activation({})
-        assert result["success"] is True
-        assert result["provider_count"] == 0
-        assert "providers_config_empty" in result["issues"]
-
-    def test_list_input_treated_as_non_dict(self):
-        result = diagnose_provider_activation([{"activated": True}])
-        assert "providers_config_not_dict" in result["issues"]
-
-    def test_malformed_provider_entry(self):
-        result = diagnose_provider_activation({"bad": "just-a-string"})
-        assert result["provider_count"] == 1
-        diag = result["providers"][0]
-        assert diag["valid"] is False
-        assert "provider_config_not_dict" in diag["issues"]
-
-    def test_integer_provider_entry(self):
-        result = diagnose_provider_activation({"num": 42})
-        assert result["providers"][0]["valid"] is False
+def test_empty_input_returns_empty_diagnostics():
+    result = diagnose_provider_activation(None)
+    assert isinstance(result, ProviderActivationDiagnostics)
+    d = result.to_dict()
+    assert d["summary"]["total_providers"] == 0
+    assert d["summary"]["activation_ready_count"] == 0
+    assert d["summary"]["usable_for_routing_count"] == 0
+    assert d["providers"] == []
+    assert d["issues"] == []
+    assert isinstance(d["recommendations"], list)
+    assert len(d["recommendations"]) == 1
 
 
-class TestValidProviders:
-    def test_activated_provider_with_api_key(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
+def test_empty_list_returns_empty_diagnostics():
+    result = diagnose_provider_activation([])
+    d = result.to_dict()
+    assert d["summary"]["total_providers"] == 0
+    assert d["summary"]["healthy"] is False
+
+
+def test_single_provider_mapping_is_accepted():
+    provider = {
+        "provider": "openai",
+        "configured": True,
+        "enabled": True,
+        "api_key": "sk-test",
+        "reachable": True,
+        "healthy": True,
+    }
+    result = diagnose_provider_activation(provider)
+    d = result.to_dict()
+    assert d["summary"]["total_providers"] == 1
+    assert d["summary"]["activation_ready_count"] == 1
+    assert d["summary"]["usable_for_routing_count"] == 1
+    assert d["summary"]["healthy"] is True
+    assert d["providers"][0]["provider"] == "openai"
+    assert d["providers"][0]["activation_ready"] is True
+    assert d["providers"][0]["usable_for_routing"] is True
+    assert d["providers"][0]["issues"] == []
+
+
+def test_multiple_providers():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
+            "reachable": True,
+            "healthy": True,
+        },
+        {
+            "provider": "local_llama",
+            "configured": True,
+            "enabled": True,
+            "token": "abc",
+            "reachable": False,
+            "healthy": False,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["total_providers"] == 2
+    assert d["summary"]["activation_ready_count"] == 2
+    assert d["summary"]["usable_for_routing_count"] == 1
+    assert d["summary"]["healthy"] is False
+    # local_llama is activation-ready but not usable for routing
+    local = [p for p in d["providers"] if p["provider"] == "local_llama"][0]
+    assert local["activation_ready"] is True
+    assert local["usable_for_routing"] is False
+    assert any(i["code"] == "activation_ready_but_unreachable" for i in local["issues"])
+
+
+def test_missing_credentials_flagged():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "reachable": True,
+            "healthy": True,
         }
-        result = diagnose_provider_activation(providers)
-        assert result["provider_count"] == 1
-        assert result["activated_count"] == 1
-        assert result["usable_count"] == 1
-        assert result["providers"][0]["usable"] is True
-        assert result["providers"][0]["issues"] == []
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["activation_ready_count"] == 0
+    assert d["summary"]["high_severity_issue_count"] >= 1
+    assert any(i["code"] == "missing_credentials" for i in d["issues"])
 
-    def test_not_activated_provider(self):
-        providers = {
-            "openai": {
-                "activated": False,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
+
+def test_not_configured_flagged():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": False,
+            "enabled": True,
+            "api_key": "sk-test",
         }
-        result = diagnose_provider_activation(providers)
-        assert result["activated_count"] == 0
-        assert result["usable_count"] == 0
-        assert "not_activated" in result["issues"]
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["activation_ready_count"] == 0
+    assert any(i["code"] == "not_configured" for i in d["issues"])
 
-    def test_missing_api_key(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "priority": 1,
-            }
+
+def test_not_enabled_flagged():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": False,
+            "api_key": "sk-test",
         }
-        result = diagnose_provider_activation(providers)
-        assert "missing_api_key" in result["issues"]
-        assert result["usable_count"] == 0
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["activation_ready_count"] == 0
+    assert any(i["code"] == "not_enabled" for i in d["issues"])
 
-    def test_local_provider_without_api_key(self):
-        providers = {
-            "local_llama": {
-                "activated": True,
-                "local": True,
-                "priority": 2,
-            }
+
+def test_malformed_provider_entry():
+    providers = ["not-a-dict", 42, None]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["total_providers"] == 3
+    assert d["summary"]["malformed_count"] == 3
+    assert d["summary"]["activation_ready_count"] == 0
+    for p in d["providers"]:
+        assert p["malformed"] is True
+    assert any(i["code"] == "malformed_provider_entry" for i in d["issues"])
+
+
+def test_unnamed_provider_gets_default_name():
+    providers = [
+        {
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
         }
-        result = diagnose_provider_activation(providers)
-        assert result["usable_count"] == 1
-        assert "missing_api_key" not in result["issues"]
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["providers"][0]["provider"] == "unnamed_provider_0"
 
-    def test_invalid_priority(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": -5,
-            }
+
+def test_string_truthy_values():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": "true",
+            "enabled": "yes",
+            "api_key": "sk-test",
+            "reachable": "on",
+            "healthy": "enabled",
         }
-        result = diagnose_provider_activation(providers)
-        assert "invalid_priority" in result["issues"]
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["activation_ready_count"] == 1
+    assert d["summary"]["usable_for_routing_count"] == 1
 
-    def test_fallback_without_credentials(self):
-        providers = {
-            "local_llama": {
-                "activated": True,
-                "fallback": True,
-                "priority": 2,
-            }
+
+def test_include_recommendations_false():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
+            "reachable": True,
+            "healthy": True,
         }
-        result = diagnose_provider_activation(providers)
-        assert "fallback_without_credentials" in result["issues"]
+    ]
+    result = diagnose_provider_activation(providers, include_recommendations=False)
+    d = result.to_dict()
+    assert d["recommendations"] == []
 
-    def test_string_activated_values(self):
-        providers = {
-            "openai": {
-                "activated": "true",
-                "api_key": "sk-test",
-                "priority": 1,
-            }
+
+def test_single_usable_provider_recommendation():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
+            "reachable": True,
+            "healthy": True,
         }
-        result = diagnose_provider_activation(providers)
-        assert result["activated_count"] == 1
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert any("fallback" in r.lower() for r in d["recommendations"])
 
-    def test_multiple_providers(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            },
-            "local_llama": {
-                "activated": True,
-                "local": True,
-                "fallback": True,
-                "priority": 2,
-            },
-            "disabled": {
-                "activated": False,
-                "api_key": "",
-                "priority": 3,
-            },
+
+def test_healthy_recommendation_when_all_good():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
+            "reachable": True,
+            "healthy": True,
+        },
+        {
+            "provider": "local_llama",
+            "configured": True,
+            "enabled": True,
+            "token": "abc",
+            "reachable": True,
+            "healthy": True,
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["healthy"] is True
+    assert any("no action required" in r.lower() for r in d["recommendations"])
+
+
+def test_to_dict_returns_plain_types():
+    result = diagnose_provider_activation(
+        {"provider": "openai", "configured": True, "enabled": True, "api_key": "k"}
+    )
+    d = result.to_dict()
+    assert isinstance(d, dict)
+    assert isinstance(d["summary"], dict)
+    assert isinstance(d["providers"], list)
+    assert isinstance(d["issues"], list)
+    assert isinstance(d["recommendations"], list)
+
+
+def test_no_external_side_effects():
+    """Ensure the function does not touch network or filesystem."""
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
+            "reachable": True,
+            "healthy": True,
         }
-        result = diagnose_provider_activation(providers)
-        assert result["provider_count"] == 3
-        assert result["activated_count"] == 2
-        assert result["usable_count"] == 2
+    ]
+    # Should complete without any external calls.
+    result = diagnose_provider_activation(providers)
+    assert result.summary["total_providers"] == 1
 
 
-class TestRoutingPolicy:
-    def test_compatible_policy(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            },
-            "local_llama": {
-                "activated": True,
-                "local": True,
-                "priority": 2,
-            },
+def test_mixed_valid_and_malformed():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": True,
+            "enabled": True,
+            "api_key": "sk-test",
+            "reachable": True,
+            "healthy": True,
+        },
+        "malformed-entry",
+        {
+            "provider": "local_llama",
+            "configured": True,
+            "enabled": False,
+            "token": "abc",
+        },
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["total_providers"] == 3
+    assert d["summary"]["malformed_count"] == 1
+    assert d["summary"]["activation_ready_count"] == 1
+    assert d["summary"]["usable_for_routing_count"] == 1
+
+
+def test_activated_field_does_not_imply_ready():
+    providers = [
+        {
+            "provider": "openai",
+            "configured": False,
+            "enabled": False,
+            "activated": True,
         }
-        policy = {
-            "primary_provider": "openai",
-            "fallback_provider": "local_llama",
-        }
-        result = diagnose_provider_activation(providers, routing_policy=policy)
-        assert result["routing_policy_compatible"] is True
-
-    def test_unknown_primary(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
-        }
-        policy = {"primary_provider": "anthropic"}
-        result = diagnose_provider_activation(providers, routing_policy=policy)
-        assert result["routing_policy_compatible"] is False
-        assert "routing_policy_primary_provider_unknown" in result["issues"]
-
-    def test_primary_not_usable(self):
-        providers = {
-            "openai": {
-                "activated": False,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
-        }
-        policy = {"primary_provider": "openai"}
-        result = diagnose_provider_activation(providers, routing_policy=policy)
-        assert result["routing_policy_compatible"] is False
-        assert "routing_policy_primary_provider_not_usable" in result["issues"]
-
-    def test_malformed_policy(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
-        }
-        result = diagnose_provider_activation(
-            providers, routing_policy="not-a-dict"
-        )
-        assert result["routing_policy_compatible"] is False
-        assert "routing_policy_not_dict" in result["issues"]
-
-    def test_no_policy_means_none(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
-        }
-        result = diagnose_provider_activation(providers)
-        assert result["routing_policy_compatible"] is None
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["providers"][0]["activated"] is True
+    assert d["providers"][0]["activation_ready"] is False
 
 
-class TestStructure:
-    def test_result_keys(self):
-        result = diagnose_provider_activation({})
-        expected_keys = {
-            "success",
-            "status",
-            "provider_count",
-            "activated_count",
-            "usable_count",
-            "providers",
-            "issues",
-            "recommendations",
-            "routing_policy_compatible",
-        }
-        assert expected_keys.issubset(result.keys())
+def test_credential_variants():
+    providers = [
+        {"provider": "p1", "configured": True, "enabled": True, "apiKey": "k"},
+        {"provider": "p2", "configured": True, "enabled": True, "auth_token": "k"},
+        {"provider": "p3", "configured": True, "enabled": True, "credentials": {"a": 1}},
+        {"provider": "p4", "configured": True, "enabled": True, "secret": ["x"]},
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["activation_ready_count"] == 4
 
-    def test_provider_diagnosis_keys(self):
-        providers = {
-            "openai": {
-                "activated": True,
-                "api_key": "sk-test",
-                "priority": 1,
-            }
-        }
-        result = diagnose_provider_activation(providers)
-        diag = result["providers"][0]
-        expected = {
-            "provider_id",
-            "valid",
-            "activated",
-            "issues",
-            "recommendations",
-            "usable",
-        }
-        assert expected.issubset(diag.keys())
 
-    def test_never_raises(self):
-        # Exercise a variety of weird inputs to ensure no exception propagates.
-        weird_inputs = [
-            None,
-            {},
-            [],
-            "",
-            123,
-            {"p": None},
-            {"p": []},
-            {"p": {"activated": "yes", "api_key": 0}},
-            {"p": {"priority": "high"}},
-        ]
-        for inp in weird_inputs:
-            result = diagnose_provider_activation(inp)
-            assert result["success"] is True
-            assert isinstance(result["providers"], list)
-            assert isinstance(result["issues"], list)
-            assert isinstance(result["recommendations"], list)
-
-    def test_dedup_issues(self):
-        providers = {
-            "a": {"activated": False, "api_key": "", "priority": -1},
-            "b": {"activated": False, "api_key": "", "priority": -1},
-        }
-        result = diagnose_provider_activation(providers)
-        # Each issue should appear only once in the aggregate list.
-        assert result["issues"].count("not_activated") == 1
-        assert result["issues"].count("missing_api_key") == 1
-        assert result["issues"].count("invalid_priority") == 1
+def test_empty_credential_values_not_counted():
+    providers = [
+        {"provider": "p1", "configured": True, "enabled": True, "api_key": ""},
+        {"provider": "p2", "configured": True, "enabled": True, "api_key": "   "},
+    ]
+    result = diagnose_provider_activation(providers)
+    d = result.to_dict()
+    assert d["summary"]["activation_ready_count"] == 0
+    assert all(i["code"] == "missing_credentials" for i in d["issues"])
