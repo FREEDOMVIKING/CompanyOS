@@ -1,231 +1,393 @@
-"""Core implementation for provider_activation_diagnostics.
+"""Core implementation for provider activation diagnostics.
 
-This module provides a single public function, ``diagnose_provider_activation``,
-that inspects provider health/configuration data and returns a structured
-diagnostic report. It performs no network access, no financial actions, and no
-external actions. It safely handles empty and malformed inputs.
+The public entry point is :func:`diagnose_provider_activation`, which accepts
+structured provider configuration and health data and returns a structured
+diagnostic report. The function is pure: it performs no I/O, no network
+access, and no external actions. It safely handles empty and malformed inputs.
 """
+
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from typing import Any
+from dataclasses import dataclass, field
+from typing import Any, Mapping, Sequence
 
 
-def _now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+SUPPORTED_PROVIDERS = ("openai", "local_llama")
+
+# Issue codes that prevent a provider from being considered activated.
+# Other issues (e.g. "configured_but_not_usable") are informational and do
+# not by themselves block activation — they indicate a pending state.
+BLOCKING_ISSUE_CODES = frozenset({
+    "missing_api_key",
+    "malformed_config",
+    "malformed_health",
+    "not_reachable",
+})
 
 
 def _is_dict(value: Any) -> bool:
-    return isinstance(value, dict)
+    return isinstance(value, Mapping)
 
 
-def _safe_bool(value: Any, default: bool = False) -> bool:
+def _is_list(value: Any) -> bool:
+    return isinstance(value, Sequence) and not isinstance(value, (str, bytes))
+
+
+def _coerce_dict(value: Any) -> dict[str, Any]:
+    if _is_dict(value):
+        return dict(value)
+    return {}
+
+
+def _coerce_list(value: Any) -> list[Any]:
+    if _is_list(value):
+        return list(value)
+    return []
+
+
+def _coerce_bool(value: Any, default: bool = False) -> bool:
     if isinstance(value, bool):
         return value
-    if value is None:
-        return default
-    if isinstance(value, str):
-        return value.strip().lower() in {"true", "1", "yes", "on"}
-    if isinstance(value, (int, float)):
-        return bool(value)
     return default
 
 
-def _safe_str(value: Any, default: str = "") -> str:
-    if value is None:
-        return default
+def _coerce_str(value: Any, default: str = "") -> str:
     if isinstance(value, str):
-        return value.strip()
+        return value
+    return default
+
+
+def _coerce_int(value: Any, default: int = 0) -> int:
     try:
-        return str(value)
-    except Exception:
+        return int(value)
+    except (TypeError, ValueError):
         return default
 
 
-def _diagnose_provider(name: str, provider_data: Any) -> dict[str, Any]:
-    """Build a diagnostic entry for a single provider entry.
+def _diagnose_single_provider(
+    name: str,
+    config: Any,
+    health: Any,
+) -> dict[str, Any]:
+    """Build a diagnostic record for a single provider.
 
-    Handles malformed/missing fields gracefully.
+    ``config`` and ``health`` are expected to be mappings but any malformed
+    input is tolerated and reported as an issue.
     """
-    if not _is_dict(provider_data):
-        return {
-            "provider": _safe_str(name),
-            "valid": False,
-            "configured": False,
-            "usable": False,
-            "reachable": False,
-            "issues": ["malformed_provider_entry"],
-            "recommendations": ["malformed_provider_entry"],
-        }
+    issues: list[dict[str, Any]] = []
+    warnings: list[dict[str, Any]] = []
 
-    issues: list[str] = []
-    recommendations: list[str] = []
+    config_malformed = False
+    health_malformed = False
 
-    configured = _safe_bool(provider_data.get("configured"), False)
-    usable = _safe_bool(provider_data.get("usable"), False)
-    reachable = _safe_bool(provider_data.get("reachable"), False)
-    provider_name = _safe_str(provider_data.get("provider"), _safe_str(name))
+    if not _is_dict(config):
+        config_malformed = True
+        issues.append({
+            "code": "malformed_config",
+            "message": f"Provider '{name}' config is missing or not a mapping.",
+        })
+        config = {}
 
-    if not configured:
-        issues.append("not_configured")
-        recommendations.append("not_configured")
-        recommendations.append(
-            f"Configure credentials/settings for provider '{provider_name}'."
-        )
+    if not _is_dict(health):
+        health_malformed = True
+        issues.append({
+            "code": "malformed_health",
+            "message": f"Provider '{name}' health is missing or not a mapping.",
+        })
+        health = {}
+
+    configured = _coerce_bool(config.get("configured"))
+    usable = _coerce_bool(health.get("usable"), configured)
+    reachable = _coerce_bool(health.get("reachable"), False)
+    enabled = _coerce_bool(config.get("enabled"), True)
+    api_key_present = _coerce_bool(config.get("api_key_present"), False)
+    base_url = _coerce_str(config.get("base_url"), "")
+    health_status = _coerce_str(health.get("status"), "")
+    last_error = _coerce_str(health.get("last_error"), "")
+    timeout_seconds = _coerce_int(config.get("timeout_seconds"), 0)
+
+    if not enabled:
+        warnings.append({
+            "code": "provider_disabled",
+            "message": f"Provider '{name}' is disabled in configuration.",
+        })
+
+    # Only flag missing API key when the provider is actually configured —
+    # an unconfigured provider is simply "not_configured", not blocked.
+    if name == "openai" and configured and not api_key_present:
+        issues.append({
+            "code": "missing_api_key",
+            "message": "OpenAI provider is configured without an API key.",
+        })
+
+    if not base_url and name == "local_llama":
+        warnings.append({
+            "code": "missing_base_url",
+            "message": "Local LLaMA provider has no base_url configured.",
+        })
 
     if configured and not usable:
-        issues.append("configured_but_not_usable")
-        recommendations.append("configured_but_not_usable")
-        recommendations.append(
-            f"Provider '{provider_name}' is configured but marked unusable; "
-            "review quota, auth, or health status."
-        )
+        issues.append({
+            "code": "configured_but_not_usable",
+            "message": f"Provider '{name}' is configured but not reported usable.",
+        })
 
-    if configured and not reachable and "reachable" in provider_data:
-        issues.append("not_reachable")
-        recommendations.append("not_reachable")
-        recommendations.append(
-            f"Provider '{provider_name}' is not reachable; verify endpoint "
-            "availability during actual requests."
-        )
+    if usable and not reachable and name == "local_llama":
+        issues.append({
+            "code": "not_reachable",
+            "message": f"Provider '{name}' is usable but not reachable.",
+        })
 
-    valid = configured and usable
+    if last_error:
+        warnings.append({
+            "code": "recent_error",
+            "message": f"Provider '{name}' reported a recent error: {last_error}",
+        })
+
+    if timeout_seconds <= 0:
+        warnings.append({
+            "code": "invalid_timeout",
+            "message": f"Provider '{name}' has no positive timeout configured.",
+        })
+
+    has_blocking = any(
+        issue["code"] in BLOCKING_ISSUE_CODES for issue in issues
+    )
+
+    # State precedence:
+    #   1. disabled — explicitly turned off
+    #   2. activation_blocked — blocking issues (including malformed input)
+    #   3. not_configured — no blocking issues and not configured
+    #   4. activated — usable with no blocking issues
+    #   5. pending_activation — configured/enabled but not yet usable
+    if not enabled:
+        activation_state = "disabled"
+    elif has_blocking:
+        activation_state = "activation_blocked"
+    elif not configured:
+        activation_state = "not_configured"
+    elif usable:
+        activation_state = "activated"
+    else:
+        # Configured and enabled with no blocking issues, but not yet usable.
+        activation_state = "pending_activation"
 
     return {
-        "provider": provider_name,
-        "valid": valid,
+        "provider": name,
+        "activation_state": activation_state,
         "configured": configured,
+        "enabled": enabled,
         "usable": usable,
-        "reachable": reachable if "reachable" in provider_data else None,
+        "reachable": reachable,
+        "api_key_present": api_key_present,
+        "base_url": base_url,
+        "health_status": health_status,
+        "last_error": last_error,
+        "timeout_seconds": timeout_seconds,
         "issues": issues,
-        "recommendations": recommendations,
+        "warnings": warnings,
     }
+
+
+def _derive_summary(providers: list[dict[str, Any]]) -> dict[str, Any]:
+    total = len(providers)
+    activated = sum(1 for p in providers if p["activation_state"] == "activated")
+    blocked = sum(1 for p in providers if p["activation_state"] == "activation_blocked")
+    pending = sum(1 for p in providers if p["activation_state"] == "pending_activation")
+    disabled = sum(1 for p in providers if p["activation_state"] == "disabled")
+    not_configured = sum(
+        1 for p in providers if p["activation_state"] == "not_configured"
+    )
+
+    issue_count = sum(len(p["issues"]) for p in providers)
+    warning_count = sum(len(p["warnings"]) for p in providers)
+
+    primary = next(
+        (p for p in providers if p["provider"] == "openai"),
+        None,
+    )
+    fallback = next(
+        (p for p in providers if p["provider"] == "local_llama"),
+        None,
+    )
+
+    primary_ready = bool(primary and primary["activation_state"] == "activated")
+    fallback_ready = bool(fallback and fallback["activation_state"] == "activated")
+
+    if primary_ready:
+        routing_recommendation = "primary_available"
+    elif fallback_ready:
+        routing_recommendation = "fallback_only"
+    elif primary and primary["activation_state"] == "pending_activation":
+        routing_recommendation = "awaiting_primary_activation"
+    else:
+        routing_recommendation = "no_active_provider"
+
+    overall_state: str
+    if primary_ready or fallback_ready:
+        overall_state = "operational"
+    elif blocked > 0:
+        overall_state = "degraded"
+    elif pending > 0:
+        overall_state = "pending"
+    else:
+        overall_state = "inactive"
+
+    return {
+        "overall_state": overall_state,
+        "routing_recommendation": routing_recommendation,
+        "primary_ready": primary_ready,
+        "fallback_ready": fallback_ready,
+        "provider_count": total,
+        "activated_count": activated,
+        "blocked_count": blocked,
+        "pending_count": pending,
+        "disabled_count": disabled,
+        "not_configured_count": not_configured,
+        "issue_count": issue_count,
+        "warning_count": warning_count,
+    }
+
+
+@dataclass(frozen=True)
+class ActivationDiagnosticsResult:
+    """Structured result returned by :func:`diagnose_provider_activation`."""
+
+    success: bool
+    status: str
+    summary: dict[str, Any] = field(default_factory=dict)
+    providers: list[dict[str, Any]] = field(default_factory=list)
+    recommendations: list[str] = field(default_factory=list)
+    errors: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "success": self.success,
+            "status": self.status,
+            "summary": self.summary,
+            "providers": self.providers,
+            "recommendations": self.recommendations,
+            "errors": self.errors,
+        }
+
+
+def _build_recommendations(
+    providers: list[dict[str, Any]],
+    summary: dict[str, Any],
+) -> list[str]:
+    recs: list[str] = []
+
+    if summary["routing_recommendation"] == "no_active_provider":
+        recs.append(
+            "No provider is currently activated. Configure at least one "
+            "provider before routing internal work."
+        )
+
+    if summary["routing_recommendation"] == "fallback_only":
+        recs.append(
+            "Primary provider is not activated. Investigate OpenAI activation "
+            "while relying on the local fallback."
+        )
+
+    if summary["routing_recommendation"] == "awaiting_primary_activation":
+        recs.append(
+            "Primary provider activation is pending. Resolve outstanding "
+            "issues to restore primary routing."
+        )
+
+    for provider in providers:
+        for issue in provider["issues"]:
+            recs.append(
+                f"[{provider['provider']}] {issue['code']}: {issue['message']}"
+            )
+
+    if not recs:
+        recs.append("Provider activation diagnostics completed with no actions required.")
+
+    return recs
 
 
 def diagnose_provider_activation(
-    provider_report: Any = None,
+    provider_config: Any = None,
+    provider_health: Any = None,
     *,
-    routing_policy: Any = None,
-) -> dict[str, Any]:
-    """Diagnose provider activation state from a provider health report.
+    providers: Any = None,
+) -> ActivationDiagnosticsResult:
+    """Diagnose provider activation state from configuration and health data.
 
     Parameters
     ----------
-    provider_report:
-        Optional dict-like provider health report. Expected to contain
-        ``primary`` and/or ``fallback`` provider entries, plus optional
-        ``healthy`` and ``routing_policy`` fields. Any shape is accepted;
-        malformed inputs are reported safely.
-    routing_policy:
-        Optional override for the routing policy string.
+    provider_config:
+        Mapping of provider name to configuration dict. Expected keys per
+        provider include ``configured``, ``enabled``, ``api_key_present``,
+        ``base_url``, and ``timeout_seconds``. Malformed or missing values
+        are tolerated.
+    provider_health:
+        Mapping of provider name to health dict. Expected keys per provider
+        include ``usable``, ``reachable``, ``status``, and ``last_error``.
+        Malformed or missing values are tolerated.
+    providers:
+        Optional explicit list of provider names to diagnose. When omitted,
+        the union of keys from ``provider_config`` and ``provider_health`` is
+        used, falling back to the supported providers.
 
     Returns
     -------
-    dict
-        Structured diagnostic report with keys:
-        - ``generated_at``: ISO timestamp
-        - ``success``: bool, always True (diagnostics ran)
-        - ``status``: "provider_activation_diagnostics_complete"
-        - ``providers``: list of per-provider diagnostic dicts
-        - ``healthy``: bool, True if at least one provider is valid
-        - ``primary_active``: bool
-        - ``fallback_active``: bool
-        - ``issue_count``: int
-        - ``recommendations``: list[str]
-        - ``routing_policy``: str
-        - ``external_actions_taken``: False
+    ActivationDiagnosticsResult
+        Structured diagnostic result with summary, per-provider details,
+        recommendations, and errors. The function never raises on malformed
+        input; instead it records diagnostic issues.
+
+    Notes
+    -----
+    This function performs no network access, no financial actions, and no
+    external actions. It is safe to call in any internal CompanyOS context.
     """
-    report: dict[str, Any] = {
-        "generated_at": _now(),
-        "success": True,
-        "status": "provider_activation_diagnostics_complete",
-        "providers": [],
-        "healthy": False,
-        "primary_active": False,
-        "fallback_active": False,
-        "issue_count": 0,
-        "recommendations": [],
-        "routing_policy": "",
-        "external_actions_taken": False,
-    }
+    errors: list[str] = []
 
-    if provider_report is None:
-        report["providers"] = []
-        report["recommendations"] = [
-            "No provider report supplied; cannot evaluate activation state."
-        ]
-        report["issue_count"] = 1
-        report["routing_policy"] = _safe_str(routing_policy)
-        return report
+    config_map = _coerce_dict(provider_config)
+    health_map = _coerce_dict(provider_health)
 
-    if not _is_dict(provider_report):
-        report["providers"] = []
-        report["recommendations"] = [
-            "Provider report is malformed; expected a JSON object."
-        ]
-        report["issue_count"] = 1
-        report["routing_policy"] = _safe_str(routing_policy)
-        return report
+    if not _is_dict(provider_config) and provider_config is not None:
+        errors.append("provider_config was not a mapping; treated as empty.")
 
-    providers: list[dict[str, Any]] = []
-    all_issues: list[str] = []
-    all_recommendations: list[str] = []
+    if not _is_dict(provider_health) and provider_health is not None:
+        errors.append("provider_health was not a mapping; treated as empty.")
 
-    primary_entry = provider_report.get("primary")
-    fallback_entry = provider_report.get("fallback")
-
-    if primary_entry is not None:
-        primary_diag = _diagnose_provider("primary", primary_entry)
-        providers.append(primary_diag)
-        all_issues.extend(primary_diag["issues"])
-        all_recommendations.extend(primary_diag["recommendations"])
-        report["primary_active"] = primary_diag["valid"]
+    if providers is not None:
+        provider_names = [str(p) for p in _coerce_list(providers)]
     else:
-        all_issues.append("missing_primary_provider")
-        all_recommendations.append("missing_primary_provider")
-        all_recommendations.append(
-            "No primary provider entry found in the report."
+        names = set(config_map.keys()) | set(health_map.keys())
+        provider_names = sorted(names) if names else list(SUPPORTED_PROVIDERS)
+
+    if not provider_names:
+        errors.append("No providers supplied for diagnostics.")
+
+    provider_records: list[dict[str, Any]] = []
+    for name in provider_names:
+        provider_records.append(
+            _diagnose_single_provider(
+                name=name,
+                config=config_map.get(name, {}),
+                health=health_map.get(name, {}),
+            )
         )
 
-    if fallback_entry is not None:
-        fallback_diag = _diagnose_provider("fallback", fallback_entry)
-        providers.append(fallback_diag)
-        all_issues.extend(fallback_diag["issues"])
-        all_recommendations.extend(fallback_diag["recommendations"])
-        report["fallback_active"] = fallback_diag["valid"]
-    else:
-        all_issues.append("missing_fallback_provider")
-        all_recommendations.append("missing_fallback_provider")
-        all_recommendations.append(
-            "No fallback provider entry found in the report."
-        )
+    summary = _derive_summary(provider_records)
+    recommendations = _build_recommendations(provider_records, summary)
 
-    # If the report itself declares a healthy flag, incorporate it but do not
-    # override the computed per-provider validity.
-    declared_healthy = _safe_bool(provider_report.get("healthy"), None)
-    computed_healthy = any(p["valid"] for p in providers)
-    report["healthy"] = bool(computed_healthy)
-    if declared_healthy is True and not computed_healthy:
-        all_issues.append("declared_healthy_but_no_valid_provider")
-        all_recommendations.append("declared_healthy_but_no_valid_provider")
-        all_recommendations.append(
-            "Report declares healthy but no provider is both configured and usable."
-        )
+    success = (
+        summary["issue_count"] == 0
+        and summary["activated_count"] > 0
+        and bool(provider_records)
+    )
+    status = "provider_activation_diagnostics_complete"
 
-    policy = _safe_str(routing_policy)
-    if not policy:
-        policy = _safe_str(provider_report.get("routing_policy"))
-    report["routing_policy"] = policy
-
-    if not policy:
-        all_issues.append("missing_routing_policy")
-        all_recommendations.append("missing_routing_policy")
-        all_recommendations.append(
-            "No routing policy specified; define primary/fallback routing."
-        )
-
-    report["providers"] = providers
-    report["issue_count"] = len(all_issues)
-    report["recommendations"] = all_recommendations
-
-    return report
+    return ActivationDiagnosticsResult(
+        success=success,
+        status=status,
+        summary=summary,
+        providers=provider_records,
+        recommendations=recommendations,
+        errors=errors,
+    )
