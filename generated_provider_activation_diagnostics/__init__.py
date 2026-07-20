@@ -1,13 +1,10 @@
-"""Provider activation diagnostics for CompanyOS.
+"""Provider activation diagnostics capability for CompanyOS.
 
 This package provides internal, read-only diagnostics for AI provider
-activation state. It performs no network access, no financial actions, and
-no external actions.
+activation states. It performs no network access, no financial actions,
+and no external actions.
 """
 
-from .core import diagnose_provider_activation, ActivationDiagnosticsResult
+from .core import diagnose_provider_activation
 
-__all__ = [
-    "diagnose_provider_activation",
-    "ActivationDiagnosticsResult",
-]
+__all__ = ["diagnose_provider_activation"]
