@@ -1,234 +1,170 @@
-"""Core implementation for provider activation diagnostics.
+"""Core implementation for provider_activation_diagnostics.
 
-This module provides a single public function, ``diagnose_provider_activation``,
-that inspects provider activation data and returns structured diagnostic
-information. It performs no network access, no financial actions, and no
+This module inspects provider activation records and produces structured
+diagnostics. It performs no network access, no financial actions, and no
 external actions of any kind.
 """
-
 from __future__ import annotations
 
 from typing import Any
 
-
-VALID_PROVIDERS = {"openai", "local_llama", "anthropic", "azure_openai"}
-
-VALID_STATUSES = {"active", "inactive", "degraded", "unconfigured", "unknown"}
+REQUIRED_FIELDS = ("provider", "status")
+VALID_STATUSES = ("active", "inactive", "error", "pending", "unknown")
 
 
-def _coerce_dict(value: Any) -> dict[str, Any]:
-    """Return *value* as a dict, or an empty dict when malformed."""
-    if isinstance(value, dict):
-        return value
-    return {}
+def _is_dict(value: Any) -> bool:
+    return isinstance(value, dict)
 
 
-def _coerce_list(value: Any) -> list[Any]:
-    """Return *value* as a list, or an empty list when malformed."""
-    if isinstance(value, list):
-        return value
-    return []
+def _coerce_providers(providers: Any) -> list[dict[str, Any]]:
+    """Normalize the providers input into a list of dicts.
 
-
-def _coerce_str(value: Any) -> str:
-    """Return *value* as a stripped string, or empty string when not a string."""
-    if isinstance(value, str):
-        return value.strip()
-    return ""
-
-
-def _coerce_bool(value: Any) -> bool:
-    """Return *value* as a bool, defaulting to False for non-bool values."""
-    return bool(value) if isinstance(value, bool) else False
-
-
-def _diagnose_single_provider(provider_entry: Any) -> dict[str, Any]:
-    """Diagnose a single provider entry.
-
-    Parameters
-    ----------
-    provider_entry
-        A dict-like object describing a single provider. Expected keys:
-        ``provider``, ``status``, ``configured``, ``usable``, ``reachable``.
-
-    Returns
-    -------
-    dict
-        Structured diagnostic for the provider.
+    Accepts None, non-list values, lists of dicts, and dicts keyed by provider
+    name. Malformed entries are replaced with sentinel dicts so diagnostics can
+    report them rather than crash.
     """
-    entry = _coerce_dict(provider_entry)
+    if providers is None:
+        return []
 
-    provider_name = _coerce_str(entry.get("provider")) or "unknown"
-    status = _coerce_str(entry.get("status")) or "unknown"
-    configured = _coerce_bool(entry.get("configured"))
-    usable = _coerce_bool(entry.get("usable"))
-    reachable = _coerce_bool(entry.get("reachable"))
+    if _is_dict(providers):
+        result: list[dict[str, Any]] = []
+        for key, value in providers.items():
+            if _is_dict(value):
+                merged = dict(value)
+                merged.setdefault("provider", str(key))
+                result.append(merged)
+            else:
+                result.append({"provider": str(key), "status": "unknown", "malformed": True})
+        return result
 
+    if isinstance(providers, list):
+        normalized: list[dict[str, Any]] = []
+        for item in providers:
+            if _is_dict(item):
+                normalized.append(dict(item))
+            else:
+                normalized.append({"provider": str(item), "status": "unknown", "malformed": True})
+        return normalized
+
+    # Unknown top-level type: treat as a single malformed entry.
+    return [{"provider": "unknown", "status": "unknown", "malformed": True}]
+
+
+def _diagnose_entry(entry: dict[str, Any]) -> dict[str, Any]:
+    """Produce a diagnostic record for a single provider entry."""
     issues: list[str] = []
-    recommendations: list[str] = []
+    warnings: list[str] = []
 
-    if provider_name not in VALID_PROVIDERS:
-        issues.append("unknown_provider_name")
-        recommendations.append(
-            f"Provider '{provider_name}' is not in the known provider set."
-        )
+    provider_name = entry.get("provider")
+    if not provider_name or not isinstance(provider_name, str):
+        issues.append("missing_or_non_string_provider")
+        provider_name = "unknown"
+
+    status = entry.get("status", "unknown")
+    if not isinstance(status, str):
+        issues.append("non_string_status")
+        status = "unknown"
 
     if status not in VALID_STATUSES:
-        issues.append("invalid_status")
-        recommendations.append(
-            f"Status '{status}' is not recognized; expected one of {sorted(VALID_STATUSES)}."
-        )
+        issues.append(f"invalid_status:{status}")
+        status = "unknown"
 
-    if not configured:
-        issues.append("provider_not_configured")
-        recommendations.append(
-            f"Provider '{provider_name}' is not configured."
-        )
+    for field in REQUIRED_FIELDS:
+        if field not in entry:
+            issues.append(f"missing_field:{field}")
 
-    if configured and not usable:
-        issues.append("configured_but_not_usable")
-        recommendations.append(
-            f"Provider '{provider_name}' is configured but not usable."
-        )
+    if entry.get("malformed") is True:
+        issues.append("malformed_entry")
 
-    if not reachable:
-        issues.append("provider_not_reachable")
-        recommendations.append(
-            f"Provider '{provider_name}' is not reachable."
-        )
+    config = entry.get("config")
+    if config is not None and not _is_dict(config):
+        issues.append("non_dict_config")
 
-    if status == "degraded":
-        issues.append("provider_degraded")
-        recommendations.append(
-            f"Provider '{provider_name}' is degraded; consider fallback."
-        )
+    credentials = entry.get("credentials")
+    if credentials is not None and not _is_dict(credentials):
+        warnings.append("non_dict_credentials")
 
-    if status == "inactive" and configured:
-        issues.append("configured_but_inactive")
-        recommendations.append(
-            f"Provider '{provider_name}' is configured but inactive."
-        )
+    enabled = entry.get("enabled")
+    if enabled is not None and not isinstance(enabled, bool):
+        warnings.append("non_bool_enabled")
 
-    healthy = len(issues) == 0
+    activated = status == "active"
+    if activated and enabled is False:
+        warnings.append("active_but_disabled")
+
+    if status == "error" and not entry.get("error_detail"):
+        warnings.append("error_status_without_detail")
+
+    healthy = len(issues) == 0 and status in ("active", "inactive", "pending")
 
     return {
         "provider": provider_name,
         "status": status,
-        "configured": configured,
-        "usable": usable,
-        "reachable": reachable,
+        "activated": activated,
         "healthy": healthy,
         "issues": issues,
-        "recommendations": recommendations,
+        "warnings": warnings,
+        "raw": entry,
     }
 
 
-def diagnose_provider_activation(
-    provider_data: Any,
-    *,
-    fallback_provider: str | None = None,
-) -> dict[str, Any]:
-    """Diagnose provider activation state from structured input.
+def diagnose_provider_activation(providers: Any = None) -> dict[str, Any]:
+    """Diagnose provider activation records.
 
-    This function inspects provider activation/health data and returns a
-    structured diagnostic report. It does **not** perform any network,
-    financial, or external actions.
+    Args:
+        providers: Optional collection of provider activation records. May be a
+            list of dicts, a dict keyed by provider name, None, or any other
+            value (handled safely as malformed input).
 
-    Parameters
-    ----------
-    provider_data
-        Structured data describing providers. Accepts either:
-
-        * A dict with a ``providers`` key containing a list of provider
-          entries, e.g.::
-
-              {
-                  "providers": [
-                      {"provider": "openai", "status": "active",
-                       "configured": True, "usable": True,
-                       "reachable": True}
-                  ]
-              }
-
-        * A dict with ``primary`` and/or ``fallback`` sub-dicts, e.g.::
-
-              {
-                  "primary": {"provider": "openai", ...},
-                  "fallback": {"provider": "local_llama", ...}
-              }
-
-        * A list of provider entry dicts.
-
-    fallback_provider
-        Optional name of a fallback provider to flag in the report.
-
-    Returns
-    -------
-    dict
-        A structured diagnostic report with keys:
-        ``success``, ``provider_count``, ``healthy_count``, ``unhealthy_count``,
-        ``providers``, ``fallback_provider``, ``overall_healthy``, and
-        ``recommendations``.
+    Returns:
+        A structured dict containing:
+          - success: always True (diagnostics ran successfully)
+          - summary: aggregate counts
+          - providers: per-provider diagnostic records
+          - issues: flat list of all issues found
+          - recommendations: suggested next internal steps
     """
-    # Normalize input into a list of provider entries.
-    entries: list[Any] = []
+    entries = _coerce_providers(providers)
+    diagnostics = [_diagnose_entry(e) for e in entries]
 
-    if isinstance(provider_data, list):
-        entries = provider_data
-    elif isinstance(provider_data, dict):
-        if "providers" in provider_data and isinstance(
-            provider_data["providers"], list
-        ):
-            entries = provider_data["providers"]
-        else:
-            # Look for primary/fallback style.
-            for key in ("primary", "fallback"):
-                sub = provider_data.get(key)
-                if isinstance(sub, dict):
-                    entries.append(sub)
-                elif sub is not None:
-                    # Malformed sub-entry; still try to coerce.
-                    entries.append(sub)
-    else:
-        # Empty or malformed top-level input.
-        entries = []
+    total = len(diagnostics)
+    active = sum(1 for d in diagnostics if d["activated"])
+    healthy = sum(1 for d in diagnostics if d["healthy"])
+    with_issues = sum(1 for d in diagnostics if d["issues"])
+    with_warnings = sum(1 for d in diagnostics if d["warnings"])
 
-    diagnostics = [_diagnose_single_provider(entry) for entry in entries]
-
-    healthy_count = sum(1 for d in diagnostics if d["healthy"])
-    unhealthy_count = len(diagnostics) - healthy_count
-
-    all_recommendations: list[str] = []
+    all_issues: list[dict[str, str]] = []
     for d in diagnostics:
-        all_recommendations.extend(d["recommendations"])
+        for issue in d["issues"]:
+            all_issues.append({"provider": d["provider"], "issue": issue})
 
-    overall_healthy = len(diagnostics) > 0 and unhealthy_count == 0
-
-    # If no providers at all, add a recommendation.
-    if len(diagnostics) == 0:
-        all_recommendations.append(
-            "No provider data was supplied; cannot determine activation state."
-        )
-
-    # If a fallback provider is specified, verify it appears.
-    if fallback_provider is not None:
-        fallback_names = {d["provider"] for d in diagnostics}
-        if fallback_provider not in fallback_names:
-            all_recommendations.append(
-                f"Fallback provider '{fallback_provider}' is not present in the provider data."
-            )
+    recommendations: list[str] = []
+    if total == 0:
+        recommendations.append("No provider records supplied; nothing to diagnose.")
+    if with_issues:
+        recommendations.append("Resolve malformed or invalid provider entries before activation.")
+    if active == 0 and total > 0:
+        recommendations.append("No providers are currently active.")
+    if any(d["status"] == "error" for d in diagnostics):
+        recommendations.append("Review providers in error state and attach error_detail.")
+    if any("active_but_disabled" in d["warnings"] for d in diagnostics):
+        recommendations.append("Reconcile providers marked active but disabled.")
+    if not recommendations:
+        recommendations.append("All provider activation records are well-formed.")
 
     return {
         "success": True,
         "status": "provider_activation_diagnostics_complete",
-        "provider_count": len(diagnostics),
-        "healthy_count": healthy_count,
-        "unhealthy_count": unhealthy_count,
-        "overall_healthy": overall_healthy,
-        "fallback_provider": fallback_provider,
+        "summary": {
+            "total": total,
+            "active": active,
+            "inactive_or_other": total - active,
+            "healthy": healthy,
+            "with_issues": with_issues,
+            "with_warnings": with_warnings,
+        },
         "providers": diagnostics,
-        "recommendations": all_recommendations,
+        "issues": all_issues,
+        "recommendations": recommendations,
         "external_actions_performed": False,
-        "network_access_performed": False,
-        "financial_actions_performed": False,
     }
