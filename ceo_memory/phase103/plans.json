@@ -1,0 +1,62 @@
+{
+  "phase": 103,
+  "plans": [
+    {
+      "success": true,
+      "status": "phase102_goal_decomposed",
+      "mission_id": "mission-2efff7b1027f",
+      "tasks": [
+        {
+          "task_id": "mission-2efff7b1027f-research",
+          "title": "Research evidence for: Find, validate, and internally develop a viable AI-powered business opportunity.",
+          "category": "research",
+          "depends_on": [],
+          "action_class": "reversible_internal",
+          "status": "planned"
+        },
+        {
+          "task_id": "mission-2efff7b1027f-strategy",
+          "title": "Define strategy for: Find, validate, and internally develop a viable AI-powered business opportunity.",
+          "category": "strategy",
+          "depends_on": [
+            "mission-2efff7b1027f-research"
+          ],
+          "action_class": "reversible_internal",
+          "status": "planned"
+        },
+        {
+          "task_id": "mission-2efff7b1027f-build",
+          "title": "Design reversible MVP for: Find, validate, and internally develop a viable AI-powered business opportunity.",
+          "category": "build",
+          "depends_on": [
+            "mission-2efff7b1027f-strategy"
+          ],
+          "action_class": "reversible_internal",
+          "status": "planned"
+        },
+        {
+          "task_id": "mission-2efff7b1027f-validate",
+          "title": "Validate assumptions for: Find, validate, and internally develop a viable AI-powered business opportunity.",
+          "category": "growth",
+          "depends_on": [
+            "mission-2efff7b1027f-build"
+          ],
+          "action_class": "reversible_internal",
+          "status": "planned"
+        },
+        {
+          "task_id": "mission-2efff7b1027f-review",
+          "title": "Prepare CEO decision package for: Find, validate, and internally develop a viable AI-powered business opportunity.",
+          "category": "review",
+          "depends_on": [
+            "mission-2efff7b1027f-validate"
+          ],
+          "action_class": "reversible_internal",
+          "status": "planned"
+        }
+      ],
+      "created_at": "2026-07-20T02:48:41.423048+00:00",
+      "saved_at": "2026-07-20T02:48:41.423068+00:00"
+    }
+  ]
+}

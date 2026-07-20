@@ -1,0 +1,35 @@
+{
+  "enabled": true,
+  "mode": "autonomous_planning_bounded_execution",
+  "source_phase": 50,
+  "minimum_opportunity_score": 65,
+  "max_active_plans": 10,
+  "max_tasks_per_plan": 50,
+  "planning": {
+    "generate_objective": true,
+    "generate_milestones": true,
+    "generate_tasks": true,
+    "assign_specialist_roles": true,
+    "map_dependencies": true,
+    "estimate_resources": true,
+    "identify_revenue_path": true,
+    "identify_failure_conditions": true
+  },
+  "prioritization": {
+    "profit_potential": true,
+    "speed_to_revenue": true,
+    "automation_potential": true,
+    "resource_efficiency": true,
+    "strategic_fit": true
+  },
+  "rules": {
+    "require_phase50_qualification": true,
+    "require_execution_plan_before_action": true,
+    "require_dependency_validation": true,
+    "require_risk_assessment": true,
+    "require_owner_approval_for_financial_commitments": true,
+    "require_owner_approval_for_irreversible_external_actions": true,
+    "allow_autonomous_reversible_internal_actions": true,
+    "preserve_existing_safety_boundaries": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "internal_health_summary": {
+    "module": "generated_internal_health_summary",
+    "verified": true,
+    "source": "openrouter_live_intelligence",
+    "model": "z-ai/glm-5.2",
+    "mission": {
+      "objective": "Build an internal-only CompanyOS capability that accepts system-health records and produces a concise structured health summary including overall status, unhealthy components, warnings, and recommended internal follow-up actions.",
+      "requirements": [
+        "Create package generated_internal_health_summary",
+        "Use generated_internal_health_summary/__init__.py",
+        "Use generated_internal_health_summary/core.py",
+        "Expose generate_internal_health_summary",
+        "Handle empty input safely",
+        "Handle missing keys and None values safely",
+        "Handle healthy and unhealthy components",
+        "Return structured Python data",
+        "Include meaningful pytest coverage",
+        "No network access",
+        "No financial actions",
+        "No external actions",
+        "Do not modify unrelated CompanyOS behavior"
+      ]
+    }
+  }
+}

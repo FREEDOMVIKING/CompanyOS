@@ -1,0 +1,25 @@
+{
+  "phase": 51,
+  "name": "Autonomous Opportunity-to-Execution Planner",
+  "enabled": true,
+  "source_phase": 50,
+  "components": [
+    "execution_planning",
+    "milestone_generation",
+    "dependency_mapping",
+    "specialist_task_routing",
+    "bounded_task_execution",
+    "autonomous_execution_loop",
+    "persistent_task_results"
+  ],
+  "integration": {
+    "phase50_opportunity_input": true,
+    "controller": "companyos/phase51ctl",
+    "verification": "companyos/verify_phase51.py"
+  },
+  "execution_policy": {
+    "autonomous_reversible_internal_actions": true,
+    "owner_approval_for_financial_commitments": true,
+    "owner_approval_for_irreversible_external_actions": true
+  }
+}

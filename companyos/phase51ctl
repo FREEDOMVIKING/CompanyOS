@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+
+import sys
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from agents.phase51_execution_planner.execution_planner import (
+    status as planner_status,
+    generate
+)
+
+from agents.phase51_execution_planner.task_dispatcher import (
+    status as dispatcher_status,
+    dispatch_ready_tasks
+)
+
+from agents.phase51_execution_planner.task_executor import (
+    status as executor_status,
+    execute_next
+)
+
+from agents.phase51_execution_planner.execution_loop import (
+    run_loop
+)
+
+
+def output(data):
+    print(json.dumps(data, indent=2))
+
+
+def main():
+    command = sys.argv[1].lower() if len(sys.argv) > 1 else "status"
+
+    if command == "status":
+        output({
+            "success": True,
+            "status": "phase51_status",
+            "planner": planner_status(),
+            "dispatcher": dispatcher_status(),
+            "executor": executor_status()
+        })
+        return 0
+
+    if command == "generate":
+        output(generate())
+        return 0
+
+    if command == "dispatch":
+        output(dispatch_ready_tasks())
+        return 0
+
+    if command == "dispatcher-status":
+        output(dispatcher_status())
+        return 0
+
+    if command == "execute-next":
+        output(execute_next())
+        return 0
+
+    if command == "executor-status":
+        output(executor_status())
+        return 0
+
+    if command == "run-loop":
+        output(run_loop())
+        return 0
+
+    output({
+        "success": False,
+        "status": "unknown_command",
+        "command": command,
+        "available_commands": [
+            "status",
+            "generate",
+            "dispatch",
+            "dispatcher-status",
+            "execute-next",
+            "executor-status",
+            "run-loop"
+        ]
+    })
+
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

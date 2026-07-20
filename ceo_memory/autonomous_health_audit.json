@@ -14516,5 +14516,400 @@
         "last_recovery_count": 3
       }
     }
+  },
+  {
+    "timestamp": "2026-07-20T00:00:08.054036+00:00",
+    "action": "supervise",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "health_supervision_attention_required",
+      "report": {
+        "generated_at": "2026-07-20T00:00:08.038656+00:00",
+        "issues_detected": 3,
+        "recoveries_attempted": 3,
+        "remaining_issues": 3,
+        "issues": [
+          {
+            "component": "scheduler-job",
+            "job_id": "autonomous-health-supervisor",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 4
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "readiness-recovery-coordinator",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 3
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "phase34-autonomous-treasury",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 5
+          }
+        ],
+        "recoveries": [
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "autonomous-health-supervisor",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 4
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 16672\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "readiness-recovery-coordinator",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 3
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 16672\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "phase34-autonomous-treasury",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 5
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 16672\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "remaining": [
+          {
+            "component": "scheduler-job",
+            "job_id": "autonomous-health-supervisor",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 4
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "readiness-recovery-coordinator",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 3
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "phase34-autonomous-treasury",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 5
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 420,
+        "last_cycle_at": "2026-07-20T00:00:08.040026+00:00",
+        "last_issue_count": 3,
+        "last_remaining_issue_count": 3,
+        "last_recovery_count": 3
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-20T00:00:37.651841+00:00",
+    "action": "supervise",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "health_supervision_attention_required",
+      "report": {
+        "generated_at": "2026-07-20T00:00:37.645210+00:00",
+        "issues_detected": 3,
+        "recoveries_attempted": 3,
+        "remaining_issues": 3,
+        "issues": [
+          {
+            "component": "scheduler-job",
+            "job_id": "autonomous-health-supervisor",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 4
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "readiness-recovery-coordinator",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 3
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "phase34-autonomous-treasury",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 5
+          }
+        ],
+        "recoveries": [
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "autonomous-health-supervisor",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 4
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 16672\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "readiness-recovery-coordinator",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 3
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 16672\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "phase34-autonomous-treasury",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 5
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 16672\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "remaining": [
+          {
+            "component": "scheduler-job",
+            "job_id": "autonomous-health-supervisor",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 4
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "readiness-recovery-coordinator",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 3
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "phase34-autonomous-treasury",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 5
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 421,
+        "last_cycle_at": "2026-07-20T00:00:37.645978+00:00",
+        "last_issue_count": 3,
+        "last_remaining_issue_count": 3,
+        "last_recovery_count": 3
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-20T00:01:31.011852+00:00",
+    "action": "supervise",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "health_supervision_attention_required",
+      "report": {
+        "generated_at": "2026-07-20T00:01:31.001705+00:00",
+        "issues_detected": 4,
+        "recoveries_attempted": 3,
+        "remaining_issues": 4,
+        "issues": [
+          {
+            "component": "operations",
+            "type": "unhealthy",
+            "severity": "high",
+            "details": {
+              "healthy": false,
+              "running": true,
+              "halted": false,
+              "last_cycle_at": "2026-07-20T00:00:40.024561+00:00",
+              "last_cycle_job_count": 16,
+              "failure_count": 1,
+              "last_error": ""
+            }
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "autonomous-health-supervisor",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 4
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "readiness-recovery-coordinator",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 3
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "phase34-autonomous-treasury",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 5
+          }
+        ],
+        "recoveries": [
+          {
+            "issue": {
+              "component": "operations",
+              "type": "unhealthy",
+              "severity": "high",
+              "details": {
+                "healthy": false,
+                "running": true,
+                "halted": false,
+                "last_cycle_at": "2026-07-20T00:00:40.024561+00:00",
+                "last_cycle_job_count": 16,
+                "failure_count": 1,
+                "last_error": ""
+              }
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 20411\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "autonomous-health-supervisor",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 4
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 20411\n}\n",
+              "stderr": ""
+            }
+          },
+          {
+            "issue": {
+              "component": "scheduler-job",
+              "job_id": "readiness-recovery-coordinator",
+              "type": "repeated-failure",
+              "severity": "high",
+              "failure_count": 3
+            },
+            "recovery": {
+              "success": true,
+              "return_code": 0,
+              "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 20411\n}\n",
+              "stderr": ""
+            }
+          }
+        ],
+        "remaining": [
+          {
+            "component": "operations",
+            "type": "unhealthy",
+            "severity": "high",
+            "details": {
+              "healthy": false,
+              "running": true,
+              "halted": false,
+              "last_cycle_at": "2026-07-20T00:00:40.024561+00:00",
+              "last_cycle_job_count": 16,
+              "failure_count": 1,
+              "last_error": ""
+            }
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "autonomous-health-supervisor",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 4
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "readiness-recovery-coordinator",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 3
+          },
+          {
+            "component": "scheduler-job",
+            "job_id": "phase34-autonomous-treasury",
+            "type": "repeated-failure",
+            "severity": "high",
+            "failure_count": 5
+          }
+        ],
+        "automatic_customer_contact": false,
+        "automatic_publication": false,
+        "automatic_spending": false,
+        "automatic_destructive_actions": false
+      },
+      "state": {
+        "schema_version": 1,
+        "cycle_count": 422,
+        "last_cycle_at": "2026-07-20T00:01:31.002884+00:00",
+        "last_issue_count": 4,
+        "last_remaining_issue_count": 4,
+        "last_recovery_count": 3
+      }
+    }
   }
 ]
