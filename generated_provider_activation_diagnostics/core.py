@@ -1,98 +1,205 @@
 #!/usr/bin/env python3
+"""Core implementation for provider activation diagnostics.
 
-from typing import Any, Dict, List, Optional
+This module inspects provider configuration data and produces structured
+diagnostics about activation readiness. It performs NO network access, NO
+financial actions, and NO external actions. It only validates in-memory data.
+"""
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from typing import Any
+
+REQUIRED_PROVIDER_FIELDS = ("provider", "status")
+
+VALID_STATUSES = (
+    "active",
+    "inactive",
+    "configured",
+    "unconfigured",
+    "error",
+    "unknown",
+)
 
 
-def get_provider_activation_diagnostics(
-    provider_name: str,
-    configuration: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _is_dict(value: Any) -> bool:
+    return isinstance(value, dict)
+
+
+def _coerce_providers(providers: Any) -> list[dict[str, Any]]:
+    """Normalize the providers input into a list of dicts.
+
+    Malformed entries are replaced with sentinel dicts so diagnostics can
+    report them rather than crash.
     """
-    Analyzes the activation status and potential issues of a given provider.
+    if providers is None:
+        return []
+    if isinstance(providers, dict):
+        # Treat a single provider dict as a one-element list.
+        return [providers]
+    if isinstance(providers, list):
+        result: list[dict[str, Any]] = []
+        for entry in providers:
+            if _is_dict(entry):
+                result.append(entry)
+            else:
+                result.append({"provider": None, "status": None, "_malformed": True})
+        return result
+    # Unknown shape: return empty rather than raising.
+    return []
 
-    This function simulates checking the activation status of a provider based
-    on its name and provided configuration. It does not perform any external
-    or financial actions.
 
-    Args:
-        provider_name: The name of the provider to check.
-        configuration: An optional dictionary of configuration parameters for the provider.
+def _diagnose_single(provider: dict[str, Any], index: int) -> dict[str, Any]:
+    """Produce a diagnostic record for a single provider entry."""
+    issues: list[str] = []
+    warnings: list[str] = []
 
-    Returns:
-        A dictionary containing diagnostic information about the provider's activation.
-        The structure includes:
-        - 'provider_name': The name of the provider.
-        - 'is_active': Boolean indicating if the provider is considered active.
-        - 'status': A string describing the current status (e.g., 'active', 'inactive', 'misconfigured').
-        - 'diagnostics': A list of strings detailing any identified issues or checks.
-        - 'configuration_used': The configuration that was used for the check.
-    """
-    if not isinstance(provider_name, str) or not provider_name:
+    if provider.get("_malformed"):
         return {
-            "provider_name": provider_name,
-            "is_active": False,
-            "status": "error: invalid_provider_name",
-            "diagnostics": ["Provider name must be a non-empty string."],
-            "configuration_used": configuration,
+            "index": index,
+            "provider": None,
+            "status": "unknown",
+            "configured": False,
+            "has_credentials": False,
+            "reachable": False,
+            "activated": False,
+            "ready": False,
+            "issues": ["malformed_provider_entry"],
+            "warnings": [],
+            "missing_fields": list(REQUIRED_PROVIDER_FIELDS),
         }
 
-    if configuration is None:
-        configuration = {}
-    elif not isinstance(configuration, dict):
-        return {
-            "provider_name": provider_name,
-            "is_active": False,
-            "status": "error: invalid_configuration_type",
-            "diagnostics": ["Configuration must be a dictionary or None."],
-            "configuration_used": configuration,
-        }
+    name = provider.get("provider")
+    status = provider.get("status")
 
-    is_active = False
-    status = "unknown"
-    diagnostics: List[str] = []
+    missing_fields = [
+        field for field in REQUIRED_PROVIDER_FIELDS if field not in provider
+    ]
 
-    # Simulate activation checks based on provider name and configuration
-    if provider_name == "openai":
-        if configuration.get("api_key") and configuration.get("api_key") != "dummy_key_for_testing":
-            is_active = True
-            status = "active"
-            diagnostics.append("OpenAI API key is present.")
-        else:
-            status = "misconfigured"
-            diagnostics.append("OpenAI API key is missing or invalid.")
-            if not configuration.get("api_key"):
-                diagnostics.append("Missing 'api_key' in configuration.")
+    if not isinstance(name, str) or not name.strip():
+        issues.append("missing_or_invalid_provider_name")
+        name = None
 
-    elif provider_name == "local_llama":
-        if configuration.get("model_path") and configuration.get("port"):
-            is_active = True
-            status = "active"
-            diagnostics.append("Local Llama model path and port are configured.")
-        else:
-            status = "misconfigured"
-            diagnostics.append("Local Llama model path or port is missing.")
-            if not configuration.get("model_path"):
-                diagnostics.append("Missing 'model_path' in configuration.")
-            if not configuration.get("port"):
-                diagnostics.append("Missing 'port' in configuration.")
+    if not isinstance(status, str) or not status.strip():
+        issues.append("missing_or_invalid_status")
+        status = "unknown"
+    elif status not in VALID_STATUSES:
+        warnings.append(f"unrecognized_status:{status}")
 
-    elif provider_name == "dummy_provider":
-        if configuration.get("enabled", False):
-            is_active = True
-            status = "active"
-            diagnostics.append("Dummy provider is enabled.")
-        else:
-            status = "inactive"
-            diagnostics.append("Dummy provider is not enabled.")
+    configured = bool(provider.get("configured", False))
+    has_credentials = bool(provider.get("has_credentials", False))
+    reachable = bool(provider.get("reachable", False))
 
-    else:
-        status = "unsupported"
-        diagnostics.append(f"Provider '{provider_name}' is not recognized or supported.")
+    if status == "active" and not configured:
+        warnings.append("active_without_configured_flag")
+    if status == "active" and not has_credentials:
+        issues.append("active_without_credentials")
+    if status == "active" and not reachable:
+        warnings.append("active_without_reachable_flag")
+
+    activated = status == "active" and configured and has_credentials
+    ready = activated and reachable
 
     return {
-        "provider_name": provider_name,
-        "is_active": is_active,
+        "index": index,
+        "provider": name,
         "status": status,
+        "configured": configured,
+        "has_credentials": has_credentials,
+        "reachable": reachable,
+        "activated": activated,
+        "ready": ready,
+        "issues": issues,
+        "warnings": warnings,
+        "missing_fields": missing_fields,
+    }
+
+
+def diagnose_provider_activation(
+    providers: Any = None,
+    *,
+    require_credentials: bool = True,
+    require_reachable: bool = False,
+) -> dict[str, Any]:
+    """Diagnose provider activation readiness from in-memory configuration.
+
+    Parameters
+    ----------
+    providers:
+        A single provider dict, a list of provider dicts, or None. Each provider
+        dict may contain ``provider``, ``status``, ``configured``,
+        ``has_credentials``, and ``reachable`` fields. Malformed entries are
+        reported safely rather than raising.
+    require_credentials:
+        When True, a provider cannot be considered activated without
+        ``has_credentials`` truthy.
+    require_reachable:
+        When True, a provider cannot be considered ready unless ``reachable``
+        is truthy.
+
+    Returns
+    -------
+    dict
+        Structured diagnostic report with per-provider details and summary
+        counts. Always returns a dict; never raises on bad input.
+    """
+    normalized = _coerce_providers(providers)
+
+    diagnostics: list[dict[str, Any]] = []
+    for index, provider in enumerate(normalized):
+        diag = _diagnose_single(provider, index)
+
+        # Re-evaluate activated/ready using caller overrides.
+        status = diag.get("status")
+        configured = diag.get("configured", False)
+        has_credentials = diag.get("has_credentials", False)
+        reachable = diag.get("reachable", False)
+
+        activated = status == "active" and configured
+        if require_credentials and not has_credentials:
+            activated = False
+
+        ready = activated
+        if require_reachable and not reachable:
+            ready = False
+
+        diag["activated"] = activated
+        diag["ready"] = ready
+        diagnostics.append(diag)
+
+    total = len(diagnostics)
+    activated_count = sum(1 for d in diagnostics if d.get("activated"))
+    ready_count = sum(1 for d in diagnostics if d.get("ready"))
+    issue_count = sum(len(d.get("issues", [])) for d in diagnostics)
+    warning_count = sum(len(d.get("warnings", [])) for d in diagnostics)
+
+    providers_with_issues = [
+        {"index": d["index"], "provider": d.get("provider"), "issues": d.get("issues", [])}
+        for d in diagnostics
+        if d.get("issues")
+    ]
+
+    # Healthy requires at least one provider and no blocking issues with at
+    # least one activated provider.
+    healthy = total > 0 and issue_count == 0 and activated_count > 0
+
+    return {
+        "generated_at": _now(),
+        "capability": "provider_activation_diagnostics",
+        "total_providers": total,
+        "activated_count": activated_count,
+        "ready_count": ready_count,
+        "issue_count": issue_count,
+        "warning_count": warning_count,
+        "healthy": healthy,
+        "require_credentials": require_credentials,
+        "require_reachable": require_reachable,
         "diagnostics": diagnostics,
-        "configuration_used": configuration,
+        "providers_with_issues": providers_with_issues,
+        "external_actions_performed": False,
+        "network_access_performed": False,
     }
