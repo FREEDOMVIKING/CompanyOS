@@ -1,235 +1,231 @@
-"""Core implementation for provider activation diagnostics.
+"""Core implementation for provider_activation_diagnostics.
 
-The public entry point is :func:`diagnose_provider_activation`, which
-inspects provider configuration data and returns a structured diagnostic
-report.  No network access, financial actions, or external side effects
-are performed.
+This module provides a single public function, ``diagnose_provider_activation``,
+that inspects provider health/configuration data and returns a structured
+diagnostic report. It performs no network access, no financial actions, and no
+external actions. It safely handles empty and malformed inputs.
 """
-
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Mapping, Optional, Sequence
-
-
-_REQUIRED_PROVIDER_FIELDS = ("provider",)
-_OPTIONAL_PROVIDER_FIELDS = (
-    "configured",
-    "usable",
-    "reachable",
-    "enabled",
-    "healthy",
-    "status",
-    "base_url",
-    "note",
-)
+from typing import Any
 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _coerce_providers(
-    providers: Any,
-) -> List[Dict[str, Any]]:
-    """Normalize the *providers* argument into a list of dicts.
+def _is_dict(value: Any) -> bool:
+    return isinstance(value, dict)
 
-    Accepts ``None``, a single mapping, or a sequence of mappings.
-    Malformed entries are replaced with safe placeholder dicts so that
-    callers always receive a structured response.
+
+def _safe_bool(value: Any, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "1", "yes", "on"}
+    if isinstance(value, (int, float)):
+        return bool(value)
+    return default
+
+
+def _safe_str(value: Any, default: str = "") -> str:
+    if value is None:
+        return default
+    if isinstance(value, str):
+        return value.strip()
+    try:
+        return str(value)
+    except Exception:
+        return default
+
+
+def _diagnose_provider(name: str, provider_data: Any) -> dict[str, Any]:
+    """Build a diagnostic entry for a single provider entry.
+
+    Handles malformed/missing fields gracefully.
     """
-    if providers is None:
-        return []
-
-    if isinstance(providers, Mapping):
-        # A single provider mapping.
-        return [_coerce_single_provider(providers)]
-
-    if isinstance(providers, Sequence) and not isinstance(providers, (str, bytes)):
-        result: List[Dict[str, Any]] = []
-        for index, item in enumerate(providers):
-            if isinstance(item, Mapping):
-                result.append(_coerce_single_provider(item))
-            else:
-                result.append(
-                    {
-                        "provider": f"malformed_{index}",
-                        "malformed": True,
-                        "error": "provider entry is not a mapping",
-                        "raw_type": type(item).__name__,
-                    }
-                )
-        return result
-
-    # Completely unexpected input type.
-    return [
-        {
-            "provider": "malformed_input",
-            "malformed": True,
-            "error": "providers argument must be a mapping or sequence of mappings",
-            "raw_type": type(providers).__name__,
-        }
-    ]
-
-
-def _coerce_single_provider(item: Mapping[str, Any]) -> Dict[str, Any]:
-    """Validate and normalize a single provider mapping."""
-    if not isinstance(item, Mapping):
+    if not _is_dict(provider_data):
         return {
-            "provider": "malformed",
-            "malformed": True,
-            "error": "provider entry is not a mapping",
-            "raw_type": type(item).__name__,
+            "provider": _safe_str(name),
+            "valid": False,
+            "configured": False,
+            "usable": False,
+            "reachable": False,
+            "issues": ["malformed_provider_entry"],
+            "recommendations": ["malformed_provider_entry"],
         }
 
-    provider_name = item.get("provider")
-    if not isinstance(provider_name, str) or not provider_name.strip():
-        return {
-            "provider": "unknown",
-            "malformed": True,
-            "error": "missing or invalid 'provider' field",
-            "raw": dict(item) if isinstance(item, Mapping) else None,
-        }
+    issues: list[str] = []
+    recommendations: list[str] = []
 
-    normalized: Dict[str, Any] = {"provider": provider_name}
-
-    for field in _OPTIONAL_PROVIDER_FIELDS:
-        if field in item:
-            normalized[field] = item[field]
-
-    normalized["malformed"] = False
-    return normalized
-
-
-def _evaluate_activation(provider: Dict[str, Any]) -> Dict[str, Any]:
-    """Determine activation state for a single normalized provider."""
-    if provider.get("malformed"):
-        return {
-            "activated": False,
-            "activation_state": "invalid",
-            "issues": [provider.get("error", "malformed provider entry")],
-        }
-
-    issues: List[str] = []
-
-    configured = bool(provider.get("configured", False))
-    enabled = bool(provider.get("enabled", True))
-    usable = bool(provider.get("usable", False))
-    reachable = bool(provider.get("reachable", False))
-    healthy = bool(provider.get("healthy", True))
+    configured = _safe_bool(provider_data.get("configured"), False)
+    usable = _safe_bool(provider_data.get("usable"), False)
+    reachable = _safe_bool(provider_data.get("reachable"), False)
+    provider_name = _safe_str(provider_data.get("provider"), _safe_str(name))
 
     if not configured:
-        issues.append("provider_not_configured")
-    if not enabled:
-        issues.append("provider_disabled")
-    if not usable:
-        issues.append("provider_not_usable")
-    if not reachable:
-        issues.append("provider_not_reachable")
-    if not healthy:
-        issues.append("provider_unhealthy")
+        issues.append("not_configured")
+        recommendations.append("not_configured")
+        recommendations.append(
+            f"Configure credentials/settings for provider '{provider_name}'."
+        )
 
-    if not issues:
-        state = "activated"
-        activated = True
-    elif configured and enabled and usable and healthy and not reachable:
-        state = "degraded"
-        activated = True
-    elif configured and not enabled:
-        state = "standby"
-        activated = False
-    elif configured and enabled and usable:
-        state = "partial"
-        activated = True
-    elif configured and enabled:
-        state = "standby"
-        activated = False
-    elif configured:
-        state = "inactive"
-        activated = False
-    else:
-        state = "unconfigured"
-        activated = False
+    if configured and not usable:
+        issues.append("configured_but_not_usable")
+        recommendations.append("configured_but_not_usable")
+        recommendations.append(
+            f"Provider '{provider_name}' is configured but marked unusable; "
+            "review quota, auth, or health status."
+        )
+
+    if configured and not reachable and "reachable" in provider_data:
+        issues.append("not_reachable")
+        recommendations.append("not_reachable")
+        recommendations.append(
+            f"Provider '{provider_name}' is not reachable; verify endpoint "
+            "availability during actual requests."
+        )
+
+    valid = configured and usable
 
     return {
-        "activated": activated,
-        "activation_state": state,
+        "provider": provider_name,
+        "valid": valid,
+        "configured": configured,
+        "usable": usable,
+        "reachable": reachable if "reachable" in provider_data else None,
         "issues": issues,
+        "recommendations": recommendations,
     }
 
 
 def diagnose_provider_activation(
-    providers: Any = None,
+    provider_report: Any = None,
     *,
     routing_policy: Any = None,
-) -> Dict[str, Any]:
-    """Diagnose provider activation state from configuration data.
+) -> dict[str, Any]:
+    """Diagnose provider activation state from a provider health report.
 
     Parameters
     ----------
-    providers:
-        Either ``None``, a single provider mapping, or a sequence of
-        provider mappings.  Each mapping should contain at least a
-        ``"provider"`` string field.  Optional fields include
-        ``configured``, ``usable``, ``reachable``, ``enabled``,
-        ``healthy``, ``status``, ``base_url``, and ``note``.
-
+    provider_report:
+        Optional dict-like provider health report. Expected to contain
+        ``primary`` and/or ``fallback`` provider entries, plus optional
+        ``healthy`` and ``routing_policy`` fields. Any shape is accepted;
+        malformed inputs are reported safely.
     routing_policy:
-        Optional routing policy descriptor (mapping or string).  It is
-        included verbatim in the report when provided.
+        Optional override for the routing policy string.
 
     Returns
     -------
     dict
-        A structured diagnostic report with the following keys:
-
-        - ``generated_at``: ISO timestamp.
-        - ``provider_count``: number of providers evaluated.
-        - ``activated_count``: number of activated providers.
-        - ``healthy``: ``True`` when all providers are activated.
-        - ``providers``: per-provider diagnostic details.
-        - ``routing_policy``: normalized routing policy if provided.
-        - ``issues``: aggregate list of all issues found.
+        Structured diagnostic report with keys:
+        - ``generated_at``: ISO timestamp
+        - ``success``: bool, always True (diagnostics ran)
+        - ``status``: "provider_activation_diagnostics_complete"
+        - ``providers``: list of per-provider diagnostic dicts
+        - ``healthy``: bool, True if at least one provider is valid
+        - ``primary_active``: bool
+        - ``fallback_active``: bool
+        - ``issue_count``: int
+        - ``recommendations``: list[str]
+        - ``routing_policy``: str
+        - ``external_actions_taken``: False
     """
-    normalized_providers = _coerce_providers(providers)
-
-    diagnostics: List[Dict[str, Any]] = []
-    all_issues: List[str] = []
-    activated_count = 0
-
-    for provider in normalized_providers:
-        activation = _evaluate_activation(provider)
-        if activation["activated"]:
-            activated_count += 1
-        all_issues.extend(
-            f"{provider.get('provider', 'unknown')}:{issue}"
-            for issue in activation.get("issues", [])
-        )
-        diagnostics.append({**provider, **activation})
-
-    normalized_policy: Optional[Dict[str, Any]] = None
-    if routing_policy is not None:
-        if isinstance(routing_policy, Mapping):
-            normalized_policy = dict(routing_policy)
-        elif isinstance(routing_policy, str):
-            normalized_policy = {"policy": routing_policy}
-        else:
-            normalized_policy = {
-                "malformed": True,
-                "raw_type": type(routing_policy).__name__,
-                "error": "routing_policy must be a mapping or string",
-            }
-
-    report: Dict[str, Any] = {
+    report: dict[str, Any] = {
         "generated_at": _now(),
-        "provider_count": len(normalized_providers),
-        "activated_count": activated_count,
-        "healthy": len(normalized_providers) > 0 and activated_count == len(normalized_providers),
-        "providers": diagnostics,
-        "routing_policy": normalized_policy,
-        "issues": all_issues,
-        "external_actions_performed": False,
-        "network_access_performed": False,
+        "success": True,
+        "status": "provider_activation_diagnostics_complete",
+        "providers": [],
+        "healthy": False,
+        "primary_active": False,
+        "fallback_active": False,
+        "issue_count": 0,
+        "recommendations": [],
+        "routing_policy": "",
+        "external_actions_taken": False,
     }
+
+    if provider_report is None:
+        report["providers"] = []
+        report["recommendations"] = [
+            "No provider report supplied; cannot evaluate activation state."
+        ]
+        report["issue_count"] = 1
+        report["routing_policy"] = _safe_str(routing_policy)
+        return report
+
+    if not _is_dict(provider_report):
+        report["providers"] = []
+        report["recommendations"] = [
+            "Provider report is malformed; expected a JSON object."
+        ]
+        report["issue_count"] = 1
+        report["routing_policy"] = _safe_str(routing_policy)
+        return report
+
+    providers: list[dict[str, Any]] = []
+    all_issues: list[str] = []
+    all_recommendations: list[str] = []
+
+    primary_entry = provider_report.get("primary")
+    fallback_entry = provider_report.get("fallback")
+
+    if primary_entry is not None:
+        primary_diag = _diagnose_provider("primary", primary_entry)
+        providers.append(primary_diag)
+        all_issues.extend(primary_diag["issues"])
+        all_recommendations.extend(primary_diag["recommendations"])
+        report["primary_active"] = primary_diag["valid"]
+    else:
+        all_issues.append("missing_primary_provider")
+        all_recommendations.append("missing_primary_provider")
+        all_recommendations.append(
+            "No primary provider entry found in the report."
+        )
+
+    if fallback_entry is not None:
+        fallback_diag = _diagnose_provider("fallback", fallback_entry)
+        providers.append(fallback_diag)
+        all_issues.extend(fallback_diag["issues"])
+        all_recommendations.extend(fallback_diag["recommendations"])
+        report["fallback_active"] = fallback_diag["valid"]
+    else:
+        all_issues.append("missing_fallback_provider")
+        all_recommendations.append("missing_fallback_provider")
+        all_recommendations.append(
+            "No fallback provider entry found in the report."
+        )
+
+    # If the report itself declares a healthy flag, incorporate it but do not
+    # override the computed per-provider validity.
+    declared_healthy = _safe_bool(provider_report.get("healthy"), None)
+    computed_healthy = any(p["valid"] for p in providers)
+    report["healthy"] = bool(computed_healthy)
+    if declared_healthy is True and not computed_healthy:
+        all_issues.append("declared_healthy_but_no_valid_provider")
+        all_recommendations.append("declared_healthy_but_no_valid_provider")
+        all_recommendations.append(
+            "Report declares healthy but no provider is both configured and usable."
+        )
+
+    policy = _safe_str(routing_policy)
+    if not policy:
+        policy = _safe_str(provider_report.get("routing_policy"))
+    report["routing_policy"] = policy
+
+    if not policy:
+        all_issues.append("missing_routing_policy")
+        all_recommendations.append("missing_routing_policy")
+        all_recommendations.append(
+            "No routing policy specified; define primary/fallback routing."
+        )
+
+    report["providers"] = providers
+    report["issue_count"] = len(all_issues)
+    report["recommendations"] = all_recommendations
 
     return report

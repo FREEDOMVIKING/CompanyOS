@@ -4,264 +4,274 @@ import pytest
 
 from generated_provider_activation_diagnostics import diagnose_provider_activation
 from generated_provider_activation_diagnostics.core import (
-    _coerce_providers,
-    _evaluate_activation,
+    diagnose_provider_activation as core_diagnose,
 )
 
 
+def test_public_function_matches_core_function():
+    assert diagnose_provider_activation is core_diagnose
+
+
 def test_empty_input_returns_safe_report():
-    report = diagnose_provider_activation()
-    assert report["provider_count"] == 0
-    assert report["activated_count"] == 0
-    assert report["healthy"] is False
-    assert report["providers"] == []
-    assert report["issues"] == []
-    assert report["external_actions_performed"] is False
-    assert report["network_access_performed"] is False
+    result = diagnose_provider_activation()
+    assert result["success"] is True
+    assert result["status"] == "provider_activation_diagnostics_complete"
+    assert result["providers"] == []
+    assert result["healthy"] is False
+    assert result["primary_active"] is False
+    assert result["fallback_active"] is False
+    assert result["issue_count"] == 1
+    assert result["external_actions_taken"] is False
+    assert "generated_at" in result
+    assert isinstance(result["recommendations"], list)
 
 
 def test_none_input_returns_safe_report():
-    report = diagnose_provider_activation(None)
-    assert report["provider_count"] == 0
-    assert report["healthy"] is False
+    result = diagnose_provider_activation(None)
+    assert result["success"] is True
+    assert result["providers"] == []
+    assert result["issue_count"] == 1
 
 
-def test_single_provider_mapping_accepted():
-    provider = {
-        "provider": "openai",
-        "configured": True,
-        "usable": True,
-        "reachable": True,
-        "enabled": True,
-        "healthy": True,
-    }
-    report = diagnose_provider_activation(provider)
-    assert report["provider_count"] == 1
-    assert report["activated_count"] == 1
-    assert report["healthy"] is True
-    assert report["providers"][0]["activation_state"] == "activated"
-    assert report["providers"][0]["issues"] == []
+def test_malformed_non_dict_input():
+    result = diagnose_provider_activation("not-a-dict")
+    assert result["success"] is True
+    assert result["providers"] == []
+    assert result["issue_count"] == 1
+    assert any("malformed" in r.lower() for r in result["recommendations"])
 
 
-def test_multiple_providers():
-    providers = [
-        {
+def test_malformed_list_input():
+    result = diagnose_provider_activation(["primary", "fallback"])
+    assert result["success"] is True
+    assert result["providers"] == []
+    assert result["issue_count"] == 1
+
+
+def test_fully_healthy_providers():
+    report = {
+        "primary": {
             "provider": "openai",
             "configured": True,
             "usable": True,
-            "reachable": True,
-            "enabled": True,
-            "healthy": True,
         },
-        {
+        "fallback": {
             "provider": "local_llama",
             "configured": True,
             "usable": True,
-            "reachable": False,
-            "enabled": True,
-            "healthy": True,
+            "reachable": True,
         },
-    ]
-    report = diagnose_provider_activation(providers)
-    assert report["provider_count"] == 2
-    assert report["activated_count"] == 2
-    assert report["healthy"] is True
-    states = {p["provider"]: p["activation_state"] for p in report["providers"]}
-    assert states["openai"] == "activated"
-    assert states["local_llama"] == "degraded"
+        "healthy": True,
+        "routing_policy": "primary_then_fallback",
+    }
+    result = diagnose_provider_activation(report)
+    assert result["healthy"] is True
+    assert result["primary_active"] is True
+    assert result["fallback_active"] is True
+    assert result["issue_count"] == 0
+    assert result["routing_policy"] == "primary_then_fallback"
+    assert len(result["providers"]) == 2
+    assert result["providers"][0]["valid"] is True
+    assert result["providers"][1]["valid"] is True
 
 
-def test_unconfigured_provider():
-    providers = [{"provider": "missing_provider"}]
-    report = diagnose_provider_activation(providers)
-    assert report["provider_count"] == 1
-    assert report["activated_count"] == 0
-    assert report["healthy"] is False
-    assert report["providers"][0]["activation_state"] == "unconfigured"
-    assert "provider_not_configured" in report["providers"][0]["issues"]
-
-
-def test_disabled_provider():
-    providers = [
-        {
-            "provider": "openai",
+def test_primary_not_configured():
+    report = {
+        "primary": {"provider": "openai", "configured": False, "usable": False},
+        "fallback": {
+            "provider": "local_llama",
             "configured": True,
-            "enabled": False,
             "usable": True,
             "reachable": True,
-            "healthy": True,
-        }
-    ]
-    report = diagnose_provider_activation(providers)
-    assert report["activated_count"] == 0
-    assert report["providers"][0]["activation_state"] == "standby"
-    assert "provider_disabled" in report["providers"][0]["issues"]
+        },
+        "routing_policy": "primary_then_fallback",
+    }
+    result = diagnose_provider_activation(report)
+    assert result["primary_active"] is False
+    assert result["fallback_active"] is True
+    assert result["healthy"] is True
+    assert "not_configured" in result["providers"][0]["issues"]
+    assert result["issue_count"] >= 1
 
 
-def test_partial_activation():
-    providers = [
-        {
+def test_configured_but_not_usable():
+    report = {
+        "primary": {
             "provider": "openai",
             "configured": True,
-            "enabled": True,
-            "usable": True,
-            "reachable": False,
-            "healthy": False,
-        }
-    ]
-    report = diagnose_provider_activation(providers)
-    assert report["activated_count"] == 1
-    assert report["providers"][0]["activation_state"] == "partial"
-    assert "provider_not_reachable" in report["providers"][0]["issues"]
-    assert "provider_unhealthy" in report["providers"][0]["issues"]
-
-
-def test_inactive_provider():
-    providers = [
-        {
-            "provider": "openai",
+            "usable": False,
+        },
+        "fallback": {
+            "provider": "local_llama",
             "configured": True,
-            "enabled": False,
             "usable": False,
             "reachable": False,
-            "healthy": True,
-        }
-    ]
-    report = diagnose_provider_activation(providers)
-    assert report["activated_count"] == 0
-    assert report["providers"][0]["activation_state"] == "standby"
-
-
-def test_malformed_provider_missing_name():
-    providers = [{"configured": True}]
-    report = diagnose_provider_activation(providers)
-    assert report["provider_count"] == 1
-    assert report["providers"][0]["malformed"] is True
-    assert report["providers"][0]["activation_state"] == "invalid"
-    assert report["activated_count"] == 0
-
-
-def test_malformed_provider_not_mapping():
-    providers = ["not_a_dict", 42, None]
-    report = diagnose_provider_activation(providers)
-    assert report["provider_count"] == 3
-    for entry in report["providers"]:
-        assert entry["malformed"] is True
-        assert entry["activation_state"] == "invalid"
-    assert report["activated_count"] == 0
-
-
-def test_completely_unexpected_input_type():
-    report = diagnose_provider_activation(12345)
-    assert report["provider_count"] == 1
-    assert report["providers"][0]["malformed"] is True
-    assert report["providers"][0]["provider"] == "malformed_input"
-
-
-def test_string_input_treated_as_malformed():
-    report = diagnose_provider_activation("openai")
-    assert report["provider_count"] == 1
-    assert report["providers"][0]["malformed"] is True
-
-
-def test_routing_policy_string():
-    report = diagnose_provider_activation(
-        [{"provider": "openai", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True}],
-        routing_policy="primary_then_fallback",
-    )
-    assert report["routing_policy"] == {"policy": "primary_then_fallback"}
-
-
-def test_routing_policy_mapping():
-    report = diagnose_provider_activation(
-        [{"provider": "openai", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True}],
-        routing_policy={"primary": "openai", "fallback": "local_llama"},
-    )
-    assert report["routing_policy"]["primary"] == "openai"
-
-
-def test_routing_policy_malformed():
-    report = diagnose_provider_activation(
-        [{"provider": "openai", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True}],
-        routing_policy=123,
-    )
-    assert report["routing_policy"]["malformed"] is True
-
-
-def test_routing_policy_none():
-    report = diagnose_provider_activation(
-        [{"provider": "openai", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True}],
-    )
-    assert report["routing_policy"] is None
-
-
-def test_aggregate_issues_populated():
-    providers = [
-        {"provider": "openai", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True},
-        {"provider": "local_llama", "configured": False},
-    ]
-    report = diagnose_provider_activation(providers)
-    assert len(report["issues"]) >= 1
-    assert any("local_llama" in issue for issue in report["issues"])
-
-
-def test_coerce_providers_empty():
-    assert _coerce_providers(None) == []
-
-
-def test_coerce_providers_single_mapping():
-    result = _coerce_providers({"provider": "openai", "configured": True})
-    assert len(result) == 1
-    assert result[0]["provider"] == "openai"
-    assert result[0]["malformed"] is False
-
-
-def test_evaluate_activation_invalid():
-    result = _evaluate_activation({"provider": "bad", "malformed": True, "error": "bad"})
-    assert result["activation_state"] == "invalid"
-    assert result["activated"] is False
-
-
-def test_report_has_generated_at_timestamp():
-    report = diagnose_provider_activation()
-    assert "generated_at" in report
-    assert isinstance(report["generated_at"], str)
-    assert "T" in report["generated_at"]
-
-
-def test_optional_fields_preserved():
-    provider = {
-        "provider": "openai",
-        "configured": True,
-        "usable": True,
-        "reachable": True,
-        "enabled": True,
-        "healthy": True,
-        "status": 200,
-        "base_url": "https://api.example.com",
-        "note": "primary provider",
+        },
     }
-    report = diagnose_provider_activation(provider)
-    entry = report["providers"][0]
-    assert entry["status"] == 200
-    assert entry["base_url"] == "https://api.example.com"
-    assert entry["note"] == "primary provider"
+    result = diagnose_provider_activation(report)
+    assert result["primary_active"] is False
+    assert result["fallback_active"] is False
+    assert result["healthy"] is False
+    assert "configured_but_not_usable" in result["providers"][0]["issues"]
+    assert "configured_but_not_usable" in result["providers"][1]["issues"]
+    assert "not_reachable" in result["providers"][1]["issues"]
 
 
-def test_all_providers_activated_is_healthy():
-    providers = [
-        {"provider": "a", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True},
-        {"provider": "b", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True},
-    ]
-    report = diagnose_provider_activation(providers)
-    assert report["healthy"] is True
+def test_missing_primary_and_fallback():
+    report = {"healthy": True}
+    result = diagnose_provider_activation(report)
+    assert result["primary_active"] is False
+    assert result["fallback_active"] is False
+    assert result["healthy"] is False
+    assert "missing_primary_provider" in result["recommendations"]
+    assert "missing_fallback_provider" in result["recommendations"]
+    assert "declared_healthy_but_no_valid_provider" in result["recommendations"]
 
 
-def test_one_unhealthy_makes_not_healthy_when_not_activated():
-    providers = [
-        {"provider": "a", "configured": True, "usable": True, "reachable": True, "enabled": True, "healthy": True},
-        {"provider": "b", "configured": False},
-    ]
-    report = diagnose_provider_activation(providers)
-    assert report["healthy"] is False
-    assert report["activated_count"] == 1
+def test_malformed_provider_entry():
+    report = {
+        "primary": "broken",
+        "fallback": 123,
+    }
+    result = diagnose_provider_activation(report)
+    assert len(result["providers"]) == 2
+    for entry in result["providers"]:
+        assert entry["valid"] is False
+        assert "malformed_provider_entry" in entry["issues"]
+
+
+def test_routing_policy_override():
+    report = {
+        "primary": {"provider": "openai", "configured": True, "usable": True},
+        "fallback": {
+            "provider": "local_llama",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+        },
+        "routing_policy": "original_policy",
+    }
+    result = diagnose_provider_activation(report, routing_policy="override_policy")
+    assert result["routing_policy"] == "override_policy"
+
+
+def test_missing_routing_policy_flagged():
+    report = {
+        "primary": {"provider": "openai", "configured": True, "usable": True},
+        "fallback": {
+            "provider": "local_llama",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+        },
+    }
+    result = diagnose_provider_activation(report)
+    assert result["routing_policy"] == ""
+    assert "missing_routing_policy" in result["recommendations"]
+
+
+def test_string_truthy_values_handled():
+    report = {
+        "primary": {
+            "provider": "openai",
+            "configured": "true",
+            "usable": "yes",
+        },
+        "fallback": {
+            "provider": "local_llama",
+            "configured": "1",
+            "usable": "on",
+            "reachable": "true",
+        },
+        "routing_policy": "primary_then_fallback",
+    }
+    result = diagnose_provider_activation(report)
+    assert result["primary_active"] is True
+    assert result["fallback_active"] is True
+    assert result["healthy"] is True
+
+
+def test_no_external_actions_flag():
+    result = diagnose_provider_activation({})
+    assert result["external_actions_taken"] is False
+
+
+def test_return_type_structure():
+    result = diagnose_provider_activation(
+        {
+            "primary": {"provider": "openai", "configured": True, "usable": True},
+            "fallback": {
+                "provider": "local_llama",
+                "configured": True,
+                "usable": True,
+                "reachable": True,
+            },
+            "routing_policy": "primary_then_fallback",
+        }
+    )
+    assert isinstance(result, dict)
+    expected_keys = {
+        "generated_at",
+        "success",
+        "status",
+        "providers",
+        "healthy",
+        "primary_active",
+        "fallback_active",
+        "issue_count",
+        "recommendations",
+        "routing_policy",
+        "external_actions_taken",
+    }
+    assert expected_keys.issubset(result.keys())
+    assert isinstance(result["providers"], list)
+    assert isinstance(result["recommendations"], list)
+    assert isinstance(result["issue_count"], int)
+
+
+def test_only_primary_present():
+    report = {
+        "primary": {"provider": "openai", "configured": True, "usable": True},
+        "routing_policy": "primary_only",
+    }
+    result = diagnose_provider_activation(report)
+    assert result["primary_active"] is True
+    assert result["fallback_active"] is False
+    assert result["healthy"] is True
+    assert "missing_fallback_provider" in result["recommendations"]
+
+
+def test_only_fallback_present():
+    report = {
+        "fallback": {
+            "provider": "local_llama",
+            "configured": True,
+            "usable": True,
+            "reachable": True,
+        },
+        "routing_policy": "fallback_only",
+    }
+    result = diagnose_provider_activation(report)
+    assert result["primary_active"] is False
+    assert result["fallback_active"] is True
+    assert result["healthy"] is True
+    assert "missing_primary_provider" in result["recommendations"]
+
+
+def test_reachable_none_when_absent():
+    report = {
+        "primary": {"provider": "openai", "configured": True, "usable": True},
+        "fallback": {
+            "provider": "local_llama",
+            "configured": True,
+            "usable": True,
+        },
+        "routing_policy": "primary_then_fallback",
+    }
+    result = diagnose_provider_activation(report)
+    assert result["providers"][0]["reachable"] is None
+    assert result["providers"][1]["reachable"] is None
+
+
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
