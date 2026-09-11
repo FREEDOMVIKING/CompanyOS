@@ -1,0 +1,50 @@
+{
+  "connectors": {
+    "APPLY_DNS": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_DOMAIN_API_URL",
+      "external_execution": true,
+      "network_validation": true,
+      "provider": "legacy_companyos_adapter",
+      "token_env": "COMPANYOS_DOMAIN_TOKEN"
+    },
+    "CREATE_STOREFRONT": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_API_BASE_URL",
+      "external_execution": true,
+      "network_validation": true,
+      "provider": "legacy_companyos_adapter",
+      "token_env": "COMPANYOS_API_TOKEN"
+    },
+    "PUBLISH_STATIC_SITE": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_HOSTING_DEPLOY_URL",
+      "external_execution": true,
+      "network_validation": true,
+      "provider": "legacy_companyos_adapter",
+      "token_env": "COMPANYOS_HOSTING_TOKEN"
+    },
+    "START_OUTREACH": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_SMTP_HOST",
+      "external_execution": true,
+      "network_validation": true,
+      "provider": "gmail_smtp",
+      "token_env": "COMPANYOS_SMTP_PASSWORD"
+    }
+  },
+  "generated_at": "2026-08-13T22:24:45.939452+00:00",
+  "global": {
+    "activation_mode": "validated_mapping",
+    "external_execution": true,
+    "network_validation": true
+  },
+  "policy": {
+    "allow_domain_purchase": true,
+    "allow_fund_transfer": true,
+    "allow_nonfinancial_connector_activation": true,
+    "allow_spending": true,
+    "allow_wallet_signing": true
+  },
+  "version": 20
+}

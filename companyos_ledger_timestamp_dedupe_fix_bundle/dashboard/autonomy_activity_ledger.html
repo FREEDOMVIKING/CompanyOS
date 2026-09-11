@@ -1,0 +1,14 @@
+<!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><title>CompanyOS Live Ledger</title>
+<style>body{font-family:system-ui;background:#0b0d10;color:#eef2f6;margin:0;padding:16px}.card{background:#151922;border:1px solid #29303b;border-radius:16px;padding:16px;margin:12px 0}.badge{display:inline-block;background:#233043;border-radius:999px;padding:5px 9px;margin:3px}.good{color:#7ee787}.muted{color:#9ba7b5}.event{border-bottom:1px solid #29303b;padding:10px 0}.count{font-size:12px;background:#2a3342;border-radius:999px;padding:2px 6px}.small{font-size:13px}pre{white-space:pre-wrap;word-break:break-word;background:#0c1015;padding:10px;border-radius:10px;max-height:300px;overflow:auto}a{color:#8fc5ff}</style>
+<h1>Live Autonomy Activity Ledger</h1>
+<div class=card><h2>Current status</h2><div id=badges></div><p id=freshness class=muted></p></div>
+<div class=card><h2>Current errors — last 15 minutes</h2><div id=currentErrors></div></div>
+<div class=card><h2>Latest activity feed</h2><div id=events></div></div>
+<div class=card><h2>Historical errors</h2><p class=muted>Old failures are kept here and are not counted as current.</p><div id=history></div></div>
+<div class=card><h2>Newest outputs / artifacts</h2><ul id=outputs></ul></div>
+<div class=card><h2>Runtime state</h2><pre id=runtime></pre></div>
+<script>
+const fmt=t=>new Date(Number(t)*1000).toLocaleString();
+function renderEvents(id,arr){let el=document.getElementById(id);el.innerHTML='';(arr||[]).forEach(e=>{let d=document.createElement('div');d.className='event';let c=(e.repeat_count||1)>1?` <span class=count>repeated ${e.repeat_count}×</span>`:'';d.innerHTML=`<b>${e.event_type||'event'}</b>${c}<div>${e.summary||''}</div><div class="small muted">${fmt(e.ts)} · ${e.source||''}</div>`;el.appendChild(d)});if(!arr||!arr.length)el.innerHTML='<div class=good>None detected.</div>'}
+async function load(){let x=await(await fetch('/api/ledger?ts='+Date.now(),{cache:'no-store'})).json();let s=x.summary||{};badges.innerHTML=`<span class=badge>Completed ${s.completed_orchestrations||0}</span><span class=badge>Active ${s.active_orchestrations||0}</span><span class=badge>Failures ${s.failed_orchestrations||0}</span><span class=badge>Events 15m ${s.recent_events_15m||0}</span><span class=badge>Current errors ${s.current_errors_15m||0}</span>`;freshness.textContent='Last refreshed: '+new Date().toLocaleTimeString()+' · Server snapshot: '+fmt(x.generated_at_unix);renderEvents('currentErrors',x.current_errors);renderEvents('events',x.current_events);renderEvents('history',x.historical_errors);outputs.innerHTML='';(x.outputs||[]).slice(0,80).forEach(o=>{let li=document.createElement('li');li.textContent=`${o.path} (${o.size} bytes) · ${fmt(o.mtime)}`;outputs.appendChild(li)});runtime.textContent=JSON.stringify(x.runtime||{},null,2)}load();setInterval(load,5000)
+</script>

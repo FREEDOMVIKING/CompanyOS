@@ -1,0 +1,58 @@
+<!doctype html><html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyOS Master Control Center</title>
+<style>
+body{font-family:system-ui;background:#0b0d10;color:#e8edf2;margin:0;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:#151922;border:1px solid #29303b;border-radius:14px;padding:14px}
+button{padding:12px 14px;margin:5px;border:0;border-radius:10px;font-weight:700}
+.good{background:#1f8f55;color:#fff}.warn{background:#c47b17;color:#fff}.danger{background:#b93838;color:#fff}.neutral{background:#354052;color:#fff}
+input{width:100%;box-sizing:border-box;padding:11px;margin:5px 0 10px;border-radius:9px;border:1px solid #394555;background:#0f1319;color:#fff}
+pre{white-space:pre-wrap;word-break:break-word;background:#0c1015;padding:10px;border-radius:10px;max-height:300px;overflow:auto}
+a{color:#8fc5ff}
+</style></head><body>
+<h1>CompanyOS Master Control Center</h1>
+<p><a href="http://127.0.0.1:8765">← Executive Dashboard</a></p>
+<div class="grid">
+<div class="card"><h2>Autonomous CEO</h2>
+<button class="good" onclick="act('autonomy_start')">Start</button>
+<button class="warn" onclick="act('autonomy_restart')">Restart</button>
+<button class="danger" onclick="act('autonomy_stop')">Stop</button>
+<button class="neutral" onclick="act('autonomy_status')">Status</button>
+<pre id="autonomy">Loading…</pre></div>
+
+<div class="card"><h2>Live Execution Profile</h2>
+<label>Max single action</label><input id="maxSingle" value="0.01">
+<label>Max daily action</label><input id="maxDaily" value="0.05">
+<label>Max consecutive failures</label><input id="maxFailures" value="2">
+<label>Confirmation token</label><input id="confirm" placeholder="I_UNDERSTAND_FULL_LIVE">
+<button class="danger" onclick="setProfile('full')">Enable FULL_LIVE</button>
+<button class="warn" onclick="setProfile('trial')">Enable TRIAL_LIVE</button>
+<button class="neutral" onclick="setProfile('safe')">Switch SAFE</button>
+<pre id="profile">Loading…</pre></div>
+
+<div class="card"><h2>Readiness & Gateway</h2>
+<button class="neutral" onclick="act('final_preflight')">Preflight</button>
+<button class="neutral" onclick="act('full_check')">Full Check</button>
+<button class="neutral" onclick="refreshAll()">Refresh All</button>
+<pre id="gateway">Loading…</pre></div>
+
+<div class="card"><h2>Logs</h2><button class="neutral" onclick="loadLogs()">Refresh Logs</button><pre id="logs">Loading…</pre></div>
+
+<div class="card"><h2>Dashboard Servers</h2>
+<div>Executive: <a href="http://127.0.0.1:8765">127.0.0.1:8765</a></div>
+<div>Master controls: <a href="http://127.0.0.1:8766">127.0.0.1:8766</a></div>
+<pre id="ports">Loading…</pre></div>
+
+<div class="card"><h2>Safety</h2>
+<p>Only fixed allowlisted commands are exposed. No arbitrary shell input.</p>
+<p>FULL_LIVE still requires the explicit confirmation token and preserves existing signer, limits, reserve, allowlist, approval, and reconciliation checks.</p></div>
+</div>
+<script>
+async function j(url,opt){let r=await fetch(url,opt);return await r.json()}
+async function act(action){let x=await j('/api/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action})});alert(x.output||JSON.stringify(x));refreshAll()}
+async function setProfile(mode){let b={mode,max_single:maxSingle.value,max_daily:maxDaily.value,max_failures:maxFailures.value,confirm:document.getElementById('confirm').value};let x=await j('/api/live-profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});alert(x.output||JSON.stringify(x));refreshAll()}
+async function refreshAll(){let x=await j('/api/snapshot');autonomy.textContent=x.autonomy_status?.output||'';profile.textContent=x.final_status?.output||'';ports.textContent=x.dashboard_status?.output||'';gateway.textContent=JSON.stringify(x.gateway_state||{},null,2)}
+async function loadLogs(){let x=await j('/api/logs');logs.textContent=x.output||''}
+refreshAll();loadLogs();setInterval(refreshAll,10000)
+</script><a href="http://127.0.0.1:8767" style="position:fixed;left:14px;bottom:14px;z-index:99999;padding:12px 15px;border-radius:12px;background:#202733;color:white;text-decoration:none;font-family:system-ui;font-weight:700">📈 Venture Progress Tracker</a>\n</body></html>

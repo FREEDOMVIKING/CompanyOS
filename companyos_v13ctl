@@ -1,0 +1,40 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"; RUN="$ROOT/.companyos_enterprise_v13"
+SPID="$RUN/supervisor.pid"; STOP="$RUN/supervisor.stop"; LOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+ start)
+   [ -x "$ROOT/companyos_v12ctl" ] && bash "$ROOT/companyos_v12ctl" stop >/dev/null 2>&1 || true
+   if [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null; then
+      echo "V13 supervisor already running (PID $(cat "$SPID"))"; exit 0
+   fi
+   rm -f "$STOP"; cd "$ROOT"
+   nohup python -u -m companyos.autonomous_company_builder_v13.supervisor >"$LOG" 2>&1 < /dev/null &
+   echo $! > "$SPID"; sleep 4
+   kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V13 started (PID $(cat "$SPID")) - http://127.0.0.1:9000" || { tail -120 "$LOG"; exit 1; }
+   ;;
+ stop)
+   touch "$STOP"
+   [ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true
+   [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true
+   rm -f "$SPID" "$RUN/runtime.pid"
+   pkill -f 'companyos\.autonomous_company_builder_v13\.' 2>/dev/null || true
+   echo "V13 stopped" ;;
+ restart) "$0" stop; sleep 2; rm -f "$STOP"; "$0" start ;;
+ status)
+   [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V13 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V13 SUPERVISOR STOPPED"
+   [ -f "$RUN/supervisor_status.json" ] && cat "$RUN/supervisor_status.json" && echo || true
+   curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo ;;
+ cycle) curl --max-time 60 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ logs) echo "=== supervisor ==="; tail -100 "$LOG" 2>/dev/null || true; echo "=== runtime ==="; tail -200 "$RUN/v13.log" 2>/dev/null || true ;;
+ kill-runtime-test)
+   if [ -f "$RUN/runtime.pid" ]; then
+      P="$(cat "$RUN/runtime.pid")"; echo "Killing V13 runtime PID $P"; kill -9 "$P" 2>/dev/null || true
+      sleep 8; "$0" status
+   else
+      echo "No runtime PID found."
+   fi ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|logs|kill-runtime-test}"; exit 2 ;;
+esac

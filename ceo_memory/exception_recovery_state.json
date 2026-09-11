@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "recovery_epochs": [
-    1784493723.4312558
+    1788396183.2876709
   ],
   "issue_history": [
     {
@@ -1100,10 +1100,3299 @@
         }
       ],
       "unresolved": []
+    },
+    {
+      "timestamp": "2026-07-29T17:17:17.852817+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:cycle-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "cycle-supervisor"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        },
+        {
+          "id": "job-failure:phase34-autonomous-treasury",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase34-autonomous-treasury"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-07-29T19:35:51.932463+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        },
+        {
+          "id": "job-failure:phase34-autonomous-treasury",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase34-autonomous-treasury"
+        }
+      ],
+      "unresolved": []
+    },
+    {
+      "timestamp": "2026-08-04T11:41:30.909056+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        },
+        {
+          "id": "job-failure:phase34-autonomous-treasury",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase34-autonomous-treasury"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-04T16:03:01.662320+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:cycle-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "cycle-supervisor"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        },
+        {
+          "id": "job-failure:phase34-autonomous-treasury",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase34-autonomous-treasury"
+        }
+      ],
+      "unresolved": []
+    },
+    {
+      "timestamp": "2026-08-30T12:02:31.347982+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:cycle-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "cycle-supervisor"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-31T12:29:28.565995+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-31T12:34:24.215925+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-31T12:45:35.054140+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-01T00:36:51.281397+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:action-queue-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "action-queue-coordinator"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:cycle-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "cycle-supervisor"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-01T00:47:54.454594+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-01T12:34:25.874303+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-01T12:40:03.936313+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-01T12:45:07.123780+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02T00:39:16.814190+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02T00:44:52.083266+00:00",
+      "issues": [
+        {
+          "id": "watchdog-unhealthy",
+          "severity": "high",
+          "recovery": "restart-watchdog"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "watchdog-unhealthy",
+          "severity": "high",
+          "recovery": "restart-watchdog"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02T00:54:47.438691+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02T12:43:12.041755+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:autonomous-health-supervisor",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-health-supervisor"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02T12:48:38.603327+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:state-backup",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "state-backup"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:state-backup",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "state-backup"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02T13:09:00.499638+00:00",
+      "issues": [
+        {
+          "id": "autonomous-operations-unhealthy",
+          "severity": "high",
+          "recovery": "restart-scheduler"
+        },
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:unified-control-cycle",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "unified-control-cycle"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:readiness-recovery-coordinator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "readiness-recovery-coordinator"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-business-intelligence",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-business-intelligence"
+        },
+        {
+          "id": "job-failure:phase23-adaptive-execution-learning",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-adaptive-execution-learning"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": [
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-03T00:43:03.287767+00:00",
+      "issues": [
+        {
+          "id": "job-failure:exception-recovery",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "exception-recovery"
+        },
+        {
+          "id": "job-failure:github-read-connector",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "github-read-connector"
+        },
+        {
+          "id": "job-failure:autonomous-watchdog",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-watchdog"
+        },
+        {
+          "id": "job-failure:recovery-aware-closed-loop",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "recovery-aware-closed-loop"
+        },
+        {
+          "id": "job-failure:strategic-goal-orchestrator",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "strategic-goal-orchestrator"
+        },
+        {
+          "id": "job-failure:autonomous-ai-operations-core",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "autonomous-ai-operations-core"
+        },
+        {
+          "id": "job-failure:phase23-strategic-autonomy-portfolio",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase23-strategic-autonomy-portfolio"
+        },
+        {
+          "id": "job-failure:phase24-business-workflow-orchestration",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-business-workflow-orchestration"
+        },
+        {
+          "id": "job-failure:phase24-project-execution-incubation",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-project-execution-incubation"
+        },
+        {
+          "id": "job-failure:phase24-governed-execution-operations",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-governed-execution-operations"
+        },
+        {
+          "id": "job-failure:phase24-executive-delivery-governance",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-executive-delivery-governance"
+        },
+        {
+          "id": "job-failure:phase24-revenue-intelligence-executive",
+          "severity": "medium",
+          "recovery": "run-scheduler-cycle",
+          "job_id": "phase24-revenue-intelligence-executive"
+        }
+      ],
+      "unresolved": []
     }
   ],
-  "recovery_count": 64,
-  "last_recovery_at": "2026-07-19T20:42:03.431287+00:00",
-  "last_issue_count": 9,
+  "recovery_count": 84,
+  "last_recovery_at": "2026-09-03T00:43:03.287699+00:00",
+  "last_issue_count": 12,
   "last_unresolved_count": 0
 }

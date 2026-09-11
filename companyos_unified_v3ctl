@@ -1,0 +1,59 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_unified_v3"
+PID="$RUN/companyos_unified_v3.pid"
+LOG="$RUN/companyos_unified_v3.log"
+SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+ start)
+   if [ -x "$ROOT/companyos_unified_v2ctl" ]; then
+     bash "$ROOT/companyos_unified_v2ctl" stop >/dev/null 2>&1 || true
+   fi
+   if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+     echo "CompanyOS Unified Core V3 already running (PID $(cat "$PID"))"; exit 0
+   fi
+   cd "$ROOT"
+   nohup python -u -m companyos.unified_core_v3.server >"$LOG" 2>&1 &
+   echo $! >"$PID"
+   sleep 3
+   if kill -0 "$(cat "$PID")" 2>/dev/null; then
+     echo "CompanyOS Unified Core V3 started (PID $(cat "$PID"))"
+     echo "Dashboard: http://127.0.0.1:9000"
+   else
+     echo "Failed to start V3"; tail -120 "$LOG" 2>/dev/null || true; rm -f "$PID"; exit 1
+   fi ;;
+ stop)
+   [ -f "$PID" ] && kill "$(cat "$PID")" 2>/dev/null || true
+   rm -f "$PID"
+   pkill -f 'companyos\.unified_core_v3\.server' 2>/dev/null || true
+   echo "CompanyOS Unified Core V3 stopped" ;;
+ restart) bash "$SELF" stop; sleep 2; bash "$SELF" start ;;
+ status)
+   if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+     echo "CompanyOS Unified Core V3: RUNNING (PID $(cat "$PID"))"
+   else
+     echo "CompanyOS Unified Core V3: STOPPED"
+   fi
+   curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo ;;
+ cycle)
+   curl --max-time 30 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ migrate)
+   curl --max-time 30 -s http://127.0.0.1:9000/api/migrate || true; echo ;;
+ health)
+   curl --max-time 10 -s http://127.0.0.1:9000/health || true ;;
+ plugins)
+   cd "$ROOT"
+   python - <<'PY'
+from pathlib import Path
+from companyos.unified_core_v3.core import UnifiedCoreV3
+import json
+c=UnifiedCoreV3(Path.home()/"companyos")
+print(json.dumps(c.db.list_plugins(),indent=2))
+PY
+   ;;
+ logs) tail -180 "$LOG" 2>/dev/null || true ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|migrate|health|plugins|logs}"; exit 2 ;;
+esac

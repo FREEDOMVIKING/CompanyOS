@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+import json,sys
+from pathlib import Path
+sys.path.insert(0,str(Path.home()/"companyos"))
+from companyos.outreach_orchestrator_v24.orchestrator import OutreachOrchestratorV24
+
+x=OutreachOrchestratorV24()
+cmd=sys.argv[1] if len(sys.argv)>1 else "status"
+
+if cmd=="status":
+    out=x.status()
+elif cmd=="cycle":
+    out=x.cycle()
+elif cmd=="review":
+    out=x.review()
+elif cmd=="add-prospect":
+    if len(sys.argv)<6:
+        raise SystemExit(
+            'usage: companyos_v24ctl add-prospect EMAIL COMPANY OPPORTUNITY SCORE'
+        )
+    out=x.add_prospect(sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+else:
+    raise SystemExit(
+        "usage: companyos_v24ctl {status|cycle|review|add-prospect}"
+    )
+print(json.dumps(out,indent=2))

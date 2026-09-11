@@ -1,0 +1,55 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_runtime"
+PIDFILE="$RUN/autonomous_operations_v17.pid"
+LOG="$RUN/autonomous_operations_v17.log"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "Autonomous Operations V17 already running (PID $(cat "$PIDFILE"))"
+      exit 0
+    fi
+    cd "$ROOT"
+    nohup python -u -m companyos.autonomous_operations_v17.server >"$LOG" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 2
+    if kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "Autonomous Operations V17 started (PID $(cat "$PIDFILE"))"
+      echo "Dashboard: http://127.0.0.1:8779"
+    else
+      echo "Failed to start."
+      tail -80 "$LOG" 2>/dev/null || true
+      exit 1
+    fi
+    ;;
+  stop)
+    [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null || true
+    rm -f "$PIDFILE"
+    pkill -f 'companyos\.autonomous_operations_v17\.server' 2>/dev/null || true
+    echo "Autonomous Operations V17 stopped"
+    ;;
+  restart)
+    "$0" stop
+    sleep 2
+    "$0" start
+    ;;
+  status)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "Autonomous Operations V17: RUNNING (PID $(cat "$PIDFILE"))"
+    else
+      echo "Autonomous Operations V17: STOPPED"
+    fi
+    curl --max-time 8 -s http://127.0.0.1:8779/api/status || true
+    echo
+    ;;
+  logs)
+    tail -100 "$LOG" 2>/dev/null || true
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status|logs}"
+    exit 2
+    ;;
+esac

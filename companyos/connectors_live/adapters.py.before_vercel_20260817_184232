@@ -1,0 +1,72 @@
+import os, smtplib
+from email.message import EmailMessage
+from .base import BaseConnector
+from .config import env_value
+
+class SMTPConnector(BaseConnector):
+    name='smtp'
+    def is_configured(self):
+        return self.enabled and all([
+            env_value(self.config.get('host_env')),
+            env_value(self.config.get('username_env')),
+            env_value(self.config.get('password_env')),
+            env_value(self.config.get('from_email_env')),
+        ])
+    def _execute(self,action,payload):
+        if action!='send_email':
+            return {'ok':False,'status':'unsupported_action'}
+        msg=EmailMessage()
+        msg['From']=env_value(self.config.get('from_email_env'))
+        msg['To']=payload['to']
+        msg['Subject']=payload.get('subject','')
+        msg.set_content(payload.get('body',''))
+        host=env_value(self.config.get('host_env'))
+        port=int(env_value(self.config.get('port_env'),'587'))
+        with smtplib.SMTP(host,port,timeout=self.timeout) as server:
+            if self.config.get('use_tls',True): server.starttls()
+            server.login(env_value(self.config.get('username_env')),env_value(self.config.get('password_env')))
+            server.send_message(msg)
+        return {'ok':True,'status':'sent'}
+
+class RESTConnector(BaseConnector):
+    name='rest_api'
+    def is_configured(self):
+        return self.enabled and bool(env_value(self.config.get('base_url_env')))
+    def _execute(self,action,payload):
+        url=env_value(self.config.get('base_url_env')).rstrip('/')+'/'+action.lstrip('/')
+        token=env_value(self.config.get('token_env'))
+        headers={'Authorization':f'Bearer {token}'} if token else {}
+        return self._json_request(url,payload,headers)
+
+class HandoffConnector(BaseConnector):
+    endpoint_key='handoff_url_env'
+    token_key='token_env'
+    def is_configured(self):
+        return self.enabled and bool(env_value(self.config.get(self.endpoint_key)))
+    def _execute(self,action,payload):
+        url=env_value(self.config.get(self.endpoint_key))
+        token=env_value(self.config.get(self.token_key))
+        headers={'Authorization':f'Bearer {token}'} if token else {}
+        return self._json_request(url,{'action':action,'payload':payload},headers)
+
+class HostingConnector(HandoffConnector):
+    name='hosting'
+    endpoint_key='deploy_url_env'
+
+class DomainConnector(HandoffConnector):
+    name='domains'
+    endpoint_key='api_url_env'
+
+class CRMConnector(HandoffConnector):
+    name='crm'
+    endpoint_key='api_url_env'
+
+class AccountingConnector(HandoffConnector):
+    name='accounting'
+    endpoint_key='api_url_env'
+
+class BankingConnector(HandoffConnector):
+    name='banking'
+
+class CryptoConnector(HandoffConnector):
+    name='crypto'

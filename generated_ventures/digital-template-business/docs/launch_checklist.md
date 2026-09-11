@@ -1,0 +1,4 @@
+- [ ] Confirm offer
+- [ ] Review legal/payment configuration
+- [ ] Approve external deployment
+- [ ] Verify analytics

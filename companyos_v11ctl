@@ -1,0 +1,53 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"; RUN="$ROOT/.companyos_enterprise_v11"
+SPID="$RUN/supervisor.pid"; STOP="$RUN/supervisor.stop"; LOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+ start)
+   [ -x "$ROOT/companyos_v10ctl" ] && bash "$ROOT/companyos_v10ctl" stop >/dev/null 2>&1 || true
+   if [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null; then
+     echo "V11 supervisor already running (PID $(cat "$SPID"))"; exit 0
+   fi
+   rm -f "$STOP"; cd "$ROOT"
+   nohup python -u -m companyos.autonomous_opportunity_intelligence_v11.supervisor >"$LOG" 2>&1 < /dev/null &
+   echo $! > "$SPID"; sleep 4
+   kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V11 started (PID $(cat "$SPID")) - http://127.0.0.1:9000" || { tail -120 "$LOG"; exit 1; }
+   ;;
+ stop)
+   touch "$STOP"
+   [ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true
+   [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true
+   rm -f "$SPID" "$RUN/runtime.pid"
+   pkill -f 'companyos\.autonomous_opportunity_intelligence_v11\.' 2>/dev/null || true
+   echo "V11 stopped" ;;
+ restart) "$0" stop; sleep 2; rm -f "$STOP"; "$0" start ;;
+ status)
+   [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V11 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V11 SUPERVISOR STOPPED"
+   [ -f "$RUN/supervisor_status.json" ] && cat "$RUN/supervisor_status.json" && echo || true
+   curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo ;;
+ cycle) curl --max-time 60 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ logs) echo "=== supervisor ==="; tail -100 "$LOG" 2>/dev/null || true; echo "=== runtime ==="; tail -200 "$RUN/v11.log" 2>/dev/null || true ;;
+ kill-runtime-test)
+   if [ -f "$RUN/runtime.pid" ]; then
+      P="$(cat "$RUN/runtime.pid")"; echo "Killing V11 runtime PID $P"; kill -9 "$P" 2>/dev/null || true
+      sleep 8; "$0" status
+   else
+      echo "No runtime PID found."
+   fi ;;
+ sources) cat "$ROOT/config/opportunity_sources.json" ;;
+ edit-sources) nano "$ROOT/config/opportunity_sources.json" ;;
+ enable-starter-source)
+   python - <<'PY'
+import json
+from pathlib import Path
+p=Path.home()/"companyos/config/opportunity_sources.json"
+d=json.loads(p.read_text())
+for s in d.get("sources",[]): s["enabled"]=True
+p.write_text(json.dumps(d,indent=2))
+print("Enabled configured starter sources.")
+PY
+   ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|logs|kill-runtime-test|sources|edit-sources|enable-starter-source}"; exit 2 ;;
+esac

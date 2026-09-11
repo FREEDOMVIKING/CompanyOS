@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+CTL="$HOME/companyos/companyos_v18ctl"
+case "${1:-status}" in
+ start) "$CTL" start;sleep 2;"$CTL" status ;;
+ stop|restart|status|cycle|config|edit-config|env-check|logs) "$CTL" "$1" ;;
+ health) "$CTL" status ;;
+ *) echo "Usage: companyosctl {start|stop|restart|status|health|cycle|config|edit-config|env-check|logs}";exit 2 ;;
+esac

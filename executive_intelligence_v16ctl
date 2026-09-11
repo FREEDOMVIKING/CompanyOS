@@ -1,0 +1,55 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_runtime"
+PIDFILE="$RUN/executive_intelligence_v16.pid"
+LOG="$RUN/executive_intelligence_v16.log"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "Executive Intelligence V16 already running (PID $(cat "$PIDFILE"))"
+      exit 0
+    fi
+    cd "$ROOT"
+    nohup python -u -m companyos.executive_intelligence_v16.server >"$LOG" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 2
+    if kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "Executive Intelligence V16 started (PID $(cat "$PIDFILE"))"
+      echo "Dashboard: http://127.0.0.1:8778"
+    else
+      echo "Failed to start."
+      tail -80 "$LOG" 2>/dev/null || true
+      exit 1
+    fi
+    ;;
+  stop)
+    [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null || true
+    rm -f "$PIDFILE"
+    pkill -f 'companyos\.executive_intelligence_v16\.server' 2>/dev/null || true
+    echo "Executive Intelligence V16 stopped"
+    ;;
+  restart)
+    "$0" stop
+    sleep 2
+    "$0" start
+    ;;
+  status)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "Executive Intelligence V16: RUNNING (PID $(cat "$PIDFILE"))"
+    else
+      echo "Executive Intelligence V16: STOPPED"
+    fi
+    curl --max-time 5 -s http://127.0.0.1:8778/api/status || true
+    echo
+    ;;
+  logs)
+    tail -100 "$LOG" 2>/dev/null || true
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status|logs}"
+    exit 2
+    ;;
+esac

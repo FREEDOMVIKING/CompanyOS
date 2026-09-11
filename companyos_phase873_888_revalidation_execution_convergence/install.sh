@@ -1,0 +1,31 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="${1:-$HOME/companyos}"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+STAMP="$(date +%Y%m%d_%H%M%S)"
+BACKUP="$ROOT/backups/phase873_888_revalidation_execution_convergence_$STAMP"
+[ -d "$ROOT" ] || { echo "ERROR: $ROOT missing"; exit 1; }
+mkdir -p "$BACKUP" "$ROOT/scripts" "$ROOT/tests"
+TARGET="$ROOT"; [ -d "$ROOT/src" ] && TARGET="$ROOT/src"
+rm -rf "$TARGET/companyos_phase873_888"
+cp -a "$HERE/companyos_phase873_888" "$TARGET/"
+cp "$HERE/scripts/"*.py "$ROOT/scripts/"
+cp "$HERE/tests/test_phase873_888.py" "$ROOT/tests/"
+chmod +x "$ROOT/scripts/phase873_888_verify.py" "$ROOT/scripts/run_revalidation_execution_demo.py"
+cd "$ROOT"
+export PYTHONPATH="$ROOT:$ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
+python scripts/phase873_888_verify.py
+python -m pytest -q tests/test_phase873_888.py --disable-warnings
+echo "PHASE873_888_INSTALL_OK"
+echo "TARGETED_TASK_EXECUTION=READY"
+echo "PROVIDER_TASK_ROUTING=READY"
+echo "ROUND_EVIDENCE_PERSISTENCE=READY"
+echo "EVIDENCE_FEEDBACK=READY"
+echo "VALIDATION_RERUN=READY"
+echo "CONVERGENCE_TRACKING=READY"
+echo "BOUNDED_ROUNDS=READY"
+echo "HUMAN_REVIEW_GATE=READY"
+echo "VENTURE_ARCHIVE_BRIDGE=READY"
+echo "BUILD_HANDOFF_BRIDGE=READY"
+echo "CEO_REVALIDATION_EXECUTION_BRIDGE=READY"
+echo "Backup: $BACKUP"

@@ -1,0 +1,55 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_enterprise_v6"
+PID="$RUN/companyos_enterprise_v6.pid"
+LOG="$RUN/companyos_enterprise_v6.log"
+SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+ start)
+   [ -x "$ROOT/companyos_unified_v5ctl" ] && bash "$ROOT/companyos_unified_v5ctl" stop >/dev/null 2>&1 || true
+   if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+     echo "CompanyOS Enterprise V6 already running (PID $(cat "$PID"))"; exit 0
+   fi
+   cd "$ROOT"
+   nohup python -u -m companyos.autonomous_enterprise_v6.server >"$LOG" 2>&1 &
+   echo $! >"$PID"
+   sleep 3
+   if kill -0 "$(cat "$PID")" 2>/dev/null; then
+     echo "CompanyOS Enterprise V6 started (PID $(cat "$PID"))"
+     echo "Dashboard: http://127.0.0.1:9000"
+   else
+     echo "Failed to start V6"
+     tail -160 "$LOG" 2>/dev/null || true
+     rm -f "$PID"
+     exit 1
+   fi ;;
+ stop)
+   [ -f "$PID" ] && kill "$(cat "$PID")" 2>/dev/null || true
+   rm -f "$PID"
+   pkill -f 'companyos\.autonomous_enterprise_v6\.server' 2>/dev/null || true
+   echo "CompanyOS Enterprise V6 stopped" ;;
+ restart) bash "$SELF" stop; sleep 2; bash "$SELF" start ;;
+ status)
+   if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+     echo "CompanyOS Enterprise V6: RUNNING (PID $(cat "$PID"))"
+   else
+     echo "CompanyOS Enterprise V6: STOPPED"
+   fi
+   curl --max-time 10 -s http://127.0.0.1:9000/api/status || true
+   echo ;;
+ cycle) curl --max-time 30 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ migrate) curl --max-time 30 -s http://127.0.0.1:9000/api/migrate || true; echo ;;
+ backup)
+   cd "$ROOT"
+   stamp="$(date +%Y%m%d_%H%M%S)"
+   mkdir -p backups
+   tar -czf "backups/companyos_enterprise_v6_${stamp}.tar.gz" \
+     .companyos_enterprise_v6 companyos/autonomous_enterprise_v6 companyos_enterprise_v6ctl 2>/dev/null || true
+   echo "Backup created: $ROOT/backups/companyos_enterprise_v6_${stamp}.tar.gz" ;;
+ logs) tail -220 "$LOG" 2>/dev/null || true ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|migrate|backup|logs}"; exit 2 ;;
+esac

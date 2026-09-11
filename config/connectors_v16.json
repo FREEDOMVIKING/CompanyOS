@@ -1,0 +1,34 @@
+{
+  "analytics": {
+    "enabled": true,
+    "event_log": "~/companyos/.companyos_enterprise_v16/analytics_events.jsonl",
+    "mode": "local_event_log"
+  },
+  "dns_provider": {
+    "enabled": false,
+    "mode": "disabled"
+  },
+  "domain_registrar": {
+    "enabled": false,
+    "mode": "disabled"
+  },
+  "email_outreach": {
+    "enabled": false,
+    "mode": "disabled"
+  },
+  "static_host": {
+    "enabled": true,
+    "mode": "local_publish",
+    "publish_root": "~/companyos/published_sites_v16"
+  },
+  "storefront": {
+    "enabled": false,
+    "mode": "disabled"
+  },
+  "webhook": {
+    "enabled": false,
+    "mode": "http_post",
+    "timeout_seconds": 10,
+    "url": ""
+  }
+}

@@ -1,0 +1,125 @@
+from __future__ import annotations
+
+from dataclasses import asdict, is_dataclass
+from typing import Any
+import time
+
+from companyos.runtime_financial_queue import pending_items, claim, release, complete
+from companyos.runtime.scheduler_financial_entrypoint import dispatch_scheduler_financial_intent
+from companyos.financial_intent_lifecycle import FinancialIntentLifecycleStore
+
+def normalize(obj: Any) -> dict[str, Any]:
+    if is_dataclass(obj):
+        return asdict(obj)
+    if isinstance(obj, dict):
+        return obj
+    if hasattr(obj, "__dict__"):
+        return dict(obj.__dict__)
+    return {"value": str(obj)}
+
+def process_lifecycle_once(max_items: int = 5):
+    store = FinancialIntentLifecycleStore()
+    store.recover_stale()
+
+    summary = {
+        "pending_seen": 0,
+        "processed": 0,
+        "failed": 0,
+        "deferred_retry": 0,
+        "skipped_claimed": 0,
+        "mode": "dry_run",
+        "last_error": None,
+    }
+
+    now = time.time()
+    items = pending_items()[:max_items]
+    summary["pending_seen"] = len(items)
+
+    for item in items:
+        rec = store.ensure_from_queue_item(item)
+
+        if rec.state == "COMPLETED":
+            complete(item, rec.result or {"status":"already_completed"})
+            continue
+
+        if rec.state == "FAILED":
+            continue
+
+        if rec.state == "RETRY_WAIT" and rec.next_retry_at and rec.next_retry_at > now:
+            summary["deferred_retry"] += 1
+            continue
+
+        if not claim(item):
+            summary["skipped_claimed"] += 1
+            continue
+
+        try:
+            rec.attempt_count += 1
+            store.transition(rec, "CLAIMED", reason="queue_claim_acquired")
+            store.transition(rec, "EXECUTING", reason="dispatcher_invocation")
+
+            result = dispatch_scheduler_financial_intent({
+                "action_type": item.action_type,
+                "destination": item.destination,
+                "amount_sol": item.sol,
+                "action_id": item.queue_id,
+                "source": item.source,
+                "requested_mode": "dry_run",
+                "confirm_token": "",
+                "metadata": {
+                    "queue_id": item.queue_id,
+                    "idempotency_key": item.idempotency_key,
+                    "lifecycle_id": rec.lifecycle_id,
+                    "attempt_count": rec.attempt_count,
+                },
+            })
+            data = normalize(result)
+
+            accepted = bool(data.get("accepted", False))
+            if accepted:
+                store.transition(
+                    rec, "COMPLETED",
+                    reason="dispatcher_completed",
+                    result=data,
+                )
+                complete(item, data)
+                summary["processed"] += 1
+            else:
+                error = str(data.get("reason") or "dispatcher_rejected")
+                if rec.attempt_count >= rec.max_attempts:
+                    store.transition(
+                        rec, "FAILED",
+                        reason="max_attempts_reached",
+                        error=error,
+                        result=data,
+                    )
+                else:
+                    backoff = min(900, 15 * (2 ** max(rec.attempt_count - 1, 0)))
+                    store.transition(
+                        rec, "RETRY_WAIT",
+                        reason="dispatcher_rejected_retry",
+                        error=error,
+                        result=data,
+                        next_retry_at=time.time() + backoff,
+                    )
+                release(item)
+                summary["failed"] += 1
+                summary["last_error"] = error
+
+        except Exception as exc:
+            error = f"{type(exc).__name__}:{str(exc)[:300]}"
+            if rec.attempt_count >= rec.max_attempts:
+                store.transition(rec, "FAILED", reason="exception_max_attempts", error=error)
+            else:
+                backoff = min(900, 15 * (2 ** max(rec.attempt_count - 1, 0)))
+                store.transition(
+                    rec, "RETRY_WAIT",
+                    reason="exception_retry",
+                    error=error,
+                    next_retry_at=time.time() + backoff,
+                )
+            release(item)
+            summary["failed"] += 1
+            summary["last_error"] = error
+
+    return summary

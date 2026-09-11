@@ -1,0 +1,59 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_enterprise_v7"
+PID="$RUN/companyos_enterprise_v7.pid"
+LOG="$RUN/companyos_enterprise_v7.log"
+SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+  start)
+    [ -x "$ROOT/companyos_enterprise_v6ctl" ] && bash "$ROOT/companyos_enterprise_v6ctl" stop >/dev/null 2>&1 || true
+    if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+      echo "CompanyOS Enterprise Network V7 already running (PID $(cat "$PID"))"; exit 0
+    fi
+    cd "$ROOT"
+    nohup python -u -m companyos.autonomous_enterprise_network_v7.server >"$LOG" 2>&1 &
+    echo $! >"$PID"
+    sleep 3
+    if kill -0 "$(cat "$PID")" 2>/dev/null; then
+      echo "CompanyOS Enterprise Network V7 started (PID $(cat "$PID"))"
+      echo "Dashboard: http://127.0.0.1:9000"
+    else
+      tail -160 "$LOG" 2>/dev/null || true
+      exit 1
+    fi
+    ;;
+  stop)
+    [ -f "$PID" ] && kill "$(cat "$PID")" 2>/dev/null || true
+    rm -f "$PID"
+    pkill -f 'companyos\.autonomous_enterprise_network_v7\.server' 2>/dev/null || true
+    echo "CompanyOS Enterprise Network V7 stopped"
+    ;;
+  restart) bash "$SELF" stop; sleep 2; bash "$SELF" start ;;
+  status)
+    if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+      echo "CompanyOS Enterprise Network V7: RUNNING (PID $(cat "$PID"))"
+    else
+      echo "CompanyOS Enterprise Network V7: STOPPED"
+    fi
+    curl --max-time 10 -s http://127.0.0.1:9000/api/status || true
+    echo
+    ;;
+  cycle) curl --max-time 30 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+  seed-opportunity)
+    cat > "$RUN/opportunities_inbox.json" <<'JSON'
+{"opportunities":[{"name":"AI Proposal Generator for Small Contractors","category":"software","demand_score":84,"margin_score":90,"execution_score":78,"strategic_fit":85}]}
+JSON
+    echo "Seed opportunity written. Run: bash companyos_enterprise_v7ctl cycle"
+    ;;
+  backup)
+    cd "$ROOT"; stamp="$(date +%Y%m%d_%H%M%S)"; mkdir -p backups
+    tar -czf "backups/companyos_enterprise_v7_${stamp}.tar.gz" .companyos_enterprise_v7 companyos/autonomous_enterprise_network_v7 companyos_enterprise_v7ctl 2>/dev/null || true
+    echo "Backup created: $ROOT/backups/companyos_enterprise_v7_${stamp}.tar.gz"
+    ;;
+  logs) tail -220 "$LOG" 2>/dev/null || true ;;
+  *) echo "Usage: $0 {start|stop|restart|status|cycle|seed-opportunity|backup|logs}"; exit 2 ;;
+esac

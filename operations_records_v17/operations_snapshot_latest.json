@@ -1,0 +1,188 @@
+{
+  "critical_services_down": 0,
+  "dashboard_url": "http://127.0.0.1:8779",
+  "dependencies": [
+    {
+      "dependencies": [
+        "storefront"
+      ],
+      "missing": [],
+      "ready": true,
+      "service": "revenue"
+    },
+    {
+      "dependencies": [
+        "revenue"
+      ],
+      "missing": [],
+      "ready": true,
+      "service": "marketing"
+    },
+    {
+      "dependencies": [
+        "storefront",
+        "revenue"
+      ],
+      "missing": [],
+      "ready": true,
+      "service": "crm"
+    },
+    {
+      "dependencies": [
+        "crm",
+        "marketing"
+      ],
+      "missing": [],
+      "ready": true,
+      "service": "commercial"
+    },
+    {
+      "dependencies": [
+        "revenue",
+        "crm",
+        "commercial"
+      ],
+      "missing": [],
+      "ready": true,
+      "service": "enterprise"
+    },
+    {
+      "dependencies": [
+        "revenue",
+        "marketing",
+        "crm",
+        "commercial",
+        "enterprise"
+      ],
+      "missing": [],
+      "ready": true,
+      "service": "executive"
+    }
+  ],
+  "event_queue": [
+    {
+      "event_type": "operations_healthy",
+      "priority": "LOW",
+      "status": "INFORMATIONAL"
+    }
+  ],
+  "external_actions_enabled": false,
+  "operations_health_score": 100,
+  "recovery_candidates": [],
+  "resource_advice": [
+    "All tracked services are active; avoid unnecessary full-stack restarts."
+  ],
+  "scheduled_tasks": [
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 95,
+      "service": "storefront",
+      "status": "COMPLETED",
+      "task_id": "ops-01-storefront"
+    },
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 90,
+      "service": "revenue",
+      "status": "COMPLETED",
+      "task_id": "ops-02-revenue"
+    },
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 61,
+      "service": "marketing",
+      "status": "COMPLETED",
+      "task_id": "ops-03-marketing"
+    },
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 58,
+      "service": "crm",
+      "status": "COMPLETED",
+      "task_id": "ops-04-crm"
+    },
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 55,
+      "service": "commercial",
+      "status": "COMPLETED",
+      "task_id": "ops-05-commercial"
+    },
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 52,
+      "service": "enterprise",
+      "status": "COMPLETED",
+      "task_id": "ops-06-enterprise"
+    },
+    {
+      "action": "HEALTH_CHECK",
+      "external_action": false,
+      "priority": 49,
+      "service": "executive",
+      "status": "COMPLETED",
+      "task_id": "ops-07-executive"
+    }
+  ],
+  "services": {
+    "commercial": {
+      "alive": true,
+      "controller": "commercial_operations_v14ctl",
+      "critical": false,
+      "latency_ms": 4.9,
+      "status": "commercial_operations_ready"
+    },
+    "crm": {
+      "alive": true,
+      "controller": "customer_growth_crm_v13ctl",
+      "critical": false,
+      "latency_ms": 3.9,
+      "status": "customer_growth_crm_ready"
+    },
+    "enterprise": {
+      "alive": true,
+      "controller": "enterprise_automation_v15ctl",
+      "critical": false,
+      "latency_ms": 25.1,
+      "status": "enterprise_automation_ready"
+    },
+    "executive": {
+      "alive": true,
+      "controller": "executive_intelligence_v16ctl",
+      "critical": false,
+      "latency_ms": 44.5,
+      "status": "executive_intelligence_ready"
+    },
+    "marketing": {
+      "alive": true,
+      "controller": "autonomous_sales_marketing_v12ctl",
+      "critical": false,
+      "latency_ms": 18.5,
+      "status": "autonomous_sales_marketing_ready"
+    },
+    "revenue": {
+      "alive": true,
+      "controller": "autonomous_revenue_v11ctl",
+      "critical": true,
+      "latency_ms": 12.3,
+      "status": "autonomous_revenue_pipeline_ready"
+    },
+    "storefront": {
+      "alive": true,
+      "controller": null,
+      "critical": true,
+      "latency_ms": 32.9,
+      "status": "crypto_checkout_connector_ready"
+    }
+  },
+  "services_alive": 7,
+  "services_total": 7,
+  "status": "autonomous_operations_ready",
+  "updated_at": "2026-08-06T20:00:53.211910+00:00"
+}

@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-08-13T22:27:18.305511+00:00",
+  "global": {
+    "cooldown_seconds": 30,
+    "external_execution": true,
+    "network_health_checks": true,
+    "retry_limit": 3
+  },
+  "policy": {
+    "allow_domain_purchase": true,
+    "allow_fund_transfer": true,
+    "allow_nonfinancial_health_checks": true,
+    "allow_spending": true,
+    "allow_wallet_signing": true
+  },
+  "providers": {
+    "APPLY_DNS": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_DOMAIN_API_URL",
+      "external_execution": true,
+      "health_state": "BLOCKED_CONFIG",
+      "network_health_checks": true,
+      "provider": "generic_dns",
+      "retry_limit": 3,
+      "token_env": "COMPANYOS_DOMAIN_TOKEN"
+    },
+    "CREATE_STOREFRONT": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_API_BASE_URL",
+      "external_execution": true,
+      "health_state": "BLOCKED_CONFIG",
+      "network_health_checks": true,
+      "provider": "generic_rest_storefront",
+      "retry_limit": 3,
+      "token_env": "COMPANYOS_API_TOKEN"
+    },
+    "PUBLISH_STATIC_SITE": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_HOSTING_DEPLOY_URL",
+      "external_execution": true,
+      "health_state": "BLOCKED_CONFIG",
+      "network_health_checks": true,
+      "provider": "generic_static_host",
+      "retry_limit": 3,
+      "token_env": "COMPANYOS_HOSTING_TOKEN"
+    },
+    "START_OUTREACH": {
+      "enabled": true,
+      "endpoint_env": "COMPANYOS_SMTP_HOST",
+      "external_execution": true,
+      "health_state": "CONFIGURED_UNTESTED",
+      "network_health_checks": true,
+      "provider": "gmail_smtp",
+      "retry_limit": 3,
+      "token_env": "COMPANYOS_SMTP_PASSWORD"
+    }
+  },
+  "version": 21
+}

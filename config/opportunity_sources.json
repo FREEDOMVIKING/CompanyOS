@@ -1,0 +1,14 @@
+{
+  "user_agent": "CompanyOS-OpportunityResearch/1.0",
+  "timeout_seconds": 12,
+  "max_items_per_source": 40,
+  "sources": [
+    {
+      "name": "Hacker News Front Page",
+      "type": "json",
+      "url": "https://hn.algolia.com/api/v1/search?tags=front_page",
+      "enabled": true,
+      "category": "technology"
+    }
+  ]
+}

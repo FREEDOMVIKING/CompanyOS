@@ -1,0 +1,56 @@
+{
+  "connectors": {
+    "APPLY_DNS": {
+      "configuration_ready": false,
+      "endpoint_env": "COMPANYOS_DOMAIN_API_URL",
+      "endpoint_present": false,
+      "endpoint_shape_valid": false,
+      "legacy_dry_run": true,
+      "legacy_enabled": false,
+      "legacy_section": "domains",
+      "provider": "legacy_companyos_adapter",
+      "token_env": "COMPANYOS_DOMAIN_TOKEN",
+      "token_present": false
+    },
+    "CREATE_STOREFRONT": {
+      "configuration_ready": false,
+      "endpoint_env": "COMPANYOS_API_BASE_URL",
+      "endpoint_present": false,
+      "endpoint_shape_valid": false,
+      "legacy_dry_run": true,
+      "legacy_enabled": false,
+      "legacy_section": "rest_api",
+      "provider": "legacy_companyos_adapter",
+      "token_env": "COMPANYOS_API_TOKEN",
+      "token_present": false
+    },
+    "PUBLISH_STATIC_SITE": {
+      "configuration_ready": false,
+      "endpoint_env": "COMPANYOS_HOSTING_DEPLOY_URL",
+      "endpoint_present": false,
+      "endpoint_shape_valid": false,
+      "legacy_dry_run": true,
+      "legacy_enabled": false,
+      "legacy_section": "hosting",
+      "provider": "legacy_companyos_adapter",
+      "token_env": "COMPANYOS_HOSTING_TOKEN",
+      "token_present": false
+    },
+    "START_OUTREACH": {
+      "configuration_ready": true,
+      "endpoint_env": "COMPANYOS_SMTP_HOST",
+      "endpoint_present": true,
+      "endpoint_shape_valid": true,
+      "legacy_dry_run": false,
+      "legacy_enabled": true,
+      "legacy_section": "smtp",
+      "provider": "gmail_smtp",
+      "token_env": "COMPANYOS_SMTP_PASSWORD",
+      "token_present": true
+    }
+  },
+  "secret_values_printed": false,
+  "status": "companyos_v20_connector_mapping_ready",
+  "updated_at": "2026-08-13T22:24:45.939274+00:00",
+  "wallet_private_keys_scanned": false
+}

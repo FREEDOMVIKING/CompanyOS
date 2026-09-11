@@ -1,0 +1,24 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"; RUN="$ROOT/.companyos_enterprise_v16"; SPID="$RUN/supervisor.pid"; STOP="$RUN/supervisor.stop"; LOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+case "${1:-status}" in
+ start)
+  [ -x "$ROOT/companyos_v15ctl" ] && bash "$ROOT/companyos_v15ctl" stop >/dev/null 2>&1 || true
+  [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && { echo "V16 already running"; exit 0; }
+  rm -f "$STOP"; cd "$ROOT"; nohup python -u -m companyos.action_control_execution_v16.supervisor >"$LOG" 2>&1 < /dev/null & echo $! >"$SPID"; sleep 4
+  echo "V16 started - http://127.0.0.1:9000" ;;
+ stop)
+  touch "$STOP"; [ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true; [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true
+  rm -f "$SPID" "$RUN/runtime.pid"; pkill -f 'companyos\.action_control_execution_v16\.' 2>/dev/null || true; echo "V16 stopped" ;;
+ restart) "$0" stop; sleep 2; rm -f "$STOP"; "$0" start ;;
+ status) [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V16 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V16 SUPERVISOR STOPPED"; curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo ;;
+ cycle) curl --max-time 60 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ approve) A="${2:-}"; [ -n "$A" ] || exit 2; curl -s "http://127.0.0.1:9000/api/approve?action_id=$A"; echo ;;
+ approve-safe-batch) curl -s http://127.0.0.1:9000/api/approve-safe-batch; echo ;;
+ retry) A="${2:-}"; [ -n "$A" ] || exit 2; curl -s "http://127.0.0.1:9000/api/retry?action_id=$A"; echo ;;
+ connectors) cat "$ROOT/config/connectors_v16.json" ;;
+ edit-connectors) nano "$ROOT/config/connectors_v16.json" ;;
+ logs) tail -200 "$RUN/v16.log" 2>/dev/null || true ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|approve ACTION_ID|approve-safe-batch|retry ACTION_ID|connectors|edit-connectors|logs}"; exit 2 ;;
+esac

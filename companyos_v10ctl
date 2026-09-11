@@ -1,0 +1,56 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"; RUN="$ROOT/.companyos_enterprise_v10"
+SPID="$RUN/supervisor.pid"; STOP="$RUN/supervisor.stop"; SLOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+ start)
+   [ -x "$ROOT/companyos_enterprise_v9ctl" ] && bash "$ROOT/companyos_enterprise_v9ctl" stop >/dev/null 2>&1 || true
+   if [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null; then
+     echo "V10 supervisor already running (PID $(cat "$SPID"))"; exit 0
+   fi
+   rm -f "$STOP"
+   cd "$ROOT"
+   nohup python -u -m companyos.autonomous_intelligence_v10.supervisor >"$SLOG" 2>&1 < /dev/null &
+   echo $! > "$SPID"
+   sleep 4
+   kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V10 supervisor started (PID $(cat "$SPID")) - http://127.0.0.1:9000" || { tail -100 "$SLOG"; exit 1; }
+   ;;
+ stop)
+   touch "$STOP"
+   [ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true
+   [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true
+   rm -f "$SPID" "$RUN/runtime.pid"
+   pkill -f 'companyos\.autonomous_intelligence_v10\.' 2>/dev/null || true
+   echo "V10 stopped"
+   ;;
+ restart) "$0" stop; sleep 2; rm -f "$STOP"; "$0" start ;;
+ status)
+   [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V10 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V10 SUPERVISOR STOPPED"
+   [ -f "$RUN/supervisor_status.json" ] && cat "$RUN/supervisor_status.json" && echo || true
+   curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo
+   ;;
+ cycle) curl --max-time 40 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ migrate) curl --max-time 40 -s http://127.0.0.1:9000/api/migrate || true; echo ;;
+ kill-runtime-test)
+   if [ -f "$RUN/runtime.pid" ]; then
+     P="$(cat "$RUN/runtime.pid")"; echo "Killing runtime PID $P"; kill -9 "$P" 2>/dev/null || true
+     sleep 8; "$0" status
+   else
+     echo "No runtime PID found."
+   fi ;;
+ logs)
+   echo "=== Supervisor ==="; tail -100 "$SLOG" 2>/dev/null || true
+   echo "=== Runtime ==="; tail -200 "$RUN/v10.log" 2>/dev/null || true ;;
+ seed-opportunity)
+   printf '%s\n' '{"opportunities":[{"name":"AI Proposal Generator for Small Contractors","category":"software","demand_score":88,"margin_score":91,"execution_score":82,"strategic_fit":90,"evidence_score":84}]}' > "$RUN/opportunities_inbox.json"
+   echo "Opportunity seed written."
+   ;;
+ backup)
+   cd "$ROOT"; mkdir -p backups; S="$(date +%Y%m%d_%H%M%S)"
+   tar -czf "backups/companyos_v10_$S.tar.gz" .companyos_enterprise_v10 companyos/autonomous_intelligence_v10 companyos_v10ctl companyosctl 2>/dev/null || true
+   echo "Backup: $ROOT/backups/companyos_v10_$S.tar.gz"
+   ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|migrate|kill-runtime-test|logs|seed-opportunity|backup}"; exit 2 ;;
+esac

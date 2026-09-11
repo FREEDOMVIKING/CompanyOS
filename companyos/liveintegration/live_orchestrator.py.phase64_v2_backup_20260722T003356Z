@@ -1,0 +1,131 @@
+import json
+from companyos.livegate import LiveReadinessGate, OneShotAuthorization
+from companyos.transactionops import TransactionLifecycle
+from companyos.controlledexec import ControlledExecutionReceipt, PostExecutionLock
+from companyos.walletintegration import SolanaExecutionGate
+from .runtime_guard import LiveRuntimeGuard
+from .receipt_reconciler import ReceiptReconciler
+from .live_policy import LiveExecutionPolicy
+
+class FinalLiveExecutionOrchestrator:
+    def __init__(self, root, allowlist=None):
+        self.root=root
+
+        # Explicit caller-supplied allowlist always wins.
+        # Otherwise load the persistent default-deny financial allowlist.
+        if allowlist is not None:
+            self.allowlist = set(allowlist)
+        else:
+            allowlist_path = self.root / "companyos_runtime" / "financial_allowlist.json"
+            try:
+                data = json.loads(allowlist_path.read_text(encoding="utf-8"))
+                self.allowlist = set(data.get("addresses", []))
+            except (FileNotFoundError, json.JSONDecodeError, OSError, TypeError):
+                # Fail closed: unavailable/corrupt state becomes an empty allowlist.
+                self.allowlist = set()
+
+        self.readiness=LiveReadinessGate(root)
+        self.auth=OneShotAuthorization(root)
+        self.guard=LiveRuntimeGuard(root)
+        self.policy=LiveExecutionPolicy()
+        self.tx=TransactionLifecycle(
+            root,
+            max_single_amount=self.policy.max_single,
+            min_reserve=self.policy.min_reserve
+        )
+        self.execgate=SolanaExecutionGate(root, allowlist=self.allowlist)
+        self.receipts=ControlledExecutionReceipt(root)
+        self.postlock=PostExecutionLock(root)
+        self.reconciler=ReceiptReconciler()
+
+    def execute_once(
+        self,
+        *,
+        token,
+        destination,
+        amount,
+        balance,
+        estimated_fee,
+        memo="controlled live execution"
+    ):
+        # Phase 63D V2: fail closed on pre-existing post-execution lock.
+        postlock_state = self.postlock.status()
+        if postlock_state.get("locked") is True:
+            return {
+                "success": False,
+                "status": "post_execution_lock_active",
+                "post_execution_lock": postlock_state,
+                "authorization_consumed": False,
+            }
+
+        readiness=self.readiness.evaluate()
+        if not readiness.get("ready_for_controlled_live_review"):
+            return {"success":False,"status":"controlled_live_readiness_not_met","readiness":readiness}
+
+        runtime=self.guard.check()
+        if not runtime.get("allowed"):
+            return {"success":False,"status":runtime.get("status"),"runtime_guard":runtime}
+
+        amount_check=self.policy.check_amount(amount)
+        if not amount_check.get("allowed"):
+            return {"success":False,"status":amount_check.get("status"),"policy":amount_check}
+
+        auth=self.auth.validate(token, amount, destination)
+        if not auth.get("allowed"):
+            return {"success":False,"status":auth.get("status"),"authorization":auth}
+
+        prepared=self.tx.prepare(
+            destination=destination,
+            amount=amount,
+            balance=balance,
+            estimated_fee=estimated_fee,
+            allowlist=self.allowlist,
+            memo=memo
+        )
+        if not prepared.get("success"):
+            return {"success":False,"status":"transaction_preparation_failed","transaction":prepared}
+
+        # The existing Solana gate owns signing + provider-specific execution.
+        execution_gate_reached = False
+
+        result=self.execgate.prepare_and_execute(
+            amount=amount,
+            balance=balance,
+            destination=destination,
+            source=prepared["proposal"]["source"],
+            memo=memo,
+            idempotency_key=prepared["fingerprint"],
+            dry_run=False,
+            signing_authorized=True
+        )
+
+        execution_gate_reached = True
+
+        # One-shot auth is consumed only after the execution gate was reached.
+        self.auth.consume()
+
+        receipt=self.receipts.append({
+            "mode":"controlled_live",
+            "destination":destination,
+            "amount":float(amount),
+            "execution_result":result
+        })
+
+        # Lock only after a real execution-gate attempt.
+        if execution_gate_reached:
+            lock=self.postlock.engage("controlled_live_attempt_complete")
+        else:
+            lock={
+                "success":True,
+                "status":"post_execution_lock_not_required",
+                "state":{"locked":False}
+            }
+
+        return {
+            "success": bool(result.get("success")),
+            "status": result.get("status"),
+            "execution": result,
+            "receipt": receipt,
+            "post_execution_lock": lock,
+            "authorization_consumed": True
+        }

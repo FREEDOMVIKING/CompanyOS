@@ -1,0 +1,91 @@
+from .reasoning_client import ReasoningClient
+from .planner import AutonomousPlanner
+from .delegator import SpecialistDelegator
+from .verification_engine import VerificationEngine
+from .learning_memory import LearningMemory
+
+class AutonomousCEOOrchestrator:
+    def __init__(self, root, reasoning_url=None):
+        self.root = root
+        self.reasoner = ReasoningClient(reasoning_url)
+        self.planner = AutonomousPlanner()
+        self.memory = LearningMemory(root)
+
+    def plan_and_delegate(self, objective, queue, context=None):
+        recent = self.memory.recent(10)
+        reasoned = self.reasoner.reason(
+            self.planner.build_prompt(objective, context=context, memory=recent),
+            metadata={"component":"autonomous_ceo","phase":"17000"}
+        )
+        if not reasoned.get("success"):
+            result = {
+                "success": False,
+                "stage": "reasoning",
+                "reasoning": reasoned
+            }
+            self.memory.append("ceo_failure", result)
+            return result
+
+        parsed = self.planner.parse(reasoned.get("content"))
+        if not parsed.get("success"):
+            result = {
+                "success": False,
+                "stage": "plan_parse",
+                "reasoning": reasoned,
+                "parse": parsed
+            }
+            self.memory.append("ceo_failure", result)
+            return result
+
+        plan = parsed["plan"]
+        validation = self.planner.validate(plan)
+        if not validation["passed"]:
+            result = {
+                "success": False,
+                "stage": "plan_validation",
+                "plan": plan,
+                "validation": validation
+            }
+            self.memory.append("ceo_failure", result)
+            return result
+
+        delegation = SpecialistDelegator().delegate(plan, queue)
+        result = {
+            "success": True,
+            "status": "ceo_plan_delegated",
+            "model": reasoned.get("model"),
+            "plan": plan,
+            "delegation": delegation
+        }
+        self.memory.append("ceo_plan", result)
+        return result
+
+    def execute_delegated(self, queue, worker_pool, max_jobs=25):
+        verifier = VerificationEngine()
+        rows = []
+
+        for i in range(int(max_jobs)):
+            before = queue.next_job()
+            if not before:
+                break
+            result = worker_pool.process_one(
+                queue,
+                worker_id="ceo_specialist_worker",
+                tick=i + 1
+            )
+            verification = verifier.verify_execution(before, result.get("result", result))
+            rows.append({
+                "job": before,
+                "execution": result,
+                "verification": verification
+            })
+
+        summary = verifier.summarize_cycle(rows)
+        output = {
+            "success": True,
+            "status": "ceo_execution_cycle_complete",
+            "executions": rows,
+            "verification_summary": summary,
+        }
+        self.memory.append("ceo_execution_cycle", output)
+        return output

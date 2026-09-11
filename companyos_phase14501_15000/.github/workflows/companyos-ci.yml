@@ -1,0 +1,43 @@
+name: CompanyOS CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip pytest ruff bandit pip-audit
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Static/Security analysis
+        run: bandit -r companyos -q
+
+      - name: Tests
+        run: pytest -q
+
+      - name: Dependency audit
+        run: pip-audit || true
+
+      - name: Build release bundle
+        run: |
+          mkdir -p dist
+          tar -czf dist/companyos-${{ github.sha }}.tar.gz companyos scripts tests
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: companyos-${{ github.sha }}
+          path: dist/companyos-${{ github.sha }}.tar.gz

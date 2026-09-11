@@ -1,0 +1,31 @@
+<!doctype html><html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyOS Autonomy Activity Ledger</title>
+<style>
+body{font-family:system-ui;background:#0b0d10;color:#eef2f6;margin:0;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.card{background:#151922;border:1px solid #29303b;border-radius:16px;padding:16px}
+h1{margin-top:0}.muted{color:#9ba7b5}.badge{display:inline-block;background:#233043;border-radius:999px;padding:5px 9px;margin:3px}
+.bar{height:16px;background:#252c36;border-radius:999px;overflow:hidden}.fill{height:100%;background:#5d9cec;width:0}
+pre{white-space:pre-wrap;word-break:break-word;background:#0c1015;padding:10px;border-radius:10px;max-height:320px;overflow:auto}
+ul{padding-left:20px}a{color:#8fc5ff}
+</style></head><body>
+<h1>Autonomy Activity Ledger</h1>
+<p><a href="http://127.0.0.1:8765">Executive Dashboard</a> · <a href="http://127.0.0.1:8766">Master Controls</a> · <a href="http://127.0.0.1:8767">Venture Progress</a> · <a href="http://127.0.0.1:8769">Lifecycle Progression</a></p>
+<div class="card"><h2>Productive Autonomy Signal</h2><div class="bar"><div id="fill" class="fill"></div></div><h3 id="score">Loading…</h3><p class="muted" id="note"></p><div id="badges"></div></div>
+<div class="grid">
+<div class="card"><h2>Autostarts</h2><ul id="autostarts"></ul></div>
+<div class="card"><h2>Recent goals</h2><ul id="goals"></ul></div>
+<div class="card"><h2>Active tasks</h2><ul id="active"></ul></div>
+<div class="card"><h2>Completed tasks</h2><ul id="completed"></ul></div>
+<div class="card"><h2>Failed / blocked tasks</h2><ul id="failed"></ul></div>
+<div class="card"><h2>Generated outputs / artifacts</h2><ul id="outputs"></ul></div>
+</div>
+<div class="card"><h2>Runtime state</h2><pre id="runtime"></pre></div>
+<div class="card"><h2>Watchdog state</h2><pre id="watchdog"></pre></div>
+<div class="card"><h2>Recent orchestration journal</h2><pre id="journal"></pre></div>
+<script>
+function list(id,arr,fmt){let e=document.getElementById(id);e.innerHTML='';(arr||[]).forEach(x=>{let li=document.createElement('li');li.textContent=fmt?fmt(x):String(x);e.appendChild(li)});if(!arr||!arr.length)e.innerHTML='<li class="muted">None detected</li>'}
+async function load(){let r=await fetch('/api/ledger');let x=await r.json();let p=x.business_progress_score||0;fill.style.width=p+'%';score.textContent=p+'/100 observed productive activity';note.textContent=x.note||'';badges.innerHTML='<span class="badge">Autostarts '+((x.watchdog||{}).total_autostarts||0)+'</span><span class="badge">Completed orchestrations '+((x.runtime||{}).completed_orchestrations||0)+'</span><span class="badge">Active '+x.active_tasks.length+'</span><span class="badge">Outputs '+x.outputs.length+'</span>';list('autostarts',x.autostarts);list('goals',x.recent_goals);list('active',x.active_tasks,t=>`${t.status} · ${t.assigned_agent||'unassigned'} · ${t.name||t.task_id||'task'}`);list('completed',x.completed_tasks,t=>`${t.status} · ${t.assigned_agent||'unassigned'} · ${t.name||t.task_id||'task'}`);list('failed',x.failed_tasks,t=>`${t.status} · ${t.name||t.task_id||'task'} · ${t.summary||''}`);list('outputs',x.outputs,o=>`${o.path} (${o.size} bytes)`);runtime.textContent=JSON.stringify(x.runtime||{},null,2);watchdog.textContent=JSON.stringify(x.watchdog||{},null,2);journal.textContent=JSON.stringify(x.recent_journal||[],null,2)}
+load();setInterval(load,10000);
+</script></body></html>

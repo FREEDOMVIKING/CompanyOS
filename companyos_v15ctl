@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"; RUN="$ROOT/.companyos_enterprise_v15"; SPID="$RUN/supervisor.pid"; STOP="$RUN/supervisor.stop"; LOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+case "${1:-status}" in
+ start) [ -x "$ROOT/companyos_v14ctl" ] && bash "$ROOT/companyos_v14ctl" stop >/dev/null 2>&1 || true; rm -f "$STOP"; cd "$ROOT"; nohup python -u -m companyos.external_integration_execution_v15.supervisor >"$LOG" 2>&1 < /dev/null & echo $! >"$SPID"; sleep 4; echo "V15 started - http://127.0.0.1:9000" ;;
+ stop) touch "$STOP"; [ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true; [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true; rm -f "$SPID" "$RUN/runtime.pid"; pkill -f 'companyos\.external_integration_execution_v15\.' 2>/dev/null || true; echo "V15 stopped" ;;
+ restart) "$0" stop; sleep 2; rm -f "$STOP"; "$0" start ;;
+ status) [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V15 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V15 SUPERVISOR STOPPED"; curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo ;;
+ cycle) curl --max-time 60 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ approve) A="${2:-}"; [ -n "$A" ] || { echo "Usage: $0 approve ACTION_ID"; exit 2; }; curl --max-time 20 -s "http://127.0.0.1:9000/api/approve?action_id=$A"; echo ;;
+ logs) tail -200 "$RUN/v15.log" 2>/dev/null || true ;;
+ connectors) cat "$ROOT/config/connectors_v15.json" ;;
+ edit-connectors) nano "$ROOT/config/connectors_v15.json" ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|approve ACTION_ID|logs|connectors|edit-connectors}"; exit 2 ;;
+esac

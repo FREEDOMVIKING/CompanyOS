@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyOS Business Intelligence</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>CompanyOS Business Intelligence</h1>
+  <p id="updated">Loading snapshot...</p>
+  <button id="refresh">Refresh dashboard</button>
+</header>
+
+<main>
+  <section class="grid">
+    <article>
+      <span>Company health</span>
+      <strong id="health">—</strong>
+    </article>
+    <article>
+      <span>Company score</span>
+      <strong id="score">—</strong>
+    </article>
+    <article>
+      <span>Pipeline value</span>
+      <strong id="pipeline">—</strong>
+    </article>
+    <article>
+      <span>Cash position</span>
+      <strong id="cash">—</strong>
+    </article>
+    <article>
+      <span>Active projects</span>
+      <strong id="projects">—</strong>
+    </article>
+    <article>
+      <span>Pending follow-ups</span>
+      <strong id="followups">—</strong>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>Financial overview</h2>
+    <div id="finance"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Strategic recommendations</h2>
+    <div id="recommendations"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Recent activity</h2>
+    <div id="activity"></div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+<a href="http://127.0.0.1:8766" style="position:fixed;right:14px;bottom:14px;z-index:99999;padding:12px 15px;border-radius:12px;background:#202733;color:white;text-decoration:none;font-family:system-ui;font-weight:700">⚙ CompanyOS Master Control Center</a>
+<a href="http://127.0.0.1:8767" style="position:fixed;left:14px;bottom:14px;z-index:99999;padding:12px 15px;border-radius:12px;background:#202733;color:white;text-decoration:none;font-family:system-ui;font-weight:700">📈 Venture Progress Tracker V2</a>\n</body>
+</html>

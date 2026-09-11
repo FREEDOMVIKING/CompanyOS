@@ -1,0 +1,86 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyOS Live Autonomy Activity Ledger</title>
+<style>
+body{font-family:system-ui;background:#0b0d10;color:#eef2f6;margin:0;padding:16px}
+.card{background:#151922;border:1px solid #29303b;border-radius:16px;padding:16px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.badge{display:inline-block;background:#233043;border-radius:999px;padding:5px 9px;margin:3px}
+.good{color:#7ee787}.warn{color:#ffbf69}.muted{color:#9ba7b5}
+pre{white-space:pre-wrap;word-break:break-word;background:#0c1015;padding:10px;border-radius:10px;max-height:340px;overflow:auto}
+ul{padding-left:20px}a{color:#8fc5ff}
+.bar{height:14px;background:#252c36;border-radius:999px;overflow:hidden}.fill{height:100%;background:#5d9cec;width:0}
+.event{border-bottom:1px solid #29303b;padding:10px 0}.event:last-child{border-bottom:0}
+.small{font-size:13px}
+</style>
+</head><body>
+<h1>Live Autonomy Activity Ledger</h1>
+<p>
+<a href="http://127.0.0.1:8765">Executive Dashboard</a> ·
+<a href="http://127.0.0.1:8766">Master Controls</a> ·
+<a href="http://127.0.0.1:8767">Venture Progress</a> ·
+<a href="http://127.0.0.1:8770">Identity + Progression</a>
+</p>
+
+<div class="card">
+<h2>Live productive activity</h2>
+<div class="bar"><div id="fill" class="fill"></div></div>
+<h3 id="score">Loading…</h3>
+<div id="badges"></div>
+<p class="muted" id="freshness"></p>
+</div>
+
+<div class="grid">
+<div class="card"><h2>Latest activity feed</h2><div id="events"></div></div>
+<div class="card"><h2>Newest outputs / artifacts</h2><ul id="outputs"></ul></div>
+</div>
+
+<div class="grid">
+<div class="card"><h2>Runtime state</h2><pre id="runtime"></pre></div>
+<div class="card"><h2>Watchdog state</h2><pre id="watchdog"></pre></div>
+</div>
+
+<div class="card"><h2>Data-source health</h2><ul id="sources"></ul></div>
+
+<script>
+const fmtTime=t=>{
+  try{return new Date(Number(t)*1000).toLocaleString()}catch(e){return String(t)}
+};
+function list(id,arr,formatter){
+  let el=document.getElementById(id);el.innerHTML='';
+  (arr||[]).forEach(x=>{let li=document.createElement('li');li.textContent=formatter?formatter(x):String(x);el.appendChild(li)});
+  if(!arr||!arr.length)el.innerHTML='<li class="muted">None detected</li>';
+}
+async function load(){
+  const r=await fetch('/api/ledger?ts='+Date.now(),{cache:'no-store'});
+  const x=await r.json();
+  const s=x.summary||{};
+  fill.style.width=(s.observed_productive_activity_score||0)+'%';
+  score.textContent=(s.observed_productive_activity_score||0)+'/100 observed productive activity';
+  badges.innerHTML=
+   `<span class="badge">Completed ${s.completed_orchestrations||0}</span>`+
+   `<span class="badge">Active ${s.active_orchestrations||0}</span>`+
+   `<span class="badge">Failures ${s.failed_orchestrations||0}</span>`+
+   `<span class="badge">Autostarts ${s.total_autostarts||0}</span>`+
+   `<span class="badge">Events 15m ${s.recent_events_15m||0}</span>`;
+  freshness.textContent='Last refreshed: '+new Date().toLocaleTimeString()+' · Server snapshot: '+fmtTime(x.generated_at_unix);
+
+  let ev=document.getElementById('events');ev.innerHTML='';
+  (x.events||[]).slice(0,60).forEach(e=>{
+    let d=document.createElement('div');d.className='event';
+    d.innerHTML=`<b>${e.event_type||'event'}</b><div>${e.summary||''}</div><div class="small muted">${fmtTime(e.ts)} · ${e.source||''}${e.orchestration_id?' · '+e.orchestration_id:''}</div>`;
+    ev.appendChild(d);
+  });
+  if(!(x.events||[]).length)ev.innerHTML='<div class="muted">No events detected.</div>';
+
+  list('outputs',(x.outputs||[]).slice(0,80),o=>`${o.path} (${o.size} bytes) · ${fmtTime(o.mtime)}`);
+  list('sources',x.source_health||[],o=>`${o.path} · ${fmtTime(o.mtime)} · ${o.size} bytes`);
+
+  runtime.textContent=JSON.stringify((x.runtime||{}),null,2);
+  watchdog.textContent=JSON.stringify((x.watchdog||{}),null,2);
+}
+load();
+setInterval(load,5000);
+</script>
+</body></html>

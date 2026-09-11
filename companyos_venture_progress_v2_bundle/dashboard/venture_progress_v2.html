@@ -1,0 +1,71 @@
+<!doctype html><html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompanyOS Venture Progress V2</title>
+<style>
+body{font-family:system-ui;background:#0b0d10;color:#eef2f6;margin:0;padding:16px}
+.card{background:#151922;border:1px solid #29303b;border-radius:16px;padding:16px;margin:12px 0}
+h1{margin-top:0}.muted{color:#9ba7b5}.state{font-size:13px;font-weight:800;letter-spacing:.08em}
+input{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid #394555;background:#0f1319;color:#fff}
+button{padding:12px 16px;border:0;border-radius:10px;background:#354052;color:#fff;font-weight:700;margin-top:8px}
+.bar{height:16px;background:#252c36;border-radius:999px;overflow:hidden}.fill{height:100%;background:#5d9cec;width:0}
+ul{padding-left:20px}a{color:#8fc5ff}.badge{display:inline-block;background:#233043;border-radius:999px;padding:5px 9px;margin:3px}
+pre{white-space:pre-wrap;word-break:break-word;background:#0c1015;padding:10px;border-radius:10px;max-height:320px;overflow:auto}
+</style></head><body>
+<h1>Venture Progress Tracker V2</h1>
+<p><a href="http://127.0.0.1:8765">← Executive Dashboard</a> · <a href="http://127.0.0.1:8766">Master Controls</a></p>
+<div class="card">
+<label>Roadmap venture / subject</label>
+<input id="subject" value="digital template business">
+<button onclick="loadProgress()">Load live progress</button>
+</div>
+
+<div class="card">
+<div id="state" class="state">LOADING</div>
+<h2 id="title">Digital template business</h2>
+<h3 id="current">Loading…</h3>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<p id="pct" class="muted"></p>
+<p id="explanation"></p>
+<div id="badges"></div>
+</div>
+
+<div class="card"><h2>Executive Roadmap record</h2><pre id="roadmap">Loading…</pre></div>
+<div class="card"><h2>Active work</h2><ul id="active"></ul></div>
+<div class="card"><h2>Completed work</h2><ul id="completed"></ul></div>
+<div class="card"><h2>Queued / next actions</h2><ul id="queued"></ul></div>
+<div class="card"><h2>Blockers</h2><ul id="blocked"></ul></div>
+<div class="card"><h2>Approvals / decisions waiting</h2><ul id="approvals"></ul><pre id="decisions"></pre></div>
+<div class="card"><h2>Research & evidence</h2><ul id="evidence"></ul></div>
+<div class="card"><h2>Milestones / stages</h2><ul id="milestones"></ul></div>
+<div class="card"><h2>Linked source records</h2><ul id="sources"></ul><p class="muted" id="note"></p></div>
+
+<script>
+function list(id,arr){
+ const e=document.getElementById(id); e.innerHTML='';
+ (arr||[]).forEach(x=>{const li=document.createElement('li');li.textContent=x;e.appendChild(li)});
+ if(!arr||!arr.length)e.innerHTML='<li class="muted">None detected</li>';
+}
+async function loadProgress(){
+ const s=document.getElementById('subject').value.trim();
+ const r=await fetch('/api/progress?subject='+encodeURIComponent(s));
+ const x=await r.json();
+ title.textContent=x.subject;
+ state.textContent=x.state||'UNKNOWN';
+ current.textContent=x.current||'No linked work';
+ explanation.textContent=x.explanation||'';
+ const p=x.progress_percent;
+ fill.style.width=(p==null?0:p)+'%';
+ pct.textContent=p==null?'No reliable linked task-state percentage available yet.':'Observed linked task-state progress: '+p+'%';
+ badges.innerHTML=
+  '<span class="badge">Active '+x.active.length+'</span>'+
+  '<span class="badge">Completed '+x.completed.length+'</span>'+
+  '<span class="badge">Queued '+x.queued.length+'</span>'+
+  '<span class="badge">Blocked '+x.blocked.length+'</span>'+
+  '<span class="badge">Approvals '+x.approvals.length+'</span>';
+ roadmap.textContent=JSON.stringify(x.roadmap_item||{},null,2);
+ decisions.textContent=JSON.stringify(x.matching_decisions||[],null,2);
+ ['active','completed','queued','blocked','approvals','evidence','milestones','sources'].forEach(k=>list(k,x[k]));
+ note.textContent=x.note||'';
+}
+loadProgress();setInterval(loadProgress,10000);
+</script></body></html>

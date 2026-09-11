@@ -1,0 +1,31 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos";RUN="$ROOT/.companyos_enterprise_v18";SPID="$RUN/supervisor.pid";STOP="$RUN/supervisor.stop";LOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+case "${1:-status}" in
+ start)
+   if [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null; then echo "V18 already running"; exit 0; fi
+   rm -f "$STOP";cd "$ROOT";nohup python -u -m companyos.connector_readiness_v18.supervisor >"$LOG" 2>&1 < /dev/null & echo $! >"$SPID";sleep 4
+   echo "V18 started - http://127.0.0.1:9000" ;;
+ stop)
+   touch "$STOP";[ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true
+   [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true
+   rm -f "$SPID" "$RUN/runtime.pid";pkill -f 'companyos\.connector_readiness_v18\.' 2>/dev/null || true;echo "V18 stopped" ;;
+ restart) "$0" stop;sleep 2;rm -f "$STOP";"$0" start ;;
+ status) [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V18 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V18 SUPERVISOR STOPPED";curl --max-time 10 -s http://127.0.0.1:9000/api/status || true;echo ;;
+ cycle) curl --max-time 60 -s http://127.0.0.1:9000/api/cycle || true;echo ;;
+ config) cat "$ROOT/config/connectors_v18.json" ;;
+ edit-config) nano "$ROOT/config/connectors_v18.json" ;;
+ env-check)
+ python - <<'PY'
+import json,os
+from pathlib import Path
+d=json.loads((Path.home()/"companyos/config/connectors_v18.json").read_text())
+for a,s in d["connectors"].items():
+ print(a)
+ for n in s.get("required_env",[]): print(" ",n,"SET" if os.environ.get(n) else "MISSING")
+PY
+ ;;
+ logs) tail -200 "$RUN/v18.log" 2>/dev/null || true ;;
+ *) echo "Usage: companyos_v18ctl {start|stop|restart|status|cycle|config|edit-config|env-check|logs}";exit 2 ;;
+esac

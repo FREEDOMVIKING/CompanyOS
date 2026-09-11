@@ -1,0 +1,292 @@
+{
+  "agents": {
+    "ceo": {
+      "name": "Executive CEO Agent",
+      "skills": [
+        "strategy",
+        "prioritization",
+        "delegation"
+      ]
+    },
+    "cfo": {
+      "name": "CFO Agent",
+      "skills": [
+        "finance",
+        "pricing",
+        "risk"
+      ]
+    },
+    "cmo": {
+      "name": "CMO Agent",
+      "skills": [
+        "marketing",
+        "campaigns",
+        "positioning"
+      ]
+    },
+    "coo": {
+      "name": "COO Agent",
+      "skills": [
+        "operations",
+        "dependencies",
+        "delivery"
+      ]
+    },
+    "cto": {
+      "name": "CTO Agent",
+      "skills": [
+        "architecture",
+        "runtime",
+        "technical_review"
+      ]
+    },
+    "customer_support": {
+      "name": "Customer Support Agent",
+      "skills": [
+        "support",
+        "customers",
+        "responses"
+      ]
+    },
+    "product_builder": {
+      "name": "Product Builder Agent",
+      "skills": [
+        "product",
+        "offer",
+        "artifacts"
+      ]
+    },
+    "qa": {
+      "name": "QA/Test Agent",
+      "skills": [
+        "qa",
+        "testing",
+        "validation"
+      ]
+    },
+    "research": {
+      "name": "Research Agent",
+      "skills": [
+        "research",
+        "evidence",
+        "competition"
+      ]
+    },
+    "sales": {
+      "name": "Sales Agent",
+      "skills": [
+        "sales",
+        "leads",
+        "conversion"
+      ]
+    }
+  },
+  "last_completed_tasks": [
+    {
+      "agent": "Executive CEO Agent",
+      "result": {
+        "agent": "Executive CEO Agent",
+        "completed_at": "2026-08-06T19:57:23.898296+00:00",
+        "external_action_performed": false,
+        "finding": "Internal review completed.",
+        "recommendation_only": true,
+        "role": "ceo",
+        "summary": "Executive CEO Agent completed: Review company-wide top priority"
+      },
+      "task_id": "v24-ceo-priority",
+      "title": "Review company-wide top priority"
+    },
+    {
+      "agent": "CFO Agent",
+      "result": {
+        "agent": "CFO Agent",
+        "completed_at": "2026-08-06T19:57:23.898671+00:00",
+        "external_action_performed": false,
+        "finding": "Pricing remains provisional until verified sales exist.",
+        "recommendation_only": true,
+        "role": "cfo",
+        "summary": "CFO Agent completed: Review pricing recommendation"
+      },
+      "task_id": "v24-cfo-pricing",
+      "title": "Review pricing recommendation"
+    },
+    {
+      "agent": "Research Agent",
+      "result": {
+        "agent": "Research Agent",
+        "completed_at": "2026-08-06T19:57:23.898959+00:00",
+        "external_action_performed": false,
+        "finding": "External research network is disabled; use internal evidence only.",
+        "recommendation_only": true,
+        "role": "research",
+        "summary": "Research Agent completed: Review external research coverage"
+      },
+      "task_id": "v24-research-evidence",
+      "title": "Review external research coverage"
+    },
+    {
+      "agent": "Product Builder Agent",
+      "result": {
+        "agent": "Product Builder Agent",
+        "completed_at": "2026-08-06T19:57:23.899228+00:00",
+        "external_action_performed": false,
+        "finding": "Internal review completed.",
+        "recommendation_only": true,
+        "role": "product_builder",
+        "summary": "Product Builder Agent completed: Inspect launch-ready venture offer"
+      },
+      "task_id": "v24-product-offer",
+      "title": "Inspect launch-ready venture offer"
+    },
+    {
+      "agent": "QA/Test Agent",
+      "result": {
+        "agent": "QA/Test Agent",
+        "completed_at": "2026-08-06T19:57:23.899492+00:00",
+        "external_action_performed": false,
+        "finding": "Internal QA completed; external launch still requires review.",
+        "recommendation_only": true,
+        "role": "qa",
+        "summary": "QA/Test Agent completed: Run internal venture QA review"
+      },
+      "task_id": "v24-qa-validate",
+      "title": "Run internal venture QA review"
+    },
+    {
+      "agent": "CMO Agent",
+      "result": {
+        "agent": "CMO Agent",
+        "completed_at": "2026-08-06T19:57:23.899751+00:00",
+        "external_action_performed": false,
+        "finding": "Internal review completed.",
+        "recommendation_only": true,
+        "role": "cmo",
+        "summary": "CMO Agent completed: Prepare campaign review brief"
+      },
+      "task_id": "v24-cmo-campaign",
+      "title": "Prepare campaign review brief"
+    },
+    {
+      "agent": "Sales Agent",
+      "result": {
+        "agent": "Sales Agent",
+        "completed_at": "2026-08-06T19:57:23.900018+00:00",
+        "external_action_performed": false,
+        "finding": "Internal review completed.",
+        "recommendation_only": true,
+        "role": "sales",
+        "summary": "Sales Agent completed: Prepare first-sale conversion brief"
+      },
+      "task_id": "v24-sales-first-sale",
+      "title": "Prepare first-sale conversion brief"
+    },
+    {
+      "agent": "COO Agent",
+      "result": {
+        "agent": "COO Agent",
+        "completed_at": "2026-08-06T19:57:23.900276+00:00",
+        "external_action_performed": false,
+        "finding": "Observed operations health: 100",
+        "recommendation_only": true,
+        "role": "coo",
+        "summary": "COO Agent completed: Review runtime and dependency health"
+      },
+      "task_id": "v24-coo-runtime",
+      "title": "Review runtime and dependency health"
+    },
+    {
+      "agent": "CTO Agent",
+      "result": {
+        "agent": "CTO Agent",
+        "completed_at": "2026-08-06T19:57:23.900536+00:00",
+        "external_action_performed": false,
+        "finding": "Internal review completed.",
+        "recommendation_only": true,
+        "role": "cto",
+        "summary": "CTO Agent completed: Review module integration health"
+      },
+      "task_id": "v24-cto-architecture",
+      "title": "Review module integration health"
+    },
+    {
+      "agent": "Customer Support Agent",
+      "result": {
+        "agent": "Customer Support Agent",
+        "completed_at": "2026-08-06T19:57:23.900790+00:00",
+        "external_action_performed": false,
+        "finding": "Internal review completed.",
+        "recommendation_only": true,
+        "role": "customer_support",
+        "summary": "Customer Support Agent completed: Prepare customer support readiness brief"
+      },
+      "task_id": "v24-support-readiness",
+      "title": "Prepare customer support readiness brief"
+    }
+  ],
+  "performance": {
+    "ceo": {
+      "agent": "Executive CEO Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "cfo": {
+      "agent": "CFO Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "cmo": {
+      "agent": "CMO Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "coo": {
+      "agent": "COO Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "cto": {
+      "agent": "CTO Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "customer_support": {
+      "agent": "Customer Support Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "product_builder": {
+      "agent": "Product Builder Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "qa": {
+      "agent": "QA/Test Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "research": {
+      "agent": "Research Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    },
+    "sales": {
+      "agent": "Sales Agent",
+      "assigned": 1,
+      "completed": 1,
+      "completion_rate": 1.0
+    }
+  },
+  "task_counts": {
+    "COMPLETED": 10
+  },
+  "updated_at": "2026-08-06T20:00:53.281676+00:00"
+}

@@ -1,0 +1,64 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_runtime"
+PID="$RUN/venture_promotion_pipeline_v39.pid"
+LOG="$RUN/venture_promotion_pipeline_v39.log"
+SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+      echo "Venture Promotion Pipeline V39 already running (PID $(cat "$PID"))"
+      exit 0
+    fi
+    cd "$ROOT"
+    nohup python -u -m companyos.venture_promotion_pipeline_v39.server >"$LOG" 2>&1 &
+    echo $! >"$PID"
+    sleep 2
+    if kill -0 "$(cat "$PID")" 2>/dev/null; then
+      echo "Venture Promotion Pipeline V39 started (PID $(cat "$PID"))"
+      echo "Dashboard: http://127.0.0.1:8801"
+    else
+      echo "Failed to start V39"
+      tail -100 "$LOG" 2>/dev/null || true
+      rm -f "$PID"
+      exit 1
+    fi ;;
+  stop)
+    if [ -f "$PID" ]; then
+      kill "$(cat "$PID")" 2>/dev/null || true
+      rm -f "$PID"
+    fi
+    pkill -f 'companyos\.venture_promotion_pipeline_v39\.server' 2>/dev/null || true
+    echo "Venture Promotion Pipeline V39 stopped" ;;
+  restart)
+    bash "$SELF" stop
+    sleep 2
+    bash "$SELF" start ;;
+  status)
+    if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+      echo "Venture Promotion Pipeline V39: RUNNING (PID $(cat "$PID"))"
+    else
+      echo "Venture Promotion Pipeline V39: STOPPED"
+    fi
+    curl --max-time 10 -s http://127.0.0.1:8801/api/status || true
+    echo ;;
+  sync)
+    cd "$ROOT"
+    python - <<'PY'
+from pathlib import Path
+from companyos.venture_promotion_pipeline_v39.engine import VenturePromotionPipelineV39
+import json
+s=VenturePromotionPipelineV39(Path.home()/"companyos").run_cycle()
+print(json.dumps(s,indent=2))
+PY
+    ;;
+  logs)
+    tail -120 "$LOG" 2>/dev/null || true ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status|sync|logs}"
+    exit 2 ;;
+esac

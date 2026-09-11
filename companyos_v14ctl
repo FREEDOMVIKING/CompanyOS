@@ -1,0 +1,20 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"; RUN="$ROOT/.companyos_enterprise_v14"; SPID="$RUN/supervisor.pid"; STOP="$RUN/supervisor.stop"; LOG="$RUN/supervisor.log"
+mkdir -p "$RUN"
+case "${1:-status}" in
+ start)
+   [ -x "$ROOT/companyos_v13ctl" ] && bash "$ROOT/companyos_v13ctl" stop >/dev/null 2>&1 || true
+   [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && { echo "V14 already running"; exit 0; }
+   rm -f "$STOP"; cd "$ROOT"; nohup python -u -m companyos.external_launch_orchestrator_v14.supervisor >"$LOG" 2>&1 < /dev/null & echo $! >"$SPID"; sleep 4
+   echo "V14 started - http://127.0.0.1:9000" ;;
+ stop)
+   touch "$STOP"; [ -f "$SPID" ] && kill "$(cat "$SPID")" 2>/dev/null || true
+   [ -f "$RUN/runtime.pid" ] && kill "$(cat "$RUN/runtime.pid")" 2>/dev/null || true
+   rm -f "$SPID" "$RUN/runtime.pid"; pkill -f 'companyos\.external_launch_orchestrator_v14\.' 2>/dev/null || true; echo "V14 stopped" ;;
+ restart) "$0" stop; sleep 2; rm -f "$STOP"; "$0" start ;;
+ status) [ -f "$SPID" ] && kill -0 "$(cat "$SPID")" 2>/dev/null && echo "V14 SUPERVISOR RUNNING (PID $(cat "$SPID"))" || echo "V14 SUPERVISOR STOPPED"; curl --max-time 10 -s http://127.0.0.1:9000/api/status || true; echo ;;
+ cycle) curl --max-time 60 -s http://127.0.0.1:9000/api/cycle || true; echo ;;
+ logs) tail -200 "$RUN/v14.log" 2>/dev/null || true ;;
+ *) echo "Usage: $0 {start|stop|restart|status|cycle|logs}"; exit 2 ;;
+esac

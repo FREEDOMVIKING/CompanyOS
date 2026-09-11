@@ -1,0 +1,36 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="${1:-$HOME/companyos}"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+STAMP="$(date +%Y%m%d_%H%M%S)"
+BACKUP="$ROOT/backups/phase857_872_autonomous_revalidation_$STAMP"
+[ -d "$ROOT" ] || { echo "ERROR: $ROOT missing"; exit 1; }
+mkdir -p "$BACKUP" "$ROOT/scripts" "$ROOT/tests"
+TARGET="$ROOT"; [ -d "$ROOT/src" ] && TARGET="$ROOT/src"
+rm -rf "$TARGET/companyos_phase857_872"
+cp -a "$HERE/companyos_phase857_872" "$TARGET/"
+cp "$HERE/scripts/"*.py "$ROOT/scripts/"
+cp "$HERE/tests/test_phase857_872.py" "$ROOT/tests/"
+chmod +x "$ROOT/scripts/"phase857_872_verify.py "$ROOT/scripts/"run_revalidation_demo.py
+cd "$ROOT"
+export PYTHONPATH="$ROOT:$ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
+python scripts/phase857_872_verify.py
+python -m pytest -q tests/test_phase857_872.py --disable-warnings
+echo "PHASE857_872_INSTALL_OK"
+echo "VALIDATION_GAP_ANALYZER=READY"
+echo "REVALIDATION_MISSION_GENERATOR=READY"
+echo "TARGETED_EVIDENCE_ACQUISITION=READY"
+echo "HYPOTHESIS_RESEARCH_TASKS=READY"
+echo "PRICING_RECOVERY=READY"
+echo "DEMAND_RECOVERY=READY"
+echo "PROBLEM_RECOVERY=READY"
+echo "CONTRADICTION_RESOLUTION=READY"
+echo "PROVIDER_REVALIDATION_ROUTER=READY"
+echo "EVIDENCE_MERGER=READY"
+echo "CONFIDENCE_DELTA_TRACKER=READY"
+echo "STAGNATION_DETECTOR=READY"
+echo "BOUNDED_REVALIDATION_LOOP=READY"
+echo "DECISION_ESCALATOR=READY"
+echo "REVALIDATION_JOURNAL=READY"
+echo "CEO_REVALIDATION_RUNTIME_BRIDGE=READY"
+echo "Backup: $BACKUP"

@@ -1,0 +1,3 @@
+- [ ] Validate demand
+- [ ] Finish MVP
+- [ ] Prepare launch

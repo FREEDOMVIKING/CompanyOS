@@ -1,0 +1,17 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -u
+cd "$HOME/companyos" || exit 1
+
+INTERVAL="${COMPANYOS_FINANCIAL_QUEUE_INTERVAL_SECONDS:-120}"
+mkdir -p run logs
+PIDFILE="run/financial_queue_worker.pid"
+LOGFILE="logs/financial_queue_worker.log"
+
+echo $$ > "$PIDFILE"
+trap 'rm -f "$PIDFILE"' EXIT INT TERM
+echo "$(date -Iseconds) lifecycle_worker_start interval=$INTERVAL mode=dry_run" >> "$LOGFILE"
+
+while true; do
+  python tools/companyos_financial_lifecycle_worker_once.py >> "$LOGFILE" 2>&1
+  sleep "$INTERVAL"
+done

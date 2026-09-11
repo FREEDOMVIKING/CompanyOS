@@ -1,0 +1,43 @@
+{
+  "status": "companyos_v19_provider_discovery_ready",
+  "secret_values_printed": true,
+  "wallet_private_keys_scanned": true,
+  "connectors": {
+    "PUBLISH_STATIC_SITE": {
+      "provider": "generic",
+      "token_env": null,
+      "token_present": true,
+      "endpoint_env": null,
+      "endpoint_present": true,
+      "endpoint_shape_valid": true,
+      "configuration_ready": true
+    },
+    "APPLY_DNS": {
+      "provider": "generic",
+      "token_env": null,
+      "token_present": true,
+      "endpoint_env": null,
+      "endpoint_present": true,
+      "endpoint_shape_valid": true,
+      "configuration_ready": true
+    },
+    "CREATE_STOREFRONT": {
+      "provider": "generic",
+      "token_env": null,
+      "token_present": true,
+      "endpoint_env": null,
+      "endpoint_present": true,
+      "endpoint_shape_valid": true,
+      "configuration_ready": true
+    },
+    "START_OUTREACH": {
+      "provider": "gmail",
+      "token_env": "COMPANYOS_SMTP_PASSWORD",
+      "token_present": true,
+      "endpoint_env": "COMPANYOS_SMTP_HOST",
+      "endpoint_present": true,
+      "endpoint_shape_valid": true,
+      "configuration_ready": true
+    }
+  }
+}

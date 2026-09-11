@@ -1,0 +1,86 @@
+{
+  "bottlenecks": [
+    {
+      "area": "sales",
+      "issue": "No verified paid orders",
+      "recommended_action": "Drive the first real customer acquisition and verify the full checkout flow.",
+      "severity": "HIGH"
+    },
+    {
+      "area": "crm",
+      "issue": "No customer profiles",
+      "recommended_action": "Capture customer email and order records through checkout.",
+      "severity": "MEDIUM"
+    }
+  ],
+  "company_health": {
+    "penalties": [
+      "no verified paid orders",
+      "no customer records"
+    ],
+    "rating": "STABLE",
+    "score": 77
+  },
+  "dashboard_url": "http://127.0.0.1:8778",
+  "external_actions_enabled": false,
+  "modules": {
+    "commercial": {
+      "available": true,
+      "status": "commercial_operations_ready",
+      "updated_at": "2026-08-06T20:00:53.141052+00:00"
+    },
+    "crm": {
+      "available": true,
+      "status": "customer_growth_crm_ready",
+      "updated_at": "2026-08-06T20:00:53.135591+00:00"
+    },
+    "enterprise": {
+      "available": true,
+      "status": "enterprise_automation_ready",
+      "updated_at": "2026-08-06T20:00:53.144730+00:00"
+    },
+    "marketing": {
+      "available": true,
+      "status": "autonomous_sales_marketing_ready",
+      "updated_at": "2026-08-06T20:00:53.131921+00:00"
+    },
+    "revenue": {
+      "available": true,
+      "status": "autonomous_revenue_pipeline_ready",
+      "updated_at": "2026-08-06T20:00:53.112049+00:00"
+    }
+  },
+  "opportunities": [
+    {
+      "name": "Digital Template Business",
+      "reason": "Enterprise portfolio priority score",
+      "score": 50.0,
+      "status": "DISCOVERED",
+      "venture_id": "digital-template-business"
+    }
+  ],
+  "recommendations": [
+    {
+      "area": "sales",
+      "execution_status": "RECOMMENDATION_ONLY",
+      "priority": "HIGH",
+      "recommendation": "Drive the first real customer acquisition and verify the full checkout flow."
+    },
+    {
+      "area": "crm",
+      "execution_status": "RECOMMENDATION_ONLY",
+      "priority": "MEDIUM",
+      "recommendation": "Capture customer email and order records through checkout."
+    },
+    {
+      "area": "marketing",
+      "execution_status": "RECOMMENDATION_ONLY",
+      "priority": "MEDIUM",
+      "recommendation": "Review and approve the highest-priority prepared campaign."
+    }
+  ],
+  "status": "executive_intelligence_ready",
+  "timeline_events": 50,
+  "top_opportunity": "Digital Template Business",
+  "updated_at": "2026-08-06T20:00:53.205109+00:00"
+}

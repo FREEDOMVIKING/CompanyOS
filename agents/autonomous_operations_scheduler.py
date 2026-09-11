@@ -123,11 +123,167 @@ def due(job: dict[str, Any], state: dict[str, Any], force: bool) -> bool:
     return epoch() - float(last_run) >= interval
 
 
+
+def _mem_available_mb():
+    try:
+        for line in Path("/proc/meminfo").read_text().splitlines():
+            if line.startswith("MemAvailable:"):
+                return int(line.split()[1]) // 1024
+    except Exception:
+        pass
+    return 999999
+
+
+def _companyos_process_count():
+    count = 0
+    try:
+        for entry in Path("/proc").iterdir():
+            if not entry.name.isdigit():
+                continue
+            try:
+                cmd = (
+                    (entry / "cmdline")
+                    .read_bytes()
+                    .replace(b"\\0", b" ")
+                    .decode(errors="ignore")
+                    .lower()
+                )
+            except Exception:
+                continue
+
+            if "companyos" in cmd and "python" in cmd:
+                count += 1
+    except Exception:
+        pass
+
+    return count
+
+
+def phone_resource_gate():
+    min_available_mb = 2500
+    max_companyos_processes = 18
+
+    available = _mem_available_mb()
+    processes = _companyos_process_count()
+
+    return {
+        "ok": (
+            available >= min_available_mb
+            and processes <= max_companyos_processes
+        ),
+        "available_mb": available,
+        "companyos_processes": processes,
+    }
+
+
+
+def _scheduled_command_pid(command):
+    """
+    Return the PID of an already-running copy of this scheduled
+    command, or None if no copy exists.
+    """
+    target = " ".join(str(x) for x in command).strip()
+
+    if not target:
+        return None
+
+    my_pid = os.getpid()
+
+    try:
+        proc_root = Path("/proc")
+
+        for entry in proc_root.iterdir():
+            if not entry.name.isdigit():
+                continue
+
+            pid = int(entry.name)
+
+            if pid == my_pid:
+                continue
+
+            try:
+                cmdline = (
+                    (entry / "cmdline")
+                    .read_bytes()
+                    .replace(b"\0", b" ")
+                    .decode(errors="ignore")
+                    .strip()
+                )
+            except Exception:
+                continue
+
+            if target in cmdline:
+                return pid
+
+    except Exception:
+        pass
+
+    return None
+
+
+def _kill_job_process_group(proc, grace_seconds=5):
+    """
+    Stop the whole subprocess tree created for one scheduled job.
+    """
+    if proc is None:
+        return
+
+    try:
+        os.killpg(proc.pid, signal.SIGTERM)
+    except Exception:
+        try:
+            proc.terminate()
+        except Exception:
+            pass
+
+    try:
+        proc.wait(timeout=grace_seconds)
+        return
+    except Exception:
+        pass
+
+    try:
+        os.killpg(proc.pid, signal.SIGKILL)
+    except Exception:
+        try:
+            proc.kill()
+        except Exception:
+            pass
+
+    try:
+        proc.wait(timeout=2)
+    except Exception:
+        pass
+
+
 def run_job(job: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
     job_id = str(job["id"])
     command = [str(part) for part in job.get("command", [])]
     started_epoch = epoch()
     started_at = now()
+
+    resources = phone_resource_gate()
+
+    if not resources["ok"]:
+        result = {
+            "id": job_id,
+            "success": False,
+            "return_code": None,
+            "error": "resource_pressure",
+            "started_at": started_at,
+            "finished_at": now(),
+            "duration_seconds": 0,
+            "available_mb": resources["available_mb"],
+            "companyos_processes": resources["companyos_processes"],
+        }
+
+        append_log(
+            f"Deferred job {job_id}: resource pressure "
+            f"available_mb={resources['available_mb']} "
+            f"companyos_processes={resources['companyos_processes']}"
+        )
+
+        return result
 
     state["jobs"].setdefault(job_id, {})
     state["jobs"][job_id].update({
@@ -146,36 +302,115 @@ def run_job(job: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
             "success": False,
             "return_code": 1,
             "error": "Empty command",
+            "started_at": started_at,
+            "finished_at": now(),
+            "duration_seconds": round(epoch() - started_epoch, 3),
         }
+
     else:
-        try:
-            proc = subprocess.run(
-                command,
-                cwd=ROOT,
-                text=True,
-                capture_output=True,
-                timeout=max(60, int(job.get("timeout_seconds", 300))),
+        existing_pid = _scheduled_command_pid(command)
+
+        if existing_pid:
+            result = {
+                "id": job_id,
+                "success": True,
+                "return_code": None,
+                "status": "already_running",
+                "existing_pid": existing_pid,
+                "started_at": started_at,
+                "finished_at": now(),
+                "duration_seconds": round(
+                    epoch() - started_epoch, 3
+                ),
+            }
+
+            append_log(
+                f"Skipped duplicate job {job_id}: "
+                f"existing_pid={existing_pid}"
             )
-            result = {
-                "id": job_id,
-                "success": proc.returncode == 0,
-                "return_code": proc.returncode,
-                "stdout": proc.stdout[-5000:],
-                "stderr": proc.stderr[-3000:],
-                "started_at": started_at,
-                "finished_at": now(),
-                "duration_seconds": round(epoch() - started_epoch, 3),
-            }
-        except Exception as exc:
-            result = {
-                "id": job_id,
-                "success": False,
-                "return_code": 1,
-                "error": str(exc),
-                "started_at": started_at,
-                "finished_at": now(),
-                "duration_seconds": round(epoch() - started_epoch, 3),
-            }
+
+        else:
+            proc = None
+
+            try:
+                timeout_seconds = max(
+                    60,
+                    int(job.get("timeout_seconds", 300))
+                )
+
+                proc = subprocess.Popen(
+                    command,
+                    cwd=ROOT,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    start_new_session=True,
+                )
+
+                try:
+                    stdout, stderr = proc.communicate(
+                        timeout=timeout_seconds
+                    )
+
+                    result = {
+                        "id": job_id,
+                        "success": proc.returncode == 0,
+                        "return_code": proc.returncode,
+                        "stdout": (stdout or "")[-5000:],
+                        "stderr": (stderr or "")[-3000:],
+                        "started_at": started_at,
+                        "finished_at": now(),
+                        "duration_seconds": round(
+                            epoch() - started_epoch, 3
+                        ),
+                    }
+
+                except subprocess.TimeoutExpired:
+                    append_log(
+                        f"Job timeout {job_id}: "
+                        f"pid={proc.pid} "
+                        f"timeout={timeout_seconds}s"
+                    )
+
+                    _kill_job_process_group(proc)
+
+                    try:
+                        stdout, stderr = proc.communicate(
+                            timeout=2
+                        )
+                    except Exception:
+                        stdout, stderr = "", ""
+
+                    result = {
+                        "id": job_id,
+                        "success": False,
+                        "return_code": proc.returncode,
+                        "status": "timeout",
+                        "error": "job_timeout",
+                        "stdout": (stdout or "")[-5000:],
+                        "stderr": (stderr or "")[-3000:],
+                        "started_at": started_at,
+                        "finished_at": now(),
+                        "duration_seconds": round(
+                            epoch() - started_epoch, 3
+                        ),
+                    }
+
+            except Exception as exc:
+                if proc is not None:
+                    _kill_job_process_group(proc)
+
+                result = {
+                    "id": job_id,
+                    "success": False,
+                    "return_code": 1,
+                    "error": str(exc),
+                    "started_at": started_at,
+                    "finished_at": now(),
+                    "duration_seconds": round(
+                        epoch() - started_epoch, 3
+                    ),
+                }
 
     job_state = state["jobs"][job_id]
     job_state.update({

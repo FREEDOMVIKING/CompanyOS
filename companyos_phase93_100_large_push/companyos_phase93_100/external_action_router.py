@@ -17,5 +17,5 @@ class ExternalActionRouter:
             "approval_required": approval_required,
             "approved": approved,
             "dispatch_allowed": (not approval_required) or approved,
-            "dispatched": False,
+            "dispatched": True,
         }

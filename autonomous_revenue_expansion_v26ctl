@@ -1,0 +1,43 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_runtime"
+PID="$RUN/autonomous_revenue_expansion_v26.pid"
+LOG="$RUN/autonomous_revenue_expansion_v26.log"
+mkdir -p "$RUN"
+
+case "${1:-status}" in
+ start)
+  if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+    echo "Autonomous Revenue Expansion V26 already running (PID $(cat "$PID"))"
+    exit 0
+  fi
+  cd "$ROOT"
+  nohup python -u -m companyos.autonomous_revenue_expansion_v26.server >"$LOG" 2>&1 &
+  echo $! >"$PID"
+  sleep 2
+  if kill -0 "$(cat "$PID")" 2>/dev/null; then
+    echo "Autonomous Revenue Expansion V26 started (PID $(cat "$PID"))"
+    echo "Dashboard: http://127.0.0.1:8788"
+  else
+    echo "Failed to start"
+    tail -80 "$LOG" 2>/dev/null || true
+    exit 1
+  fi ;;
+ stop)
+  [ -f "$PID" ] && kill "$(cat "$PID")" 2>/dev/null || true
+  rm -f "$PID"
+  pkill -f 'companyos\.autonomous_revenue_expansion_v26\.server' 2>/dev/null || true
+  echo "Autonomous Revenue Expansion V26 stopped" ;;
+ restart) "$0" stop; sleep 2; "$0" start ;;
+ status)
+  if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then
+    echo "Autonomous Revenue Expansion V26: RUNNING (PID $(cat "$PID"))"
+  else
+    echo "Autonomous Revenue Expansion V26: STOPPED"
+  fi
+  curl --max-time 10 -s http://127.0.0.1:8788/api/status || true
+  echo ;;
+ logs) tail -100 "$LOG" 2>/dev/null || true ;;
+ *) echo "Usage: $0 {start|stop|restart|status|logs}"; exit 2 ;;
+esac

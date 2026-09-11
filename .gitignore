@@ -1,32 +1,49 @@
-__pycache__/
-*.pyc
-*.pid
-*.log
-*.env
-secrets/
-backups/
 
+!.env.example
+# CompanyOS local secrets / runtime
 # CompanyOS runtime-generated state
-runtime/
-logs/
-run/
-backups/state_snapshots/
-ceo_memory/*_state.json
-ceo_memory/*_health.json
-ceo_memory/*_report.json
-ceo_memory/*_audit.json
-ceo_memory/*_cache.json
-ceo_memory/*_brief.json
-ceo_memory/*_queue.json
-ceo_memory/*_history.json
-ceo_memory/HALT_AUTONOMY
+# Large generated CompanyOS state
+# Local AI engine - separate upstream repository
+# Local AI repositories/models
 # Python runtime
-
 # Runtime-generated CompanyOS state
+*.env
+*.ggml
+*.gguf
+*.key
+*.log
+*.pem
+*.pid
+*.pyc
+*.pyo
+*.secret
+.companyos_runtime/
+.env
+.env.*
+__pycache__/
+backups/
+backups/state_snapshots/
+ceo_memory/*_audit.json
+ceo_memory/*_brief.json
+ceo_memory/*_cache.json
+ceo_memory/*_health.json
+ceo_memory/*_history.json
+ceo_memory/*_queue.json
+ceo_memory/*_report.json
+ceo_memory/*_state.json
+ceo_memory/HALT_AUTONOMY
+ceo_memory/autonomous_operations_audit.json
+ceo_memory/git_change_audit.json
 ceo_memory/github_connector_audit.json
 ceo_memory/github_push_approval.json
-ceo_memory/git_change_audit.json
-ceo_memory/watchdog_health.json
-
+ceo_memory/persistent_business_memory.json
+ceo_memory/phase54/workspaces.json
 ceo_memory/watchdog_audit.json
 ceo_memory/watchdog_health.json
+companyos_runtime/
+local_ai/llama.cpp/
+local_ai/models/
+logs/
+run/
+runtime/
+secrets/

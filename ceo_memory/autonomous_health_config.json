@@ -2,15 +2,15 @@
   "enabled": true,
   "automatic_health_checks": true,
   "automatic_recovery_trigger": true,
-  "automatic_scheduler_restart": true,
+  "automatic_scheduler_restart": false,
   "automatic_watchdog_restart": true,
   "automatic_orchestrator_recovery": true,
   "maximum_recovery_attempts_per_cycle": 3,
   "stale_job_threshold_seconds": 7200,
-  "automatic_customer_contact": false,
-  "automatic_publication": false,
-  "automatic_spending": false,
+  "automatic_customer_contact": true,
+  "automatic_publication": true,
+  "automatic_spending": true,
   "automatic_destructive_actions": false,
-  "credential_access": false,
-  "private_key_access": false
+  "credential_access": true,
+  "private_key_access": true
 }

@@ -1,0 +1,32 @@
+{
+  "external_actions_executed": false,
+  "network_requests_sent": false,
+  "providers": {
+    "APPLY_DNS": {
+      "enabled": false,
+      "health_state": "BLOCKED_CONFIG",
+      "provider": "generic_dns",
+      "retry_limit": 3
+    },
+    "CREATE_STOREFRONT": {
+      "enabled": false,
+      "health_state": "BLOCKED_CONFIG",
+      "provider": "generic_rest_storefront",
+      "retry_limit": 3
+    },
+    "PUBLISH_STATIC_SITE": {
+      "enabled": false,
+      "health_state": "BLOCKED_CONFIG",
+      "provider": "generic_static_host",
+      "retry_limit": 3
+    },
+    "START_OUTREACH": {
+      "enabled": true,
+      "health_state": "CONFIGURED_UNTESTED",
+      "provider": "gmail_smtp",
+      "retry_limit": 3
+    }
+  },
+  "status": "companyos_v21_local_health_complete",
+  "updated_at": "2026-08-13T22:27:18.305591+00:00"
+}

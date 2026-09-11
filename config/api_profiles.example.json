@@ -1,0 +1,36 @@
+{
+  "profiles": {
+    "example_readonly": {
+      "enabled": false,
+      "base_url": "https://api.example.com",
+      "auth": {
+        "type": "none"
+      },
+      "dry_run": true,
+      "allowed_methods": [
+        "GET"
+      ],
+      "read_only": true,
+      "timeout_seconds": 20,
+      "max_retries": 2,
+      "rate_limit_per_minute": 30
+    },
+    "example_bearer": {
+      "enabled": false,
+      "base_url": "https://api.example.com",
+      "auth": {
+        "type": "bearer",
+        "token_env": "COMPANYOS_EXAMPLE_API_TOKEN"
+      },
+      "dry_run": true,
+      "allowed_methods": [
+        "GET",
+        "POST"
+      ],
+      "read_only": false,
+      "timeout_seconds": 20,
+      "max_retries": 2,
+      "rate_limit_per_minute": 30
+    }
+  }
+}

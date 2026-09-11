@@ -1,0 +1,99 @@
+{
+  "updated_at": "2026-08-06T22:39:16.000244+00:00",
+  "workflows": [
+    {
+      "assigned_agent": "ceo",
+      "dependencies": [
+        "storefront_sales",
+        "finance_treasury",
+        "learning"
+      ],
+      "name": "Revenue Feedback Loop",
+      "next_action": "Capture first verified sale",
+      "priority": 99,
+      "status": "WAITING_FOR_FIRST_VERIFIED_SALE",
+      "updated_at": "2026-08-06T22:39:15.981476+00:00",
+      "workflow_id": "revenue_feedback_loop"
+    },
+    {
+      "assigned_agent": "research",
+      "dependencies": [
+        "research",
+        "validation",
+        "revenue_expansion"
+      ],
+      "name": "Venture Validation",
+      "next_action": "Strengthen validation evidence",
+      "priority": 96,
+      "status": "ACTIVE",
+      "top_venture": "Digital Template Business",
+      "updated_at": "2026-08-06T22:39:15.981474+00:00",
+      "workflow_id": "venture_validation"
+    },
+    {
+      "assigned_agent": "sales",
+      "dependencies": [
+        "product_builder",
+        "storefront_sales"
+      ],
+      "name": "Product \u2192 Storefront",
+      "next_action": "Prepare storefront review package",
+      "priority": 95,
+      "status": "ACTIVE",
+      "updated_at": "2026-08-06T22:39:15.981465+00:00",
+      "workflow_id": "product_to_storefront"
+    },
+    {
+      "assigned_agent": "cmo",
+      "dependencies": [
+        "storefront_sales",
+        "marketing_acquisition"
+      ],
+      "name": "Storefront \u2192 Marketing",
+      "next_action": "Collect traffic and conversion evidence",
+      "priority": 90,
+      "status": "ACTIVE",
+      "updated_at": "2026-08-06T22:39:15.981468+00:00",
+      "workflow_id": "storefront_to_marketing"
+    },
+    {
+      "assigned_agent": "sales",
+      "dependencies": [
+        "marketing_acquisition",
+        "storefront_sales"
+      ],
+      "name": "Marketing \u2192 Sales",
+      "next_action": "Improve first-sale conversion loop",
+      "priority": 88,
+      "status": "ACTIVE",
+      "updated_at": "2026-08-06T22:39:15.981471+00:00",
+      "workflow_id": "marketing_to_sales"
+    },
+    {
+      "assigned_agent": "cfo",
+      "dependencies": [
+        "storefront_sales",
+        "finance_treasury"
+      ],
+      "name": "Sales \u2192 Finance",
+      "next_action": "Reconcile verified sales into executive ledger",
+      "priority": 82,
+      "status": "ACTIVE",
+      "updated_at": "2026-08-06T22:39:15.981473+00:00",
+      "workflow_id": "sales_to_finance"
+    },
+    {
+      "assigned_agent": "product_builder",
+      "dependencies": [
+        "opportunity_hunter",
+        "product_builder"
+      ],
+      "name": "Opportunity \u2192 Product",
+      "next_action": "Collect more opportunity evidence",
+      "priority": 75,
+      "status": "ACTIVE",
+      "updated_at": "2026-08-06T22:39:15.981453+00:00",
+      "workflow_id": "opportunity_to_product"
+    }
+  ]
+}

@@ -1,0 +1,1184 @@
+{
+  "enabled": true,
+  "loop_interval_seconds": 900,
+  "maximum_jobs_per_cycle": 20,
+  "stop_cycle_on_job_failure": false,
+  "require_autonomy_not_halted": true,
+  "automatic_local_execution": true,
+  "automatic_internal_analysis": true,
+  "automatic_internal_reporting": true,
+  "automatic_backups": true,
+  "automatic_integrity_checks": true,
+  "automatic_git_stage": false,
+  "automatic_git_commit": false,
+  "automatic_git_push": false,
+  "automatic_customer_contact": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "jobs": [
+    {
+      "id": "integrity-check",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": [
+        "python",
+        "companyos/integrityctl",
+        "check"
+      ]
+    },
+    {
+      "id": "opportunity-discovery",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/opportunitydiscoveryctl",
+        "discover"
+      ]
+    },
+    {
+      "id": "priority-ranking",
+      "enabled": true,
+      "interval_seconds": 1200,
+      "command": [
+        "python",
+        "companyos/priorityctl",
+        "rank"
+      ]
+    },
+    {
+      "id": "decision-preparation",
+      "enabled": true,
+      "interval_seconds": 600,
+      "command": [
+        "python",
+        "companyos/decisionctl",
+        "prepare"
+      ]
+    },
+    {
+      "id": "execution-plan-preparation",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/executionplanctl",
+        "prepare"
+      ]
+    },
+    {
+      "id": "improvement-analysis",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/improvementctl",
+        "analyze"
+      ]
+    },
+    {
+      "id": "performance-analytics",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/performancectl",
+        "collect"
+      ]
+    },
+    {
+      "id": "business-forecast",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": [
+        "python",
+        "companyos/forecastctl",
+        "forecast"
+      ]
+    },
+    {
+      "id": "local-backup",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/integrityctl",
+        "backup"
+      ]
+    },
+    {
+      "id": "executive-briefing",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/briefctl",
+        "generate"
+      ]
+    },
+    {
+      "id": "autonomous-orchestrator",
+      "enabled": true,
+      "interval_seconds": 600,
+      "command": [
+        "python",
+        "companyos/orchestratorctl",
+        "run"
+      ]
+    },
+    {
+      "id": "goal-strategy",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/goalctl",
+        "generate"
+      ]
+    },
+    {
+      "id": "learning-feedback",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/learningctl",
+        "learn"
+      ]
+    },
+    {
+      "id": "exception-recovery",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/recoveryctl",
+        "recover"
+      ]
+    },
+    {
+      "id": "resource-workload-optimizer",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/resourcctl",
+        "optimize"
+      ]
+    },
+    {
+      "id": "internal-action-engine",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/actionctl",
+        "execute"
+      ]
+    },
+    {
+      "id": "autonomous-health-supervisor",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/healthctl",
+        "run"
+      ]
+    },
+    {
+      "id": "mission-control",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/missionctl",
+        "build"
+      ]
+    },
+    {
+      "id": "governance-router",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/governancectl",
+        "classify"
+      ]
+    },
+    {
+      "id": "outcome-tracker",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/outcomectl",
+        "measure"
+      ]
+    },
+    {
+      "id": "strategy-feedback-loop",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/strategyfeedbackctl",
+        "adapt"
+      ]
+    },
+    {
+      "id": "dependency-readiness",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/readinessctl",
+        "check"
+      ]
+    },
+    {
+      "id": "execution-gateway",
+      "enabled": true,
+      "interval_seconds": 900,
+      "command": [
+        "python",
+        "companyos/gatewayctl",
+        "process"
+      ]
+    },
+    {
+      "id": "connector-registry",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/connectorctl",
+        "discover"
+      ]
+    },
+    {
+      "id": "permission-broker",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/permissionctl",
+        "build"
+      ]
+    },
+    {
+      "id": "connector-runtime",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/runtimectl",
+        "build"
+      ]
+    },
+    {
+      "id": "connector-binding",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/bindingctl",
+        "bind"
+      ]
+    },
+    {
+      "id": "github-read-connector",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/githubreadctl",
+        "probe"
+      ]
+    },
+    {
+      "id": "github-intelligence",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/githubintelctl",
+        "analyze"
+      ]
+    },
+    {
+      "id": "github-change-intelligence",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/githubchangectl",
+        "analyze"
+      ]
+    },
+    {
+      "id": "autonomous-preflight",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/preflightctl",
+        "run"
+      ]
+    },
+    {
+      "id": "action-queue-coordinator",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/actionqueuectl",
+        "run"
+      ]
+    },
+    {
+      "id": "action-feedback-loop",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/actionfeedbackctl",
+        "learn"
+      ]
+    },
+    {
+      "id": "unified-control-cycle",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/controlcyclectl",
+        "run"
+      ]
+    },
+    {
+      "id": "cycle-supervisor",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/supervisorctl",
+        "run"
+      ]
+    },
+    {
+      "id": "incident-escalation",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/incidentctl",
+        "run"
+      ]
+    },
+    {
+      "id": "reliability-scorecard",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/reliabilityctl",
+        "run"
+      ]
+    },
+    {
+      "id": "dependency-drift-monitor",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": [
+        "python",
+        "companyos/driftctl",
+        "check"
+      ]
+    },
+    {
+      "id": "resource-capacity-monitor",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/resourcectl",
+        "run"
+      ]
+    },
+    {
+      "id": "autonomous-watchdog",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/watchdogctl",
+        "run"
+      ]
+    },
+    {
+      "id": "state-backup",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/backupctl",
+        "backup"
+      ]
+    },
+    {
+      "id": "operations-dashboard",
+      "enabled": true,
+      "interval_seconds": 28800,
+      "command": [
+        "python",
+        "companyos/dashboardctl",
+        "build"
+      ]
+    },
+    {
+      "id": "runtime-hygiene",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/runtimehygienectl",
+        "isolate"
+      ]
+    },
+    {
+      "id": "runtime-aware-preflight",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/preflight2ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "readiness-coordinator-v2",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/readiness2ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "execution-eligibility-gate",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/eligibilityctl",
+        "run"
+      ]
+    },
+    {
+      "id": "autonomous-action-dispatcher",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/dispatchctl",
+        "run"
+      ]
+    },
+    {
+      "id": "dispatcher-feedback-loop",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/dispatcherfeedbackctl",
+        "analyze"
+      ]
+    },
+    {
+      "id": "adaptive-action-prioritization",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/adaptivepriorityctl",
+        "run"
+      ]
+    },
+    {
+      "id": "adaptive-decision-selector",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/decisionselectctl",
+        "select"
+      ]
+    },
+    {
+      "id": "adaptive-execution-plan",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/executionplan2ctl",
+        "build"
+      ]
+    },
+    {
+      "id": "adaptive-plan-executor",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/planexecutorctl",
+        "run"
+      ]
+    },
+    {
+      "id": "execution-outcome-learner",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/outcomelearnerctl",
+        "learn"
+      ]
+    },
+    {
+      "id": "confidence-priority-fusion",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/fusionctl",
+        "fuse"
+      ]
+    },
+    {
+      "id": "fused-decision-selector",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/fusedselectctl",
+        "select"
+      ]
+    },
+    {
+      "id": "fused-execution-plan",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/fusedplanctl",
+        "build"
+      ]
+    },
+    {
+      "id": "feedback-priority-integration",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/feedbackpriorityctl",
+        "integrate"
+      ]
+    },
+    {
+      "id": "closed-loop-selector",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/closedloopctl",
+        "run"
+      ]
+    },
+    {
+      "id": "readiness-recovery-coordinator",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/recovery2ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "recovery-aware-closed-loop",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/loopctl",
+        "run"
+      ]
+    },
+    {
+      "id": "strategic-goal-orchestrator",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/strategyorchestratorctl",
+        "run"
+      ]
+    },
+    {
+      "id": "strategic-opportunity-alignment",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/strategicalignctl",
+        "align"
+      ]
+    },
+    {
+      "id": "opportunity-activation-pipeline",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunityactivatectl",
+        "activate"
+      ]
+    },
+    {
+      "id": "opportunity-action-translation",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunitytranslatectl",
+        "translate"
+      ]
+    },
+    {
+      "id": "opportunity-action-queue",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/opportunityqueuectl",
+        "coordinate"
+      ]
+    },
+    {
+      "id": "ready-action-execution-handoff",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/actionhandoffctl",
+        "handoff"
+      ]
+    },
+    {
+      "id": "guarded-opportunity-action-executor",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/opportunityexecctl",
+        "run"
+      ]
+    },
+    {
+      "id": "opportunity-outcome-feedback",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunityoutcomectl",
+        "analyze"
+      ]
+    },
+    {
+      "id": "learned-opportunity-reranking",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunityrerankctl",
+        "rerank"
+      ]
+    },
+    {
+      "id": "adaptive-opportunity-cycle",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunitycyclectl",
+        "run"
+      ]
+    },
+    {
+      "id": "opportunity-portfolio-allocation",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunityportfolioctl",
+        "allocate"
+      ]
+    },
+    {
+      "id": "portfolio-capacity-guard",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/portfoliocapacityctl",
+        "evaluate"
+      ]
+    },
+    {
+      "id": "portfolio-rebalance",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/portfoliorebalancectl",
+        "rebalance"
+      ]
+    },
+    {
+      "id": "opportunity-lifecycle",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/opportunitylifecyclectl",
+        "evaluate"
+      ]
+    },
+    {
+      "id": "portfolio-performance-readiness",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/portfolioperformancectl",
+        "evaluate"
+      ]
+    },
+    {
+      "id": "internal-resource-allocation",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/resourceallocatectl",
+        "allocate"
+      ]
+    },
+    {
+      "id": "specialist-delegation-planner",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/specialistdelegatectl",
+        "plan"
+      ]
+    },
+    {
+      "id": "controlled-multiagent-router",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/multiagentroutectl",
+        "route"
+      ]
+    },
+    {
+      "id": "specialist-work-result-collector",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/specialistresultctl",
+        "collect"
+      ]
+    },
+    {
+      "id": "specialist-insight-integration",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/specialistinsightctl",
+        "integrate"
+      ]
+    },
+    {
+      "id": "ceo-insight-decision-synthesis",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/ceoinsightdecisionctl",
+        "synthesize"
+      ]
+    },
+    {
+      "id": "ceo-decision-governance",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/ceodecisiongovernctl",
+        "govern"
+      ]
+    },
+    {
+      "id": "governed-execution-planner",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/governedplanctl",
+        "plan"
+      ]
+    },
+    {
+      "id": "governed-internal-execution-queue",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/governedqueuectl",
+        "enqueue"
+      ]
+    },
+    {
+      "id": "governed-internal-worker",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/governedworkerctl",
+        "run"
+      ]
+    },
+    {
+      "id": "specialist-runtime-adapter",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/specialistruntimectl",
+        "run"
+      ]
+    },
+    {
+      "id": "live-specialist-task-bridge",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/specialistbridgectl",
+        "bridge"
+      ]
+    },
+    {
+      "id": "live-specialist-queue-consumer",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/livespecialistctl",
+        "run"
+      ]
+    },
+    {
+      "id": "live-specialist-result-bridge",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/liveresultbridgectl",
+        "integrate"
+      ]
+    },
+    {
+      "id": "validated-insight-refresh",
+      "enabled": true,
+      "interval_seconds": 1800,
+      "command": [
+        "python",
+        "companyos/insightrefreshctl",
+        "refresh"
+      ]
+    },
+    {
+      "id": "autonomous-ai-operations-core",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/autonomyctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase23-adaptive-business-intelligence",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase23ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase23-adaptive-execution-learning",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase23bundle2ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase23-strategic-autonomy-portfolio",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase23bundle3ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-business-workflow-orchestration",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase24ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-project-execution-incubation",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase24bundle2ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-governed-execution-operations",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase24bundle3ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-executive-delivery-governance",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase24bundle4ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase24-revenue-intelligence-executive",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/phase24bundle5ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase25-hybrid-ai-orchestration",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": [
+        "python",
+        "companyos/phase25bundle1ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase25-autonomous-ceo-cycle",
+      "enabled": true,
+      "interval_seconds": 14400,
+      "command": [
+        "python",
+        "companyos/phase25bundle3ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase26-authority-execution-core",
+      "enabled": true,
+      "interval_seconds": 7200,
+      "command": [
+        "python",
+        "companyos/phase26authorityctl"
+      ]
+    },
+    {
+      "id": "phase27-execution-connectors",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/phase27ctl"
+      ]
+    },
+    {
+      "id": "phase28-self-evolving-platform",
+      "enabled": true,
+      "interval_seconds": 21600,
+      "command": [
+        "python",
+        "companyos/phase28ctl"
+      ]
+    },
+    {
+      "id": "phase29-crypto-treasury-monitor",
+      "enabled": true,
+      "interval_seconds": 300,
+      "command": [
+        "python",
+        "companyos/phase29ctl"
+      ]
+    },
+    {
+      "id": "phase30-live-treasury-monitor",
+      "enabled": true,
+      "interval_seconds": 300,
+      "command": [
+        "python",
+        "companyos/phase30ctl"
+      ]
+    },
+    {
+      "id": "phase31-multi-asset-treasury",
+      "enabled": true,
+      "interval_seconds": 300,
+      "command": [
+        "python",
+        "companyos/phase31ctl"
+      ]
+    },
+    {
+      "id": "phase34-autonomous-treasury",
+      "enabled": true,
+      "interval_seconds": 43200,
+      "command": [
+        "python",
+        "companyos/autonomoustreasuryctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase35-ceo-treasury-bridge",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/ceotreasurybridgectl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase39-production-orchestrator",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/phase39ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase40-ceo-production-integration",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/phase40ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase41-external-operations-router",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/phase41ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase42-external-connector-runtime",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/phase42ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase43-autonomous-business-operations-loop",
+      "enabled": true,
+      "interval_seconds": 60,
+      "command": [
+        "python",
+        "companyos/phase43ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase44-autonomous-opportunity-revenue-engine",
+      "enabled": true,
+      "interval_seconds": 300,
+      "command": [
+        "python",
+        "companyos/phase44ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase45-autonomous-decision-action-planner",
+      "enabled": true,
+      "interval_seconds": 300,
+      "command": [
+        "python",
+        "companyos/phase45ctl",
+        "run"
+      ]
+    },
+    {
+      "id": "phase46-autonomous-goal-strategy-engine",
+      "enabled": true,
+      "interval_seconds": 3600,
+      "command": [
+        "python",
+        "companyos/phase46ctl",
+        "run"
+      ]
+    }
+  ]
+}

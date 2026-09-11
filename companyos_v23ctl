@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+import json,sys
+from pathlib import Path
+sys.path.insert(0,str(Path.home()/"companyos"))
+from companyos.outreach_execution_v23.engine import OutreachExecutionV23
+
+x=OutreachExecutionV23()
+cmd=sys.argv[1] if len(sys.argv)>1 else "status"
+
+if cmd=="status":
+    out=x.health()
+elif cmd=="queue":
+    out=x.queue_status()
+elif cmd=="create":
+    if len(sys.argv)<5:
+        raise SystemExit('usage: companyos_v23ctl create RECIPIENT "SUBJECT" "BODY"')
+    out=x.create(sys.argv[2],sys.argv[3],sys.argv[4])
+elif cmd=="approve":
+    if len(sys.argv)<3:
+        raise SystemExit("usage: companyos_v23ctl approve MESSAGE_ID")
+    out=x.approve(sys.argv[2])
+elif cmd=="send":
+    if len(sys.argv)<3:
+        raise SystemExit("usage: companyos_v23ctl send MESSAGE_ID")
+    out=x.send(sys.argv[2])
+elif cmd=="test-self":
+    out=x.test_self()
+else:
+    raise SystemExit("usage: companyos_v23ctl {status|queue|create|approve|send|test-self}")
+print(json.dumps(out,indent=2))

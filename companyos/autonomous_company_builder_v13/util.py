@@ -1,0 +1,20 @@
+import json, hashlib, re
+from pathlib import Path
+from datetime import datetime, timezone
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
+
+def sid(*parts, length=24):
+    return hashlib.sha256("|".join(map(str,parts)).encode()).hexdigest()[:length]
+
+def slugify(s):
+    s=re.sub(r"[^a-zA-Z0-9]+","-",str(s or "").strip().lower()).strip("-")
+    return s or "venture"
+
+def safe_json(path, default=None):
+    if default is None: default={}
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    except Exception:
+        return default

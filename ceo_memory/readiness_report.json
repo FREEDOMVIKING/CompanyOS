@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-20T00:00:37.748752+00:00",
-  "readiness_score": 91.79,
+  "generated_at": "2026-09-11T01:22:09.268635+00:00",
+  "readiness_score": 88.89,
   "controllers": [
     {
       "name": "operationsctl",
@@ -49,23 +49,29 @@
     {
       "type": "unhealthy_components",
       "items": [
+        "autonomous_operations_health.json",
         "action_queue_health.json",
         "mission_control_health.json",
         "github_read_health.json",
         "control_cycle_health.json",
+        "cycle_supervisor_health.json",
         "reliability_health.json",
         "recovery_closed_loop_health.json",
         "autonomy_core_health.json",
         "phase23_bundle3_health.json",
+        "phase24_bundle5_health.json",
         "drift_health.json",
         "autonomy_watchdog_health.json",
         "phase24_bundle2_health.json",
         "phase23_health.json",
         "readiness_recovery_health.json",
+        "strategic_orchestrator_health.json",
         "phase23_bundle2_health.json",
         "phase24_health.json",
         "operations_observability_health.json",
-        "phase24_bundle3_health.json"
+        "phase24_bundle3_health.json",
+        "phase24_bundle4_health.json",
+        "treasury_rpc_health.json"
       ]
     }
   ],

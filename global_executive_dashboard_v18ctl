@@ -1,0 +1,32 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RUN="$ROOT/.companyos_runtime"
+PID="$RUN/global_executive_dashboard_v18.pid"
+LOG="$RUN/global_executive_dashboard_v18.log"
+mkdir -p "$RUN"
+case "${1:-status}" in
+ start)
+  if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then echo "Already running PID $(cat "$PID")"; exit 0; fi
+  cd "$ROOT"
+  nohup python -u -m companyos.global_executive_dashboard_v18.server >"$LOG" 2>&1 &
+  echo $! >"$PID"
+  sleep 2
+  if kill -0 "$(cat "$PID")" 2>/dev/null; then
+    echo "Global Executive Dashboard V18 started (PID $(cat "$PID"))"
+    echo "Dashboard: http://127.0.0.1:8780"
+  else
+    echo "Failed to start"; tail -80 "$LOG" 2>/dev/null || true; exit 1
+  fi ;;
+ stop)
+  [ -f "$PID" ] && kill "$(cat "$PID")" 2>/dev/null || true
+  rm -f "$PID"
+  pkill -f 'companyos\.global_executive_dashboard_v18\.server' 2>/dev/null || true
+  echo "Stopped" ;;
+ restart) "$0" stop; sleep 2; "$0" start ;;
+ status)
+  if [ -f "$PID" ] && kill -0 "$(cat "$PID")" 2>/dev/null; then echo "RUNNING PID $(cat "$PID")"; else echo "STOPPED"; fi
+  curl --max-time 8 -s http://127.0.0.1:8780/api/status || true; echo ;;
+ logs) tail -100 "$LOG" 2>/dev/null || true ;;
+ *) echo "Usage: $0 {start|stop|restart|status|logs}"; exit 2 ;;
+esac

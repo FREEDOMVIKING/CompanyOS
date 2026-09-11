@@ -1,0 +1,43 @@
+{
+  "version": 19,
+  "global": {
+    "dry_run": true,
+    "network_validation": true
+  },
+  "connectors": {
+    "PUBLISH_STATIC_SITE": {
+      "provider": "generic",
+      "enabled": true,
+      "token_env": null,
+      "endpoint_env": null,
+      "dry_run": true
+    },
+    "APPLY_DNS": {
+      "provider": "generic",
+      "enabled": true,
+      "token_env": null,
+      "endpoint_env": null,
+      "dry_run": true
+    },
+    "CREATE_STOREFRONT": {
+      "provider": "generic",
+      "enabled": true,
+      "token_env": null,
+      "endpoint_env": null,
+      "dry_run": true
+    },
+    "START_OUTREACH": {
+      "provider": "gmail",
+      "enabled": true,
+      "token_env": "COMPANYOS_SMTP_PASSWORD",
+      "endpoint_env": "COMPANYOS_SMTP_HOST",
+      "dry_run": true
+    }
+  },
+  "policy": {
+    "allow_domain_purchase": true,
+    "allow_wallet_signing": true,
+    "allow_fund_transfer": true,
+    "allow_spending": true
+  }
+}

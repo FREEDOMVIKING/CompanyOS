@@ -1,0 +1,29 @@
+import argparse, json, os, signal, time
+from .engine import OrchestratorEngine
+
+RUNNING=True
+def stop(_s,_f):
+    global RUNNING
+    RUNNING=False
+
+def main():
+    p=argparse.ArgumentParser()
+    p.add_argument("--once",action="store_true")
+    p.add_argument("--interval",type=int,default=int(os.environ.get("COMPANYOS_ORCHESTRATOR_INTERVAL","30")))
+    a=p.parse_args()
+    signal.signal(signal.SIGTERM,stop); signal.signal(signal.SIGINT,stop)
+    engine=OrchestratorEngine()
+    if a.once:
+        print(json.dumps(engine.run_cycle(),indent=2)); return
+    while RUNNING:
+        try:
+            r=engine.run_cycle()
+            print(json.dumps({"timestamp":r["generated_at"],**r["summary"]}),flush=True)
+        except Exception as e:
+            print(json.dumps({"orchestrator_error":str(e)}),flush=True)
+        for _ in range(max(1,a.interval)):
+            if not RUNNING: break
+            time.sleep(1)
+
+if __name__=="__main__":
+    main()

@@ -100,10 +100,17 @@ def execute(pid):
     if p["chain"]=="bitcoin":return btc(p)
     return {"success":False,"status":"unsupported_route"}
 
-a=sys.argv[1] if len(sys.argv)>1 else "status"
-r=execute(sys.argv[2]) if a=="execute" else {"success":True,"status":"multichain_adapter_ready",
- "signer_configured":bool(os.getenv("MULTICHAIN_SIGNER_COMMAND","").strip()),
- "evm_key_configured":bool(os.getenv("EVM_PRIVATE_KEY_HEX","").strip()),
- "btc_key_configured":bool(os.getenv("BITCOIN_PRIVATE_KEY_WIF","").strip())}
-print(json.dumps(r,indent=2))
-raise SystemExit(0 if r.get("success") else 1)
+def main():
+    a=sys.argv[1] if len(sys.argv)>1 else "status"
+    r=execute(sys.argv[2]) if a=="execute" else {
+        "success":True,
+        "status":"multichain_adapter_ready",
+        "signer_configured":bool(os.getenv("MULTICHAIN_SIGNER_COMMAND","").strip()),
+        "evm_key_configured":bool(os.getenv("EVM_PRIVATE_KEY_HEX","").strip()),
+        "btc_key_configured":bool(os.getenv("BITCOIN_PRIVATE_KEY_WIF","").strip())
+    }
+    print(json.dumps(r,indent=2))
+    return 0 if r.get("success") else 1
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,1 @@
+from flask import Flask, jsonify\napp=Flask(__name__)\n@app.get('/health')\ndef health(): return jsonify({'ok':True})\nif __name__=='__main__': app.run(host='127.0.0.1',port=5051)\n

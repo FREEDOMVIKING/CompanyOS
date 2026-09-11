@@ -1,0 +1,14 @@
+class OnChainReceiptVerifier:
+    def verify(self, execution_result):
+        r = execution_result or {}
+        tx_id = r.get("txid") or r.get("tx_id") or r.get("signature") or r.get("transaction_hash") or r.get("hash")
+        success = bool(r.get("success"))
+        status = r.get("status")
+
+        evidence = bool(tx_id) or status in {"broadcast","executed","confirmed","settled"}
+        return {
+            "passed": bool(success and evidence),
+            "tx_id": tx_id,
+            "success_flag": success,
+            "evidence_present": evidence,
+        }

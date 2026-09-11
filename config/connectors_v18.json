@@ -1,0 +1,60 @@
+{
+  "adaptive_credential_resolver": "v18",
+  "connectors": {
+    "APPLY_DNS": {
+      "adaptive_mapping": true,
+      "enabled": true,
+      "health_url": "",
+      "legacy_endpoint_env": "COMPANYOS_DOMAIN_API_URL",
+      "legacy_token_env": "COMPANYOS_DOMAIN_TOKEN",
+      "provider": "legacy_companyos_adapter",
+      "required_env": [
+        "COMPANYOS_DOMAIN_TOKEN",
+        "COMPANYOS_DOMAIN_API_URL"
+      ]
+    },
+    "CREATE_STOREFRONT": {
+      "adaptive_mapping": true,
+      "enabled": true,
+      "health_url": "",
+      "legacy_endpoint_env": "COMPANYOS_API_BASE_URL",
+      "legacy_token_env": "COMPANYOS_API_TOKEN",
+      "provider": "legacy_companyos_adapter",
+      "required_env": [
+        "COMPANYOS_API_TOKEN",
+        "COMPANYOS_API_BASE_URL"
+      ]
+    },
+    "PUBLISH_STATIC_SITE": {
+      "adaptive_mapping": true,
+      "enabled": true,
+      "health_url": "",
+      "legacy_endpoint_env": "COMPANYOS_HOSTING_DEPLOY_URL",
+      "legacy_token_env": "COMPANYOS_HOSTING_TOKEN",
+      "provider": "legacy_companyos_adapter",
+      "required_env": [
+        "COMPANYOS_HOSTING_TOKEN",
+        "COMPANYOS_HOSTING_DEPLOY_URL"
+      ]
+    },
+    "START_OUTREACH": {
+      "adaptive_mapping": true,
+      "enabled": true,
+      "health_url": "",
+      "legacy_endpoint_env": "COMPANYOS_SMTP_HOST",
+      "legacy_token_env": "COMPANYOS_SMTP_PASSWORD",
+      "provider": "legacy_companyos_adapter",
+      "required_env": [
+        "COMPANYOS_SMTP_PASSWORD",
+        "COMPANYOS_SMTP_HOST"
+      ]
+    }
+  },
+  "policy": {
+    "allow_domain_purchase": true,
+    "allow_fund_transfer": true,
+    "allow_spending": true,
+    "allow_wallet_signing": true
+  },
+  "version": 18
+}

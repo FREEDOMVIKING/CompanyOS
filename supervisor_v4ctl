@@ -1,0 +1,48 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -u
+ROOT="$HOME/companyos"
+STATE="$ROOT/.companyos_runtime/supervisor_v4"
+PIDFILE="$STATE/supervisor.pid"
+LOGFILE="$STATE/logs/supervisor.log"
+PY="$ROOT/companyos/supervisor_v4.py"
+mkdir -p "$STATE/logs" "$STATE/pids"
+
+alive(){ [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; }
+
+start_it(){
+  if alive; then echo "Runtime Supervisor V4 already running (PID $(cat "$PIDFILE"))"; return; fi
+  cd "$ROOT" || exit 1
+  nohup python -u "$PY" >>"$LOGFILE" 2>&1 </dev/null &
+  echo $! > "$PIDFILE"
+  sleep 2
+  alive && echo "Runtime Supervisor V4 started (PID $(cat "$PIDFILE"))" || { echo "Supervisor failed"; tail -40 "$LOGFILE"; return 1; }
+}
+
+stop_it(){
+  if alive; then
+    pid="$(cat "$PIDFILE")"; kill "$pid" 2>/dev/null || true; sleep 2; kill -9 "$pid" 2>/dev/null || true
+  fi
+  rm -f "$PIDFILE"; echo "Runtime Supervisor V4 stopped"
+}
+
+status_it(){
+  alive && echo "Runtime Supervisor V4: RUNNING (PID $(cat "$PIDFILE"))" || echo "Runtime Supervisor V4: STOPPED"
+  [ -f "$STATE/state.json" ] && python - <<'PY'
+import json
+from pathlib import Path
+p=Path.home()/"companyos"/".companyos_runtime"/"supervisor_v4"/"state.json"
+d=json.loads(p.read_text())
+print("Runtime processes:",d.get("runtime",{}).get("process_count","unknown"))
+for n,v in d.get("dashboards",{}).items():
+    print(f"{n}: {v.get('status')} pid={v.get('pid','-')} port={v.get('port','-')}")
+PY
+}
+
+case "${1:-status}" in
+ start) start_it;;
+ stop) stop_it;;
+ restart) stop_it; sleep 2; start_it;;
+ status) status_it;;
+ logs) tail -120 "$LOGFILE";;
+ *) echo "Usage: bash supervisor_v4ctl {start|stop|restart|status|logs}"; exit 2;;
+esac
