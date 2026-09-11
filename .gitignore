@@ -2,6 +2,7 @@
 !.env.example
 # CompanyOS local secrets / runtime
 # CompanyOS runtime-generated state
+# Generated runtime/state only
 # Large generated CompanyOS state
 # Local AI engine - separate upstream repository
 # Local AI repositories/models
@@ -20,6 +21,10 @@
 .companyos_runtime/
 .env
 .env.*
+/__pycache__/
+/companyos_runtime/
+/logs/
+/run/
 __pycache__/
 backups/
 backups/state_snapshots/
@@ -45,5 +50,4 @@ local_ai/llama.cpp/
 local_ai/models/
 logs/
 run/
-runtime/
 secrets/
