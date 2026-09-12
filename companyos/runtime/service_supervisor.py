@@ -19,8 +19,36 @@ class ManagedService:
 
 
 class ServiceSupervisor:
+    @staticmethod
+    def _load_launch_env_file(path: Path) -> None:
+        import shlex
+        if not path.exists():
+            return
+        for raw in path.read_text(encoding="utf-8").splitlines():
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            try:
+                parts = shlex.split(line, posix=True)
+            except Exception:
+                continue
+            if not parts:
+                continue
+            if parts[0] == "export":
+                parts = parts[1:]
+            if not parts:
+                continue
+            token = parts[0]
+            if "=" not in token:
+                continue
+            key, value = token.split("=", 1)
+            key = key.strip()
+            if key and key not in os.environ:
+                os.environ[key] = value
+
     def __init__(self, services: Iterable[ManagedService] | None = None):
         self.root = (Path.home() / "companyos").resolve()
+        self._load_launch_env_file(Path.home() / ".companyos_launch_env")
         self.runtime_root = self.root / ".companyos_runtime"
         self.runtime_root.mkdir(parents=True, exist_ok=True)
 
