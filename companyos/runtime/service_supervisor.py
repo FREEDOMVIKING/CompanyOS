@@ -86,6 +86,11 @@ class ServiceSupervisor:
         ]
         if (Path.home()/"companyos/companyos/runtime/profit_opportunity_runtime.py").exists():
             services.append(ManagedService("profit_opportunity_runtime", (python, "-m", "companyos.runtime.profit_opportunity_runtime")))
+        if (
+            os.getenv("COMPANYOS_ENABLE_SELF_EVOLUTION", "0") == "1"
+            and (Path.home()/"companyos/companyos/runtime/self_evolution_runtime.py").exists()
+        ):
+            services.append(ManagedService("self_evolution_runtime", (python, "-m", "companyos.runtime.self_evolution_runtime")))
         return services
 
     def _log(self, message: str) -> None:

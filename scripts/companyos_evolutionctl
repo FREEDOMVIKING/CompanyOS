@@ -1,0 +1,29 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json,os,sys
+from pathlib import Path
+ROOT=Path.home()/"companyos"
+p=Path.home()/".companyos_launch_env"
+if p.exists():
+    for raw in p.read_text().splitlines():
+        s=raw.strip()
+        if s.startswith("export ") and "=" in s:
+            k,v=s[7:].split("=",1); os.environ.setdefault(k.strip(),v.strip().strip("'\""))
+sys.path.insert(0,str(ROOT))
+from companyos.runtime.self_evolution_engine import LEDGER,RC,cycle,diagnose,status
+def emit(x):print(json.dumps(x,indent=2,sort_keys=True))
+def main():
+    c=sys.argv[1] if len(sys.argv)>1 else "status"
+    if c=="status":emit(status());return
+    if c=="diagnose":emit(diagnose());return
+    if c=="once":r=cycle(force=True);emit(r);raise SystemExit(0 if r.get("ok") else 1)
+    if c=="proposal":r=cycle(force=True,proposal_only=True);emit(r);raise SystemExit(0 if r.get("ok") else 1)
+    if c=="history":
+        rows=[]
+        if LEDGER.exists():
+            for x in LEDGER.read_text(errors="replace").splitlines()[-50:]:
+                try:rows.append(json.loads(x))
+                except:pass
+        emit(rows);return
+    if c=="receipts":emit([str(x) for x in sorted(RC.glob("*.json"),reverse=True)[:20]]);return
+    print("Usage: companyos_evolutionctl [status|diagnose|once|proposal|history|receipts]");raise SystemExit(2)
+main()
