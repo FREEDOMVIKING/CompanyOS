@@ -197,12 +197,25 @@ def _direct_generation_fallback(wt, goal):
 
     try:
         raw = model_request(prompt)
-        plan = extract_json(raw)
+        if isinstance(raw, dict):
+            if isinstance(raw.get("response"), dict):
+                plan = raw["response"]
+            elif isinstance(raw.get("result"), dict):
+                plan = raw["result"]
+            elif isinstance(raw.get("data"), dict):
+                plan = raw["data"]
+            else:
+                plan = raw
+        elif isinstance(raw, str):
+            plan = extract_json(raw)
+        else:
+            plan = extract_json(str(raw))
     except Exception as exc:
         return {
             "ok": False,
             "reason": "model_generation_failed",
             "error": f"{type(exc).__name__}: {exc}",
+            "response_type": type(raw).__name__ if "raw" in locals() else None,
         }
 
     if not isinstance(plan, dict):
