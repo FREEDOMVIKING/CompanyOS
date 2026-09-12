@@ -9,6 +9,21 @@ IDENTITY = ROOT / ".companyos_runtime" / "venture_identity_progression.json"
 STATE = ROOT / ".companyos_runtime" / "stalled_stage_progression_state.json"
 
 STAGE_TASKS = {
+    "VALIDATE": [
+        "validate one specific customer problem, buyer, offer, price hypothesis, and measurable success criterion",
+        "persist validation evidence and explicitly mark pass/fail",
+        "if validation passes, advance immediately to the smallest sellable build instead of restarting broad research",
+    ],
+    "PACKAGE": [
+        "package the tested release candidate",
+        "create an export manifest and operator/deployment notes",
+        "advance to launch-ready when packaging is complete",
+    ],
+    "LAUNCH": [
+        "verify the deployed endpoint or customer-facing asset is reachable",
+        "record deployment evidence and live URL where applicable",
+        "advance to measurable customer acquisition using configured connectors and existing policy gates",
+    ],
     "CUSTOMER_ACQUISITION": [
         "define one measurable acquisition experiment with channel, audience, offer, and success metric",
         "create internal campaign assets, messaging, landing copy, outreach templates, and a tracking plan",

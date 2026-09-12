@@ -49,10 +49,37 @@ def artifact_files(rec):
 
 def infer_stage(files):
     names=" ".join(str(p).lower() for p in files)
-    if any(x in names for x in ("customer","lead","conversion","campaign")): return "CUSTOMER_ACQUISITION"
-    if any(p.suffix==".zip" for p in files) or "export_manifest" in names: return "LAUNCH_READY"
-    if any(x in names for x in ("test","qa","acceptance")): return "TEST"
-    if files: return "BUILD"
+
+    explicit_order = [
+        ("venture_stage_scale", "SCALE"),
+        ("venture_stage_operate", "OPERATE"),
+        ("venture_stage_customer_acquisition", "CUSTOMER_ACQUISITION"),
+        ("venture_stage_launch", "LAUNCH"),
+        ("venture_stage_launch_ready", "LAUNCH_READY"),
+        ("venture_stage_package", "PACKAGE"),
+        ("venture_stage_test", "TEST"),
+        ("venture_stage_build", "BUILD"),
+        ("venture_stage_validate", "VALIDATE"),
+    ]
+    for marker, stage in explicit_order:
+        if marker in names:
+            return stage
+
+    if any(x in names for x in (
+        "conversion_result", "customer_result", "lead_result",
+        "outreach_result", "campaign_result",
+    )):
+        return "CUSTOMER_ACQUISITION"
+    if "deployment_result" in names or "live_url" in names:
+        return "LAUNCH"
+    if any(p.suffix==".zip" for p in files) or "export_manifest" in names:
+        return "LAUNCH_READY"
+    if any(x in names for x in ("test_result","qa_result","acceptance_result")):
+        return "TEST"
+    if "validation_result" in names:
+        return "VALIDATE"
+    if files:
+        return "BUILD"
     return "DISCOVER"
 
 def next_action(stage):

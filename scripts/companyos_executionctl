@@ -1,0 +1,50 @@
+#!/data/data/com.termux/files/usr/bin/python
+from __future__ import annotations
+import argparse, json, sys
+from pathlib import Path
+
+ROOT = Path.home() / "companyos"
+sys.path.insert(0, str(ROOT))
+
+from companyos.runtime.research_to_execution_bridge import (
+    maybe_promote_candidate,
+    scan_candidates,
+    status,
+)
+
+def dump(x):
+    print(json.dumps(x, indent=2, sort_keys=True, default=str))
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("command", choices=["status", "scan", "promote"])
+    p.add_argument("--min-score", type=float, default=45.0)
+    a = p.parse_args()
+
+    if a.command == "status":
+        dump(status())
+        return 0
+    if a.command == "scan":
+        rows = scan_candidates(min_score=a.min_score)
+        dump([
+            {
+                "name": x.name,
+                "slug": x.slug,
+                "score": x.score,
+                "confidence": x.confidence,
+                "evidence_count": x.evidence_count,
+                "source": x.source,
+            }
+            for x in rows
+        ])
+        return 0
+
+    result = maybe_promote_candidate(
+        min_score=a.min_score,
+        cooldown_seconds=0,
+    )
+    dump(result)
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())

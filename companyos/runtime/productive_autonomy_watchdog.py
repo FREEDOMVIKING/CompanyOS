@@ -21,6 +21,7 @@ from companyos.runtime.idle_cycle_recovery_controller import maybe_recover as ma
 from companyos.strategy.diversified_opportunity_governor import discovery_directive, should_force_diversified_discovery
 from companyos.runtime.stalled_stage_progression_controller import maybe_start as maybe_start_stalled_stage
 from companyos.governance.venture_identity_progression import highest_priority_stalled
+from companyos.runtime.research_to_execution_bridge import maybe_promote_candidate
 
 ROOT = Path.home() / "companyos"
 RUNTIME = ROOT / ".companyos_runtime"
@@ -103,6 +104,19 @@ def start_internal_goal(goal: str) -> str:
     return str(oid or "created")
 
 def tick() -> dict[str, Any]:
+    promotion = maybe_promote_candidate(
+        min_score=float(os.getenv("COMPANYOS_EXECUTION_PROMOTION_MIN_SCORE", "45")),
+        cooldown_seconds=int(os.getenv("COMPANYOS_EXECUTION_PROMOTION_COOLDOWN_SECONDS", "900")),
+        max_existing_execution_ventures=int(os.getenv("COMPANYOS_MAX_ACTIVE_EXECUTION_VENTURES", "3")),
+    )
+    if promotion.get("started"):
+        log("RESEARCH_TO_EXECUTION_PROMOTION " + json.dumps(promotion, default=str, sort_keys=True))
+
+    execution_backlog = (
+        promotion.get("started")
+        or int(promotion.get("eligible_count", 0) or 0) > 0
+        or promotion.get("reason") in {"execution_capacity_full", "promotion_cooldown"}
+    )
     profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(
         cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_ENRICHMENT_COOLDOWN_SECONDS", "300")),
     )
@@ -120,18 +134,30 @@ def tick() -> dict[str, Any]:
     if candidate_recovery.get("started"):
         log("PROFIT_FIRST_CANDIDATE_RECOVERY " + json.dumps(candidate_recovery, default=str, sort_keys=True))
 
-    profit_first_research = maybe_run_profit_first_research(
-        cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_RESEARCH_COOLDOWN_SECONDS", "300")),
-    )
-    if profit_first_research.get("started"):
-        log("PROFIT_FIRST_RESEARCH " + json.dumps(profit_first_research, default=str, sort_keys=True))
+    if execution_backlog:
+        profit_first_research = {
+            "started": False,
+            "reason": "execution_backlog_preferred_over_more_research",
+        }
+    else:
+        profit_first_research = maybe_run_profit_first_research(
+            cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_RESEARCH_COOLDOWN_SECONDS", "300")),
+        )
+        if profit_first_research.get("started"):
+            log("PROFIT_FIRST_RESEARCH " + json.dumps(profit_first_research, default=str, sort_keys=True))
 
-    profit_first_dispatch = maybe_dispatch_profit_first(
-        min_idle_cycles=int(os.getenv("COMPANYOS_PROFIT_FIRST_DISPATCH_MIN_IDLE_CYCLES", "20")),
-        cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_DISPATCH_COOLDOWN_SECONDS", "300")),
-    )
-    if profit_first_dispatch.get("started"):
-        log("PROFIT_FIRST_DISPATCH " + json.dumps(profit_first_dispatch, default=str, sort_keys=True))
+    if execution_backlog:
+        profit_first_dispatch = {
+            "started": False,
+            "reason": "execution_backlog_preferred_over_more_research",
+        }
+    else:
+        profit_first_dispatch = maybe_dispatch_profit_first(
+            min_idle_cycles=int(os.getenv("COMPANYOS_PROFIT_FIRST_DISPATCH_MIN_IDLE_CYCLES", "20")),
+            cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_DISPATCH_COOLDOWN_SECONDS", "300")),
+        )
+        if profit_first_dispatch.get("started"):
+            log("PROFIT_FIRST_DISPATCH " + json.dumps(profit_first_dispatch, default=str, sort_keys=True))
 
     idle_recovery = maybe_recover_idle_cycles(
         min_idle_cycles=int(os.getenv("COMPANYOS_IDLE_RECOVERY_MIN_CYCLES", "25")),
