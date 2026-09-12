@@ -15,6 +15,7 @@ class UnifiedRuntimeControl:
         "continuous_goal_runtime",
         "productive_autonomy_watchdog",
         "local_dashboard",
+        "profit_opportunity_runtime",
     }
 
     def __init__(self, root: Path | None = None):
