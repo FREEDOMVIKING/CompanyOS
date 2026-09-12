@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import fcntl
 import os
 import signal
 import subprocess
@@ -229,6 +230,18 @@ class ServiceSupervisor:
         )
 
     def run(self) -> int:
+        lock_path = self.runtime_root / "service_supervisor.lock"
+        self._lock_file = lock_path.open("a+")
+
+        try:
+            fcntl.flock(
+                self._lock_file.fileno(),
+                fcntl.LOCK_EX | fcntl.LOCK_NB,
+            )
+        except BlockingIOError:
+            self._log("SUPERVISOR_ALREADY_RUNNING")
+            return 2
+
         self.stop_path.unlink(missing_ok=True)
 
         self._log(
