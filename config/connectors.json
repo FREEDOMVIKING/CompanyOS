@@ -21,10 +21,12 @@
     "dry_run": true
   },
   "hosting": {
-    "enabled": false,
+    "enabled": true,
     "deploy_url_env": "COMPANYOS_HOSTING_DEPLOY_URL",
-    "token_env": "COMPANYOS_HOSTING_TOKEN",
-    "dry_run": true
+    "token_env": "CLOUDFLARE_API_TOKEN",
+    "dry_run": false,
+    "provider": "cloudflare",
+    "account_id_env": "CLOUDFLARE_ACCOUNT_ID"
   },
   "domains": {
     "enabled": false,
