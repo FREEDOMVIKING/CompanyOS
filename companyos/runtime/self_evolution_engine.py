@@ -133,19 +133,14 @@ def _direct_generation_fallback(wt, goal):
     try:
         from companyos_local_ai_adapter import model_request, extract_json
     except Exception as exc:
-        return {
-            "ok": False,
-            "reason": "local_ai_adapter_import_failed",
-            "error": f"{type(exc).__name__}: {exc}",
-        }
+        return {"ok": False, "reason": "adapter_import_failed", "error": f"{type(exc).__name__}: {exc}"}
 
-    blocked_words = (
-        "wallet", "finance", "banking", "payment", "credential", "secret",
-        "security", "approval", "governance", "guardrail", "connector",
-        "solana", "private_key", "self_evolution", "service_supervisor",
-        "runtime_control", "deployment_gate",
+    blocked = (
+        "wallet","finance","banking","payment","credential","secret","security",
+        "approval","governance","guardrail","connector","solana","private_key",
+        "self_evolution","service_supervisor","runtime_control","deployment_gate",
     )
-    blocked_exact = {
+    exact = {
         "scripts/companyos_evolutionctl",
         "scripts/companyos_adaptive_self_build.py",
         "companyos/runtime/self_evolution_engine.py",
@@ -153,151 +148,123 @@ def _direct_generation_fallback(wt, goal):
         "companyos/runtime/service_supervisor.py",
     }
 
-    candidates = []
-    for base in ("companyos", "companyos_modules", "scripts", "tests"):
-        root = wt / base
+    candidates=[]
+    for base in ("companyos","companyos_modules","scripts"):
+        root=wt/base
         if not root.exists():
             continue
         for fp in root.rglob("*.py"):
             try:
-                rel = str(fp.relative_to(wt)).replace(chr(92), "/")
-                low = rel.lower()
-                if rel in blocked_exact or any(word in low for word in blocked_words):
+                rel=str(fp.relative_to(wt)).replace(chr(92),"/")
+                low=rel.lower()
+                size=fp.stat().st_size
+                if rel in exact or any(x in low for x in blocked):
                     continue
-                if fp.stat().st_size > 120000:
-                    continue
-                candidates.append(rel)
+                if 200 <= size <= 14000:
+                    candidates.append((size,rel))
             except Exception:
-                continue
+                pass
+    candidates=[r for _,r in sorted(candidates)[:60]]
 
-    candidates = sorted(set(candidates))[:120]
-
-    prompt = (
-        "You are the code-generation stage inside CompanyOS self-evolution.\n\n"
-        "Goal:\n" + str(goal) + "\n\n"
-        "The previous adaptive builder returned a no-op. Produce ONE real, useful "
-        "source-code improvement inside this isolated git worktree.\n\n"
-        "Rules:\n"
-        "1. Return JSON only.\n"
-        "2. Do NOT return not_run, skipped, no-op, or empty output.\n"
-        "3. Change exactly ONE file.\n"
-        "4. Prefer an existing file from the candidate list.\n"
-        "5. Allowed action is replace or create.\n"
-        "6. Return COMPLETE file content, not a diff fragment.\n"
-        "7. Python must compile.\n"
-        "8. Keep the change focused and under roughly 600 changed lines.\n"
-        "9. Never touch wallet, finance, payment, credentials, security, approvals, "
-        "governance, connectors, deployment gates, supervisor code, or self-evolution guard code.\n"
-        "10. Prefer opportunity-to-execution conversion, reliability, validation, "
-        "observability, recovery, or measurable progress.\n\n"
-        "Return exactly this JSON shape:\n"
-        "{\"path\":\"relative/file.py\",\"action\":\"replace\",\"content\":\"complete file contents\"}\n\n"
-        "Candidate files:\n" + _json.dumps(candidates, indent=2)
-    )
-
-    try:
-        raw = model_request(prompt)
-        if isinstance(raw, dict):
-            if raw.get("ok") is False:
-                return {
-                    "ok": False,
-                    "reason": "model_generation_failed",
-                    "adapter_reason": raw.get("reason"),
-                    "endpoint": raw.get("endpoint"),
-                    "model": raw.get("model"),
-                }
-            if isinstance(raw.get("text"), str):
-                plan = extract_json(raw["text"])
-            elif isinstance(raw.get("response"), dict):
-                plan = raw["response"]
-            elif isinstance(raw.get("result"), dict):
-                plan = raw["result"]
-            elif isinstance(raw.get("data"), dict):
-                plan = raw["data"]
-            else:
-                plan = raw
-        elif isinstance(raw, str):
-            plan = extract_json(raw)
-        else:
-            plan = extract_json(str(raw))
-    except Exception as exc:
-        return {
-            "ok": False,
-            "reason": "model_generation_failed",
-            "error": f"{type(exc).__name__}: {exc}",
-            "response_type": type(raw).__name__ if "raw" in locals() else None,
-        }
-
-    if not isinstance(plan, dict):
-        return {"ok": False, "reason": "plan_not_object"}
-
-    rel = str(plan.get("path") or "").strip().replace(chr(92), "/")
-    action = str(plan.get("action") or "replace").strip().lower()
-    content = str(plan.get("content") or "")
-
-    if not rel or not content.strip():
-        return {"ok": False, "reason": "empty_direct_plan"}
-
-    low = rel.lower()
-    if (
-        rel.startswith("/")
-        or ".." in Path(rel).parts
-        or rel in blocked_exact
-        or any(word in low for word in blocked_words)
-        or not rel.startswith(("companyos/", "companyos_modules/", "scripts/", "tests/"))
-    ):
-        return {
-            "ok": False,
-            "reason": "direct_plan_path_rejected",
-            "path": rel,
-        }
-
-    target = wt / rel
-    if action not in {"replace", "create"}:
-        action = "replace" if target.exists() else "create"
-
-    if action == "replace" and not target.exists():
-        return {
-            "ok": False,
-            "reason": "replace_target_missing",
-            "path": rel,
-        }
-
-    if rel.endswith(".py"):
-        try:
-            compile(content, rel, "exec")
-        except Exception as exc:
-            return {
-                "ok": False,
-                "reason": "generated_python_invalid",
-                "error": f"{type(exc).__name__}: {exc}",
-            }
-
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(content.rstrip() + "\n", encoding="utf-8")
-
-    check = _subprocess.run(
-        ["git", "status", "--porcelain=v1"],
-        cwd=str(wt),
-        text=True,
-        capture_output=True,
-        timeout=30,
-    )
-    changed = [
-        line[3:].strip()
-        for line in check.stdout.splitlines()
-        if len(line) >= 4
+    prompts=[
+        (
+            "Goal:\n"+str(goal)+"\n\n"
+            "Produce ONE concrete CompanyOS source improvement. Return JSON only. "
+            "Do not return not_run, skip, no-op, or empty output. "
+            "Change exactly one file. Prefer a SMALL existing Python file from the list. "
+            "Return COMPLETE file content, not a diff. Keep it concise, preferably under 160 lines. "
+            "Python must compile. Never touch wallets, finance, payments, credentials, security, "
+            "approvals, governance, connectors, deployment gates, supervisor code, or self-evolution guard code. "
+            "Prefer reliability, observability, validation, recovery, or opportunity-to-execution progress.\n\n"
+            "Return exactly: "
+            "{\"path\":\"relative/file.py\",\"action\":\"replace\",\"content\":\"complete file contents\"}\n\n"
+            "Candidates:\n"+_json.dumps(candidates[:40],indent=2)
+        ),
+        (
+            "Goal:\n"+str(goal)+"\n\n"
+            "The previous answer was incomplete. Make the SMALLEST useful improvement possible. "
+            "Create one compact new Python helper under companyos_modules/. Maximum about 120 lines. "
+            "Return JSON only with path, action=create, and complete content. "
+            "Do not touch protected finance, wallet, credential, approval, connector, supervisor, "
+            "deployment-gate, or self-evolution code."
+        ),
     ]
 
-    return {
-        "ok": bool(changed),
-        "status": "direct_candidate_written" if changed else "direct_candidate_no_change",
-        "generator": "direct_fallback",
-        "path": rel,
-        "action": action,
-        "changed_files": changed,
-    }
+    last_error=None
+    for attempt,prompt in enumerate(prompts,1):
+        try:
+            raw=model_request(prompt)
+            if isinstance(raw,dict):
+                if raw.get("ok") is False:
+                    last_error={"reason":"adapter_failed","adapter_reason":raw.get("reason"),"attempt":attempt}
+                    continue
+                text=raw.get("text")
+                plan=extract_json(text) if isinstance(text,str) else raw
+            elif isinstance(raw,str):
+                plan=extract_json(raw)
+            else:
+                plan=extract_json(str(raw))
+        except Exception as exc:
+            last_error={"reason":"generation_or_parse_failed","error":f"{type(exc).__name__}: {exc}","attempt":attempt}
+            continue
 
+        if not isinstance(plan,dict):
+            last_error={"reason":"plan_not_object","attempt":attempt}
+            continue
+
+        rel=str(plan.get("path") or "").strip().replace(chr(92),"/")
+        action=str(plan.get("action") or "replace").strip().lower()
+        content=str(plan.get("content") or "")
+
+        if not rel or not content.strip():
+            last_error={"reason":"empty_plan","attempt":attempt}
+            continue
+
+        low=rel.lower()
+        if (
+            rel.startswith("/") or ".." in Path(rel).parts or rel in exact
+            or any(x in low for x in blocked)
+            or not rel.startswith(("companyos/","companyos_modules/","scripts/","tests/"))
+        ):
+            last_error={"reason":"path_rejected","path":rel,"attempt":attempt}
+            continue
+
+        target=wt/rel
+        if action not in {"replace","create"}:
+            action="replace" if target.exists() else "create"
+        if action=="replace" and not target.exists():
+            last_error={"reason":"replace_target_missing","path":rel,"attempt":attempt}
+            continue
+
+        if len(content.encode("utf-8")) > 50000:
+            last_error={"reason":"content_too_large","path":rel,"attempt":attempt}
+            continue
+
+        if rel.endswith(".py"):
+            try:
+                compile(content,rel,"exec")
+            except Exception as exc:
+                last_error={"reason":"invalid_python","error":f"{type(exc).__name__}: {exc}","attempt":attempt}
+                continue
+
+        target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_text(content.rstrip()+"\n",encoding="utf-8")
+
+        cp=_subprocess.run(["git","status","--porcelain=v1"],cwd=str(wt),text=True,capture_output=True,timeout=30)
+        changed=[line[3:].strip() for line in cp.stdout.splitlines() if len(line)>=4]
+        if changed:
+            return {
+                "ok":True,
+                "status":"direct_candidate_written",
+                "generator":"direct_fallback_retrying",
+                "attempt":attempt,
+                "path":rel,
+                "action":action,
+                "changed_files":changed,
+            }
+        last_error={"reason":"no_change_after_write","attempt":attempt}
+
+    return {"ok":False,"reason":"all_generation_attempts_failed","last_error":last_error}
 
 
 def generate(wt, goal):
