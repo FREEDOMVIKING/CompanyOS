@@ -69,43 +69,127 @@ def _balanced_json_object(text: str) -> dict[str, Any]:
 
 
 def model_request(prompt: str) -> dict[str, Any]:
-    key = os.getenv("OPENAI_API_KEY", "companyos-local").strip() or "companyos-local"
-    base_url = os.getenv("OPENAI_BASE_URL", "http://127.0.0.1:8080/v1").rstrip("/")
-    model = os.getenv("OPENAI_MODEL", "companyos-local").strip() or "companyos-local"
+    configured_key = os.getenv("OPENAI_API_KEY", "").strip()
+    configured_base = os.getenv("OPENAI_BASE_URL", "").strip().rstrip("/")
+    configured_model = os.getenv("OPENAI_MODEL", "").strip()
 
-    max_tokens = _env_int("COMPANYOS_LOCAL_AI_MAX_TOKENS", 768, 128, 1536)
-    prompt_chars = _env_int("COMPANYOS_LOCAL_AI_PROMPT_CHARS", 2500, 800, 7000)
+    local_default = "http://127.0.0.1:8080/v1"
+    localish = (
+        not configured_base
+        or configured_base.startswith("http://127.0.0.1:")
+        or configured_base.startswith("http://localhost:")
+        or configured_base.startswith("https://127.0.0.1:")
+        or configured_base.startswith("https://localhost:")
+    )
+    has_cloud_key = bool(
+        configured_key
+        and configured_key != "companyos-local"
+        and not configured_key.lower().startswith("replace")
+    )
+
+    max_tokens = _env_int("COMPANYOS_LOCAL_AI_MAX_TOKENS", 1200, 128, 4096)
+    prompt_chars = _env_int("COMPANYOS_LOCAL_AI_PROMPT_CHARS", 5000, 800, 12000)
     timeout = _env_int("COMPANYOS_LOCAL_AI_TIMEOUT", 900, 60, 1800)
 
     full_prompt = prompt or ""
     if len(full_prompt) <= prompt_chars:
         compact_prompt = full_prompt
     else:
-        # Preserve instructions/schema at the beginning and newest context at the end.
-        head_chars = max(1200, int(prompt_chars * 0.65))
-        tail_chars = max(600, prompt_chars - head_chars)
+        head_chars = max(1800, int(prompt_chars * 0.65))
+        tail_chars = max(900, prompt_chars - head_chars)
         compact_prompt = (
             full_prompt[:head_chars]
             + "\n\n[... middle runtime inventory omitted ...]\n\n"
             + full_prompt[-tail_chars:]
         )
 
+    system_text = (
+        "You are the CompanyOS adaptive build planner. "
+        "Return one complete valid JSON object only. "
+        "Do not use markdown fences or commentary. "
+        "Implement real code, not placeholders or TODO-only text. "
+        "Never modify credentials, wallets, financial controls, approval gates, "
+        "security controls, deployment gates, or secrets."
+    )
+
+    if has_cloud_key and localish:
+        model = os.getenv("COMPANYOS_OPENAI_MODEL", "").strip()
+        if not model:
+            model = configured_model if configured_model and configured_model != "companyos-local" else "gpt-5.6-luna"
+
+        endpoint = "https://api.openai.com/v1/responses"
+        payload = {
+            "model": model,
+            "input": [
+                {"role": "system", "content": [{"type": "input_text", "text": system_text}]},
+                {"role": "user", "content": [{"type": "input_text", "text": compact_prompt}]},
+            ],
+            "max_output_tokens": max_tokens,
+        }
+
+        request = urllib.request.Request(
+            endpoint,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {configured_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                data = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            return {
+                "ok": False,
+                "reason": f"HTTPError: HTTP {exc.code}",
+                "body": body[:4000],
+                "endpoint": endpoint,
+                "model": model,
+            }
+        except Exception as exc:
+            return {
+                "ok": False,
+                "reason": f"{type(exc).__name__}: {exc}",
+                "endpoint": endpoint,
+                "model": model,
+            }
+
+        text = ""
+        for item in data.get("output", []) if isinstance(data, dict) else []:
+            if isinstance(item, dict):
+                for content in item.get("content", []) or []:
+                    if isinstance(content, dict) and content.get("type") == "output_text":
+                        text += str(content.get("text") or "")
+
+        if not text.strip():
+            return {
+                "ok": False,
+                "reason": "unexpected_openai_responses_output",
+                "raw_id": data.get("id") if isinstance(data, dict) else None,
+                "endpoint": endpoint,
+                "model": model,
+            }
+
+        return {
+            "ok": True,
+            "text": text.strip(),
+            "raw_id": data.get("id"),
+            "model": data.get("model", model),
+            "endpoint": endpoint,
+            "provider": "openai",
+        }
+
+    key = configured_key or "companyos-local"
+    base_url = configured_base or local_default
+    model = configured_model or "companyos-local"
+
     payload: dict[str, Any] = {
         "model": model,
         "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "You are the CompanyOS adaptive build planner. "
-                    "Return one complete valid JSON object only. "
-                    "Do not use markdown fences or commentary. "
-                    "Never put placeholders, prose instructions, summaries, TODO-only text, "
-                    "or phrases such as complete file content in a change content field. "
-                    "For every .py path, content must be the complete syntactically valid "
-                    "Python source file ready to save and run. ""Write concise production code, not essays. Do not repeat sentences. ""Do not describe what the module could do; implement it. ""A Python content field must begin with valid Python such as imports, ""a module docstring, a class, or a function. ""Keep each generated Python file under 350 lines unless replacing a longer existing file. "
-                    "Keep the plan focused and executable. Use exactly this schema: "                    "{title:string, reason:string, changes:list, tests:list, integration:string}. "                    "Each change must contain path, action, content, and reason. "                    "Never modify credentials, wallets, financial controls, approval gates, or secrets."
-                ),
-            },
+            {"role": "system", "content": system_text},
             {"role": "user", "content": compact_prompt},
         ],
         "temperature": 0.1,
@@ -134,7 +218,6 @@ def model_request(prompt: str) -> dict[str, Any]:
             data = perform(payload)
         except urllib.error.HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
-            # Some llama.cpp versions reject response_format. Retry once without it.
             if exc.code == 400 and "response_format" in payload:
                 fallback = dict(payload)
                 fallback.pop("response_format", None)
@@ -145,12 +228,14 @@ def model_request(prompt: str) -> dict[str, Any]:
                     "reason": f"HTTPError: HTTP {exc.code}",
                     "body": body[:4000],
                     "endpoint": endpoint,
+                    "model": model,
                 }
     except Exception as exc:
         return {
             "ok": False,
             "reason": f"{type(exc).__name__}: {exc}",
             "endpoint": endpoint,
+            "model": model,
         }
 
     try:
@@ -161,6 +246,7 @@ def model_request(prompt: str) -> dict[str, Any]:
             "reason": "unexpected_local_model_response",
             "raw": data,
             "endpoint": endpoint,
+            "model": model,
         }
 
     return {
@@ -169,6 +255,7 @@ def model_request(prompt: str) -> dict[str, Any]:
         "raw_id": data.get("id"),
         "model": data.get("model", model),
         "endpoint": endpoint,
+        "provider": "openai_compatible",
     }
 
 

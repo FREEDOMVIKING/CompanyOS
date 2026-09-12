@@ -198,7 +198,17 @@ def _direct_generation_fallback(wt, goal):
     try:
         raw = model_request(prompt)
         if isinstance(raw, dict):
-            if isinstance(raw.get("response"), dict):
+            if raw.get("ok") is False:
+                return {
+                    "ok": False,
+                    "reason": "model_generation_failed",
+                    "adapter_reason": raw.get("reason"),
+                    "endpoint": raw.get("endpoint"),
+                    "model": raw.get("model"),
+                }
+            if isinstance(raw.get("text"), str):
+                plan = extract_json(raw["text"])
+            elif isinstance(raw.get("response"), dict):
                 plan = raw["response"]
             elif isinstance(raw.get("result"), dict):
                 plan = raw["result"]
