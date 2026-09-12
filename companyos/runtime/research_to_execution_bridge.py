@@ -22,6 +22,40 @@ POLICY_WORDS = {
     "companyos_opportunity_engine_test", "one_shot_token",
 }
 
+IMPERATIVE_NAME_PATTERNS = (
+    "prefer ",
+    "for each ",
+    "use 0-100",
+    "use 0_100",
+    "research markets",
+    "discover at least",
+    "generate at least",
+    "do not ",
+    "must ",
+    "every candidate",
+    "construction and service businesses may",
+    "persist a market scan",
+    "this stage is research",
+    "mark estimates",
+    "evidence sources",
+)
+
+SEMANTIC_KEYS = (
+    "business_model",
+    "target_customer",
+    "customer_segment",
+    "customer_problem",
+    "problem",
+    "offer",
+    "product",
+    "service",
+    "value_proposition",
+    "pricing",
+    "price",
+    "revenue_model",
+    "market",
+)
+
 NAME_KEYS = (
     "name", "candidate_name", "venture_name", "business_name",
     "title", "opportunity", "idea", "concept",
@@ -162,18 +196,66 @@ def _looks_like_policy(source: Path, payload: dict[str, Any]) -> bool:
     if any(word in stem for word in POLICY_WORDS):
         return True
 
+    name = _name(payload, source).strip().lower()
+    if any(name.startswith(x) or x in name for x in IMPERATIVE_NAME_PATTERNS):
+        return True
+
     keys = {str(k).lower() for k in payload}
-    useful = any(k in keys for k in NAME_KEYS) and any(k in keys for k in MODEL_KEYS)
     text = _text(payload)
 
     instruction_markers = (
-        "must not", "do not perform", "research only",
-        "candidate json must", "generate at least",
-        "this stage is research", "scoring fields must",
+        "must not",
+        "do not perform",
+        "research only",
+        "candidate json must",
+        "generate at least",
+        "this stage is research",
+        "scoring fields must",
+        "for each candidate",
+        "prefer commercially distinct",
+        "use 0-100 numeric scores",
+        "research markets before building",
     )
-    if not useful and any(x in text for x in instruction_markers):
-        return True
+    if any(x in text for x in instruction_markers):
+        semantic_hits = sum(1 for k in SEMANTIC_KEYS if k in keys)
+        if semantic_hits < 2:
+            return True
+
     return False
+
+
+def _semantic_candidate_strength(payload: dict[str, Any]) -> int:
+    keys = {str(k).lower() for k in payload}
+    hits = sum(1 for k in SEMANTIC_KEYS if k in keys)
+
+    # Nested business records are also acceptable.
+    for nested_key in ("candidate", "business", "opportunity_details", "market_analysis"):
+        nested = payload.get(nested_key)
+        if isinstance(nested, dict):
+            nested_keys = {str(k).lower() for k in nested}
+            hits += sum(1 for k in SEMANTIC_KEYS if k in nested_keys)
+
+    return hits
+
+
+def _has_explicit_score(payload: dict[str, Any]) -> bool:
+    if any(k in payload for k in SCORE_KEYS):
+        return True
+    scores = payload.get("scores")
+    return isinstance(scores, dict) and any(_numeric(v) is not None for v in scores.values())
+
+
+def _promotion_quality(candidate: Candidate) -> tuple[bool, list[str]]:
+    reasons = []
+    if candidate.score < 60:
+        reasons.append("score_below_60")
+    if candidate.confidence < 35 and candidate.evidence_count < 1:
+        reasons.append("insufficient_confidence_and_evidence")
+    if _semantic_candidate_strength(candidate.payload) < 2:
+        reasons.append("insufficient_business_semantics")
+    if not _has_explicit_score(candidate.payload):
+        reasons.append("no_explicit_candidate_score")
+    return (not reasons), reasons
 
 
 def scan_candidates(min_score: float = 45.0) -> list[Candidate]:
@@ -191,6 +273,13 @@ def scan_candidates(min_score: float = 45.0) -> list[Candidate]:
         name = _name(payload, path)
         slug = _slug(name)
         if not slug or len(slug) < 3:
+            continue
+
+        # A real opportunity must look like a business candidate, not a rule,
+        # instruction, test artifact, or generic research directive.
+        if _semantic_candidate_strength(payload) < 2:
+            continue
+        if not _has_explicit_score(payload):
             continue
 
         score = _score(payload)
@@ -343,10 +432,22 @@ def maybe_promote_candidate(
             execution_ventures += sum(1 for x in root.iterdir() if x.is_dir())
 
     eligible = []
+    rejected = []
     for c in candidates:
         if c.fingerprint in state["promoted_fingerprints"]:
             continue
         if _workspace_exists(c.slug):
+            continue
+        ok, reasons = _promotion_quality(c)
+        if not ok:
+            rejected.append({
+                "name": c.name,
+                "slug": c.slug,
+                "score": c.score,
+                "confidence": c.confidence,
+                "evidence_count": c.evidence_count,
+                "reasons": reasons,
+            })
             continue
         eligible.append(c)
 
@@ -354,6 +455,8 @@ def maybe_promote_candidate(
         "candidate_count": len(candidates),
         "eligible_count": len(eligible),
         "execution_venture_count": execution_ventures,
+        "rejected_count": len(rejected),
+        "rejected_candidates": rejected[:10],
         "top_candidates": [
             {
                 "name": c.name,
