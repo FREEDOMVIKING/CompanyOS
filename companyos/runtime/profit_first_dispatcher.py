@@ -116,3 +116,27 @@ def maybe_dispatch(min_idle_cycles=20, cooldown_seconds=300):
             "error": f"{type(exc).__name__}: {exc}",
             **detail,
         }
+
+
+# COMPANYOS_TARGETED_ENRICHMENT_CONTRACT_V3
+_profit_first_build_goal_v3_base = build_goal
+def build_goal():
+    q = load(ROOT / ".companyos_runtime" / "profit_candidate_enrichment_queue.json", {})
+    rows = q.get("candidates", []) if isinstance(q, dict) else []
+    focus = []
+    for row in rows[:8]:
+        if isinstance(row, dict):
+            focus.append({"name":row.get("name"),"missing_or_blocking":row.get("missing_or_blocking"),"current":row.get("current")})
+    return _profit_first_build_goal_v3_base() + """
+TARGETED ENRICHMENT CONTRACT:
+- Prioritize the current enrichment queue instead of broad generic research.
+- Resolve specific gaps with real evidence.
+- A usable candidate needs a buyer, problem, offer/revenue mechanism, at least one evidence source, and one executable next action.
+- Estimate profit, probability, readiness, time-to-cash, and capital only when evidence supports it.
+- Never invent evidence, customers, revenue, or probability.
+- Save structured commercial research into canonical_research_outputs for ingestion.
+- Avoid duplicate or renamed opportunities.
+- Preserve all connector, approval, finance, credential, signer, deployment, legal, destructive-action, and irreversible-action gates.
+CURRENT ENRICHMENT QUEUE:
+""" + json.dumps(focus, indent=2, default=str)
+
