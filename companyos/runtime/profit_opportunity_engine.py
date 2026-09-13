@@ -5,6 +5,8 @@ from pathlib import Path
 from typing import Any
 ROOT=Path.home()/"companyos"; RT=ROOT/".companyos_runtime"; STORE=RT/"profit_opportunities"
 LEDGER=RT/"profit_opportunity_ledger.jsonl"; STATUS=RT/"profit_opportunity_status.json"
+EXECUTION_STATE=RT/"profit_execution_state.json"
+EXECUTION_COOLDOWN_SECONDS=int(os.getenv("COMPANYOS_EXECUTION_REDISPATCH_SECONDS","1800"))
 POLICY=("must not","research only","candidate json must","generate at least","for each candidate","use 0-100","this stage is research")
 HINTS=("sell","service","broker","agency","arbitrage","resell","license","affiliate","contract","acquire","marketplace","software","automation","data","lead","consult","rent","subscription","commission","build","launch")
 def num(v,d=0):
@@ -93,16 +95,73 @@ def choose():
     "decision":"execute_candidate" if chosen else "research_more","chosen":asdict(chosen) if chosen else None,
     "ranked":[asdict(o) for o in rows[:30]]}
  write(STATUS,x);event("DECISION",decision=x["decision"]);return x
+def _exec_load():
+ try:return json.loads(EXECUTION_STATE.read_text())
+ except:return {}
+
+def _exec_save(x):write(EXECUTION_STATE,x)
+
+def _slug(v):
+ import re
+ return (re.sub(r"[^a-z0-9]+","-",str(v).lower()).strip("-") or "opportunity")[:72]
+
+def _start_execution(o):
+ from companyos.runtime.autonomous_ceo_orchestrator import AutonomousCEOOrchestrator
+ slug=_slug(o.get("name") or o.get("id"))
+ venture=ROOT/"workspace"/slug
+ venture.mkdir(parents=True,exist_ok=True)
+ write(venture/"venture_brief.json",{
+  "canonical_id":slug,"name":o.get("name"),"stage":"EXECUTE",
+  "objective":"realized_profit","opportunity":o,"updated_at_unix":time.time(),
+  "next_required_outcome":"Produce measurable progress toward a sellable offer, deployment, customer acquisition, or revenue evidence."
+ })
+ goal=(
+  f"Advance venture '{slug}' into concrete execution.\n"
+  f"Selected opportunity: {o.get('name')}\n"
+  f"Score: {o.get('score')}\n"
+  f"Expected profit: {o.get('expected_profit')}\n"
+  f"Recommended next action: {o.get('next_action')}\n\n"
+  "Do not return to broad research unless a specific missing fact blocks execution.\n"
+  "Build the smallest sellable offer/product/service supported by evidence.\n"
+  "Create price, buyer definition, acceptance criteria, customer-facing asset, and execution checklist.\n"
+  "Build/test the smallest viable version if build work is required.\n"
+  "Use configured deployment/outreach connectors only when existing policy authorizes them.\n"
+  f"Persist measurable stage/evidence updates in workspace/{slug}.\n"
+  "Prefer a path to first cash over more documentation.\n"
+  "Never bypass wallet, finance, credential, approval, signer, reconciliation, legal, destructive-action, or irreversible-action gates.\n"
+  "Do not initiate a financial transaction merely to prove activity.\n"
+ )
+ rec=AutonomousCEOOrchestrator().start(goal=goal,max_cycles=220,max_follow_up_depth=8,priority_base=360)
+ oid=getattr(rec,"orchestration_id",None)
+ st=_exec_load(); now=time.time()
+ st["last_opportunity_id"]=o.get("id"); st["last_dispatch_unix"]=now; st["last_orchestration_id"]=oid
+ st.setdefault("dispatches",[]).append({"ts":now,"name":o.get("name"),"slug":slug,"orchestration_id":oid})
+ st["dispatches"]=st["dispatches"][-200:]; _exec_save(st)
+ return {"started":True,"workspace":str(venture),"canonical_id":slug,"orchestration_id":oid}
+
 def dispatch():
  x=choose()
  if not x["chosen"]:
-  y={"ok":True,"action":"research_more","reason":"no_execution_qualified_profit_opportunity"};write(RT/"profit_opportunity_dispatch.json",y);return y
+  y={"ok":True,"action":"research_more","reason":"no_execution_qualified_profit_opportunity"}
+  write(RT/"profit_opportunity_dispatch.json",y); return y
  o=x["chosen"]; STORE.mkdir(parents=True,exist_ok=True)
- rec={"schema":"companyos.profit_opportunity.v1","stage":"EXECUTE","objective":"realized_profit","opportunity":o,
-      "constraints":{"connector_gates":True,"financial_gates":True,"credential_gates":True,"irreversible_action_gates":True}}
- p=STORE/("selected_"+o["id"]+".json");write(p,rec)
- y={"ok":True,"action":"execute_candidate","selected_path":str(p),"name":o["name"],"score":o["score"],"next_action":o["next_action"]}
- write(RT/"profit_opportunity_dispatch.json",y);event("EXECUTE_SELECTED",name=o["name"],score=o["score"]);return y
+ selected=STORE/("selected_"+o["id"]+".json")
+ write(selected,{"schema":"companyos.profit_opportunity.v2","stage":"EXECUTE","objective":"realized_profit","opportunity":o,
+  "constraints":{"connector_gates":True,"financial_gates":True,"credential_gates":True,"irreversible_action_gates":True}})
+ st=_exec_load(); since=time.time()-float(st.get("last_dispatch_unix",0) or 0)
+ if st.get("last_opportunity_id")==o.get("id") and since<EXECUTION_COOLDOWN_SECONDS:
+  y={"ok":True,"action":"continue_existing_execution","name":o["name"],"score":o["score"],
+     "orchestration_id":st.get("last_orchestration_id"),"seconds_until_redispatch":round(EXECUTION_COOLDOWN_SECONDS-since,1)}
+  write(RT/"profit_opportunity_dispatch.json",y); event("EXECUTION_CONTINUE",name=o["name"],score=o["score"]); return y
+ try:
+  ex=_start_execution(o)
+  y={"ok":True,"action":"execution_orchestration_started","selected_path":str(selected),"name":o["name"],"score":o["score"],
+     "next_action":o["next_action"],**ex}
+  write(RT/"profit_opportunity_dispatch.json",y); event("EXECUTION_STARTED",name=o["name"],score=o["score"],orchestration_id=ex.get("orchestration_id")); return y
+ except Exception as exc:
+  y={"ok":False,"action":"execution_start_failed","name":o["name"],"score":o["score"],"error":f"{type(exc).__name__}: {exc}"}
+  write(RT/"profit_opportunity_dispatch.json",y); event("EXECUTION_START_FAILED",name=o["name"],error=y["error"]); return y
+
 def main():
  import argparse
  a=argparse.ArgumentParser();a.add_argument("command",choices=("discover","choose","dispatch","status"));q=a.parse_args().command
