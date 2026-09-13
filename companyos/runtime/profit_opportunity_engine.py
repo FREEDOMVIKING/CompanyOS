@@ -169,3 +169,167 @@ def main():
  print(json.dumps(r,indent=2,sort_keys=True,default=str))
 if __name__=="__main__":main()
 
+
+
+# COMPANYOS_CANDIDATE_INTELLIGENCE_V2
+
+_CI_INTERNAL_MARKERS = (
+    "companyos opportunity engine test",
+    "research markets before building",
+    "research/analysis only",
+    "preserve all external",
+    "mark estimates honestly",
+    "discover at least",
+    "materially different opportunities",
+    "persist a market-scan",
+    "persist a market scan",
+    "do not generate superficial",
+    "do not duplicate",
+    "construction and service businesses may appear",
+    "prefer commercially distinct opportunities",
+    "for each candidate",
+    "each record must",
+    "generate at least",
+    "use 0-100 numeric scores",
+    "this stage is research",
+)
+
+def _ci_text_from_opportunity(o):
+    parts = [
+        str(getattr(o, "name", "") or ""),
+        str(getattr(o, "source", "") or ""),
+        str(getattr(o, "next_action", "") or ""),
+    ]
+    payload = getattr(o, "payload", {}) or {}
+    try:
+        parts.append(json.dumps(payload, sort_keys=True, default=str))
+    except Exception:
+        parts.append(str(payload))
+    return " ".join(parts).lower()
+
+def candidate_is_internal_instruction(o):
+    t = _ci_text_from_opportunity(o)
+    source = str(getattr(o, "source", "") or "").lower()
+    name = str(getattr(o, "name", "") or "").lower()
+    if any(x in t for x in _CI_INTERNAL_MARKERS):
+        return True
+    if "/tests/" in source or source.startswith("tests/"):
+        return True
+    if "test" in name and "opportunity" in name:
+        return True
+    imperative_hits = sum(
+        1 for x in (
+            "must ", "do not ", "preserve ", "generate at least",
+            "for each candidate", "research markets", "use 0-100"
+        ) if x in t
+    )
+    if imperative_hits >= 2 and not getattr(o, "next_action", ""):
+        return True
+    return False
+
+_candidate_intel_legacy_discover = discover
+
+def discover():
+    rows = _candidate_intel_legacy_discover()
+    commercial = [o for o in rows if not candidate_is_internal_instruction(o)]
+    event(
+        "CANDIDATE_INTELLIGENCE_FILTER",
+        input_count=len(rows),
+        commercial_count=len(commercial),
+        rejected_internal_count=len(rows)-len(commercial),
+    )
+    return commercial
+
+def _candidate_qualification_reasons(o):
+    reasons = []
+    min_score = num(os.getenv("COMPANYOS_PROFIT_MIN_SCORE", "45"))
+    if o.score < min_score:
+        reasons.append("score_below_execution_threshold")
+    if o.evidence_count < 1:
+        reasons.append("missing_external_evidence")
+    if o.probability <= 0:
+        reasons.append("probability_unestimated")
+    if o.expected_profit <= 0:
+        reasons.append("profit_unestimated")
+    if o.readiness <= 0:
+        reasons.append("readiness_unestimated")
+    if not str(o.next_action or "").strip():
+        reasons.append("missing_executable_next_action")
+    if o.compliance_risk >= 80:
+        reasons.append("compliance_risk_too_high")
+    return reasons
+
+def _write_candidate_enrichment_queue(rows):
+    queue = []
+    for o in rows[:30]:
+        reasons = _candidate_qualification_reasons(o)
+        if not reasons:
+            continue
+        queue.append({
+            "id": o.id,
+            "name": o.name,
+            "source": o.source,
+            "score": o.score,
+            "missing_or_blocking": reasons,
+            "current": {
+                "expected_profit": o.expected_profit,
+                "probability": o.probability,
+                "evidence_count": o.evidence_count,
+                "evidence_quality": o.evidence_quality,
+                "readiness": o.readiness,
+                "time_to_cash_days": o.time_to_cash_days,
+                "capital_required": o.capital_required,
+                "next_action": o.next_action,
+            },
+            "research_contract": (
+                "Research only this commercial opportunity. Resolve the listed gaps "
+                "with real evidence. Do not invent probability, profit, readiness, "
+                "customers, or evidence. Return evidence sources and one executable next action."
+            ),
+        })
+    write(RT / "profit_candidate_enrichment_queue.json", {
+        "ts": time.time(),
+        "count": len(queue),
+        "candidates": queue,
+    })
+    return queue
+
+def choose():
+    rows = discover()
+    eligible = []
+    rejected = []
+    for o in rows:
+        reasons = _candidate_qualification_reasons(o)
+        if reasons:
+            rejected.append({
+                "id": o.id,
+                "name": o.name,
+                "source": o.source,
+                "score": o.score,
+                "reasons": reasons,
+            })
+        else:
+            eligible.append(o)
+    chosen = eligible[0] if eligible else None
+    queue = _write_candidate_enrichment_queue(rows)
+    x = {
+        "ts": time.time(),
+        "objective": "risk_adjusted_realized_profit",
+        "candidate_count": len(rows),
+        "eligible_count": len(eligible),
+        "rejected_count": len(rejected),
+        "decision": "execute_candidate" if chosen else "research_more",
+        "chosen": asdict(chosen) if chosen else None,
+        "ranked": [asdict(o) for o in rows[:30]],
+        "qualification_rejections": rejected[:30],
+        "enrichment_queue_count": len(queue),
+    }
+    write(STATUS, x)
+    event(
+        "DECISION",
+        decision=x["decision"],
+        candidate_count=len(rows),
+        eligible_count=len(eligible),
+        enrichment_queue_count=len(queue),
+    )
+    return x
