@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+case "${1:-status}" in
+  once) python -m companyos.runtime.opportunity_execution_capability_bridge once ;;
+  status) python -m companyos.runtime.opportunity_execution_capability_bridge status ;;
+  queue) python -m companyos.runtime.opportunity_execution_capability_bridge queue ;;
+  events) tail -n "${2:-40}" .companyos_runtime/opportunity_execution_capability_bridge_events.jsonl 2>/dev/null || true ;;
+  *) echo "usage: scripts/companyos_actionbridgectl {once|status|queue|events [N]}"; exit 2 ;;
+esac

@@ -140,3 +140,32 @@ TARGETED ENRICHMENT CONTRACT:
 CURRENT ENRICHMENT QUEUE:
 """ + json.dumps(focus, indent=2, default=str)
 
+
+
+# COMPANYOS_CAPABILITY_GUIDED_EXECUTION_V17
+_profit_first_build_goal_v17_base = build_goal
+def build_goal():
+    base = _profit_first_build_goal_v17_base()
+    q = load(ROOT / ".companyos_runtime" / "profit_execution_action_queue.json", {})
+    rows = q.get("actions", []) if isinstance(q, dict) else []
+    packet = rows[-1] if rows and isinstance(rows[-1], dict) else None
+    if not packet:
+        return base
+
+    safe_packet = {
+        "action_packet_id": packet.get("action_packet_id"),
+        "candidate_name": packet.get("candidate_name"),
+        "candidate_score": packet.get("candidate_score"),
+        "recommended_actions": packet.get("recommended_actions"),
+        "required_execution_contract": packet.get("required_execution_contract"),
+    }
+    header = "\nCAPABILITY-GUIDED EXECUTION PACKET:\n"
+    rules = (
+        "- Use the capability-derived actions below to advance the selected opportunity.\n"
+        "- Re-evaluate the candidate after each measurable action.\n"
+        "- Prefer the highest-confidence reversible action first.\n"
+        "- Preserve every existing connector, approval, finance, signer, credential, deployment, legal, destructive-action, and irreversible-action gate.\n"
+        "- If an action is blocked by policy or missing evidence, record the blocker and choose the next permitted reversible validation action instead of bypassing the gate.\n"
+        "\nCURRENT ACTION PACKET:\n"
+    )
+    return base + header + rules + json.dumps(safe_packet, indent=2, default=str)

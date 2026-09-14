@@ -124,6 +124,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.semantic_capability_bridge", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/opportunity_execution_capability_bridge.py").exists():
+            services.append(
+                ManagedService(
+                    "opportunity_execution_capability_bridge",
+                    (python, "-m", "companyos.runtime.opportunity_execution_capability_bridge", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
