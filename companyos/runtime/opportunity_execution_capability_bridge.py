@@ -154,6 +154,15 @@ def cycle():
     cap_results=run_capabilities(top)
     actions=extract_actions(top,cap_results)
     packet=build_packet(top,cap_results,actions)
+    # COMPANYOS_OUTCOME_BASELINE_V18
+    packet["candidate_snapshot"]=top["payload"]
+    packet["candidate_metrics_before"]={
+        "profit": candidate_score({"profit": top["payload"].get("expected_profit", top["payload"].get("profit", 0))}),
+        "probability": float(top["payload"].get("probability", top["payload"].get("confidence", 0)) or 0),
+        "readiness": float(top["payload"].get("readiness", top["payload"].get("readiness_score", 0)) or 0),
+        "score": float(top.get("score", 0) or 0),
+        "evidence_count": len(top["payload"].get("evidence", [])) if isinstance(top["payload"].get("evidence"), list) else 0,
+    }
     q=load(QUEUE,{"actions":[]})
     arr=q.get("actions")
     if not isinstance(arr,list):arr=[]

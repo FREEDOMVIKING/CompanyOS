@@ -131,6 +131,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.opportunity_execution_capability_bridge", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/closed_loop_outcome_evaluator.py").exists():
+            services.append(
+                ManagedService(
+                    "closed_loop_outcome_evaluator",
+                    (python, "-m", "companyos.runtime.closed_loop_outcome_evaluator", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:

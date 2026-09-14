@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+case "${1:-status}" in
+  once) python -m companyos.runtime.closed_loop_outcome_evaluator once ;;
+  status) python -m companyos.runtime.closed_loop_outcome_evaluator status ;;
+  events) tail -n "${2:-40}" .companyos_runtime/closed_loop_outcome_evaluator_events.jsonl 2>/dev/null || true ;;
+  *) echo "usage: scripts/companyos_outcomectl {once|status|events [N]}"; exit 2 ;;
+esac
