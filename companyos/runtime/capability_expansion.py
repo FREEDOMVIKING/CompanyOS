@@ -1,107 +1,248 @@
 from __future__ import annotations
-import ast,json,os,shutil,subprocess,sys,time
+import ast, importlib.util, json, os, re, shutil, subprocess, sys, time
 from pathlib import Path
-ROOT=(Path.home()/"companyos").resolve(); RT=ROOT/".companyos_runtime"
-BASE=RT/"capability_expansion"; STATE=BASE/"state.json"; EVENTS=BASE/"events.jsonl"
-STAGING=BASE/"staging"; PROMOTED=BASE/"promoted"; REGISTRY=ROOT/"companyos/extensions/generated"; TESTS=ROOT/"tests/generated"; STOP=RT/"STOP_CONTINUOUS"
-SAFE_IMPORTS={"json","re","math","statistics","time","pathlib","typing","dataclasses","collections","itertools","functools"}
-FORBIDDEN_NAMES={"eval","exec","compile","__import__","open","input","breakpoint"}
-FORBIDDEN_TEXT=("OPENAI_API_KEY","SOLANA_PRIVATE_KEY","SMTP_PASSWORD","CLOUDFLARE_API_TOKEN","wallet","private key","seed phrase","approval gate","disable guard","bypass","subprocess","os.system","socket","urllib","requests","http://","https://")
-def atomic(p,o):
- p.parent.mkdir(parents=True,exist_ok=True); q=p.with_suffix(p.suffix+".tmp"); q.write_text(json.dumps(o,indent=2,sort_keys=True,default=str)+"\n"); q.replace(p)
-def load(p,d=None):
- try:return json.loads(p.read_text())
- except:return {} if d is None else d
-def emit(k,**kw):
+
+ROOT=(Path.home()/"companyos").resolve()
+RT=ROOT/".companyos_runtime"
+BASE=RT/"capability_expansion"
+STATE=BASE/"state.json"
+EVENTS=BASE/"events.jsonl"
+STAGING=BASE/"staging"
+PROMOTED=BASE/"promoted"
+REGISTRY=ROOT/"companyos/extensions/generated"
+TESTS=ROOT/"tests/generated"
+STOP=RT/"STOP_CONTINUOUS"
+
+SAFE_IMPORTS={"json","re","math","statistics","time","pathlib","typing","dataclasses","collections","itertools","functools","unittest"}
+FORBIDDEN_CALLS={"eval","exec","compile","__import__","open","input","breakpoint"}
+FORBIDDEN_TEXT=(
+ "openai_api_key","solana_private_key","smtp_password","cloudflare_api_token",
+ "seed phrase","private key","disable guard","bypass approval","os.system",
+ "subprocess","socket","urllib","requests","http://","https://",
+)
+
+def atomic(p,obj):
+ p.parent.mkdir(parents=True,exist_ok=True)
+ q=p.with_suffix(p.suffix+".tmp")
+ q.write_text(json.dumps(obj,indent=2,sort_keys=True,default=str)+"\n",encoding="utf-8")
+ q.replace(p)
+
+def load(p,default=None):
+ if default is None: default={}
+ try:return json.loads(p.read_text(encoding="utf-8"))
+ except Exception:return default
+
+def emit(kind,**kw):
  EVENTS.parent.mkdir(parents=True,exist_ok=True)
- with EVENTS.open("a") as f:f.write(json.dumps({"ts":time.time(),"kind":k,**kw},sort_keys=True,default=str)+"\n")
-def context():
- d=load(RT/"autonomous_diagnostics_state.json"); findings=((d.get("after") or {}).get("findings") or d.get("findings") or [])
- return {"findings":findings,"profit":load(RT/"profit_opportunity_status.json"),"bridge":load(RT/"candidate_enrichment_bridge_state.json"),"services":load(RT/"service_supervisor_state.json").get("services",{})}
-def inventory():
- REGISTRY.mkdir(parents=True,exist_ok=True); return [p.stem for p in sorted(REGISTRY.glob("*.py")) if not p.name.startswith("__")]
-def derive_gap(c):
- for f in c["findings"]:
+ with EVENTS.open("a",encoding="utf-8") as f:
+  f.write(json.dumps({"ts":time.time(),"kind":kind,**kw},sort_keys=True,default=str)+"\n")
+
+def diagnostics():
+ d=load(RT/"autonomous_diagnostics_state.json")
+ findings=((d.get("after") or {}).get("findings") or d.get("findings") or [])
+ return {
+  "findings":findings,
+  "profit":load(RT/"profit_opportunity_status.json"),
+  "bridge":load(RT/"candidate_enrichment_bridge_state.json"),
+  "services":load(RT/"service_supervisor_state.json").get("services",{}),
+ }
+
+def capability_inventory():
+ REGISTRY.mkdir(parents=True,exist_ok=True)
+ return sorted(p.stem for p in REGISTRY.glob("*.py") if not p.name.startswith("__"))
+
+def derive_gap(ctx):
+ for f in ctx["findings"]:
   k=f.get("kind")
-  if k=="research_conversion_stall":return {"id":"research_quality_analyzer","title":"Research quality analyzer","reason":"Research is not converting into execution-qualified opportunities.","success":"Rank exact enrichment gaps and recommend concrete field-level fixes."}
-  if k=="ssl_hostname_mismatch":return {"id":"deployment_route_analyzer","title":"Deployment route analyzer","reason":"Deployment hostname/certificate failures recur.","success":"Classify route risk and recommend safe rediscovery checks."}
-  if k=="import_error":return {"id":"import_failure_analyzer","title":"Import failure analyzer","reason":"Import errors were detected.","success":"Classify likely causes and safe verification steps."}
- p=c["profit"]
- if p.get("candidate_count",0)>0 and p.get("eligible_count",0)==0:return {"id":"candidate_gap_ranker","title":"Candidate gap ranker","reason":"Candidates exist but none qualify for execution.","success":"Rank missing evidence/economics/action fields by qualification impact."}
+  if k=="research_conversion_stall":
+   return {"id":"research_quality_analyzer","title":"Research quality analyzer","reason":"Research artifacts are not converting into execution-qualified opportunities."}
+  if k=="ssl_hostname_mismatch":
+   return {"id":"deployment_route_analyzer","title":"Deployment route analyzer","reason":"Deployment hostname/certificate mismatch is recurring."}
+  if k=="import_error":
+   return {"id":"import_failure_analyzer","title":"Import failure analyzer","reason":"Import failures are present in diagnostics."}
+ p=ctx["profit"]
+ if int(p.get("candidate_count") or 0)>0 and int(p.get("eligible_count") or 0)==0:
+  return {"id":"candidate_gap_ranker","title":"Candidate qualification gap ranker","reason":"Profit candidates exist but none are execution-qualified."}
  return None
-def model_plan(g,c):
- sys.path.insert(0,str(ROOT/"scripts")); from companyos_local_ai_adapter import model_request,extract_json
- prompt=f'''Build one NEW SAFE ANALYTICAL capability for CompanyOS.\nGAP:\n{json.dumps(g,indent=2)}\nCONTEXT:\n{json.dumps(c,default=str)[:4500]}\nRules: create exactly companyos/extensions/generated/{g['id']}.py and tests/generated/test_{g['id']}.py. Module must expose CAPABILITY_ID, capability_manifest()->dict, evaluate(context:dict)->dict. Pure analysis only: no network, subprocess, shell, environment, filesystem writes, credentials, wallets, finance, approvals, deployments, or external sends. Allowed imports only: {sorted(SAFE_IMPORTS)}. Tests must verify manifest and at least two evaluate behaviors. Complete code only.'''
+
+def canonical_paths(capability_id):
+ cid=re.sub(r"[^a-zA-Z0-9_]+","_",str(capability_id or "")).strip("_").lower()
+ if not cid: raise ValueError("missing capability id")
+ return (
+  f"companyos/extensions/generated/{cid}.py",
+  f"tests/generated/test_{cid}.py",
+ )
+
+def model_plan(gap,ctx):
+ sys.path.insert(0,str(ROOT/"scripts"))
+ from companyos_local_ai_adapter import model_request,extract_json
+ module_path,test_path=canonical_paths(gap["id"])
+ prompt=f"""
+Build one NEW SAFE ANALYTICAL CompanyOS capability.
+
+CAPABILITY:
+{json.dumps(gap,indent=2)}
+
+CONTEXT:
+{json.dumps(ctx,default=str)[:4500]}
+
+Return JSON in the adapter schema title/reason/changes/tests/integration.
+Generate exactly TWO Python contents:
+1. capability module for {module_path}
+2. unittest module for {test_path}
+
+The capability module must expose:
+CAPABILITY_ID = "{gap['id']}"
+def capability_manifest() -> dict
+def evaluate(context: dict) -> dict
+
+Rules:
+- Pure analysis only.
+- No network, shell, subprocess, environment access, file writes, credentials, wallets, finance, approvals, deployment actions, or external sends.
+- Allowed imports in the capability module: {sorted(SAFE_IMPORTS - {'unittest'})}
+- Test module may import unittest and the generated capability.
+- Complete runnable Python only. No TODO/placeholders.
+"""
  r=model_request(prompt)
- if not r.get("ok"):return {"ok":False,"reason":r.get("reason")}
- try:return {"ok":True,"plan":extract_json(r.get("text","")),"model":r.get("model")}
- except Exception as e:return {"ok":False,"reason":f"parse_failed:{e}"}
-def validate(path,content,gid):
- allowed={f"companyos/extensions/generated/{gid}.py",f"tests/generated/test_{gid}.py"}; errs=[]
- if path not in allowed:return ["path_not_allowed"]
+ if not r.get("ok"): return {"ok":False,"reason":r.get("reason"),"raw":r}
+ try:return {"ok":True,"plan":extract_json(r.get("text","")),"model":r.get("model"),"endpoint":r.get("endpoint")}
+ except Exception as e:return {"ok":False,"reason":f"plan_parse_failed: {e}"}
+
+def _classify_generated_contents(plan):
+ changes=plan.get("changes") if isinstance(plan,dict) else None
+ if not isinstance(changes,list): return None,None,["changes_missing"]
+ module_content=None
+ test_content=None
+ extra=[]
+ for ch in changes:
+  if not isinstance(ch,dict):
+   extra.append("non_dict_change"); continue
+  content=ch.get("content")
+  if not isinstance(content,str) or not content.strip():
+   extra.append("empty_content"); continue
+  path=str(ch.get("path","")).lower()
+  looks_test=("test_" in path or path.startswith("tests/") or "import unittest" in content or "unittest.TestCase" in content)
+  if looks_test:
+   if test_content is None:test_content=content
+   else:extra.append("duplicate_test_content")
+  else:
+   if module_content is None:module_content=content
+   else:extra.append("duplicate_module_content")
+ if module_content is None:extra.append("module_content_missing")
+ if test_content is None:extra.append("test_content_missing")
+ return module_content,test_content,extra
+
+def validate_source(path,content,gap_id,is_test=False):
+ errors=[]
+ expected=set(canonical_paths(gap_id))
+ if path not in expected:errors.append("canonical_path_violation")
  low=content.lower()
- for x in FORBIDDEN_TEXT:
-  if x.lower() in low:errs.append("forbidden:"+x)
- try:t=ast.parse(content,filename=path)
- except SyntaxError as e:return [f"syntax:{e}"]
- for n in ast.walk(t):
-  if isinstance(n,(ast.Import,ast.ImportFrom)):
-   mods=[a.name.split('.')[0] for a in n.names] if isinstance(n,ast.Import) else [(n.module or '').split('.')[0]]
+ for text in FORBIDDEN_TEXT:
+  if text in low:errors.append("forbidden_text:"+text)
+ try:tree=ast.parse(content,filename=path)
+ except SyntaxError as e:return errors+[f"syntax:{e}"]
+ allowed=set(SAFE_IMPORTS)
+ for n in ast.walk(tree):
+  if isinstance(n,ast.Import):
+   mods=[a.name.split(".")[0] for a in n.names]
    for m in mods:
-    if m and m not in SAFE_IMPORTS and not m.startswith("companyos"):errs.append("unsafe_import:"+m)
-  if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in FORBIDDEN_NAMES:errs.append("forbidden_call:"+n.func.id)
- return sorted(set(errs))
-def stage(g,plan):
- cid=f"{g['id']}-{int(time.time())}"; root=STAGING/cid; shutil.rmtree(root,ignore_errors=True); root.mkdir(parents=True)
- expected={f"companyos/extensions/generated/{g['id']}.py",f"tests/generated/test_{g['id']}.py"}; got=set(); errs=[]
- for ch in plan.get("changes") or []:
-  if not isinstance(ch,dict):errs.append("non_dict_change");continue
-  path=str(ch.get("path","")); content=str(ch.get("content","")); got.add(path); errs+=validate(path,content,g['id'])
-  if path in expected:
-   d=root/path; d.parent.mkdir(parents=True,exist_ok=True); d.write_text(content)
- if got!=expected:errs.append("exact_two_paths_required")
- atomic(root/"proposal.json",{"gap":g,"plan":plan,"validation_errors":errs}); return cid,root,errs
-def run_tests(root,gid):
- env=os.environ.copy(); env["PYTHONPATH"]=str(root)+os.pathsep+str(ROOT); steps=[]
- for cmd in ([sys.executable,"-m","py_compile",str(root/f"companyos/extensions/generated/{gid}.py"),str(root/f"tests/generated/test_{gid}.py")],[sys.executable,"-m","unittest",str(root/f"tests/generated/test_{gid}.py"),"-v"]):
-  cp=subprocess.run(cmd,cwd=ROOT,env=env,text=True,capture_output=True,timeout=60); steps.append({"returncode":cp.returncode,"stdout":cp.stdout[-3000:],"stderr":cp.stderr[-3000:]})
+    if m not in allowed and not (is_test and m=="companyos"):errors.append("unsafe_import:"+m)
+  elif isinstance(n,ast.ImportFrom):
+   m=(n.module or "").split(".")[0]
+   if m and m not in allowed and not (is_test and m=="companyos"):errors.append("unsafe_import:"+m)
+  elif isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in FORBIDDEN_CALLS:
+   errors.append("forbidden_call:"+n.func.id)
+ return sorted(set(errors))
+
+def stage_plan(gap,plan):
+ module_path,test_path=canonical_paths(gap["id"])
+ module_content,test_content,shape_errors=_classify_generated_contents(plan)
+ cid=f"{gap['id']}-{int(time.time())}"
+ root=STAGING/cid
+ if root.exists():shutil.rmtree(root)
+ root.mkdir(parents=True,exist_ok=True)
+ errors=list(shape_errors)
+ if module_content is not None:errors+=validate_source(module_path,module_content,gap["id"],False)
+ if test_content is not None:errors+=validate_source(test_path,test_content,gap["id"],True)
+ if not errors:
+  a=root/module_path;b=root/test_path
+  a.parent.mkdir(parents=True,exist_ok=True);b.parent.mkdir(parents=True,exist_ok=True)
+  a.write_text(module_content,encoding="utf-8");b.write_text(test_content,encoding="utf-8")
+ atomic(root/"proposal.json",{"gap":gap,"plan":plan,"normalized_paths":[module_path,test_path],"validation_errors":errors})
+ return cid,root,sorted(set(errors))
+
+def test_stage(root,gap_id):
+ module_path,test_path=canonical_paths(gap_id)
+ mod=root/module_path;tst=root/test_path
+ env=os.environ.copy();env["PYTHONPATH"]=str(root)+os.pathsep+str(ROOT)
+ steps=[]
+ cmds=[
+  [sys.executable,"-m","py_compile",str(mod),str(tst)],
+  [sys.executable,str(tst)],
+ ]
+ for cmd in cmds:
+  cp=subprocess.run(cmd,cwd=ROOT,env=env,text=True,capture_output=True,timeout=90)
+  steps.append({"cmd":cmd,"returncode":cp.returncode,"stdout":cp.stdout[-4000:],"stderr":cp.stderr[-4000:]})
   if cp.returncode!=0:return False,steps
  return True,steps
-def promote(root,gid,cid):
- REGISTRY.mkdir(parents=True,exist_ok=True); TESTS.mkdir(parents=True,exist_ok=True)
- dst=REGISTRY/f"{gid}.py"; tdst=TESTS/f"test_{gid}.py"; shutil.copy2(root/f"companyos/extensions/generated/{gid}.py",dst); shutil.copy2(root/f"tests/generated/test_{gid}.py",tdst)
- r={"candidate_id":cid,"capability_id":gid,"promoted_at":time.time(),"module":str(dst.relative_to(ROOT))}; PROMOTED.mkdir(parents=True,exist_ok=True); atomic(PROMOTED/f"{cid}.json",r); return r
-def use(gid,c):
- import importlib.util
- p=REGISTRY/f"{gid}.py"; spec=importlib.util.spec_from_file_location("generated_"+gid,p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return {"manifest":m.capability_manifest(),"result":m.evaluate(c)}
+
+def promote(root,gap_id,cid):
+ module_path,test_path=canonical_paths(gap_id)
+ src=root/module_path;tst=root/test_path
+ dst=ROOT/module_path;tdst=ROOT/test_path
+ dst.parent.mkdir(parents=True,exist_ok=True);tdst.parent.mkdir(parents=True,exist_ok=True)
+ shutil.copy2(src,dst);shutil.copy2(tst,tdst)
+ receipt={"candidate_id":cid,"capability_id":gap_id,"module":module_path,"test":test_path,"promoted_at":time.time()}
+ PROMOTED.mkdir(parents=True,exist_ok=True);atomic(PROMOTED/f"{cid}.json",receipt)
+ return receipt
+
+def rollback(gap_id):
+ module_path,test_path=canonical_paths(gap_id)
+ (ROOT/module_path).unlink(missing_ok=True);(ROOT/test_path).unlink(missing_ok=True)
+
+def run_capability(gap_id,context):
+ module_path,_=canonical_paths(gap_id);p=ROOT/module_path
+ spec=importlib.util.spec_from_file_location("companyos_generated_"+gap_id,p)
+ m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+ return {"manifest":m.capability_manifest(),"result":m.evaluate(context)}
+
 def cycle():
- c=context(); inv=inventory(); g=derive_gap(c); s={"running":True,"last_cycle_unix":time.time(),"inventory":inv,"gap":g}
- if not g:s["status"]="no_gap_detected";s["healthy"]=True;atomic(STATE,s);return s
- if g["id"] in inv:
-  try:s["execution"]=use(g["id"],c);s["status"]="existing_capability_used";s["healthy"]=True
-  except Exception as e:s["status"]="existing_capability_failed";s["error"]=repr(e);s["healthy"]=False
-  atomic(STATE,s);emit("CAPABILITY_USED",capability=g["id"],status=s["status"]);return s
- gen=model_plan(g,c);s["generation"]=gen
- if not gen.get("ok"):s["status"]="generation_failed";s["healthy"]=False;atomic(STATE,s);return s
- cid,root,errs=stage(g,gen["plan"]);s["candidate_id"]=cid;s["validation_errors"]=errs
- if errs:s["status"]="candidate_rejected_validation";s["healthy"]=True;atomic(STATE,s);return s
- ok,steps=run_tests(root,g["id"]);s["tests"]=steps
- if not ok:s["status"]="candidate_rejected_tests";s["healthy"]=True;atomic(STATE,s);return s
- s["promotion"]=promote(root,g["id"],cid)
- try:s["execution"]=use(g["id"],c);s["status"]="capability_promoted_and_used";s["healthy"]=True
+ ctx=diagnostics();inv=capability_inventory();gap=derive_gap(ctx)
+ st={"running":True,"last_cycle_unix":time.time(),"inventory":inv,"gap":gap}
+ if not gap:
+  st.update(status="no_gap_detected",healthy=True);atomic(STATE,st);return st
+ if gap["id"] in inv:
+  try:st["execution"]=run_capability(gap["id"],ctx);st.update(status="existing_capability_used",healthy=True)
+  except Exception as e:st.update(status="existing_capability_failed",healthy=False,error=repr(e))
+  atomic(STATE,st);return st
+ gen=model_plan(gap,ctx);st["generation"]=gen
+ if not gen.get("ok"):
+  st.update(status="generation_failed",healthy=False);atomic(STATE,st);return st
+ cid,root,errors=stage_plan(gap,gen["plan"]);st["candidate_id"]=cid;st["validation_errors"]=errors
+ if errors:
+  st.update(status="candidate_rejected_validation",healthy=True);atomic(STATE,st);emit("CANDIDATE_REJECTED",capability=gap["id"],errors=errors);return st
+ ok,tests=test_stage(root,gap["id"]);st["tests"]=tests
+ if not ok:
+  st.update(status="candidate_rejected_tests",healthy=True);atomic(STATE,st);emit("CANDIDATE_REJECTED_TESTS",capability=gap["id"]);return st
+ st["promotion"]=promote(root,gap["id"],cid)
+ try:
+  st["execution"]=run_capability(gap["id"],ctx)
+  st.update(status="capability_promoted_and_used",healthy=True)
  except Exception as e:
-  (REGISTRY/f"{g['id']}.py").unlink(missing_ok=True);(TESTS/f"test_{g['id']}.py").unlink(missing_ok=True);s["status"]="canary_failed_rolled_back";s["error"]=repr(e);s["healthy"]=False
- atomic(STATE,s);emit("CAPABILITY_CYCLE",capability=g["id"],status=s["status"]);return s
+  rollback(gap["id"]);st.update(status="canary_failed_rolled_back",healthy=False,error=repr(e))
+ atomic(STATE,st);emit("CAPABILITY_CYCLE",capability=gap["id"],status=st["status"]);return st
+
 def run():
  delay=max(300,int(os.getenv("COMPANYOS_CAPABILITY_EXPANSION_INTERVAL_SECONDS","1800")))
  while not STOP.exists():
   try:cycle()
   except Exception as e:atomic(STATE,{"running":True,"healthy":False,"status":"cycle_exception","error":repr(e),"last_cycle_unix":time.time()})
   time.sleep(delay)
+
 if __name__=="__main__":
  import argparse
- a=argparse.ArgumentParser();a.add_argument("command",nargs="?",default="run",choices=("run","once","status","inventory"));q=a.parse_args().command
- if q=="run":run()
- elif q=="once":print(json.dumps(cycle(),indent=2,sort_keys=True,default=str))
- elif q=="status":print(json.dumps(load(STATE,{"status":"not_run"}),indent=2,sort_keys=True,default=str))
- else:print(json.dumps({"capabilities":inventory()},indent=2))
+ a=argparse.ArgumentParser();a.add_argument("command",nargs="?",default="run",choices=("run","once","status","inventory"));cmd=a.parse_args().command
+ if cmd=="run":run()
+ elif cmd=="once":print(json.dumps(cycle(),indent=2,sort_keys=True,default=str))
+ elif cmd=="status":print(json.dumps(load(STATE,{"status":"not_run"}),indent=2,sort_keys=True,default=str))
+ else:print(json.dumps({"capabilities":capability_inventory()},indent=2))
