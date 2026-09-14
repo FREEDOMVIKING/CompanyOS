@@ -1,0 +1,158 @@
+from __future__ import annotations
+import json, os, time, traceback
+from pathlib import Path
+
+ROOT=(Path.home()/"companyos").resolve()
+RT=ROOT/".companyos_runtime"
+BASE=RT/"capability_expansion"
+QUEUE=BASE/"next_capability_queue.json"
+STATE=BASE/"request_executor_state.json"
+EVENTS=BASE/"request_executor_events.jsonl"
+STOP=RT/"STOP_CONTINUOUS"
+
+def load(path,default=None):
+    if default is None: default={}
+    try:return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:return default
+
+def atomic(path,obj):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    tmp=path.with_suffix(path.suffix+".tmp")
+    tmp.write_text(json.dumps(obj,indent=2,sort_keys=True,default=str)+"\n",encoding="utf-8")
+    tmp.replace(path)
+
+def emit(kind,**kw):
+    EVENTS.parent.mkdir(parents=True,exist_ok=True)
+    with EVENTS.open("a",encoding="utf-8") as f:
+        f.write(json.dumps({"ts":time.time(),"kind":kind,**kw},sort_keys=True,default=str)+"\n")
+
+def _eligible(req):
+    if not isinstance(req,dict): return False,"not_dict"
+    if req.get("status")!="research_required": return False,"status_not_research_required"
+    checks=("execution_allowed","external_action_allowed","financial_action_allowed","credential_access_allowed","deployment_allowed")
+    for key in checks:
+        if req.get(key) is not False:return False,key+"_not_false"
+    contract=req.get("generation_contract") or {}
+    for key in ("must_be_new_capability","must_have_tests","must_pass_isolated_validation","must_not_duplicate_source","promotion_requires_existing_expansion_pipeline"):
+        if contract.get(key) is not True:return False,"contract_missing:"+key
+    if not req.get("requested_capability"):return False,"requested_capability_missing"
+    return True,"ok"
+
+def _gap(req):
+    cid=str(req["requested_capability"])
+    return {"id":cid,"title":cid.replace("_"," ").title(),"reason":str(req.get("reason") or "Compounding capability request"),"source_capability":req.get("source_capability"),"gap_type":req.get("gap_type"),"gap_id":req.get("gap_id")}
+
+def _context(req):
+    return {
+        "compounding_request":req,
+        "capability_feedback":load(RT/"capability_feedback_state.json",{}),
+        "diagnostics":load(RT/"autonomous_diagnostics_state.json",{}),
+        "profit":load(RT/"profit_opportunity_status.json",{}),
+    }
+
+def _update(queue,index,**updates):
+    queue["requests"][index].update(updates)
+    queue["requests"][index]["updated_at"]=time.time()
+    atomic(QUEUE,queue)
+
+def process_one():
+    from companyos.runtime import capability_expansion as ce
+    queue=load(QUEUE,{"requests":[]})
+    reqs=queue.get("requests",[])
+    if not isinstance(reqs,list):
+        return {"ok":False,"status":"bad_queue"}
+
+    selected=None
+    for i,req in enumerate(reqs):
+        ok,_=_eligible(req)
+        if ok:
+            selected=(i,req)
+            break
+    if selected is None:
+        return {"ok":True,"status":"idle","reason":"no_eligible_research_required_request"}
+
+    i,req=selected
+    gap=_gap(req); cid=gap["id"]
+    inv=ce.capability_inventory()
+
+    if cid in inv:
+        try:
+            execution=ce.run_capability(cid,_context(req))
+            _update(queue,i,status="completed",result="existing_capability_used",execution=execution,completed_at=time.time())
+            emit("completed_existing",capability=cid,gap_id=req.get("gap_id"))
+            return {"ok":True,"status":"completed_existing","capability":cid}
+        except Exception as exc:
+            _update(queue,i,status="rejected",result="existing_capability_failed",error=repr(exc))
+            return {"ok":False,"status":"existing_capability_failed","error":repr(exc)}
+
+    _update(queue,i,status="generating",started_at=time.time())
+    ctx=_context(req)
+    gen=ce.model_plan(gap,ctx)
+    queue=load(QUEUE,{"requests":[]})
+    if not gen.get("ok"):
+        _update(queue,i,status="research_required",last_attempt="generation_failed",generation=gen)
+        emit("generation_failed",capability=cid,gap_id=req.get("gap_id"))
+        return {"ok":False,"status":"generation_failed","generation":gen}
+
+    module_content,_,shape=ce._classify_generated_contents(gen.get("plan") or {},cid)
+    if shape:
+        queue=load(QUEUE,{"requests":[]})
+        _update(queue,i,status="rejected",result="generation_shape_invalid",errors=shape)
+        return {"ok":True,"status":"generation_shape_invalid","errors":shape}
+
+    dup_fn=getattr(ce,"_is_duplicate_generated_source",None)
+    if callable(dup_fn) and module_content:
+        is_dup,dup_id=dup_fn(module_content)
+        if is_dup:
+            queue=load(QUEUE,{"requests":[]})
+            _update(queue,i,status="rejected",result="duplicate_capability",duplicate_of=dup_id)
+            emit("duplicate_rejected",capability=cid,duplicate_of=dup_id)
+            return {"ok":True,"status":"duplicate_rejected","duplicate_of":dup_id}
+
+    candidate_id,stage,errors=ce.stage_plan(gap,gen["plan"])
+    queue=load(QUEUE,{"requests":[]})
+    if errors:
+        _update(queue,i,status="rejected",result="validation_failed",candidate_id=candidate_id,errors=errors)
+        return {"ok":True,"status":"validation_rejected","errors":errors}
+
+    ok,tests=ce.test_stage(stage,cid)
+    queue=load(QUEUE,{"requests":[]})
+    if not ok:
+        _update(queue,i,status="rejected",result="tests_failed",candidate_id=candidate_id,tests=tests)
+        return {"ok":True,"status":"tests_rejected","tests":tests}
+
+    receipt=ce.promote(stage,cid,candidate_id)
+    try:
+        execution=ce.run_capability(cid,ctx)
+    except Exception as exc:
+        ce.rollback(cid)
+        queue=load(QUEUE,{"requests":[]})
+        _update(queue,i,status="rejected",result="canary_failed_rolled_back",candidate_id=candidate_id,error=repr(exc))
+        return {"ok":False,"status":"canary_failed_rolled_back","error":repr(exc)}
+
+    queue=load(QUEUE,{"requests":[]})
+    _update(queue,i,status="completed",result="capability_promoted_and_used",candidate_id=candidate_id,promotion=receipt,execution=execution,completed_at=time.time())
+    emit("completed_promoted",capability=cid,candidate_id=candidate_id,gap_id=req.get("gap_id"))
+    return {"ok":True,"status":"capability_promoted_and_used","capability":cid,"candidate_id":candidate_id}
+
+def cycle():
+    result=process_one()
+    state={"running":True,"last_cycle_unix":time.time(),"result":result}
+    atomic(STATE,state)
+    return state
+
+def run():
+    interval=max(120,int(os.getenv("COMPANYOS_CAPABILITY_REQUEST_EXECUTOR_INTERVAL_SECONDS","300")))
+    while not STOP.exists():
+        try:cycle()
+        except Exception as exc:
+            atomic(STATE,{"running":True,"last_cycle_unix":time.time(),"result":{"ok":False,"status":"cycle_exception","error":repr(exc)}})
+            emit("cycle_exception",error=repr(exc),traceback=traceback.format_exc()[-4000:])
+        time.sleep(interval)
+
+if __name__=="__main__":
+    import argparse
+    a=argparse.ArgumentParser();a.add_argument("command",nargs="?",default="run",choices=("run","once","status"));cmd=a.parse_args().command
+    if cmd=="run":run()
+    elif cmd=="once":print(json.dumps(cycle(),indent=2,sort_keys=True,default=str))
+    else:print(json.dumps(load(STATE,{"status":"not_run"}),indent=2,sort_keys=True,default=str))

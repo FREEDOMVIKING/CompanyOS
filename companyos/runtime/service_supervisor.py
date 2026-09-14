@@ -100,6 +100,16 @@ class ServiceSupervisor:
             )
         if (Path.home()/"companyos/companyos/runtime/capability_expansion.py").exists():
             services.append(ManagedService("capability_expansion", (python, "-m", "companyos.runtime.capability_expansion", "run")))
+        if (Path.home()/"companyos/companyos/runtime/capability_feedback.py").exists():
+            services.append(ManagedService("capability_feedback", (python, "-m", "companyos.runtime.capability_feedback", "run")))
+            services.append(ManagedService("compounding_capability_expansion", (python, "-m", "companyos.runtime.compounding_capability_expansion")))
+        if (Path.home()/"companyos/companyos/runtime/capability_request_executor.py").exists():
+            services.append(
+                ManagedService(
+                    "capability_request_executor",
+                    (python, "-m", "companyos.runtime.capability_request_executor", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
