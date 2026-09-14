@@ -167,6 +167,17 @@ def stage_plan(gap,plan):
  if not errors:
   a=root/module_path;b=root/test_path
   a.parent.mkdir(parents=True,exist_ok=True);b.parent.mkdir(parents=True,exist_ok=True)
+  # COMPANYOS_STAGING_PACKAGE_FIX_V4
+  for init_path in (
+      root/"companyos/__init__.py",
+      root/"companyos/extensions/__init__.py",
+      root/"companyos/extensions/generated/__init__.py",
+      root/"tests/__init__.py",
+      root/"tests/generated/__init__.py",
+  ):
+   init_path.parent.mkdir(parents=True,exist_ok=True)
+   if not init_path.exists():
+    init_path.write_text("",encoding="utf-8")
   a.write_text(module_content,encoding="utf-8");b.write_text(test_content,encoding="utf-8")
  atomic(root/"proposal.json",{"gap":gap,"plan":plan,"normalized_paths":[module_path,test_path],"validation_errors":errors})
  return cid,root,sorted(set(errors))
