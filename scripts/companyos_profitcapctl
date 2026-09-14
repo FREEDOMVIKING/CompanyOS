@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+case "${1:-status}" in
+  once) python -m companyos.runtime.profit_directed_capability_priority once ;;
+  status) python -m companyos.runtime.profit_directed_capability_priority status ;;
+  events) tail -n "${2:-40}" .companyos_runtime/capability_expansion/profit_directed_priority_events.jsonl 2>/dev/null || true ;;
+  *) echo "usage: scripts/companyos_profitcapctl {once|status|events [N]}"; exit 2 ;;
+esac

@@ -101,6 +101,7 @@ def request_guard(req,h,now):
 def newest_pending_request():
     q=queue_state().get("requests",[])
     pending=[x for x in q if isinstance(x,dict) and x.get("status")=="research_required"]
+    pending.sort(key=lambda r:(-int(r.get("profit_directed_priority",r.get("priority",0)) or 0),float(r.get("created_at",0) or 0),str(r.get("requested_capability",""))))
     return pending[0] if pending else None
 
 def quarantine(capability_id,reason):
@@ -130,6 +131,7 @@ def one_cycle():
     from companyos.runtime import capability_feedback as feedback
     from companyos.runtime import compounding_capability_expansion as compound
     from companyos.runtime import semantic_capability_bridge as semantic
+    from companyos.runtime import profit_directed_capability_priority as profit_priority
     from companyos.runtime import capability_request_executor as executor
 
     now=time.time()
@@ -144,7 +146,10 @@ def one_cycle():
     compound_result=compound.once()
     semantic_before=semantic.cycle()
 
-    # Prefer whatever guarded request is now pending.
+    # COMPANYOS_PROFIT_DIRECTED_RECURSION_V16
+    profit_priority_before=profit_priority.cycle()
+
+    # Prefer the highest-ranked guarded request now pending.
     req=newest_pending_request()
 
     selected=None
@@ -189,6 +194,7 @@ def one_cycle():
         "feedback_before":feedback_result.get("summary") if isinstance(feedback_result,dict) else None,
         "compound":compound_result,
         "semantic_before":semantic_before,
+        "profit_priority_before":profit_priority_before,
         "executor":executor_result,
         "feedback_after":feedback_after.get("summary") if isinstance(feedback_after,dict) else None,
         "semantic_after":semantic_after,
