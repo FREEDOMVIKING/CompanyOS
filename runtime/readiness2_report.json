@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-09-11T01:23:50.626303+00:00",
+  "decision": "blocked",
+  "blockers": [
+    "runtime_aware_preflight_not_ready",
+    "reliability_score_below_threshold"
+  ],
+  "warnings": [],
+  "checks": [
+    {
+      "check": "runtime_aware_preflight",
+      "passed": false
+    },
+    {
+      "check": "reliability_score",
+      "passed": false,
+      "value": 60
+    },
+    {
+      "check": "watchdog_health",
+      "passed": true
+    },
+    {
+      "check": "critical_incident_absent",
+      "passed": true
+    },
+    {
+      "check": "resource_health",
+      "passed": true,
+      "value": "healthy"
+    },
+    {
+      "check": "recent_backup",
+      "passed": true,
+      "age_hours": 0.0
+    },
+    {
+      "check": "integrity_health",
+      "passed": true
+    }
+  ],
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

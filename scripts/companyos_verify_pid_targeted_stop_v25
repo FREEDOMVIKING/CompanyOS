@@ -1,0 +1,24 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+echo "===== COMPANYOS V25 REPAIR ====="
+python -m py_compile companyos/runtime/runtime_control.py companyos/runtime/service_supervisor.py
+echo "COMPILE=PASS"
+rm -f .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+scripts/companyosctl recover || scripts/companyosctl start || true
+sleep 12
+PID="$(cat .companyos_runtime/service_supervisor.pid 2>/dev/null || true)"
+echo "SUPERVISOR_PID=$PID"
+[ -n "$PID" ] && kill -0 "$PID" 2>/dev/null || { echo "ERROR:SUPERVISOR_NOT_ALIVE"; exit 1; }
+printf 'stop\n' > .companyos_runtime/STOP_CONTINUOUS
+sleep 12
+kill -0 "$PID" 2>/dev/null || { echo "ERROR:STALE_STOP_KILLED_SUPERVISOR"; exit 1; }
+echo "STALE_STOP_IMMUNITY=PASS"
+scripts/companyosctl stop >/dev/null || true
+sleep 5
+if kill -0 "$PID" 2>/dev/null; then echo "ERROR:TARGETED_STOP_FAILED"; exit 1; fi
+echo "TARGETED_STOP=PASS"
+scripts/companyosctl start || scripts/companyosctl recover
+sleep 20
+scripts/companyosctl health || true
+echo "COMPANYOS_PID_TARGETED_STOP_REPAIR_V25=PASS"

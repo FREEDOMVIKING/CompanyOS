@@ -1,0 +1,74 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+
+echo "===== V27.1 STOP PATH REPAIR ====="
+
+echo "[1/7] Compile"
+python -m py_compile companyos/runtime/runtime_control.py companyos/runtime/service_supervisor.py
+echo "COMPILE=PASS"
+
+echo "[2/7] Confirm stop_path exists"
+python - <<'PY'
+from companyos.runtime.runtime_control import UnifiedRuntimeControl
+rc=UnifiedRuntimeControl()
+print("STOP_PATH=", rc.stop_path)
+assert rc.stop_path.name == "SUPERVISOR_STOP"
+print("STOP_PATH_CONTRACT=PASS")
+PY
+
+echo "[3/7] Remove stale test stop files"
+rm -f .companyos_runtime/SUPERVISOR_STOP .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+
+echo "[4/7] Start CompanyOS"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 12
+
+PID="$(cat .companyos_runtime/service_supervisor.pid 2>/dev/null || true)"
+echo "SUPERVISOR_PID=$PID"
+[ -n "$PID" ] && kill -0 "$PID" 2>/dev/null || { echo "ERROR:SUPERVISOR_NOT_ALIVE"; exit 1; }
+
+echo "[5/7] Legacy STOP_CONTINUOUS isolation test"
+printf 'stop\n' > .companyos_runtime/STOP_CONTINUOUS
+sleep 12
+kill -0 "$PID" 2>/dev/null || { echo "ERROR:LEGACY_STOP_KILLED_SUPERVISOR"; exit 1; }
+echo "GLOBAL_STOP_ISOLATION=PASS"
+rm -f .companyos_runtime/STOP_CONTINUOUS
+
+echo "[6/7] Intentional stop/start test"
+scripts/companyosctl stop >/dev/null || true
+sleep 5
+if kill -0 "$PID" 2>/dev/null; then
+  echo "ERROR:INTENTIONAL_STOP_FAILED"
+  exit 1
+fi
+echo "INTENTIONAL_STOP=PASS"
+
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 25
+
+echo "[7/7] Final status"
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+p=Path(".companyos_runtime/service_supervisor_state.json")
+d=json.loads(p.read_text()) if p.exists() else {}
+pid=d.get("supervisor_pid")
+alive=False
+try:
+    os.kill(int(pid),0); alive=True
+except Exception:
+    pass
+services=d.get("services") or {}
+dead=[k for k,v in services.items() if isinstance(v,dict) and not v.get("running")]
+print("SUPERVISOR_PID=",pid)
+print("SUPERVISOR_ALIVE=",alive)
+print("SERVICE_COUNT=",len(services))
+print("DEAD_SERVICES=",dead)
+print("STOP_REQUESTED=",d.get("stop_requested"))
+if not alive or dead:
+    sys.exit(1)
+PY
+
+scripts/companyosctl health || true
+echo "COMPANYOS_STOP_PATH_REPAIR_V27_1=PASS"

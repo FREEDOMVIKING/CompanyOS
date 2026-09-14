@@ -1,0 +1,62 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+
+echo "===== V26 STOP REQUEST HARDENING ====="
+python -m py_compile companyos/runtime/service_supervisor.py companyos/runtime/runtime_control.py
+echo "COMPILE=PASS"
+
+rm -f .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+
+echo "[1/5] Start CompanyOS"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 12
+
+PID="$(cat .companyos_runtime/service_supervisor.pid 2>/dev/null || true)"
+echo "SUPERVISOR_PID=$PID"
+[ -n "$PID" ] && kill -0 "$PID" 2>/dev/null || { echo "ERROR:SUPERVISOR_NOT_ALIVE"; exit 1; }
+
+echo "[2/5] Legacy stale stop immunity"
+printf 'stop\n' > .companyos_runtime/STOP_CONTINUOUS
+sleep 12
+kill -0 "$PID" 2>/dev/null || { echo "ERROR:LEGACY_STOP_KILLED_SUPERVISOR"; exit 1; }
+echo "LEGACY_STOP_IMMUNITY=PASS"
+
+echo "[3/5] Intentional stop"
+scripts/companyosctl stop >/dev/null || true
+sleep 5
+if kill -0 "$PID" 2>/dev/null; then
+  echo "ERROR:INTENTIONAL_STOP_FAILED"
+  exit 1
+fi
+echo "INTENTIONAL_STOP=PASS"
+
+echo "[4/5] Restart and soak"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 30
+
+echo "[5/5] Verify services"
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+p=Path(".companyos_runtime/service_supervisor_state.json")
+d=json.loads(p.read_text()) if p.exists() else {}
+pid=d.get("supervisor_pid")
+alive=False
+try:
+    os.kill(int(pid),0)
+    alive=True
+except Exception:
+    pass
+services=d.get("services") or {}
+dead=[n for n,v in services.items() if isinstance(v,dict) and not v.get("running")]
+print("SUPERVISOR_ALIVE=",alive)
+print("SERVICE_COUNT=",len(services))
+print("DEAD_SERVICES=",dead)
+print("STOP_REQUESTED=",d.get("stop_requested"))
+if not alive or dead:
+    sys.exit(1)
+PY
+
+scripts/companyosctl health || true
+echo "COMPANYOS_REQUEST_STOP_PID_TARGET_V26=PASS"

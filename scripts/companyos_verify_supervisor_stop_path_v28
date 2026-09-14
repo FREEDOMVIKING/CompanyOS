@@ -1,0 +1,114 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+
+echo "===== COMPANYOS V28 SUPERVISOR STOP-PATH REPAIR ====="
+
+echo "[1/7] Compile"
+python -m py_compile companyos/runtime/service_supervisor.py companyos/runtime/runtime_control.py
+echo "COMPILE=PASS"
+
+echo "[2/7] Verify BOTH classes"
+python - <<'PY'
+from companyos.runtime.service_supervisor import ServiceSupervisor
+from companyos.runtime.runtime_control import UnifiedRuntimeControl
+
+ss=ServiceSupervisor()
+rc=UnifiedRuntimeControl()
+
+print("SERVICE_SUPERVISOR_HAS_STOP_PATH=",hasattr(ss,"stop_path"))
+print("SERVICE_SUPERVISOR_STOP_PATH=",getattr(ss,"stop_path",None))
+print("RUNTIME_CONTROL_HAS_STOP_PATH=",hasattr(rc,"stop_path"))
+print("RUNTIME_CONTROL_STOP_PATH=",getattr(rc,"stop_path",None))
+
+assert hasattr(ss,"stop_path")
+assert ss.stop_path.name=="SUPERVISOR_STOP"
+assert hasattr(rc,"stop_path")
+assert rc.stop_path.name=="SUPERVISOR_STOP"
+print("DUAL_STOP_PATH_CONTRACT=PASS")
+PY
+
+echo "[3/7] Clear stale stop artifacts"
+rm -f .companyos_runtime/SUPERVISOR_STOP .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+
+echo "[4/7] Start supervisor directly through control"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 15
+
+PID="$(cat .companyos_runtime/service_supervisor.pid 2>/dev/null || true)"
+echo "SUPERVISOR_PID=$PID"
+[ -n "$PID" ] || { echo "ERROR:NO_SUPERVISOR_PID"; exit 1; }
+kill -0 "$PID" 2>/dev/null || {
+  echo "ERROR:SUPERVISOR_DIED"
+  tail -n 80 .companyos_runtime/service_supervisor.log 2>/dev/null || true
+  exit 1
+}
+echo "SUPERVISOR_START=PASS"
+
+echo "[5/7] Ensure all managed children alive"
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+p=Path(".companyos_runtime/service_supervisor_state.json")
+d=json.loads(p.read_text())
+services=d.get("services") or {}
+dead=[]
+for name,v in services.items():
+    if not isinstance(v,dict):
+        continue
+    pid=v.get("pid")
+    alive=False
+    try:
+        if pid:
+            os.kill(int(pid),0)
+            alive=True
+    except Exception:
+        pass
+    if not (v.get("running") and alive):
+        dead.append(name)
+print("SERVICE_COUNT=",len(services))
+print("DEAD_SERVICES=",dead)
+if dead:
+    sys.exit(1)
+print("ALL_MANAGED_SERVICES=PASS")
+PY
+
+echo "[6/7] Dedicated intentional stop/start"
+OLDPID="$PID"
+scripts/companyosctl stop >/dev/null || true
+sleep 6
+if kill -0 "$OLDPID" 2>/dev/null; then
+  echo "ERROR:DEDICATED_STOP_FAILED"
+  exit 1
+fi
+echo "DEDICATED_STOP=PASS"
+
+rm -f .companyos_runtime/SUPERVISOR_STOP .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 20
+
+echo "[7/7] Final health"
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+p=Path(".companyos_runtime/service_supervisor_state.json")
+d=json.loads(p.read_text()) if p.exists() else {}
+pid=d.get("supervisor_pid")
+alive=False
+try:
+    os.kill(int(pid),0); alive=True
+except Exception:
+    pass
+services=d.get("services") or {}
+dead=[n for n,v in services.items() if isinstance(v,dict) and not v.get("running")]
+print("SUPERVISOR_PID=",pid)
+print("SUPERVISOR_ALIVE=",alive)
+print("SERVICE_COUNT=",len(services))
+print("DEAD_SERVICES=",dead)
+print("STOP_REQUESTED=",d.get("stop_requested"))
+if not alive or dead:
+    sys.exit(1)
+print("FINAL_RUNTIME_HEALTH=PASS")
+PY
+
+echo "COMPANYOS_SERVICE_SUPERVISOR_STOP_PATH_V28=PASS"

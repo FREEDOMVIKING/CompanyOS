@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-09-02T13:08:40.518397+00:00",
+  "financial_queue": {
+    "items": []
+  },
+  "approvals": {
+    "items": []
+  },
+  "communications": {
+    "generated_at": "2026-09-02T13:08:39.726410+00:00",
+    "enabled": true,
+    "capabilities": {
+      "business_email": true,
+      "customer_messaging": true,
+      "api_messaging": true,
+      "contractual_commitments_require_owner_approval": true,
+      "mass_outreach_requires_owner_approval": true
+    },
+    "status": "connector_ready"
+  },
+  "publication": {
+    "generated_at": "2026-09-02T13:08:40.003499+00:00",
+    "enabled": true,
+    "automatic_publication": true,
+    "allowed_targets": [],
+    "paid_ad_campaigns_require_owner_approval": true,
+    "regulated_claims_require_owner_approval": true
+  },
+  "deployment": {
+    "generated_at": "2026-09-02T13:08:40.253582+00:00",
+    "enabled": true,
+    "automatic_deploy_to_approved_targets": true,
+    "approved_targets": [],
+    "require_tests_before_deploy": true,
+    "require_health_check_after_deploy": true,
+    "automatic_rollback_on_failure": true,
+    "new_production_target_requires_owner_approval": true
+  }
+}

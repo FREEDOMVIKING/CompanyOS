@@ -1,26 +1,51 @@
 from __future__ import annotations
+
 import json
+import shutil
+import subprocess
+import time
 from pathlib import Path
 
-def build_snapshot():
-    home=Path.home()
-    rt=home/".companyos_runtime"
-    paths={
-      "financial_state": rt/"treasury_live_state.json",
-      "ceo_runtime_state": rt/"autonomous_ceo_runtime_service.json",
-      "continuous_goal_state": rt/"continuous_goal_runtime_state.json",
-      "approval_queue": rt/"approval_queue",
-      "opportunities": rt/"opportunities",
-      "research_signals": rt/"research_signals",
-      "research_evidence": rt/"research_evidence",
-    }
-    snap={}
-    for k,p in paths.items():
-        if p.is_dir():
-            snap[k]={"present":p.exists(),"count":len(list(p.glob("*.json"))) if p.exists() else 0}
-        else:
-            snap[k]={"present":p.exists()}
-            if p.exists():
-                try: snap[k]["data"]=json.loads(p.read_text())
-                except Exception: snap[k]["data"]="unreadable"
-    return snap
+from companyos.runtime.runtime_status import RuntimeStatus
+
+
+class LaunchHealthSnapshot:
+    def __init__(self, root: Path | None = None):
+        self.root = Path(root or (Path.home() / "companyos")).resolve()
+        self.runtime_root = self.root / ".companyos_runtime"
+        self.runtime_root.mkdir(parents=True, exist_ok=True)
+        self.path = self.runtime_root / "launch_health_snapshot.json"
+
+    def build(self):
+        usage = shutil.disk_usage(self.root)
+        result = subprocess.run(
+            ["git", "status", "--short"],
+            cwd=self.root,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        changes = [x for x in result.stdout.splitlines() if x.strip()]
+
+        snapshot = {
+            "checked_at_unix": time.time(),
+            "runtime": RuntimeStatus(self.root).status(),
+            "repository": {
+                "git_ok": result.returncode == 0,
+                "dirty": bool(changes),
+                "change_count": len(changes),
+                "changes": changes[:100],
+            },
+            "storage": {
+                "free_gb": round(usage.free / (1024 ** 3), 2),
+                "total_gb": round(usage.total / (1024 ** 3), 2),
+            },
+        }
+
+        tmp = self.path.with_suffix(".json.tmp")
+        tmp.write_text(
+            json.dumps(snapshot, indent=2, sort_keys=True, default=str) + "\n",
+            encoding="utf-8",
+        )
+        tmp.replace(self.path)
+        return snapshot

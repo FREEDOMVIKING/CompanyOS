@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+case "${1:-status}" in
+ once) python -m companyos.runtime.autonomous_diagnostics --once;;
+ status) cat .companyos_runtime/autonomous_diagnostics_state.json 2>/dev/null || echo '{"status":"not_run"}';;
+ events) tail -n "${2:-40}" .companyos_runtime/autonomous_diagnostics_events.jsonl 2>/dev/null || true;;
+ *) echo "usage: companyos_diagctl {once|status|events [N]}"; exit 2;;
+esac

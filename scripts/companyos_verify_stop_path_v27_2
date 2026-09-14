@@ -1,0 +1,79 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+
+echo "===== V27.2 STOP PATH FIX ====="
+
+echo "[1/8] Compile"
+python -m py_compile companyos/runtime/runtime_control.py companyos/runtime/service_supervisor.py
+echo "COMPILE=PASS"
+
+echo "[2/8] Constructor contract"
+python - <<'PY'
+from companyos.runtime.runtime_control import UnifiedRuntimeControl
+rc=UnifiedRuntimeControl()
+print("HAS_STOP_PATH=",hasattr(rc,"stop_path"))
+print("STOP_PATH=",getattr(rc,"stop_path",None))
+assert hasattr(rc,"stop_path")
+assert rc.stop_path.name=="SUPERVISOR_STOP"
+print("STOP_PATH_CONTRACT=PASS")
+PY
+
+echo "[3/8] Clean stale stop artifacts"
+rm -f .companyos_runtime/SUPERVISOR_STOP .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+
+echo "[4/8] Start"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 12
+
+PID="$(cat .companyos_runtime/service_supervisor.pid 2>/dev/null || true)"
+echo "SUPERVISOR_PID=$PID"
+[ -n "$PID" ] && kill -0 "$PID" 2>/dev/null || { echo "ERROR:SUPERVISOR_NOT_ALIVE_AFTER_START"; exit 1; }
+
+echo "[5/8] Legacy STOP_CONTINUOUS isolation"
+printf 'stop\n' > .companyos_runtime/STOP_CONTINUOUS
+sleep 12
+kill -0 "$PID" 2>/dev/null || { echo "ERROR:LEGACY_STOP_KILLED_SUPERVISOR"; exit 1; }
+echo "GLOBAL_STOP_ISOLATION=PASS"
+rm -f .companyos_runtime/STOP_CONTINUOUS
+
+echo "[6/8] Intentional supervisor stop"
+scripts/companyosctl stop >/dev/null || true
+sleep 5
+if kill -0 "$PID" 2>/dev/null; then
+  echo "ERROR:INTENTIONAL_STOP_FAILED"
+  exit 1
+fi
+echo "INTENTIONAL_STOP=PASS"
+
+echo "[7/8] Restart + soak"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 25
+
+echo "[8/8] Final verification"
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+p=Path(".companyos_runtime/service_supervisor_state.json")
+d=json.loads(p.read_text()) if p.exists() else {}
+pid=d.get("supervisor_pid")
+alive=False
+try:
+    os.kill(int(pid),0); alive=True
+except Exception:
+    pass
+services=d.get("services") or {}
+dead=[k for k,v in services.items() if isinstance(v,dict) and not v.get("running")]
+print("SUPERVISOR_PID=",pid)
+print("SUPERVISOR_ALIVE=",alive)
+print("SERVICE_COUNT=",len(services))
+print("DEAD_SERVICES=",dead)
+print("STOP_REQUESTED=",d.get("stop_requested"))
+print("SUPERVISOR_STOP_EXISTS=",Path(".companyos_runtime/SUPERVISOR_STOP").exists())
+print("LEGACY_STOP_EXISTS=",Path(".companyos_runtime/STOP_CONTINUOUS").exists())
+if not alive or dead:
+    sys.exit(1)
+PY
+
+scripts/companyosctl health || true
+echo "COMPANYOS_STOP_PATH_FIX_V27_2=PASS"

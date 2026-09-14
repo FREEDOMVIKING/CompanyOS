@@ -1,0 +1,606 @@
+{
+  "schema_version": 1,
+  "decisions": [
+    {
+      "id": "decision-b15b3d04d036",
+      "source_id": "invoice-d7e99861931c",
+      "source_type": "invoice",
+      "title": "Review receivable: Sample Contractor",
+      "category": "finance",
+      "description": "Invoice has $11,500.00 outstanding.",
+      "rank": 1,
+      "priority_score": 91.0,
+      "priority_band": "critical",
+      "estimated_value": 11500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is critical.",
+          "It has an estimated value of $11,500.00.",
+          "Delay may reduce revenue or increase operating risk.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490231+00:00",
+      "updated_at": "2026-07-18T04:01:44.490234+00:00"
+    },
+    {
+      "id": "decision-e89592185f4a",
+      "source_id": "oppdisc-60e0812a7dc5",
+      "source_type": "opportunity",
+      "title": "Recover receivable: Sample Contractor",
+      "category": "cash_recovery",
+      "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+      "rank": 2,
+      "priority_score": 81.3,
+      "priority_band": "high",
+      "estimated_value": 11500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $11,500.00.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490248+00:00",
+      "updated_at": "2026-07-18T04:01:44.490250+00:00"
+    },
+    {
+      "id": "decision-e58ee52eaedc",
+      "source_id": "oppdisc-982ee88708bc",
+      "source_type": "opportunity",
+      "title": "Advance lead: Driveway Replacement",
+      "category": "sales",
+      "description": "Move Sample Contractor from new toward an approved proposal.",
+      "rank": 3,
+      "priority_score": 77.5,
+      "priority_band": "high",
+      "estimated_value": 12500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $12,500.00.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490262+00:00",
+      "updated_at": "2026-07-18T04:01:44.490263+00:00"
+    },
+    {
+      "id": "decision-01e1d8180ae5",
+      "source_id": "followup-f51333cfa177",
+      "source_type": "followup",
+      "title": "Review follow-up: Sample Contractor",
+      "category": "sales",
+      "description": "Review lead and prepare owner-approved follow-up.",
+      "rank": 4,
+      "priority_score": 74.4,
+      "priority_band": "high",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "Delay may reduce revenue or increase operating risk.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified.",
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490273+00:00",
+      "updated_at": "2026-07-18T04:01:44.490274+00:00"
+    },
+    {
+      "id": "decision-5200616ae55a",
+      "source_id": "task-eb820b859cf3",
+      "source_type": "internal_task",
+      "title": "Design core user workflow",
+      "category": "operations",
+      "description": "Map the main user journey from first use through successful completion of the core workflow.",
+      "rank": 5,
+      "priority_score": 67.0,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "Delay may reduce revenue or increase operating risk.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490281+00:00",
+      "updated_at": "2026-07-18T04:01:44.490283+00:00"
+    },
+    {
+      "id": "decision-ab2f096501a2",
+      "source_id": "task-82d38d4f9b65",
+      "source_type": "internal_task",
+      "title": "Define project data model",
+      "category": "operations",
+      "description": "Define the entities, records and relationships required by the MVP.",
+      "rank": 6,
+      "priority_score": 66.4,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "Delay may reduce revenue or increase operating risk.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490290+00:00",
+      "updated_at": "2026-07-18T04:01:44.490291+00:00"
+    },
+    {
+      "id": "decision-ce2e87d03613",
+      "source_id": "task-c8d5cc150ca3",
+      "source_type": "internal_task",
+      "title": "Build MVP project structure",
+      "category": "operations",
+      "description": "Create the initial project structure, configuration, modules and local runtime.",
+      "rank": 7,
+      "priority_score": 65.5,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "Delay may reduce revenue or increase operating risk.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490300+00:00",
+      "updated_at": "2026-07-18T04:01:44.490301+00:00"
+    },
+    {
+      "id": "decision-04ab4ab06425",
+      "source_id": "task-bd393b27b270",
+      "source_type": "internal_task",
+      "title": "Build core MVP workflow",
+      "category": "operations",
+      "description": "Implement the primary workflow required to solve the customer's main problem.",
+      "rank": 8,
+      "priority_score": 64.6,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "Delay may reduce revenue or increase operating risk.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490308+00:00",
+      "updated_at": "2026-07-18T04:01:44.490309+00:00"
+    },
+    {
+      "id": "decision-c872d23cb9ca",
+      "source_id": "project-d7c6da306465",
+      "source_type": "project",
+      "title": "Advance project: Driveway Replacement",
+      "category": "operations",
+      "description": "Project is 0% complete and currently planning.",
+      "rank": 9,
+      "priority_score": 64.5,
+      "priority_band": "medium",
+      "estimated_value": 12500.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It has an estimated value of $12,500.00.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490316+00:00",
+      "updated_at": "2026-07-18T04:01:44.490318+00:00"
+    },
+    {
+      "id": "decision-8c968e9f4bfa",
+      "source_id": "task-e8fd6aeae630",
+      "source_type": "internal_task",
+      "title": "Create internal test suite",
+      "category": "operations",
+      "description": "Create repeatable tests for the main product workflow and expected failure conditions.",
+      "rank": 10,
+      "priority_score": 63.4,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490324+00:00",
+      "updated_at": "2026-07-18T04:01:44.490326+00:00"
+    },
+    {
+      "id": "decision-c435c6d57929",
+      "source_id": "oppdisc-377f943bc4f1",
+      "source_type": "opportunity",
+      "title": "Create first customer retention offer",
+      "category": "retention",
+      "description": "Use existing customer records to design a repeat-service or maintenance offer for owner review.",
+      "rank": 11,
+      "priority_score": 62.7,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified.",
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490332+00:00",
+      "updated_at": "2026-07-18T04:01:44.490334+00:00"
+    },
+    {
+      "id": "decision-75ba15b100d3",
+      "source_id": "task-3b87f6c647c7",
+      "source_type": "internal_task",
+      "title": "Run product validation review",
+      "category": "operations",
+      "description": "Review the MVP against the proposal, acceptance criteria and customer problem.",
+      "rank": 12,
+      "priority_score": 62.2,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490341+00:00",
+      "updated_at": "2026-07-18T04:01:44.490343+00:00"
+    },
+    {
+      "id": "decision-4faf8795729c",
+      "source_id": "task-37e3324efffd",
+      "source_type": "internal_task",
+      "title": "Create product documentation",
+      "category": "operations",
+      "description": "Create installation, usage and maintenance documentation.",
+      "rank": 13,
+      "priority_score": 61.0,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490350+00:00",
+      "updated_at": "2026-07-18T04:01:44.490352+00:00"
+    },
+    {
+      "id": "decision-fd987e87d48b",
+      "source_id": "task-4ae37c5a4935",
+      "source_type": "internal_task",
+      "title": "Create deployment and launch checklist",
+      "category": "operations",
+      "description": "Prepare an internal deployment and launch checklist. No external publication is authorized.",
+      "rank": 14,
+      "priority_score": 59.5,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490358+00:00",
+      "updated_at": "2026-07-18T04:01:44.490360+00:00"
+    },
+    {
+      "id": "decision-fe00844854d2",
+      "source_id": "task-f2116d82e4cc",
+      "source_type": "internal_task",
+      "title": "Review new lead",
+      "category": "operations",
+      "description": "Review lead for Sample Contractor - Driveway Replacement.",
+      "rank": 15,
+      "priority_score": 58.0,
+      "priority_band": "medium",
+      "estimated_value": 0.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Financial value is not yet quantified."
+        ],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:01:44.490366+00:00",
+      "updated_at": "2026-07-18T04:01:44.490368+00:00"
+    },
+    {
+      "id": "decision-ae5c422396f1",
+      "source_id": "e2e-invoice-001",
+      "source_type": "invoice",
+      "title": "Review receivable: E2E Test Customer",
+      "category": "finance",
+      "description": "Invoice has $1,250.00 outstanding.",
+      "rank": 2,
+      "priority_score": 91.0,
+      "priority_band": "critical",
+      "estimated_value": 1250.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is critical.",
+          "It has an estimated value of $1,250.00.",
+          "Delay may reduce revenue or increase operating risk.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.681993+00:00",
+      "updated_at": "2026-07-18T04:47:26.681995+00:00"
+    },
+    {
+      "id": "decision-95bcc2a7d742",
+      "source_id": "oppdisc-aa15a45c9641",
+      "source_type": "opportunity",
+      "title": "Recover receivable: Sample Contractor",
+      "category": "cash_recovery",
+      "description": "Internally review invoice invoice-d7e99861931c with $11,500.00 outstanding.",
+      "rank": 3,
+      "priority_score": 81.3,
+      "priority_band": "high",
+      "estimated_value": 11500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $11,500.00.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682007+00:00",
+      "updated_at": "2026-07-18T04:47:26.682009+00:00"
+    },
+    {
+      "id": "decision-7e482dfbea21",
+      "source_id": "oppdisc-76a988d89351",
+      "source_type": "opportunity",
+      "title": "Recover receivable: E2E Test Customer",
+      "category": "cash_recovery",
+      "description": "Internally review invoice e2e-invoice-001 with $1,250.00 outstanding.",
+      "rank": 4,
+      "priority_score": 81.3,
+      "priority_band": "high",
+      "estimated_value": 1250.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $1,250.00.",
+          "Completing it would materially reduce business risk."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682020+00:00",
+      "updated_at": "2026-07-18T04:47:26.682022+00:00"
+    },
+    {
+      "id": "decision-ba6fcf48bdd5",
+      "source_id": "oppdisc-f83dbe7c8e35",
+      "source_type": "opportunity",
+      "title": "Advance lead: Driveway Replacement",
+      "category": "sales",
+      "description": "Move Sample Contractor from new toward an approved proposal.",
+      "rank": 5,
+      "priority_score": 77.5,
+      "priority_band": "high",
+      "estimated_value": 12500.0,
+      "status": "pending",
+      "recommended_action": "owner_review",
+      "explanation": {
+        "why_now": [
+          "The overall priority score is high.",
+          "It has an estimated value of $12,500.00.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [
+          "Owner approval is required before any external action."
+        ],
+        "recommended_outcome": "owner_review_required"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682028+00:00",
+      "updated_at": "2026-07-18T04:47:26.682030+00:00"
+    },
+    {
+      "id": "decision-8d0619a3b216",
+      "source_id": "e2e-project-001",
+      "source_type": "project",
+      "title": "Advance project: E2E Test Project",
+      "category": "operations",
+      "description": "Project is 35% complete and currently in_progress.",
+      "rank": 12,
+      "priority_score": 64.5,
+      "priority_band": "medium",
+      "estimated_value": 5000.0,
+      "status": "pending",
+      "recommended_action": "internal_execution_review",
+      "explanation": {
+        "why_now": [
+          "The item is important but not immediately critical.",
+          "It has an estimated value of $5,000.00.",
+          "It appears practical to move forward internally."
+        ],
+        "tradeoffs": [],
+        "recommended_outcome": "approve_internal_next_step"
+      },
+      "owner_approval_required": true,
+      "external_action_authorized": false,
+      "automatic_execution": false,
+      "created_at": "2026-07-18T04:47:26.682040+00:00",
+      "updated_at": "2026-07-18T04:47:26.682042+00:00"
+    }
+  ],
+  "statistics": {
+    "total": 20,
+    "pending": 20,
+    "approved": 0,
+    "deferred": 0,
+    "rejected": 0
+  },
+  "last_updated_at": "2026-09-11T01:22:11.160584+00:00"
+}

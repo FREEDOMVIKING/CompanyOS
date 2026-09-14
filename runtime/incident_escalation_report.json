@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-19T03:01:27.662612+00:00",
+  "incident_count": 1,
+  "incidents": [
+    {
+      "severity": "warning",
+      "type": "system_readiness_degraded",
+      "issues": [
+        {
+          "type": "unhealthy_components",
+          "items": [
+            "autonomy_core_health.json",
+            "phase23_bundle3_health.json",
+            "drift_health.json",
+            "autonomy_watchdog_health.json",
+            "phase23_health.json",
+            "phase23_bundle2_health.json",
+            "phase24_health.json"
+          ]
+        }
+      ]
+    }
+  ],
+  "critical_incident": false,
+  "autonomy_halted": false,
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_deploy": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

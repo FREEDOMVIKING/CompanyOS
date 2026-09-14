@@ -1,0 +1,54 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json, os, sys
+from pathlib import Path
+from urllib import error, request
+
+def load_env():
+    p=Path.home()/".companyos_launch_env"
+    if not p.exists(): return
+    for raw in p.read_text().splitlines():
+        s=raw.strip()
+        if s.startswith("export ") and "=" in s:
+            k,v=s[7:].split("=",1); os.environ.setdefault(k.strip(),v.strip().strip("'\""))
+
+def api(path):
+    t=os.environ.get("CLOUDFLARE_API_TOKEN","")
+    req=request.Request("https://api.cloudflare.com/client/v4"+path,headers={"Authorization":f"Bearer {t}","Content-Type":"application/json"})
+    try:
+        with request.urlopen(req,timeout=30) as r: return r.status,json.loads(r.read().decode() or "{}")
+    except error.HTTPError as e:
+        b=e.read().decode("utf-8","replace")
+        try:o=json.loads(b)
+        except:o={"raw":b[:1000]}
+        return e.code,o
+
+def main():
+    load_env()
+    cmd=sys.argv[1] if len(sys.argv)>1 else "status"
+    token=os.environ.get("CLOUDFLARE_API_TOKEN",""); acct=os.environ.get("CLOUDFLARE_ACCOUNT_ID","")
+    if cmd=="status":
+        print(json.dumps({"provider":os.environ.get("COMPANYOS_HOSTING_PROVIDER","cloudflare"),
+                          "token":"SET" if token else "MISSING","account_id":"SET" if acct else "MISSING",
+                          "ready":bool(token and acct)},indent=2)); return
+    if cmd=="verify":
+        code,o=api("/user/tokens/verify")
+        print(json.dumps({"http_status":code,"success":bool(o.get("success")),
+                          "token_status":(o.get("result") or {}).get("status"),"errors":o.get("errors") or []},indent=2))
+        raise SystemExit(0 if code==200 and o.get("success") else 1)
+    if cmd=="projects":
+        code,o=api(f"/accounts/{acct}/pages/projects")
+        rows=o.get("result") or []
+        print(json.dumps({"http_status":code,"success":bool(o.get("success")),"project_count":len(rows),
+                          "projects":[{"name":x.get("name"),"subdomain":x.get("subdomain")} for x in rows[:25]],
+                          "errors":o.get("errors") or []},indent=2))
+        raise SystemExit(0 if code==200 and o.get("success") else 1)
+    if cmd in {"demo","commission"}:
+        root=Path.home()/"companyos"/".companyos_runtime"/"cloudflare_commissioning_site"; root.mkdir(parents=True,exist_ok=True)
+        (root/"index.html").write_text("<!doctype html><meta charset=utf-8><title>CompanyOS PASS</title><h1>CompanyOS Cloudflare Hosting: PASS</h1><p>Harmless commissioning deployment.</p>")
+        sys.path.insert(0,str(Path.home()/"companyos"))
+        from companyos.connectors_live.cloudflare_adapter import CloudflareHostingConnector
+        c=CloudflareHostingConnector({"enabled":True,"dry_run":False,"request_timeout_seconds":30,"max_retries":1})
+        r=c.execute("deploy_production",{"project_name":"companyos-commissioning","website_path":str(root),"branch":"main"})
+        print(json.dumps(r,indent=2)); raise SystemExit(0 if r.get("ok") else 1)
+    print("Usage: companyos_cloudflarectl [status|verify|projects|demo]"); raise SystemExit(2)
+main()

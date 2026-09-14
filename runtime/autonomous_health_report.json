@@ -1,0 +1,320 @@
+{
+  "generated_at": "2026-09-11T01:24:24.640916+00:00",
+  "issues_detected": 17,
+  "recoveries_attempted": 3,
+  "remaining_issues": 17,
+  "issues": [
+    {
+      "component": "operations",
+      "type": "unhealthy",
+      "severity": "high",
+      "details": {
+        "healthy": false,
+        "running": true,
+        "halted": false,
+        "last_cycle_at": "2026-09-11T01:23:50.951297+00:00",
+        "last_cycle_job_count": 3,
+        "failure_count": 1,
+        "last_error": ""
+      }
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "exception-recovery",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 8
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "autonomous-health-supervisor",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 39
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "github-read-connector",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 41
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "action-queue-coordinator",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 33
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "unified-control-cycle",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 34
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "readiness-recovery-coordinator",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 37
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "recovery-aware-closed-loop",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 35
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "strategic-goal-orchestrator",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 31
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "autonomous-ai-operations-core",
+      "type": "stalled-job",
+      "severity": "high",
+      "age_seconds": 736467.95
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "autonomous-ai-operations-core",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 30
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase23-strategic-autonomy-portfolio",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 28
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-business-workflow-orchestration",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 28
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-project-execution-incubation",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 26
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-governed-execution-operations",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 25
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-executive-delivery-governance",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 16
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-revenue-intelligence-executive",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 15
+    }
+  ],
+  "recoveries": [
+    {
+      "issue": {
+        "component": "operations",
+        "type": "unhealthy",
+        "severity": "high",
+        "details": {
+          "healthy": false,
+          "running": true,
+          "halted": false,
+          "last_cycle_at": "2026-09-11T01:23:50.951297+00:00",
+          "last_cycle_job_count": 3,
+          "failure_count": 1,
+          "last_error": ""
+        }
+      },
+      "recovery": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 31183\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "issue": {
+        "component": "scheduler-job",
+        "job_id": "exception-recovery",
+        "type": "repeated-failure",
+        "severity": "high",
+        "failure_count": 8
+      },
+      "recovery": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 31183\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "issue": {
+        "component": "scheduler-job",
+        "job_id": "autonomous-health-supervisor",
+        "type": "repeated-failure",
+        "severity": "high",
+        "failure_count": 39
+      },
+      "recovery": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"scheduler_already_running\",\n  \"pid\": 31183\n}\n",
+        "stderr": ""
+      }
+    }
+  ],
+  "remaining": [
+    {
+      "component": "operations",
+      "type": "unhealthy",
+      "severity": "high",
+      "details": {
+        "healthy": false,
+        "running": true,
+        "halted": false,
+        "last_cycle_at": "2026-09-11T01:23:50.951297+00:00",
+        "last_cycle_job_count": 3,
+        "failure_count": 1,
+        "last_error": ""
+      }
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "exception-recovery",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 8
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "autonomous-health-supervisor",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 39
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "github-read-connector",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 41
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "action-queue-coordinator",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 33
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "unified-control-cycle",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 34
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "readiness-recovery-coordinator",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 37
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "recovery-aware-closed-loop",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 35
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "strategic-goal-orchestrator",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 31
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "autonomous-ai-operations-core",
+      "type": "stalled-job",
+      "severity": "high",
+      "age_seconds": 736491.87
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "autonomous-ai-operations-core",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 30
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase23-strategic-autonomy-portfolio",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 28
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-business-workflow-orchestration",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 28
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-project-execution-incubation",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 26
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-governed-execution-operations",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 25
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-executive-delivery-governance",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 16
+    },
+    {
+      "component": "scheduler-job",
+      "job_id": "phase24-revenue-intelligence-executive",
+      "type": "repeated-failure",
+      "severity": "high",
+      "failure_count": 15
+    }
+  ],
+  "automatic_customer_contact": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

@@ -53,7 +53,9 @@ class ServiceSupervisor:
         self.runtime_root.mkdir(parents=True, exist_ok=True)
 
         self.state_path = self.runtime_root / "service_supervisor_state.json"
-        self.stop_path = self.runtime_root / "STOP_CONTINUOUS"
+        # COMPANYOS_SERVICE_SUPERVISOR_STOP_PATH_V28
+        self.stop_path = self.runtime_root / "SUPERVISOR_STOP"
+        # COMPANYOS_SUPERVISOR_DEDICATED_STOP_V27\n        self.stop_path = self.runtime_root / "SUPERVISOR_STOP"
         self.log_path = self.runtime_root / "service_supervisor.log"
         self.lock_path = self.runtime_root / "service_supervisor.lock"
 
@@ -263,8 +265,29 @@ class ServiceSupervisor:
             pass
         self._log(f"FORCE_KILL service={name} pid={child.pid}")
 
+    # COMPANYOS_REQUEST_STOP_PID_TARGET_V26
     def request_stop(self) -> None:
-        self.stop_path.write_text("stop\n", encoding="utf-8")
+        self.stop_path.write_text(f"pid={os.getpid()}\n", encoding="utf-8")
+
+    # COMPANYOS_PID_TARGETED_STOP_V25
+    def _targeted_stop_requested(self) -> bool:
+        if not self.stop_path.exists():
+            return False
+        try:
+            raw = self.stop_path.read_text(encoding="utf-8").strip()
+            expected = f"pid={os.getpid()}"
+            if raw == expected:
+                return True
+            stale = self.runtime_root / f"STOP_CONTINUOUS.stale.{int(time.time())}"
+            try:
+                self.stop_path.replace(stale)
+            except Exception:
+                self._clear_stop_file_for_start()
+            self._log(f"IGNORED_STALE_STOP_REQUEST raw={raw!r}")
+            return False
+        except Exception as exc:
+            self._log(f"STOP_REQUEST_READ_ERROR error={exc!r}")
+            return False
 
     def run(self) -> int:
         self._lock_file = self.lock_path.open("a+")
@@ -291,7 +314,7 @@ class ServiceSupervisor:
         signal.signal(signal.SIGINT, signal_handler)
 
         try:
-            while not self._stopping and not self.stop_path.exists():
+            while not self._stopping and not self._targeted_stop_requested():
                 for spec in self.services:
                     self._ensure_running(spec)
                 self._write_state()

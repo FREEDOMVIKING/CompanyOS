@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-09-02T13:08:49.511196+00:00",
+  "failure_count": 0,
+  "failed_steps": [],
+  "steps": [
+    {
+      "step": "multi_asset_balances",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"multi_asset_balance_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-02T13:08:49.175751+00:00\",\n    \"wallet_count\": 3,\n    \"balances\": [\n      {\n        \"wallet_id\": \"c9dc938395e4f9eea1\",\n        \"chain\": \"bitcoin\",\n        \"address\": \"bc1qw5r54zpk7adcg25qmk30gsq9uk6t5kejtaz56r\",\n        \"checked_at\": \"2026-09-02T13:08:47.451226+00:00\",\n        \"assets\": {\n          \"BTC\": 1.772e-05\n        },\n        \"status\": \"ok\",\n        \"rpc_used\": \"https://blockstream.info/api\"\n      },\n      {\n        \"wallet_id\": \"ea6dfbc69b23d1c0da\",\n        \"chain\": \"solana\",\n        \"address\": \"5DRKXC4SD4TfSTPG8aQej7kBbzrtX8Tgpn4PgRbTnCnQ\",\n        \"checked_at\": \"2026-09-02T13:08:47.922518+00:00\",\n        \"assets\": {\n          \"SOL\": 0.015913006,\n          \"USDT-SPL\": 0.0,\n          \"USDC-SPL\": 0.0\n        },\n        \"status\": \"ok\",\n        \"rpc_used\": \"https://api.mainnet-beta.solana.com\"\n      },\n      {\n        \"wallet_id\": \"c4ad78cf817e3f5b10\",\n        \"chain\": \"evm\",\n        \"address\": \"0xE57C8d32F81fCc98076026619c3eD8a04c65dFc8\",\n        \"checked_at\": \"2026-09-02T13:08:48.619080+00:00\",\n        \"assets\": {\n          \"ETH\": 0.0,\n          \"USDT-ERC20\": 0.0,\n          \"USDC-ERC20\": 0.0\n        },\n        \"status\": \"ok\",\n        \"rpc_used\": \"https://ethereum.publicnode.com\"\n      }\n    ]\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "multi_asset_events",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"multi_asset_event_generation_complete\",\n  \"event_count\": 6\n}\n",
+        "stderr": ""
+      }
+    }
+  ]
+}

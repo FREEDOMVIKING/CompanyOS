@@ -1,0 +1,29 @@
+#!/data/data/com.termux/files/usr/bin/python
+from __future__ import annotations
+import argparse, json, sys
+from pathlib import Path
+
+ROOT=Path.home()/"companyos"
+sys.path.insert(0,str(ROOT))
+from companyos.runtime.launch_runtime import CompanyOSLaunchRuntime
+from companyos.runtime.launch_readiness import LaunchReadinessAudit
+from companyos.runtime.launch_health_snapshot import LaunchHealthSnapshot
+
+def dump(x): print(json.dumps(x,indent=2,sort_keys=True,default=str))
+
+def main():
+    p=argparse.ArgumentParser()
+    p.add_argument("command", choices=["start","stop","status","audit","snapshot"])
+    a=p.parse_args()
+    r=CompanyOSLaunchRuntime(ROOT)
+    if a.command=="start": out=r.start()
+    elif a.command=="stop": out=r.stop()
+    elif a.command=="status": out=r.status()
+    elif a.command=="audit": out=LaunchReadinessAudit(ROOT).run()
+    else: out=LaunchHealthSnapshot(ROOT).build()
+    dump(out)
+    if "ok" in out: return 0 if out["ok"] else 1
+    if "ready" in out: return 0 if out["ready"] else 1
+    return 0
+
+if __name__=="__main__": raise SystemExit(main())

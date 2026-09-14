@@ -1,0 +1,165 @@
+[
+  {
+    "timestamp": "2026-07-18T03:09:29.317096+00:00",
+    "action": "add_customer",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "customer_created",
+      "customer": {
+        "id": "customer-31f34fdec022",
+        "name": "Sample Contractor",
+        "phone": "555-0100",
+        "email": "sample@example.com",
+        "address": null,
+        "status": "active",
+        "created_at": "2026-07-18T03:09:29.316709+00:00",
+        "updated_at": "2026-07-18T03:09:29.316718+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:09:29.393957+00:00",
+    "action": "add_lead",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "lead_created",
+      "lead": {
+        "id": "lead-2567cdb19ba6",
+        "customer_name": "Sample Contractor",
+        "project_name": "Driveway Replacement",
+        "estimate_amount": 12500.0,
+        "source": "internal_test",
+        "status": "new",
+        "follow_up_date": null,
+        "notes": [],
+        "external_contact_authorized": false,
+        "created_at": "2026-07-18T03:09:29.393569+00:00",
+        "updated_at": "2026-07-18T03:09:29.393572+00:00"
+      },
+      "automatic_external_contact": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:09:29.466310+00:00",
+    "action": "customers",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "customer_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "active": 1,
+        "inactive": 0
+      },
+      "customers": [
+        {
+          "id": "customer-31f34fdec022",
+          "name": "Sample Contractor",
+          "phone": "555-0100",
+          "email": "sample@example.com",
+          "address": null,
+          "status": "active",
+          "created_at": "2026-07-18T03:09:29.316709+00:00",
+          "updated_at": "2026-07-18T03:09:29.316718+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:09:29.537810+00:00",
+    "action": "leads",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "lead_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "new": 1,
+        "contacted": 0,
+        "qualified": 0,
+        "proposal_sent": 0,
+        "won": 0,
+        "lost": 0,
+        "hold": 0
+      },
+      "leads": [
+        {
+          "id": "lead-2567cdb19ba6",
+          "customer_name": "Sample Contractor",
+          "project_name": "Driveway Replacement",
+          "estimate_amount": 12500.0,
+          "source": "internal_test",
+          "status": "new",
+          "follow_up_date": null,
+          "notes": [],
+          "external_contact_authorized": false,
+          "created_at": "2026-07-18T03:09:29.393569+00:00",
+          "updated_at": "2026-07-18T03:09:29.393572+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:09:29.610872+00:00",
+    "action": "activities",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "crm_activity_list",
+      "count": 2,
+      "activities": [
+        {
+          "id": "activity-99745b29c5c1",
+          "activity_type": "customer_created",
+          "entity_type": "customer",
+          "entity_id": "customer-31f34fdec022",
+          "note": "Customer created: Sample Contractor",
+          "created_at": "2026-07-18T03:09:29.316984+00:00"
+        },
+        {
+          "id": "activity-7c1470917f29",
+          "activity_type": "lead_created",
+          "entity_type": "lead",
+          "entity_id": "lead-2567cdb19ba6",
+          "note": "Lead created for Sample Contractor",
+          "created_at": "2026-07-18T03:09:29.393827+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:09:29.684005+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "crm_status",
+      "enabled": true,
+      "automatic_follow_up": false,
+      "automatic_email": false,
+      "automatic_sms": false,
+      "automatic_external_execution": false,
+      "automatic_spending": false,
+      "customer_statistics": {
+        "total": 1,
+        "active": 1,
+        "inactive": 0
+      },
+      "lead_statistics": {
+        "total": 1,
+        "new": 1,
+        "contacted": 0,
+        "qualified": 0,
+        "proposal_sent": 0,
+        "won": 0,
+        "lost": 0,
+        "hold": 0
+      },
+      "health": {}
+    }
+  }
+]

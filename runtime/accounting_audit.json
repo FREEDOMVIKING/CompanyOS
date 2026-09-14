@@ -1,0 +1,195 @@
+[
+  {
+    "timestamp": "2026-07-18T03:34:22.541041+00:00",
+    "action": "create_invoice",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "invoice_created",
+      "invoice": {
+        "id": "invoice-d7e99861931c",
+        "project_id": "project-d7c6da306465",
+        "customer_name": "Sample Contractor",
+        "project_name": "Driveway Replacement",
+        "currency": "USD",
+        "status": "draft",
+        "line_items": [
+          {
+            "description": "Driveway Replacement",
+            "quantity": 1,
+            "unit_price": 12500.0
+          }
+        ],
+        "subtotal": 12500.0,
+        "total": 12500.0,
+        "paid_amount": 0.0,
+        "balance_due": 12500.0,
+        "issued_at": null,
+        "due_date": "2026-08-17",
+        "automatic_payment_collection": false,
+        "automatic_bank_connection": false,
+        "external_financial_execution_authorized": false,
+        "created_at": "2026-07-18T03:34:22.540260+00:00",
+        "updated_at": "2026-07-18T03:34:22.540260+00:00"
+      },
+      "workspace": "/data/data/com.termux/files/home/companyos/workspace/accounting/invoice-d7e99861931c",
+      "automatic_payment_collection": false,
+      "automatic_external_execution": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:34:22.707947+00:00",
+    "action": "record_payment",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "payment_recorded",
+      "payment": {
+        "id": "payment-43cd4313b169",
+        "invoice_id": "invoice-d7e99861931c",
+        "amount": 1000.0,
+        "method": "manual_test_record",
+        "external_payment_processed": false,
+        "recorded_at": "2026-07-18T03:34:22.707365+00:00"
+      },
+      "invoice_balance_due": 11500.0,
+      "external_payment_processed": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:34:22.813454+00:00",
+    "action": "record_expense",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "expense_recorded",
+      "expense": {
+        "id": "expense-2164da924fb0",
+        "description": "Sample material estimate",
+        "amount": 250.0,
+        "category": "materials",
+        "external_spending_executed": false,
+        "recorded_at": "2026-07-18T03:34:22.812902+00:00"
+      },
+      "external_spending_executed": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:34:22.916115+00:00",
+    "action": "kpis",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "financial_kpis_calculated",
+      "metrics": {
+        "total_invoiced": 12500.0,
+        "cash_received": 1000.0,
+        "accounts_receivable": 11500.0,
+        "recorded_expenses": 250.0,
+        "net_cash_position": 750.0,
+        "gross_margin_estimate": 98.0,
+        "invoice_count": 1,
+        "payment_count": 1,
+        "expense_count": 1,
+        "external_payments_processed": 0,
+        "external_spending_executed": 0,
+        "calculated_at": "2026-07-18T03:34:22.915687+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:34:23.020635+00:00",
+    "action": "invoices",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "invoice_list",
+      "statistics": {
+        "total": 1,
+        "draft": 0,
+        "issued": 0,
+        "partially_paid": 1,
+        "paid": 0,
+        "void": 0
+      },
+      "invoices": [
+        {
+          "id": "invoice-d7e99861931c",
+          "project_id": "project-d7c6da306465",
+          "customer_name": "Sample Contractor",
+          "project_name": "Driveway Replacement",
+          "currency": "USD",
+          "status": "partially_paid",
+          "line_items": [
+            {
+              "description": "Driveway Replacement",
+              "quantity": 1,
+              "unit_price": 12500.0
+            }
+          ],
+          "subtotal": 12500.0,
+          "total": 12500.0,
+          "paid_amount": 1000.0,
+          "balance_due": 11500.0,
+          "issued_at": null,
+          "due_date": "2026-08-17",
+          "automatic_payment_collection": false,
+          "automatic_bank_connection": false,
+          "external_financial_execution_authorized": false,
+          "created_at": "2026-07-18T03:34:22.540260+00:00",
+          "updated_at": "2026-07-18T03:34:22.707747+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:34:23.124072+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "accounting_status",
+      "enabled": true,
+      "automatic_invoice_generation": false,
+      "automatic_payment_collection": false,
+      "automatic_bank_connection": false,
+      "automatic_external_execution": false,
+      "automatic_spending": false,
+      "invoice_statistics": {
+        "total": 1,
+        "draft": 0,
+        "issued": 0,
+        "partially_paid": 1,
+        "paid": 0,
+        "void": 0
+      },
+      "payment_statistics": {
+        "total": 1,
+        "recorded_amount": 1000.0
+      },
+      "expense_statistics": {
+        "total": 1,
+        "recorded_amount": 250.0
+      },
+      "financial_kpis": {
+        "total_invoiced": 12500.0,
+        "cash_received": 1000.0,
+        "accounts_receivable": 11500.0,
+        "recorded_expenses": 250.0,
+        "net_cash_position": 750.0,
+        "gross_margin_estimate": 98.0,
+        "invoice_count": 1,
+        "payment_count": 1,
+        "expense_count": 1,
+        "external_payments_processed": 0,
+        "external_spending_executed": 0,
+        "calculated_at": "2026-07-18T03:34:22.915687+00:00"
+      },
+      "health": {
+        "healthy": true,
+        "last_calculated_at": "2026-07-18T03:34:22.915950+00:00",
+        "last_error": null
+      }
+    }
+  }
+]

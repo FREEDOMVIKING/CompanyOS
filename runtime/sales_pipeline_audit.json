@@ -1,0 +1,153 @@
+[
+  {
+    "timestamp": "2026-07-18T03:19:53.797090+00:00",
+    "action": "schedule_followup",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "followup_scheduled",
+      "followup": {
+        "id": "followup-f51333cfa177",
+        "lead_id": "lead-2567cdb19ba6",
+        "customer_name": "Sample Contractor",
+        "project_name": "Driveway Replacement",
+        "due_date": "2026-07-21",
+        "note": "Review lead and prepare owner-approved follow-up.",
+        "status": "pending",
+        "external_contact_authorized": false,
+        "automatic_email": false,
+        "automatic_sms": false,
+        "created_at": "2026-07-18T03:19:53.796760+00:00",
+        "updated_at": "2026-07-18T03:19:53.796763+00:00"
+      },
+      "automatic_customer_contact": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:19:53.909954+00:00",
+    "action": "metrics",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "sales_metrics_calculated",
+      "metrics": {
+        "total_leads": 1,
+        "qualified_leads": 0,
+        "proposals_sent": 0,
+        "won_leads": 0,
+        "lost_leads": 0,
+        "conversion_rate_percent": 0.0,
+        "qualification_rate_percent": 0.0,
+        "proposal_rate_percent": 0.0,
+        "active_pipeline_value": 12500.0,
+        "won_revenue_value": 0,
+        "open_quote_value": 12500.0,
+        "pending_followups": 1,
+        "forecast_value": 4375.0,
+        "calculated_at": "2026-07-18T03:19:53.909522+00:00"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:19:54.025217+00:00",
+    "action": "pipeline",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "sales_pipeline",
+      "stages": {
+        "new": [
+          {
+            "id": "lead-2567cdb19ba6",
+            "customer_name": "Sample Contractor",
+            "project_name": "Driveway Replacement",
+            "estimate_amount": 12500.0,
+            "source": "internal_test",
+            "status": "new",
+            "follow_up_date": null,
+            "notes": [],
+            "external_contact_authorized": false,
+            "created_at": "2026-07-18T03:09:29.393569+00:00",
+            "updated_at": "2026-07-18T03:09:29.393572+00:00"
+          }
+        ]
+      },
+      "total_leads": 1
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:19:54.142391+00:00",
+    "action": "followups",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "followup_list",
+      "count": 1,
+      "statistics": {
+        "total": 1,
+        "pending": 1,
+        "completed": 0,
+        "cancelled": 0
+      },
+      "followups": [
+        {
+          "id": "followup-f51333cfa177",
+          "lead_id": "lead-2567cdb19ba6",
+          "customer_name": "Sample Contractor",
+          "project_name": "Driveway Replacement",
+          "due_date": "2026-07-21",
+          "note": "Review lead and prepare owner-approved follow-up.",
+          "status": "pending",
+          "external_contact_authorized": false,
+          "automatic_email": false,
+          "automatic_sms": false,
+          "created_at": "2026-07-18T03:19:53.796760+00:00",
+          "updated_at": "2026-07-18T03:19:53.796763+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-07-18T03:19:54.247371+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "sales_pipeline_status",
+      "enabled": true,
+      "automatic_follow_up_scheduling": false,
+      "automatic_customer_contact": false,
+      "automatic_email": false,
+      "automatic_sms": false,
+      "automatic_external_execution": false,
+      "automatic_spending": false,
+      "followup_statistics": {
+        "total": 1,
+        "pending": 1,
+        "completed": 0,
+        "cancelled": 0
+      },
+      "metrics": {
+        "total_leads": 1,
+        "qualified_leads": 0,
+        "proposals_sent": 0,
+        "won_leads": 0,
+        "lost_leads": 0,
+        "conversion_rate_percent": 0.0,
+        "qualification_rate_percent": 0.0,
+        "proposal_rate_percent": 0.0,
+        "active_pipeline_value": 12500.0,
+        "won_revenue_value": 0,
+        "open_quote_value": 12500.0,
+        "pending_followups": 1,
+        "forecast_value": 4375.0,
+        "calculated_at": "2026-07-18T03:19:53.909522+00:00"
+      },
+      "health": {
+        "healthy": true,
+        "last_calculated_at": "2026-07-18T03:19:53.909793+00:00",
+        "last_error": null
+      }
+    }
+  }
+]

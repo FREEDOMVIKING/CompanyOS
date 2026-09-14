@@ -1,0 +1,130 @@
+[
+  {
+    "timestamp": "2026-07-18T02:47:07.752261+00:00",
+    "action": "error",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "release_approval_error",
+      "error": "No packaged release found"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T02:52:16.339188+00:00",
+    "action": "activate",
+    "success": false,
+    "result": {
+      "success": false,
+      "status": "local_activation_blocked",
+      "reason": "Release must be owner-approved first",
+      "current_status": "packaged"
+    }
+  },
+  {
+    "timestamp": "2026-07-18T02:52:16.454535+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "release_approval_status",
+      "enabled": true,
+      "owner_approval_required": true,
+      "automatic_release_approval": false,
+      "automatic_local_activation": false,
+      "automatic_external_deployment": false,
+      "automatic_publication": false,
+      "automatic_spending": false,
+      "release_statistics": {
+        "total": 1,
+        "ready": 1,
+        "blocked": 0,
+        "packaged": 1,
+        "approved": 0,
+        "active": 0
+      },
+      "activation_state": {
+        "active_release_id": null,
+        "active_directory": null,
+        "activated_at": null,
+        "status": "inactive"
+      },
+      "health": {
+        "healthy": false,
+        "last_checked_at": "2026-07-18T02:47:07.752060+00:00",
+        "last_error": "No packaged release found"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-18T02:54:33.866150+00:00",
+    "action": "approve",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "release_approved",
+      "release_id": "local_contractor_bid_organizer-v1",
+      "reason": "Owner approved local release",
+      "automatic_local_activation": false,
+      "automatic_external_deployment": false,
+      "automatic_publication": false,
+      "automatic_spending": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T02:54:33.963123+00:00",
+    "action": "activate",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "release_locally_activated",
+      "release_id": "local_contractor_bid_organizer-v1",
+      "active_directory": "/data/data/com.termux/files/home/companyos/releases/active",
+      "preview_command": "python /data/data/com.termux/files/home/companyos/releases/active/server.py",
+      "preview_url": "http://127.0.0.1:8765",
+      "automatic_external_deployment": false,
+      "automatic_publication": false,
+      "automatic_spending": false
+    }
+  },
+  {
+    "timestamp": "2026-07-18T02:54:35.073560+00:00",
+    "action": "status",
+    "success": true,
+    "result": {
+      "success": true,
+      "status": "release_approval_status",
+      "enabled": true,
+      "owner_approval_required": true,
+      "automatic_release_approval": false,
+      "automatic_local_activation": false,
+      "automatic_external_deployment": false,
+      "automatic_publication": false,
+      "automatic_spending": false,
+      "release_statistics": {
+        "total": 1,
+        "ready": 1,
+        "blocked": 0,
+        "packaged": 0,
+        "approved": 0,
+        "active": 1
+      },
+      "activation_state": {
+        "active_release_id": "local_contractor_bid_organizer-v1",
+        "active_directory": "/data/data/com.termux/files/home/companyos/releases/active",
+        "activated_at": "2026-07-18T02:54:33.962647+00:00",
+        "status": "active",
+        "preview_command": "python /data/data/com.termux/files/home/companyos/releases/active/server.py",
+        "preview_url": "http://127.0.0.1:8765",
+        "external_deployment": false,
+        "external_publication": false
+      },
+      "health": {
+        "healthy": true,
+        "active_release_id": "local_contractor_bid_organizer-v1",
+        "active_directory": "/data/data/com.termux/files/home/companyos/releases/active",
+        "last_error": null,
+        "updated_at": "2026-07-18T02:54:33.962800+00:00"
+      }
+    }
+  }
+]

@@ -51,3 +51,21 @@ local_ai/models/
 logs/
 run/
 secrets/
+
+# CompanyOS continuous runtime generated control files
+.companyos_runtime/*.pid
+.companyos_runtime/*.lock
+.companyos_runtime/*.tmp
+companyos/runtime/*.bak*
+companyos/runtime/*.candidate*
+companyos/runtime/*.backup
+*.sqlite3-journal
+*.sqlite3-shm
+*.sqlite3-wal
+
+# CompanyOS launch/readiness generated state
+.companyos_runtime/launch_health_snapshot.json
+.companyos_runtime/launch_readiness_audit.json
+.companyos_runtime/termux_boot.log
+
+# CompanyOS full autonomous launch generated state

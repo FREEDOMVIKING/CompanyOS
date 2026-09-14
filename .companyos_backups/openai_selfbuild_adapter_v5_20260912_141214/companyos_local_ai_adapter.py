@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import os
+import re
+import urllib.error
+import urllib.request
+from typing import Any
+
+
+def _env_int(name: str, default: int, minimum: int, maximum: int) -> int:
+    raw = os.getenv(name, str(default)).strip()
+    try:
+        value = int(raw)
+    except ValueError:
+        value = default
+    return max(minimum, min(maximum, value))
+
+
+def _balanced_json_object(text: str) -> dict[str, Any]:
+    text = (text or "").strip()
+
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?[ \t\r\n]*", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"[ \t\r\n]*```$", "", text)
+
+    try:
+        value = json.loads(text)
+        if isinstance(value, dict):
+            return value
+        raise ValueError("Model response JSON was not an object")
+    except json.JSONDecodeError:
+        pass
+
+    start = text.find("{")
+    if start < 0:
+        raise ValueError("No JSON object found in model response")
+
+    depth = 0
+    in_string = False
+    escaped = False
+
+    for index in range(start, len(text)):
+        char = text[index]
+
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if char == '"':
+            in_string = True
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                value = json.loads(text[start:index + 1])
+                if not isinstance(value, dict):
+                    raise ValueError("Extracted JSON was not an object")
+                return value
+
+    raise ValueError("Model returned incomplete JSON")
+
+
+def model_request(prompt: str) -> dict[str, Any]:
+    key = os.getenv("OPENAI_API_KEY", "companyos-local").strip() or "companyos-local"
+    base_url = os.getenv("OPENAI_BASE_URL", "http://127.0.0.1:8080/v1").rstrip("/")
+    model = os.getenv("OPENAI_MODEL", "companyos-local").strip() or "companyos-local"
+
+    max_tokens = _env_int("COMPANYOS_LOCAL_AI_MAX_TOKENS", 768, 128, 1536)
+    prompt_chars = _env_int("COMPANYOS_LOCAL_AI_PROMPT_CHARS", 2500, 800, 7000)
+    timeout = _env_int("COMPANYOS_LOCAL_AI_TIMEOUT", 900, 60, 1800)
+
+    full_prompt = prompt or ""
+    if len(full_prompt) <= prompt_chars:
+        compact_prompt = full_prompt
+    else:
+        # Preserve instructions/schema at the beginning and newest context at the end.
+        head_chars = max(1200, int(prompt_chars * 0.65))
+        tail_chars = max(600, prompt_chars - head_chars)
+        compact_prompt = (
+            full_prompt[:head_chars]
+            + "\n\n[... middle runtime inventory omitted ...]\n\n"
+            + full_prompt[-tail_chars:]
+        )
+
+    payload: dict[str, Any] = {
+        "model": model,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are the CompanyOS adaptive build planner. "
+                    "Return one complete valid JSON object only. "
+                    "Do not use markdown fences or commentary. "
+                    "Never put placeholders, prose instructions, summaries, TODO-only text, "
+                    "or phrases such as complete file content in a change content field. "
+                    "For every .py path, content must be the complete syntactically valid "
+                    "Python source file ready to save and run. ""Write concise production code, not essays. Do not repeat sentences. ""Do not describe what the module could do; implement it. ""A Python content field must begin with valid Python such as imports, ""a module docstring, a class, or a function. ""Keep each generated Python file under 350 lines unless replacing a longer existing file. "
+                    "Keep the plan focused and executable. Use exactly this schema: "                    "{title:string, reason:string, changes:list, tests:list, integration:string}. "                    "Each change must contain path, action, content, and reason. "                    "Never modify credentials, wallets, financial controls, approval gates, or secrets."
+                ),
+            },
+            {"role": "user", "content": compact_prompt},
+        ],
+        "temperature": 0.1,
+        "max_tokens": max_tokens,
+        "stream": False,
+        "response_format": {"type": "json_object"},
+    }
+
+    endpoint = f"{base_url}/chat/completions"
+
+    def perform(request_payload: dict[str, Any]) -> dict[str, Any]:
+        request = urllib.request.Request(
+            endpoint,
+            data=json.dumps(request_payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return json.loads(response.read().decode("utf-8"))
+
+    try:
+        try:
+            data = perform(payload)
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            # Some llama.cpp versions reject response_format. Retry once without it.
+            if exc.code == 400 and "response_format" in payload:
+                fallback = dict(payload)
+                fallback.pop("response_format", None)
+                data = perform(fallback)
+            else:
+                return {
+                    "ok": False,
+                    "reason": f"HTTPError: HTTP {exc.code}",
+                    "body": body[:4000],
+                    "endpoint": endpoint,
+                }
+    except Exception as exc:
+        return {
+            "ok": False,
+            "reason": f"{type(exc).__name__}: {exc}",
+            "endpoint": endpoint,
+        }
+
+    try:
+        output = data["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError):
+        return {
+            "ok": False,
+            "reason": "unexpected_local_model_response",
+            "raw": data,
+            "endpoint": endpoint,
+        }
+
+    return {
+        "ok": True,
+        "text": str(output).strip(),
+        "raw_id": data.get("id"),
+        "model": data.get("model", model),
+        "endpoint": endpoint,
+    }
+
+
+def extract_json(text: str) -> dict[str, Any]:
+    return _balanced_json_object(text)

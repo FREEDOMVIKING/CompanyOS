@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-09-11T01:23:03.155752+00:00",
+  "system_ready": false,
+  "selected_actions": [],
+  "rejected_actions": [
+    {
+      "action": "run-health",
+      "reason": "system_not_ready",
+      "final_priority": 63.5
+    },
+    {
+      "action": "run-readiness",
+      "reason": "system_not_ready",
+      "final_priority": 62.0
+    },
+    {
+      "action": "refresh-forecast",
+      "reason": "system_not_ready",
+      "final_priority": 56.0
+    },
+    {
+      "action": "refresh-brief",
+      "reason": "system_not_ready",
+      "final_priority": 54.5
+    },
+    {
+      "action": "refresh-priorities",
+      "reason": "system_not_ready",
+      "final_priority": 53.0
+    },
+    {
+      "action": "refresh-decisions",
+      "reason": "system_not_ready",
+      "final_priority": 51.5
+    },
+    {
+      "action": "run-outcomes",
+      "reason": "system_not_ready",
+      "final_priority": 50.0
+    }
+  ],
+  "selected_count": 0,
+  "rejected_count": 7,
+  "refresh": {
+    "feedback_priority": {
+      "success": true,
+      "return_code": 0,
+      "stdout": "ed_score\": 50.0,\n        \"adaptive_priority\": 95.0\n      },\n      {\n        \"action\": \"run-readiness\",\n        \"base_fused_priority\": 62.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 62.0,\n        \"reason\": \"Mission control reports items requiring attention.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 90.0\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"base_fused_priority\": 56.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 56.0,\n        \"reason\": \"Keep forecast aligned with active goals.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 70.0\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"base_fused_priority\": 54.5,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 54.5,\n        \"reason\": \"Summarize current repository state before owner review.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 65.0\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"base_fused_priority\": 53.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 53.0,\n        \"reason\": \"Maintain current executive ordering.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 60.0\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"base_fused_priority\": 51.5,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 51.5,\n        \"reason\": \"Keep CEO decision queue synchronized.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 55.0\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"base_fused_priority\": 50.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 50.0,\n        \"reason\": \"Refresh measurable outcomes for the feedback loop.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 50.0\n      }\n    ],\n    \"top_action\": \"run-health\",\n    \"top_priority\": 63.5,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+      "stderr": ""
+    },
+    "readiness": {
+      "success": true,
+      "return_code": 0,
+      "stdout": "{\n  \"success\": true,\n  \"status\": \"readiness_coordination_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-11T01:23:02.851755+00:00\",\n    \"decision\": \"blocked\",\n    \"blockers\": [\n      \"runtime_aware_preflight_not_ready\",\n      \"reliability_score_below_threshold\"\n    ],\n    \"warnings\": [],\n    \"checks\": [\n      {\n        \"check\": \"runtime_aware_preflight\",\n        \"passed\": false\n      },\n      {\n        \"check\": \"reliability_score\",\n        \"passed\": false,\n        \"value\": 60\n      },\n      {\n        \"check\": \"watchdog_health\",\n        \"passed\": true\n      },\n      {\n        \"check\": \"critical_incident_absent\",\n        \"passed\": true\n      },\n      {\n        \"check\": \"resource_health\",\n        \"passed\": true,\n        \"value\": \"healthy\"\n      },\n      {\n        \"check\": \"recent_backup\",\n        \"passed\": true,\n        \"age_hours\": 0.01\n      },\n      {\n        \"check\": \"integrity_health\",\n        \"passed\": true\n      }\n    ],\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+      "stderr": ""
+    },
+    "eligibility": {
+      "success": true,
+      "return_code": 0,
+      "stdout": "{\n  \"success\": true,\n  \"status\": \"execution_eligibility_evaluated\",\n  \"report\": {\n    \"generated_at\": \"2026-09-11T01:23:03.118066+00:00\",\n    \"readiness_decision\": \"blocked\",\n    \"system_ready\": false,\n    \"eligibility\": {\n      \"internal_read_only\": false,\n      \"internal_reversible\": false,\n      \"external_read_only\": false,\n      \"external_write\": false,\n      \"customer_contact\": false,\n      \"publication\": false,\n      \"spending\": false,\n      \"destructive_actions\": false,\n      \"credential_export\": false,\n      \"private_key_export\": false\n    },\n    \"blocked_categories\": [\n      \"internal_read_only\",\n      \"internal_reversible\",\n      \"external_read_only\",\n      \"external_write\",\n      \"customer_contact\",\n      \"publication\",\n      \"spending\",\n      \"destructive_actions\",\n      \"credential_export\",\n      \"private_key_export\"\n    ],\n    \"allowed_categories\": []\n  }\n}\n",
+      "stderr": ""
+    }
+  },
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

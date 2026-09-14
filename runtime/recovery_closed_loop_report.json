@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-09-04T02:41:25.484853+00:00",
+  "ready_before": false,
+  "ready_after": false,
+  "steps": [
+    {
+      "step": "readiness_recovery",
+      "result": {
+        "success": false,
+        "return_code": 1,
+        "stdout": "_only_change_count\\\": 108,\\n    \\\"working_tree_effectively_clean\\\": false,\\n    \\\"github_connector_healthy\\\": false,\\n    \\\"change_risk_score\\\": 80,\\n    \\\"automatic_git_reset\\\": false,\\n    \\\"automatic_git_clean\\\": false,\\n    \\\"automatic_commit\\\": false,\\n    \\\"automatic_push\\\": false,\\n    \\\"automatic_deploy\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"readiness_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-09-04T02:41:23.217560+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\",\\n      \\\"reliability_score_below_threshold\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": false,\\n        \\\"value\\\": 40\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      },\n      {\n        \"action\": \"eligibility_refresh\",\n        \"result\": {\n          \"success\": true,\n          \"return_code\": 0,\n          \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-09-04T02:41:23.466836+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n          \"stderr\": \"\"\n        }\n      }\n    ],\n    \"failed_recovery_actions\": [\n      \"health_check\"\n    ],\n    \"recovery_attempted\": true,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_git_reset\": false,\n    \"automatic_git_clean\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "execution_feedback",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"execution_feedback_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-04T02:41:23.638708+00:00\",\n    \"adjustments\": [],\n    \"action_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "feedback_priority_integration",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"feedback_priority_integration_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-04T02:41:23.876728+00:00\",\n    \"integrated_priorities\": [\n      {\n        \"action\": \"run-health\",\n        \"base_fused_priority\": 63.5,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 63.5,\n        \"reason\": \"Preflight is blocked; verify system health before further work.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 95.0\n      },\n      {\n        \"action\": \"run-readiness\",\n        \"base_fused_priority\": 62.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 62.0,\n        \"reason\": \"Mission control reports items requiring attention.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 90.0\n      },\n      {\n        \"action\": \"refresh-forecast\",\n        \"base_fused_priority\": 56.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 56.0,\n        \"reason\": \"Keep forecast aligned with active goals.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 70.0\n      },\n      {\n        \"action\": \"refresh-brief\",\n        \"base_fused_priority\": 54.5,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 54.5,\n        \"reason\": \"Summarize current repository state before owner review.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 65.0\n      },\n      {\n        \"action\": \"refresh-priorities\",\n        \"base_fused_priority\": 53.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 53.0,\n        \"reason\": \"Maintain current executive ordering.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 60.0\n      },\n      {\n        \"action\": \"refresh-decisions\",\n        \"base_fused_priority\": 51.5,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 51.5,\n        \"reason\": \"Keep CEO decision queue synchronized.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 55.0\n      },\n      {\n        \"action\": \"run-outcomes\",\n        \"base_fused_priority\": 50.0,\n        \"feedback_adjustment\": 0.0,\n        \"feedback_confidence\": 0.0,\n        \"final_priority\": 50.0,\n        \"reason\": \"Refresh measurable outcomes for the feedback loop.\",\n        \"confidence\": 0.5,\n        \"learned_score\": 50.0,\n        \"adaptive_priority\": 50.0\n      }\n    ],\n    \"top_action\": \"run-health\",\n    \"top_priority\": 63.5,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "closed_loop_selection",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "djustment\\\": 0.0,\\n        \\\"feedback_confidence\\\": 0.0,\\n        \\\"final_priority\\\": 50.0,\\n        \\\"reason\\\": \\\"Refresh measurable outcomes for the feedback loop.\\\",\\n        \\\"confidence\\\": 0.5,\\n        \\\"learned_score\\\": 50.0,\\n        \\\"adaptive_priority\\\": 50.0\\n      }\\n    ],\\n    \\\"top_action\\\": \\\"run-health\\\",\\n    \\\"top_priority\\\": 63.5,\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      },\n      \"readiness\": {\n        \"success\": true,\n        \"return_code\": 0,\n        \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"readiness_coordination_complete\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-09-04T02:41:24.465870+00:00\\\",\\n    \\\"decision\\\": \\\"blocked\\\",\\n    \\\"blockers\\\": [\\n      \\\"runtime_aware_preflight_not_ready\\\",\\n      \\\"reliability_score_below_threshold\\\"\\n    ],\\n    \\\"warnings\\\": [],\\n    \\\"checks\\\": [\\n      {\\n        \\\"check\\\": \\\"runtime_aware_preflight\\\",\\n        \\\"passed\\\": false\\n      },\\n      {\\n        \\\"check\\\": \\\"reliability_score\\\",\\n        \\\"passed\\\": false,\\n        \\\"value\\\": 40\\n      },\\n      {\\n        \\\"check\\\": \\\"watchdog_health\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"critical_incident_absent\\\",\\n        \\\"passed\\\": true\\n      },\\n      {\\n        \\\"check\\\": \\\"resource_health\\\",\\n        \\\"passed\\\": true,\\n        \\\"value\\\": \\\"healthy\\\"\\n      },\\n      {\\n        \\\"check\\\": \\\"recent_backup\\\",\\n        \\\"passed\\\": true,\\n        \\\"age_hours\\\": 0.0\\n      },\\n      {\\n        \\\"check\\\": \\\"integrity_health\\\",\\n        \\\"passed\\\": true\\n      }\\n    ],\\n    \\\"automatic_external_write\\\": false,\\n    \\\"automatic_code_changes\\\": false,\\n    \\\"automatic_merge\\\": false,\\n    \\\"automatic_deploy\\\": false,\\n    \\\"automatic_publication\\\": false,\\n    \\\"automatic_spending\\\": false,\\n    \\\"automatic_destructive_actions\\\": false\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      },\n      \"eligibility\": {\n        \"success\": true,\n        \"return_code\": 0,\n        \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"execution_eligibility_evaluated\\\",\\n  \\\"report\\\": {\\n    \\\"generated_at\\\": \\\"2026-09-04T02:41:24.718731+00:00\\\",\\n    \\\"readiness_decision\\\": \\\"blocked\\\",\\n    \\\"system_ready\\\": false,\\n    \\\"eligibility\\\": {\\n      \\\"internal_read_only\\\": false,\\n      \\\"internal_reversible\\\": false,\\n      \\\"external_read_only\\\": false,\\n      \\\"external_write\\\": false,\\n      \\\"customer_contact\\\": false,\\n      \\\"publication\\\": false,\\n      \\\"spending\\\": false,\\n      \\\"destructive_actions\\\": false,\\n      \\\"credential_export\\\": false,\\n      \\\"private_key_export\\\": false\\n    },\\n    \\\"blocked_categories\\\": [\\n      \\\"internal_read_only\\\",\\n      \\\"internal_reversible\\\",\\n      \\\"external_read_only\\\",\\n      \\\"external_write\\\",\\n      \\\"customer_contact\\\",\\n      \\\"publication\\\",\\n      \\\"spending\\\",\\n      \\\"destructive_actions\\\",\\n      \\\"credential_export\\\",\\n      \\\"private_key_export\\\"\\n    ],\\n    \\\"allowed_categories\\\": []\\n  }\\n}\\n\",\n        \"stderr\": \"\"\n      }\n    },\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "fused_plan_build",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"fused_execution_plan_built\",\n  \"report\": {\n    \"generated_at\": \"2026-09-04T02:41:25.012962+00:00\",\n    \"system_ready\": false,\n    \"plan\": [],\n    \"rejected\": [],\n    \"planned_count\": 0,\n    \"rejected_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false,\n    \"credential_export\": false,\n    \"private_key_export\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "guarded_execution",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"guarded_execution_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-04T02:41:25.219319+00:00\",\n    \"results\": [],\n    \"executed_count\": 0,\n    \"failed_count\": 0,\n    \"blocked_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "post_execution_feedback",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"execution_feedback_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-04T02:41:25.448256+00:00\",\n    \"adjustments\": [],\n    \"action_count\": 0,\n    \"automatic_external_write\": false,\n    \"automatic_code_changes\": false,\n    \"automatic_merge\": false,\n    \"automatic_deploy\": false,\n    \"automatic_publication\": false,\n    \"automatic_spending\": false,\n    \"automatic_destructive_actions\": false\n  }\n}\n",
+        "stderr": ""
+      }
+    }
+  ],
+  "failure_count": 1,
+  "failed_steps": [
+    "readiness_recovery"
+  ],
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_git_reset": false,
+  "automatic_git_clean": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

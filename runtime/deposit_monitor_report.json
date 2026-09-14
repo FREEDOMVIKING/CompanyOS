@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-09-02T13:08:44.638287+00:00",
+  "wallet_count": 3,
+  "results": [
+    {
+      "wallet_id": "c9dc938395e4f9eea1",
+      "chain": "bitcoin",
+      "return_code": 2,
+      "status": "scan_failed",
+      "stdout": "{\n  \"success\": false,\n  \"status\": \"signer_not_configured\",\n  \"chain\": \"bitcoin\",\n  \"missing_env\": [\n    \"BITCOIN_RPC_URL\",\n    \"BITCOIN_SIGNER_COMMAND\"\n  ],\n  \"mode\": \"scan\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "wallet_id": "ea6dfbc69b23d1c0da",
+      "chain": "solana",
+      "return_code": 2,
+      "status": "scan_failed",
+      "stdout": "{\n  \"success\": false,\n  \"status\": \"signer_not_configured\",\n  \"chain\": \"solana\",\n  \"missing_env\": [\n    \"SOLANA_RPC_URL\",\n    \"SOLANA_SIGNER_COMMAND\"\n  ],\n  \"mode\": \"scan\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "wallet_id": "c4ad78cf817e3f5b10",
+      "chain": "evm",
+      "return_code": 2,
+      "status": "scan_failed",
+      "stdout": "{\n  \"success\": false,\n  \"status\": \"signer_not_configured\",\n  \"chain\": \"evm\",\n  \"missing_env\": [\n    \"EVM_RPC_URL\",\n    \"EVM_SIGNER_COMMAND\"\n  ],\n  \"mode\": \"scan\"\n}\n",
+      "stderr": ""
+    }
+  ]
+}

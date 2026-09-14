@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-09-11T01:22:56.222480+00:00",
+  "adaptive_priorities": [
+    {
+      "action": "run-health",
+      "base_priority": 95,
+      "adjustment": 0,
+      "adaptive_priority": 95,
+      "reason": "Preflight is blocked; verify system health before further work.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    },
+    {
+      "action": "run-readiness",
+      "base_priority": 90,
+      "adjustment": 0,
+      "adaptive_priority": 90,
+      "reason": "Mission control reports items requiring attention.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    },
+    {
+      "action": "refresh-forecast",
+      "base_priority": 70,
+      "adjustment": 0,
+      "adaptive_priority": 70,
+      "reason": "Keep forecast aligned with active goals.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    },
+    {
+      "action": "refresh-brief",
+      "base_priority": 65,
+      "adjustment": 0,
+      "adaptive_priority": 65,
+      "reason": "Summarize current repository state before owner review.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    },
+    {
+      "action": "refresh-priorities",
+      "base_priority": 60,
+      "adjustment": 0,
+      "adaptive_priority": 60,
+      "reason": "Maintain current executive ordering.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    },
+    {
+      "action": "refresh-decisions",
+      "base_priority": 55,
+      "adjustment": 0,
+      "adaptive_priority": 55,
+      "reason": "Keep CEO decision queue synchronized.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    },
+    {
+      "action": "run-outcomes",
+      "base_priority": 50,
+      "adjustment": 0,
+      "adaptive_priority": 50,
+      "reason": "Refresh measurable outcomes for the feedback loop.",
+      "outcomes": {
+        "success": 0,
+        "failure": 0,
+        "blocked": 0
+      }
+    }
+  ],
+  "top_action": "run-health",
+  "top_priority": 95,
+  "automatic_external_write": false,
+  "automatic_code_changes": false,
+  "automatic_merge": false,
+  "automatic_deploy": false,
+  "automatic_publication": false,
+  "automatic_spending": false,
+  "automatic_destructive_actions": false
+}

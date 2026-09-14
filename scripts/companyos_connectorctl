@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/python
+from __future__ import annotations
+import json, sys
+from pathlib import Path
+ROOT=Path.home()/"companyos"
+sys.path.insert(0,str(ROOT))
+from companyos.runtime.connector_readiness import ConnectorReadinessAudit
+print(json.dumps(ConnectorReadinessAudit(ROOT).run(),indent=2,sort_keys=True))

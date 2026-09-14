@@ -1,0 +1,23 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="${HOME}/companyos"
+case "${1:-status}" in
+  url)
+    echo "http://127.0.0.1:${COMPANYOS_DASHBOARD_PORT:-8765}/"
+    ;;
+  status)
+    python - <<'PY'
+import json, urllib.request
+try:
+    with urllib.request.urlopen("http://127.0.0.1:8765/api/status",timeout=5) as r:
+        print(json.dumps(json.loads(r.read().decode()),indent=2,sort_keys=True))
+except Exception as e:
+    print("dashboard unavailable:", type(e).__name__, e)
+    raise SystemExit(1)
+PY
+    ;;
+  *)
+    echo "Usage: $0 [status|url]"
+    exit 2
+    ;;
+esac

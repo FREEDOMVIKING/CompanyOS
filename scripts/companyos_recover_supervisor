@@ -1,0 +1,65 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+
+echo "===== PRE-RECOVERY ====="
+scripts/companyosctl status || true
+
+python - <<'PY'
+import json, os
+from pathlib import Path
+
+rt = Path(".companyos_runtime")
+pidfile = rt / "service_supervisor.pid"
+statefile = rt / "service_supervisor_state.json"
+
+def alive(pid):
+    try:
+        if not pid or int(pid) <= 1:
+            return False
+        os.kill(int(pid), 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except Exception:
+        return False
+
+pid = None
+if pidfile.exists():
+    try:
+        pid = int(pidfile.read_text().strip())
+    except Exception:
+        pid = None
+
+print("pidfile_pid=", pid)
+print("pidfile_alive=", alive(pid) if pid else False)
+
+if pid and not alive(pid):
+    pidfile.unlink(missing_ok=True)
+    print("stale_pid_file_removed=true")
+
+if statefile.exists():
+    try:
+        d = json.loads(statefile.read_text())
+    except Exception:
+        d = {}
+    spid = d.get("supervisor_pid")
+    if spid and not alive(spid):
+        d["supervisor_pid"] = None
+        d["supervisor_alive"] = False
+        d["stop_requested"] = False
+        statefile.write_text(json.dumps(d, indent=2) + "\n")
+        print("stale_state_cleared=true")
+PY
+
+echo "===== START ====="
+scripts/companyosctl start || true
+sleep 12
+
+echo "===== POST-START STATUS ====="
+scripts/companyosctl status || true
+
+echo "===== HEALTH ====="
+scripts/companyosctl health || true

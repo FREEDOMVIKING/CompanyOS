@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-09-02T13:08:36.343384+00:00",
+  "primary": {
+    "provider": "openai",
+    "configured": false,
+    "usable": false,
+    "note": "Quota/HTTP health is validated during actual requests."
+  },
+  "fallback": {
+    "provider": "local_llama",
+    "configured": true,
+    "reachable": true,
+    "status": 200,
+    "base_url": "http://127.0.0.1:8080/v1"
+  },
+  "routing_policy": "primary_then_local_fallback",
+  "healthy": true
+}

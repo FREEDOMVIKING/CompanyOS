@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-09-02T13:08:43.709421+00:00",
+  "failure_count": 0,
+  "failed_steps": [],
+  "steps": [
+    {
+      "step": "capability_gaps",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"capability_gap_detection_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-02T13:08:42.146080+00:00\",\n    \"gap_count\": 0,\n    \"gaps\": []\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "platform_architect",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"platform_architecture_complete\",\n  \"plan\": {\n    \"generated_at\": \"2026-09-02T13:08:42.456914+00:00\",\n    \"proposal_count\": 0,\n    \"proposals\": []\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "sandbox_builder",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"sandbox_build_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-02T13:08:42.766731+00:00\",\n    \"build_count\": 0,\n    \"builds\": []\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "self_test",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"self_test_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-02T13:08:43.071763+00:00\",\n    \"test_count\": 0,\n    \"passed_count\": 0,\n    \"pass_rate\": 1.0,\n    \"tests\": []\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "internal_promotion",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"internal_promotion_complete\",\n  \"report\": {\n    \"generated_at\": \"2026-09-02T13:08:43.360857+00:00\",\n    \"promotion_count\": 0,\n    \"promotions\": [],\n    \"note\": \"Internal promotion only. External deployment still follows registered deployment authority.\"\n  }\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "step": "architecture_memory",
+      "result": {
+        "success": true,
+        "return_code": 0,
+        "stdout": "{\n  \"success\": true,\n  \"status\": \"architecture_memory_complete\",\n  \"event_count\": 80\n}\n",
+        "stderr": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+cd "$HOME/companyos"
+
+echo "===== V27 DEDICATED SUPERVISOR STOP CHANNEL ====="
+python -m py_compile companyos/runtime/runtime_control.py companyos/runtime/service_supervisor.py
+echo "COMPILE=PASS"
+
+rm -f .companyos_runtime/SUPERVISOR_STOP .companyos_runtime/STOP_CONTINUOUS 2>/dev/null || true
+
+echo "[1/6] Start"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 12
+PID="$(cat .companyos_runtime/service_supervisor.pid 2>/dev/null || true)"
+echo "SUPERVISOR_PID=$PID"
+[ -n "$PID" ] && kill -0 "$PID" 2>/dev/null || { echo "ERROR:SUPERVISOR_NOT_ALIVE"; exit 1; }
+
+echo "[2/6] Prove child/global STOP_CONTINUOUS no longer kills supervisor"
+printf 'stop\n' > .companyos_runtime/STOP_CONTINUOUS
+sleep 12
+kill -0 "$PID" 2>/dev/null || { echo "ERROR:LEGACY_GLOBAL_STOP_KILLED_SUPERVISOR"; exit 1; }
+echo "GLOBAL_STOP_ISOLATION=PASS"
+
+echo "[3/6] Remove legacy child stop file"
+rm -f .companyos_runtime/STOP_CONTINUOUS
+
+echo "[4/6] Prove intentional CompanyOS stop still works"
+scripts/companyosctl stop >/dev/null || true
+sleep 5
+if kill -0 "$PID" 2>/dev/null; then
+  echo "ERROR:INTENTIONAL_SUPERVISOR_STOP_FAILED"
+  exit 1
+fi
+echo "INTENTIONAL_SUPERVISOR_STOP=PASS"
+
+echo "[5/6] Restart and soak"
+scripts/companyosctl start || scripts/companyosctl recover || true
+sleep 35
+
+echo "[6/6] Verify final runtime"
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+p=Path(".companyos_runtime/service_supervisor_state.json")
+d=json.loads(p.read_text()) if p.exists() else {}
+pid=d.get("supervisor_pid")
+alive=False
+try:
+    os.kill(int(pid),0); alive=True
+except Exception:
+    pass
+services=d.get("services") or {}
+dead=[n for n,v in services.items() if isinstance(v,dict) and not v.get("running")]
+print("SUPERVISOR_PID=",pid)
+print("SUPERVISOR_ALIVE=",alive)
+print("SERVICE_COUNT=",len(services))
+print("DEAD_SERVICES=",dead)
+print("SUPERVISOR_STOP_EXISTS=",Path(".companyos_runtime/SUPERVISOR_STOP").exists())
+print("LEGACY_STOP_EXISTS=",Path(".companyos_runtime/STOP_CONTINUOUS").exists())
+if not alive or dead:
+    sys.exit(1)
+PY
+
+scripts/companyosctl health || true
+tail -n 80 .companyos_runtime/service_supervisor.log 2>/dev/null || true
+echo "COMPANYOS_DEDICATED_SUPERVISOR_STOP_V27=PASS"

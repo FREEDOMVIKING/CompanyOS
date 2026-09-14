@@ -1,0 +1,18 @@
+{
+  "healthy": true,
+  "last_checked_at": "2026-07-19T15:47:07.600156+00:00",
+  "checks": [
+    {
+      "name": "phase34",
+      "success": true,
+      "stdout": "26462+00:00\\\\\\\",\\\\n        \\\\\\\"assets\\\\\\\": {\\\\n          \\\\\\\"ETH\\\\\\\": 0.0,\\\\n          \\\\\\\"USDT-ERC20\\\\\\\": 0.0,\\\\n          \\\\\\\"USDC-ERC20\\\\\\\": 0.0\\\\n        },\\\\n        \\\\\\\"status\\\\\\\": \\\\\\\"ok\\\\\\\",\\\\n        \\\\\\\"rpc_used\\\\\\\": \\\\\\\"https://ethereum.publicnode.com\\\\\\\"\\\\n      }\\\\n    ]\\\\n  }\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      },\\n      {\\n        \\\"step\\\": \\\"multi_asset_events\\\",\\n        \\\"result\\\": {\\n          \\\"success\\\": true,\\n          \\\"return_code\\\": 0,\\n          \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"success\\\\\\\": true,\\\\n  \\\\\\\"status\\\\\\\": \\\\\\\"multi_asset_event_generation_complete\\\\\\\",\\\\n  \\\\\\\"event_count\\\\\\\": 1\\\\n}\\\\n\\\",\\n          \\\"stderr\\\": \\\"\\\"\\n        }\\n      }\\n    ]\\n  }\\n}\\n\",\n      \"stderr\": \"\"\n    },\n    {\n      \"name\": \"autonomous_treasury_status\",\n      \"success\": true,\n      \"stdout\": \"{\\n  \\\"success\\\": true,\\n  \\\"status\\\": \\\"autonomous_treasury_status\\\",\\n  \\\"config\\\": {\\n    \\\"enabled\\\": true,\\n    \\\"execution_mode\\\": \\\"policy_gated_autonomous\\\",\\n    \\\"single_transaction_auto_limit_usd\\\": 15000,\\n    \\\"daily_total_limit_usd\\\": 20000,\\n    \\\"max_transactions_per_cycle\\\": 5,\\n    \\\"minimum_seconds_between_broadcasts\\\": 10,\\n    \\\"require_phase32_authorization\\\": true,\\n    \\\"require_registered_destination\\\": true,\\n    \\\"require_live_balance_check\\\": true,\\n    \\\"require_preflight\\\": true,\\n    \\\"require_confirmation\\\": true,\\n    \\\"stop_on_first_execution_failure\\\": true,\\n    \\\"automatic_receiving\\\": true,\\n    \\\"automatic_execution\\\": true,\\n    \\\"automatic_signing\\\": true,\\n    \\\"automatic_broadcast\\\": true,\\n    \\\"kill_switch\\\": false,\\n    \\\"supported_live_routes\\\": {\\n      \\\"solana\\\": [\\n        \\\"SOL\\\"\\n      ]\\n    },\\n    \\\"future_routes\\\": {\\n      \\\"solana\\\": [\\n        \\\"USDT-SPL\\\",\\n        \\\"USDC-SPL\\\"\\n      ],\\n      \\\"evm\\\": [\\n        \\\"ETH\\\",\\n        \\\"USDT-ERC20\\\",\\n        \\\"USDC-ERC20\\\"\\n      ],\\n      \\\"bitcoin\\\": [\\n        \\\"BTC\\\"\\n      ]\\n    }\\n  },\\n  \\\"state\\\": {}\\n}\\n\",\n      \"stderr\": \"\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "bridge_status",
+      "success": true,
+      "stdout": "{\n  \"success\": true,\n  \"status\": \"ceo_treasury_bridge_status\",\n  \"config\": {\n    \"enabled\": true,\n    \"mode\": \"governed_autonomous_execution\",\n    \"require_structured_ceo_request\": true,\n    \"require_phase32_policy\": true,\n    \"require_registered_destination\": true,\n    \"require_supported_live_route\": true,\n    \"require_live_balance_check\": true,\n    \"require_preflight\": true,\n    \"require_confirmation\": true,\n    \"single_transaction_auto_limit_usd\": 15000,\n    \"daily_total_limit_usd\": 20000,\n    \"max_ceo_requests_per_cycle\": 10,\n    \"supported_live_routes\": {\n      \"solana\": [\n        \"SOL\"\n      ]\n    },\n    \"unsupported_routes_fail_closed\": true,\n    \"automatic_execution\": true,\n    \"automatic_signing\": true,\n    \"automatic_broadcast\": true\n  },\n  \"requests\": {\n    \"requests\": []\n  }\n}\n",
+      "stderr": ""
+    }
+  ]
+}

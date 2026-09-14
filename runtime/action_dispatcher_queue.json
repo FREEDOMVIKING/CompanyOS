@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-09-11T01:22:50.898517+00:00",
+  "system_ready": false,
+  "queue": [
+    {
+      "action": "run-health",
+      "category": "internal_read_only",
+      "priority": 95,
+      "reason": "Preflight is blocked; verify system health before further work.",
+      "eligible": false
+    },
+    {
+      "action": "run-readiness",
+      "category": "internal_read_only",
+      "priority": 90,
+      "reason": "Mission control reports items requiring attention.",
+      "eligible": false
+    },
+    {
+      "action": "refresh-forecast",
+      "category": "internal_read_only",
+      "priority": 70,
+      "reason": "Keep forecast aligned with active goals.",
+      "eligible": false
+    },
+    {
+      "action": "refresh-brief",
+      "category": "internal_read_only",
+      "priority": 65,
+      "reason": "Summarize current repository state before owner review.",
+      "eligible": false
+    },
+    {
+      "action": "refresh-priorities",
+      "category": "internal_reversible",
+      "priority": 60,
+      "reason": "Maintain current executive ordering.",
+      "eligible": false
+    },
+    {
+      "action": "refresh-decisions",
+      "category": "internal_reversible",
+      "priority": 55,
+      "reason": "Keep CEO decision queue synchronized.",
+      "eligible": false
+    },
+    {
+      "action": "run-outcomes",
+      "category": "internal_read_only",
+      "priority": 50,
+      "reason": "Refresh measurable outcomes for the feedback loop.",
+      "eligible": false
+    }
+  ]
+}
