@@ -1,0 +1,22 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+case "${1:-status}" in
+  run)
+    shift
+    python -m companyos.runtime.recursive_qualification run "$@"
+    ;;
+  status)
+    python -m companyos.runtime.recursive_qualification status
+    ;;
+  report)
+    python -m companyos.runtime.recursive_qualification report
+    ;;
+  events)
+    tail -n "${2:-60}" .companyos_runtime/recursive_qualification/events.jsonl 2>/dev/null || true
+    ;;
+  *)
+    echo "usage: scripts/companyos_qualify_recursive {run [--cycles N --delay S]|status|report|events [N]}"
+    exit 2
+    ;;
+esac
