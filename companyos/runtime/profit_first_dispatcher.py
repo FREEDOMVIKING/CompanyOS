@@ -169,3 +169,32 @@ def build_goal():
         "\nCURRENT ACTION PACKET:\n"
     )
     return base + header + rules + json.dumps(safe_packet, indent=2, default=str)
+
+
+# COMPANYOS_EVIDENCE_ACQUISITION_V19
+_profit_first_build_goal_v19_base = build_goal
+def build_goal():
+    base = _profit_first_build_goal_v19_base()
+    evidence_q = load(ROOT / ".companyos_runtime" / "evidence_acquisition_queue.json", {})
+    tasks = evidence_q.get("tasks", []) if isinstance(evidence_q, dict) else []
+    pending = [
+        {
+            "task_id": t.get("task_id"),
+            "candidate_name": t.get("candidate_name"),
+            "requirement": t.get("requirement"),
+            "guidance": t.get("guidance"),
+            "research_contract": t.get("research_contract"),
+        }
+        for t in tasks
+        if isinstance(t, dict) and t.get("status") == "research_required"
+    ][:8]
+    if not pending:
+        return base
+    return base + "\nAUTONOMOUS EVIDENCE ACQUISITION TASKS:\n" + (
+        "- Resolve these research-only evidence gaps before treating the candidate as execution-ready.\n"
+        "- Use real attributable evidence only. Never fabricate sources or observations.\n"
+        "- Write collected research into the normal CompanyOS canonical research-output path so it can be re-evaluated.\n"
+        "- Do not send outreach, buy anything, deploy, sign, or transact merely to satisfy an evidence task.\n"
+        "- Existing approval, external-action, credential, deployment, and financial gates remain authoritative.\n\n"
+        "PENDING EVIDENCE TASKS:\n"
+    ) + json.dumps(pending, indent=2, default=str)

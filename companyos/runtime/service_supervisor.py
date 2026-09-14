@@ -138,6 +138,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.closed_loop_outcome_evaluator", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/autonomous_evidence_acquisition.py").exists():
+            services.append(
+                ManagedService(
+                    "autonomous_evidence_acquisition",
+                    (python, "-m", "companyos.runtime.autonomous_evidence_acquisition", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
