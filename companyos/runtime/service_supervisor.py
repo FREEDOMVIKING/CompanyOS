@@ -117,6 +117,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.recursive_improvement_controller", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/semantic_capability_bridge.py").exists():
+            services.append(
+                ManagedService(
+                    "semantic_capability_bridge",
+                    (python, "-m", "companyos.runtime.semantic_capability_bridge", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
