@@ -91,6 +91,15 @@ class ServiceSupervisor:
             and (Path.home()/"companyos/companyos/runtime/self_evolution_runtime.py").exists()
         ):
             services.append(ManagedService("self_evolution_runtime", (python, "-m", "companyos.runtime.self_evolution_runtime")))
+        if (Path.home()/"companyos/companyos/runtime/autonomous_diagnostics.py").exists():
+            services.append(
+                ManagedService(
+                    "autonomous_diagnostics",
+                    (python, "-m", "companyos.runtime.autonomous_diagnostics"),
+                )
+            )
+        if (Path.home()/"companyos/companyos/runtime/capability_expansion.py").exists():
+            services.append(ManagedService("capability_expansion", (python, "-m", "companyos.runtime.capability_expansion", "run")))
         return services
 
     def _log(self, message: str) -> None:
