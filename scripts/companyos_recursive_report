@@ -1,0 +1,13 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+echo "===== RECURSIVE SEMANTIC STATUS ====="
+scripts/companyos_recursive_ctl status || true
+echo "===== SEMANTIC STATUS ====="
+scripts/companyos_semanticctl status || true
+echo "===== REQUESTS ====="
+scripts/companyos_compoundctl requests || true
+echo "===== INVENTORY ====="
+scripts/companyos_expandctl inventory || true
+echo "===== FEEDBACK ====="
+scripts/companyos_feedbackctl status || true

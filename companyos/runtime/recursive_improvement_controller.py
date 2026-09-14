@@ -129,17 +129,22 @@ def detect_regression(before,after,new_capability=None):
 def one_cycle():
     from companyos.runtime import capability_feedback as feedback
     from companyos.runtime import compounding_capability_expansion as compound
+    from companyos.runtime import semantic_capability_bridge as semantic
     from companyos.runtime import capability_request_executor as executor
 
     now=time.time()
     h=_history()
     before=summary_snapshot()
 
+    # COMPANYOS_RECURSIVE_SEMANTIC_LOOP_V14
     # Refresh observations first.
     feedback_result=feedback.cycle()
 
-    # Ask active capabilities to expose at most one next gap.
+    # Two complementary gap sources: usage/feedback and semantic capability output.
     compound_result=compound.once()
+    semantic_before=semantic.cycle()
+
+    # Prefer whatever guarded request is now pending.
     req=newest_pending_request()
 
     selected=None
@@ -163,6 +168,11 @@ def one_cycle():
 
     # Observe the resulting system and catch regressions.
     feedback_after=feedback.cycle()
+
+    # Inspect the just-completed capability output immediately and enqueue at most
+    # one next semantic request. It is not executed until a later controller cycle.
+    semantic_after=semantic.cycle()
+
     after=summary_snapshot()
     promoted=executor_result.get("capability") if isinstance(executor_result,dict) and executor_result.get("status")=="capability_promoted_and_used" else None
     regression=detect_regression(before,after,promoted)
@@ -178,8 +188,10 @@ def one_cycle():
         "selected_request":selected,
         "feedback_before":feedback_result.get("summary") if isinstance(feedback_result,dict) else None,
         "compound":compound_result,
+        "semantic_before":semantic_before,
         "executor":executor_result,
         "feedback_after":feedback_after.get("summary") if isinstance(feedback_after,dict) else None,
+        "semantic_after":semantic_after,
         "regression_reasons":regression,
         "limits":{
             "max_promotions_per_hour":MAX_PROMOTIONS_PER_HOUR,
