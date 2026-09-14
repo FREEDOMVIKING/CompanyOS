@@ -198,3 +198,25 @@ def build_goal():
         "- Existing approval, external-action, credential, deployment, and financial gates remain authoritative.\n\n"
         "PENDING EVIDENCE TASKS:\n"
     ) + json.dumps(pending, indent=2, default=str)
+
+
+# COMPANYOS_EVIDENCE_DECISION_CLOSURE_V20
+_profit_first_build_goal_v20_base = build_goal
+def build_goal():
+    base = _profit_first_build_goal_v20_base()
+    q = load(ROOT / ".companyos_runtime" / "profit_execution_action_queue.json", {})
+    rows = q.get("actions", []) if isinstance(q, dict) else []
+    packet = rows[-1] if rows and isinstance(rows[-1], dict) else None
+    if not packet:
+        return base
+
+    closure = packet.get("decision_closure")
+    if not isinstance(closure, dict):
+        return base
+
+    decision = closure.get("decision")
+    if decision == "promote_to_guarded_execution":
+        return base + "\nEVIDENCE-TO-DECISION CLOSURE:\nCandidate evidence and economics passed the current guarded-readiness rules. Continue through the existing execution gates; do not bypass any connector, approval, finance, credential, deployment, legal, or irreversible-action control.\n"
+    if decision == "deprioritize":
+        return base + "\nEVIDENCE-TO-DECISION CLOSURE:\nThis candidate is currently deprioritized. Do not spend external resources on it. Record the reason and select the next eligible opportunity.\n"
+    return base + "\nEVIDENCE-TO-DECISION CLOSURE:\nCandidate is not yet execution-ready. Continue only the permitted research/validation work needed to close the listed evidence or economic gaps.\n"

@@ -145,6 +145,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.autonomous_evidence_acquisition", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/evidence_decision_closure.py").exists():
+            services.append(
+                ManagedService(
+                    "evidence_decision_closure",
+                    (python, "-m", "companyos.runtime.evidence_decision_closure", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
