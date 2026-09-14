@@ -73,40 +73,106 @@ def canonical_paths(capability_id):
   f"tests/generated/test_{cid}.py",
  )
 
-def model_plan(gap,ctx):
- sys.path.insert(0,str(ROOT/"scripts"))
- from companyos_local_ai_adapter import model_request,extract_json
- module_path,test_path=canonical_paths(gap["id"])
- prompt=f"""
-Build one NEW SAFE ANALYTICAL CompanyOS capability.
+# COMPANYOS_GENERATION_RECOVERY_V6
+def _minimal_generation_prompt(gap,module_path,test_path,attempt):
+ return f"""
+Return ONE complete JSON object only.
+Schema: {{"title":str,"reason":str,"changes":[{{"path":str,"action":str,"content":str,"reason":str}}],"tests":list,"integration":str}}
 
-CAPABILITY:
-{json.dumps(gap,indent=2)}
+Build one SAFE ANALYTICAL capability:
+id={gap["id"]}
+reason={gap["reason"]}
 
-CONTEXT:
-{json.dumps(ctx,default=str)[:4500]}
+Required files:
+- {module_path}
+- {test_path}
 
-Return JSON in the adapter schema title/reason/changes/tests/integration.
-Generate exactly TWO Python contents:
-1. capability module for {module_path}
-2. unittest module for {test_path}
-
-The capability module must expose:
-CAPABILITY_ID = "{gap['id']}"
+Module contract:
+CAPABILITY_ID = "{gap["id"]}"
 def capability_manifest() -> dict
 def evaluate(context: dict) -> dict
 
 Rules:
 - Pure analysis only.
 - No network, shell, subprocess, environment access, file writes, credentials, wallets, finance, approvals, deployment actions, or external sends.
-- Allowed imports in the capability module: {sorted(SAFE_IMPORTS - {'unittest'})}
-- Test module may import unittest and the generated capability.
-- Complete runnable Python only. No TODO/placeholders.
+- No markdown.
+- No placeholders.
+- Keep both files concise.
+- Attempt {attempt}.
 """
- r=model_request(prompt)
- if not r.get("ok"): return {"ok":False,"reason":r.get("reason"),"raw":r}
- try:return {"ok":True,"plan":extract_json(r.get("text","")),"model":r.get("model"),"endpoint":r.get("endpoint")}
- except Exception as e:return {"ok":False,"reason":f"plan_parse_failed: {e}"}
+
+def _recover_json_object(text):
+ text=(text or "").strip()
+ if not text:return None
+ try:
+  obj=json.loads(text)
+  return obj if isinstance(obj,dict) else None
+ except Exception:
+  pass
+ # Conservative recovery: locate outermost complete JSON object only.
+ start=text.find("{")
+ if start < 0:return None
+ depth=0; in_string=False; escaped=False
+ for i,ch in enumerate(text[start:], start):
+  if in_string:
+   if escaped:escaped=False
+   elif ch=="\\":escaped=True
+   elif ch=='"':in_string=False
+   continue
+  if ch=='"':in_string=True
+  elif ch=="{":depth+=1
+  elif ch=="}":
+   depth-=1
+   if depth==0:
+    try:
+     obj=json.loads(text[start:i+1])
+     return obj if isinstance(obj,dict) else None
+    except Exception:
+     return None
+ return None
+
+def model_plan(gap,ctx):
+ sys.path.insert(0,str(ROOT/"scripts"))
+ from companyos_local_ai_adapter import model_request,extract_json
+ module_path,test_path=canonical_paths(gap["id"])
+ attempts=[]
+ prompts=[
+  f"""
+Build one NEW SAFE ANALYTICAL CompanyOS capability.
+
+CAPABILITY:
+{json.dumps(gap,indent=2)}
+
+CONTEXT:
+{json.dumps(ctx,default=str)[:2600]}
+
+Return one complete JSON object in schema title/reason/changes/tests/integration.
+Generate exactly TWO Python contents:
+1. {module_path}
+2. {test_path}
+
+The module must expose CAPABILITY_ID, capability_manifest(), evaluate(context).
+Pure analysis only. No network, shell, subprocess, environment access, file writes,
+credentials, wallets, finance, approvals, deployment actions, or external sends.
+Complete runnable Python only. No markdown. No placeholders.
+""",
+  _minimal_generation_prompt(gap,module_path,test_path,2),
+  _minimal_generation_prompt(gap,module_path,test_path,3),
+ ]
+ for idx,prompt in enumerate(prompts,1):
+  r=model_request(prompt)
+  attempts.append({"attempt":idx,"ok":r.get("ok"),"reason":r.get("reason"),"model":r.get("model"),"endpoint":r.get("endpoint")})
+  if not r.get("ok"):
+   continue
+  text=r.get("text","")
+  try:
+   plan=extract_json(text)
+   return {"ok":True,"plan":plan,"model":r.get("model"),"endpoint":r.get("endpoint"),"attempts":attempts,"recovered":False}
+  except Exception:
+   plan=_recover_json_object(text)
+   if isinstance(plan,dict):
+    return {"ok":True,"plan":plan,"model":r.get("model"),"endpoint":r.get("endpoint"),"attempts":attempts,"recovered":True}
+ return {"ok":False,"reason":"generation_retries_exhausted","attempts":attempts}
 
 # COMPANYOS_TEST_RECOVERY_V5
 def _find_test_content(value):
