@@ -110,6 +110,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.capability_request_executor", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/recursive_improvement_controller.py").exists():
+            services.append(
+                ManagedService(
+                    "recursive_improvement_controller",
+                    (python, "-m", "companyos.runtime.recursive_improvement_controller", "run"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:

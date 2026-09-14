@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+cd "$HOME/companyos"
+case "${1:-status}" in
+  once) python -m companyos.runtime.recursive_improvement_controller once ;;
+  status) python -m companyos.runtime.recursive_improvement_controller status ;;
+  history) python -m companyos.runtime.recursive_improvement_controller history ;;
+  events) tail -n "${2:-40}" .companyos_runtime/recursive_improvement/events.jsonl 2>/dev/null || true ;;
+  *) echo "usage: scripts/companyos_recursive_ctl {once|status|history|events [N]}"; exit 2 ;;
+esac
