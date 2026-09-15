@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/python
+from __future__ import annotations
+import json
+import sys
+from pathlib import Path
+
+# Resolve ~/companyos regardless of the caller's working directory.
+REPO = Path(__file__).resolve().parents[1]
+repo_s = str(REPO)
+if repo_s not in sys.path:
+    sys.path.insert(0, repo_s)
+
+from companyos.runtime.adaptive_workforce_execution_bridge import cycle
+
+if __name__ == "__main__":
+    print(json.dumps(cycle(), indent=2, default=str))
