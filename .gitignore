@@ -69,3 +69,17 @@ companyos/runtime/*.backup
 .companyos_runtime/termux_boot.log
 
 # CompanyOS full autonomous launch generated state
+
+# ===== CompanyOS repository hygiene =====
+.companyos_backups/
+.companyos_enterprise_v18/*.sqlite3
+.companyos_enterprise_v18/*status*.json
+
+# Runtime-generated ledgers/state
+/runtime/
+
+# Generated backup copies
+*.bak
+*.bak.*
+*.backup
+*.pre_public_connectors
