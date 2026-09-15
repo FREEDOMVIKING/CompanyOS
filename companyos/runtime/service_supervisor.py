@@ -168,6 +168,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.adaptive_worker_factory"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/adaptive_workforce_execution_bridge.py").exists():
+            services.append(
+                ManagedService(
+                    "adaptive_workforce_execution_bridge",
+                    (python, "-m", "companyos.runtime.adaptive_workforce_execution_bridge"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:

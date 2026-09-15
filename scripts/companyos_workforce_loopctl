@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/python
+import sys,json
+from pathlib import Path
+R=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(R))
+from companyos.runtime.autonomous_workforce_loop import cycle
+if len(sys.argv)>1 and sys.argv[1]=="status":
+ p=Path.home()/"companyos/.companyos_runtime/autonomous_workforce_loop_state.json"
+ print(p.read_text() if p.exists() else "{}")
+else: print(json.dumps(cycle(),indent=2,default=str))

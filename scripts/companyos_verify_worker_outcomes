@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT))
+from companyos.runtime.verified_outcome_scoring import VerifiedOutcomeScorer
+print(json.dumps(VerifiedOutcomeScorer(ROOT).run(),indent=2,sort_keys=True))

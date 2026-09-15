@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/python
+from pathlib import Path
+p=Path.cwd()/".companyos_runtime/continuous_improvement/latest.json"
+print(p.read_text() if p.exists() else '{"status":"not_run"}')

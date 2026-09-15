@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/python
+from pathlib import Path
+import sys,json
+ROOT=Path.home()/"companyos"; sys.path.insert(0,str(ROOT))
+from companyos.runtime.adaptive_workforce_execution_bridge import WorkforceExecutionBridge
+if len(sys.argv)>1 and sys.argv[1]=="cycle":
+ print(json.dumps(WorkforceExecutionBridge().cycle(),indent=2))
+else:
+ p=ROOT/".companyos_runtime/adaptive_workers/execution_bridge_latest.json"
+ print(p.read_text() if p.exists() else '{"status":"not_run"}')

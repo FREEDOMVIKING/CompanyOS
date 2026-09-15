@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/python
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import argparse
+from companyos.runtime.self_code_provenance import run
+p=argparse.ArgumentParser()
+p.add_argument("--hours",type=int,default=24)
+a=p.parse_args()
+run(a.hours)
