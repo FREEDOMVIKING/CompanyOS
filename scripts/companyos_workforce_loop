@@ -1,0 +1,33 @@
+#!/data/data/com.termux/files/usr/bin/python
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+# When launched as:
+#   python scripts/companyos_workforce_loop ...
+# Python normally places ~/companyos/scripts on sys.path. Explicitly add the
+# repository root so the companyos package resolves identically in Termux.
+REPO_ROOT = Path(__file__).resolve().parents[1]
+repo = str(REPO_ROOT)
+if repo not in sys.path:
+    sys.path.insert(0, repo)
+
+from companyos.runtime.autonomous_workforce_loop import cycle, run
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("command", choices=["cycle", "run"])
+    parser.add_argument("--interval", type=int, default=300)
+    args = parser.parse_args()
+
+    if args.command == "cycle":
+        print(json.dumps(cycle(), indent=2, default=str))
+    else:
+        run(args.interval)
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
