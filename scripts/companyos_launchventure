@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/python
+import argparse,json,os,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+env=Path.home()/".companyos_launch_env"
+if env.exists():
+    for raw in env.read_text().splitlines():
+        raw=raw.strip()
+        if raw.startswith("export ") and "=" in raw:
+            k,v=raw[7:].split("=",1);os.environ.setdefault(k.strip(),v.strip().strip("'").strip('"'))
+from companyos.runtime.venture_launch_orchestrator import VentureLaunchOrchestrator
+p=argparse.ArgumentParser();p.add_argument("--file");a=p.parse_args();v=VentureLaunchOrchestrator(ROOT)
+r=v.launch(json.loads(Path(a.file).read_text())) if a.file else v.launch_latest()
+print(json.dumps(r,indent=2,sort_keys=True))
