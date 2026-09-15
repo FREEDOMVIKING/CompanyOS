@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/python
+import os,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.site_evidence_collector import serve
+serve(ROOT,os.getenv("COMPANYOS_EVIDENCE_HOST","127.0.0.1"),int(os.getenv("COMPANYOS_EVIDENCE_PORT","8776")))

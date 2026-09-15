@@ -1,0 +1,7 @@
+#!/data/data/com.termux/files/usr/bin/python
+import argparse,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.site_instrumentation import instrument
+p=argparse.ArgumentParser();p.add_argument("--site",required=True);p.add_argument("--venture",required=True);p.add_argument("--endpoint",required=True)
+a=p.parse_args();print(json.dumps(instrument(a.site,a.venture,a.endpoint),indent=2))
