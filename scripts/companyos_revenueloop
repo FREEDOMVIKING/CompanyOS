@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.post_launch_revenue_loop import PostLaunchRevenueLoop
+from companyos.runtime.venture_performance_feedback import VenturePerformanceFeedback
+r=PostLaunchRevenueLoop(ROOT).run(); f=VenturePerformanceFeedback(ROOT).run()
+print(json.dumps({"revenue_loop":r,"feedback":f},indent=2,sort_keys=True))

@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json
+from pathlib import Path
+rt=Path.cwd()/".companyos_runtime"
+def x(n):
+    try:return json.loads((rt/n).read_text())
+    except:return None
+print(json.dumps({"latest":x("post_launch_revenue_latest.json"),
+"next_action":x("post_launch_next_action.json"),
+"performance_feedback":x("venture_performance_feedback.json")},indent=2,sort_keys=True))
