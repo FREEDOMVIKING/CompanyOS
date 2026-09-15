@@ -1,0 +1,7 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from companyos.runtime.self_evolution_closed_loop import ClosedLoopSelfEvolution
+print(json.dumps(ClosedLoopSelfEvolution(ROOT).execute(),indent=2,sort_keys=True))
