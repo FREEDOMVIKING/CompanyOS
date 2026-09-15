@@ -1,0 +1,15 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.overnight_finance_guard import OvernightFinanceGuard
+def read(p):
+ try:return json.loads(p.read_text())
+ except:return None
+print(json.dumps({
+ "finance":OvernightFinanceGuard(ROOT).status(),
+ "supervisor":read(ROOT/".companyos_runtime/service_supervisor_state.json"),
+ "ceo_workforce":read(ROOT/".companyos_runtime/ceo_workforce/latest.json"),
+ "revenue":read(ROOT/".companyos_runtime/post_launch_revenue_latest.json"),
+ "market_evidence":read(ROOT/".companyos_runtime/market_evidence_summary.json"),
+},indent=2,sort_keys=True))

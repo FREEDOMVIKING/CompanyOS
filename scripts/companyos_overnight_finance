@@ -1,0 +1,11 @@
+#!/data/data/com.termux/files/usr/bin/python
+import argparse,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.overnight_finance_guard import OvernightFinanceGuard
+p=argparse.ArgumentParser();sp=p.add_subparsers(dest="cmd",required=True);sp.add_parser("status")
+r=sp.add_parser("reserve");r.add_argument("--usd",type=float,required=True);r.add_argument("--tx-id",required=True)
+q=sp.add_parser("settle");q.add_argument("--usd",type=float,required=True);q.add_argument("--tx-id",required=True);q.add_argument("--success",action="store_true")
+a=p.parse_args();g=OvernightFinanceGuard(ROOT)
+o=g.status() if a.cmd=="status" else g.reserve(a.usd,a.tx_id) if a.cmd=="reserve" else g.settle(a.usd,a.tx_id,a.success)
+print(json.dumps(o,indent=2,sort_keys=True))
