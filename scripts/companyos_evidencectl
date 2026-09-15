@@ -1,10 +1,14 @@
-#!/data/data/com.termux/files/usr/bin/bash
-set -e
-cd "$HOME/companyos"
-case "${1:-status}" in
-  once) python -m companyos.runtime.autonomous_evidence_acquisition once ;;
-  status) python -m companyos.runtime.autonomous_evidence_acquisition status ;;
-  queue) python -m companyos.runtime.autonomous_evidence_acquisition queue ;;
-  events) tail -n "${2:-50}" .companyos_runtime/evidence_acquisition_events.jsonl 2>/dev/null || true ;;
-  *) echo "usage: scripts/companyos_evidencectl {once|status|queue|events [N]}"; exit 2 ;;
-esac
+#!/data/data/com.termux/files/usr/bin/python
+import argparse,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.market_evidence_engine import MarketEvidenceEngine
+p=argparse.ArgumentParser();sub=p.add_subparsers(dest="cmd",required=True)
+i=sub.add_parser("ingest");i.add_argument("--venture",required=True);i.add_argument("--kind",required=True);i.add_argument("--external-id");i.add_argument("--amount",type=float)
+s=sub.add_parser("summary");s.add_argument("--venture",required=True)
+a=p.parse_args();e=MarketEvidenceEngine(ROOT)
+if a.cmd=="ingest":
+ r=e.ingest({"venture_id":a.venture,"kind":a.kind,"external_id":a.external_id,"amount":a.amount})
+else:
+ sm=e.summarize(a.venture);r={"summary":sm,"performance":e.score(sm)}
+print(json.dumps(r,indent=2,sort_keys=True))
