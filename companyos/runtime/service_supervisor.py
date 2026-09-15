@@ -154,6 +154,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.evidence_decision_closure", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/continuous_profit_improvement_loop.py").exists():
+            services.append(
+                ManagedService(
+                    "continuous_profit_improvement_loop",
+                    (python, "-m", "companyos.runtime.continuous_profit_improvement_loop"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
