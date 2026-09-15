@@ -55,8 +55,47 @@ def _update(queue,index,**updates):
     queue["requests"][index]["updated_at"]=time.time()
     atomic(QUEUE,queue)
 
+def _context_fingerprint(req):
+    import hashlib
+    ctx=_context(req)
+    cr=ctx.get("compounding_request")
+    if isinstance(cr,dict):
+        cr=dict(cr)
+        for k in ("status","updated_at","started_at","completed_at","last_attempt","generation","execution","promotion","result","error","candidate_id","retriggered_at","last_context_fingerprint"):
+            cr.pop(k,None)
+        ctx["compounding_request"]=cr
+    raw=json.dumps(ctx,sort_keys=True,default=str,separators=(",",":"))
+    return hashlib.sha256(raw.encode()).hexdigest()
+
+def _retrigger_stale_completed(queue):
+    now=time.time()
+    reopened=0
+    baseline_changed=False
+    for req in queue.get("requests",[]):
+        if not isinstance(req,dict) or req.get("status")!="completed" or not req.get("requested_capability"):
+            continue
+        fp=_context_fingerprint(req)
+        previous=req.get("last_context_fingerprint")
+        if not previous:
+            req["last_context_fingerprint"]=fp
+            baseline_changed=True
+            continue
+        if previous==fp:
+            continue
+        req["status"]="research_required"
+        req["retriggered_at"]=now
+        req["retrigger_reason"]="runtime_evidence_changed"
+        req["last_context_fingerprint"]=fp
+        reopened+=1
+        emit("completed_request_retriggered",capability=req.get("requested_capability"),gap_id=req.get("gap_id"))
+    if reopened or baseline_changed:
+        atomic(QUEUE,queue)
+    return reopened
+
 def process_one():
     from companyos.runtime import capability_expansion as ce
+    queue=load(QUEUE,{"requests":[]})
+    _retrigger_stale_completed(queue)
     queue=load(QUEUE,{"requests":[]})
     reqs=queue.get("requests",[])
     if not isinstance(reqs,list):
@@ -78,7 +117,7 @@ def process_one():
     if cid in inv:
         try:
             execution=ce.run_capability(cid,_context(req))
-            _update(queue,i,status="completed",result="existing_capability_used",execution=execution,completed_at=time.time())
+            _update(queue,i,status="completed",result="existing_capability_used",execution=execution,completed_at=time.time(),last_context_fingerprint=_context_fingerprint(req))
             emit("completed_existing",capability=cid,gap_id=req.get("gap_id"))
             return {"ok":True,"status":"completed_existing","capability":cid}
         except Exception as exc:
@@ -131,7 +170,7 @@ def process_one():
         return {"ok":False,"status":"canary_failed_rolled_back","error":repr(exc)}
 
     queue=load(QUEUE,{"requests":[]})
-    _update(queue,i,status="completed",result="capability_promoted_and_used",candidate_id=candidate_id,promotion=receipt,execution=execution,completed_at=time.time())
+    _update(queue,i,status="completed",result="capability_promoted_and_used",candidate_id=candidate_id,promotion=receipt,execution=execution,completed_at=time.time(),last_context_fingerprint=_context_fingerprint(req))
     emit("completed_promoted",capability=cid,candidate_id=candidate_id,gap_id=req.get("gap_id"))
     return {"ok":True,"status":"capability_promoted_and_used","capability":cid,"candidate_id":candidate_id}
 
