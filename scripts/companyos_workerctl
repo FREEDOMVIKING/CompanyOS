@@ -1,0 +1,23 @@
+#!/data/data/com.termux/files/usr/bin/python
+from pathlib import Path
+import json
+import sys
+
+ROOT = Path.home() / "companyos"
+root_s = str(ROOT)
+if root_s not in sys.path:
+    sys.path.insert(0, root_s)
+
+from companyos.runtime.adaptive_worker_factory import Factory
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "cycle":
+        print(json.dumps(Factory().cycle(), indent=2))
+        return 0
+
+    p = ROOT / ".companyos_runtime/adaptive_workers/latest.json"
+    print(p.read_text() if p.exists() else json.dumps({"status": "not_run"}, indent=2))
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -161,6 +161,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.continuous_profit_improvement_loop"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/adaptive_worker_factory.py").exists():
+            services.append(
+                ManagedService(
+                    "adaptive_worker_factory",
+                    (python, "-m", "companyos.runtime.adaptive_worker_factory"),
+                )
+            )
         return services
 
     def _log(self, message: str) -> None:
