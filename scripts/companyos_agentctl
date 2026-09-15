@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/python
+import argparse,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from companyos.runtime.autonomous_agent_workforce import AgentWorkforce
+p=argparse.ArgumentParser();sub=p.add_subparsers(dest="cmd",required=True)
+sub.add_parser("status")
+c=sub.add_parser("create");c.add_argument("--role",required=True);c.add_argument("--purpose",default="specialist work")
+r=sub.add_parser("record");r.add_argument("--agent",required=True);r.add_argument("--success",action="store_true");r.add_argument("--useful",action="store_true");r.add_argument("--verified-profit",type=float,default=0)
+a=p.parse_args();w=AgentWorkforce(ROOT)
+if a.cmd=="status":o=w.portfolio()
+elif a.cmd=="create":o=w.create(a.role,a.purpose)
+else:o=w.record(a.agent,a.success,a.useful,a.verified_profit)
+print(json.dumps(o,indent=2,sort_keys=True))
