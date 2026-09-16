@@ -25,35 +25,34 @@ class DependencyAwareDispatcher:
         if not dep:
             return True
 
-        for candidate in self.queue.all_tasks():
-            payload = candidate.payload or {}
-            if payload.get("goal_id") != goal_id:
-                continue
-            if payload.get("stage") == dep:
-                return candidate.state == "COMPLETED"
-
-        return False
+        return self.queue.has_completed_goal_stage(goal_id, dep)
 
     def dispatch_next(self) -> DispatchResult:
-        candidates = [
-            t for t in self.queue.all_tasks()
-            if t.state == "QUEUED"
-            and t.attempts < t.max_attempts
-            and self._dependency_satisfied(t)
-            and t.task_type in self.dispatcher.handlers
-        ]
-
+        import os
+        scan_limit = max(1, int(os.getenv("COMPANYOS_QUEUE_SCAN_LIMIT", "1000")))
+        cursor_path = self.queue.root.parent / "dispatcher_scan_cursor.txt"
+        try:
+            cursor = int(cursor_path.read_text().strip()) if cursor_path.exists() else 0
+        except Exception:
+            cursor = 0
+        if hasattr(self.queue, "bounded_candidates_window"):
+            source = self.queue.bounded_candidates_window(scan_limit, cursor)
+        elif hasattr(self.queue, "bounded_candidates"):
+            source = self.queue.bounded_candidates(scan_limit)
+        else:
+            source = self.queue.all_tasks()[:scan_limit]
+        try:
+            total = len(self.queue._iter_task_files()) if hasattr(self.queue, "_iter_task_files") else len(self.queue.all_tasks())
+            cursor_path.write_text(str((cursor + scan_limit) % max(1,total)))
+        except Exception:
+            pass
+        candidates = [t for t in source if t.state == "QUEUED" and t.attempts < t.max_attempts and self._dependency_satisfied(t) and t.task_type in self.dispatcher.handlers]
         if not candidates:
-            return DispatchResult(
-                False, None, None, None, "no_dependency_ready_task", None
-            )
-
-        candidates.sort(key=lambda t: (t.priority, t.created_at_unix))
+            return DispatchResult(False, None, None, None, "no_dependency_ready_task", None)
+        candidates.sort(key=lambda t: (-t.priority, t.created_at_unix))
         chosen = candidates[0]
-
-        # Temporarily bias chosen task to front without changing external API.
         original_priority = chosen.priority
-        chosen.priority = -10**9
+        chosen.priority = 10**9
         self.queue.save(chosen)
         try:
             result = self.dispatcher.dispatch_next()
@@ -65,5 +64,4 @@ class DependencyAwareDispatcher:
                     self.queue.save(saved)
             except Exception:
                 pass
-
         return result

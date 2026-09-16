@@ -40,7 +40,35 @@ def advance(j):
     j["updated_at"]=time.time(); atomic(job_path(oid),j)
     if j["terminal"]:emit("durable_job_terminal",orchestration_id=oid,state=j["state"],outcome=j.get("outcome"))
     return j
+def recover_existing():
+    recovered=[]
+    orch_root=ROOT / "ceo_orchestrations"
+    if not orch_root.exists():
+        return recovered
+    known={p.stem for p in JOBS.glob("*.json")}
+    for op in sorted(orch_root.glob("*.json"), key=lambda x:x.stat().st_mtime):
+        try:
+            x=json.loads(op.read_text())
+            oid=str(x.get("orchestration_id") or op.stem)
+            if not oid or oid in known:
+                continue
+            state=str(x.get("state") or "RUNNING").upper()
+            j={"schema":"companyos.durable_execution.v23","orchestration_id":oid,
+               "action_packet_id":None,"candidate_name":x.get("root_goal") or oid,
+               "candidate_score":None,"selected_action":{"action":x.get("root_goal")},
+               "fingerprint":"recovered:"+oid,"state":state,
+               "created_at":float(x.get("created_at_unix") or op.stat().st_mtime),
+               "updated_at":time.time(),"terminal":state in TERMINAL,
+               "cycles":int(x.get("total_cycles") or 0),"evidence":[],
+               "outcome":x.get("final_summary"),"last_error":None,"recovered":True}
+            atomic(job_path(oid),j); recovered.append(oid); known.add(oid)
+            emit("durable_job_recovered",orchestration_id=oid,state=state)
+        except Exception as e:
+            emit("durable_recovery_error",path=str(op),error=repr(e))
+    return recovered
+
 def cycle():
+    recovered=recover_existing()
     now=time.time(); rows=[]
     for p in JOBS.glob("*.json"):
         j=load(p,{})
@@ -50,7 +78,7 @@ def cycle():
     out={"running":True,"healthy":True,"last_cycle_unix":now,"job_count":len(rows),
          "active_count":sum(not j.get("terminal") for j in rows),"terminal_count":len(terminal),
          "completed_count":sum(j.get("state")=="COMPLETED" for j in terminal),
-         "failed_count":sum(j.get("state") in {"FAILED","HALTED"} for j in terminal)}
+         "failed_count":sum(j.get("state") in {"FAILED","HALTED"} for j in terminal),"recovered_this_cycle":len(recovered)}
     atomic(STATE,out); return out
 def run():
     interval=max(10,int(os.getenv("COMPANYOS_DURABLE_EXECUTION_INTERVAL_SECONDS","30")))

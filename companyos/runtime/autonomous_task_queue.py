@@ -68,14 +68,46 @@ class AutonomousTaskQueue:
         data = json.loads(self._path(task_id).read_text(encoding="utf-8"))
         return TaskRecord(**data)
 
-    def all_tasks(self) -> list[TaskRecord]:
-        tasks = []
-        for p in self.root.glob("*.json"):
+    def _iter_task_files(self):
+        for path in self.root.glob("*.json"):
             try:
-                tasks.append(self.load(p.stem))
+                data = json.loads(path.read_text(encoding="utf-8"))
+                yield TaskRecord(**data)
             except Exception:
                 continue
+
+    def all_tasks(self) -> list[TaskRecord]:
+        return list(self._iter_task_files())
+
+    def bounded_candidates_window(self, limit: int = 1000, offset: int = 0) -> list[TaskRecord]:
+        limit=max(1,int(limit)); offset=max(0,int(offset))
+        files=self._iter_task_files() if hasattr(self,"_iter_task_files") else list(self.root.glob("*.json"))
+        if not files: return []
+        start=offset % len(files); ordered=files[start:]+files[:start]; tasks=[]
+        for path in ordered[:limit]:
+            try:
+                data=json.loads(path.read_text(encoding="utf-8")); tasks.append(TaskRecord(**data))
+            except Exception: continue
         return tasks
+
+    def bounded_candidates(self, limit: int = 512) -> list[TaskRecord]:
+        limit = max(1, int(limit))
+        candidates = []
+        for task in self._iter_task_files():
+            if task.state != "QUEUED":
+                continue
+            if task.attempts >= task.max_attempts:
+                continue
+            candidates.append(task)
+        candidates.sort(key=lambda t: (-int(t.priority), float(t.created_at_unix)))
+        return candidates[:limit]
+
+    def has_completed_goal_stage(self, goal_id: str, stage: str) -> bool:
+        for task in self._iter_task_files():
+            payload = task.payload if isinstance(task.payload, dict) else {}
+            if payload.get("goal_id") == goal_id and payload.get("stage") == stage and task.state == "COMPLETED":
+                return True
+        return False
 
     def find_by_idempotency_key(self, key: str) -> Optional[TaskRecord]:
         if not key:
