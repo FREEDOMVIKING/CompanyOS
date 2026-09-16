@@ -154,6 +154,13 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.evidence_decision_closure", "run"),
                 )
             )
+        if (Path.home()/"companyos/companyos/runtime/profit_to_action_closure.py").exists():
+            services.append(
+                ManagedService(
+                    "profit_to_action_closure",
+                    (python, "-m", "companyos.runtime.profit_to_action_closure", "run"),
+                )
+            )
         if (Path.home()/"companyos/companyos/runtime/continuous_profit_improvement_loop.py").exists():
             services.append(
                 ManagedService(
