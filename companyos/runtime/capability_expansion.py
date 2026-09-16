@@ -65,9 +65,27 @@ def derive_gap(ctx):
   return {"id":"candidate_gap_ranker","title":"Candidate qualification gap ranker","reason":"Profit candidates exist but none are execution-qualified."}
  return None
 
-def canonical_paths(capability_id):
+JUNK_CAPABILITY_IDS={
+ "x","xx","xxx","test","tmp","temp","foo","bar","baz","demo","sample",
+ "capability","new_capability","unknown","none","null","todo","fix","helper"
+}
+
+def normalize_capability_id(capability_id):
  cid=re.sub(r"[^a-zA-Z0-9_]+","_",str(capability_id or "")).strip("_").lower()
- if not cid: raise ValueError("missing capability id")
+ if not cid:
+  raise ValueError("missing_capability_id")
+ if cid in JUNK_CAPABILITY_IDS:
+  raise ValueError("junk_capability_id:"+cid)
+ if len(cid) < 4:
+  raise ValueError("capability_id_too_short:"+cid)
+ if cid.isdigit():
+  raise ValueError("numeric_capability_id:"+cid)
+ if not re.search(r"[a-z]",cid):
+  raise ValueError("capability_id_missing_letters:"+cid)
+ return cid
+
+def canonical_paths(capability_id):
+ cid=normalize_capability_id(capability_id)
  return (
   f"companyos/extensions/generated/{cid}.py",
   f"tests/generated/test_{cid}.py",

@@ -38,9 +38,52 @@ def _eligible(req):
     if not req.get("requested_capability"):return False,"requested_capability_missing"
     return True,"ok"
 
+def _replacement_capability_id(req):
+    text=" ".join(str(req.get(k) or "") for k in ("gap_type","reason","requested_capability","gap_id")).lower()
+    mapping=(
+        (("missing_executable_next_action","executable next action"),"executable_next_action_planner"),
+        (("missing_external_evidence","external evidence"),"external_evidence_requirements_analyzer"),
+        (("profit_unestimated","profit unestimated","profitability"),"profitability_estimator"),
+        (("probability_unestimated","probability unestimated"),"probability_estimator"),
+        (("missing_revenue_evidence","revenue evidence"),"revenue_evidence_analyzer"),
+        (("qualification","candidate gap","execution-qualified"),"candidate_gap_ranker"),
+    )
+    for needles,cid in mapping:
+        if any(n in text for n in needles):
+            return cid
+    return "semantic_gap_resolution_analyzer"
+
 def _gap(req):
     cid=str(req["requested_capability"])
     return {"id":cid,"title":cid.replace("_"," ").title(),"reason":str(req.get("reason") or "Compounding capability request"),"source_capability":req.get("source_capability"),"gap_type":req.get("gap_type"),"gap_id":req.get("gap_id")}
+
+def _retry_or_reject(queue,index,req,result,**details):
+    attempts=int(req.get("generation_retry_count") or 0)+1
+    max_attempts=max(1,int(os.getenv("COMPANYOS_CAPABILITY_GENERATION_MAX_RETRIES","3")))
+    updates=dict(details)
+    updates["result"]=result
+    updates["generation_retry_count"]=attempts
+    updates["last_attempt"]=result
+    if attempts < max_attempts:
+        updates["status"]="research_required"
+        updates["retry_after_unix"]=time.time()
+        updates["retry_reason"]="candidate_generation_or_validation_failed"
+        emit("capability_retry_queued",
+             capability=req.get("requested_capability"),
+             gap_id=req.get("gap_id"),
+             attempt=attempts,
+             reason=result)
+        _update(queue,index,**updates)
+        return {"ok":True,"status":"retry_queued","reason":result,"attempt":attempts}
+    updates["status"]="rejected_terminal"
+    updates["rejected_at"]=time.time()
+    emit("capability_retry_exhausted",
+         capability=req.get("requested_capability"),
+         gap_id=req.get("gap_id"),
+         attempts=attempts,
+         reason=result)
+    _update(queue,index,**updates)
+    return {"ok":False,"status":"retry_exhausted","reason":result,"attempts":attempts}
 
 def _context(req):
     return {
@@ -111,6 +154,31 @@ def process_one():
         return {"ok":True,"status":"idle","reason":"no_eligible_research_required_request"}
 
     i,req=selected
+
+    original_cid=str(req.get("requested_capability") or "")
+    try:
+        ce.canonical_paths(original_cid)
+    except Exception as exc:
+        replacement=_replacement_capability_id(req)
+        try:
+            ce.canonical_paths(replacement)
+        except Exception:
+            replacement="semantic_gap_resolution_analyzer"
+        queue=load(QUEUE,{"requests":[]})
+        _update(queue,i,
+                status="research_required",
+                requested_capability=replacement,
+                recovered_from_capability_id=original_cid,
+                recovery_reason="invalid_or_junk_capability_id",
+                recovery_error=repr(exc),
+                recovered_at=time.time())
+        emit("junk_capability_id_recovered",
+             original=original_cid,
+             replacement=replacement,
+             gap_id=req.get("gap_id"))
+        queue=load(QUEUE,{"requests":[]})
+        req=queue["requests"][i]
+
     gap=_gap(req); cid=gap["id"]
     inv=ce.capability_inventory()
 
@@ -121,23 +189,20 @@ def process_one():
             emit("completed_existing",capability=cid,gap_id=req.get("gap_id"))
             return {"ok":True,"status":"completed_existing","capability":cid}
         except Exception as exc:
-            _update(queue,i,status="rejected",result="existing_capability_failed",error=repr(exc))
-            return {"ok":False,"status":"existing_capability_failed","error":repr(exc)}
+            queue=load(QUEUE,{"requests":[]})
+            return _retry_or_reject(queue,i,req,"existing_capability_failed",error=repr(exc))
 
     _update(queue,i,status="generating",started_at=time.time())
     ctx=_context(req)
     gen=ce.model_plan(gap,ctx)
     queue=load(QUEUE,{"requests":[]})
     if not gen.get("ok"):
-        _update(queue,i,status="research_required",last_attempt="generation_failed",generation=gen)
-        emit("generation_failed",capability=cid,gap_id=req.get("gap_id"))
-        return {"ok":False,"status":"generation_failed","generation":gen}
+        return _retry_or_reject(queue,i,req,"generation_failed",generation=gen)
 
     module_content,_,shape=ce._classify_generated_contents(gen.get("plan") or {},cid)
     if shape:
         queue=load(QUEUE,{"requests":[]})
-        _update(queue,i,status="rejected",result="generation_shape_invalid",errors=shape)
-        return {"ok":True,"status":"generation_shape_invalid","errors":shape}
+        return _retry_or_reject(queue,i,req,"generation_shape_invalid",errors=shape)
 
     dup_fn=getattr(ce,"_is_duplicate_generated_source",None)
     if callable(dup_fn) and module_content:
@@ -151,14 +216,14 @@ def process_one():
     candidate_id,stage,errors=ce.stage_plan(gap,gen["plan"])
     queue=load(QUEUE,{"requests":[]})
     if errors:
-        _update(queue,i,status="rejected",result="validation_failed",candidate_id=candidate_id,errors=errors)
-        return {"ok":True,"status":"validation_rejected","errors":errors}
+        return _retry_or_reject(queue,i,req,"validation_failed",
+                                candidate_id=candidate_id,errors=errors)
 
     ok,tests=ce.test_stage(stage,cid)
     queue=load(QUEUE,{"requests":[]})
     if not ok:
-        _update(queue,i,status="rejected",result="tests_failed",candidate_id=candidate_id,tests=tests)
-        return {"ok":True,"status":"tests_rejected","tests":tests}
+        return _retry_or_reject(queue,i,req,"tests_failed",
+                                candidate_id=candidate_id,tests=tests)
 
     receipt=ce.promote(stage,cid,candidate_id)
     try:
@@ -166,8 +231,8 @@ def process_one():
     except Exception as exc:
         ce.rollback(cid)
         queue=load(QUEUE,{"requests":[]})
-        _update(queue,i,status="rejected",result="canary_failed_rolled_back",candidate_id=candidate_id,error=repr(exc))
-        return {"ok":False,"status":"canary_failed_rolled_back","error":repr(exc)}
+        return _retry_or_reject(queue,i,req,"canary_failed_rolled_back",
+                                candidate_id=candidate_id,error=repr(exc))
 
     queue=load(QUEUE,{"requests":[]})
     _update(queue,i,status="completed",result="capability_promoted_and_used",candidate_id=candidate_id,promotion=receipt,execution=execution,completed_at=time.time(),last_context_fingerprint=_context_fingerprint(req))
