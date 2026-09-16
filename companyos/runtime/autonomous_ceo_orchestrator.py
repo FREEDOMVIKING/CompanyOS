@@ -269,8 +269,15 @@ class AutonomousCEOOrchestrator:
 
         goal_text = self._goal_text(active_goal_id, record)
 
-        # First advance at most one dependency-ready task.
-        dispatch = self.execution_loop.cycle()
+        # Advance a bounded batch of dependency-ready internal tasks.
+        import os
+        batch_size = max(1, min(int(os.getenv("COMPANYOS_TASKS_PER_CEO_CYCLE", "8")), 64))
+        batch = self.execution_loop.run_bounded_batch(max_dispatches=batch_size)
+        dispatch = batch[-1]
+        for item in reversed(batch):
+            if item.dispatched:
+                dispatch = item
+                break
 
         # Then derive whole-goal lifecycle.
         goal_record = self.lifecycle.refresh(

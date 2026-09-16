@@ -40,6 +40,10 @@ class AutonomousGoalExecutionLoop:
         self.queue = queue or AutonomousTaskQueue()
         base_dispatcher = AutonomousTaskDispatcher(self.queue)
         register_default_specialists(base_dispatcher)
+        required = {"research", "planning", "build"}
+        missing = sorted(required.difference(base_dispatcher.handlers))
+        if missing:
+            raise RuntimeError("missing_default_specialist_handlers:" + ",".join(missing))
         self.dispatcher = DependencyAwareDispatcher(base_dispatcher)
 
     def _counts(self):
@@ -72,6 +76,16 @@ class AutonomousGoalExecutionLoop:
             queued_tasks=queued,
             running_tasks=running,
         )
+
+    def run_bounded_batch(self, *, max_dispatches: int = 8):
+        # Bounded internal throughput; existing queue/dependency gates remain authoritative.
+        results = []
+        for _ in range(max(1, min(int(max_dispatches), 64))):
+            result = self.cycle()
+            results.append(result)
+            if not result.dispatched:
+                break
+        return results
 
     def run_until_idle(
         self,
