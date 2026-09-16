@@ -1,0 +1,25 @@
+#!/data/data/com.termux/files/usr/bin/python
+import json, os, sys, time
+from pathlib import Path
+from companyos.runtime.autonomous_task_queue import AutonomousTaskQueue
+from companyos.runtime.bounded_backlog_controller import select_bounded
+
+q=AutonomousTaskQueue()
+tasks=q.all_tasks()
+terminal={"COMPLETED","FAILED","CANCELLED","HALTED"}
+active=[t for t in tasks if str(getattr(t,"state","")).upper() not in terminal]
+sel=select_bounded(tasks)
+print(json.dumps({
+ "total":len(tasks),
+ "nonterminal":len(active),
+ "batch_size":len(sel.selected),
+ "scanned":sel.scanned,
+ "eligible_scanned":sel.eligible,
+ "scan_seconds":round(sel.elapsed,4),
+ "selected":[{
+   "task_id":getattr(t,"task_id",None),
+   "state":getattr(t,"state",None),
+   "priority":getattr(t,"priority",None),
+   "stage":(getattr(t,"payload",{}) or {}).get("stage")
+ } for t in sel.selected[:20]]
+},indent=2))
