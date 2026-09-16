@@ -67,7 +67,12 @@ def cycle():
     p,a,fid=selected
     from companyos.runtime.autonomous_ceo_orchestrator import AutonomousCEOOrchestrator
     rec=AutonomousCEOOrchestrator().start(goal=goal(p,a),max_cycles=80,max_follow_up_depth=4,priority_base=260)
-    oid=getattr(rec,"orchestration_id",None); done[fid]=now
+    oid=getattr(rec,"orchestration_id",None)
+    if not oid: raise RuntimeError("orchestration_id_missing")
+    from companyos.runtime.durable_execution_closure import register as register_durable_execution
+    register_durable_execution(oid=oid,packet_id=p.get("action_packet_id"),candidate_name=p.get("candidate_name"),
+        candidate_score=p.get("candidate_score"),selected_action=a,fingerprint=fid)
+    done[fid]=now
     d={"ts":now,"fingerprint":fid,"action_packet_id":p.get("action_packet_id"),"candidate_name":p.get("candidate_name"),
        "candidate_score":p.get("candidate_score"),"selected_action":a,"orchestration_id":oid}
     arr=st.get("dispatches",[]); arr=arr if isinstance(arr,list) else []; arr.append(d)
