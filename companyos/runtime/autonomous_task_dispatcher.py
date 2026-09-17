@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Optional
 
 from companyos.runtime.autonomous_task_queue import AutonomousTaskQueue, TaskRecord
+from companyos.runtime.bounded_task_execution import run_bounded
 
 
 @dataclass(frozen=True)
@@ -77,7 +78,13 @@ class AutonomousTaskDispatcher:
         self.queue.mark_running(task)
 
         try:
-            result = handler(task)
+            # V27_9_4A_LIVE_HANDLER_TIMEOUT
+            _bounded = run_bounded(lambda: handler(task))
+            if not _bounded.ok:
+                if _bounded.timed_out:
+                    raise TimeoutError(_bounded.error or 'task_timeout')
+                raise RuntimeError(_bounded.error or 'task_handler_failed')
+            result = _bounded.value
             self.queue.complete(task, result)
             return DispatchResult(
                 True,
