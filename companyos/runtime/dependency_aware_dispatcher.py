@@ -84,9 +84,14 @@ class DependencyAwareDispatcher:
             and t.next_attempt_unix <= now
             and t.task_type in self.dispatcher.handlers
         ]
-        candidates.sort(
-            key=lambda t: (-int(t.priority), float(t.created_at_unix), t.task_id)
-        )
+        try:
+            from companyos.runtime.adaptive_backpressure import AdaptiveBackpressure
+            boost_type = AdaptiveBackpressure(self.queue).decide().get("boost_type")
+        except Exception:
+            boost_type = None
+        candidates.sort(key=lambda t: (
+            0 if boost_type and t.task_type == boost_type else 1,
+            float(t.created_at_unix), -int(t.priority), t.task_id))
 
         results: list[DispatchResult] = []
         remaining = list(candidates)

@@ -271,7 +271,12 @@ class AutonomousCEOOrchestrator:
 
         # Advance a bounded batch of dependency-ready internal tasks.
         import os
-        batch_size = max(1, min(int(os.getenv("COMPANYOS_TASKS_PER_CEO_CYCLE", "8")), 64))
+        try:
+            from companyos.runtime.adaptive_backpressure import AdaptiveBackpressure
+            adaptive_batch = int(AdaptiveBackpressure(self.queue).decide().get("execution_batch", 8))
+        except Exception:
+            adaptive_batch = int(os.getenv("COMPANYOS_TASKS_PER_CEO_CYCLE", "8"))
+        batch_size = max(1, min(adaptive_batch, 64))
         batch = self.execution_loop.run_bounded_batch(max_dispatches=batch_size)
         dispatch = batch[-1]
         for item in reversed(batch):

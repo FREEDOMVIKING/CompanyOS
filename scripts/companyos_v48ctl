@@ -1,0 +1,7 @@
+#!/data/data/com.termux/files/usr/bin/python
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import json
+from companyos.runtime.adaptive_backpressure import AdaptiveBackpressure
+print(json.dumps(AdaptiveBackpressure().decide(),indent=2))
