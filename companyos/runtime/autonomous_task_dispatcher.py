@@ -1,4 +1,5 @@
 from __future__ import annotations
+from companyos.runtime.lease_execution_guard import LeaseExecutionGuard
 import time
 from dataclasses import dataclass
 from typing import Any,Callable,Optional
@@ -20,7 +21,17 @@ class AutonomousTaskDispatcher:
         agent,handler=self.handlers[task.task_type]
         task.state="CLAIMED"; task.assigned_agent=agent; task.updated_at_unix=now; self.queue.save(task); self.queue.mark_running(task)
         try:
-            result=handler(task); self.queue.complete(task,result)
+            # V35_1_FENCED_HANDLER_CALL
+            _v35_guard = LeaseExecutionGuard(self.queue.kernel.db_path)
+            _v35_tid = str(getattr(task, "task_id", None) or getattr(task, "id", None) or "")
+            if not _v35_tid:
+                raise RuntimeError("task_id_missing_for_lease")
+            _v35_ok, _v35_value, _v35_error = _v35_guard.execute(
+                _v35_tid, "dispatcher-" + str(id(self)), lambda: handler(task)
+            )
+            if not _v35_ok:
+                raise RuntimeError(_v35_error or "leased_execution_failed")
+            _ = _v35_value
             return DispatchResult(True,task.task_id,agent,task.state,"completed",result)
         except Exception as exc:
             self.queue.fail(task,f"{type(exc).__name__}:{exc}",retry_delay_seconds=30)
