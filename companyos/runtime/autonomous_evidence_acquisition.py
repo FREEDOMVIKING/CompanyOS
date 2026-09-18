@@ -2,8 +2,9 @@ from __future__ import annotations
 import hashlib, json, os, re, time
 from pathlib import Path
 
-ROOT=Path.home()/"companyos"
-RT=ROOT/".companyos_runtime"
+ROOT=(Path.home()/"companyos").resolve()
+# V32_CANONICAL_RUNTIME_ROOT
+RT=Path.home()/".companyos_runtime"
 STATE=RT/"evidence_acquisition_state.json"
 QUEUE=RT/"evidence_acquisition_queue.json"
 EVENTS=RT/"evidence_acquisition_events.jsonl"
@@ -132,7 +133,8 @@ def validate_tasks(queue):
             if not attribution:continue
             candidate_hit=(candidate and candidate in text)
             if not candidate_hit and matches:continue
-            matches.append({"path":str(p.relative_to(ROOT)),"observed_at":p.stat().st_mtime})
+            # V32_1_CANONICAL_EVIDENCE_PATH
+            matches.append({"path":str(p),"observed_at":p.stat().st_mtime})
             if len(matches)>=3:break
         if matches:
             task["status"]="observed";task["observed_at"]=time.time();task["evidence_artifacts"]=matches

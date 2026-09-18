@@ -1,7 +1,7 @@
 from __future__ import annotations
 import hashlib,json,os,time
 from pathlib import Path
-ROOT=Path.home()/"companyos"; RT=ROOT/".companyos_runtime"
+ROOT=(Path.home()/"companyos").resolve(); RT=Path.home()/".companyos_runtime" # V32_CANONICAL_RUNTIME_ROOT
 QUEUE=RT/"profit_execution_action_queue.json"; STATE=RT/"profit_to_action_closure_state.json"
 EVENTS=RT/"profit_to_action_closure_events.jsonl"; STOP=RT/"STOP_CONTINUOUS"
 

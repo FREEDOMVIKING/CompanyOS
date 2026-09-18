@@ -56,7 +56,6 @@ class ServiceSupervisor:
         self.state_path = self.runtime_root / "service_supervisor_state.json"
         # COMPANYOS_SERVICE_SUPERVISOR_STOP_PATH_V28
         self.stop_path = self.runtime_root / "SUPERVISOR_STOP"
-        # COMPANYOS_SUPERVISOR_DEDICATED_STOP_V27\n        self.stop_path = self.runtime_root / "SUPERVISOR_STOP"
         self.log_path = self.runtime_root / "service_supervisor.log"
         self.lock_path = self.runtime_root / "service_supervisor.lock"
 
@@ -76,6 +75,8 @@ class ServiceSupervisor:
         self.failures = {s.name: 0 for s in self.services}
         self.restarts = {s.name: 0 for s in self.services}
         self.started_at = time.time()
+        # V32_STABILITY_WINDOW
+        self.spawned_at: dict[str, float] = {}
         self._stopping = False
         self._lock_file = None
 
@@ -249,12 +250,14 @@ class ServiceSupervisor:
             start_new_session=True,
         )
         self.children[spec.name] = child
+        self.spawned_at[spec.name] = time.time()
         self._log(f"START service={spec.name} pid={child.pid}")
 
     def _ensure_running(self, spec: ManagedService) -> None:
         child = self.children.get(spec.name)
         if child and child.poll() is None:
-            self.failures[spec.name] = 0
+            if time.time() - self.spawned_at.get(spec.name, self.started_at) >= max(10.0, self.poll_seconds * 2):
+                self.failures[spec.name] = 0
             return
 
         if child is not None:

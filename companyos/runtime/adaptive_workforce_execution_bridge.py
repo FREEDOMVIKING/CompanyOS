@@ -13,6 +13,8 @@ ROOT = (Path.home() / "companyos").resolve()
 RUNTIME = Path.home() / ".companyos_runtime"
 STATE = RUNTIME / "adaptive_workforce_execution_bridge_state.json"
 RESULTS = RUNTIME / "adaptive_workforce_verified_results.jsonl"
+# V32_EMITTED_JOB_INDEX
+EMITTED = RUNTIME / "adaptive_workforce_emitted_jobs.json"
 QUEUE = RUNTIME / "profit_execution_action_queue.json"
 WORKFORCE = RUNTIME / "ceo_workforce" / "latest.json"
 
@@ -70,9 +72,11 @@ def cycle() -> Dict[str, Any]:
     # This bridge does not fabricate revenue/profit. It records only observable
     # internal execution facts and leaves profitability to downstream evidence.
     emitted = 0
+    emitted_index = _load(EMITTED, {"job_ids": []})
+    known = set(str(x) for x in emitted_index.get("job_ids", []) if x)
     for job in queue[-25:]:
         jid = str(job.get("id") or job.get("job_id") or job.get("action_id") or "")
-        if not jid:
+        if not jid or jid in known:
             continue
         status = str(job.get("status") or "").lower()
         if status not in {"complete", "completed", "done", "success", "succeeded", "verified"}:
@@ -87,7 +91,10 @@ def cycle() -> Dict[str, Any]:
             "source": str(QUEUE),
         }
         _append(rec)
+        known.add(jid)
         emitted += 1
+
+    _write(EMITTED, {"job_ids": sorted(known)[-10000:], "updated_at": now})
 
     factory = Factory()
     factory_result = _invoke_cycle(factory)

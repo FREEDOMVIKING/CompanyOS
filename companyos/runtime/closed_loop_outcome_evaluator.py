@@ -2,8 +2,9 @@ from __future__ import annotations
 import json, os, time, hashlib
 from pathlib import Path
 
-ROOT=Path.home()/"companyos"
-RT=ROOT/".companyos_runtime"
+ROOT=(Path.home()/"companyos").resolve()
+# V32_CANONICAL_RUNTIME_ROOT
+RT=Path.home()/".companyos_runtime"
 ACTION_QUEUE=RT/"profit_execution_action_queue.json"
 STATE=RT/"closed_loop_outcome_evaluator_state.json"
 EVENTS=RT/"closed_loop_outcome_evaluator_events.jsonl"
