@@ -63,7 +63,13 @@ class ContinuousGoalRuntime:
         cycle_errors = []
         dispatched = 0
         try:
-            execution_results = self.execution_loop.run_bounded_batch(max_dispatches=self.execution_batch_size)
+            try:
+                from companyos.runtime.adaptive_backpressure import AdaptiveBackpressure
+                control = AdaptiveBackpressure(self.execution_loop.queue).decide()
+                live_batch = max(1, min(int(control.get("execution_batch", self.execution_batch_size)), 64))
+            except Exception:
+                live_batch = self.execution_batch_size
+            execution_results = self.execution_loop.run_bounded_batch(max_dispatches=live_batch)
             dispatched = sum(1 for r in execution_results if r.dispatched)
             state.execution_dispatched += dispatched
         except Exception as exc:

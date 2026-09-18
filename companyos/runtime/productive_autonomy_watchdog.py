@@ -103,7 +103,27 @@ def start_internal_goal(goal: str) -> str:
     oid = getattr(rec, "orchestration_id", None)
     return str(oid or "created")
 
+def _v49_backpressure():
+    try:
+        from companyos.runtime.adaptive_backpressure import AdaptiveBackpressure
+        return AdaptiveBackpressure().decide()
+    except Exception:
+        return {"snapshot": {"queued": 0}, "producer_divisor": 1}
+
 def tick() -> dict[str, Any]:
+    bp = _v49_backpressure()
+    if int(bp.get("snapshot", {}).get("queued", 0) or 0) >= int(os.getenv("COMPANYOS_BACKPRESSURE_QUEUE_THRESHOLD", "300")):
+        p, rs = runtime_state()
+        ws = watchdog_state()
+        ws["last_seen"] = {
+            "state_path": str(p) if p else None,
+            "action": "backpressure_execution_first",
+            "queued": bp.get("snapshot", {}).get("queued"),
+            "producer_divisor": bp.get("producer_divisor"),
+            "ts": time.time(),
+        }
+        write_json(WATCHDOG_STATE, ws)
+        return {"ok": True, **ws["last_seen"]}
     promotion = maybe_promote_candidate(
         min_score=float(os.getenv("COMPANYOS_EXECUTION_PROMOTION_MIN_SCORE", "45")),
         cooldown_seconds=int(os.getenv("COMPANYOS_EXECUTION_PROMOTION_COOLDOWN_SECONDS", "900")),
