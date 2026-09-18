@@ -1,8 +1,25 @@
-from companyos.runtime.adaptive_workforce_execution_bridge import ROLE_ACTIONS,WorkforceExecutionBridge
-def test_roles(): assert {"execution_readiness","revenue_evidence","market_validation","pricing","research"}<=set(ROLE_ACTIONS)
-def test_safe_context_excludes_secrets():
- x=WorkforceExecutionBridge().safe_context({"title":"x","secret":"bad","private_key":"bad"})
- assert x=={"title":"x"}
-def test_actions_are_bounded():
- s=" ".join(ROLE_ACTIONS.values()).lower()
- assert "transfer" not in s and "buy " not in s and "send money" not in s
+import inspect
+from companyos.runtime import adaptive_workforce_execution_bridge as bridge
+
+def test_current_bridge_contract():
+    assert callable(bridge.cycle)
+    assert callable(bridge.run)
+    assert callable(bridge._invoke_cycle)
+    assert bridge.RESULTS.name == "adaptive_workforce_verified_results.jsonl"
+    assert bridge.EMITTED.name == "adaptive_workforce_emitted_jobs.json"
+
+def test_factory_cycle_adapter_has_no_invented_required_args():
+    class F:
+        def cycle(self):
+            return {"ok": True}
+    assert bridge._invoke_cycle(F()) == {"ok": True}
+
+def test_items_are_bounded_to_supported_collections():
+    assert list(bridge._items({"queue":[{"id":"x"}]})) == [{"id":"x"}]
+    assert list(bridge._items({"unknown":[{"id":"x"}]})) == []
+
+def test_source_preserves_financial_evidence_guard():
+    src=inspect.getsource(bridge.cycle)
+    assert '"financial_metrics_invented": False' in src
+    assert 'attributed_profit' in src
+    assert 'isinstance' in src

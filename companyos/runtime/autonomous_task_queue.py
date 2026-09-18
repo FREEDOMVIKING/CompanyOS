@@ -120,8 +120,12 @@ class AutonomousTaskQueue:
             return None
         indexed = self.kernel.idempotent_task(key)
         if indexed:
-            try: return self.load(indexed)
-            except Exception: pass
+            try:
+                return self.load(indexed)
+            except FileNotFoundError:
+                raise RuntimeError(f"durable_task_projection_missing:{indexed}:{key}")
+            except Exception as exc:
+                raise RuntimeError(f"durable_task_projection_unreadable:{indexed}:{key}:{type(exc).__name__}") from exc
         for task in self.all_tasks():
             if task.idempotency_key == key:
                 return task

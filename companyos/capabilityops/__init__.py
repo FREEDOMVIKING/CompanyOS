@@ -2,3 +2,6 @@ from .stage_router import StageCapabilityRouter
 from .controlled_autonomy import ControlledAutonomyPolicy
 from .operating_executor import RealCapabilityOperatingExecutor
 from .status import CapabilityOpsStatus
+from .capability_policy import CapabilityPolicy
+from .capability_registry import CapabilityRegistry
+from .real_execution_bridge import RealExecutionBridge

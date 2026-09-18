@@ -93,3 +93,18 @@ def validate_work_items(items: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
 def check_integrity(items: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
     """Compatibility alias for callers that use a check-oriented name."""
     return validate_work_items(items)
+
+# Legacy compatibility names retained for older phase tests/importers.
+# They delegate to the current deterministic validation implementation.
+class DataIntegrityGuard:
+    @staticmethod
+    def validate(items):
+        return validate_work_items(items)
+
+    @staticmethod
+    def check(items):
+        return check_integrity(items)
+
+
+def data_integrity(items):
+    return validate_work_items(items)

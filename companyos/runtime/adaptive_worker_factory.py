@@ -2,7 +2,9 @@ from __future__ import annotations
 import json,hashlib,time
 from pathlib import Path
 
-ROOT=(Path.home()/"companyos").resolve(); RT=Path.home()/".companyos_runtime" # V32_CANONICAL_RUNTIME_ROOT; STATE=RT/"adaptive_workers"
+ROOT=(Path.home()/"companyos").resolve()
+RT=Path.home()/".companyos_runtime"  # V32_CANONICAL_RUNTIME_ROOT
+STATE=RT/"adaptive_workers"
 STATE.mkdir(parents=True,exist_ok=True)
 BOTTLENECKS=("execution_readiness","revenue_evidence","market_evidence","pricing","research")
 ROLES={"execution_readiness":"execution_readiness","revenue_evidence":"revenue_evidence",
