@@ -1,0 +1,38 @@
+#!/data/data/com.termux/files/usr/bin/python
+from __future__ import annotations
+import argparse, json, time
+from companyos.runtime.execution_drain_engine import ExecutionDrainEngine
+
+p = argparse.ArgumentParser()
+sub = p.add_subparsers(dest="cmd", required=True)
+
+s = sub.add_parser("status")
+s = sub.add_parser("batch")
+s.add_argument("--size", type=int, default=32)
+
+s = sub.add_parser("run")
+s.add_argument("--size", type=int, default=32)
+s.add_argument("--cycles", type=int, default=5)
+s.add_argument("--sleep", type=float, default=2.0)
+
+a = p.parse_args()
+
+if a.cmd == "status":
+    e = ExecutionDrainEngine()
+    print(json.dumps(e.snapshot().__dict__, indent=2))
+elif a.cmd == "batch":
+    print(json.dumps(ExecutionDrainEngine(a.size).run_batch(), indent=2))
+else:
+    e = ExecutionDrainEngine(a.size)
+    for i in range(max(1, min(a.cycles, 50))):
+        r = e.run_batch()
+        print(json.dumps({
+            "cycle": i + 1,
+            "attempted": r["attempted"],
+            "completed_delta": r["completed_delta"],
+            "queue_delta": r["queue_delta"],
+            "after": r["after"],
+        }, indent=2))
+        if r["attempted"] == 0:
+            break
+        time.sleep(max(0.0, a.sleep))
