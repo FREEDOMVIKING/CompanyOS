@@ -6,6 +6,7 @@ import uuid
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Any, Optional
+from companyos.runtime.durable_execution_kernel import DurableExecutionKernel
 
 
 VALID_STATES = {
@@ -54,6 +55,8 @@ class AutonomousTaskQueue:
     def __init__(self, root: Path | None = None) -> None:
         self.root = root or (Path.home() / ".companyos_runtime" / "task_queue")
         self.root.mkdir(parents=True, exist_ok=True)
+        # V33_DURABLE_KERNEL
+        self.kernel = DurableExecutionKernel(self.root.parent)
 
     def _path(self, task_id: str) -> Path:
         return self.root / f"{task_id}.json"
@@ -63,6 +66,7 @@ class AutonomousTaskQueue:
         tmp = path.with_suffix(".json.tmp")
         tmp.write_text(json.dumps(asdict(task), indent=2, sort_keys=True) + "\n", encoding="utf-8")
         tmp.replace(path)
+        self.kernel.upsert(task)
 
     def load(self, task_id: str) -> TaskRecord:
         data = json.loads(self._path(task_id).read_text(encoding="utf-8"))
@@ -104,6 +108,7 @@ class AutonomousTaskQueue:
         return candidates[:limit]
 
     def has_completed_goal_stage(self, goal_id: str, stage: str) -> bool:
+        if self.kernel.completed_stage(goal_id, stage): return True
         for task in self._iter_task_files():
             payload = task.payload if isinstance(task.payload, dict) else {}
             if payload.get("goal_id") == goal_id and payload.get("stage") == stage and task.state == "COMPLETED":
@@ -113,6 +118,10 @@ class AutonomousTaskQueue:
     def find_by_idempotency_key(self, key: str) -> Optional[TaskRecord]:
         if not key:
             return None
+        indexed = self.kernel.idempotent_task(key)
+        if indexed:
+            try: return self.load(indexed)
+            except Exception: pass
         for task in self.all_tasks():
             if task.idempotency_key == key:
                 return task
