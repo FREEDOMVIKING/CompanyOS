@@ -95,6 +95,16 @@ class AutonomousCEORuntimeService:
                 halted += 1
         return active, completed, failed, halted
 
+    # V29_PERSISTENT_CEO_STATE
+    def load(self) -> CEORuntimeServiceState:
+        if not self.state_path.exists():
+            return self.startup()
+        try:
+            raw = json.loads(self.state_path.read_text(encoding='utf-8'))
+            return CEORuntimeServiceState(**raw)
+        except Exception:
+            return self.startup()
+
     def startup(self) -> CEORuntimeServiceState:
         now = time.time()
         active, completed, failed, halted = self._counts()

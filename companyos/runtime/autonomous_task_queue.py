@@ -81,12 +81,13 @@ class AutonomousTaskQueue:
 
     def bounded_candidates_window(self, limit: int = 1000, offset: int = 0) -> list[TaskRecord]:
         limit=max(1,int(limit)); offset=max(0,int(offset))
-        files=self._iter_task_files() if hasattr(self,"_iter_task_files") else list(self.root.glob("*.json"))
+        files=sorted(self.root.glob("*.json"),key=lambda p:p.name)
         if not files: return []
-        start=offset % len(files); ordered=files[start:]+files[:start]; tasks=[]
+        start=offset % len(files)
+        ordered=files[start:]+files[:start]
+        tasks=[]
         for path in ordered[:limit]:
-            try:
-                data=json.loads(path.read_text(encoding="utf-8")); tasks.append(TaskRecord(**data))
+            try: tasks.append(TaskRecord(**json.loads(path.read_text(encoding="utf-8"))))
             except Exception: continue
         return tasks
 
@@ -161,7 +162,7 @@ class AutonomousTaskQueue:
         if not candidates:
             return None
 
-        candidates.sort(key=lambda t: (t.priority, t.created_at_unix))
+        candidates.sort(key=lambda t: (-int(t.priority), float(t.created_at_unix)))
         task = candidates[0]
         task.state = "CLAIMED"
         task.assigned_agent = agent_name

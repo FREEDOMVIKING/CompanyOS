@@ -49,7 +49,8 @@ class ServiceSupervisor:
     def __init__(self, services: Iterable[ManagedService] | None = None):
         self.root = (Path.home() / "companyos").resolve()
         self._load_launch_env_file(Path.home() / ".companyos_launch_env")
-        self.runtime_root = self.root / ".companyos_runtime"
+        # V30_SHARED_RUNTIME_ROOT
+        self.runtime_root = Path.home() / ".companyos_runtime"
         self.runtime_root.mkdir(parents=True, exist_ok=True)
 
         self.state_path = self.runtime_root / "service_supervisor_state.json"

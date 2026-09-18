@@ -25,15 +25,10 @@ class GoalLoopCycleResult:
 
 class AutonomousGoalExecutionLoop:
     """
-    Continuously advances dependency-ready internal goal tasks.
+    Continuous dependency-ready execution loop.
 
-    Responsibilities:
-    - recover stale Phase 94 tasks before each cycle
-    - use Phase 95 specialist routing
-    - obey Phase 96 dependency ordering
-    - advance one eligible task per cycle
-    - persist all task states/results
-    - never build/sign/broadcast financial transactions itself
+    V28.3 performs stale recovery once per batch, dependency indexing once per
+    batch, and queue counting once per batch instead of once per task.
     """
 
     def __init__(self, queue: AutonomousTaskQueue | None = None) -> None:
@@ -43,12 +38,14 @@ class AutonomousGoalExecutionLoop:
         required = {"research", "planning", "build"}
         missing = sorted(required.difference(base_dispatcher.handlers))
         if missing:
-            raise RuntimeError("missing_default_specialist_handlers:" + ",".join(missing))
+            raise RuntimeError(
+                "missing_default_specialist_handlers:" + ",".join(missing)
+            )
         self.dispatcher = DependencyAwareDispatcher(base_dispatcher)
 
     def _counts(self):
         completed = failed = queued = running = 0
-        for task in self.queue.all_tasks():
+        for task in self.queue._iter_task_files():
             if task.state == "COMPLETED":
                 completed += 1
             elif task.state == "FAILED":
@@ -59,12 +56,9 @@ class AutonomousGoalExecutionLoop:
                 running += 1
         return completed, failed, queued, running
 
-    def cycle(self) -> GoalLoopCycleResult:
-        self.queue.recover_stale(stale_after_seconds=300)
-
-        result = self.dispatcher.dispatch_next()
-        completed, failed, queued, running = self._counts()
-
+    @staticmethod
+    def _to_cycle(result, counts):
+        completed, failed, queued, running = counts
         return GoalLoopCycleResult(
             dispatched=result.dispatched,
             task_id=result.task_id,
@@ -77,15 +71,18 @@ class AutonomousGoalExecutionLoop:
             running_tasks=running,
         )
 
+    def cycle(self) -> GoalLoopCycleResult:
+        return self.run_bounded_batch(max_dispatches=1)[0]
+
     def run_bounded_batch(self, *, max_dispatches: int = 8):
-        # Bounded internal throughput; existing queue/dependency gates remain authoritative.
-        results = []
-        for _ in range(max(1, min(int(max_dispatches), 64))):
-            result = self.cycle()
-            results.append(result)
-            if not result.dispatched:
-                break
-        return results
+        # One stale scan per batch, not once per task.
+        self.queue.recover_stale(stale_after_seconds=300)
+
+        raw = self.dispatcher.dispatch_batch(max_dispatches=max_dispatches)
+
+        # One count scan per batch, not once per task.
+        counts = self._counts()
+        return [self._to_cycle(result, counts) for result in raw]
 
     def run_until_idle(
         self,
@@ -94,15 +91,11 @@ class AutonomousGoalExecutionLoop:
         sleep_seconds: float = 0.0,
     ) -> list[GoalLoopCycleResult]:
         results = []
-
         for _ in range(max(1, int(max_cycles))):
-            cycle = self.cycle()
-            results.append(cycle)
-
-            if cycle.reason in ("no_dependency_ready_task", "queue_empty"):
+            batch = self.run_bounded_batch(max_dispatches=8)
+            results.extend(batch)
+            if not any(item.dispatched for item in batch):
                 break
-
             if sleep_seconds > 0:
                 time.sleep(float(sleep_seconds))
-
         return results

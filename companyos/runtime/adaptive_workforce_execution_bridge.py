@@ -8,8 +8,9 @@ from typing import Any, Dict, Iterable
 
 from companyos.runtime.adaptive_worker_factory import Factory
 
-ROOT = Path.home() / "companyos"
-RUNTIME = ROOT / ".companyos_runtime"
+ROOT = (Path.home() / "companyos").resolve()
+# V31_CANONICAL_RUNTIME_ROOT
+RUNTIME = Path.home() / ".companyos_runtime"
 STATE = RUNTIME / "adaptive_workforce_execution_bridge_state.json"
 RESULTS = RUNTIME / "adaptive_workforce_verified_results.jsonl"
 QUEUE = RUNTIME / "profit_execution_action_queue.json"
@@ -83,7 +84,7 @@ def cycle() -> Dict[str, Any]:
             "verified_internal_completion": True,
             "attributed_profit": job.get("attributed_profit", 0.0)
                 if isinstance(job.get("attributed_profit", 0.0), (int, float)) else 0.0,
-            "source": str(QUEUE.relative_to(ROOT)),
+            "source": str(QUEUE),
         }
         _append(rec)
         emitted += 1
@@ -100,7 +101,7 @@ def cycle() -> Dict[str, Any]:
         "workers_observed": len(workers),
         "queue_items_observed": len(queue),
         "verified_results_emitted_this_cycle": emitted,
-        "verified_results_feed": str(RESULTS.relative_to(ROOT)),
+        "verified_results_feed": str(RESULTS),
         "financial_metrics_invented": False,
     }
     _write(STATE, state)
@@ -120,4 +121,5 @@ def run(interval: int = 300) -> None:
         time.sleep(max(30, interval))
 
 if __name__ == "__main__":
-    print(json.dumps(cycle(), indent=2, default=str))
+    # V31_LONG_RUNNING_SERVICE_ENTRYPOINT
+    run()

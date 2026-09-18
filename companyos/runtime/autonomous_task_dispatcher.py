@@ -1,110 +1,33 @@
 from __future__ import annotations
-
+import time
 from dataclasses import dataclass
-from typing import Any, Callable, Optional
-
-from companyos.runtime.autonomous_task_queue import AutonomousTaskQueue, TaskRecord
-from companyos.runtime.bounded_task_execution import run_bounded
-
-
+from typing import Any,Callable,Optional
+from companyos.runtime.autonomous_task_queue import AutonomousTaskQueue,TaskRecord
 @dataclass(frozen=True)
 class DispatchResult:
-    dispatched: bool
-    task_id: Optional[str]
-    agent_name: Optional[str]
-    state: Optional[str]
-    reason: str
-    result: Any
-
-
+    dispatched:bool; task_id:Optional[str]; agent_name:Optional[str]; state:Optional[str]; reason:str; result:Any
 class AutonomousTaskDispatcher:
-    """
-    Routes queued internal tasks to registered specialist handlers.
-
-    Responsibilities:
-    - claim highest-priority eligible task
-    - select specialist agent by task_type
-    - mark task RUNNING
-    - execute handler
-    - persist COMPLETED/FAILED state
-    - retry according to queue policy
-
-    This dispatcher does NOT sign or broadcast transactions.
-    """
-
-    def __init__(self, queue: AutonomousTaskQueue | None = None) -> None:
-        self.queue = queue or AutonomousTaskQueue()
-        self.handlers: dict[str, tuple[str, Callable[[TaskRecord], Any]]] = {}
-
-    def register(
-        self,
-        *,
-        task_type: str,
-        agent_name: str,
-        handler: Callable[[TaskRecord], Any],
-    ) -> None:
-        self.handlers[task_type] = (agent_name, handler)
-
-    def dispatch_next(self) -> DispatchResult:
-        # First peek at eligible tasks so unsupported task types are not
-        # accidentally claimed by a generic agent.
-        candidates = [
-            t for t in self.queue.all_tasks()
-            if t.state == "QUEUED"
-            and t.attempts < t.max_attempts
-        ]
-
-        if not candidates:
-            return DispatchResult(False, None, None, None, "queue_empty", None)
-
-        supported = [t for t in candidates if t.task_type in self.handlers]
-        if not supported:
-            return DispatchResult(
-                False, None, None, None, "no_supported_task_available", None
-            )
-
-        supported.sort(key=lambda t: (t.priority, t.created_at_unix))
-        chosen = supported[0]
-        agent_name, handler = self.handlers[chosen.task_type]
-
-        # claim_next may choose a different task if unsupported tasks have
-        # higher priority, so claim manually and persist atomically enough for
-        # this local single-process dispatcher.
-        task = self.queue.load(chosen.task_id)
-        task.state = "CLAIMED"
-        task.assigned_agent = agent_name
-        self.queue.save(task)
-
-        self.queue.mark_running(task)
-
+    def __init__(self,queue:AutonomousTaskQueue|None=None)->None:
+        self.queue=queue or AutonomousTaskQueue(); self.handlers={}
+    def register(self,*,task_type:str,agent_name:str,handler:Callable[[TaskRecord],Any])->None:
+        self.handlers[task_type]=(agent_name,handler)
+    def dispatch_task(self,task:TaskRecord)->DispatchResult:
+        now=time.time(); task=self.queue.load(task.task_id)
+        if task.state!="QUEUED": return DispatchResult(False,task.task_id,None,task.state,"task_not_queued",None)
+        if task.attempts>=task.max_attempts: return DispatchResult(False,task.task_id,None,task.state,"attempts_exhausted",None)
+        if task.next_attempt_unix>now: return DispatchResult(False,task.task_id,None,task.state,"retry_not_due",None)
+        if task.task_type not in self.handlers: return DispatchResult(False,task.task_id,None,task.state,"unsupported_task_type",None)
+        agent,handler=self.handlers[task.task_type]
+        task.state="CLAIMED"; task.assigned_agent=agent; task.updated_at_unix=now; self.queue.save(task); self.queue.mark_running(task)
         try:
-            # V27_9_4A_LIVE_HANDLER_TIMEOUT
-            _bounded = run_bounded(lambda: handler(task))
-            if not _bounded.ok:
-                if _bounded.timed_out:
-                    raise TimeoutError(_bounded.error or 'task_timeout')
-                raise RuntimeError(_bounded.error or 'task_handler_failed')
-            result = _bounded.value
-            self.queue.complete(task, result)
-            return DispatchResult(
-                True,
-                task.task_id,
-                agent_name,
-                task.state,
-                "completed",
-                result,
-            )
+            result=handler(task); self.queue.complete(task,result)
+            return DispatchResult(True,task.task_id,agent,task.state,"completed",result)
         except Exception as exc:
-            self.queue.fail(
-                task,
-                f"{type(exc).__name__}:{str(exc)}",
-                retry_delay_seconds=0,
-            )
-            return DispatchResult(
-                True,
-                task.task_id,
-                agent_name,
-                task.state,
-                "handler_failed",
-                None,
-            )
+            self.queue.fail(task,f"{type(exc).__name__}:{exc}",retry_delay_seconds=30)
+            return DispatchResult(True,task.task_id,agent,task.state,"handler_failed",None)
+    def dispatch_next(self)->DispatchResult:
+        now=time.time()
+        c=[t for t in self.queue.bounded_candidates(1024) if t.task_type in self.handlers and t.next_attempt_unix<=now]
+        if not c:return DispatchResult(False,None,None,None,"no_supported_task_available",None)
+        c.sort(key=lambda t:(-int(t.priority),float(t.created_at_unix),t.task_id))
+        return self.dispatch_task(c[0])
