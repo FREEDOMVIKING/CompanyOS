@@ -1,0 +1,311 @@
+{
+  "deployment_actions_performed": false,
+  "email_actions_performed": false,
+  "execution_batch_consumers": [
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/adaptive_backpressure.py",
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/autonomous_ceo_orchestrator.py",
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/continuous_goal_runtime.py",
+    "companyos/runtime/autonomous_ceo_orchestrator.py",
+    "companyos/runtime/continuous_goal_runtime.py",
+    "scripts/companyos_v69_1_adaptive_throughput_benchmark.py",
+    "scripts/companyos_v69_2_controlled_load_backpressure_test.py"
+  ],
+  "execution_batch_source_refs": [
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/adaptive_backpressure.py",
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/autonomous_ceo_orchestrator.py",
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/continuous_goal_runtime.py",
+    "companyos/runtime/adaptive_backpressure.py",
+    "companyos/runtime/autonomous_ceo_orchestrator.py",
+    "companyos/runtime/continuous_goal_runtime.py",
+    "scripts/companyos_v69_1_adaptive_throughput_benchmark.py",
+    "scripts/companyos_v69_2_controlled_load_backpressure_test.py"
+  ],
+  "execution_batch_wired": true,
+  "external_actions_performed": false,
+  "financial_actions_performed": false,
+  "generated_at_unix": 1789936060.4728274,
+  "load_scaling_pass": true,
+  "mode": "ISOLATED_TEMP_HOME_REAL_QUEUE_AND_REAL_INTERNAL_SPECIALISTS",
+  "overall_status": "PASS",
+  "producer_divisor_consumers": [
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/adaptive_backpressure.py",
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+    "companyos/runtime/productive_autonomy_watchdog.py",
+    "scripts/companyos_v69_1_adaptive_throughput_benchmark.py",
+    "scripts/companyos_v69_2_controlled_load_backpressure_test.py"
+  ],
+  "producer_divisor_source_refs": [
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/adaptive_backpressure.py",
+    ".companyos_runtime/self_evolution/worktrees/20260920T182249Z/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+    "companyos/runtime/adaptive_backpressure.py",
+    "companyos/runtime/productive_autonomy_watchdog.py",
+    "scripts/companyos_v69_1_adaptive_throughput_benchmark.py",
+    "scripts/companyos_v69_2_controlled_load_backpressure_test.py"
+  ],
+  "producer_throttle_wired": true,
+  "real_companyos_queue_modified": false,
+  "schema": "companyos.v69_2.controlled_load_backpressure_test.v1",
+  "temporary_home": "/data/data/com.termux/files/home/.companyos_runtime/v69_2_tmp_home_29256",
+  "tiers": [
+    {
+      "after": {
+        "completed": 16,
+        "failed": 0,
+        "queued": 84,
+        "queued_by_type": {
+          "build": 10,
+          "planning": 30,
+          "research": 44
+        },
+        "running": 0,
+        "states": {
+          "COMPLETED": 16,
+          "QUEUED": 84
+        }
+      },
+      "before": {
+        "completed": 0,
+        "failed": 0,
+        "queued": 100,
+        "queued_by_type": {
+          "build": 10,
+          "planning": 30,
+          "research": 60
+        },
+        "running": 0,
+        "states": {
+          "QUEUED": 100
+        }
+      },
+      "completed_delta": 16,
+      "completion_rate_per_minute": 1173.5503448120057,
+      "completion_rate_per_second": 19.559172413533428,
+      "decision": {
+        "boost_type": "research",
+        "execution_batch": 16,
+        "producer_divisor": 1,
+        "queue_growth": 0,
+        "snapshot": {
+          "largest_type": "research",
+          "queued": 100,
+          "queued_by_type": {
+            "build": 10,
+            "planning": 30,
+            "research": 60
+          }
+        },
+        "timestamp_unix": 1789936050.5971255
+      },
+      "dispatched": 16,
+      "elapsed_seconds": 0.8180305210116785,
+      "expected_execution_batch": 16,
+      "expected_producer_divisor": 1,
+      "failed_delta": 0,
+      "load": 100,
+      "pass": true,
+      "queued_delta": -16,
+      "results_returned": 16,
+      "seed_distribution": {
+        "build": 10,
+        "planning": 30,
+        "research": 60
+      },
+      "tier": "LOW"
+    },
+    {
+      "after": {
+        "completed": 32,
+        "failed": 0,
+        "queued": 268,
+        "queued_by_type": {
+          "build": 30,
+          "planning": 90,
+          "research": 148
+        },
+        "running": 0,
+        "states": {
+          "COMPLETED": 32,
+          "QUEUED": 268
+        }
+      },
+      "before": {
+        "completed": 0,
+        "failed": 0,
+        "queued": 300,
+        "queued_by_type": {
+          "build": 30,
+          "planning": 90,
+          "research": 180
+        },
+        "running": 0,
+        "states": {
+          "QUEUED": 300
+        }
+      },
+      "completed_delta": 32,
+      "completion_rate_per_minute": 969.4654926671788,
+      "completion_rate_per_second": 16.157758211119646,
+      "decision": {
+        "boost_type": "research",
+        "execution_batch": 32,
+        "producer_divisor": 2,
+        "queue_growth": 0,
+        "snapshot": {
+          "largest_type": "research",
+          "queued": 300,
+          "queued_by_type": {
+            "build": 30,
+            "planning": 90,
+            "research": 180
+          }
+        },
+        "timestamp_unix": 1789936051.5014663
+      },
+      "dispatched": 32,
+      "elapsed_seconds": 1.9804727600130718,
+      "expected_execution_batch": 32,
+      "expected_producer_divisor": 2,
+      "failed_delta": 0,
+      "load": 300,
+      "pass": true,
+      "queued_delta": -32,
+      "results_returned": 32,
+      "seed_distribution": {
+        "build": 30,
+        "planning": 90,
+        "research": 180
+      },
+      "tier": "MEDIUM"
+    },
+    {
+      "after": {
+        "completed": 48,
+        "failed": 0,
+        "queued": 552,
+        "queued_by_type": {
+          "build": 60,
+          "planning": 180,
+          "research": 312
+        },
+        "running": 0,
+        "states": {
+          "COMPLETED": 48,
+          "QUEUED": 552
+        }
+      },
+      "before": {
+        "completed": 0,
+        "failed": 0,
+        "queued": 600,
+        "queued_by_type": {
+          "build": 60,
+          "planning": 180,
+          "research": 360
+        },
+        "running": 0,
+        "states": {
+          "QUEUED": 600
+        }
+      },
+      "completed_delta": 48,
+      "completion_rate_per_minute": 829.3366813964494,
+      "completion_rate_per_second": 13.822278023274157,
+      "decision": {
+        "boost_type": "research",
+        "execution_batch": 48,
+        "producer_divisor": 3,
+        "queue_growth": 0,
+        "snapshot": {
+          "largest_type": "research",
+          "queued": 600,
+          "queued_by_type": {
+            "build": 60,
+            "planning": 180,
+            "research": 360
+          }
+        },
+        "timestamp_unix": 1789936053.8693445
+      },
+      "dispatched": 48,
+      "elapsed_seconds": 3.4726547909958754,
+      "expected_execution_batch": 48,
+      "expected_producer_divisor": 3,
+      "failed_delta": 0,
+      "load": 600,
+      "pass": true,
+      "queued_delta": -48,
+      "results_returned": 48,
+      "seed_distribution": {
+        "build": 60,
+        "planning": 180,
+        "research": 360
+      },
+      "tier": "HIGH"
+    },
+    {
+      "after": {
+        "completed": 64,
+        "failed": 0,
+        "queued": 836,
+        "queued_by_type": {
+          "build": 90,
+          "planning": 270,
+          "research": 476
+        },
+        "running": 0,
+        "states": {
+          "COMPLETED": 64,
+          "QUEUED": 836
+        }
+      },
+      "before": {
+        "completed": 0,
+        "failed": 0,
+        "queued": 900,
+        "queued_by_type": {
+          "build": 90,
+          "planning": 270,
+          "research": 540
+        },
+        "running": 0,
+        "states": {
+          "QUEUED": 900
+        }
+      },
+      "completed_delta": 64,
+      "completion_rate_per_minute": 1347.479529485586,
+      "completion_rate_per_second": 22.4579921580931,
+      "decision": {
+        "boost_type": "research",
+        "execution_batch": 64,
+        "producer_divisor": 4,
+        "queue_growth": 0,
+        "snapshot": {
+          "largest_type": "research",
+          "queued": 900,
+          "queued_by_type": {
+            "build": 90,
+            "planning": 270,
+            "research": 540
+          }
+        },
+        "timestamp_unix": 1789936057.5488718
+      },
+      "dispatched": 64,
+      "elapsed_seconds": 2.8497649990022182,
+      "expected_execution_batch": 64,
+      "expected_producer_divisor": 4,
+      "failed_delta": 0,
+      "load": 900,
+      "pass": true,
+      "queued_delta": -64,
+      "results_returned": 64,
+      "seed_distribution": {
+        "build": 90,
+        "planning": 270,
+        "research": 540
+      },
+      "tier": "CRITICAL"
+    }
+  ]
+}
