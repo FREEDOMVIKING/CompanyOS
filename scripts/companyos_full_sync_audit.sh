@@ -75,6 +75,14 @@ import hashlib,re,shutil,os
 home=Path.home()
 root=home/"companyos"
 dest=root/"ops/patch_history"
+
+# V67.2: patch/build history is no longer copied into the active branch by default.
+# Git history and recovery branches preserve prior artifacts.
+if os.getenv("COMPANYOS_COMMIT_PATCH_HISTORY","0") != "1":
+    print("PATCH_HISTORY_IMPORT=DISABLED_BY_DEFAULT")
+    print("PATCH_HISTORY_IMPORT_OVERRIDE=COMPANYOS_COMMIT_PATCH_HISTORY=1")
+    raise SystemExit(0)
+
 dest.mkdir(parents=True,exist_ok=True)
 
 sources=[home]
