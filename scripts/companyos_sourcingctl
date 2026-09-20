@@ -1,0 +1,89 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/autonomous_procurement_sourcing.pid"
+LOGFILE="$RT/autonomous_procurement_sourcing.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+case "$cmd" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "SOURCING_ENGINE_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.autonomous_procurement_sourcing loop \
+      --interval "${COMPANYOS_SOURCING_INTERVAL_SECONDS:-300}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "SOURCING_ENGINE_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "SOURCING_ENGINE_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    WAS_RUNNING=0
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      WAS_RUNNING=1
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+      sleep 1
+    fi
+    
+    if [ "$WAS_RUNNING" = "1" ]; then
+      nohup python -m companyos.runtime.autonomous_procurement_sourcing loop \
+        --interval "${COMPANYOS_SOURCING_INTERVAL_SECONDS:-300}" \
+        >>"$LOGFILE" 2>&1 &
+      echo $! > "$PIDFILE"
+      echo "BACKGROUND_LOOP_RESTARTED PID=$(cat "$PIDFILE")"
+    fi
+    python -m companyos.runtime.autonomous_procurement_sourcing once --max-requests "${2:-12}"
+    ;;
+  status)
+    python -m companyos.runtime.autonomous_procurement_sourcing status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  providers)
+    python - <<'PY'
+import json
+from companyos.runtime.autonomous_procurement_sourcing import provider_status, chosen_provider
+print(json.dumps({
+    "providers": provider_status(),
+    "selected_provider": chosen_provider(),
+    "keys_printed": False,
+}, indent=2, sort_keys=True))
+PY
+    ;;
+  evidence)
+    tail -n "${2:-30}" "$RT/procurement/sourcing_evidence.jsonl" 2>/dev/null || true
+    ;;
+  resolutions)
+    tail -n "${2:-30}" "$RT/procurement/sourcing_resolutions.jsonl" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-120}" "$LOGFILE"
+    ;;
+  env)
+    nano "$ROOT/.env"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once [n]|status|providers|evidence [n]|resolutions [n]|log [n]|env}"
+    exit 2
+    ;;
+esac

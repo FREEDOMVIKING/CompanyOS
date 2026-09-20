@@ -1,0 +1,75 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/browser_provider_onboarding.pid"
+LOGFILE="$RT/browser_provider_onboarding.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+case "$cmd" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "BROWSER_ONBOARDING_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.browser_provider_onboarding loop \
+      --interval "${COMPANYOS_BROWSER_ONBOARD_INTERVAL_SECONDS:-900}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "BROWSER_ONBOARDING_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "BROWSER_ONBOARDING_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.browser_provider_onboarding once --max-providers "${2:-2}"
+    ;;
+  status)
+    python -m companyos.runtime.browser_provider_onboarding status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  backend)
+    python -m companyos.runtime.browser_provider_onboarding backend
+    ;;
+  candidates)
+    python -m companyos.runtime.browser_provider_onboarding candidates
+    ;;
+  start-browser)
+    python -m companyos.runtime.browser_provider_onboarding start-browser
+    ;;
+  stop-browser)
+    python -m companyos.runtime.browser_provider_onboarding stop-browser
+    ;;
+  accounts)
+    tail -n "${2:-30}" "$RT/provider_accounts/accounts.jsonl" 2>/dev/null || true
+    ;;
+  human)
+    tail -n "${2:-30}" "$RT/provider_accounts/human_verification_required.jsonl" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-120}" "$LOGFILE"
+    ;;
+  env)
+    nano "$ROOT/.env"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once [n]|status|backend|candidates|start-browser|stop-browser|accounts [n]|human [n]|log [n]|env}"
+    exit 2
+    ;;
+esac

@@ -1,0 +1,59 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/procurement_intent_validator.pid"
+LOGFILE="$RT/procurement_intent_validator.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "PROCUREMENT_INTENT_VALIDATOR_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.procurement_intent_validator loop \
+      --interval "${COMPANYOS_PROCUREMENT_INTENT_INTERVAL_SECONDS:-120}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "PROCUREMENT_INTENT_VALIDATOR_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "PROCUREMENT_INTENT_VALIDATOR_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.procurement_intent_validator once
+    ;;
+  status)
+    python -m companyos.runtime.procurement_intent_validator status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  quarantine)
+    tail -n "${2:-20}" "$RT/procurement/quarantined_requirements.jsonl" 2>/dev/null || true
+    ;;
+  validations)
+    tail -n "${2:-20}" "$RT/procurement/procurement_intent_validations.jsonl" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-100}" "$LOGFILE"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|status|quarantine [n]|validations [n]|log [n]}"
+    exit 2
+    ;;
+esac

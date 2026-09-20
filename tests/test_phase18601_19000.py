@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import shutil
 
 ROOT = Path.home() / "companyos"
 sys.path.insert(0, str(ROOT))
@@ -11,9 +12,11 @@ from companyos_modules.phase18601_19000.autonomous_operations_kernel import (
 
 
 def kernel(name: str) -> AutonomousOperationsKernel:
-    return AutonomousOperationsKernel(
-        ROOT / "companyos_runtime" / "phase18601_19000_test" / name
-    )
+    # V65.62A isolate persistent phase test state
+    state_dir = ROOT / "companyos_runtime" / "phase18601_19000_test" / name
+    if state_dir.exists():
+        shutil.rmtree(state_dir)
+    return AutonomousOperationsKernel(state_dir)
 
 
 def test_internal_work_executes():

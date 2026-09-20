@@ -1,0 +1,56 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/execution_blocker_router.pid"
+LOGFILE="$RT/execution_blocker_router.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "BLOCKER_ROUTER_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.execution_blocker_router loop \
+      --interval "${COMPANYOS_BLOCKER_ROUTER_INTERVAL_SECONDS:-120}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "BLOCKER_ROUTER_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "BLOCKER_ROUTER_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.execution_blocker_router once
+    ;;
+  status)
+    python -m companyos.runtime.execution_blocker_router status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  blockers)
+    tail -n "${2:-30}" "$RT/venture_blockers/blockers.jsonl" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-100}" "$LOGFILE"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|status|blockers [n]|log [n]}"
+    exit 2
+    ;;
+esac

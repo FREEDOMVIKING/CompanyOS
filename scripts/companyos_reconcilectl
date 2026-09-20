@@ -1,0 +1,18 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-once}" in
+  once)
+    python -m companyos.runtime.canonical_state_reconciler once
+    ;;
+  status)
+    python -m companyos.runtime.canonical_state_reconciler status
+    ;;
+  *)
+    echo "usage: $0 {once|status}"
+    exit 2
+    ;;
+esac

@@ -1,0 +1,60 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/autonomous_procurement_requirements.pid"
+LOGFILE="$RT/autonomous_procurement_requirements.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+case "$cmd" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "PROCUREMENT_ENGINE_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.autonomous_procurement_requirements loop \
+      --interval "${COMPANYOS_PROCUREMENT_INTERVAL_SECONDS:-60}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "PROCUREMENT_ENGINE_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "PROCUREMENT_ENGINE_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.autonomous_procurement_requirements once
+    ;;
+  status)
+    python -m companyos.runtime.autonomous_procurement_requirements status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  requirements)
+    tail -n "${2:-30}" "$RT/procurement/requirements.jsonl" 2>/dev/null || true
+    ;;
+  sourcing)
+    tail -n "${2:-30}" "$RT/procurement/sourcing_requests.jsonl" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-120}" "$LOGFILE"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|status|requirements [n]|sourcing [n]|log [n]}"
+    exit 2
+    ;;
+esac

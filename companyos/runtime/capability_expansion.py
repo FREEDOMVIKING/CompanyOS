@@ -13,7 +13,7 @@ REGISTRY=ROOT/"companyos/extensions/generated"
 TESTS=ROOT/"tests/generated"
 STOP=RT/"STOP_CONTINUOUS"
 
-SAFE_IMPORTS={"json","re","math","statistics","time","pathlib","typing","dataclasses","collections","itertools","functools","unittest"}
+SAFE_IMPORTS={"json","re","math","statistics","time","pathlib","typing","dataclasses","collections","itertools","functools","unittest","copy"}
 FORBIDDEN_CALLS={"eval","exec","compile","__import__","open","input","breakpoint"}
 FORBIDDEN_TEXT=(
  "openai_api_key","solana_private_key","smtp_password","cloudflare_api_token",
@@ -112,7 +112,7 @@ def evaluate(context: dict) -> dict
 
 Rules:
 - Pure analysis only.
-- No network, shell, subprocess, environment access, file writes, credentials, wallets, finance, approvals, deployment actions, or external sends.
+- Allowed imports only: json, re, math, statistics, time, pathlib, typing, dataclasses, collections, itertools, functools, copy, unittest.\n- No network, shell, subprocess, environment access, file writes, credentials, wallets, finance, approvals, deployment actions, or external sends.
 - No markdown.
 - No placeholders.
 - Keep both files concise.
@@ -266,7 +266,12 @@ def _classify_generated_contents(plan, capability_id=None):
 
 def validate_source(path,content,gap_id,is_test=False):
  errors=[]
- expected=set(canonical_paths(gap_id))
+ # V65.50: malformed candidate ids are validation findings, not exceptions
+ try:
+  expected=set(canonical_paths(gap_id))
+ except (ValueError, TypeError):
+  expected=set()
+  errors.append("invalid_capability_id")
  if path not in expected:errors.append("canonical_path_violation")
  low=content.lower()
  for text in FORBIDDEN_TEXT:
@@ -289,6 +294,25 @@ def validate_source(path,content,gap_id,is_test=False):
 def stage_plan(gap,plan):
  module_path,test_path=canonical_paths(gap["id"])
  module_content,test_content,shape_errors=_classify_generated_contents(plan,gap["id"])
+ # V65.48: enforce canonical CAPABILITY_ID in generated source.
+ canonical_id = normalize_capability_id(gap['id'])
+ if module_content is not None:
+     _cap_id_re = re.compile(r'(?m)^CAPABILITY_ID\s*=\s*[^\n]+$')
+     if _cap_id_re.search(module_content):
+         module_content = _cap_id_re.sub('CAPABILITY_ID=' + repr(canonical_id), module_content, count=1)
+     else:
+         module_content = 'CAPABILITY_ID=' + repr(canonical_id) + '\n' + module_content
+         # V65.51: keep capability_manifest()['id'] consistent with CAPABILITY_ID
+         _manifest_id_re = re.compile(
+             r"(?s)(def\s+capability_manifest\s*\([^)]*\)\s*:\s*return\s*\{.*?[\'\"]id[\'\"]\s*:\s*)[\'\"][^\'\"]*[\'\"]"
+         )
+         module_content = _manifest_id_re.sub(
+             lambda m: m.group(1) + repr(canonical_id),
+             module_content,
+             count=1,
+         )
+ # V65.53: canonicalize capability_manifest id before staging
+ module_content = re.sub(r"(?s)(def\s+capability_manifest\s*\([^)]*\)\s*:\s*return\s*\{.*?['\"]id['\"]\s*:\s*)['\"][^'\"]*['\"]", lambda m: m.group(1) + repr(canonical_id), module_content, count=1) if module_content is not None else module_content
  cid=f"{gap['id']}-{int(time.time())}"
  root=STAGING/cid
  if root.exists():shutil.rmtree(root)
@@ -315,7 +339,7 @@ def stage_plan(gap,plan):
  return cid,root,sorted(set(errors))
 
 def test_stage(root,gap_id):
- module_path,test_path=canonical_paths(gap_id)
+ module_path,test_path=canonical_paths(normalize_capability_id(gap_id))
  mod=root/module_path;tst=root/test_path
  env=os.environ.copy();env["PYTHONPATH"]=str(root)+os.pathsep+str(ROOT)
  steps=[]
@@ -423,3 +447,78 @@ if __name__=="__main__":
  elif cmd=="once":print(json.dumps(cycle(),indent=2,sort_keys=True,default=str))
  elif cmd=="status":print(json.dumps(load(STATE,{"status":"not_run"}),indent=2,sort_keys=True,default=str))
  else:print(json.dumps({"capabilities":capability_inventory()},indent=2))
+
+# V65.16 — backward-compatible capability validation API
+
+# V65.17 — generated capability static validation compatibility API
+
+# V65.18 — AST-based capability validation
+def validate(path, source, capability_id=None):
+    """
+    Return {} for acceptable generated Python.
+    Return findings for actual network/secret-access constructs.
+    String literals and comments do not count as access.
+    """
+    import ast
+
+    path = str(path or "")
+    source = str(source or "")
+
+    if not source.strip():
+        return {"valid": False, "findings": ["empty_source"]}
+
+    try:
+        tree = ast.parse(source, filename=path or "<capability>")
+    except (SyntaxError, ValueError, TypeError) as exc:
+        return {
+            "valid": False,
+            "findings": [f"invalid_python:{type(exc).__name__}"],
+        }
+
+    findings = set()
+
+    network_roots = {
+        "urllib", "requests", "socket",
+        "aiohttp", "httpx",
+    }
+
+    secret_names = {
+        "OPENAI_API_KEY",
+        "API_KEY",
+        "SECRET_KEY",
+        "PRIVATE_KEY",
+        "ACCESS_TOKEN",
+    }
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                root = alias.name.split(".", 1)[0]
+                if root in network_roots:
+                    findings.add("network_access")
+
+        elif isinstance(node, ast.ImportFrom):
+            root = (node.module or "").split(".", 1)[0]
+            if root in network_roots:
+                findings.add("network_access")
+
+        elif isinstance(node, ast.Name):
+            if node.id in secret_names:
+                findings.add("secret_access")
+
+        elif isinstance(node, ast.Call):
+            fn = node.func
+
+            # os.getenv("OPENAI_API_KEY")
+            if (
+                isinstance(fn, ast.Attribute)
+                and fn.attr == "getenv"
+                and node.args
+                and isinstance(node.args[0], ast.Constant)
+                and node.args[0].value in secret_names
+            ):
+                findings.add("secret_access")
+
+    # Historical validator contract: return a list of findings.
+    # Clean source => []; rejected source => non-empty list.
+    return sorted(findings)

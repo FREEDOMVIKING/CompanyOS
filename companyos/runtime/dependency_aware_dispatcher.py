@@ -66,6 +66,10 @@ class DependencyAwareDispatcher:
         return source
 
     def dispatch_batch(self, max_dispatches: int = 8) -> list[DispatchResult]:
+        # V65.76 scan-window starvation fix.
+        # Keep the rotating window as the fast path, but before declaring idle
+        # search the remaining eligible queue so ready work outside the current
+        # window cannot be hidden by thousands of completed records.
         max_dispatches = max(1, min(int(max_dispatches), 64))
         scan_limit = max(
             max_dispatches * 16,
@@ -76,46 +80,71 @@ class DependencyAwareDispatcher:
         completed = self._completed_stage_index()
         source = self._window(scan_limit)
 
-        candidates = [
-            t
-            for t in source
-            if t.state == "QUEUED"
-            and t.attempts < t.max_attempts
-            and t.next_attempt_unix <= now
-            and t.task_type in self.dispatcher.handlers
-        ]
         try:
             from companyos.runtime.adaptive_backpressure import AdaptiveBackpressure
             boost_type = AdaptiveBackpressure(self.queue).decide().get("boost_type")
         except Exception:
             boost_type = None
-        candidates.sort(key=lambda t: (
-            0 if boost_type and t.task_type == boost_type else 1,
-            float(t.created_at_unix), -int(t.priority), t.task_id))
+
+        def eligible(task) -> bool:
+            return (
+                task.state == "QUEUED"
+                and task.attempts < task.max_attempts
+                and task.next_attempt_unix <= now
+                and task.task_type in self.dispatcher.handlers
+            )
+
+        def sort_key(task):
+            return (
+                0 if boost_type and task.task_type == boost_type else 1,
+                float(task.created_at_unix),
+                -int(task.priority),
+                task.task_id,
+            )
 
         results: list[DispatchResult] = []
-        remaining = list(candidates)
+        dispatched_ids: set[str] = set()
 
-        while remaining and len(results) < max_dispatches:
-            chosen_index = None
-            for i, task in enumerate(remaining):
-                if self._dependency_satisfied_with_index(task, completed):
-                    chosen_index = i
+        def drain(candidates) -> None:
+            remaining = [
+                t for t in candidates
+                if t.task_id not in dispatched_ids
+            ]
+            remaining.sort(key=sort_key)
+
+            while remaining and len(results) < max_dispatches:
+                chosen_index = None
+                for i, task in enumerate(remaining):
+                    if self._dependency_satisfied_with_index(task, completed):
+                        chosen_index = i
+                        break
+
+                if chosen_index is None:
                     break
 
-            if chosen_index is None:
-                break
+                task = remaining.pop(chosen_index)
+                result = self.dispatcher.dispatch_task(task)
+                results.append(result)
+                dispatched_ids.add(task.task_id)
 
-            task = remaining.pop(chosen_index)
-            result = self.dispatcher.dispatch_task(task)
-            results.append(result)
+                if result.dispatched and result.reason == "completed":
+                    payload = self._payload(task)
+                    goal_id = payload.get("goal_id")
+                    stage = payload.get("stage")
+                    if goal_id and stage:
+                        completed.add((str(goal_id), str(stage)))
 
-            if result.dispatched and result.reason == "completed":
-                payload = self._payload(task)
-                goal_id = payload.get("goal_id")
-                stage = payload.get("stage")
-                if goal_id and stage:
-                    completed.add((str(goal_id), str(stage)))
+        # Fast rotating window first.
+        drain([t for t in source if eligible(t)])
+
+        # V65.76 starvation fallback: only pay for a whole-queue scan if the
+        # fast path could not fill the requested batch.
+        if len(results) < max_dispatches:
+            fallback = [
+                t for t in self.queue._iter_task_files()
+                if eligible(t) and t.task_id not in dispatched_ids
+            ]
+            drain(fallback)
 
         if not results:
             results.append(

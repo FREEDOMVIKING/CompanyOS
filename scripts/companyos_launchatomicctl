@@ -1,0 +1,27 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-once}" in
+  once)
+    python - <<'PY'
+import json
+from companyos.runtime.atomic_launch_executor import execute_once
+print(json.dumps(execute_once(),indent=2,sort_keys=True,default=str))
+PY
+    ;;
+  status)
+    python - <<'PY'
+import json
+from companyos.runtime.atomic_launch_executor import status
+print(json.dumps(status(),indent=2,sort_keys=True,default=str))
+PY
+    ;;
+  *)
+    echo "usage: $0 {once|status}"
+    exit 2
+    ;;
+esac

@@ -11,6 +11,7 @@ from .adapters import (
     CryptoConnector,
 )
 from .cloudflare_adapter import CloudflareHostingConnector
+from .solana_finance_adapter import SolanaFinanceConnector
 
 
 def build_registry(config):
@@ -41,5 +42,5 @@ def build_registry(config):
         "crm": CRMConnector(merged("crm")),
         "accounting": AccountingConnector(merged("accounting")),
         "banking": BankingConnector(merged("banking")),
-        "crypto": CryptoConnector(merged("crypto")),
+        "crypto": SolanaFinanceConnector(merged("crypto")),
     }

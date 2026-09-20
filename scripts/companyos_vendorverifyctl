@@ -1,0 +1,41 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+case "$cmd" in
+  status)
+    cat "$RT/procurement/official_vendor_verification_latest.json" 2>/dev/null || echo '{"status":"no_verification_run_yet"}'
+    ;;
+  audit)
+    tail -n "${2:-40}" "$RT/procurement/official_vendor_verifications.jsonl" 2>/dev/null || true
+    ;;
+  rejected)
+    python - <<'PY'
+import json
+from pathlib import Path
+p=Path.home()/".companyos_runtime/procurement/official_vendor_verification_latest.json"
+try:d=json.loads(p.read_text())
+except Exception:d={}
+print(json.dumps(d.get("rejected",[]),indent=2,sort_keys=True))
+PY
+    ;;
+  providers)
+    python - <<'PY'
+import json
+from pathlib import Path
+p=Path.home()/".companyos_runtime/procurement/official_vendor_verification_latest.json"
+try:d=json.loads(p.read_text())
+except Exception:d={}
+print(json.dumps(d.get("providers",[]),indent=2,sort_keys=True))
+PY
+    ;;
+  *)
+    echo "usage: $0 {status|audit [n]|rejected|providers}"
+    exit 2
+    ;;
+esac

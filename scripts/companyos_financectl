@@ -1,0 +1,107 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/live_financial_execution_router.pid"
+LOGFILE="$RT/live_financial_execution_router.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+
+case "$cmd" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "LIVE_FINANCE_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.live_financial_execution_router loop \
+      --interval "${COMPANYOS_FINANCE_ROUTER_INTERVAL_SECONDS:-60}" \
+      --max-actions "${COMPANYOS_FINANCE_MAX_ACTIONS_PER_CYCLE:-3}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "LIVE_FINANCE_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "LIVE_FINANCE_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  health)
+    python -m companyos.runtime.live_financial_execution_router health
+    ;;
+  status)
+    python -m companyos.runtime.live_financial_execution_router status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  balance)
+    python - <<'PY'
+import json
+from companyos.connectors_live.engine import ConnectorEngine
+c=ConnectorEngine().registry["crypto"]
+print(json.dumps(c.execute("get_balance",{}),indent=2,sort_keys=True))
+PY
+    ;;
+  limits)
+    python - <<'PY'
+import json
+from companyos.connectors_live.engine import ConnectorEngine
+c=ConnectorEngine().registry["crypto"]
+print(json.dumps({
+    "wallet":c.wallet_address(),
+    "limits":c._limits(),
+    "daily_usage":c._daily_usage(),
+    "limits_configured":c.limits_configured(),
+},indent=2,sort_keys=True))
+PY
+    ;;
+  queue-transfer)
+    to="${2:-}"
+    amount="${3:-}"
+    if [ -z "$to" ] || [ -z "$amount" ]; then
+      echo "usage: $0 queue-transfer RECIPIENT_ADDRESS AMOUNT_SOL"
+      exit 2
+    fi
+    python - "$to" "$amount" <<'PY'
+import json,sys
+from companyos.connectors_live.engine import ConnectorEngine
+to=sys.argv[1]
+amount=float(sys.argv[2])
+eng=ConnectorEngine()
+c=eng.registry["crypto"]
+pre=c.preflight_transfer({"asset":"SOL","to":to,"amount_sol":amount})
+print("PREFLIGHT=")
+print(json.dumps(pre,indent=2,sort_keys=True))
+if not pre.get("ok"):
+    raise SystemExit(1)
+row=eng.queue("crypto","transfer_funds",{"asset":"SOL","to":to,"amount_sol":amount},risk="high")
+print("QUEUED=")
+print(json.dumps(row,indent=2,sort_keys=True))
+PY
+    ;;
+  process)
+    python -m companyos.runtime.live_financial_execution_router process --max-actions "${2:-3}"
+    ;;
+  log)
+    tail -n "${2:-120}" "$LOGFILE"
+    ;;
+  env)
+    nano "$ROOT/.env"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|health|status|balance|limits|queue-transfer ADDRESS AMOUNT_SOL|process [max]|log [lines]|env}"
+    exit 2
+    ;;
+esac

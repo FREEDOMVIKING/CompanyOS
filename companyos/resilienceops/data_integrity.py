@@ -105,6 +105,35 @@ class DataIntegrityGuard:
     def check(items):
         return check_integrity(items)
 
+    @staticmethod
+    def evaluate(items):
+        # V65.58 legacy evaluate contract: phase/runtime callers pass
+        # integrity-check rows shaped like {'name': ..., 'passed': bool}.
+        rows = list(items or [])
+        if all(isinstance(item, dict) and 'passed' in item for item in rows):
+            failed = [item for item in rows if not bool(item.get('passed'))]
+            issues = [
+                {
+                    'id': str(item.get('name') or f'check-{idx + 1}'),
+                    'code': 'check_failed',
+                    'message': 'integrity check failed',
+                }
+                for idx, item in enumerate(failed)
+            ]
+            ok = not failed
+            return {
+                'integrity_ok': ok,
+                'valid': ok,
+                'items': len(rows),
+                'issue_count': len(issues),
+                'issues': issues,
+            }
+
+        # Current work-item contract remains unchanged for non-legacy rows.
+        report = dict(validate_work_items(rows))
+        report['integrity_ok'] = bool(report.get('valid'))
+        return report
+
 
 def data_integrity(items):
     return validate_work_items(items)

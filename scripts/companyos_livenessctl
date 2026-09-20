@@ -1,0 +1,95 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+LPID="$RT/venture_liveness_runtime.pid"
+LLOG="$RT/venture_liveness_runtime.log"
+CPID="$RT/autonomous_ceo_runtime_service.pid"
+CLOG="$RT/autonomous_ceo_runtime_service.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+start_ceo() {
+  if [ -f "$CPID" ] && kill -0 "$(cat "$CPID")" 2>/dev/null; then
+    echo "CEO_RUNTIME_ALREADY_RUNNING PID=$(cat "$CPID")"
+    return 0
+  fi
+  nohup python - <<'PY' >>"$CLOG" 2>&1 &
+from companyos.runtime.autonomous_ceo_runtime_service import AutonomousCEORuntimeService
+AutonomousCEORuntimeService(
+    interval_seconds=10,
+    max_consecutive_failures=5,
+).run_forever()
+PY
+  echo $! > "$CPID"
+  sleep 1
+  echo "CEO_RUNTIME_RUNNING PID=$(cat "$CPID")"
+}
+
+stop_ceo() {
+  if [ -f "$CPID" ]; then
+    kill "$(cat "$CPID")" 2>/dev/null || true
+    rm -f "$CPID"
+  fi
+  echo "CEO_RUNTIME_STOPPED"
+}
+
+start_liveness() {
+  if [ -f "$LPID" ] && kill -0 "$(cat "$LPID")" 2>/dev/null; then
+    echo "LIVENESS_ALREADY_RUNNING PID=$(cat "$LPID")"
+    return 0
+  fi
+  nohup python -m companyos.runtime.venture_liveness_runtime loop \
+    --interval "${COMPANYOS_LIVENESS_INTERVAL_SECONDS:-120}" \
+    >>"$LLOG" 2>&1 &
+  echo $! > "$LPID"
+  sleep 1
+  echo "LIVENESS_RUNNING PID=$(cat "$LPID")"
+}
+
+stop_liveness() {
+  if [ -f "$LPID" ]; then
+    kill "$(cat "$LPID")" 2>/dev/null || true
+    rm -f "$LPID"
+  fi
+  echo "LIVENESS_STOPPED"
+}
+
+case "${1:-status}" in
+  start)
+    start_ceo
+    start_liveness
+    ;;
+  stop)
+    stop_liveness
+    stop_ceo
+    ;;
+  restart)
+    stop_liveness
+    stop_ceo
+    start_ceo
+    start_liveness
+    ;;
+  once)
+    python -m companyos.runtime.venture_liveness_runtime once
+    ;;
+  status)
+    python -m companyos.runtime.venture_liveness_runtime status
+    echo "CEO_PID=$(cat "$CPID" 2>/dev/null || true)"
+    [ -f "$CPID" ] && ps -p "$(cat "$CPID")" -o pid,etime,args || true
+    echo "LIVENESS_PID=$(cat "$LPID" 2>/dev/null || true)"
+    [ -f "$LPID" ] && ps -p "$(cat "$LPID")" -o pid,etime,args || true
+    ;;
+  ceo-log)
+    tail -n "${2:-100}" "$CLOG" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-100}" "$LLOG" 2>/dev/null || true
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|status|ceo-log [n]|log [n]}"
+    exit 2
+    ;;
+esac

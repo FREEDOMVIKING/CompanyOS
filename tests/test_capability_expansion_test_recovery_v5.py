@@ -20,11 +20,11 @@ class CapabilityExpansionTestRecoveryV5(unittest.TestCase):
         self.assertEqual(e,[])
 
     def test_staged_contract_executes(self):
-        gap={"id":"x","title":"x","reason":"x"}
+        gap={"id":"research_quality_analyzer","title":"x","reason":"x"}
         plan={"changes":[{"path":"whatever.py","content":"CAPABILITY_ID='x'\ndef capability_manifest(): return {'id':'x'}\ndef evaluate(context): return {'ok':True}\n"}],"tests":[]}
         cid,root,errors=c.stage_plan(gap,plan)
         self.assertEqual(errors,[])
-        ok,steps=c.test_stage(root,"x")
+        ok,steps=c.test_stage(root,"research_quality_analyzer")
         self.assertTrue(ok,steps)
 
 if __name__=="__main__":

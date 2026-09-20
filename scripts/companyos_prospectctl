@@ -1,0 +1,22 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-once}" in
+  once)
+    python - <<'PY'
+import json
+from companyos.runtime.verified_web_prospect_discovery import run_once
+print(json.dumps(run_once(),indent=2,sort_keys=True,default=str))
+PY
+    ;;
+  status)
+    cat "$HOME/.companyos_runtime/verified_web_prospect_discovery_latest.json" 2>/dev/null || echo '{"status":"no_run_yet"}'
+    ;;
+  *)
+    echo "usage: $0 {once|status}"
+    exit 2
+    ;;
+esac

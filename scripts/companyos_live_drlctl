@@ -1,0 +1,56 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/advanced_drl_live.pid"
+LOGFILE="$RT/advanced_drl_live.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+case "$cmd" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "LIVE_DRL_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.live_drl_strategy_governor loop \
+      --interval "${COMPANYOS_DRL_LIVE_INTERVAL_SECONDS:-900}" >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "LIVE_DRL_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "LIVE_DRL_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  status)
+    python -m companyos.runtime.live_drl_strategy_governor status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  once)
+    python -m companyos.runtime.live_drl_strategy_governor once
+    ;;
+  dry-run)
+    python -m companyos.runtime.live_drl_strategy_governor dry-run
+    ;;
+  log)
+    tail -n "${2:-120}" "$LOGFILE"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|status|once|dry-run|log [lines]}"
+    exit 2
+    ;;
+esac

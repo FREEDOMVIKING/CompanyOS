@@ -1,0 +1,58 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/trusted_procurement_intent_emitter.pid"
+LOGFILE="$RT/trusted_procurement_intent_emitter.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "PROCUREMENT_EMITTER_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.trusted_procurement_intent_emitter loop \
+      --interval "${COMPANYOS_PROCUREMENT_EMITTER_INTERVAL_SECONDS:-120}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "PROCUREMENT_EMITTER_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "PROCUREMENT_EMITTER_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.trusted_procurement_intent_emitter once
+    ;;
+  declarations)
+    python -m companyos.runtime.trusted_procurement_intent_emitter declarations --max-tasks "${2:-10}"
+    ;;
+  status)
+    python -m companyos.runtime.trusted_procurement_intent_emitter status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  emitted)
+    tail -n "${2:-30}" "$RT/procurement/trusted_emitted_requirements.jsonl" 2>/dev/null || true
+    ;;
+  log)
+    tail -n "${2:-100}" "$LOGFILE"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|declarations [n]|status|emitted [n]|log [n]}"
+    exit 2
+    ;;
+esac

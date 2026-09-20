@@ -1,5 +1,5 @@
 from __future__ import annotations
-import json, time
+import json, time, os
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
@@ -22,6 +22,9 @@ class ContinuousGoalRuntimeState:
     execution_failures: int = 0
     scheduler_failures: int = 0
     ceo_failures: int = 0
+    # V65.83 profit auto-seed state
+    auto_seeded_profit_goals: int = 0
+    last_auto_seed_unix: float = 0.0
 
 class ContinuousGoalRuntime:
     """
@@ -40,6 +43,9 @@ class ContinuousGoalRuntime:
         self.runtime_root.mkdir(parents=True, exist_ok=True)
         self.state_path = self.runtime_root / "continuous_goal_runtime_state.json"
         self.stop_path = self.runtime_root / "continuous_goal_runtime.stop"
+        # V65.83 idle profit auto-seed configuration
+        self.profit_autoseed_enabled = os.getenv("COMPANYOS_PROFIT_AUTOSEED_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+        self.profit_autoseed_cooldown_seconds = max(0, int(os.getenv("COMPANYOS_PROFIT_AUTOSEED_COOLDOWN_SECONDS", "300")))
 
     def save(self, state):
         state.updated_at_unix = time.time()
@@ -56,6 +62,62 @@ class ContinuousGoalRuntime:
             return ContinuousGoalRuntimeState(**{k:v for k,v in raw.items() if k in allowed})
         except Exception:
             return ContinuousGoalRuntimeState()
+
+    # V65.83 idle profit auto-seed helper
+    def _auto_seed_profit_goal_if_idle(self, state):
+        # Seed exactly one new profit-first CEO goal only when CompanyOS is
+        # globally idle. This creates internal intake only.
+        if not self.profit_autoseed_enabled:
+            return None
+
+        now = time.time()
+        if (
+            self.profit_autoseed_cooldown_seconds > 0
+            and float(getattr(state, "last_auto_seed_unix", 0.0) or 0.0) > 0
+            and now - float(state.last_auto_seed_unix) < self.profit_autoseed_cooldown_seconds
+        ):
+            return None
+
+        intake_records = self.scheduler.intake.all_records()
+        if any(r.state in ("PENDING", "CLAIMED") for r in intake_records):
+            return None
+
+        orchestration_records = []
+        for p in sorted(self.scheduler.ceo.root.glob("*.json")):
+            try:
+                orchestration_records.append(self.scheduler.ceo.load(p.stem))
+            except Exception:
+                continue
+        if any(r.state == "RUNNING" for r in orchestration_records):
+            return None
+
+        queue = self.execution_loop.queue
+        if any(t.state in ("QUEUED", "CLAIMED", "RUNNING") for t in queue.all_tasks()):
+            return None
+
+        from companyos.strategy.profit_first_venture_engine import discovery_directive
+
+        goal = discovery_directive()
+        intake_id = f"auto-profit-{int(now)}"
+        rec = self.scheduler.intake.submit(
+            goal=goal,
+            priority=1,
+            metadata={
+                "source": "continuous_goal_runtime_v65_83",
+                "profit_first": True,
+                "auto_seeded": True,
+                "internal_only": True,
+                "created_at_unix": now,
+            },
+            intake_id=intake_id,
+            max_attempts=3,
+        )
+
+        state.auto_seeded_profit_goals = int(
+            getattr(state, "auto_seeded_profit_goals", 0) or 0
+        ) + 1
+        state.last_auto_seed_unix = now
+        return rec.intake_id
 
     def cycle(self, state):
         # V29_BIG_RUNTIME_STABILIZATION
@@ -85,8 +147,19 @@ class ContinuousGoalRuntime:
                     state.last_orchestration_id = result.orchestration_id
                     state.last_reason = result.reason
                 else:
-                    state.idle_cycles += 1
-                    state.last_reason = result.reason
+                    # V65.83 auto-seed exactly one profit-first goal when globally idle
+                    seeded_id = self._auto_seed_profit_goal_if_idle(state)
+                    if seeded_id:
+                        seeded = self.scheduler.process_next()
+                        if seeded.processed and seeded.orchestration_id:
+                            state.goals_processed += 1
+                            state.last_orchestration_id = seeded.orchestration_id
+                            state.last_reason = "profit_goal_auto_seeded_and_orchestrated"
+                        else:
+                            state.last_reason = "profit_goal_auto_seeded"
+                    else:
+                        state.idle_cycles += 1
+                        state.last_reason = result.reason
             except Exception as exc:
                 state.scheduler_failures += 1
                 cycle_errors.append(f'scheduler:{type(exc).__name__}:{exc}')

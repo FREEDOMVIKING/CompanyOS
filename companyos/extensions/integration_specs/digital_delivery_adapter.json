@@ -1,0 +1,35 @@
+{
+  "activation": {
+    "automatic_external_execution": false,
+    "external_actions": "existing_policy_only",
+    "financial_actions": "existing_policy_only"
+  },
+  "contract": {
+    "credentials": "existing_secret_provider_only",
+    "idempotency_required": true,
+    "inputs": [
+      "venture_id",
+      "validated_context",
+      "provider_config",
+      "idempotency_key"
+    ],
+    "outputs": [
+      "success",
+      "provider_reference",
+      "evidence",
+      "error"
+    ],
+    "receipt_required": true,
+    "test_mode_required": true
+  },
+  "created_at_unix": 1789869814.4591818,
+  "id": "digital_delivery_adapter",
+  "kind": "integration",
+  "models": [
+    "digital_products"
+  ],
+  "priority": 84,
+  "reason": "Publish and deliver approved digital products.",
+  "schema": "companyos.integration_capability_request.v1",
+  "status": "SCAFFOLDED"
+}

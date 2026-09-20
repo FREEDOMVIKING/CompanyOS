@@ -34,6 +34,43 @@ def _clear_stop_file_for_start(self):
     return {"removed_stop_files":removed}
 
 
+def _read_pid_file(path) -> int | None:
+    """Read a PID from a file; return None for missing/invalid PID files."""
+    try:
+        value = Path(path).read_text(encoding="utf-8").strip()
+        pid = int(value)
+        return pid if pid > 0 else None
+    except (OSError, ValueError, TypeError):
+        return None
+
+
+def _pid_is_alive(pid: int | None) -> bool:
+    """Return True only when pid refers to a currently live process."""
+    if not pid:
+        return False
+
+    try:
+        pid = int(pid)
+        if pid <= 0:
+            return False
+        os.kill(pid, 0)
+    except (ProcessLookupError, PermissionError, ValueError, TypeError, OSError):
+        return False
+
+    # Android/Termux can briefly leave detached processes as zombies.
+    try:
+        stat = Path(f"/proc/{pid}/stat").read_text(
+            encoding="utf-8", errors="ignore"
+        )
+        fields = stat.split()
+        if len(fields) > 2 and fields[2] in {"Z", "X", "x"}:
+            return False
+    except Exception:
+        pass
+
+    return True
+
+
 class UnifiedRuntimeControl:
     _clear_stop_file_for_start = _clear_stop_file_for_start
     EXPECTED_SERVICES = {
@@ -82,6 +119,19 @@ class UnifiedRuntimeControl:
 
         return True
 
+    @staticmethod
+    def _pid_is_companyos_supervisor(pid: int | None) -> bool:
+        if not UnifiedRuntimeControl._pid_alive(pid):
+            return False
+        try:
+            raw = Path(f"/proc/{int(pid)}/cmdline").read_bytes()
+            cmd = raw.replace(b"\x00", b" ").decode("utf-8", errors="replace")
+        except (OSError, ValueError, TypeError):
+            return False
+        normalized = cmd.replace("\\", "/")
+        return ("companyos/runtime/service_supervisor.py" in normalized
+                or "companyos.runtime.service_supervisor" in normalized)
+
     def _log(self, message: str) -> None:
         with self.control_log.open("a", encoding="utf-8") as f:
             f.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {message}\n")
@@ -126,7 +176,7 @@ class UnifiedRuntimeControl:
             all_children_running = all_children_running and running
 
         expected_present = self.EXPECTED_SERVICES.issubset(set(normalized))
-        supervisor_alive = self._pid_alive(pid)
+        supervisor_alive = self._pid_is_companyos_supervisor(pid)
 
         return {
             "running": bool(
@@ -253,11 +303,14 @@ class UnifiedRuntimeControl:
             time.sleep(0.5)
 
         pid = before.get("supervisor_pid")
-        if self._pid_alive(pid):
+        if self._pid_is_companyos_supervisor(pid):
             try:
                 os.kill(int(pid), signal.SIGTERM)
             except ProcessLookupError:
                 pass
+        elif pid:
+            self._log(f"STALE/FOREIGN supervisor pid ignored: {pid}")
+            self.pid_path.unlink(missing_ok=True)
 
         time.sleep(1.0)
         after = self.status()

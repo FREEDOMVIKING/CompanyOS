@@ -9,7 +9,7 @@ from .pause_policy import PausePolicy
 from .adaptive_scheduler import AdaptiveScheduler
 
 class PersistentImprover:
-    \"\"\"Persistent improvement with exactly one autonomous cycle per requested round.\"\"\"
+    """Persistent improvement with exactly one autonomous cycle per requested round."""
 
     def __init__(self, project_root):
         self.root = Path(project_root).resolve()

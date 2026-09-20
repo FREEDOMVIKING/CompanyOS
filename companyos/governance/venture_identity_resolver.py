@@ -3,7 +3,9 @@ import re
 INTERNAL = {
     "accounting","runtime","logs","backups","backup","tmp","temp","quotes",
     "projects","invoices","artifacts","exports","dashboard","ceo_memory",
-    "companyos_runtime"
+    "companyos_runtime",
+    # Deployment output container, not a venture identity.
+    "production_sites",
 }
 
 def slugify(name):

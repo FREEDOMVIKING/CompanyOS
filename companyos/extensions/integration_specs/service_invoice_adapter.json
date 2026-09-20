@@ -1,0 +1,35 @@
+{
+  "activation": {
+    "automatic_external_execution": false,
+    "external_actions": "existing_policy_only",
+    "financial_actions": "existing_policy_only"
+  },
+  "contract": {
+    "credentials": "existing_secret_provider_only",
+    "idempotency_required": true,
+    "inputs": [
+      "venture_id",
+      "validated_context",
+      "provider_config",
+      "idempotency_key"
+    ],
+    "outputs": [
+      "success",
+      "provider_reference",
+      "evidence",
+      "error"
+    ],
+    "receipt_required": true,
+    "test_mode_required": true
+  },
+  "created_at_unix": 1789862557.0200574,
+  "id": "service_invoice_adapter",
+  "kind": "external",
+  "models": [
+    "services"
+  ],
+  "priority": 90,
+  "reason": "Connect approved invoicing/payment provider.",
+  "schema": "companyos.integration_capability_request.v1",
+  "status": "SCAFFOLDED"
+}

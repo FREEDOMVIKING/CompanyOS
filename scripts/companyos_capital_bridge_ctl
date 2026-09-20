@@ -1,0 +1,54 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/capital_intent_bridge.pid"
+LOGFILE="$RT/capital_intent_bridge.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+cmd="${1:-status}"
+case "$cmd" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "CAPITAL_INTENT_BRIDGE_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.capital_intent_bridge loop \
+      --interval "${COMPANYOS_CAPITAL_BRIDGE_INTERVAL_SECONDS:-60}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "CAPITAL_INTENT_BRIDGE_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "CAPITAL_INTENT_BRIDGE_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.capital_intent_bridge once
+    ;;
+  status)
+    python -m companyos.runtime.capital_intent_bridge status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  log)
+    tail -n "${2:-120}" "$LOGFILE"
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|status|log [lines]}"
+    exit 2
+    ;;
+esac

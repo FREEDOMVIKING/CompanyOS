@@ -1,61 +1,69 @@
 {
-  "global": {
-    "dry_run": true,
-    "request_timeout_seconds": 20,
-    "max_retries": 2
-  },
-  "smtp": {
-    "enabled": true,
-    "host_env": "COMPANYOS_SMTP_HOST",
-    "port_env": "COMPANYOS_SMTP_PORT",
-    "username_env": "COMPANYOS_SMTP_USERNAME",
-    "password_env": "COMPANYOS_SMTP_PASSWORD",
-    "from_email_env": "COMPANYOS_SMTP_FROM",
-    "use_tls": true,
-    "dry_run": false
-  },
-  "rest_api": {
-    "enabled": false,
-    "base_url_env": "COMPANYOS_API_BASE_URL",
-    "token_env": "COMPANYOS_API_TOKEN",
-    "dry_run": true
-  },
-  "hosting": {
-    "enabled": true,
-    "deploy_url_env": "COMPANYOS_HOSTING_DEPLOY_URL",
-    "token_env": "CLOUDFLARE_API_TOKEN",
-    "dry_run": false,
-    "provider": "cloudflare",
-    "account_id_env": "CLOUDFLARE_ACCOUNT_ID"
-  },
-  "domains": {
-    "enabled": false,
-    "api_url_env": "COMPANYOS_DOMAIN_API_URL",
-    "token_env": "COMPANYOS_DOMAIN_TOKEN",
-    "dry_run": true
-  },
-  "crm": {
-    "enabled": false,
-    "api_url_env": "COMPANYOS_CRM_API_URL",
-    "token_env": "COMPANYOS_CRM_TOKEN",
-    "dry_run": true
-  },
   "accounting": {
-    "enabled": false,
     "api_url_env": "COMPANYOS_ACCOUNTING_API_URL",
-    "token_env": "COMPANYOS_ACCOUNTING_TOKEN",
-    "dry_run": true
+    "dry_run": true,
+    "enabled": false,
+    "token_env": "COMPANYOS_ACCOUNTING_TOKEN"
   },
   "banking": {
+    "dry_run": true,
     "enabled": false,
     "handoff_url_env": "COMPANYOS_BANKING_HANDOFF_URL",
-    "token_env": "COMPANYOS_BANKING_TOKEN",
-    "dry_run": true
+    "token_env": "COMPANYOS_BANKING_TOKEN"
+  },
+  "crm": {
+    "api_url_env": "COMPANYOS_CRM_API_URL",
+    "dry_run": true,
+    "enabled": false,
+    "token_env": "COMPANYOS_CRM_TOKEN"
   },
   "crypto": {
-    "enabled": false,
+    "daily_cap_usd_env": "COMPANYOS_FINANCE_DAILY_CAP_USD",
+    "dry_run": false,
+    "enabled": true,
+    "fee_reserve_lamports": 10000,
     "handoff_url_env": "COMPANYOS_CRYPTO_HANDOFF_URL",
+    "price_url": "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd",
+    "private_key_env": "COMPANYOS_SOLANA_PRIVATE_KEY_BASE58",
+    "provider": "solana_local_signer",
+    "rpc_url_env": "COMPANYOS_SOLANA_RPC_URL",
+    "single_tx_cap_usd_env": "COMPANYOS_FINANCE_SINGLE_TX_CAP_USD",
     "token_env": "COMPANYOS_CRYPTO_TOKEN",
-    "dry_run": true
+    "wallet_address_env": "COMPANYOS_SOLANA_WALLET_ADDRESS"
+  },
+  "domains": {
+    "api_url_env": "COMPANYOS_DOMAIN_API_URL",
+    "dry_run": true,
+    "enabled": false,
+    "token_env": "COMPANYOS_DOMAIN_TOKEN"
+  },
+  "global": {
+    "dry_run": true,
+    "max_retries": 2,
+    "request_timeout_seconds": 20
+  },
+  "hosting": {
+    "account_id_env": "CLOUDFLARE_ACCOUNT_ID",
+    "deploy_url_env": "COMPANYOS_HOSTING_DEPLOY_URL",
+    "dry_run": false,
+    "enabled": true,
+    "provider": "cloudflare",
+    "token_env": "CLOUDFLARE_API_TOKEN"
+  },
+  "rest_api": {
+    "base_url_env": "COMPANYOS_API_BASE_URL",
+    "dry_run": true,
+    "enabled": false,
+    "token_env": "COMPANYOS_API_TOKEN"
+  },
+  "smtp": {
+    "dry_run": false,
+    "enabled": true,
+    "from_email_env": "COMPANYOS_SMTP_FROM",
+    "host_env": "COMPANYOS_SMTP_HOST",
+    "password_env": "COMPANYOS_SMTP_PASSWORD",
+    "port_env": "COMPANYOS_SMTP_PORT",
+    "use_tls": true,
+    "username_env": "COMPANYOS_SMTP_USERNAME"
   }
 }

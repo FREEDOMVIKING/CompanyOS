@@ -1,0 +1,53 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+PIDFILE="$RT/canonical_outcome_bridge.pid"
+LOGFILE="$RT/canonical_outcome_bridge.log"
+
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-status}" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "OUTCOME_BRIDGE_ALREADY_RUNNING PID=$(cat "$PIDFILE")"
+      exit 0
+    fi
+    nohup python -m companyos.runtime.canonical_outcome_bridge loop \
+      --interval "${COMPANYOS_OUTCOME_BRIDGE_INTERVAL_SECONDS:-60}" \
+      >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    sleep 1
+    echo "OUTCOME_BRIDGE_RUNNING PID=$(cat "$PIDFILE")"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null || true
+      rm -f "$PIDFILE"
+    fi
+    echo "OUTCOME_BRIDGE_STOPPED"
+    ;;
+  restart)
+    "$0" stop
+    "$0" start
+    ;;
+  once)
+    python -m companyos.runtime.canonical_outcome_bridge once
+    ;;
+  status)
+    python -m companyos.runtime.canonical_outcome_bridge status
+    if [ -f "$PIDFILE" ]; then
+      echo "PID=$(cat "$PIDFILE")"
+      ps -p "$(cat "$PIDFILE")" -o pid,etime,args || true
+    fi
+    ;;
+  log)
+    tail -n "${2:-100}" "$LOGFILE" 2>/dev/null || true
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|once|status|log [n]}"
+    exit 2
+    ;;
+esac

@@ -14,14 +14,26 @@ class DrainResult:
     last_result: Any = None
 
 class ExecutionDrainEngine:
-    def __init__(self, queue: AutonomousTaskQueue, dispatcher: Any, batch_size: int = 32):
+    def __init__(self, queue: AutonomousTaskQueue | int, dispatcher: Any = None, batch_size: int = 32):
+        # V65.56 compatibility: historical callers may construct with only
+        # an integer to inspect the bounded batch size. That path is config-only
+        # and cannot dispatch work. Live execution still requires a dispatcher.
+        if dispatcher is None and isinstance(queue, int):
+            self.queue = None
+            self.dispatcher = None
+            self.batch_size = max(1, min(int(queue), 128))
+            self._config_only = True
+            return
         if dispatcher is None or not hasattr(dispatcher, "dispatch_next"):
             raise TypeError("live_dependency_dispatcher_required")
-        self.queue=queue
-        self.dispatcher=dispatcher
-        self.batch_size=max(1,min(int(batch_size),64))
+        self.queue = queue
+        self.dispatcher = dispatcher
+        self.batch_size = max(1, min(int(batch_size), 128))
+        self._config_only = False
 
     def drain_once(self) -> DrainResult:
+        if self.dispatcher is None:
+            raise RuntimeError("live_dependency_dispatcher_required")
         attempted=dispatched=0
         last=None
         for _ in range(self.batch_size):

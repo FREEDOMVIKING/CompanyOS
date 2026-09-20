@@ -97,10 +97,24 @@ class GoalLifecycleManager:
     def refresh(self, *, goal_id: str, goal: str = "") -> GoalRecord:
         record = self.ensure_goal(goal_id=goal_id, goal=goal or goal_id)
 
-        tasks = []
+        all_tasks = []
         for task in self.queue.all_tasks():
             payload = task.payload or {}
             if payload.get("goal_id") == goal_id:
+                all_tasks.append(task)
+
+        # V65.82 semantic duplicate cancellation lifecycle filter
+        # A reconciliation tombstone is audit history, not unfinished goal work.
+        # General CANCELLED tasks are NOT ignored.
+        tasks = []
+        for task in all_tasks:
+            ignored_duplicate = (
+                task.state == "CANCELLED"
+                and isinstance(task.result, dict)
+                and task.result.get("reason") == "semantic_duplicate_already_completed"
+                and bool(task.result.get("canonical_task_id"))
+            )
+            if not ignored_duplicate:
                 tasks.append(task)
 
         record.task_ids = [t.task_id for t in tasks]

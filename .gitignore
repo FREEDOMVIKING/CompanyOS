@@ -86,3 +86,44 @@ companyos/runtime/*.backup
 
 # Generated deployment/site output
 generated_sites/
+
+# BEGIN COMPANYOS LOCAL/RUNTIME EXCLUDES
+# Local secrets / credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python / OS / transient state
+**/__pycache__/
+*.py[cod]
+*.log
+*.pid
+*.sock
+*.sqlite
+*.sqlite3
+*.db
+
+# CompanyOS mutable runtime
+.companyos_runtime/
+companyos_runtime/connectors/actions.json
+companyos_runtime/connectors/executions.json
+companyos_runtime/connectors/dead_letter.json
+companyos_runtime/connectors/dead_letter.jsonl
+
+# Generated operational evidence and progress ledgers
+companyos_progress/
+workspace/**/companyos_progress/
+
+# Timestamped source/test/script backups; current canonical files remain tracked
+**/*.v[0-9]*_backup_*
+**/*_backup_[0-9]*
+**/*.backup_*
+**/*.bak
+
+# Device/editor debris
+*.swp
+*.tmp
+.DS_Store
+# END COMPANYOS LOCAL/RUNTIME EXCLUDES

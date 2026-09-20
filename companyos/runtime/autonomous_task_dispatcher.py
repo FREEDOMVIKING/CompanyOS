@@ -1,5 +1,6 @@
 from __future__ import annotations
 from companyos.runtime.lease_execution_guard import LeaseExecutionGuard
+from companyos.runtime.bounded_task_execution import run_bounded
 import time
 from dataclasses import dataclass
 from typing import Any,Callable,Optional
@@ -34,13 +35,24 @@ class AutonomousTaskDispatcher:
         task = self.queue.mark_running(task)
 
         try:
-            guard = LeaseExecutionGuard(self.queue.kernel.db_path)
+            # V35_1_FENCED_HANDLER_CALL
+            # V27_9_4A_LIVE_HANDLER_TIMEOUT
+            _v35_guard = LeaseExecutionGuard(self.queue.kernel.db_path)
             task_id = str(task.task_id)
             owner = "dispatcher-" + str(id(self))
-            ok, result, error = guard.execute(
+
+            def _bounded_handler():
+                bounded = run_bounded(lambda: handler(task))
+                if bounded.timed_out:
+                    raise TimeoutError(bounded.error or "live_handler_timeout")
+                if not bounded.ok:
+                    raise RuntimeError(bounded.error or "bounded_handler_failed")
+                return bounded.value
+
+            ok, result, error = _v35_guard.execute(
                 task_id,
                 owner,
-                lambda: handler(task),
+                _bounded_handler,
             )
             if not ok:
                 raise RuntimeError(error or "leased_execution_failed")

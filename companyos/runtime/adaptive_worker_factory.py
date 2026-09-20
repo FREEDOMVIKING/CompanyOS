@@ -16,6 +16,24 @@ def read(p,d):
 def write(p,v):
     t=p.with_suffix(p.suffix+".tmp"); t.write_text(json.dumps(v,indent=2,sort_keys=True)+"\n"); t.replace(p)
 
+
+# Legacy/public compatibility exports.
+ROLE_ACTIONS = {
+    "execution_readiness": "execution_readiness",
+    "revenue_evidence": "revenue_evidence",
+    "market_validation": "market_validation",
+    "pricing": "pricing",
+    "research": "research",
+}
+
+BUILD_CHECKS = (
+    "execution_readiness",
+    "revenue_evidence",
+    "market_validation",
+    "pricing",
+    "research",
+)
+
 class Factory:
     def __init__(self):
         self.regp=STATE/"registry.json"; self.reg=read(self.regp,{"version":1,"workers":[]})

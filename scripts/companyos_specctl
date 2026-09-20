@@ -1,0 +1,19 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+ROOT="$HOME/companyos"
+RT="$HOME/.companyos_runtime"
+cd "$ROOT"
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
+
+case "${1:-status}" in
+  status)
+    cat "$RT/procurement/requirement_specificity_latest.json" 2>/dev/null || echo '{"status":"no_specificity_run_yet"}'
+    ;;
+  audit)
+    tail -n "${2:-30}" "$RT/procurement/requirement_specificity_audit.jsonl" 2>/dev/null || true
+    ;;
+  *)
+    echo "usage: $0 {status|audit [n]}"
+    exit 2
+    ;;
+esac

@@ -1,0 +1,35 @@
+{
+  "activation": {
+    "automatic_external_execution": false,
+    "external_actions": "existing_policy_only",
+    "financial_actions": "existing_policy_only"
+  },
+  "contract": {
+    "credentials": "existing_secret_provider_only",
+    "idempotency_required": true,
+    "inputs": [
+      "venture_id",
+      "validated_context",
+      "provider_config",
+      "idempotency_key"
+    ],
+    "outputs": [
+      "success",
+      "provider_reference",
+      "evidence",
+      "error"
+    ],
+    "receipt_required": true,
+    "test_mode_required": true
+  },
+  "created_at_unix": 1789832336.051452,
+  "id": "app_distribution_adapter",
+  "kind": "integration",
+  "models": [
+    "mobile_web_apps"
+  ],
+  "priority": 93,
+  "reason": "Prepare approved web/app distribution paths.",
+  "schema": "companyos.integration_capability_request.v1",
+  "status": "SCAFFOLDED"
+}
