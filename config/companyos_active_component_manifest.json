@@ -1,0 +1,260 @@
+{
+  "component_status": {
+    "connectors_and_hosting.cloudflare_hosting": {
+      "path": "companyos/connectors/cloudflare_hosting.py",
+      "present": true
+    },
+    "connectors_and_hosting.connector_engine": {
+      "path": "companyos/connectors_live/engine.py",
+      "present": true
+    },
+    "connectors_and_hosting.hosting_router": {
+      "path": "companyos/connectors/hosting_router.py",
+      "present": true
+    },
+    "control_plane.dashboard": {
+      "path": "companyos/runtime/dashboard_server.py",
+      "present": true
+    },
+    "control_plane.end_to_end_qualification": {
+      "path": "companyos/runtime/end_to_end_qualification.py",
+      "present": true
+    },
+    "control_plane.launch_readiness": {
+      "path": "companyos/runtime/launch_readiness.py",
+      "present": true
+    },
+    "control_plane.runtime_control": {
+      "path": "companyos/runtime/runtime_control.py",
+      "present": true
+    },
+    "control_plane.runtime_status": {
+      "path": "companyos/runtime/runtime_status.py",
+      "present": true
+    },
+    "control_plane.service_supervisor": {
+      "path": "companyos/runtime/service_supervisor.py",
+      "present": true
+    },
+    "evidence_and_outcomes.autonomous_evidence_acquisition": {
+      "path": "companyos/runtime/autonomous_evidence_acquisition.py",
+      "present": true
+    },
+    "evidence_and_outcomes.canonical_outcome_bridge": {
+      "path": "companyos/runtime/canonical_outcome_bridge.py",
+      "present": true
+    },
+    "evidence_and_outcomes.closed_loop_outcome_evaluator": {
+      "path": "companyos/runtime/closed_loop_outcome_evaluator.py",
+      "present": true
+    },
+    "evidence_and_outcomes.evidence_decision_closure": {
+      "path": "companyos/runtime/evidence_decision_closure.py",
+      "present": true
+    },
+    "execution.adaptive_worker_factory": {
+      "path": "companyos/runtime/adaptive_worker_factory.py",
+      "present": true
+    },
+    "execution.adaptive_workforce_bridge": {
+      "path": "companyos/runtime/adaptive_workforce_execution_bridge.py",
+      "present": true
+    },
+    "execution.specialist_registry": {
+      "path": "companyos/runtime/default_specialist_registry.py",
+      "present": true
+    },
+    "execution.task_dispatcher": {
+      "path": "companyos/runtime/autonomous_task_dispatcher.py",
+      "present": true
+    },
+    "execution.task_queue": {
+      "path": "companyos/runtime/autonomous_task_queue.py",
+      "present": true
+    },
+    "finance.solana_bridge_factory": {
+      "path": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+      "present": true
+    },
+    "finance.solana_execution_policy": {
+      "path": "companyos/walletintegration/execution_policy.py",
+      "present": true
+    },
+    "finance.treasury_budget_policy": {
+      "path": "companyos/treasuryops/policy.py",
+      "present": true
+    },
+    "learning_and_capability.autonomous_diagnostics": {
+      "path": "companyos/runtime/autonomous_diagnostics.py",
+      "present": true
+    },
+    "learning_and_capability.capability_expansion": {
+      "path": "companyos/runtime/capability_expansion.py",
+      "present": true
+    },
+    "learning_and_capability.capability_feedback": {
+      "path": "companyos/runtime/capability_feedback.py",
+      "present": true
+    },
+    "learning_and_capability.capability_request_executor": {
+      "path": "companyos/runtime/capability_request_executor.py",
+      "present": true
+    },
+    "learning_and_capability.opportunity_execution_capability_bridge": {
+      "path": "companyos/runtime/opportunity_execution_capability_bridge.py",
+      "present": true
+    },
+    "learning_and_capability.recursive_improvement_controller": {
+      "path": "companyos/runtime/recursive_improvement_controller.py",
+      "present": true
+    },
+    "learning_and_capability.self_evolution_engine": {
+      "path": "companyos/runtime/self_evolution_engine.py",
+      "present": true
+    },
+    "learning_and_capability.self_evolution_runtime": {
+      "path": "companyos/runtime/self_evolution_runtime.py",
+      "present": true
+    },
+    "learning_and_capability.semantic_capability_bridge": {
+      "path": "companyos/runtime/semantic_capability_bridge.py",
+      "present": true
+    },
+    "opportunity_and_profit.continuous_profit_improvement": {
+      "path": "companyos/runtime/continuous_profit_improvement_loop.py",
+      "present": true
+    },
+    "opportunity_and_profit.productive_autonomy_watchdog": {
+      "path": "companyos/runtime/productive_autonomy_watchdog.py",
+      "present": true
+    },
+    "opportunity_and_profit.profit_opportunity_engine": {
+      "path": "companyos/runtime/profit_opportunity_engine.py",
+      "present": true
+    },
+    "opportunity_and_profit.profit_opportunity_runtime": {
+      "path": "companyos/runtime/profit_opportunity_runtime.py",
+      "present": true
+    },
+    "opportunity_and_profit.profit_to_action_closure": {
+      "path": "companyos/runtime/profit_to_action_closure.py",
+      "present": true
+    },
+    "ventures_and_customers.customer_acquisition": {
+      "path": "companyos/runtime/customer_acquisition_bridge.py",
+      "present": true
+    },
+    "ventures_and_customers.venture_identity_progression": {
+      "path": "companyos/governance/venture_identity_progression.py",
+      "present": true
+    },
+    "ventures_and_customers.venture_liveness": {
+      "path": "companyos/runtime/venture_liveness_runtime.py",
+      "present": true
+    },
+    "ventures_and_customers.verified_web_prospect_discovery": {
+      "path": "companyos/runtime/verified_web_prospect_discovery.py",
+      "present": true
+    }
+  },
+  "components": {
+    "connectors_and_hosting": {
+      "cloudflare_hosting": "companyos/connectors/cloudflare_hosting.py",
+      "connector_engine": "companyos/connectors_live/engine.py",
+      "hosting_router": "companyos/connectors/hosting_router.py"
+    },
+    "control_plane": {
+      "dashboard": "companyos/runtime/dashboard_server.py",
+      "end_to_end_qualification": "companyos/runtime/end_to_end_qualification.py",
+      "launch_readiness": "companyos/runtime/launch_readiness.py",
+      "runtime_control": "companyos/runtime/runtime_control.py",
+      "runtime_status": "companyos/runtime/runtime_status.py",
+      "service_supervisor": "companyos/runtime/service_supervisor.py"
+    },
+    "evidence_and_outcomes": {
+      "autonomous_evidence_acquisition": "companyos/runtime/autonomous_evidence_acquisition.py",
+      "canonical_outcome_bridge": "companyos/runtime/canonical_outcome_bridge.py",
+      "closed_loop_outcome_evaluator": "companyos/runtime/closed_loop_outcome_evaluator.py",
+      "evidence_decision_closure": "companyos/runtime/evidence_decision_closure.py"
+    },
+    "execution": {
+      "adaptive_worker_factory": "companyos/runtime/adaptive_worker_factory.py",
+      "adaptive_workforce_bridge": "companyos/runtime/adaptive_workforce_execution_bridge.py",
+      "specialist_registry": "companyos/runtime/default_specialist_registry.py",
+      "task_dispatcher": "companyos/runtime/autonomous_task_dispatcher.py",
+      "task_queue": "companyos/runtime/autonomous_task_queue.py"
+    },
+    "finance": {
+      "solana_bridge_factory": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+      "solana_execution_policy": "companyos/walletintegration/execution_policy.py",
+      "treasury_budget_policy": "companyos/treasuryops/policy.py"
+    },
+    "learning_and_capability": {
+      "autonomous_diagnostics": "companyos/runtime/autonomous_diagnostics.py",
+      "capability_expansion": "companyos/runtime/capability_expansion.py",
+      "capability_feedback": "companyos/runtime/capability_feedback.py",
+      "capability_request_executor": "companyos/runtime/capability_request_executor.py",
+      "opportunity_execution_capability_bridge": "companyos/runtime/opportunity_execution_capability_bridge.py",
+      "recursive_improvement_controller": "companyos/runtime/recursive_improvement_controller.py",
+      "self_evolution_engine": "companyos/runtime/self_evolution_engine.py",
+      "self_evolution_runtime": "companyos/runtime/self_evolution_runtime.py",
+      "semantic_capability_bridge": "companyos/runtime/semantic_capability_bridge.py"
+    },
+    "opportunity_and_profit": {
+      "continuous_profit_improvement": "companyos/runtime/continuous_profit_improvement_loop.py",
+      "productive_autonomy_watchdog": "companyos/runtime/productive_autonomy_watchdog.py",
+      "profit_opportunity_engine": "companyos/runtime/profit_opportunity_engine.py",
+      "profit_opportunity_runtime": "companyos/runtime/profit_opportunity_runtime.py",
+      "profit_to_action_closure": "companyos/runtime/profit_to_action_closure.py"
+    },
+    "ventures_and_customers": {
+      "customer_acquisition": "companyos/runtime/customer_acquisition_bridge.py",
+      "venture_identity_progression": "companyos/governance/venture_identity_progression.py",
+      "venture_liveness": "companyos/runtime/venture_liveness_runtime.py",
+      "verified_web_prospect_discovery": "companyos/runtime/verified_web_prospect_discovery.py"
+    }
+  },
+  "generated_at_unix": 1789928843.734667,
+  "historical_classification_patterns": [
+    "backups/**",
+    "ops/patch_history/**",
+    "companyos_phase*/**",
+    "install_phase*.sh",
+    "**/*_backup_*",
+    "**/*.backup",
+    "**/*.bak*",
+    "*.zip"
+  ],
+  "missing_canonical_paths": [],
+  "policy_domains": {
+    "solana_live_execution": {
+      "canonical_policy": "companyos/walletintegration/execution_policy.py",
+      "configuration_source": "environment variables",
+      "env_keys": [
+        "COMPANYOS_SOL_DAILY_CAP_SOL",
+        "COMPANYOS_SOL_SINGLE_CAP_SOL",
+        "COMPANYOS_SOL_MIN_TRANSFER_SOL",
+        "COMPANYOS_SOL_RESERVE_SOL",
+        "COMPANYOS_SOL_REQUIRE_ALLOWLIST",
+        "COMPANYOS_SOL_ALLOW_SELF_TRANSFER"
+      ],
+      "factory": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+      "note": "SOL-denominated execution policy. V67.0 does not change any values."
+    },
+    "treasury_budgeting": {
+      "canonical_policy": "companyos/treasuryops/policy.py",
+      "configuration_source": "environment variables",
+      "env_keys": [
+        "COMPANYOS_AUTONOMOUS_SINGLE_TX_LIMIT",
+        "COMPANYOS_AUTONOMOUS_DAILY_LIMIT",
+        "COMPANYOS_TREASURY_RESERVE_FLOOR",
+        "COMPANYOS_MAX_DAILY_LOSS",
+        "COMPANYOS_REQUIRE_DESTINATION_ALLOWLIST",
+        "COMPANYOS_ALLOW_AUTONOMOUS_TRANSFERS"
+      ],
+      "note": "USD/accounting-style treasury policy. Distinct from SOL-denominated execution limits."
+    }
+  },
+  "purpose": "Canonical active implementation registry. Historical and backup files remain preserved but are not authoritative runtime implementations.",
+  "schema": "companyos.active_component_manifest.v1"
+}
