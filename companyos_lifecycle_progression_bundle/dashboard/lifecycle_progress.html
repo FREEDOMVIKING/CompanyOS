@@ -1,6 +1,0 @@
-<!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><title>CompanyOS Lifecycle Progression</title>
-<style>body{font-family:system-ui;background:#0b0d10;color:#eee;padding:18px}.c{background:#151922;border:1px solid #303744;border-radius:16px;padding:16px;margin:12px 0}.s{font-size:22px;font-weight:800}.warn{color:#ffbf69}.good{color:#7ee787}.muted{color:#9ba7b5}a{color:#8fc5ff}</style>
-<h1>Venture Lifecycle Progression</h1><p><a href="http://127.0.0.1:8768">← Activity Ledger</a></p><div id=x>Loading…</div>
-<script>
-async function load(){let d=await (await fetch('/api/lifecycle')).json();x.innerHTML='';for(let v of d.ventures){let e=document.createElement('div');e.className='c';e.innerHTML=`<div class=s>${v.venture}</div><p>Stage: <b>${v.stage}</b></p><p>Artifacts: ${v.artifact_count}</p><p>Changed since previous observation: <b class="${v.observed_change?'good':''}">${v.observed_change?'YES':'NO'}</b></p><p>Unchanged cycles: ${v.unchanged_cycles}</p><p class="${v.duplicate_work_risk?'warn':''}">Duplicate/repeated-work risk: <b>${v.duplicate_work_risk?'YES':'NO'}</b></p><p><b>Required next meaningful action:</b> ${v.next_action}</p>`;x.appendChild(e)}if(!d.ventures.length)x.innerHTML='<div class=c>No ventures detected.</div>'}load();setInterval(load,15000)
-</script>
