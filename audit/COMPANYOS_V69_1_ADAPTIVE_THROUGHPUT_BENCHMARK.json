@@ -1,0 +1,176 @@
+{
+  "actual_internal_queue_benchmark": {
+    "after": {
+      "completed": 16291,
+      "failed": 0,
+      "oldest_queued_age_seconds": 0.0,
+      "queued": 0,
+      "queued_by_type": {},
+      "running": 0,
+      "states": {
+        "CANCELLED": 1,
+        "COMPLETED": 16291
+      },
+      "supported_due": 0,
+      "supported_queued": 0,
+      "task_types": {
+        "build": 5388,
+        "planning": 5451,
+        "research": 5453
+      },
+      "timestamp_unix": 1789935811.4314725,
+      "total": 16292
+    },
+    "before": {
+      "completed": 16291,
+      "failed": 0,
+      "oldest_queued_age_seconds": 0.0,
+      "queued": 0,
+      "queued_by_type": {},
+      "running": 0,
+      "states": {
+        "CANCELLED": 1,
+        "COMPLETED": 16291
+      },
+      "supported_due": 0,
+      "supported_queued": 0,
+      "task_types": {
+        "build": 5388,
+        "planning": 5451,
+        "research": 5453
+      },
+      "timestamp_unix": 1789935800.2101505,
+      "total": 16292
+    },
+    "benchmark_cycles_requested": 4,
+    "completed_delta": 0,
+    "completion_rate_per_minute": 0.0,
+    "cycles": [
+      {
+        "actual_batch": 16,
+        "control": {
+          "boost_type": null,
+          "execution_batch": 16,
+          "producer_divisor": 1,
+          "queue_growth": -4,
+          "snapshot": {
+            "largest_type": null,
+            "queued": 0,
+            "queued_by_type": {}
+          },
+          "timestamp_unix": 1789935807.8762517
+        },
+        "cycle": 1,
+        "dispatched": 0,
+        "elapsed_seconds": 3.5441919779987074,
+        "phone_safe_batch_cap": 32,
+        "reasons": {
+          "no_dependency_ready_task": 1
+        },
+        "requested_execution_batch": 16,
+        "results_returned": 1
+      }
+    ],
+    "cycles_executed": 1,
+    "elapsed_seconds": 4.26112671699957,
+    "failed_delta": 0,
+    "failure_regression": false,
+    "oldest_queued_age_delta_seconds": 0.0,
+    "pass": true,
+    "phone_safe_batch_cap": 32,
+    "queued_delta": 0,
+    "total_dispatched": 0,
+    "useful_progress": true
+  },
+  "deployment_actions_performed": false,
+  "email_actions_performed": false,
+  "external_actions_performed": false,
+  "financial_actions_performed": false,
+  "generated_at_unix": 1789935812.0807033,
+  "mode": "INTERNAL_ONLY_REAL_QUEUE_DRAIN_PLUS_ISOLATED_POLICY_TESTS",
+  "overall_status": "PASS",
+  "schema": "companyos.v69_1.adaptive_throughput_benchmark.v1",
+  "synthetic_backpressure_matrix": {
+    "cases": [
+      {
+        "case": "low",
+        "execution_batch": 16,
+        "expected_batch": 16,
+        "expected_divisor": 1,
+        "growth": 0,
+        "pass": true,
+        "producer_divisor": 1,
+        "queued": 100
+      },
+      {
+        "case": "medium_count",
+        "execution_batch": 32,
+        "expected_batch": 32,
+        "expected_divisor": 2,
+        "growth": 0,
+        "pass": true,
+        "producer_divisor": 2,
+        "queued": 300
+      },
+      {
+        "case": "high_count",
+        "execution_batch": 48,
+        "expected_batch": 48,
+        "expected_divisor": 3,
+        "growth": 0,
+        "pass": true,
+        "producer_divisor": 3,
+        "queued": 600
+      },
+      {
+        "case": "critical_count",
+        "execution_batch": 64,
+        "expected_batch": 64,
+        "expected_divisor": 4,
+        "growth": 0,
+        "pass": true,
+        "producer_divisor": 4,
+        "queued": 900
+      },
+      {
+        "case": "positive_growth",
+        "execution_batch": 32,
+        "expected_batch": 32,
+        "expected_divisor": 2,
+        "growth": 5,
+        "pass": true,
+        "producer_divisor": 2,
+        "queued": 100
+      },
+      {
+        "case": "high_growth",
+        "execution_batch": 48,
+        "expected_batch": 48,
+        "expected_divisor": 3,
+        "growth": 8,
+        "pass": true,
+        "producer_divisor": 3,
+        "queued": 100
+      },
+      {
+        "case": "critical_growth",
+        "execution_batch": 64,
+        "expected_batch": 64,
+        "expected_divisor": 4,
+        "growth": 20,
+        "pass": true,
+        "producer_divisor": 4,
+        "queued": 100
+      }
+    ],
+    "pass": true
+  },
+  "synthetic_dispatch_policy": {
+    "expected_oldest_research_task_id": "280b3951-fca6-44ac-966a-9213e456e40a",
+    "high_priority_planning_task_id": "5203211b-e7fc-4c98-bbf5-2a8f70d3cfe3",
+    "largest_type_boost_verified": true,
+    "oldest_within_boost_verified": true,
+    "pass": true,
+    "selected_task_id": "280b3951-fca6-44ac-966a-9213e456e40a"
+  }
+}
