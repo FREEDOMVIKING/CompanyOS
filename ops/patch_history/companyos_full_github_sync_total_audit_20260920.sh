@@ -229,7 +229,7 @@ if [ "$SECRET_RC" -ne 0 ]; then
 fi
 
 say "===== STAGED SUMMARY ====="
-git diff --cached --stat || true
+git --no-pager diff --cached --stat || true
 
 # ------------------------------------------------------------
 # 5) Commit + safe sync + push current branch.
