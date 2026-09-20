@@ -1,0 +1,266 @@
+{
+  "branch": "companyos-continuous-fix-2026-09-11",
+  "case_variant_workspace_audit": {
+    "action": "manual_workspace_identity_review",
+    "equivalent_excluding_progress": false,
+    "lower": {
+      "bytes": 5950,
+      "file_count": 8,
+      "present": true,
+      "tree_sha256": "070144766b3ecac5b2e5f48bec8ab588bbb5c357722afde6811aa22c21e3ba6b"
+    },
+    "lower_path": "workspace/local_contractor_bid_organizer",
+    "upper": {
+      "bytes": 8121,
+      "file_count": 10,
+      "present": true,
+      "tree_sha256": "17f0e63253823c0369081035f4f7f19bf5702cd3107878b325b5e17ebd6bbc30"
+    },
+    "upper_path": "workspace/Local_Contractor_Bid_Organizer"
+  },
+  "decision_counts": {
+    "ARCHIVE_HISTORY_EXACT_COPIES": 1,
+    "KEEP_MARKETPLACE_AND_INSTALLED_PLUGIN_ROLES": 2,
+    "KEEP_MODULE_AND_SCRIPT_ENTRYPOINT_ROLES": 1,
+    "KEEP_OPERATIONAL_CHECK_COPIES": 1,
+    "KEEP_PENDING_BEHAVIOR_REVIEW": 2,
+    "KEEP_PRODUCT_LOCAL_COPIES": 1,
+    "KEEP_RELEASE_AND_WORKSPACE_ROLES": 1,
+    "KEEP_UNRESOLVED_DORMANT_SUBSYSTEM_COPIES": 1,
+    "ROOT_SHADOW_EXACT_COPY_CANDIDATE": 1
+  },
+  "deletion_performed": false,
+  "financial_limits_changed": false,
+  "future_surgical_candidate_count": 10,
+  "future_surgical_candidates": [
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-075252/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-075836/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-080700/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-081253/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-081314/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-082048/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-085643/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260805-171659/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "archive_history_exact_copy",
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "path": "generated_products/_archive/digital-template-business-20260807-063522/tests/test_product.py",
+      "sha256": "c3e45fafdcafccc1e24d5785474b7eb8562169a5606f6af10b6e51831c8ea8f0"
+    },
+    {
+      "class": "root_shadow_exact_copy",
+      "keeper": "companyos/walletintegration/pending_recovery.py",
+      "path": "pending_recovery.py",
+      "sha256": "f7c163e1658cdc67df9cb8d144d526dcf2ec591b0692628d70aa713092506f82"
+    }
+  ],
+  "generated_at_unix": 1789931515.8172739,
+  "head_sha": "44ba93677e91357b089914eb348b6e762f179bf4",
+  "input_groups": 11,
+  "mode": "AUDIT_ONLY_NO_FILE_MUTATION",
+  "move_performed": false,
+  "next_step": {
+    "name": "V68.3 surgical exact-copy retirement",
+    "requirements": [
+      "remote recovery branch",
+      "reverify byte equality before removal",
+      "reverify keeper exists",
+      "reverify candidate has zero structured active/test/entrypoint evidence",
+      "full pytest",
+      "runtime health",
+      "launch readiness",
+      "automatic rollback on failure"
+    ],
+    "scope": "future_surgical_candidates only"
+  },
+  "resolved_groups": [
+    {
+      "decision": "ARCHIVE_HISTORY_EXACT_COPIES",
+      "files": [
+        "generated_products/_archive/digital-template-business-20260805-075252/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-075836/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-080700/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-081253/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-081314/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-082048/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-085643/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-171659/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260807-063522/tests/test_product.py",
+        "generated_products/digital-template-business/tests/test_product.py"
+      ],
+      "future_retirement_candidates": [
+        "generated_products/_archive/digital-template-business-20260805-075252/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-075836/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-080700/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-081253/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-081314/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-082048/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-085643/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260805-171659/tests/test_product.py",
+        "generated_products/_archive/digital-template-business-20260807-063522/tests/test_product.py"
+      ],
+      "keeper": "generated_products/digital-template-business/tests/test_product.py",
+      "kind": "exact",
+      "reason": "Archived generated-product snapshots contain byte-identical test copies; current product copy is retained."
+    },
+    {
+      "decision": "KEEP_RELEASE_AND_WORKSPACE_ROLES",
+      "files": [
+        "releases/local_contractor_bid_organizer-v1/server.py",
+        "workspace/Local_Contractor_Bid_Organizer/prototype/current/server.py",
+        "workspace/Local_Contractor_Bid_Organizer/prototype/versions/v1/server.py",
+        "workspace/local_contractor_bid_organizer/prototype/current/server.py",
+        "workspace/local_contractor_bid_organizer/prototype/versions/v1/server.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "Release artifact, current prototype, and version snapshots are separate lifecycle roles even when byte-identical."
+    },
+    {
+      "decision": "KEEP_PRODUCT_LOCAL_COPIES",
+      "files": [
+        "generated_products_v7/construction-estimate-kit/tests/test_product.py",
+        "generated_products_v7/customer-service-response-library/tests/test_product.py",
+        "generated_products_v7/small-business-operations-pack/tests/test_product.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "Identical test source is intentionally packaged independently with different generated products."
+    },
+    {
+      "decision": "KEEP_UNRESOLVED_DORMANT_SUBSYSTEM_COPIES",
+      "files": [
+        "companyos/intelligence/storage.py",
+        "companyos/orchestrator/storage.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "No active caller establishes a canonical owner; deletion would be speculative."
+    },
+    {
+      "decision": "ROOT_SHADOW_EXACT_COPY_CANDIDATE",
+      "files": [
+        "companyos/walletintegration/pending_recovery.py",
+        "pending_recovery.py"
+      ],
+      "future_retirement_candidates": [
+        "pending_recovery.py"
+      ],
+      "keeper": "companyos/walletintegration/pending_recovery.py",
+      "kind": "exact",
+      "reason": "Root-level byte-identical shadow is dormant while package implementation has structured active callers."
+    },
+    {
+      "decision": "KEEP_MODULE_AND_SCRIPT_ENTRYPOINT_ROLES",
+      "files": [
+        "companyos/workerops/execution_bridge.py",
+        "scripts/execution_bridge_phase18000.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "Importable module and executable/operational script are distinct roles."
+    },
+    {
+      "decision": "KEEP_OPERATIONAL_CHECK_COPIES",
+      "files": [
+        "companyos_system_check_v2/scripts/full_system_check.py",
+        "scripts/full_system_check.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "Operational check bundle and standalone script may be invoked independently."
+    },
+    {
+      "decision": "KEEP_MARKETPLACE_AND_INSTALLED_PLUGIN_ROLES",
+      "files": [
+        "marketplace/packages/knowledge_notes/plugin.py",
+        "plugins/installed/knowledge_notes/plugin.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "Marketplace package source and installed plugin copy are distinct deployment roles."
+    },
+    {
+      "decision": "KEEP_MARKETPLACE_AND_INSTALLED_PLUGIN_ROLES",
+      "files": [
+        "marketplace/packages/project_metrics/plugin.py",
+        "plugins/installed/project_metrics/plugin.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "exact",
+      "reason": "Marketplace package source and installed plugin copy are distinct deployment roles."
+    },
+    {
+      "decision": "KEEP_PENDING_BEHAVIOR_REVIEW",
+      "files": [
+        "companyos/autonomous_enterprise_v6/util.py",
+        "companyos/unified_core_v3/util.py",
+        "companyos/unified_core_v4/util.py",
+        "companyos/unified_core_v5/util.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "semantic",
+      "reason": "AST-equivalent files may serve different subsystem contracts or side effects."
+    },
+    {
+      "decision": "KEEP_PENDING_BEHAVIOR_REVIEW",
+      "files": [
+        "companyos/autonomous_execution_engine_v38/storage.py",
+        "companyos/venture_promotion_pipeline_v39/storage.py"
+      ],
+      "future_retirement_candidates": [],
+      "keeper": null,
+      "kind": "semantic",
+      "reason": "AST-equivalent files may serve different subsystem contracts or side effects."
+    }
+  ],
+  "schema": "companyos.v68_2.role_resolution.v1"
+}
