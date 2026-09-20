@@ -1,0 +1,94 @@
+{
+  "blocking_failures": [],
+  "companyos_peak_rss_bytes": 492642304,
+  "companyos_rss_growth_bytes": -213442560,
+  "deployment_actions_performed": false,
+  "duration_observed_seconds": 549.2791385410237,
+  "email_actions_performed": false,
+  "external_actions_performed": false,
+  "final_snapshot": {
+    "injected": {
+      "cancelled": 0,
+      "completed": 1100,
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "total": 1100
+    },
+    "injected_task_types": {
+      "build": 110,
+      "planning": 330,
+      "research": 660
+    },
+    "native": {
+      "cancelled": 0,
+      "completed": 18,
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "total": 18
+    },
+    "native_task_types": {
+      "build": 6,
+      "planning": 6,
+      "research": 6
+    }
+  },
+  "financial_actions_performed": false,
+  "force_kill_hits": 0,
+  "generated_at_unix": 1789940140.9760292,
+  "injected_drain_seconds_after_load": 181.3171815870155,
+  "load_end_snapshot": {
+    "injected": {
+      "cancelled": 0,
+      "completed": 800,
+      "failed": 0,
+      "queued": 300,
+      "running": 0,
+      "total": 1100
+    },
+    "injected_task_types": {
+      "build": 110,
+      "planning": 330,
+      "research": 660
+    },
+    "native": {
+      "cancelled": 0,
+      "completed": 9,
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "total": 9
+    },
+    "native_task_types": {
+      "build": 3,
+      "planning": 3,
+      "research": 3
+    }
+  },
+  "load_seconds": 300,
+  "max_consecutive_failures": 0,
+  "max_injected_queued": 428,
+  "max_native_queued": 1,
+  "max_restart_total": 0,
+  "max_total_queued": 428,
+  "memory_error_hits": 0,
+  "native_created_during_tail": 9,
+  "native_total_at_tail_start": 9,
+  "native_total_final": 18,
+  "network_guard": "python_outbound_socket_connect_blocked",
+  "overall_status": "PASS_WITH_WARNINGS",
+  "produced_injected_total": 1100,
+  "profit_autoseed_enabled": false,
+  "real_companyos_queue_modified": false,
+  "real_companyos_runtime_modified": false,
+  "samples_collected": 37,
+  "schema": "companyos.v69_7.post_load_drain_forensics.v1",
+  "signal9_hits": 0,
+  "system_min_mem_available_bytes": 3407204352,
+  "system_min_mem_available_ratio": 0.29314023165435377,
+  "tail_seconds_budget": 300,
+  "warnings": [
+    "native_runtime_continued_creating_tasks_during_tail"
+  ]
+}
