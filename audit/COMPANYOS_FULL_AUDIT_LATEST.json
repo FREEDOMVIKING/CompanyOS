@@ -119,69 +119,69 @@
   "checks": {
     "git_fetch_audit": {
       "command": "git fetch origin",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/git_fetch_audit.log",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/git_fetch_audit.log",
       "passed": true,
       "returncode": 0,
       "timeout_seconds": 120
     },
     "native_company_health": {
       "command": "scripts/companyosctl health",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_company_health.log",
-      "passed": false,
-      "returncode": 1,
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/native_company_health.log",
+      "passed": true,
+      "returncode": 0,
       "timeout_seconds": 120
     },
     "native_company_status": {
       "command": "scripts/companyosctl status",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_company_status.log",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/native_company_status.log",
       "passed": true,
       "returncode": 0,
       "timeout_seconds": 120
     },
     "native_full_launch_validation": {
       "command": "python scripts/validate_companyos_full_launch.py",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_full_launch_validation.log",
-      "passed": false,
-      "returncode": 40,
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/native_full_launch_validation.log",
+      "passed": true,
+      "returncode": 0,
       "timeout_seconds": 240
     },
     "native_launch_audit": {
       "command": "scripts/companyos_launchctl audit",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_launch_audit.log",
-      "passed": false,
-      "returncode": 1,
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/native_launch_audit.log",
+      "passed": true,
+      "returncode": 0,
       "timeout_seconds": 180
     },
     "native_launch_snapshot": {
       "command": "scripts/companyos_launchctl snapshot",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_launch_snapshot.log",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/native_launch_snapshot.log",
       "passed": true,
       "returncode": 0,
       "timeout_seconds": 180
     },
     "native_qualify": {
       "command": "scripts/companyos_qualify",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_qualify.log",
-      "passed": false,
-      "returncode": 1,
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/native_qualify.log",
+      "passed": true,
+      "returncode": 0,
       "timeout_seconds": 240
     },
     "pytest_full": {
       "command": "python -m pytest -q --disable-warnings --maxfail=25",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/pytest_full.log",
-      "passed": false,
-      "returncode": 1,
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/pytest_full.log",
+      "passed": true,
+      "returncode": 0,
       "timeout_seconds": 900
     },
     "python_compileall": {
       "command": "python -m compileall -q companyos",
-      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/python_compileall.log",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_131816/python_compileall.log",
       "passed": true,
       "returncode": 0,
       "timeout_seconds": 300
     },
     "shell_syntax_all": {
-      "checked": 931,
+      "checked": 940,
       "failed_count": 0,
       "failed_files": [],
       "passed": true
@@ -190,10 +190,8 @@
   "deployment_actions_performed": false,
   "email_actions_performed": false,
   "external_actions_performed": false,
-  "failure_count": 1,
-  "failures": [
-    "check_failed:pytest_full"
-  ],
+  "failure_count": 0,
+  "failures": [],
   "finance_policy_scan": {
     "limit_definitions": {
       "daily_sol": [
@@ -460,8 +458,8 @@
   },
   "financial_actions_performed": false,
   "inventory": {
-    "commit_count": 265,
-    "current_branch_remote_sha": "d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652",
+    "commit_count": 270,
+    "current_branch_remote_sha": "c4fda4f14b33e3e2d501068974b07dad0a3aeaae",
     "extensions": {
       ".1784755492": 1,
       ".1784756673": 2,
@@ -533,9 +531,9 @@
       ".html": 49,
       ".ini": 1,
       ".js": 7,
-      ".json": 1498,
+      ".json": 1499,
       ".jsonl": 18,
-      ".md": 147,
+      ".md": 148,
       ".phase63d_backup_20260722t000226z": 1,
       ".phase63d_v2_backup_20260722t000522z": 1,
       ".phase64_v2_backup_20260722t003356z": 1,
@@ -555,8 +553,8 @@
       ".pre_public_connectors": 1,
       ".pre_result_fix": 1,
       ".pre_sol_transfer": 3,
-      ".py": 6528,
-      ".sh": 931,
+      ".py": 6531,
+      ".sh": 940,
       ".sqlite3": 16,
       ".stop": 6,
       ".txt": 230,
@@ -567,9 +565,9 @@
       "<none>": 443
     },
     "git_status_porcelain": [],
-    "head_sha": "d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652",
+    "head_sha": "c4fda4f14b33e3e2d501068974b07dad0a3aeaae",
     "head_subject": "Sync full CompanyOS state before comprehensive audit",
-    "head_time": "2026-09-20T12:26:34-05:00",
+    "head_time": "2026-09-20T13:18:18-05:00",
     "latest_version_markers": [
       "V66.35",
       "V66.34",
@@ -601,25 +599,25 @@
       ".css": 60,
       ".html": 1434,
       ".js": 68,
-      ".json": 3923398,
-      ".md": 4031,
-      ".py": 278259,
-      ".sh": 165427,
+      ".json": 3924184,
+      ".md": 4112,
+      ".py": 278453,
+      ".sh": 167058,
       ".yml": 186
     },
     "main_remote_sha": "133114c7dfb1a54b99ce1da5f80ff46c5b15b497",
-    "patch_history_files": 412,
-    "python_files": 6528,
+    "patch_history_files": 421,
+    "python_files": 6531,
     "script_files": 589,
-    "shell_files": 931,
-    "test_files": 265,
-    "tracked_bytes": 251890751,
-    "tracked_files": 10233,
-    "vs_main_ahead": 73,
+    "shell_files": 940,
+    "test_files": 267,
+    "tracked_bytes": 251980459,
+    "tracked_files": 10247,
+    "vs_main_ahead": 78,
     "vs_main_behind": 0
   },
   "mode": "READ_ONLY_AUDIT",
-  "overall_status": "FAIL",
+  "overall_status": "PASS_WITH_WARNINGS",
   "repository": "FREEDOMVIKING/CompanyOS",
   "runtime": {
     "authority_switches": {
@@ -637,29 +635,33 @@
       "unsolicited_outreach": true,
       "wallet_transactions": true
     },
-    "companyos_process_count": 21,
+    "companyos_process_count": 25,
     "companyos_processes": [
       "526 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.canonical_outcome_bridge loop --interval 60",
       "16937 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.live_external_execution_router loop --interval 60 --max-actions 5",
-      "17977 bash /data/data/com.termux/files/usr/bin/bash /data/data/com.termux/files/home/companyos_full_github_sync_total_audit_20260920.sh",
-      "19592 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python companyos/runtime/service_supervisor.py",
-      "19593 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -c from companyos.runtime.continuous_goal_runtime import ContinuousGoalRuntime; ContinuousGoalRuntime().run()",
-      "19594 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
-      "19595 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.dashboard_server",
-      "19596 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.profit_opportunity_runtime",
-      "19597 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.self_evolution_runtime",
-      "19598 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.autonomous_diagnostics",
-      "19599 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_expansion run",
-      "19600 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_feedback run",
-      "19601 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.compounding_capability_expansion",
-      "19602 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_request_executor run",
-      "19603 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.recursive_improvement_controller run",
-      "19604 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.semantic_capability_bridge run",
-      "19605 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.opportunity_execution_capability_bridge run",
-      "19610 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.continuous_profit_improvement_loop",
-      "19612 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.adaptive_worker_factory",
-      "19613 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.adaptive_workforce_execution_bridge",
-      "23612 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.venture_liveness_runtime loop --interval 120"
+      "23612 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.venture_liveness_runtime loop --interval 120",
+      "26741 bash /data/data/com.termux/files/usr/bin/bash /data/data/com.termux/files/home/companyos_full_github_sync_total_audit_20260920.sh",
+      "28627 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python companyos/runtime/service_supervisor.py",
+      "28628 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -c from companyos.runtime.continuous_goal_runtime import ContinuousGoalRuntime; ContinuousGoalRuntime().run()",
+      "28629 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "28630 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.dashboard_server",
+      "28631 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.profit_opportunity_runtime",
+      "28632 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.self_evolution_runtime",
+      "28633 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.autonomous_diagnostics",
+      "28634 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_expansion run",
+      "28635 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_feedback run",
+      "28636 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.compounding_capability_expansion",
+      "28637 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_request_executor run",
+      "28638 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.recursive_improvement_controller run",
+      "28639 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.semantic_capability_bridge run",
+      "28640 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.opportunity_execution_capability_bridge run",
+      "28641 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.closed_loop_outcome_evaluator run",
+      "28642 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.autonomous_evidence_acquisition run",
+      "28643 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.evidence_decision_closure run",
+      "28644 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.profit_to_action_closure run",
+      "28645 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.continuous_profit_improvement_loop",
+      "28646 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.adaptive_worker_factory",
+      "28647 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.adaptive_workforce_execution_bridge"
     ],
     "connectors": {
       "accounting": {
@@ -704,7 +706,7 @@
       "venture_liveness_latest.json": {
         "mode": "venture_liveness_and_existing_ceo_runtime_bridge",
         "progression_mode": "proactive",
-        "timestamp_unix": 1789925190.9078572,
+        "timestamp_unix": 1789928237.220421,
         "version": "V66.16"
       },
       "verified_web_prospect_discovery_latest.json": {
@@ -717,20 +719,20 @@
     "task_queue": {
       "cancelled": 1,
       "claimed": 0,
-      "completed": 15990,
+      "completed": 16124,
       "failed": 0,
-      "queued": 22,
+      "queued": 3,
       "running": 0,
       "states": {
         "CANCELLED": 1,
-        "COMPLETED": 15990,
-        "QUEUED": 22
+        "COMPLETED": 16124,
+        "QUEUED": 3
       },
-      "total_records": 16013,
+      "total_records": 16128,
       "types_top20": {
-        "build": 5298,
-        "planning": 5359,
-        "research": 5356
+        "build": 5334,
+        "planning": 5397,
+        "research": 5397
       }
     },
     "ventures": {
@@ -742,19 +744,19 @@
       },
       "ventures": [
         {
-          "artifact_count": 93,
+          "artifact_count": 101,
           "id": "local_contractor_bid_organizer",
           "stage": "CUSTOMER_ACQUISITION",
           "unchanged_observations": 0
         },
         {
-          "artifact_count": 24,
+          "artifact_count": 31,
           "id": "marketplace_software_opportunity",
           "stage": "BUILD",
           "unchanged_observations": 0
         },
         {
-          "artifact_count": 23,
+          "artifact_count": 31,
           "id": "mobile_workflow_app_opportunity",
           "stage": "BUILD",
           "unchanged_observations": 0
@@ -769,18 +771,14 @@
     "tracked_sensitive_filename_count": 0,
     "tracked_sensitive_filenames": []
   },
-  "source_snapshot_sha": "d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652",
-  "timestamp_local": "2026-09-20 12:26:37",
-  "timestamp_unix": 1789925197.671972,
-  "warning_count": 8,
+  "source_snapshot_sha": "c4fda4f14b33e3e2d501068974b07dad0a3aeaae",
+  "timestamp_local": "2026-09-20 13:18:21",
+  "timestamp_unix": 1789928301.6002252,
+  "warning_count": 4,
   "warnings": [
     "multiple_daily_usd_values_detected:0.0,100,100.0,2,20,200,200.0,20000,66",
     "multiple_single_usd_values_detected:150,150.0,2",
     "multiple_daily_sol_values_detected:200,200.0",
-    "multiple_single_sol_values_detected:150,150.0",
-    "native_check_failed:native_full_launch_validation",
-    "native_check_failed:native_launch_audit",
-    "native_check_failed:native_qualify",
-    "native_check_failed:native_company_health"
+    "multiple_single_sol_values_detected:150,150.0"
   ]
 }

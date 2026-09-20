@@ -1,30 +1,30 @@
 # CompanyOS Full Total Audit
 
-- **Status:** FAIL
+- **Status:** PASS_WITH_WARNINGS
 - **Repository:** FREEDOMVIKING/CompanyOS
 - **Branch:** `companyos-continuous-fix-2026-09-11`
-- **Source snapshot:** `d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652`
-- **Tracked files:** 10233
-- **Python files:** 6528
-- **Shell files:** 931
-- **Tests:** 265
+- **Source snapshot:** `c4fda4f14b33e3e2d501068974b07dad0a3aeaae`
+- **Tracked files:** 10247
+- **Python files:** 6531
+- **Shell files:** 940
+- **Tests:** 267
 - **Scripts:** 589
-- **Patch-history scripts:** 412
-- **Commits on branch:** 265
+- **Patch-history scripts:** 421
+- **Commits on branch:** 270
 
 ## Source integrity
 
 - **python_compileall:** PASS
 - **shell_syntax_all:** PASS
-- **pytest_full:** FAIL
+- **pytest_full:** PASS
 
 ## Runtime inventory
 
-- Task records: 16013
-- Task states: `{"CANCELLED": 1, "COMPLETED": 15990, "QUEUED": 22}`
+- Task records: 16128
+- Task states: `{"CANCELLED": 1, "COMPLETED": 16124, "QUEUED": 3}`
 - Canonical ventures: 3
 - Venture stages: `{"BUILD": 2, "CUSTOMER_ACQUISITION": 1}`
-- CompanyOS processes observed: 21
+- CompanyOS processes observed: 25
 
 ## Capability presence
 
@@ -64,14 +64,10 @@ V66.35, V66.34, V66.33, V66.32, V66.31, V66.30, V66.29, V66.28, V66.27, V66.26, 
 - multiple_single_usd_values_detected:150,150.0,2
 - multiple_daily_sol_values_detected:200,200.0
 - multiple_single_sol_values_detected:150,150.0
-- native_check_failed:native_full_launch_validation
-- native_check_failed:native_launch_audit
-- native_check_failed:native_qualify
-- native_check_failed:native_company_health
 
 ## Failures
 
-- check_failed:pytest_full
+- None
 
 ## Audit safety
 
