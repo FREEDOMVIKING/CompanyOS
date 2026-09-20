@@ -1,0 +1,534 @@
+{
+  "blocking_failures": [],
+  "ceo_start_event_count": 9,
+  "ceo_start_result_count": 9,
+  "companyos_peak_rss_bytes": 697085952,
+  "companyos_rss_growth_bytes": 186490880,
+  "deployment_actions_performed": false,
+  "duration_observed_seconds": 729.9568477429857,
+  "email_actions_performed": false,
+  "external_actions_performed": false,
+  "final_task_counts": {
+    "goal_count": 9,
+    "states": {
+      "COMPLETED": 27
+    },
+    "total": 27,
+    "types": {
+      "build": 9,
+      "planning": 9,
+      "research": 9
+    }
+  },
+  "financial_actions_performed": false,
+  "force_kill_hits": 0,
+  "generated_at_unix": 1789942100.2228703,
+  "goal_decompose_event_count": 9,
+  "instrumentation_failures": [],
+  "max_consecutive_failures": 0,
+  "max_follow_up_depth_request_counts": {
+    "3": 3,
+    "4": 6
+  },
+  "max_native_queued": 0,
+  "max_restart_total": 0,
+  "memory_error_hits": 0,
+  "network_guard": "python_outbound_socket_connect_blocked",
+  "overall_status": "PASS_WITH_WARNINGS",
+  "priority_base_counts": {
+    "248": 3,
+    "250": 3,
+    "252": 3
+  },
+  "producer_caller_counts": {
+    "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs": 3,
+    "profit_first_enrichment_expansion.py:176:dispatch": 3,
+    "profit_first_research_pipeline.py:107:run_stage": 3
+  },
+  "producer_cmdline_counts": {
+    "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog": 9
+  },
+  "producer_pid_counts": {
+    "21151": 9
+  },
+  "profit_autoseed_enabled": false,
+  "real_companyos_queue_modified": false,
+  "real_companyos_runtime_modified": false,
+  "root_start_events": [
+    {
+      "caller": "profit_first_enrichment_expansion.py:176:dispatch",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=0\nsector_count=0\nbusiness_model_count=0\nqualified_count=0\n\nExisting candidates:\n[]\n\nThe portfolio is not diversified enough.\n\nExpand the opportunity pool until there are AT LEAST:\n- 20 materially different candidates\n- 8 unrelated sectors\n- 7 business-model families\n\nActively search across business models such as:\nsoftware/SaaS/AI, mobile/web apps, digital products, marketplaces/platforms,\ne-commerce/physical products, content/media, data/API/licensing, lead-generation assets,\nsubscriptions/memberships, automation products, and services.\n\nRules:\n1. Do not generate superficial variants of construction, contractor, bid-organizer, or SMB-AI concepts.\n2. Do not count renamed/versioned copies as new opportunities.\n3. Prefer commercially distinct opportunities with different customers, economics, channels, and moats.\n4. For each new candidate, write one structured JSON record under:\n.companyos_runtime/profit_first_candidates/\n5. Each record must include:\nname, sector, business_model, description,\nmarket_demand, expected_profit, probability_of_success, margin, recurring_revenue,\nscalability, capital_efficiency, sp",
+      "max_cycles": 140,
+      "max_follow_up_depth": 4,
+      "pid": 21151,
+      "priority_base": 252,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 182,
+          "name": "tick"
+        },
+        {
+          "code": "entry = dispatch(goal, stage, priority)",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_enrichment_expansion.py",
+          "line": 223,
+          "name": "maybe_run"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_enrichment_expansion.py",
+          "line": 176,
+          "name": "dispatch"
+        }
+      ],
+      "ts": 1789941370.51551
+    },
+    {
+      "caller": "profit_first_research_pipeline.py:107:run_stage",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least 7 business-model families.\n3. Business-model families to actively consider: software_saas_ai, mobile_web_apps, digital_products, marketplaces_platforms, ecommerce_physical_products, content_media, data_api_licensing, lead_generation_assets, subscriptions_memberships, automation_products, services.\n4. Construction is allowed but must not dominate merely because prior artifacts exist.\n5. Service businesses are allowed but receive no preference over scalable products, software, marketplaces, commerce, media, data, licensing, subscriptions, or automation businesses.\n6. Do not clone, rename, version-bump, or superficially mutate existing ventures to satisfy diversity.\n\nEVIDENCE + ECONOMICS:\nFor ",
+      "max_cycles": 140,
+      "max_follow_up_depth": 4,
+      "pid": 21151,
+      "priority_base": 250,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "profit_first_research = maybe_run_profit_first_research(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 205,
+          "name": "tick"
+        },
+        {
+          "code": "oid = run_stage(stage)",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_research_pipeline.py",
+          "line": 134,
+          "name": "maybe_run"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_research_pipeline.py",
+          "line": 107,
+          "name": "run_stage"
+        }
+      ],
+      "ts": 1789941370.5391567
+    },
+    {
+      "caller": "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "RESEARCH OUTPUT RECOVERY\n\nRecent profit-first market-scan orchestration IDs: 0a2a9015-e82c-4948-9434-9583de7171e6\n\nThe prior research orchestration(s) completed without producing enough machine-readable candidate records.\n\nRecover the substantive research already performed where possible, then produce structured JSON opportunity records under:\n.companyos_runtime/profit_first_candidates/\n\nEach candidate must include:\nname, sector, business_model, description,\nmarket_demand, expected_profit, probability_of_success, margin, recurring_revenue,\nscalability, capital_efficiency, speed_to_revenue, automation_potential, defensibility,\ncompetition, customer_acquisition_difficulty, regulatory_operational_risk,\ncapital_intensity, evidence_uncertainty, evidence_confidence,\nevidence_sources, assumptions, unknowns.\n\nUse 0-100 numeric fields. Do not invent certainty. Clearly separate estimates from evidence.\nDo not create renamed/versioned duplicates.\nResearch/analysis only; preserve all existing approval, financial, external-action, credential,\nsigner, reconciliation, publication/deployment, legal, destructive, and irreversible-action gates.",
+      "max_cycles": 100,
+      "max_follow_up_depth": 3,
+      "pid": 21151,
+      "priority_base": 248,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "candidate_recovery = maybe_recover_profit_first_outputs(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 192,
+          "name": "tick"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/candidate_materialization_bridge.py",
+          "line": 347,
+          "name": "maybe_recover_missing_outputs"
+        }
+      ],
+      "ts": 1789941400.588451
+    },
+    {
+      "caller": "profit_first_enrichment_expansion.py:176:dispatch",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=0\nsector_count=0\nbusiness_model_count=0\nqualified_count=0\n\nExisting candidates:\n[]\n\nThe portfolio is not diversified enough.\n\nExpand the opportunity pool until there are AT LEAST:\n- 20 materially different candidates\n- 8 unrelated sectors\n- 7 business-model families\n\nActively search across business models such as:\nsoftware/SaaS/AI, mobile/web apps, digital products, marketplaces/platforms,\ne-commerce/physical products, content/media, data/API/licensing, lead-generation assets,\nsubscriptions/memberships, automation products, and services.\n\nRules:\n1. Do not generate superficial variants of construction, contractor, bid-organizer, or SMB-AI concepts.\n2. Do not count renamed/versioned copies as new opportunities.\n3. Prefer commercially distinct opportunities with different customers, economics, channels, and moats.\n4. For each new candidate, write one structured JSON record under:\n.companyos_runtime/profit_first_candidates/\n5. Each record must include:\nname, sector, business_model, description,\nmarket_demand, expected_profit, probability_of_success, margin, recurring_revenue,\nscalability, capital_efficiency, sp",
+      "max_cycles": 140,
+      "max_follow_up_depth": 4,
+      "pid": 21151,
+      "priority_base": 252,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 182,
+          "name": "tick"
+        },
+        {
+          "code": "entry = dispatch(goal, stage, priority)",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_enrichment_expansion.py",
+          "line": 223,
+          "name": "maybe_run"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_enrichment_expansion.py",
+          "line": 176,
+          "name": "dispatch"
+        }
+      ],
+      "ts": 1789941670.8636985
+    },
+    {
+      "caller": "profit_first_research_pipeline.py:107:run_stage",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least 7 business-model families.\n3. Business-model families to actively consider: software_saas_ai, mobile_web_apps, digital_products, marketplaces_platforms, ecommerce_physical_products, content_media, data_api_licensing, lead_generation_assets, subscriptions_memberships, automation_products, services.\n4. Construction is allowed but must not dominate merely because prior artifacts exist.\n5. Service businesses are allowed but receive no preference over scalable products, software, marketplaces, commerce, media, data, licensing, subscriptions, or automation businesses.\n6. Do not clone, rename, version-bump, or superficially mutate existing ventures to satisfy diversity.\n\nEVIDENCE + ECONOMICS:\nFor ",
+      "max_cycles": 140,
+      "max_follow_up_depth": 4,
+      "pid": 21151,
+      "priority_base": 250,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "profit_first_research = maybe_run_profit_first_research(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 205,
+          "name": "tick"
+        },
+        {
+          "code": "oid = run_stage(stage)",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_research_pipeline.py",
+          "line": 134,
+          "name": "maybe_run"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_research_pipeline.py",
+          "line": 107,
+          "name": "run_stage"
+        }
+      ],
+      "ts": 1789941670.9296632
+    },
+    {
+      "caller": "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "RESEARCH OUTPUT RECOVERY\n\nRecent profit-first market-scan orchestration IDs: 0a2a9015-e82c-4948-9434-9583de7171e6, 239b8de0-d532-4a99-84a9-ca60ea5ba0d2\n\nThe prior research orchestration(s) completed without producing enough machine-readable candidate records.\n\nRecover the substantive research already performed where possible, then produce structured JSON opportunity records under:\n.companyos_runtime/profit_first_candidates/\n\nEach candidate must include:\nname, sector, business_model, description,\nmarket_demand, expected_profit, probability_of_success, margin, recurring_revenue,\nscalability, capital_efficiency, speed_to_revenue, automation_potential, defensibility,\ncompetition, customer_acquisition_difficulty, regulatory_operational_risk,\ncapital_intensity, evidence_uncertainty, evidence_confidence,\nevidence_sources, assumptions, unknowns.\n\nUse 0-100 numeric fields. Do not invent certainty. Clearly separate estimates from evidence.\nDo not create renamed/versioned duplicates.\nResearch/analysis only; preserve all existing approval, financial, external-action, credential,\nsigner, reconciliation, publication/deployment, legal, destructive, and irreversible-action gates.",
+      "max_cycles": 100,
+      "max_follow_up_depth": 3,
+      "pid": 21151,
+      "priority_base": 248,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "candidate_recovery = maybe_recover_profit_first_outputs(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 192,
+          "name": "tick"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/candidate_materialization_bridge.py",
+          "line": 347,
+          "name": "maybe_recover_missing_outputs"
+        }
+      ],
+      "ts": 1789941700.979965
+    },
+    {
+      "caller": "profit_first_enrichment_expansion.py:176:dispatch",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=0\nsector_count=0\nbusiness_model_count=0\nqualified_count=0\n\nExisting candidates:\n[]\n\nThe portfolio is not diversified enough.\n\nExpand the opportunity pool until there are AT LEAST:\n- 20 materially different candidates\n- 8 unrelated sectors\n- 7 business-model families\n\nActively search across business models such as:\nsoftware/SaaS/AI, mobile/web apps, digital products, marketplaces/platforms,\ne-commerce/physical products, content/media, data/API/licensing, lead-generation assets,\nsubscriptions/memberships, automation products, and services.\n\nRules:\n1. Do not generate superficial variants of construction, contractor, bid-organizer, or SMB-AI concepts.\n2. Do not count renamed/versioned copies as new opportunities.\n3. Prefer commercially distinct opportunities with different customers, economics, channels, and moats.\n4. For each new candidate, write one structured JSON record under:\n.companyos_runtime/profit_first_candidates/\n5. Each record must include:\nname, sector, business_model, description,\nmarket_demand, expected_profit, probability_of_success, margin, recurring_revenue,\nscalability, capital_efficiency, sp",
+      "max_cycles": 140,
+      "max_follow_up_depth": 4,
+      "pid": 21151,
+      "priority_base": 252,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 182,
+          "name": "tick"
+        },
+        {
+          "code": "entry = dispatch(goal, stage, priority)",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_enrichment_expansion.py",
+          "line": 223,
+          "name": "maybe_run"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_enrichment_expansion.py",
+          "line": 176,
+          "name": "dispatch"
+        }
+      ],
+      "ts": 1789941971.2166781
+    },
+    {
+      "caller": "profit_first_research_pipeline.py:107:run_stage",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least 7 business-model families.\n3. Business-model families to actively consider: software_saas_ai, mobile_web_apps, digital_products, marketplaces_platforms, ecommerce_physical_products, content_media, data_api_licensing, lead_generation_assets, subscriptions_memberships, automation_products, services.\n4. Construction is allowed but must not dominate merely because prior artifacts exist.\n5. Service businesses are allowed but receive no preference over scalable products, software, marketplaces, commerce, media, data, licensing, subscriptions, or automation businesses.\n6. Do not clone, rename, version-bump, or superficially mutate existing ventures to satisfy diversity.\n\nEVIDENCE + ECONOMICS:\nFor ",
+      "max_cycles": 140,
+      "max_follow_up_depth": 4,
+      "pid": 21151,
+      "priority_base": 250,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "profit_first_research = maybe_run_profit_first_research(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 205,
+          "name": "tick"
+        },
+        {
+          "code": "oid = run_stage(stage)",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_research_pipeline.py",
+          "line": 134,
+          "name": "maybe_run"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/profit_first_research_pipeline.py",
+          "line": 107,
+          "name": "run_stage"
+        }
+      ],
+      "ts": 1789941971.327174
+    },
+    {
+      "caller": "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs",
+      "cmdline": "/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "goal": "RESEARCH OUTPUT RECOVERY\n\nRecent profit-first market-scan orchestration IDs: 0a2a9015-e82c-4948-9434-9583de7171e6, 239b8de0-d532-4a99-84a9-ca60ea5ba0d2, be45f317-c8c0-4de4-a001-1b4f42ce51e2\n\nThe prior research orchestration(s) completed without producing enough machine-readable candidate records.\n\nRecover the substantive research already performed where possible, then produce structured JSON opportunity records under:\n.companyos_runtime/profit_first_candidates/\n\nEach candidate must include:\nname, sector, business_model, description,\nmarket_demand, expected_profit, probability_of_success, margin, recurring_revenue,\nscalability, capital_efficiency, speed_to_revenue, automation_potential, defensibility,\ncompetition, customer_acquisition_difficulty, regulatory_operational_risk,\ncapital_intensity, evidence_uncertainty, evidence_confidence,\nevidence_sources, assumptions, unknowns.\n\nUse 0-100 numeric fields. Do not invent certainty. Clearly separate estimates from evidence.\nDo not create renamed/versioned duplicates.\nResearch/analysis only; preserve all existing approval, financial, external-action, credential,\nsigner, reconciliation, publication/deployment, legal, destructive, and irreve",
+      "max_cycles": 100,
+      "max_follow_up_depth": 3,
+      "pid": 21151,
+      "priority_base": 248,
+      "stack": [
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 198,
+          "name": "_run_module_as_main"
+        },
+        {
+          "code": "",
+          "file": "<frozen runpy>",
+          "line": 88,
+          "name": "_run_code"
+        },
+        {
+          "code": "main()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 330,
+          "name": "<module>"
+        },
+        {
+          "code": "result = tick()",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 323,
+          "name": "main"
+        },
+        {
+          "code": "candidate_recovery = maybe_recover_profit_first_outputs(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/runtime/productive_autonomy_watchdog.py",
+          "line": 192,
+          "name": "tick"
+        },
+        {
+          "code": "rec = AutonomousCEOOrchestrator().start(",
+          "file": "/data/data/com.termux/files/home/.companyos_runtime/v69_9_tmp_home_21029/companyos/companyos/strategy/candidate_materialization_bridge.py",
+          "line": 347,
+          "name": "maybe_recover_missing_outputs"
+        }
+      ],
+      "ts": 1789942001.4457104
+    }
+  ],
+  "samples_collected": 49,
+  "schema": "companyos.v69_9.native_producer_provenance.v1",
+  "signal9_hits": 0,
+  "system_min_mem_available_bytes": 3603513344,
+  "warnings": [
+    "multiple_native_root_goal_producers_observed"
+  ]
+}
