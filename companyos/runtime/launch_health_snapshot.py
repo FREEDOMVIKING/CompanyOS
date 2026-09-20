@@ -12,7 +12,7 @@ from companyos.runtime.runtime_status import RuntimeStatus
 class LaunchHealthSnapshot:
     def __init__(self, root: Path | None = None):
         self.root = Path(root or (Path.home() / "companyos")).resolve()
-        self.runtime_root = self.root / ".companyos_runtime"
+        self.runtime_root = Path.home() / ".companyos_runtime"
         self.runtime_root.mkdir(parents=True, exist_ok=True)
         self.path = self.runtime_root / "launch_health_snapshot.json"
 

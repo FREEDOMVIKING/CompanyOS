@@ -1,11 +1,14 @@
 from __future__ import annotations
 import json,os,re,subprocess,time
 from pathlib import Path
-ROOT=(Path.home()/"companyos").resolve(); RT=ROOT/".companyos_runtime"
-STATE=RT/"autonomous_diagnostics_state.json"; EVENTS=RT/"autonomous_diagnostics_events.jsonl"; STOP=RT/"STOP_CONTINUOUS"
+ROOT=(Path.home()/"companyos").resolve(); RT=Path.home()/".companyos_runtime"
+STATE=RT/"autonomous_diagnostics_state.json"; EVENTS=RT/"autonomous_diagnostics_events.jsonl"; STOP=RT/"autonomous_diagnostics.stop"
 PATS={"ssl_hostname_mismatch":r"CERTIFICATE_VERIFY_FAILED|Hostname mismatch|certificate is not valid","connection_refused":r"Connection refused","http_404":r"HTTP Error 404|404 Not Found","permission_denied":r"Permission denied","syntax_error":r"SyntaxError|IndentationError|TabError","import_error":r"ModuleNotFoundError|ImportError","disk_full":r"No space left on device"}
 def atomic(p,x):
- p.parent.mkdir(parents=True,exist_ok=True); q=p.with_suffix(p.suffix+".tmp"); q.write_text(json.dumps(x,indent=2,sort_keys=True,default=str)+"\\n"); q.replace(p)
+ p.parent.mkdir(parents=True,exist_ok=True)
+ q=p.with_suffix(p.suffix+".tmp")
+ q.write_text(json.dumps(x,indent=2,sort_keys=True,default=str)+"\n",encoding="utf-8")
+ q.replace(p)
 def load(p):
  try:return json.loads(p.read_text())
  except:return {}
@@ -37,16 +40,31 @@ def apply(a):
  if "quarantine_stale_deployment_route" in kinds:
   atomic(RT/"diagnostics_deployment_route_quarantine.json",{"created_at":time.time(),"policy":"Do not retry identical failing hostname. Require rediscovery/revalidation."});res.append({"repair":"quarantine_stale_deployment_route","ok":True})
  if "supervisor_restart" in kinds:
-  c=ROOT/"scripts/companyosctl"
-  if c.exists():
-   p=subprocess.run([str(c),"restart"],cwd=ROOT,text=True,capture_output=True,timeout=45);res.append({"repair":"supervisor_restart","ok":p.returncode==0})
+  # autonomous_diagnostics is itself supervisor-managed. Restarting the
+  # supervisor from this child creates a bootstrap race/restart loop.
+  atomic(
+   RT/"diagnostics_supervisor_recovery_requested.json",
+   {
+    "requested_at":time.time(),
+    "source":"autonomous_diagnostics",
+    "reason":"service_health_finding",
+    "policy":"defer_to_supervisor_control_plane",
+   },
+  )
+  res.append({
+   "repair":"supervisor_restart",
+   "ok":True,
+   "action":"deferred_to_supervisor_control_plane",
+   "executed_restart":False,
+  })
  return res
 def cycle():
  before=diagnose(); repairs=apply(plan(before)); after=diagnose()
  x={"running":True,"healthy":not any(f["severity"]=="high" for f in after["findings"]),"last_cycle_unix":time.time(),"before":before,"repairs":repairs,"after":after};atomic(STATE,x)
- with EVENTS.open("a") as f:f.write(json.dumps({"ts":time.time(),"event":"diagnostic_cycle","healthy":x["healthy"],"repairs":repairs})+"\\n")
+ with EVENTS.open("a",encoding="utf-8") as f:f.write(json.dumps({"ts":time.time(),"event":"diagnostic_cycle","healthy":x["healthy"],"repairs":repairs})+"\n")
  return x
 def run():
+ STOP.unlink(missing_ok=True)
  delay=max(60,int(os.getenv("COMPANYOS_DIAGNOSTICS_INTERVAL_SECONDS","300")))
  while not STOP.exists():
   try:cycle()

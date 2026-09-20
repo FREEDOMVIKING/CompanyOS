@@ -82,7 +82,7 @@ class UnifiedRuntimeControl:
 
     def __init__(self, root: Path | None = None):
         self.root = Path(root or (Path.home() / "companyos")).resolve()
-        self.runtime_root = self.root / ".companyos_runtime"
+        self.runtime_root = Path.home() / ".companyos_runtime"
         self.runtime_root.mkdir(parents=True, exist_ok=True)
         self.state_path = self.runtime_root / "service_supervisor_state.json"
         # COMPANYOS_STOP_PATH_FIX_V27_2

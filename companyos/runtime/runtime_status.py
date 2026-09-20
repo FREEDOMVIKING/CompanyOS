@@ -10,7 +10,7 @@ from companyos.runtime.runtime_control import UnifiedRuntimeControl
 class RuntimeStatus:
     def __init__(self, root: Path | None = None):
         self.root = Path(root or (Path.home() / "companyos")).resolve()
-        self.runtime_root = self.root / ".companyos_runtime"
+        self.runtime_root = Path.home() / ".companyos_runtime"
         self.control = UnifiedRuntimeControl(self.root)
 
     def _read(self, name: str):
