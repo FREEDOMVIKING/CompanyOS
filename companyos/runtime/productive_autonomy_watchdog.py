@@ -84,6 +84,40 @@ def can_autostart(ws: dict[str, Any]) -> bool:
     ws["autostarts"] = recent
     return len(recent) < MAX_AUTOSTARTS_PER_HOUR
 
+
+def _producer_throttle_gate(bp: dict[str, Any], ws: dict[str, Any]) -> dict[str, Any]:
+    # Convert AdaptiveBackpressure.producer_divisor into actual producer cadence.
+    # Existing hard-stop behavior remains in force at the configured queue ceiling.
+    snapshot = bp.get("snapshot") if isinstance(bp, dict) else {}
+    snapshot = snapshot if isinstance(snapshot, dict) else {}
+
+    queued = int(snapshot.get("queued", 0) or 0)
+    divisor = max(1, int((bp or {}).get("producer_divisor", 1) or 1))
+    hard_threshold = int(os.getenv("COMPANYOS_BACKPRESSURE_QUEUE_THRESHOLD", "300"))
+
+    tick = int(ws.get("backpressure_producer_tick", 0) or 0) + 1
+    ws["backpressure_producer_tick"] = tick
+
+    if queued >= hard_threshold:
+        return {
+            "allow_producer": False,
+            "action": "backpressure_execution_first",
+            "queued": queued,
+            "producer_divisor": divisor,
+            "producer_tick": tick,
+            "hard_threshold": hard_threshold,
+        }
+
+    allow = ((tick - 1) % divisor) == 0
+    return {
+        "allow_producer": allow,
+        "action": "producer_allowed" if allow else "backpressure_producer_throttled",
+        "queued": queued,
+        "producer_divisor": divisor,
+        "producer_tick": tick,
+        "hard_threshold": hard_threshold,
+    }
+
 def start_internal_goal(goal: str) -> str:
     if should_force_diversified_discovery():
         goal = discovery_directive()
@@ -112,14 +146,22 @@ def _v49_backpressure():
 
 def tick() -> dict[str, Any]:
     bp = _v49_backpressure()
-    if int(bp.get("snapshot", {}).get("queued", 0) or 0) >= int(os.getenv("COMPANYOS_BACKPRESSURE_QUEUE_THRESHOLD", "300")):
+    ws = watchdog_state()
+    gate = _producer_throttle_gate(bp, ws)
+
+    # Persist cadence state on each watchdog tick so adaptive throttling is
+    # stable across repeated observations and process restarts.
+    write_json(WATCHDOG_STATE, ws)
+
+    if not gate["allow_producer"]:
         p, rs = runtime_state()
-        ws = watchdog_state()
         ws["last_seen"] = {
             "state_path": str(p) if p else None,
-            "action": "backpressure_execution_first",
-            "queued": bp.get("snapshot", {}).get("queued"),
-            "producer_divisor": bp.get("producer_divisor"),
+            "action": gate["action"],
+            "queued": gate["queued"],
+            "producer_divisor": gate["producer_divisor"],
+            "producer_tick": gate["producer_tick"],
+            "hard_threshold": gate["hard_threshold"],
             "ts": time.time(),
         }
         write_json(WATCHDOG_STATE, ws)

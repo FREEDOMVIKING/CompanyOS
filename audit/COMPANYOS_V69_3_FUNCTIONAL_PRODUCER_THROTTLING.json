@@ -1,0 +1,84 @@
+{
+  "cadence_results": [
+    {
+      "allowed_tick_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "allowed_ticks": 12,
+      "blocked_ticks": 0,
+      "producer_divisor": 1,
+      "ticks": 12
+    },
+    {
+      "allowed_tick_numbers": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11
+      ],
+      "allowed_ticks": 6,
+      "blocked_ticks": 6,
+      "producer_divisor": 2,
+      "ticks": 12
+    },
+    {
+      "allowed_tick_numbers": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "allowed_ticks": 4,
+      "blocked_ticks": 8,
+      "producer_divisor": 3,
+      "ticks": 12
+    },
+    {
+      "allowed_tick_numbers": [
+        1,
+        5,
+        9
+      ],
+      "allowed_ticks": 3,
+      "blocked_ticks": 9,
+      "producer_divisor": 4,
+      "ticks": 12
+    }
+  ],
+  "expected": {
+    "divisor_1_allowed": 12,
+    "divisor_2_allowed": 6,
+    "divisor_3_allowed": 4,
+    "divisor_4_allowed": 3,
+    "hard_stop_blocked": 4
+  },
+  "external_actions_performed": false,
+  "financial_actions_performed": false,
+  "generated_at_unix": 1789936369.9946654,
+  "hard_queue_stop": {
+    "actions": [
+      "backpressure_execution_first",
+      "backpressure_execution_first",
+      "backpressure_execution_first",
+      "backpressure_execution_first"
+    ],
+    "blocked_ticks": 4,
+    "queued": 300,
+    "ticks": 4
+  },
+  "overall_status": "PASS",
+  "schema": "companyos.v69_3.functional_producer_throttling.v1"
+}
