@@ -1,0 +1,256 @@
+{
+  "branch": "companyos-continuous-fix-2026-09-11",
+  "deletion_performed": false,
+  "financial_limits_changed": false,
+  "generated_at_unix": 1789932892.0213828,
+  "head_sha": "c2ad36708126d33ad3294c62494dad68ecd7d2bf",
+  "mode": "AUDIT_ONLY_NO_FILE_MUTATION",
+  "move_performed": false,
+  "next_step": {
+    "name": "V68.5 targeted canonicalization",
+    "rule": "Only canonicalize a semantic group if one implementation has clear structured ownership and the others have no independent callers/tests. Workspace trees require file-level merge planning before either path can be retired."
+  },
+  "schema": "companyos.v68_4.semantic_workspace_audit.v1",
+  "semantic_group_count": 2,
+  "semantic_groups": [
+    {
+      "active_reference_counts": {
+        "companyos/autonomous_enterprise_v6/util.py": 2,
+        "companyos/unified_core_v3/util.py": 2,
+        "companyos/unified_core_v4/util.py": 2,
+        "companyos/unified_core_v5/util.py": 2
+      },
+      "ast_equivalent": true,
+      "byte_identical": false,
+      "decision": "KEEP_ROLE_ISOLATED_EQUIVALENTS",
+      "details": {
+        "companyos/autonomous_enterprise_v6/util.py": {
+          "ast_sha256": "81123a851fe979ba76aeaf543eb617669f7953a78bcf1876d2b42623cdad9448",
+          "byte_sha256": "a09267aa40f9bdb22174f475b5d5b3e23438f69ef6f812462fde333ab9783f90",
+          "exports": [
+            "atomic_write_json",
+            "now",
+            "read_json",
+            "stable_id"
+          ],
+          "imports": [
+            "datetime",
+            "hashlib",
+            "json",
+            "os",
+            "pathlib",
+            "tempfile"
+          ],
+          "references": {
+            "literal_path_references": [
+              "ceo_memory/drift_report.json",
+              "ceo_memory/operations_dashboard.json"
+            ],
+            "structured_importers": [],
+            "test_references": []
+          },
+          "top_level_executable_nodes": []
+        },
+        "companyos/unified_core_v3/util.py": {
+          "ast_sha256": "81123a851fe979ba76aeaf543eb617669f7953a78bcf1876d2b42623cdad9448",
+          "byte_sha256": "ec7950b0015134c93609a84df1fbc6c885757cde6f18e83cc8e00ad296f381ea",
+          "exports": [
+            "atomic_write_json",
+            "now",
+            "read_json",
+            "stable_id"
+          ],
+          "imports": [
+            "datetime",
+            "hashlib",
+            "json",
+            "os",
+            "pathlib",
+            "tempfile"
+          ],
+          "references": {
+            "literal_path_references": [
+              "ceo_memory/drift_report.json",
+              "ceo_memory/operations_dashboard.json"
+            ],
+            "structured_importers": [],
+            "test_references": []
+          },
+          "top_level_executable_nodes": []
+        },
+        "companyos/unified_core_v4/util.py": {
+          "ast_sha256": "81123a851fe979ba76aeaf543eb617669f7953a78bcf1876d2b42623cdad9448",
+          "byte_sha256": "821dfab3a22dc8abedbc5e512ab5d32bb07f9e4dc52d9a93cd5146ca04572167",
+          "exports": [
+            "atomic_write_json",
+            "now",
+            "read_json",
+            "stable_id"
+          ],
+          "imports": [
+            "datetime",
+            "hashlib",
+            "json",
+            "os",
+            "pathlib",
+            "tempfile"
+          ],
+          "references": {
+            "literal_path_references": [
+              "ceo_memory/drift_report.json",
+              "ceo_memory/operations_dashboard.json"
+            ],
+            "structured_importers": [],
+            "test_references": []
+          },
+          "top_level_executable_nodes": []
+        },
+        "companyos/unified_core_v5/util.py": {
+          "ast_sha256": "81123a851fe979ba76aeaf543eb617669f7953a78bcf1876d2b42623cdad9448",
+          "byte_sha256": "aa24b977a4cb4d74c46938ffc26ee061d0a01d4beae27bbed515b7173ba22221",
+          "exports": [
+            "atomic_write_json",
+            "now",
+            "read_json",
+            "stable_id"
+          ],
+          "imports": [
+            "datetime",
+            "hashlib",
+            "json",
+            "os",
+            "pathlib",
+            "tempfile"
+          ],
+          "references": {
+            "literal_path_references": [
+              "ceo_memory/drift_report.json",
+              "ceo_memory/operations_dashboard.json"
+            ],
+            "structured_importers": [],
+            "test_references": []
+          },
+          "top_level_executable_nodes": []
+        }
+      },
+      "files": [
+        "companyos/autonomous_enterprise_v6/util.py",
+        "companyos/unified_core_v3/util.py",
+        "companyos/unified_core_v4/util.py",
+        "companyos/unified_core_v5/util.py"
+      ],
+      "provisional_keeper": null
+    },
+    {
+      "active_reference_counts": {
+        "companyos/autonomous_execution_engine_v38/storage.py": 2,
+        "companyos/venture_promotion_pipeline_v39/storage.py": 2
+      },
+      "ast_equivalent": true,
+      "byte_identical": false,
+      "decision": "KEEP_ROLE_ISOLATED_EQUIVALENTS",
+      "details": {
+        "companyos/autonomous_execution_engine_v38/storage.py": {
+          "ast_sha256": "d3597925ee1dbb83dcf0136bcdb9aa774cf346eab2ef6253a644665ff93c5beb",
+          "byte_sha256": "70033050b0e8acc15e9a5fdfc9d81a411b3d8420199491f9892e23ecd4386c17",
+          "exports": [
+            "append_jsonl",
+            "atomic_write_json",
+            "now",
+            "read_json"
+          ],
+          "imports": [
+            "datetime",
+            "json",
+            "os",
+            "pathlib",
+            "tempfile"
+          ],
+          "references": {
+            "literal_path_references": [
+              "ceo_memory/drift_report.json",
+              "ceo_memory/operations_dashboard.json"
+            ],
+            "structured_importers": [],
+            "test_references": []
+          },
+          "top_level_executable_nodes": []
+        },
+        "companyos/venture_promotion_pipeline_v39/storage.py": {
+          "ast_sha256": "d3597925ee1dbb83dcf0136bcdb9aa774cf346eab2ef6253a644665ff93c5beb",
+          "byte_sha256": "436b32944841dd62916bd4495b7089ac2f2d5721d2db58f6dc177b3b3dd22853",
+          "exports": [
+            "append_jsonl",
+            "atomic_write_json",
+            "now",
+            "read_json"
+          ],
+          "imports": [
+            "datetime",
+            "json",
+            "os",
+            "pathlib",
+            "tempfile"
+          ],
+          "references": {
+            "literal_path_references": [
+              "ceo_memory/drift_report.json",
+              "ceo_memory/operations_dashboard.json"
+            ],
+            "structured_importers": [],
+            "test_references": []
+          },
+          "top_level_executable_nodes": []
+        }
+      },
+      "files": [
+        "companyos/autonomous_execution_engine_v38/storage.py",
+        "companyos/venture_promotion_pipeline_v39/storage.py"
+      ],
+      "provisional_keeper": null
+    }
+  ],
+  "workspace_identity_audit": {
+    "decision": "BOTH_REFERENCED_MANUAL_MERGE_REQUIRED",
+    "different_relative_file_count": 0,
+    "different_relative_files": [],
+    "lower_file_count": 8,
+    "lower_only_files": [],
+    "lower_path": "workspace/local_contractor_bid_organizer",
+    "references": {
+      "workspace/Local_Contractor_Bid_Organizer": [
+        "ceo_memory/github_change_report.json",
+        "ceo_memory/internal_task_results.json",
+        "ceo_memory/internal_task_runner_audit.json",
+        "ceo_memory/product_execution_tasks.json",
+        "scripts/companyos_duplicate_role_resolution.py",
+        "tests/test_v68_3c_archive_retirement.py"
+      ],
+      "workspace/local_contractor_bid_organizer": [
+        "ceo_memory/prototype_builder_health.json",
+        "ceo_memory/prototype_registry.json",
+        "ceo_memory/release_readiness_audit.json",
+        "install_phase15_step6.sh",
+        "scripts/companyos_duplicate_role_resolution.py",
+        "tests/test_v68_3c_archive_retirement.py"
+      ]
+    },
+    "same_relative_file_count": 8,
+    "same_relative_files": [
+      "prototype/current/frontend/app.js",
+      "prototype/current/frontend/index.html",
+      "prototype/current/frontend/styles.css",
+      "prototype/current/server.py",
+      "prototype/versions/v1/frontend/app.js",
+      "prototype/versions/v1/frontend/index.html",
+      "prototype/versions/v1/frontend/styles.css",
+      "prototype/versions/v1/server.py"
+    ],
+    "upper_file_count": 10,
+    "upper_only_files": [
+      "customer_problem_validation.md",
+      "product_requirements.md"
+    ],
+    "upper_path": "workspace/Local_Contractor_Bid_Organizer"
+  }
+}
