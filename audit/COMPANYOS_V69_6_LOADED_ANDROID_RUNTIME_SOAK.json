@@ -1,0 +1,341 @@
+{
+  "blocking_failures": [],
+  "companyos_peak_rss_bytes": 484061184,
+  "companyos_rss_first_bytes": 473481216,
+  "companyos_rss_growth_bytes": 9920512,
+  "companyos_rss_last_bytes": 483401728,
+  "completed_total": 1586,
+  "completion_rate_per_minute": 156.14092132050592,
+  "completion_ratio": 0.9329411764705883,
+  "deployment_actions_performed": false,
+  "duration_observed_seconds": 609.4494588300004,
+  "duration_requested_seconds": 600,
+  "email_actions_performed": false,
+  "external_actions_performed": false,
+  "failed_total": 0,
+  "final_queue": {
+    "cancelled": 0,
+    "completed": 1586,
+    "failed": 0,
+    "queued": 138,
+    "queued_by_type": {
+      "build": 44,
+      "planning": 48,
+      "research": 46
+    },
+    "running": 0,
+    "total": 1724
+  },
+  "financial_actions_performed": false,
+  "force_kill_hits": 0,
+  "generated_at_unix": 1789939043.2264786,
+  "healthy_samples": 41,
+  "initial_queued": 200,
+  "initial_tasks": 200,
+  "injection_interval_seconds": 30,
+  "injection_tasks_per_event": 100,
+  "injection_until_seconds": 480,
+  "max_consecutive_failures": 0,
+  "max_queued_tasks": 416,
+  "max_restart_total": 0,
+  "max_state_age_seconds": 4.72,
+  "memory_error_hits": 0,
+  "min_queued_tasks": 148,
+  "network_guard": "python_outbound_socket_connect_blocked",
+  "overall_status": "PASS_WITH_WARNINGS",
+  "produced_total": 1700,
+  "profit_autoseed_enabled": false,
+  "real_companyos_queue_modified": false,
+  "real_companyos_runtime_modified": false,
+  "running_service_count_min": 19,
+  "sample_interval_seconds": 15,
+  "samples_collected": 41,
+  "schema": "companyos.v69_6.loaded_android_runtime_soak.v1",
+  "service_count_max": 19,
+  "signal9_hits": 0,
+  "startup_health": {
+    "checked_at_unix": 1789938433.4248188,
+    "expected_services": [
+      "continuous_goal_runtime",
+      "local_dashboard",
+      "productive_autonomy_watchdog",
+      "profit_opportunity_runtime"
+    ],
+    "expected_services_present": true,
+    "healthy": true,
+    "issues": [],
+    "running": true,
+    "services": {
+      "adaptive_worker_factory": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.adaptive_worker_factory"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23852,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "adaptive_workforce_execution_bridge": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.adaptive_workforce_execution_bridge"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23853,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "autonomous_diagnostics": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.autonomous_diagnostics"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23819,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "autonomous_evidence_acquisition": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.autonomous_evidence_acquisition",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23846,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "capability_expansion": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.capability_expansion",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23822,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "capability_feedback": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.capability_feedback",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23824,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "capability_request_executor": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.capability_request_executor",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23827,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "closed_loop_outcome_evaluator": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.closed_loop_outcome_evaluator",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23843,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "compounding_capability_expansion": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.compounding_capability_expansion"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23826,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "continuous_goal_runtime": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-c",
+          "from companyos.runtime.continuous_goal_runtime import ContinuousGoalRuntime; ContinuousGoalRuntime().run()"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23809,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "continuous_profit_improvement_loop": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.continuous_profit_improvement_loop"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23851,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "evidence_decision_closure": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.evidence_decision_closure",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23847,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "local_dashboard": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.dashboard_server"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23811,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "opportunity_execution_capability_bridge": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.opportunity_execution_capability_bridge",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23833,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "productive_autonomy_watchdog": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.productive_autonomy_watchdog"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23810,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "profit_opportunity_runtime": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.profit_opportunity_runtime"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23816,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "profit_to_action_closure": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.profit_to_action_closure",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23849,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "recursive_improvement_controller": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.recursive_improvement_controller",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23830,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      },
+      "semantic_capability_bridge": {
+        "argv": [
+          "/data/data/com.termux/files/usr/bin/python",
+          "-m",
+          "companyos.runtime.semantic_capability_bridge",
+          "run"
+        ],
+        "consecutive_failures": 0,
+        "pid": 23831,
+        "process_alive": true,
+        "restarts": 0,
+        "returncode": null,
+        "running": true
+      }
+    },
+    "state_age_seconds": 0.22,
+    "state_path": "/data/data/com.termux/files/home/.companyos_runtime/v69_6_tmp_home_23720/.companyos_runtime/service_supervisor_state.json",
+    "stop_requested": false,
+    "supervisor_alive": true,
+    "supervisor_pid": 23804,
+    "updated_at_unix": 1789938433.204081
+  },
+  "stop_result_ok": true,
+  "supervisor_alive_samples": 41,
+  "system_min_mem_available_bytes": 3286130688,
+  "system_min_mem_available_ratio": 0.2827236090378183,
+  "warnings": [
+    "queue_not_fully_drained_by_soak_end"
+  ]
+}
