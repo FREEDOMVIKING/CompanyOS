@@ -1,0 +1,45 @@
+{
+  "blocking_failures": [],
+  "ceo_start_count": 6,
+  "deployment_actions_performed": false,
+  "duration_seconds": 425.43308254599106,
+  "email_actions_performed": false,
+  "external_actions_performed": false,
+  "financial_actions_performed": false,
+  "handoff_seconds": 60,
+  "instrumentation_failures": [],
+  "inter_start_gaps_seconds": [
+    60.0970401763916,
+    60.09129524230957,
+    180.2472541332245,
+    60.179457902908325,
+    60.15910458564758
+  ],
+  "max_consecutive_failures": 0,
+  "max_restart_total": 0,
+  "memory_error_hits": 0,
+  "min_inter_start_gap_seconds": 60.09129524230957,
+  "native_task_states": {
+    "COMPLETED": 15,
+    "QUEUED": 3
+  },
+  "native_task_total": 18,
+  "overall_status": "PASS",
+  "producer_callers": {
+    "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs": 2,
+    "profit_first_enrichment_expansion.py:176:dispatch": 2,
+    "profit_first_research_pipeline.py:107:run_stage": 2
+  },
+  "schema": "companyos.v69_10.serialized_profit_first_producer_arbiter.v1",
+  "signal9_hits": 0,
+  "spacing_pass": true,
+  "start_timestamps": [
+    1789942666.1734328,
+    1789942726.270473,
+    1789942786.3617682,
+    1789942966.6090224,
+    1789943026.7884803,
+    1789943086.9475849
+  ],
+  "warnings": []
+}

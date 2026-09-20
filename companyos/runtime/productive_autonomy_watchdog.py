@@ -179,33 +179,120 @@ def tick() -> dict[str, Any]:
         or int(promotion.get("eligible_count", 0) or 0) > 0
         or promotion.get("reason") in {"execution_capacity_full", "promotion_cooldown"}
     )
-    profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(
-        cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_ENRICHMENT_COOLDOWN_SECONDS", "300")),
+
+    # V69.10 serialized profit-first producer arbitration.
+    #
+    # V69.9 proved three independent producer paths could all create CEO root
+    # orchestrations from the same empty-candidate observation. Keep every
+    # recovery path, but serialize dispatches through one shared handoff window.
+    producer_handoff_seconds = max(
+        15,
+        int(os.getenv("COMPANYOS_PROFIT_FIRST_PRODUCER_HANDOFF_COOLDOWN_SECONDS", "60")),
     )
-    if profit_first_enrichment_expansion.get("started"):
-        log("PROFIT_FIRST_ENRICHMENT_EXPANSION " + json.dumps(profit_first_enrichment_expansion, default=str, sort_keys=True))
+    producer_now = time.time()
+    producer_last_dispatch = float(
+        ws.get("profit_first_producer_last_dispatch_unix", 0) or 0
+    )
+    producer_handoff_remaining = max(
+        0.0,
+        producer_handoff_seconds - (producer_now - producer_last_dispatch),
+    )
+    producer_window_open = (
+        not execution_backlog and producer_handoff_remaining <= 0.0
+    )
+    producer_dispatched_this_tick = False
+
+    def _record_profit_first_producer(name: str, result: dict[str, Any]) -> None:
+        nonlocal producer_dispatched_this_tick, producer_last_dispatch
+        producer_dispatched_this_tick = True
+        producer_last_dispatch = time.time()
+        ws["profit_first_producer_last_dispatch_unix"] = producer_last_dispatch
+        ws["profit_first_producer_last_name"] = name
+        ws["profit_first_producer_last_orchestration_id"] = result.get("orchestration_id")
+        ws["profit_first_producer_handoff_seconds"] = producer_handoff_seconds
+        write_json(WATCHDOG_STATE, ws)
+
+    if execution_backlog:
+        profit_first_enrichment_expansion = {
+            "started": False,
+            "reason": "execution_backlog_preferred_over_more_research",
+        }
+    elif not producer_window_open:
+        profit_first_enrichment_expansion = {
+            "started": False,
+            "reason": "shared_profit_first_producer_handoff_cooldown",
+            "cooldown_remaining_seconds": round(producer_handoff_remaining, 2),
+        }
+    else:
+        profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(
+            cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_ENRICHMENT_COOLDOWN_SECONDS", "300")),
+        )
+        if profit_first_enrichment_expansion.get("started"):
+            _record_profit_first_producer(
+                "profit_first_enrichment_expansion",
+                profit_first_enrichment_expansion,
+            )
+            log("PROFIT_FIRST_ENRICHMENT_EXPANSION " + json.dumps(profit_first_enrichment_expansion, default=str, sort_keys=True))
 
     candidate_materialization = materialize_profit_first_candidates()
     if candidate_materialization.get("candidate_files_written_or_updated", 0) > 0:
         log("PROFIT_FIRST_CANDIDATES_MATERIALIZED " + json.dumps(candidate_materialization, default=str, sort_keys=True))
 
-    candidate_recovery = maybe_recover_profit_first_outputs(
-        min_expected_candidates=1,
-        cooldown_seconds=int(os.getenv("COMPANYOS_CANDIDATE_RECOVERY_COOLDOWN_SECONDS", "300")),
+    producer_now = time.time()
+    producer_handoff_remaining = max(
+        0.0,
+        producer_handoff_seconds - (producer_now - producer_last_dispatch),
     )
-    if candidate_recovery.get("started"):
-        log("PROFIT_FIRST_CANDIDATE_RECOVERY " + json.dumps(candidate_recovery, default=str, sort_keys=True))
+
+    if execution_backlog:
+        candidate_recovery = {
+            "started": False,
+            "reason": "execution_backlog_preferred_over_more_research",
+        }
+    elif producer_dispatched_this_tick or producer_handoff_remaining > 0.0:
+        candidate_recovery = {
+            "started": False,
+            "reason": "shared_profit_first_producer_handoff_cooldown",
+            "cooldown_remaining_seconds": round(producer_handoff_remaining, 2),
+        }
+    else:
+        candidate_recovery = maybe_recover_profit_first_outputs(
+            min_expected_candidates=1,
+            cooldown_seconds=int(os.getenv("COMPANYOS_CANDIDATE_RECOVERY_COOLDOWN_SECONDS", "300")),
+        )
+        if candidate_recovery.get("started"):
+            _record_profit_first_producer(
+                "candidate_recovery",
+                candidate_recovery,
+            )
+            log("PROFIT_FIRST_CANDIDATE_RECOVERY " + json.dumps(candidate_recovery, default=str, sort_keys=True))
+
+    producer_now = time.time()
+    producer_handoff_remaining = max(
+        0.0,
+        producer_handoff_seconds - (producer_now - producer_last_dispatch),
+    )
 
     if execution_backlog:
         profit_first_research = {
             "started": False,
             "reason": "execution_backlog_preferred_over_more_research",
         }
+    elif producer_dispatched_this_tick or producer_handoff_remaining > 0.0:
+        profit_first_research = {
+            "started": False,
+            "reason": "shared_profit_first_producer_handoff_cooldown",
+            "cooldown_remaining_seconds": round(producer_handoff_remaining, 2),
+        }
     else:
         profit_first_research = maybe_run_profit_first_research(
             cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_RESEARCH_COOLDOWN_SECONDS", "300")),
         )
         if profit_first_research.get("started"):
+            _record_profit_first_producer(
+                "profit_first_research",
+                profit_first_research,
+            )
             log("PROFIT_FIRST_RESEARCH " + json.dumps(profit_first_research, default=str, sort_keys=True))
 
     if execution_backlog:
