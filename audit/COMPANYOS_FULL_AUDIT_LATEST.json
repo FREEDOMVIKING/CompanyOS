@@ -1,0 +1,786 @@
+{
+  "branch": "companyos-continuous-fix-2026-09-11",
+  "capabilities": {
+    "autonomous_task_queue": {
+      "path": "companyos/runtime/autonomous_task_queue.py",
+      "present": true
+    },
+    "connector_engine": {
+      "path": "companyos/connectors_live/engine.py",
+      "present": true
+    },
+    "customer_acquisition": {
+      "path": "companyos/runtime/customer_acquisition_bridge.py",
+      "present": true
+    },
+    "dashboard": {
+      "matching_files": [
+        "agents/executive_dashboard_engine.py",
+        "agents/operations_dashboard.py",
+        "agents/phase70_ceo_command_center/__init__.py",
+        "agents/phase70_ceo_command_center/ceoctl.py",
+        "backups/dashboard_server.py.20260717_085035.backup",
+        "backups/dashboard_server.py.20260717_090026.plugins.backup",
+        "backups/dashboard_server.py.20260717_090548.plugin-display.backup",
+        "backups/dashboard_server.py.20260717_091229.marketplace.backup",
+        "backups/dashboard_server.py.20260717_105506.backup",
+        "ceo_memory/dashboard_status.json",
+        "ceo_memory/operations_dashboard.json",
+        "ceo_memory/phase23_executive_dashboard.json",
+        "command_center",
+        "command_center_v25ctl",
+        "companyos/command_center_v25/__init__.py",
+        "companyos/command_center_v25/engine.py",
+        "companyos/command_center_v25/server.py",
+        "companyos/controlplane/dashboard.py",
+        "companyos/dashboard_cluster_manager/__init__.py",
+        "companyos/dashboard_cluster_manager/cli.py",
+        "companyos/dashboard_cluster_manager/engine.py",
+        "companyos/dashboard_cluster_manager/runtime.py",
+        "companyos/dashboardctl",
+        "companyos/executive_dashboard_v2/__init__.py",
+        "companyos/executive_dashboard_v2/cli.py",
+        "companyos/executive_dashboard_v2/engine.py",
+        "companyos/executive_dashboard_v2/runtime.py",
+        "companyos/executivedashboardctl",
+        "companyos/global_executive_dashboard_v18/__init__.py",
+        "companyos/global_executive_dashboard_v18/server.py"
+      ],
+      "present": true
+    },
+    "hosting_connector": {
+      "path": "companyos/connectors_live/hosting.py",
+      "present": false
+    },
+    "profit_opportunity_engine": {
+      "path": "companyos/runtime/profit_opportunity_engine.py",
+      "present": true
+    },
+    "self_evolution": {
+      "path": "companyos/runtime/self_evolution_engine.py",
+      "present": true
+    },
+    "specialist_registry": {
+      "path": "companyos/runtime/default_specialist_registry.py",
+      "present": true
+    },
+    "task_dispatcher": {
+      "path": "companyos/runtime/autonomous_task_dispatcher.py",
+      "present": true
+    },
+    "treasury_or_finance": {
+      "matching_files": [
+        "CompanyOS_AUTONOMOUS_TREASURY_22000.zip",
+        "CompanyOS_CRYPTO_WALLET_CONNECTOR_24000.zip",
+        "CompanyOS_TRANSACTION_LIFECYCLE_48000.zip",
+        "CompanyOS_TREASURY_MULTICHAIN_25000.zip",
+        "CompanyOS_VERIFIED_WALLET_SOURCE_46000.zip",
+        "CompanyOS_WALLET_AUTOBIND_PREFLIGHT_42000.zip",
+        "CompanyOS_WALLET_EXECUTION_WIRING_40000.zip",
+        "PHASE75_LIVE_TREASURY_FEED_INSTALLED.json",
+        "PHASE76_LIVE_TREASURY_AUTH_INSTALLED.json",
+        "PHASE77_EXECUTION_GATE_TREASURY_BRIDGE_INSTALLED.json",
+        "PHASE78_SOLANA_TRANSACTION_BUILD_SIGN_INSTALLED.json",
+        "PHASE82_TRANSACTION_LIFECYCLE_INSTALLED.json",
+        "agents/autonomous_treasury_orchestrator.py",
+        "agents/ceo_treasury_bridge_engine.py",
+        "agents/ceo_treasury_request_engine.py",
+        "agents/finance_forecast_bridge.py",
+        "agents/transaction_approval_bridge.py",
+        "agents/transaction_proposal_engine.py",
+        "agents/transaction_signing_queue.py",
+        "agents/treasury_destination_registry.py",
+        "agents/treasury_event_engine.py",
+        "agents/treasury_kill_switch.py",
+        "agents/treasury_policy_engine.py",
+        "agents/treasury_registry_engine.py",
+        "agents/treasury_rpc_health.py",
+        "agents/treasury_transfer_router.py",
+        "autonomous_finance_treasury_v30ctl",
+        "backups/bootstrap_20260717_083820/agents/finance_agent.py",
+        "backups/bootstrap_20260717_083820/ceo_memory/finance.json",
+        "backups/finance_ledger.json.20260717_180034.phase13-step1.backup"
+      ],
+      "present": true
+    },
+    "venture_identity_progression": {
+      "path": "companyos/governance/venture_identity_progression.py",
+      "present": true
+    },
+    "venture_liveness": {
+      "path": "companyos/runtime/venture_liveness_runtime.py",
+      "present": true
+    },
+    "verified_web_prospect_discovery": {
+      "path": "companyos/runtime/verified_web_prospect_discovery.py",
+      "present": true
+    }
+  },
+  "checks": {
+    "git_fetch_audit": {
+      "command": "git fetch origin",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/git_fetch_audit.log",
+      "passed": true,
+      "returncode": 0,
+      "timeout_seconds": 120
+    },
+    "native_company_health": {
+      "command": "scripts/companyosctl health",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_company_health.log",
+      "passed": false,
+      "returncode": 1,
+      "timeout_seconds": 120
+    },
+    "native_company_status": {
+      "command": "scripts/companyosctl status",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_company_status.log",
+      "passed": true,
+      "returncode": 0,
+      "timeout_seconds": 120
+    },
+    "native_full_launch_validation": {
+      "command": "python scripts/validate_companyos_full_launch.py",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_full_launch_validation.log",
+      "passed": false,
+      "returncode": 40,
+      "timeout_seconds": 240
+    },
+    "native_launch_audit": {
+      "command": "scripts/companyos_launchctl audit",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_launch_audit.log",
+      "passed": false,
+      "returncode": 1,
+      "timeout_seconds": 180
+    },
+    "native_launch_snapshot": {
+      "command": "scripts/companyos_launchctl snapshot",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_launch_snapshot.log",
+      "passed": true,
+      "returncode": 0,
+      "timeout_seconds": 180
+    },
+    "native_qualify": {
+      "command": "scripts/companyos_qualify",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/native_qualify.log",
+      "passed": false,
+      "returncode": 1,
+      "timeout_seconds": 240
+    },
+    "pytest_full": {
+      "command": "python -m pytest -q --disable-warnings --maxfail=25",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/pytest_full.log",
+      "passed": false,
+      "returncode": 1,
+      "timeout_seconds": 900
+    },
+    "python_compileall": {
+      "command": "python -m compileall -q companyos",
+      "log": "/data/data/com.termux/files/home/.companyos_runtime/audit_logs/20260920_122631/python_compileall.log",
+      "passed": true,
+      "returncode": 0,
+      "timeout_seconds": 300
+    },
+    "shell_syntax_all": {
+      "checked": 931,
+      "failed_count": 0,
+      "failed_files": [],
+      "passed": true
+    }
+  },
+  "deployment_actions_performed": false,
+  "email_actions_performed": false,
+  "external_actions_performed": false,
+  "failure_count": 1,
+  "failures": [
+    "check_failed:pytest_full"
+  ],
+  "finance_policy_scan": {
+    "limit_definitions": {
+      "daily_sol": [
+        {
+          "file": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+          "value": "200"
+        },
+        {
+          "file": "companyos/walletintegration/execution_policy.py",
+          "value": "200.0"
+        },
+        {
+          "file": "tools/companyos_live_sol.py",
+          "value": "200"
+        },
+        {
+          "file": "tools/companyos_policy_sol_transfer.py",
+          "value": "200"
+        }
+      ],
+      "daily_usd": [
+        {
+          "file": "backups/bootstrap_20260717_083820/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_084206/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_091756/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_094040/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_094735/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "ceo_memory/authority_execution_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase27_execution_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase29_crypto_treasury_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase32_transaction_policy_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase33a_solana_execution_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase34_autonomous_treasury_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase35_ceo_treasury_bridge_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase36_execution_adapter_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase37_safety_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase38_broadcast_activation_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase38b_activation_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase39_production_orchestrator_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "ceo_memory/phase40_ceo_production_config.json",
+          "value": "20000"
+        },
+        {
+          "file": "companyos/treasuryops/policy.py",
+          "value": "100.0"
+        },
+        {
+          "file": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+          "value": "200"
+        },
+        {
+          "file": "companyos/walletintegration/execution_policy.py",
+          "value": "200.0"
+        },
+        {
+          "file": "companyos_phase21001_22000/companyos/treasuryops/policy.py",
+          "value": "100.0"
+        },
+        {
+          "file": "companyos_phase21001_22000/scripts/phase21001_22000_verify.py",
+          "value": "100"
+        },
+        {
+          "file": "companyos_phase22001_23000/scripts/companyos_payment_demo.py",
+          "value": "100"
+        },
+        {
+          "file": "companyos_phase22001_23000/scripts/phase22001_23000_verify.py",
+          "value": "100"
+        },
+        {
+          "file": "install_phase26_authority_execution_core.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase27_live_execution_connectors.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase29_crypto_treasury_core.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase29_crypto_treasury_core.sh",
+          "value": "20"
+        },
+        {
+          "file": "install_phase32_transaction_policy.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase33a_solana_execution_core.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase34_autonomous_treasury_orchestrator.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase35_ceo_treasury_bridge.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase36_multichain_execution_adapters.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase37_preflight_broadcast_safety.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase38_staged_broadcast_activation.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase38b_controlled_production_activation.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase39_autonomous_production_orchestrator.sh",
+          "value": "20000"
+        },
+        {
+          "file": "install_phase40_ceo_production_integration.sh",
+          "value": "20000"
+        },
+        {
+          "file": "ops/patch_history/companyos_v66_27_customer_acquisition_bridge.sh",
+          "value": "66"
+        },
+        {
+          "file": "phase59_policy_boundary_matrix.py",
+          "value": "0.0"
+        },
+        {
+          "file": "scripts/companyos_payment_demo.py",
+          "value": "100"
+        },
+        {
+          "file": "scripts/phase21001_22000_verify.py",
+          "value": "100"
+        },
+        {
+          "file": "scripts/phase22001_23000_verify.py",
+          "value": "100"
+        },
+        {
+          "file": "tools/companyos_live_sol.py",
+          "value": "200"
+        },
+        {
+          "file": "tools/companyos_policy_sol_transfer.py",
+          "value": "200"
+        }
+      ],
+      "single_sol": [
+        {
+          "file": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+          "value": "150"
+        },
+        {
+          "file": "companyos/walletintegration/execution_policy.py",
+          "value": "150.0"
+        },
+        {
+          "file": "tools/companyos_live_sol.py",
+          "value": "150"
+        },
+        {
+          "file": "tools/companyos_policy_sol_transfer.py",
+          "value": "150"
+        }
+      ],
+      "single_usd": [
+        {
+          "file": "backups/bootstrap_20260717_083820/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_084206/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_091756/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_094040/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "backups/manual_20260717_094735/agents/finance_agent.py",
+          "value": "2"
+        },
+        {
+          "file": "companyos/walletintegration/autonomous_financial_bridge_factory.py",
+          "value": "150"
+        },
+        {
+          "file": "companyos/walletintegration/execution_policy.py",
+          "value": "150.0"
+        },
+        {
+          "file": "tools/companyos_live_sol.py",
+          "value": "150"
+        },
+        {
+          "file": "tools/companyos_policy_sol_transfer.py",
+          "value": "150"
+        }
+      ]
+    }
+  },
+  "financial_actions_performed": false,
+  "inventory": {
+    "commit_count": 265,
+    "current_branch_remote_sha": "d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652",
+    "extensions": {
+      ".1784755492": 1,
+      ".1784756673": 2,
+      ".1784757131": 2,
+      ".1784760739": 3,
+      ".1784762026": 1,
+      ".1784767747": 3,
+      ".1784770797": 2,
+      ".1784772085": 1,
+      ".1784773536": 1,
+      ".1784774090": 1,
+      ".1784822591": 1,
+      ".1784843544": 2,
+      ".1784844397": 1,
+      ".1784844486": 1,
+      ".1784844686": 1,
+      ".1784844902": 1,
+      ".20260721_065127": 1,
+      ".backup": 77,
+      ".bak": 6,
+      ".bak2": 1,
+      ".bak_phase220_fix": 1,
+      ".before-venture-patch": 1,
+      ".before_action_normalizer_20260726_121235": 1,
+      ".before_code_quality_guard_20260731_220443": 2,
+      ".before_code_sanitizer": 1,
+      ".before_compact_plan_20260726_120204": 1,
+      ".before_context_fix": 1,
+      ".before_diag_repair": 1,
+      ".before_empty_test_repair_20260731_205601": 1,
+      ".before_escape_decode_20260731_211357": 1,
+      ".before_exact_validator_20260726_124149": 1,
+      ".before_external_true": 1,
+      ".before_final_action_fallback_20260726_123809": 1,
+      ".before_final_local_fix": 1,
+      ".before_financial_status_fix": 1,
+      ".before_fix": 1,
+      ".before_full_run_tests_replacement_20260731_222038": 1,
+      ".before_governor_v2": 1,
+      ".before_import_fix": 1,
+      ".before_invalid_code_retry_20260731_212436": 1,
+      ".before_json_reliability_fix": 1,
+      ".before_lifecycle_fix_v2": 1,
+      ".before_local_endpoint_fix": 1,
+      ".before_lock_fix": 1,
+      ".before_memory_guard": 1,
+      ".before_noop_success_20260731_215421": 1,
+      ".before_openrouter_fix": 1,
+      ".before_phone_tuning": 1,
+      ".before_plan_normalizer_20260725_134522": 1,
+      ".before_plan_normalizer_20260726_113154": 1,
+      ".before_process_lifecycle_fix": 1,
+      ".before_prompt_preservation_20260731_214614": 1,
+      ".before_registry_compat": 1,
+      ".before_resource_governor": 1,
+      ".before_safe_test_command_fix_20260731_223341": 1,
+      ".before_stability_repair": 1,
+      ".before_test_shape_fix_20260731_221456": 1,
+      ".before_treasury_compat": 1,
+      ".before_unified_local_ai_20260724_221558": 1,
+      ".before_validator_action_20260726_123452": 1,
+      ".before_vercel_20260816_011600": 1,
+      ".before_vercel_20260817_184232": 1,
+      ".broken": 1,
+      ".css": 7,
+      ".csv": 13,
+      ".example": 2,
+      ".gz": 1,
+      ".html": 49,
+      ".ini": 1,
+      ".js": 7,
+      ".json": 1498,
+      ".jsonl": 18,
+      ".md": 147,
+      ".phase63d_backup_20260722t000226z": 1,
+      ".phase63d_v2_backup_20260722t000522z": 1,
+      ".phase64_v2_backup_20260722t003356z": 1,
+      ".phase66_v2_backup_20260722t025526z": 2,
+      ".phase66_v2_backup_20260722t025752z": 3,
+      ".phase66_v2_backup_20260722t030155z": 3,
+      ".phase71_backup_20260722t120213z": 2,
+      ".pre-link": 5,
+      ".pre-resolution": 4,
+      ".pre_compat_fix": 1,
+      ".pre_env_live": 2,
+      ".pre_live_autonomy": 2,
+      ".pre_phase65v2": 2,
+      ".pre_phase65v2_receipt_fields": 1,
+      ".pre_phase65v2_rpc_verify": 1,
+      ".pre_phase65v2_state_mapping": 1,
+      ".pre_public_connectors": 1,
+      ".pre_result_fix": 1,
+      ".pre_sol_transfer": 3,
+      ".py": 6528,
+      ".sh": 931,
+      ".sqlite3": 16,
+      ".stop": 6,
+      ".txt": 230,
+      ".v27_2_backup_20260916_130629": 1,
+      ".v65_43_broken_snapshot_1789761713": 1,
+      ".yml": 4,
+      ".zip": 140,
+      "<none>": 443
+    },
+    "git_status_porcelain": [],
+    "head_sha": "d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652",
+    "head_subject": "Sync full CompanyOS state before comprehensive audit",
+    "head_time": "2026-09-20T12:26:34-05:00",
+    "latest_version_markers": [
+      "V66.35",
+      "V66.34",
+      "V66.33",
+      "V66.32",
+      "V66.31",
+      "V66.30",
+      "V66.29",
+      "V66.28",
+      "V66.27",
+      "V66.26",
+      "V66.25",
+      "V66.24",
+      "V66.23",
+      "V66.22",
+      "V66.21",
+      "V66.20",
+      "V66.19",
+      "V66.18",
+      "V66.17",
+      "V66.16",
+      "V66.15",
+      "V66.14",
+      "V66.13",
+      "V66.12",
+      "V66.11"
+    ],
+    "lines_by_extension": {
+      ".css": 60,
+      ".html": 1434,
+      ".js": 68,
+      ".json": 3923398,
+      ".md": 4031,
+      ".py": 278259,
+      ".sh": 165427,
+      ".yml": 186
+    },
+    "main_remote_sha": "133114c7dfb1a54b99ce1da5f80ff46c5b15b497",
+    "patch_history_files": 412,
+    "python_files": 6528,
+    "script_files": 589,
+    "shell_files": 931,
+    "test_files": 265,
+    "tracked_bytes": 251890751,
+    "tracked_files": 10233,
+    "vs_main_ahead": 73,
+    "vs_main_behind": 0
+  },
+  "mode": "READ_ONLY_AUDIT",
+  "overall_status": "FAIL",
+  "repository": "FREEDOMVIKING/CompanyOS",
+  "runtime": {
+    "authority_switches": {
+      "candidate_validation_priority": true,
+      "capability_build_priority": true,
+      "credential_changes": true,
+      "economics_validation_priority": true,
+      "external_irreversible_actions": true,
+      "financial_actions": true,
+      "integration_scaffold_priority": true,
+      "paid_ads": true,
+      "portfolio_focus_priority": true,
+      "public_deployment": true,
+      "research_priority": true,
+      "unsolicited_outreach": true,
+      "wallet_transactions": true
+    },
+    "companyos_process_count": 21,
+    "companyos_processes": [
+      "526 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.canonical_outcome_bridge loop --interval 60",
+      "16937 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.live_external_execution_router loop --interval 60 --max-actions 5",
+      "17977 bash /data/data/com.termux/files/usr/bin/bash /data/data/com.termux/files/home/companyos_full_github_sync_total_audit_20260920.sh",
+      "19592 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python companyos/runtime/service_supervisor.py",
+      "19593 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -c from companyos.runtime.continuous_goal_runtime import ContinuousGoalRuntime; ContinuousGoalRuntime().run()",
+      "19594 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.productive_autonomy_watchdog",
+      "19595 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.dashboard_server",
+      "19596 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.profit_opportunity_runtime",
+      "19597 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.self_evolution_runtime",
+      "19598 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.autonomous_diagnostics",
+      "19599 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_expansion run",
+      "19600 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_feedback run",
+      "19601 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.compounding_capability_expansion",
+      "19602 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.capability_request_executor run",
+      "19603 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.recursive_improvement_controller run",
+      "19604 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.semantic_capability_bridge run",
+      "19605 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.opportunity_execution_capability_bridge run",
+      "19610 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.continuous_profit_improvement_loop",
+      "19612 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.adaptive_worker_factory",
+      "19613 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.adaptive_workforce_execution_bridge",
+      "23612 python /data/data/com.termux/files/usr/bin/python -m companyos.runtime.venture_liveness_runtime loop --interval 120"
+    ],
+    "connectors": {
+      "accounting": {
+        "configured": false,
+        "enabled": false
+      },
+      "banking": {
+        "configured": false,
+        "enabled": false
+      },
+      "crm": {
+        "configured": false,
+        "enabled": false
+      },
+      "crypto": {
+        "configured": true,
+        "enabled": true
+      },
+      "domains": {
+        "configured": false,
+        "enabled": false
+      },
+      "hosting": {
+        "configured": true,
+        "enabled": true
+      },
+      "rest_api": {
+        "configured": false,
+        "enabled": false
+      },
+      "smtp": {
+        "configured": true,
+        "enabled": true
+      }
+    },
+    "latest_runtime_reports": {
+      "customer_acquisition_bridge_latest.json": {
+        "mode": "verified_public_business_customer_acquisition",
+        "timestamp_unix": 1789921914.6242428,
+        "version": "V66.27"
+      },
+      "venture_liveness_latest.json": {
+        "mode": "venture_liveness_and_existing_ceo_runtime_bridge",
+        "progression_mode": "proactive",
+        "timestamp_unix": 1789925190.9078572,
+        "version": "V66.16"
+      },
+      "verified_web_prospect_discovery_latest.json": {
+        "mode": "adaptive_web_prospect_search_backoff",
+        "timestamp_unix": 1789921914.4424448,
+        "verified_contacts_created": 0,
+        "version": "V66.34"
+      }
+    },
+    "task_queue": {
+      "cancelled": 1,
+      "claimed": 0,
+      "completed": 15990,
+      "failed": 0,
+      "queued": 22,
+      "running": 0,
+      "states": {
+        "CANCELLED": 1,
+        "COMPLETED": 15990,
+        "QUEUED": 22
+      },
+      "total_records": 16013,
+      "types_top20": {
+        "build": 5298,
+        "planning": 5359,
+        "research": 5356
+      }
+    },
+    "ventures": {
+      "canonical_candidate_count": 3,
+      "evaluated_count": 3,
+      "stages": {
+        "BUILD": 2,
+        "CUSTOMER_ACQUISITION": 1
+      },
+      "ventures": [
+        {
+          "artifact_count": 93,
+          "id": "local_contractor_bid_organizer",
+          "stage": "CUSTOMER_ACQUISITION",
+          "unchanged_observations": 0
+        },
+        {
+          "artifact_count": 24,
+          "id": "marketplace_software_opportunity",
+          "stage": "BUILD",
+          "unchanged_observations": 0
+        },
+        {
+          "artifact_count": 23,
+          "id": "mobile_workflow_app_opportunity",
+          "stage": "BUILD",
+          "unchanged_observations": 0
+        }
+      ]
+    }
+  },
+  "schema": "companyos.full_total_audit.v1",
+  "security": {
+    "secret_like_literal_counts": {},
+    "secret_like_locations": [],
+    "tracked_sensitive_filename_count": 0,
+    "tracked_sensitive_filenames": []
+  },
+  "source_snapshot_sha": "d52ecb2156d0c2cdcd9563ce8d5c8ba67ef68652",
+  "timestamp_local": "2026-09-20 12:26:37",
+  "timestamp_unix": 1789925197.671972,
+  "warning_count": 8,
+  "warnings": [
+    "multiple_daily_usd_values_detected:0.0,100,100.0,2,20,200,200.0,20000,66",
+    "multiple_single_usd_values_detected:150,150.0,2",
+    "multiple_daily_sol_values_detected:200,200.0",
+    "multiple_single_sol_values_detected:150,150.0",
+    "native_check_failed:native_full_launch_validation",
+    "native_check_failed:native_launch_audit",
+    "native_check_failed:native_qualify",
+    "native_check_failed:native_company_health"
+  ]
+}
