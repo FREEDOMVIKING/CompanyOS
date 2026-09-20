@@ -19,5 +19,10 @@ def test_query_for_hosting():
 
 def test_provider_status_does_not_expose_keys():
     s = provider_status()
-    assert set(s) == {"tavily", "brave", "serper"}
+    # Provider support can expand over time. The security contract is that
+    # provider_status returns provider labels mapped only to boolean readiness,
+    # never credential values. Provider labels may legitimately include words
+    # such as "keyless".
+    assert {"tavily", "brave", "serper"}.issubset(set(s))
+    assert all(isinstance(k, str) and k for k in s)
     assert all(isinstance(v, bool) for v in s.values())

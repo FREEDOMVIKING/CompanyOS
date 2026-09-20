@@ -29,6 +29,8 @@ ACTION_TIMEOUT = int(os.getenv("COMPANYOS_DRL_ACTION_TIMEOUT_SECONDS", "240"))
 # unsolicited outreach, and irreversible external actions are intentionally
 # outside the live-learning action surface.
 LIVE_AUTHORITY = {
+    # Global CompanyOS authority switches. These reflect the user's configured
+    # system-wide autonomy and are consumed by dedicated governed runtimes.
     "research_priority": True,
     "economics_validation_priority": True,
     "capability_build_priority": True,
@@ -42,6 +44,26 @@ LIVE_AUTHORITY = {
     "unsolicited_outreach": True,
     "public_deployment": True,
     "external_irreversible_actions": True,
+}
+
+# The adaptive DRL learner has a narrower action surface than CompanyOS as a
+# whole. Learning/exploration may choose internal research/build/validation
+# actions, but irreversible external actions must be handed to their dedicated
+# policy/governance runtimes rather than executed directly by the learner.
+DRL_ACTION_AUTHORITY = {
+    "research_priority": True,
+    "economics_validation_priority": True,
+    "capability_build_priority": True,
+    "integration_scaffold_priority": True,
+    "candidate_validation_priority": True,
+    "portfolio_focus_priority": True,
+    "financial_actions": False,
+    "wallet_transactions": False,
+    "credential_changes": False,
+    "paid_ads": False,
+    "unsolicited_outreach": False,
+    "public_deployment": False,
+    "external_irreversible_actions": False,
 }
 
 
@@ -139,9 +161,9 @@ def command_for(action: str, snap: dict[str, Any]) -> tuple[list[str] | None, st
         return None, "portfolio_executor_unavailable"
 
     if action == "allocate_verified_capital":
-        if not bool(LIVE_AUTHORITY.get("financial_actions")):
+        if not bool(DRL_ACTION_AUTHORITY.get("financial_actions")):
             return None, "financial_actions_authority_off"
-        if not bool(LIVE_AUTHORITY.get("wallet_transactions")):
+        if not bool(DRL_ACTION_AUTHORITY.get("wallet_transactions")):
             return None, "wallet_transactions_authority_off"
         try:
             from companyos.runtime import drl_financial_allocator as _capital_allocator
@@ -338,6 +360,7 @@ def cycle(execute_live: bool = True) -> dict[str, Any]:
         "execution": execution,
         "pending_reward_assignment": bool(gov.get("pending")),
         "authority": LIVE_AUTHORITY,
+        "drl_action_authority": DRL_ACTION_AUTHORITY,
         "snapshot": current.get("raw"),
     }
     save_json(LATEST, result)
@@ -360,6 +383,7 @@ def status() -> dict[str, Any]:
         "mode": gov.get("mode", "not_started"),
         "objective": gov.get("objective"),
         "authority": LIVE_AUTHORITY,
+        "drl_action_authority": DRL_ACTION_AUTHORITY,
         "pending_action": (gov.get("pending") or {}).get("action") if isinstance(gov.get("pending"), dict) else None,
         "last_choice": (gov.get("last_choice") or {}).get("action") if isinstance(gov.get("last_choice"), dict) else None,
         "last_execution": gov.get("last_execution"),
