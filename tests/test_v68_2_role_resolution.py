@@ -18,12 +18,28 @@ def test_role_resolution_is_non_destructive():
     assert d["move_performed"] is False
     assert d["financial_limits_changed"] is False
 
-def test_future_candidates_are_exact_copies_of_keeper():
+def test_future_candidates_are_exact_copies_of_keeper_or_verified_retired():
     d=report()
+    retirement_path=ROOT/"audit/COMPANYOS_V68_3C_ARCHIVE_RETIREMENT_MANIFEST.json"
+    retired={}
+    if retirement_path.exists():
+        rd=json.loads(retirement_path.read_text())
+        retired={row["path"]:row for row in rd.get("candidates",[])}
+
     for row in d["future_surgical_candidates"]:
-        assert (ROOT/row["path"]).exists()
-        assert (ROOT/row["keeper"]).exists()
-        assert sha(row["path"])==sha(row["keeper"])==row["sha256"]
+        candidate=ROOT/row["path"]
+        keeper=ROOT/row["keeper"]
+
+        assert keeper.exists()
+        assert sha(row["keeper"])==row["sha256"]
+
+        if candidate.exists():
+            assert sha(row["path"])==row["sha256"]
+        else:
+            retired_row=retired.get(row["path"])
+            assert retired_row is not None
+            assert retired_row["keeper"]==row["keeper"]
+            assert retired_row["sha256"]==row["sha256"]
 
 def test_role_distinct_groups_are_not_future_candidates():
     d=report()
