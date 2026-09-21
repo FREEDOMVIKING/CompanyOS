@@ -1,0 +1,88 @@
+{
+  "account_created_by_test": false,
+  "automatic_purchase_performed": false,
+  "blocking_failures": [],
+  "cloudflare_free_model_default": "@cf/zai-org/glm-4.7-flash",
+  "connector_state": {
+    "capabilities": {
+      "llm_inference": [
+        "cloudflare_workers_ai",
+        "openai"
+      ],
+      "public_code_research": [
+        "github_public_rest"
+      ],
+      "web_search": []
+    },
+    "cloudflare": {
+      "account_id_present": true,
+      "discovery": {
+        "available": true,
+        "source": "authorized_env"
+      },
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "ready": true
+    },
+    "financial_action_performed": false,
+    "generated_at_unix": 1790010974.5522506,
+    "public_key_harvesting_performed": false,
+    "schema": "companyos.provider_connector_router.v69_27",
+    "secret_values_emitted": false
+  },
+  "financial_action_performed": false,
+  "generated_at_unix": 1790010976.9779332,
+  "interactive_signup_submission_performed": false,
+  "leaked_key_usage_performed": false,
+  "onboarding_state": {
+    "action": {
+      "performed": false,
+      "reason": "interactive_signup_or_verification_required"
+    },
+    "available_capabilities": {
+      "llm_inference": [
+        "cloudflare_workers_ai",
+        "openai"
+      ],
+      "public_code_research": [
+        "github_public_rest"
+      ],
+      "web_search": []
+    },
+    "company_account_email": "co***@gmail.com",
+    "financial_action_performed": false,
+    "generated_at_unix": 1790010976.2462552,
+    "next_provider": "tavily",
+    "next_signup_url": "https://app.tavily.com",
+    "pending_providers": [
+      "tavily",
+      "brave_search",
+      "groq",
+      "gemini",
+      "huggingface",
+      "github_actions"
+    ],
+    "rules": {
+      "automatic_purchase": false,
+      "bypass_captcha": false,
+      "bypass_kyc": false,
+      "bypass_phone_verification": false,
+      "fabricate_identity": false,
+      "official_programmatic_registration_only": true,
+      "paid_upgrade": false,
+      "search_public_repositories_for_keys": false,
+      "use_leaked_or_third_party_keys": false
+    },
+    "schema": "companyos.provider_account_onboarding_worker.v69_27",
+    "secret_values_emitted": false
+  },
+  "overall_status": "PASS",
+  "public_code_provider": "github_public_rest",
+  "public_key_harvesting_performed": false,
+  "schema": "companyos.v69_27.provider_connectors_and_onboarding_worker.v1",
+  "secret_values_emitted": false,
+  "verification_bypassed": false,
+  "web_search_provider_targets": [
+    "tavily",
+    "brave_search"
+  ]
+}

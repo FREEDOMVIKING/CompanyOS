@@ -32,6 +32,32 @@ PROVIDERS: dict[str,dict[str,Any]] = {
         "automated_signup_permitted":False,
         "priority":1,
     },
+    "tavily": {
+        "kind":"web_search",
+        "auth":"api_key",
+        "free":True,
+        "free_summary":"Free account includes monthly API credits.",
+        "official_url":"https://www.tavily.com",
+        "signup_url":"https://app.tavily.com",
+        "credential_env":["TAVILY_API_KEY"],
+        "account_required":True,
+        "official_registration_api":False,
+        "automated_signup_permitted":False,
+        "priority":2,
+    },
+    "brave_search": {
+        "kind":"web_search",
+        "auth":"api_key",
+        "free":True,
+        "free_summary":"Brave Search API includes monthly free credits.",
+        "official_url":"https://brave.com/search/api/",
+        "signup_url":"https://api.search.brave.com/app/keys",
+        "credential_env":["BRAVE_SEARCH_API_KEY","BRAVE_API_KEY"],
+        "account_required":True,
+        "official_registration_api":False,
+        "automated_signup_permitted":False,
+        "priority":3,
+    },
     "groq": {
         "kind":"ai_inference",
         "auth":"api_key",
@@ -236,6 +262,14 @@ def probe_github_public() -> dict[str,Any]:
 def probe_keyed_provider(name: str, secrets: dict[str,str]) -> dict[str,Any]:
     # Only zero-spend/read-only auth probes. No inference request is generated here.
     try:
+        if name=="tavily":
+            key=secrets.get("TAVILY_API_KEY")
+            return {"probe":"credential_presence","authenticated":bool(key),"unverified_until_first_search":bool(key)} if key else {"probe":"skipped","reason":"credential_missing"}
+
+        if name=="brave_search":
+            key=secrets.get("BRAVE_SEARCH_API_KEY") or secrets.get("BRAVE_API_KEY")
+            return {"probe":"credential_presence","authenticated":bool(key),"unverified_until_first_search":bool(key)} if key else {"probe":"skipped","reason":"credential_missing"}
+
         if name=="groq":
             key=secrets.get("GROQ_API_KEY")
             if not key:
