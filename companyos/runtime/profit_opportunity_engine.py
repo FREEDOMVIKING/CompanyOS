@@ -43,7 +43,12 @@ def normalize(d,p):
  action=str(pick(d,"next_action","recommended_action","first_action","execution_action",default=""))
  has_action=bool(action) or any(h in t for h in HINTS)
  if any(x in t for x in POLICY) and not has_action:return None
- profit=num(pick(d,"expected_profit","projected_profit","profit","expected_net_profit",default=0))
+ schema_name=str(d.get("schema") or "")
+ monetary_profit=pick(d,"expected_profit_dollars","projected_profit_dollars","expected_net_profit","projected_profit","profit_dollars",default=None)
+ if monetary_profit in (None,"") and schema_name.startswith("companyos.profit_candidate.v69_13"):
+  profit=0.0
+ else:
+  profit=num(monetary_profit if monetary_profit not in (None,"") else pick(d,"expected_profit","profit",default=0))
  margin=num(pick(d,"expected_margin_pct","margin_pct","margin","profit_margin",default=0))
  if not has_action and profit<=0 and margin<=0:return None
  ev=pick(d,"evidence","evidence_sources","sources",default=[])
@@ -51,7 +56,7 @@ def normalize(d,p):
  return Opportunity(eid,name,str(p),str(pick(d,"profit_mechanism","mechanism","revenue_mechanism","model","business_model",default="unknown")),
   str(pick(d,"category","sector","market","industry","type",default="unknown")),action,profit,margin,max(.1,num(pick(d,"time_to_cash_days","days_to_cash",default=30),30)),
   max(0,num(pick(d,"capital_required","startup_cost","required_capital","cost",default=0))),max(0,num(pick(d,"capital_at_risk","downside","max_loss",default=0))),
-  clamp(pick(d,"probability_success_pct","success_probability","confidence",default=0)),int(num(pick(d,"evidence_count",default=len(ev) if isinstance(ev,list) else 0))),
+  clamp(pick(d,"probability_success_pct","probability_of_success","success_probability","probability","confidence",default=0)),int(num(pick(d,"evidence_count",default=len(ev) if isinstance(ev,list) else 0))),
   clamp(pick(d,"evidence_quality_pct","evidence_quality","evidence_confidence",default=0)),clamp(pick(d,"scalability_pct","scalability","scale_score",default=50)),
   clamp(pick(d,"reversibility_pct","reversibility",default=70)),clamp(pick(d,"execution_readiness_pct","execution_readiness","readiness",default=50 if has_action else 0)),
   clamp(pick(d,"complexity_pct","complexity",default=50)),clamp(pick(d,"legal_compliance_risk_pct","compliance_risk","legal_risk",default=10)),
@@ -242,6 +247,13 @@ def discover():
 
 def _candidate_qualification_reasons(o):
     reasons = []
+    payload = o.payload if isinstance(o.payload, dict) else {}
+    decision_ready = bool(payload.get("decision_ready", False))
+    decision_status = str(payload.get("decision_status") or "").strip().lower()
+    if payload.get("hypothesis_only") is True and not decision_ready:
+        reasons.append("research_hypothesis_not_promoted")
+    if decision_status in {"research_required", "continue_research"} and not decision_ready:
+        reasons.append("decision_closure_not_ready")
     min_score = num(os.getenv("COMPANYOS_PROFIT_MIN_SCORE", "45"))
     if o.score < min_score:
         reasons.append("score_below_execution_threshold")
