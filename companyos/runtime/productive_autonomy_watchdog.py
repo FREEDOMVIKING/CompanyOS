@@ -118,6 +118,119 @@ def _producer_throttle_gate(bp: dict[str, Any], ws: dict[str, Any]) -> dict[str,
         "hard_threshold": hard_threshold,
     }
 
+
+def _profit_first_candidate_count() -> int:
+    dirs = [
+        RUNTIME / "profit_first_candidates",
+        Path.home() / ".companyos_runtime" / "profit_first_candidates",
+    ]
+    seen: set[str] = set()
+    for d in dirs:
+        try:
+            if d.exists():
+                for p in d.glob("*.json"):
+                    seen.add(str(p))
+        except Exception:
+            pass
+    return len(seen)
+
+
+def _profit_first_orchestration_record(orchestration_id: str | None) -> dict[str, Any]:
+    if not orchestration_id:
+        return {}
+    for p in (
+        Path.home() / ".companyos_runtime" / "ceo_orchestrations" / f"{orchestration_id}.json",
+        RUNTIME / "ceo_orchestrations" / f"{orchestration_id}.json",
+    ):
+        if p.exists():
+            d = read_json(p)
+            if d:
+                d["_record_path"] = str(p)
+                return d
+    return {}
+
+
+def _clear_profit_first_producer_owner(ws: dict[str, Any]) -> None:
+    for key in (
+        "profit_first_producer_owner_name",
+        "profit_first_producer_owner_orchestration_id",
+        "profit_first_producer_owner_started_unix",
+        "profit_first_producer_owner_candidate_count_baseline",
+        "profit_first_producer_owner_timeout_seconds",
+    ):
+        ws.pop(key, None)
+
+
+def _profit_first_producer_owner_state(ws: dict[str, Any], *, timeout_seconds: int) -> dict[str, Any]:
+    """V69.11 outcome-aware profit-first producer ownership.
+
+    Candidate materialization by itself does not release a RUNNING owner.
+    Ownership releases only on a terminal orchestration state or bounded timeout.
+    """
+    oid = str(ws.get("profit_first_producer_owner_orchestration_id") or "")
+    name = str(ws.get("profit_first_producer_owner_name") or "")
+    started = float(ws.get("profit_first_producer_owner_started_unix", 0) or 0)
+    baseline = int(ws.get("profit_first_producer_owner_candidate_count_baseline", 0) or 0)
+    now = time.time()
+    current = _profit_first_candidate_count()
+    if not oid:
+        return {"blocking": False, "reason": "no_profit_first_producer_owner", "candidate_count": current}
+
+    rec = _profit_first_orchestration_record(oid)
+    state = str(rec.get("state") or "UNKNOWN").upper()
+    age = max(0.0, now - started) if started else 0.0
+    delta = current - baseline
+    terminal = state in {"COMPLETED", "FAILED", "HALTED", "CANCELLED"}
+
+    if terminal or (started and age >= timeout_seconds):
+        outcome = (
+            ("terminal_with_candidates" if delta > 0 else "terminal_without_candidates")
+            if terminal else "owner_timeout"
+        )
+        ws["profit_first_producer_last_owner_outcome"] = outcome
+        ws["profit_first_producer_last_owner_terminal_state"] = state
+        ws["profit_first_producer_last_owner_orchestration_id"] = oid
+        ws["profit_first_producer_last_owner_name"] = name
+        ws["profit_first_producer_last_owner_age_seconds"] = round(age, 3)
+        ws["profit_first_producer_last_owner_candidate_delta"] = delta
+        ws["profit_first_producer_last_owner_released_unix"] = now
+        _clear_profit_first_producer_owner(ws)
+        write_json(WATCHDOG_STATE, ws)
+        return {
+            "blocking": False, "reason": outcome, "owner_name": name,
+            "orchestration_id": oid, "state": state, "age_seconds": age,
+            "candidate_count": current, "candidate_delta": delta,
+            "record_path": rec.get("_record_path"),
+        }
+
+    return {
+        "blocking": True, "reason": "active_profit_first_producer_owner",
+        "owner_name": name, "orchestration_id": oid, "state": state,
+        "age_seconds": age, "timeout_seconds": timeout_seconds,
+        "candidate_count": current, "candidate_delta": delta,
+        "record_path": rec.get("_record_path"),
+    }
+
+
+def _claim_profit_first_producer_owner(
+    ws: dict[str, Any], *, name: str, result: dict[str, Any],
+    timeout_seconds: int, candidate_count_baseline: int,
+) -> None:
+    oid = str(result.get("orchestration_id") or "")
+    if not oid:
+        return
+    now = time.time()
+    ws["profit_first_producer_owner_name"] = name
+    ws["profit_first_producer_owner_orchestration_id"] = oid
+    ws["profit_first_producer_owner_started_unix"] = now
+    ws["profit_first_producer_owner_candidate_count_baseline"] = int(candidate_count_baseline)
+    ws["profit_first_producer_owner_timeout_seconds"] = int(timeout_seconds)
+    ws["profit_first_producer_last_dispatch_unix"] = now
+    ws["profit_first_producer_last_name"] = name
+    ws["profit_first_producer_last_orchestration_id"] = oid
+    write_json(WATCHDOG_STATE, ws)
+
+
 def start_internal_goal(goal: str) -> str:
     if should_force_diversified_discovery():
         goal = discovery_directive()
@@ -180,57 +293,66 @@ def tick() -> dict[str, Any]:
         or promotion.get("reason") in {"execution_capacity_full", "promotion_cooldown"}
     )
 
-    # V69.10 serialized profit-first producer arbitration.
-    #
-    # V69.9 proved three independent producer paths could all create CEO root
-    # orchestrations from the same empty-candidate observation. Keep every
-    # recovery path, but serialize dispatches through one shared handoff window.
+    # V69.11 outcome-aware profit-first producer ownership.
     producer_handoff_seconds = max(
         15,
         int(os.getenv("COMPANYOS_PROFIT_FIRST_PRODUCER_HANDOFF_COOLDOWN_SECONDS", "60")),
     )
-    producer_now = time.time()
-    producer_last_dispatch = float(
-        ws.get("profit_first_producer_last_dispatch_unix", 0) or 0
+    producer_owner_timeout_seconds = max(
+        producer_handoff_seconds,
+        int(os.getenv("COMPANYOS_PROFIT_FIRST_PRODUCER_OWNER_TIMEOUT_SECONDS", "600")),
     )
+
+    owner_state = _profit_first_producer_owner_state(
+        ws, timeout_seconds=producer_owner_timeout_seconds,
+    )
+    owner_blocking = bool(owner_state.get("blocking"))
+    ws["profit_first_producer_owner_observation"] = owner_state
+    write_json(WATCHDOG_STATE, ws)
+
+    producer_now = time.time()
+    producer_last_dispatch = float(ws.get("profit_first_producer_last_dispatch_unix", 0) or 0)
     producer_handoff_remaining = max(
-        0.0,
-        producer_handoff_seconds - (producer_now - producer_last_dispatch),
+        0.0, producer_handoff_seconds - (producer_now - producer_last_dispatch),
     )
     producer_window_open = (
-        not execution_backlog and producer_handoff_remaining <= 0.0
+        not execution_backlog and not owner_blocking and producer_handoff_remaining <= 0.0
     )
     producer_dispatched_this_tick = False
 
-    def _record_profit_first_producer(name: str, result: dict[str, Any]) -> None:
-        nonlocal producer_dispatched_this_tick, producer_last_dispatch
+    def _record_profit_first_producer(
+        name: str, result: dict[str, Any], *, candidate_count_baseline: int,
+    ) -> None:
+        nonlocal producer_dispatched_this_tick, producer_last_dispatch, owner_blocking
         producer_dispatched_this_tick = True
         producer_last_dispatch = time.time()
-        ws["profit_first_producer_last_dispatch_unix"] = producer_last_dispatch
-        ws["profit_first_producer_last_name"] = name
-        ws["profit_first_producer_last_orchestration_id"] = result.get("orchestration_id")
+        _claim_profit_first_producer_owner(
+            ws, name=name, result=result,
+            timeout_seconds=producer_owner_timeout_seconds,
+            candidate_count_baseline=candidate_count_baseline,
+        )
+        owner_blocking = bool(result.get("orchestration_id"))
         ws["profit_first_producer_handoff_seconds"] = producer_handoff_seconds
         write_json(WATCHDOG_STATE, ws)
 
     if execution_backlog:
-        profit_first_enrichment_expansion = {
-            "started": False,
-            "reason": "execution_backlog_preferred_over_more_research",
-        }
+        profit_first_enrichment_expansion = {"started": False, "reason": "execution_backlog_preferred_over_more_research"}
+    elif owner_blocking:
+        profit_first_enrichment_expansion = {"started": False, "reason": "active_profit_first_producer_owner", "owner": owner_state}
     elif not producer_window_open:
         profit_first_enrichment_expansion = {
-            "started": False,
-            "reason": "shared_profit_first_producer_handoff_cooldown",
+            "started": False, "reason": "shared_profit_first_producer_handoff_cooldown",
             "cooldown_remaining_seconds": round(producer_handoff_remaining, 2),
         }
     else:
+        baseline = _profit_first_candidate_count()
         profit_first_enrichment_expansion = maybe_run_profit_first_enrichment_expansion(
             cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_ENRICHMENT_COOLDOWN_SECONDS", "300")),
         )
         if profit_first_enrichment_expansion.get("started"):
             _record_profit_first_producer(
-                "profit_first_enrichment_expansion",
-                profit_first_enrichment_expansion,
+                "profit_first_enrichment_expansion", profit_first_enrichment_expansion,
+                candidate_count_baseline=baseline,
             )
             log("PROFIT_FIRST_ENRICHMENT_EXPANSION " + json.dumps(profit_first_enrichment_expansion, default=str, sort_keys=True))
 
@@ -238,60 +360,52 @@ def tick() -> dict[str, Any]:
     if candidate_materialization.get("candidate_files_written_or_updated", 0) > 0:
         log("PROFIT_FIRST_CANDIDATES_MATERIALIZED " + json.dumps(candidate_materialization, default=str, sort_keys=True))
 
-    producer_now = time.time()
     producer_handoff_remaining = max(
-        0.0,
-        producer_handoff_seconds - (producer_now - producer_last_dispatch),
+        0.0, producer_handoff_seconds - (time.time() - producer_last_dispatch),
     )
-
     if execution_backlog:
+        candidate_recovery = {"started": False, "reason": "execution_backlog_preferred_over_more_research"}
+    elif owner_blocking or producer_dispatched_this_tick:
+        candidate_recovery = {"started": False, "reason": "active_profit_first_producer_owner", "owner": owner_state}
+    elif producer_handoff_remaining > 0.0:
         candidate_recovery = {
-            "started": False,
-            "reason": "execution_backlog_preferred_over_more_research",
-        }
-    elif producer_dispatched_this_tick or producer_handoff_remaining > 0.0:
-        candidate_recovery = {
-            "started": False,
-            "reason": "shared_profit_first_producer_handoff_cooldown",
+            "started": False, "reason": "shared_profit_first_producer_handoff_cooldown",
             "cooldown_remaining_seconds": round(producer_handoff_remaining, 2),
         }
     else:
+        baseline = _profit_first_candidate_count()
         candidate_recovery = maybe_recover_profit_first_outputs(
             min_expected_candidates=1,
             cooldown_seconds=int(os.getenv("COMPANYOS_CANDIDATE_RECOVERY_COOLDOWN_SECONDS", "300")),
         )
         if candidate_recovery.get("started"):
             _record_profit_first_producer(
-                "candidate_recovery",
-                candidate_recovery,
+                "candidate_recovery", candidate_recovery,
+                candidate_count_baseline=baseline,
             )
             log("PROFIT_FIRST_CANDIDATE_RECOVERY " + json.dumps(candidate_recovery, default=str, sort_keys=True))
 
-    producer_now = time.time()
     producer_handoff_remaining = max(
-        0.0,
-        producer_handoff_seconds - (producer_now - producer_last_dispatch),
+        0.0, producer_handoff_seconds - (time.time() - producer_last_dispatch),
     )
-
     if execution_backlog:
+        profit_first_research = {"started": False, "reason": "execution_backlog_preferred_over_more_research"}
+    elif owner_blocking or producer_dispatched_this_tick:
+        profit_first_research = {"started": False, "reason": "active_profit_first_producer_owner", "owner": owner_state}
+    elif producer_handoff_remaining > 0.0:
         profit_first_research = {
-            "started": False,
-            "reason": "execution_backlog_preferred_over_more_research",
-        }
-    elif producer_dispatched_this_tick or producer_handoff_remaining > 0.0:
-        profit_first_research = {
-            "started": False,
-            "reason": "shared_profit_first_producer_handoff_cooldown",
+            "started": False, "reason": "shared_profit_first_producer_handoff_cooldown",
             "cooldown_remaining_seconds": round(producer_handoff_remaining, 2),
         }
     else:
+        baseline = _profit_first_candidate_count()
         profit_first_research = maybe_run_profit_first_research(
             cooldown_seconds=int(os.getenv("COMPANYOS_PROFIT_FIRST_RESEARCH_COOLDOWN_SECONDS", "300")),
         )
         if profit_first_research.get("started"):
             _record_profit_first_producer(
-                "profit_first_research",
-                profit_first_research,
+                "profit_first_research", profit_first_research,
+                candidate_count_baseline=baseline,
             )
             log("PROFIT_FIRST_RESEARCH " + json.dumps(profit_first_research, default=str, sort_keys=True))
 

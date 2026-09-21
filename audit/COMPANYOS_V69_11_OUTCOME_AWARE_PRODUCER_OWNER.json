@@ -1,0 +1,118 @@
+{
+  "blocking_failures": [],
+  "ceo_start_count": 6,
+  "duration_seconds": 484.3712631489907,
+  "handoffs": [
+    {
+      "gap_seconds": 60.06526017189026,
+      "next_start_ts": 1789950518.97302,
+      "pass": true,
+      "previous_final_state": "COMPLETED",
+      "previous_orchestration_id": "48e34347-b853-4533-b0a2-3bfcd5cbd66b",
+      "previous_start_ts": 1789950458.90776,
+      "previous_updated_at_unix": 1789950459.2942777,
+      "terminal_before_next": true,
+      "timeout_before_next": false
+    },
+    {
+      "gap_seconds": 60.0848925113678,
+      "next_start_ts": 1789950579.0579126,
+      "pass": true,
+      "previous_final_state": "COMPLETED",
+      "previous_orchestration_id": "b6aca354-eed0-4912-9204-f89aacafa5b2",
+      "previous_start_ts": 1789950518.97302,
+      "previous_updated_at_unix": 1789950519.5275466,
+      "terminal_before_next": true,
+      "timeout_before_next": false
+    },
+    {
+      "gap_seconds": 180.18488597869873,
+      "next_start_ts": 1789950759.2427986,
+      "pass": true,
+      "previous_final_state": "COMPLETED",
+      "previous_orchestration_id": "6e0c4f87-7374-400b-b848-ab7791758809",
+      "previous_start_ts": 1789950579.0579126,
+      "previous_updated_at_unix": 1789950579.8194413,
+      "terminal_before_next": true,
+      "timeout_before_next": false
+    },
+    {
+      "gap_seconds": 60.12604355812073,
+      "next_start_ts": 1789950819.3688421,
+      "pass": true,
+      "previous_final_state": "COMPLETED",
+      "previous_orchestration_id": "6645cefa-efe1-4593-a7e5-93a840a77ef8",
+      "previous_start_ts": 1789950759.2427986,
+      "previous_updated_at_unix": 1789950760.3508222,
+      "terminal_before_next": true,
+      "timeout_before_next": false
+    },
+    {
+      "gap_seconds": 60.10834574699402,
+      "next_start_ts": 1789950879.4771879,
+      "pass": true,
+      "previous_final_state": "COMPLETED",
+      "previous_orchestration_id": "36d01669-77a0-4d2b-b531-65ed895a8b4b",
+      "previous_start_ts": 1789950819.3688421,
+      "previous_updated_at_unix": 1789950820.7143354,
+      "terminal_before_next": true,
+      "timeout_before_next": false
+    }
+  ],
+  "max_consecutive_failures": 0,
+  "max_restart_total": 0,
+  "memory_error_hits": 0,
+  "native_task_states": {
+    "COMPLETED": 18
+  },
+  "native_task_total": 18,
+  "overall_status": "PASS",
+  "owner_overlap_violation_count": 0,
+  "owner_overlap_violations": [],
+  "owner_timeout_seconds": 600,
+  "producer_callers": {
+    "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs": 2,
+    "profit_first_enrichment_expansion.py:176:dispatch": 2,
+    "profit_first_research_pipeline.py:107:run_stage": 2
+  },
+  "schema": "companyos.v69_11.outcome_aware_producer_ownership.v1",
+  "signal9_hits": 0,
+  "starts": [
+    {
+      "caller": "profit_first_enrichment_expansion.py:176:dispatch",
+      "orchestration_id": "48e34347-b853-4533-b0a2-3bfcd5cbd66b",
+      "start_ts": 1789950458.90776
+    },
+    {
+      "caller": "profit_first_research_pipeline.py:107:run_stage",
+      "orchestration_id": "b6aca354-eed0-4912-9204-f89aacafa5b2",
+      "start_ts": 1789950518.97302
+    },
+    {
+      "caller": "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs",
+      "orchestration_id": "6e0c4f87-7374-400b-b848-ab7791758809",
+      "start_ts": 1789950579.0579126
+    },
+    {
+      "caller": "profit_first_enrichment_expansion.py:176:dispatch",
+      "orchestration_id": "6645cefa-efe1-4593-a7e5-93a840a77ef8",
+      "start_ts": 1789950759.2427986
+    },
+    {
+      "caller": "profit_first_research_pipeline.py:107:run_stage",
+      "orchestration_id": "36d01669-77a0-4d2b-b531-65ed895a8b4b",
+      "start_ts": 1789950819.3688421
+    },
+    {
+      "caller": "candidate_materialization_bridge.py:347:maybe_recover_missing_outputs",
+      "orchestration_id": "0747478f-3db1-49e8-a7be-1abe9d2bc513",
+      "start_ts": 1789950879.4771879
+    }
+  ],
+  "warnings": [],
+  "watchdog_last_owner_candidate_delta": 0,
+  "watchdog_last_owner_outcome": "terminal_without_candidates",
+  "watchdog_last_owner_terminal_state": "COMPLETED",
+  "watchdog_owner_name": null,
+  "watchdog_owner_orchestration_id": null
+}

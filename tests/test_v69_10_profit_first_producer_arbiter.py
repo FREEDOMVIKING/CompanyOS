@@ -8,7 +8,7 @@ def source():
 
 def test_shared_handoff_state_is_present():
     s=source()
-    assert "V69.10 serialized profit-first producer arbitration" in s
+    assert ("V69.10 serialized profit-first producer arbitration" in s or "V69.11 outcome-aware profit-first producer ownership" in s)
     assert "COMPANYOS_PROFIT_FIRST_PRODUCER_HANDOFF_COOLDOWN_SECONDS" in s
     assert 'ws["profit_first_producer_last_dispatch_unix"]' in s
     assert 'ws["profit_first_producer_last_name"]' in s
