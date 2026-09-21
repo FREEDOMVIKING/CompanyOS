@@ -145,6 +145,71 @@ def _mark_provider_failure(name,error):
     state["updated_at_unix"]=time.time()
     _save_provider_health(state)
 
+# COMPANYOS_V69_30C_CLOUDFLARE_RESPONSE_PARSER
+def _extract_cloudflare_text(result):
+    if isinstance(result,str):
+        return result.strip()
+
+    if isinstance(result,list):
+        parts=[]
+        for item in result:
+            if isinstance(item,str) and item.strip():
+                parts.append(item.strip())
+            elif isinstance(item,dict):
+                for key in ("text","content","output_text","response"):
+                    value=item.get(key)
+                    if isinstance(value,str) and value.strip():
+                        parts.append(value.strip())
+                        break
+        return "".join(parts).strip()
+
+    if not isinstance(result,dict):
+        return ""
+
+    for key in ("response","text","generated_text","output_text","content"):
+        value=result.get(key)
+        if isinstance(value,str) and value.strip():
+            return value.strip()
+        if isinstance(value,(list,dict)):
+            text=_extract_cloudflare_text(value)
+            if text:
+                return text
+
+    choices=result.get("choices")
+    if isinstance(choices,list):
+        for choice in choices:
+            if not isinstance(choice,dict):
+                continue
+
+            value=choice.get("text")
+            if isinstance(value,str) and value.strip():
+                return value.strip()
+
+            message=choice.get("message")
+            if isinstance(message,dict):
+                text=_extract_cloudflare_text(message.get("content"))
+                if text:
+                    return text
+
+                reasoning=message.get("reasoning_content")
+                if isinstance(reasoning,str) and reasoning.strip():
+                    return reasoning.strip()
+
+            delta=choice.get("delta")
+            if isinstance(delta,dict):
+                text=_extract_cloudflare_text(delta.get("content"))
+                if text:
+                    return text
+
+    for key in ("result","output","data"):
+        nested=result.get(key)
+        if isinstance(nested,(dict,list,str)):
+            text=_extract_cloudflare_text(nested)
+            if text:
+                return text
+
+    return ""
+
 def cloudflare_infer(prompt,max_tokens=160):
     sec=secrets().get("cloudflare_workers_ai") or {}
     token=sec.get("CLOUDFLARE_API_TOKEN") or sec.get("CF_API_TOKEN")
@@ -176,11 +241,28 @@ def cloudflare_infer(prompt,max_tokens=160):
     if status!=200 or not bool((data or {}).get("success")):
         raise RuntimeError(f"cloudflare_http_{status}:{json.dumps(data)[:1000]}")
     result=(data or {}).get("result")
-    text=""
-    if isinstance(result,dict):
-        text=str(result.get("response") or result.get("text") or "")
-    elif isinstance(result,str):
-        text=result
+    text=_extract_cloudflare_text(result)
+    if not text:
+        shape={
+            "result_type":type(result).__name__,
+            "result_keys":sorted(result.keys()) if isinstance(result,dict) else [],
+        }
+        if isinstance(result,dict):
+            choices=result.get("choices")
+            if isinstance(choices,list):
+                shape["choice_count"]=len(choices)
+                shape["choice_keys"]=[
+                    sorted(x.keys()) for x in choices[:3] if isinstance(x,dict)
+                ]
+                shape["message_keys"]=[
+                    sorted((x.get("message") or {}).keys())
+                    for x in choices[:3]
+                    if isinstance(x,dict) and isinstance(x.get("message"),dict)
+                ]
+        raise RuntimeError(
+            "cloudflare_success_without_usable_text:"
+            +json.dumps(shape,sort_keys=True)
+        )
     return {
         "provider":"cloudflare_workers_ai",
         "model":model,
