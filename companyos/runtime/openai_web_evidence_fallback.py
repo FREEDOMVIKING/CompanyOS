@@ -4,6 +4,7 @@ import json
 import os
 import re
 import time
+import random
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -60,29 +61,71 @@ def resolve_api_key() -> tuple[str | None, str | None]:
                 return value, f"file:{path.name}:{name}"
     return None,None
 
-def _request_json(payload: dict[str,Any], api_key: str) -> dict[str,Any]:
-    body=json.dumps(payload).encode("utf-8")
-    req=urllib.request.Request(
-        API_URL,
-        data=body,
-        method="POST",
-        headers={
-            "Authorization":f"Bearer {api_key}",
-            "Content-Type":"application/json",
-            "Accept":"application/json",
-        },
-    )
+# COMPANYOS_V69_24_RATE_LIMIT_BACKOFF
+def _retry_delay_from_error(exc, detail: str, attempt: int) -> float:
+    header=None
     try:
-        with urllib.request.urlopen(req,timeout=TIMEOUT) as r:
-            raw=r.read(5_000_000).decode("utf-8","replace")
-            return json.loads(raw)
-    except urllib.error.HTTPError as exc:
-        detail=""
+        header=exc.headers.get("Retry-After")
+    except Exception:
+        pass
+    if header:
         try:
-            detail=exc.read(2000).decode("utf-8","replace")
+            return max(0.5, min(60.0, float(header)))
         except Exception:
             pass
-        raise RuntimeError(f"openai_http_{exc.code}:{detail[:600]}") from exc
+
+    m=re.search(r"try again in\s+([0-9.]+)\s*(ms|milliseconds?|s|seconds?)", detail, re.I)
+    if m:
+        value=float(m.group(1))
+        unit=m.group(2).lower()
+        if unit.startswith("m"):
+            value/=1000.0
+        return max(0.5, min(60.0, value))
+
+    return min(30.0, 1.5*(2**attempt))
+
+def _request_json(payload: dict[str,Any], api_key: str) -> dict[str,Any]:
+    body=json.dumps(payload).encode("utf-8")
+    max_attempts=max(2,int(os.getenv("COMPANYOS_OPENAI_WEB_SEARCH_MAX_ATTEMPTS","6")))
+
+    last_error=None
+    for attempt in range(max_attempts):
+        req=urllib.request.Request(
+            API_URL,
+            data=body,
+            method="POST",
+            headers={
+                "Authorization":f"Bearer {api_key}",
+                "Content-Type":"application/json",
+                "Accept":"application/json",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req,timeout=TIMEOUT) as r:
+                raw=r.read(5_000_000).decode("utf-8","replace")
+                return json.loads(raw)
+        except urllib.error.HTTPError as exc:
+            detail=""
+            try:
+                detail=exc.read(4000).decode("utf-8","replace")
+            except Exception:
+                pass
+
+            last_error=f"openai_http_{exc.code}:{detail[:900]}"
+            if exc.code!=429 or attempt>=max_attempts-1:
+                raise RuntimeError(last_error) from exc
+
+            delay=_retry_delay_from_error(exc,detail,attempt)
+            delay+=random.uniform(0.15,0.65)
+            print(
+                "OPENAI_429_RETRY "
+                f"attempt={attempt+1}/{max_attempts} "
+                f"sleep_seconds={delay:.2f}",
+                flush=True,
+            )
+            time.sleep(delay)
+
+    raise RuntimeError(last_error or "openai_request_failed")
 
 def _message_text(response: dict[str,Any]) -> str:
     if isinstance(response.get("output_text"),str) and response.get("output_text"):
@@ -209,7 +252,7 @@ def research_candidate(candidate_name: str, requirements: list[str]) -> dict[str
                 "model":MODEL,
                 "tools":[{"type":"web_search","search_context_size":"medium"}],
                 "input":_prompt(candidate,requirement,anchors),
-                "max_output_tokens":2200,
+                "max_output_tokens":1200,
             }
             try:
                 response=_request_json(payload,api_key)
