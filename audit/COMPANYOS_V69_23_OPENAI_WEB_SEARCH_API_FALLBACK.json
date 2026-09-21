@@ -1,0 +1,108 @@
+{
+  "blocking_failures": [],
+  "candidate_name_shortcut_removed": true,
+  "deployment_performed": false,
+  "email_sent": false,
+  "evidence_revalidation": {
+    "candidate": "regional_construction_ai",
+    "evidence_summary": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "invalidated": 0,
+    "observed_this_cycle": 0
+  },
+  "financial_action_performed": false,
+  "forced_promotion": false,
+  "generated_at_unix": 1790002158.7793326,
+  "guarded_action_dispatched_by_test": false,
+  "next_step": {
+    "decision": "continue_research",
+    "missing_critical": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "next_step": "V69_24_OPENAI_WEB_SEARCH_ACCESS_REPAIR",
+    "provider_error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"Rate limit reached for gpt-5.6-luna in organization org-D5OJVObqVoA1KVOAuTZOnXIF on tokens per min (TPM): Limit 100000, Used 97876, Requested 4993. Please try again in 20h39m24.48s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.\",\n    \"type\": \"tokens\",\n    \"param\": null,\n    \"code\": \"rate_limit_exceeded\"\n  }\n}",
+    "source_rows": 0
+  },
+  "overall_status": "PASS",
+  "prospect_contact_performed": false,
+  "provider_result": {
+    "api_key_available": true,
+    "api_key_source": "env:OPENAI_API_KEY",
+    "artifact": "/data/data/com.termux/files/home/.companyos_runtime/canonical_research_outputs/openai_web_evidence_v69_23_regional_construction_ai_1790002155736.json",
+    "calls": [
+      {
+        "error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"Rate limit reached for gpt-5.6-luna in organization org-D5OJVObqVoA1KVOAuTZOnXIF on tokens per min (TPM): Limit 100000, Used 97876, Requested 4993. Please try again in 20h39m24.48s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.\",\n    \"type\": \"tokens\",\n    \"param\": null,\n    \"code\": \"rate_limit_exceeded\"\n  }\n}",
+        "requirement": "pricing",
+        "status": "error"
+      }
+    ],
+    "candidate_name": "regional_construction_ai",
+    "healthy": false,
+    "provider_error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"Rate limit reached for gpt-5.6-luna in organization org-D5OJVObqVoA1KVOAuTZOnXIF on tokens per min (TPM): Limit 100000, Used 97876, Requested 4993. Please try again in 20h39m24.48s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.\",\n    \"type\": \"tokens\",\n    \"param\": null,\n    \"code\": \"rate_limit_exceeded\"\n  }\n}",
+    "requirements_requested": [
+      "pricing",
+      "buyer_demand"
+    ],
+    "schema": "companyos.openai_web_evidence_fallback_state.v69_23",
+    "source_row_count": 0,
+    "updated_at": 1790002157.69028
+  },
+  "reevaluation": {
+    "action_packet_id": "12abfa19d030f0618981",
+    "candidate": "regional_construction_ai",
+    "decision": "continue_research",
+    "evidence": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "forced_promotion": false,
+    "guarded_action_dispatched_by_v69_23": false,
+    "guarded_gate_allowed": false,
+    "guarded_gate_reason": "decision_not_promoted",
+    "metrics": {
+      "probability": 0.0,
+      "profit": 50.0,
+      "readiness": 0.0,
+      "score": 0.0
+    },
+    "reasons": [
+      "evidence_coverage_below_threshold"
+    ],
+    "recalculated_readiness": 0.0,
+    "ts": 1790002158.431656
+  },
+  "schema": "companyos.v69_23.openai_web_search_api_fallback.v1",
+  "synthetic_evidence_used": false,
+  "transaction_broadcast_performed": false
+}

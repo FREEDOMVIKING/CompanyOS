@@ -206,11 +206,9 @@ def _iter_evidence_rows(doc):
 def _row_attributed(row):
     return any(str(row.get(k) or "").strip() for k in ("url","link","source","publisher","domain","author"))
 
+# COMPANYOS_V69_23_NO_INTERNAL_NAME_SHORTCUT
 def _row_matches_candidate(row,candidate,anchors):
     text=_norm_text(json.dumps(row,default=str))
-    name=_norm_text(candidate)
-    if name and name in text:
-        return True
     hits={tok for tok in anchors if tok in text}
     return len(hits)>=2
 
