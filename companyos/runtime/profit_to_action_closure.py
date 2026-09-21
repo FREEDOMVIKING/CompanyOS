@@ -17,12 +17,30 @@ def priority(p):
     c=p.get("decision_closure") if isinstance(p.get("decision_closure"),dict) else {}
     r={"promote_to_guarded_execution":3,"continue_research":2,None:1,"deprioritize":0}.get(c.get("decision"),1)
     return (r,float(p.get("candidate_score") or 0),float(p.get("created_at") or 0))
+def execution_gate(p):
+    if not isinstance(p,dict):
+        return False,"packet_invalid"
+    if not p.get("recommended_actions"):
+        return False,"no_recommended_actions"
+    c=p.get("decision_closure") if isinstance(p.get("decision_closure"),dict) else {}
+    decision=str(c.get("decision") or "").strip().lower()
+    if decision!="promote_to_guarded_execution":
+        return False,"decision_not_promoted"
+    status=str(p.get("status") or "").strip().lower()
+    if status and status!="ready_for_guarded_execution":
+        return False,"packet_status_not_ready"
+    evidence=c.get("evidence") if isinstance(c.get("evidence"),dict) else {}
+    if evidence:
+        missing=evidence.get("missing_critical")
+        if isinstance(missing,list) and missing:
+            return False,"critical_evidence_missing"
+    return True,"promoted_and_guarded_ready"
+
 def packets():
     q=load(QUEUE,{"actions":[]}); rows=q.get("actions",[]) if isinstance(q,dict) else []; out=[]
     for p in rows:
-        if not isinstance(p,dict) or not p.get("recommended_actions"):continue
-        c=p.get("decision_closure") if isinstance(p.get("decision_closure"),dict) else {}
-        if c.get("decision")=="deprioritize":continue
+        ok,_=execution_gate(p)
+        if not ok:continue
         out.append(p)
     return sorted(out,key=priority,reverse=True)
 def choose(p):
