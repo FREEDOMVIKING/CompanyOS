@@ -11,6 +11,7 @@ EVENTS=RT/"evidence_acquisition_events.jsonl"
 STOP=RT/"STOP_CONTINUOUS"
 ACTION_QUEUE=RT/"profit_execution_action_queue.json"
 RESEARCH_DIR=RT/"canonical_research_outputs"
+CANDIDATE_DIR=RT/"profit_first_candidates"
 
 REQUIREMENTS={
     "provenance":"Identify source origin/ownership and preserve a retrievable reference.",
@@ -118,28 +119,174 @@ def research_docs():
         if isinstance(x,dict):out.append((p,x,json.dumps(x,default=str).lower()))
     return out
 
-def validate_tasks(queue):
-    docs=research_docs();completed=0
+# COMPANYOS_V69_20_CANDIDATE_BOUND_EVIDENCE
+_EVIDENCE_STOPWORDS={
+    "about","after","again","against","being","before","between","business",
+    "candidate","company","could","customer","evidence","first","from","have",
+    "into","market","more","other","research","service","software","their",
+    "there","these","this","through","using","with","would",
+}
+
+_REQUIREMENT_TERMS={
+    "pricing":{"price","pricing","cost","costs","fee","fees","quote","quoted","subscription","plan","plans","paid","pay"},
+    "buyer_demand":{"buyer","buyers","customer","customers","client","clients","demand","purchase","purchases","adoption","users","user"},
+    "competition":{"competitor","competitors","competition","alternative","alternatives","substitute","substitutes"},
+    "provenance":{"source","publisher","author","origin","owner","ownership"},
+    "recency":{"date","dated","updated","published","retrieved","observed","recent"},
+    "authority":{"official","authority","authoritative","government","company","vendor","publisher"},
+    "corroboration":{"independent","second","corroborat","multiple","sources"},
+    "relevance":{"relevant","customer","buyer","market","problem","use","usage"},
+    "traceability":{"url","source","reference","retrieved","observed","timestamp"},
+}
+
+def _norm_text(value):
+    return re.sub(r"[^a-z0-9]+"," ",str(value or "").lower()).strip()
+
+def _candidate_payload(candidate):
+    target=_norm_text(candidate)
+    if not CANDIDATE_DIR.exists():
+        return {}
+    for p in CANDIDATE_DIR.glob("*.json"):
+        x=load(p,None)
+        if not isinstance(x,dict):
+            continue
+        name=_norm_text(x.get("name") or x.get("candidate_name") or x.get("venture_name") or p.stem)
+        if name==target:
+            return x
+    return {}
+
+def _candidate_anchors(candidate):
+    payload=_candidate_payload(candidate)
+    values=[
+        candidate,
+        payload.get("name"),
+        payload.get("market"),
+        payload.get("sector"),
+        payload.get("target_customer"),
+        payload.get("problem"),
+        payload.get("offer"),
+        payload.get("business_model"),
+    ]
+    anchors=set()
+    for value in values:
+        for tok in re.findall(r"[a-z0-9]+",_norm_text(value)):
+            if len(tok)>=4 and tok not in _EVIDENCE_STOPWORDS:
+                anchors.add(tok)
+    return anchors
+
+def _iter_evidence_rows(doc):
+    if not isinstance(doc,dict):
+        return []
+    rows=[]
+    keys=("source_rows","evidence_sources","sources","citations","market_evidence","observations")
+    for key in keys:
+        value=doc.get(key)
+        if isinstance(value,list):
+            rows.extend(x for x in value if isinstance(x,dict))
+        elif isinstance(value,dict):
+            rows.append(value)
+    artifact=doc.get("artifact_payload")
+    if isinstance(artifact,dict):
+        for key in keys:
+            value=artifact.get(key)
+            if isinstance(value,list):
+                rows.extend(x for x in value if isinstance(x,dict))
+            elif isinstance(value,dict):
+                rows.append(value)
+    result=doc.get("result")
+    if isinstance(result,dict):
+        for key in keys:
+            value=result.get(key)
+            if isinstance(value,list):
+                rows.extend(x for x in value if isinstance(x,dict))
+            elif isinstance(value,dict):
+                rows.append(value)
+    return rows
+
+def _row_attributed(row):
+    return any(str(row.get(k) or "").strip() for k in ("url","link","source","publisher","domain","author"))
+
+def _row_matches_candidate(row,candidate,anchors):
+    text=_norm_text(json.dumps(row,default=str))
+    name=_norm_text(candidate)
+    if name and name in text:
+        return True
+    hits={tok for tok in anchors if tok in text}
+    return len(hits)>=2
+
+def _row_matches_requirement(row,requirement):
+    text=_norm_text(json.dumps(row,default=str))
+    terms=_REQUIREMENT_TERMS.get(requirement)
+    if not terms:
+        terms={t for t in requirement.split("_") if len(t)>=4}
+    return any(term in text for term in terms)
+
+def _doc_supports_task(doc,candidate,requirement):
+    anchors=_candidate_anchors(candidate)
+    for row in _iter_evidence_rows(doc):
+        if not _row_attributed(row):
+            continue
+        if not _row_matches_candidate(row,candidate,anchors):
+            continue
+        if not _row_matches_requirement(row,requirement):
+            continue
+        return True
+    return False
+
+def _artifact_supports_task(path,candidate,requirement):
+    p=Path(path)
+    x=load(p,None)
+    return isinstance(x,dict) and _doc_supports_task(x,candidate,requirement)
+
+def reconcile_observed_tasks(queue,candidate=None):
+    invalidated=0
     for task in queue.get("tasks",[]):
-        if not isinstance(task,dict) or task.get("status")!="research_required":continue
-        candidate=str(task.get("candidate_name","")).lower()
+        if not isinstance(task,dict) or task.get("status")!="observed":
+            continue
+        task_candidate=str(task.get("candidate_name") or "")
+        if candidate and task_candidate!=candidate:
+            continue
         requirement=slug(task.get("requirement"))
-        terms=[t for t in requirement.split("_") if t]
+        artifacts=task.get("evidence_artifacts")
+        if not isinstance(artifacts,list):
+            artifacts=[]
+        valid=False
+        for item in artifacts:
+            path=item.get("path") if isinstance(item,dict) else item
+            if path and _artifact_supports_task(path,task_candidate,requirement):
+                valid=True
+                break
+        if not valid:
+            task["status"]="research_required"
+            task["invalidated_at"]=time.time()
+            task["invalidated_reason"]="evidence_not_candidate_bound_or_requirement_specific"
+            task.pop("observed_at",None)
+            task.pop("evidence_artifacts",None)
+            invalidated+=1
+            emit("evidence_invalidated",task_id=task.get("task_id"),candidate=task_candidate,requirement=requirement,reason=task["invalidated_reason"])
+    return invalidated
+
+def validate_tasks(queue):
+    docs=research_docs()
+    completed=0
+    for task in queue.get("tasks",[]):
+        if not isinstance(task,dict) or task.get("status")!="research_required":
+            continue
+        candidate=str(task.get("candidate_name",""))
+        requirement=slug(task.get("requirement"))
         matches=[]
-        for p,x,text in docs:
-            hits=sum(1 for t in terms if t in text)
-            if hits < max(1,len(terms)//2):continue
-            attribution=any(k in text for k in ('"url"','"source"','"sources"','"publisher"','"domain"','"retrieved_at"','"observed_at"'))
-            if not attribution:continue
-            candidate_hit=(candidate and candidate in text)
-            if not candidate_hit and matches:continue
-            # V32_1_CANONICAL_EVIDENCE_PATH
+        for p,x,_text in docs:
+            if not _doc_supports_task(x,candidate,requirement):
+                continue
             matches.append({"path":str(p),"observed_at":p.stat().st_mtime})
-            if len(matches)>=3:break
+            if len(matches)>=3:
+                break
         if matches:
-            task["status"]="observed";task["observed_at"]=time.time();task["evidence_artifacts"]=matches
+            task["status"]="observed"
+            task["observed_at"]=time.time()
+            task["evidence_artifacts"]=matches
             completed+=1
-            emit("evidence_observed",task_id=task.get("task_id"),requirement=requirement,matches=matches)
+            emit("evidence_observed",task_id=task.get("task_id"),candidate=candidate,requirement=requirement,matches=matches,candidate_bound=True)
     return completed
 
 def cycle():
@@ -155,6 +302,8 @@ def cycle():
             if task["task_id"] not in existing:
                 tasks.append(task);created.append(task);existing.add(task["task_id"])
                 emit("evidence_task_created",task_id=task["task_id"],requirement=task["requirement"],candidate=task["candidate_name"])
+    candidate_name=packet.get("candidate_name") if packet else None
+    invalidated=reconcile_observed_tasks(q,candidate_name)
     observed=validate_tasks(q)
     q["tasks"]=tasks[-200:]
     atomic(QUEUE,q)
@@ -162,6 +311,7 @@ def cycle():
         "running":True,"healthy":True,"last_cycle_unix":time.time(),
         "latest_candidate":packet.get("candidate_name") if packet else None,
         "created_count":len(created),"observed_this_cycle":observed,
+        "invalidated_this_cycle":invalidated,
         "task_summary":{
             "total":len(tasks),
             "research_required":sum(1 for t in tasks if isinstance(t,dict) and t.get("status")=="research_required"),

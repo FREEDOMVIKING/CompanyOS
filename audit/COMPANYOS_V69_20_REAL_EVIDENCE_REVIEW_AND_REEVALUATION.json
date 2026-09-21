@@ -1,0 +1,66 @@
+{
+  "action_packet_id": "12abfa19d030f0618981",
+  "after_evidence": {
+    "coverage": 0.0,
+    "critical_requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "missing_critical": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "observed": 0,
+    "observed_requirements": [],
+    "requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "total": 2
+  },
+  "before_evidence": {
+    "coverage": 1.0,
+    "critical_requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "missing_critical": [],
+    "observed": 2,
+    "observed_requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "total": 2
+  },
+  "blocking_failures": [],
+  "candidate": "regional_construction_ai",
+  "candidate_bound_evidence_enforced": true,
+  "decision_reasons": [
+    "evidence_coverage_below_threshold"
+  ],
+  "deployment_performed": false,
+  "external_send_performed": false,
+  "financial_action_performed": false,
+  "forced_promotion": false,
+  "generated_at_unix": 1789996140.6246605,
+  "guarded_action_dispatched_by_test": false,
+  "guarded_gate_allowed": false,
+  "guarded_gate_reason": "decision_not_promoted",
+  "metrics": {
+    "probability": 0.0,
+    "profit": 50.0,
+    "readiness": 0.0,
+    "score": 0.0
+  },
+  "next_step": "V69_21_TARGETED_PRICING_AND_BUYER_DEMAND_RESEARCH",
+  "overall_status": "PASS",
+  "recalculated_readiness": 0.0,
+  "reevaluated_decision": "continue_research",
+  "schema": "companyos.v69_20.real_evidence_review_and_reevaluation.v1",
+  "synthetic_evidence_used": false,
+  "transaction_broadcast_performed": false
+}
