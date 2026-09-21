@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path.home() / "companyos"
-RUNTIME = ROOT / ".companyos_runtime"
+RUNTIME = Path.home() / ".companyos_runtime"
 RAW_DIR = RUNTIME / "canonical_research_outputs"
 STATE = RUNTIME / "research_output_capture_state.json"
 INDEX = RUNTIME / "canonical_research_output_index.jsonl"
@@ -223,3 +223,56 @@ def install_orchestrator_capture() -> bool:
     wrapped._companyos_raw_capture_original = original
     AutonomousCEOOrchestrator.start = wrapped
     return True
+
+# COMPANYOS_SPECIALIST_RESULT_CAPTURE_V69_13
+def persist_specialist_result(task: Any, result: Any, agent_name: str | None = None) -> dict:
+    # Persist the result of an actually executed specialist task. This complements
+    # the legacy orchestrator-start profiler, whose scope ends before handlers run.
+    task_type = str(getattr(task, "task_type", "") or "")
+    task_id = str(getattr(task, "task_id", "") or "")
+    payload = getattr(task, "payload", {}) or {}
+    goal_id = str(payload.get("goal_id") or "") if isinstance(payload, dict) else ""
+
+    artifact_payload = None
+    artifact_path = None
+    if isinstance(result, dict) and result.get("artifact"):
+        artifact_path = str(result.get("artifact"))
+        try:
+            p = Path(artifact_path)
+            if p.exists() and p.is_file() and p.stat().st_size <= 2_000_000:
+                artifact_payload = json.loads(p.read_text(encoding="utf-8", errors="ignore"))
+        except Exception:
+            artifact_payload = None
+
+    record = {
+        "capture_version": 2,
+        "capture_kind": "specialist_task_result",
+        "captured_at_unix": time.time(),
+        "task_id": task_id,
+        "task_type": task_type,
+        "goal_id": goal_id,
+        "agent_name": agent_name,
+        "task_payload": _safe(payload),
+        "result": _safe(result),
+        "artifact_path": artifact_path,
+        "artifact_payload": _safe(artifact_payload),
+    }
+
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    stamp = int(record["captured_at_unix"] * 1000)
+    safe_task = "".join(c for c in task_id if c.isalnum() or c in "-_")[:100] or "unknown"
+    path = RAW_DIR / f"{stamp}_{safe_task}_{task_type or 'task'}.json"
+    _save(path, record)
+
+    index_row = {
+        "ts": record["captured_at_unix"],
+        "orchestration_id": goal_id.split(":goal:", 1)[0] if ":goal:" in goal_id else None,
+        "goal_id": goal_id,
+        "task_id": task_id,
+        "task_type": task_type,
+        "agent_name": agent_name,
+        "path": str(path),
+        "capture_kind": "specialist_task_result",
+    }
+    _append_jsonl(INDEX, index_row)
+    return index_row

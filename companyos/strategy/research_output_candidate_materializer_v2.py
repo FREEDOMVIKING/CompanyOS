@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path.home() / "companyos"
-RUNTIME = ROOT / ".companyos_runtime"
+RUNTIME = Path.home() / ".companyos_runtime"
 RAW_DIR = RUNTIME / "canonical_research_outputs"
 CANDIDATE_DIR = RUNTIME / "profit_first_candidates"
 STATE = RUNTIME / "research_output_candidate_materializer_v2_state.json"

@@ -2,7 +2,7 @@ from __future__ import annotations
 import json,re,time,hashlib
 from pathlib import Path
 ROOT=Path.home()/"companyos"
-RT=ROOT/".companyos_runtime"
+RT=Path.home()/".companyos_runtime"
 RESEARCH=RT/"canonical_research_outputs"
 CANDIDATES=RT/"profit_first_candidates"
 STATE=RT/"candidate_enrichment_bridge_state.json"

@@ -57,6 +57,11 @@ class AutonomousTaskDispatcher:
             if not ok:
                 raise RuntimeError(error or "leased_execution_failed")
 
+            try:
+                from companyos.runtime.research_output_capture import persist_specialist_result
+                persist_specialist_result(task, result, agent)
+            except Exception:
+                pass
             task = self.queue.complete(task, result)
             return DispatchResult(True, task.task_id, agent, task.state, "completed", result)
         except Exception as exc:

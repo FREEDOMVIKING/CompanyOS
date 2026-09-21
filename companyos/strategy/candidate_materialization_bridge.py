@@ -8,13 +8,16 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path.home() / "companyos"
-RUNTIME = ROOT / ".companyos_runtime"
+RUNTIME = Path.home() / ".companyos_runtime"
 CANDIDATE_DIR = RUNTIME / "profit_first_candidates"
 STATE_PATH = RUNTIME / "candidate_materialization_bridge_state.json"
 REPORT_PATH = RUNTIME / "candidate_materialization_report.json"
 RESEARCH_STATE = RUNTIME / "profit_first_research_pipeline_state.json"
 
 JOURNAL_CANDIDATES = [
+    RUNTIME / "full_autonomy_journal.jsonl",
+    RUNTIME / "ceo_orchestration_journal.jsonl",
+    RUNTIME / "canonical_production" / "journal.jsonl",
     ROOT / "companyos_runtime" / "full_autonomy_journal.jsonl",
     ROOT / ".companyos_runtime" / "full_autonomy_journal.jsonl",
     ROOT / "companyos_runtime" / "ceo_orchestration_journal.jsonl",
@@ -29,6 +32,7 @@ SEARCH_ROOTS = [
     ROOT / "exports",
     ROOT / "companyos_runtime",
     ROOT / ".companyos_runtime",
+    RUNTIME,
 ]
 
 NUMERIC_FIELDS = [

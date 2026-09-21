@@ -9,7 +9,7 @@ import time
 import urllib.parse
 import urllib.request
 
-STATE_ROOT = Path("companyos_runtime/external_research_network")
+STATE_ROOT = Path.home() / ".companyos_runtime" / "external_research_network"
 STATE_ROOT.mkdir(parents=True, exist_ok=True)
 ROTATION_FILE = STATE_ROOT / "topic_rotation.json"
 

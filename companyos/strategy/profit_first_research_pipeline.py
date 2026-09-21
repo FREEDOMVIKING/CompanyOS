@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 
 ROOT = Path.home() / "companyos"
-RUNTIME = ROOT / ".companyos_runtime"
+RUNTIME = Path.home() / ".companyos_runtime"
 STATE = RUNTIME / "profit_first_research_pipeline_state.json"
 CANDIDATE_DIR = RUNTIME / "profit_first_candidates"
 

@@ -8,7 +8,7 @@ from typing import Any
 from companyos.strategy.profit_first_venture_engine import ensure_policy, rank_candidates
 
 ROOT = Path.home() / "companyos"
-RUNTIME = ROOT / ".companyos_runtime"
+RUNTIME = Path.home() / ".companyos_runtime"
 OUT = RUNTIME / "profit_first_evidence_report.json"
 
 SEARCH_ROOTS = [
@@ -16,6 +16,7 @@ SEARCH_ROOTS = [
     ROOT / "exports",
     ROOT / "artifacts",
     ROOT / ".companyos_runtime",
+    RUNTIME,
 ]
 
 ALIASES = {

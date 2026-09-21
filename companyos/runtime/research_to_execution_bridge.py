@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path.home() / "companyos"
-RT = ROOT / ".companyos_runtime"
+RT = Path.home() / ".companyos_runtime"
 CANDIDATES = RT / "profit_first_candidates"
 STATE = RT / "research_to_execution_bridge.json"
 

@@ -3,7 +3,7 @@ import json,os,time
 from pathlib import Path
 from companyos.runtime.profit_opportunity_engine import dispatch
 from companyos.runtime.candidate_enrichment_bridge import refresh_enrichments
-RT=Path.home()/"companyos/.companyos_runtime"; STATE=RT/"profit_opportunity_runtime_state.json"
+RT=Path.home()/".companyos_runtime"; STATE=RT/"profit_opportunity_runtime_state.json"
 def run():
  interval=max(60,int(os.getenv("COMPANYOS_PROFIT_ENGINE_INTERVAL_SECONDS","300")))
  while not (RT/"STOP_CONTINUOUS").exists():

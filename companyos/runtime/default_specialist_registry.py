@@ -38,15 +38,36 @@ def register_default_specialists(dispatcher:AutonomousTaskDispatcher)->None:
         _require(bool(subject),"research_missing_subject")
         supplied=p.get("evidence") or p.get("sources") or p.get("observations") or []
         if not isinstance(supplied,(list,dict)): supplied=[str(supplied)]
+        try:
+            from companyos.runtime.research_candidate_synthesizer import run_for_task
+            synthesis=run_for_task(subject,supplied)
+        except Exception as exc:
+            synthesis={
+                "candidate_count":0,
+                "candidate_files":[],
+                "external_research_performed":False,
+                "synthesis_mode":"error",
+                "error":f"{type(exc).__name__}:{exc}",
+                "execution_ready_candidates_created":0,
+            }
         artifact=_write(task,"research",{
             "subject":subject,
             "payload_sha256":hashlib.sha256(json.dumps(p,sort_keys=True,default=str).encode()).hexdigest(),
             "supplied_evidence":supplied,
-            "external_research_performed":False,
-            "status":"internal_research_intake_validated",
-            "next_requirement":"use evidence acquisition connector when fresh external evidence is required"})
-        return {"agent":"research_agent","status":"evidence_artifact_created",
-                "artifact":artifact,"external_claims_invented":False}
+            "external_research_performed":bool(synthesis.get("external_research_performed")),
+            "candidate_synthesis":synthesis,
+            "candidate_count":int(synthesis.get("candidate_count",0) or 0),
+            "candidate_files":synthesis.get("candidate_files",[]),
+            "status":"grounded_research_candidate_synthesis_attempted",
+            "next_requirement":"enrich low-confidence hypotheses before guarded execution"})
+        return {"agent":"research_agent","status":"research_candidate_synthesis_attempted",
+                "artifact":artifact,
+                "candidate_count":int(synthesis.get("candidate_count",0) or 0),
+                "candidate_files":synthesis.get("candidate_files",[]),
+                "synthesis_mode":synthesis.get("synthesis_mode"),
+                "external_research_performed":bool(synthesis.get("external_research_performed")),
+                "external_claims_invented":False,
+                "execution_ready_candidates_created":0}
 
     def planning(task):
         p=_payload(task)

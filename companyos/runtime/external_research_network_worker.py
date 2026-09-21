@@ -4,7 +4,7 @@ from pathlib import Path
 import hashlib, importlib, json, os, time, urllib.request
 from companyos.runtime.public_research_connectors import collect_public_research
 
-ROOT=Path("companyos_runtime/external_research_network")
+ROOT=Path.home()/".companyos_runtime"/"external_research_network"
 ROOT.mkdir(parents=True,exist_ok=True)
 STATE=ROOT/"state.json"
 SEEN=ROOT/"seen.json"

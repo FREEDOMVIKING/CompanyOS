@@ -3,7 +3,7 @@ import hashlib,json,math,os,time
 from dataclasses import asdict,dataclass,field
 from pathlib import Path
 from typing import Any
-ROOT=Path.home()/"companyos"; RT=ROOT/".companyos_runtime"; STORE=RT/"profit_opportunities"
+ROOT=Path.home()/"companyos"; RT=Path.home()/".companyos_runtime"; STORE=RT/"profit_opportunities"
 LEDGER=RT/"profit_opportunity_ledger.jsonl"; STATUS=RT/"profit_opportunity_status.json"
 EXECUTION_STATE=RT/"profit_execution_state.json"
 EXECUTION_COOLDOWN_SECONDS=int(os.getenv("COMPANYOS_EXECUTION_REDISPATCH_SECONDS","1800"))
