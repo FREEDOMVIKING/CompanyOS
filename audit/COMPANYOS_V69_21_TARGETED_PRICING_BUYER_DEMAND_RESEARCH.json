@@ -1,0 +1,110 @@
+{
+  "action_packet_id": "12abfa19d030f0618981",
+  "blocking_failures": [],
+  "candidate": "regional_construction_ai",
+  "decision_reasons": [
+    "evidence_coverage_below_threshold"
+  ],
+  "deployment_performed": false,
+  "email_sent": false,
+  "evidence_revalidation": {
+    "candidate_name": "regional_construction_ai",
+    "evidence_summary": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "invalidated": 0,
+    "observed_this_cycle": 0
+  },
+  "financial_action_performed": false,
+  "forced_promotion": false,
+  "generated_at_unix": 1789998685.987302,
+  "guarded_action_dispatched_by_test": false,
+  "guarded_gate_allowed": false,
+  "guarded_gate_reason": "decision_not_promoted",
+  "metrics": {
+    "probability": 0.0,
+    "profit": 50.0,
+    "readiness": 0.0,
+    "score": 0.0
+  },
+  "next_step": "V69_22_TARGETED_EVIDENCE_RETRY_OR_CONNECTOR_EXPANSION",
+  "overall_status": "PASS",
+  "prospect_contact_performed": false,
+  "recalculated_readiness": 0.0,
+  "reevaluated_decision": "continue_research",
+  "schema": "companyos.v69_21.targeted_pricing_buyer_demand_research.v1",
+  "synthetic_evidence_used": false,
+  "targeted_research": {
+    "artifact": "/data/data/com.termux/files/home/.companyos_runtime/canonical_research_outputs/targeted_evidence_regional_construction_ai_1789998682606.json",
+    "candidate_name": "regional_construction_ai",
+    "error_count": 0,
+    "errors": [],
+    "healthy": true,
+    "last_run_unix": 1789998685.1475277,
+    "queries": [
+      {
+        "query": "\"south central\" \"south central\" pricing",
+        "requirement": "pricing",
+        "results": 0
+      },
+      {
+        "query": "\"business customer\" estimating software pricing",
+        "requirement": "pricing",
+        "results": 0
+      },
+      {
+        "query": "\"south central\" bid workflow software cost",
+        "requirement": "pricing",
+        "results": 0
+      },
+      {
+        "query": "\"south central\" contractor software pricing plans",
+        "requirement": "pricing",
+        "results": 0
+      },
+      {
+        "query": "\"south central\" \"south central\" customers case study",
+        "requirement": "buyer_demand",
+        "results": 0
+      },
+      {
+        "query": "\"business customer\" estimating software customers",
+        "requirement": "buyer_demand",
+        "results": 0
+      },
+      {
+        "query": "\"south central\" contractor software adoption",
+        "requirement": "buyer_demand",
+        "results": 0
+      },
+      {
+        "query": "\"south central\" bid software customer testimonials",
+        "requirement": "buyer_demand",
+        "results": 0
+      }
+    ],
+    "query_count": 8,
+    "requirements_requested": [
+      "pricing",
+      "buyer_demand"
+    ],
+    "schema": "companyos.targeted_public_evidence_state.v69_21",
+    "source_row_count": 0
+  },
+  "transaction_broadcast_performed": false
+}
