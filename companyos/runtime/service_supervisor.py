@@ -96,6 +96,23 @@ class ServiceSupervisor:
         ):
             services.append(ManagedService("self_evolution_runtime", (python, "-m", "companyos.runtime.self_evolution_runtime")))
         # COMPANYOS_V69_31_EXTERNAL_RESEARCH_SERVICE
+        # COMPANYOS_V69_35A_REMOTE_FABRIC_MONITOR
+        remote_inventory=Path.home()/".companyos_runtime/remote_runtime_hosts.json"
+        if (
+            remote_inventory.exists()
+            and os.getenv("COMPANYOS_ENABLE_REMOTE_FABRIC_MONITOR","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/remote_runtime_fabric.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "remote_runtime_fabric_monitor",
+                    (
+                        python,"-m","companyos.runtime.remote_runtime_fabric",
+                        "monitor","--interval",
+                        os.getenv("COMPANYOS_REMOTE_FABRIC_PROBE_SECONDS","60"),
+                    ),
+                )
+            )
         if (Path.home()/"companyos/companyos/runtime/external_research_network_worker.py").exists():
             services.append(
                 ManagedService(

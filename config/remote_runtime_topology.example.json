@@ -1,0 +1,15 @@
+{
+  "schema": "companyos.remote_runtime_topology.example.v69_35a",
+  "recommended_topology": [
+    {"name":"oracle-a1-primary","provider":"oracle","role":"primary","capacity_score":10},
+    {"name":"oracle-worker-1","provider":"oracle","role":"research_worker","capacity_score":6},
+    {"name":"google-e2-worker","provider":"google","role":"research_worker","capacity_score":2}
+  ],
+  "optional_burst_layers": ["github_actions","cloudflare_workers"],
+  "rules": {
+    "one_authoritative_primary": true,
+    "research_workers_read_only": true,
+    "no_provider_quota_bypass": true,
+    "only_user_authorized_accounts_and_hosts": true
+  }
+}

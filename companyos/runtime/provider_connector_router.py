@@ -512,9 +512,28 @@ def public_research_mesh_search(query,max_results=5):
         "financial_action_performed":False,
     }
 
+# COMPANYOS_V69_35A_REMOTE_RUNTIME_FABRIC
 def search_web(query,max_results=5):
-    available=(provider_status().get("capabilities") or {}).get("web_search") or []
     errors=[]
+    remote_allowed=(
+        os.getenv("COMPANYOS_ENABLE_REMOTE_FABRIC","1")=="1"
+        and os.getenv("COMPANYOS_REMOTE_WORKER_LOCAL_ONLY","0")!="1"
+    )
+    if remote_allowed:
+        try:
+            from companyos.runtime import remote_runtime_fabric as rrf
+            remote=rrf.search_web_remote(query,max_results=max_results)
+            if int(remote.get("result_count") or 0)>0:
+                return remote
+            errors.append({"provider":"remote_runtime_fabric","status":"empty"})
+        except Exception as exc:
+            errors.append({
+                "provider":"remote_runtime_fabric",
+                "status":"unavailable",
+                "error":f"{type(exc).__name__}:{str(exc)[:300]}",
+            })
+
+    available=(provider_status().get("capabilities") or {}).get("web_search") or []
     for name,fn in (("tavily",tavily_search),("brave_search",brave_search),("public_research_mesh",public_research_mesh_search)):
         if name not in available: continue
         try:
