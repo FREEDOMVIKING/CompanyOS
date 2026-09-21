@@ -10,9 +10,9 @@ def load(p,d):
     except Exception:return d
 def atomic(p,o):
     p.parent.mkdir(parents=True,exist_ok=True); t=p.with_suffix(p.suffix+".tmp")
-    t.write_text(json.dumps(o,indent=2,sort_keys=True,default=str)+"\\n",encoding="utf-8"); t.replace(p)
+    t.write_text(json.dumps(o,indent=2,sort_keys=True,default=str)+"\n",encoding="utf-8"); t.replace(p)
 def emit(k,**kw):
-    with EVENTS.open("a",encoding="utf-8") as f:f.write(json.dumps({"ts":time.time(),"kind":k,**kw},sort_keys=True,default=str)+"\\n")
+    with EVENTS.open("a",encoding="utf-8") as f:f.write(json.dumps({"ts":time.time(),"kind":k,**kw},sort_keys=True,default=str)+"\n")
 def priority(p):
     c=p.get("decision_closure") if isinstance(p.get("decision_closure"),dict) else {}
     r={"promote_to_guarded_execution":3,"continue_research":2,None:1,"deprioritize":0}.get(c.get("decision"),1)
