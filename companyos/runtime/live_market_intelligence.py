@@ -395,6 +395,20 @@ def cycle(max_candidates:int=4,max_tasks:int=8)->dict[str,Any]:
             "error":f"{type(exc).__name__}:{str(exc)[:800]}",
         }
 
+    # COMPANYOS_V69_34_PORTFOLIO_VALIDATION
+    portfolio_validation=None
+    try:
+        from companyos.runtime import candidate_portfolio_validation as cpv
+        portfolio_validation=cpv.cycle(
+            max_candidates=int(os.getenv("COMPANYOS_PORTFOLIO_SIZE","3")),
+            execute_limit=int(os.getenv("COMPANYOS_VALIDATION_EXPERIMENTS_PER_CYCLE","1")),
+        )
+    except Exception as exc:
+        portfolio_validation={
+            "healthy":False,
+            "error":f"{type(exc).__name__}:{str(exc)[:800]}",
+        }
+
     enrichment=None
     try:
         from companyos.runtime.candidate_enrichment_bridge import refresh_enrichments
@@ -428,6 +442,7 @@ def cycle(max_candidates:int=4,max_tasks:int=8)->dict[str,Any]:
         "invalidated_this_cycle":invalidated,
         "candidate_updates":candidate_updates,
         "evidence_rescoring":rescoring,
+        "candidate_portfolio_validation":portfolio_validation,
         "candidate_enrichment":enrichment,
         "decision_closure":decision,
         "queue_summary":{
