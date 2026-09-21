@@ -40,7 +40,18 @@ TOPICS=[
     "finance back office automation small business",
 ]
 
+# COMPANYOS_V69_33_EVIDENCE_GAP_ACCELERATION
+# Preserve the V69.32 public contract: ensure_tasks() defaults to exactly
+# buyer_demand, pricing, and competition.  The live V69.33 cycle opts into
+# the expanded requirement set explicitly.
 DEFAULT_REQUIREMENTS=("buyer_demand","pricing","competition")
+EVIDENCE_GAP_REQUIREMENTS=(
+    "buyer_demand",
+    "pricing",
+    "provenance",
+    "corroboration",
+    "competition",
+)
 
 
 def load(path:Path,default:Any):
@@ -98,6 +109,8 @@ def candidate_rows()->list[dict[str,Any]]:
         success=float(payload.get("probability_of_success") or payload.get("probability") or 0)
         needs=bool(payload.get("needs_enrichment",False))
         evidence_count=int(payload.get("observed_evidence_count") or 0)
+        evidence_coverage=float(payload.get("observed_evidence_coverage") or 0)
+        critical_coverage=float(payload.get("critical_evidence_coverage") or 0)
 
         rows.append({
             "name":name,
@@ -109,7 +122,9 @@ def candidate_rows()->list[dict[str,Any]]:
                 +demand*0.2
                 +profit*0.2
                 +success*0.1
-                -evidence_count*3
+                +(1.0-evidence_coverage)*60.0
+                +(1.0-critical_coverage)*40.0
+                -evidence_count*2
             ),
         })
 
@@ -143,7 +158,11 @@ def selected_candidates(max_candidates:int=4)->list[dict[str,Any]]:
     return selected[:max(1,int(max_candidates))]
 
 
-def ensure_tasks(queue:dict[str,Any],candidates:list[dict[str,Any]])->int:
+def ensure_tasks(
+    queue:dict[str,Any],
+    candidates:list[dict[str,Any]],
+    requirements:tuple[str,...]=DEFAULT_REQUIREMENTS,
+)->int:
     tasks=queue.get("tasks")
     if not isinstance(tasks,list):
         tasks=[]
@@ -157,7 +176,7 @@ def ensure_tasks(queue:dict[str,Any],candidates:list[dict[str,Any]])->int:
 
     for row in candidates:
         name=row["name"]
-        for requirement in DEFAULT_REQUIREMENTS:
+        for requirement in requirements:
             key=(name,requirement)
             if key in existing:
                 continue
@@ -343,7 +362,11 @@ def cycle(max_candidates:int=4,max_tasks:int=8)->dict[str,Any]:
     if not isinstance(queue,dict):
         queue={"tasks":[]}
 
-    created=ensure_tasks(queue,selected)
+    created=ensure_tasks(
+        queue,
+        selected,
+        requirements=EVIDENCE_GAP_REQUIREMENTS,
+    )
 
     provider_research=mpr.cycle(
         queue=queue,
@@ -361,6 +384,16 @@ def cycle(max_candidates:int=4,max_tasks:int=8)->dict[str,Any]:
     atomic(QUEUE,queue)
 
     candidate_updates=_update_candidate_evidence_metadata(selected,queue)
+
+    rescoring=None
+    try:
+        from companyos.runtime import evidence_coverage_rescoring as ecr
+        rescoring=ecr.cycle(max_candidates=50)
+    except Exception as exc:
+        rescoring={
+            "healthy":False,
+            "error":f"{type(exc).__name__}:{str(exc)[:800]}",
+        }
 
     enrichment=None
     try:
@@ -394,6 +427,7 @@ def cycle(max_candidates:int=4,max_tasks:int=8)->dict[str,Any]:
         "observed_this_cycle":observed,
         "invalidated_this_cycle":invalidated,
         "candidate_updates":candidate_updates,
+        "evidence_rescoring":rescoring,
         "candidate_enrichment":enrichment,
         "decision_closure":decision,
         "queue_summary":{
