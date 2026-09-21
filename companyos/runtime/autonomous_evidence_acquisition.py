@@ -300,6 +300,24 @@ def cycle():
             if task["task_id"] not in existing:
                 tasks.append(task);created.append(task);existing.add(task["task_id"])
                 emit("evidence_task_created",task_id=task["task_id"],requirement=task["requirement"],candidate=task["candidate_name"])
+    # COMPANYOS_V69_28_MULTI_PROVIDER_RESEARCH
+    provider_research=None
+    if os.getenv("COMPANYOS_MULTI_PROVIDER_RESEARCH_ENABLED","1").strip().lower() not in ("0","false","no","off"):
+        try:
+            from companyos.runtime import multi_provider_research_pipeline as _mpr
+            provider_research=_mpr.cycle(
+                queue=q,
+                persist_queue=False,
+                max_tasks=int(os.getenv("COMPANYOS_MULTI_PROVIDER_RESEARCH_TASKS_PER_CYCLE","3")),
+            )
+        except Exception as exc:
+            provider_research={
+                "healthy":False,
+                "global_runtime_blocked":False,
+                "error":f"{type(exc).__name__}:{str(exc)[:800]}",
+            }
+            emit("multi_provider_research_error",error=provider_research["error"])
+
     candidate_name=packet.get("candidate_name") if packet else None
     invalidated=reconcile_observed_tasks(q,candidate_name)
     observed=validate_tasks(q)
@@ -310,6 +328,8 @@ def cycle():
         "latest_candidate":packet.get("candidate_name") if packet else None,
         "created_count":len(created),"observed_this_cycle":observed,
         "invalidated_this_cycle":invalidated,
+        "provider_research":provider_research,
+        "global_runtime_blocked_by_research":False,
         "task_summary":{
             "total":len(tasks),
             "research_required":sum(1 for t in tasks if isinstance(t,dict) and t.get("status")=="research_required"),

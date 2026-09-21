@@ -1,0 +1,208 @@
+{
+  "blocked_research_is_task_scoped": true,
+  "blocking_failures": [],
+  "candidate_rotation_enabled": true,
+  "cloudflare_first_internal_inference": true,
+  "deployment_performed": false,
+  "evidence_cycle": {
+    "created_count": 0,
+    "global_runtime_blocked_by_research": false,
+    "healthy": true,
+    "invalidated_this_cycle": 0,
+    "last_cycle_unix": 1790011780.2793186,
+    "latest_candidate": "regional_construction_ai",
+    "latest_tasks": [
+      {
+        "action_packet_id": "7145391a7e17cc9a1dee",
+        "candidate_name": "regional_construction_ai",
+        "created_at": 1789995059.6419024,
+        "credential_access_allowed": false,
+        "deployment_allowed": false,
+        "external_send_allowed": false,
+        "financial_action_allowed": false,
+        "global_runtime_blocked": false,
+        "guidance": "Collect evidence for market price/willingness-to-pay from a credible source.",
+        "invalidated_at": 1789996139.726856,
+        "invalidated_reason": "evidence_not_candidate_bound_or_requirement_specific",
+        "provider_last_attempt_at_unix": 1790011779.8856244,
+        "requirement": "pricing",
+        "research_contract": [
+          "Use observable, attributable sources only.",
+          "Do not invent URLs, quotes, prices, buyers, dates, or evidence.",
+          "Record source identity, claim, observation date, and confidence.",
+          "Prefer current primary or authoritative sources when available.",
+          "Use independent corroboration for material claims when practical.",
+          "Research only; do not contact prospects, purchase services, deploy, or transact."
+        ],
+        "research_deferred_reason": "no_web_search_provider",
+        "research_deferred_until_unix": 1790012979.8856244,
+        "source_capability": "action_packet",
+        "status": "research_required",
+        "task_id": "6194e5674da848774050"
+      },
+      {
+        "action_packet_id": "7145391a7e17cc9a1dee",
+        "candidate_name": "regional_construction_ai",
+        "created_at": 1789995059.6419158,
+        "credential_access_allowed": false,
+        "deployment_allowed": false,
+        "external_send_allowed": false,
+        "financial_action_allowed": false,
+        "global_runtime_blocked": false,
+        "guidance": "Collect concrete buyer/customer demand evidence.",
+        "invalidated_at": 1789996139.7280946,
+        "invalidated_reason": "evidence_not_candidate_bound_or_requirement_specific",
+        "provider_last_attempt_at_unix": 1790011779.8858533,
+        "requirement": "buyer_demand",
+        "research_contract": [
+          "Use observable, attributable sources only.",
+          "Do not invent URLs, quotes, prices, buyers, dates, or evidence.",
+          "Record source identity, claim, observation date, and confidence.",
+          "Prefer current primary or authoritative sources when available.",
+          "Use independent corroboration for material claims when practical.",
+          "Research only; do not contact prospects, purchase services, deploy, or transact."
+        ],
+        "research_deferred_reason": "no_web_search_provider",
+        "research_deferred_until_unix": 1790012979.8858533,
+        "source_capability": "action_packet",
+        "status": "research_required",
+        "task_id": "4945eb08261a1b181125"
+      }
+    ],
+    "observed_this_cycle": 0,
+    "provider_research": {
+      "candidate_rotation_enabled": true,
+      "deferred_task_count": 0,
+      "deployments_performed": false,
+      "evidence_artifacts_created": 0,
+      "external_messages_sent": false,
+      "financial_actions_performed": false,
+      "forced_promotion": false,
+      "global_runtime_blocked": false,
+      "healthy": true,
+      "last_cycle_unix": 1790011780.0255024,
+      "outcomes": [],
+      "pending_due_count": 0,
+      "provider_capabilities": {
+        "llm_inference": [
+          "cloudflare_workers_ai",
+          "openai"
+        ],
+        "public_code_research": [
+          "github_public_rest"
+        ],
+        "web_search": []
+      },
+      "schema": "companyos.multi_provider_research_pipeline.v69_28",
+      "selected_task_count": 0
+    },
+    "running": true,
+    "task_summary": {
+      "observed": 0,
+      "research_required": 2,
+      "total": 2
+    }
+  },
+  "external_message_sent": false,
+  "financial_action_performed": false,
+  "forced_promotion": false,
+  "generated_at_unix": 1790011780.380039,
+  "global_runtime_blocked_by_research": false,
+  "internal_inference_smoke": {
+    "attempts": [
+      {
+        "error": "RuntimeError:cloudflare_http_401:{\"result\": null, \"success\": false, \"errors\": [{\"code\": 10000, \"message\": \"Authentication error\"}], \"messages\": []}",
+        "provider": "cloudflare_workers_ai",
+        "status": "failed"
+      },
+      {
+        "error": "RuntimeError:openai_internal_infer_failed:[{\"model\": \"gpt-5.6-luna\", \"status\": \"cooldown_skip\"}, {\"model\": \"gpt-5.6-terra\", \"status\": \"failed\", \"error\": \"RuntimeError:openai_http_429:{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\\\",\\n    \\\"type\\\": \\\"insufficient_quota\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"credit_balance_exhausted\\\"\\n  }\\n}\"}, {\"model\": \"gpt-5.6-sol\", \"status\": \"failed\", \"error\": \"RuntimeError:openai_http_429:{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\\\",\\n    \\\"type\\\": \\\"insufficient_quota\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"credit_balance_exhausted\\\"\\n  }\\n}\"}]",
+        "provider": "openai",
+        "status": "failed"
+      }
+    ],
+    "external_action_performed": false,
+    "financial_action_performed": false,
+    "model": null,
+    "provider": null,
+    "status": "no_usable_inference_provider",
+    "text": ""
+  },
+  "openai_single_point_of_failure_removed": true,
+  "overall_status": "PASS",
+  "provider_status": {
+    "capabilities": {
+      "llm_inference": [
+        "cloudflare_workers_ai",
+        "openai"
+      ],
+      "public_code_research": [
+        "github_public_rest"
+      ],
+      "web_search": []
+    },
+    "cloudflare": {
+      "account_id_present": true,
+      "discovery": {
+        "available": true,
+        "source": "authorized_env"
+      },
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "ready": true
+    },
+    "financial_action_performed": false,
+    "generated_at_unix": 1790011776.8568442,
+    "public_key_harvesting_performed": false,
+    "schema": "companyos.provider_connector_router.v69_27",
+    "secret_values_emitted": false
+  },
+  "public_code_research": [
+    "github_public_rest"
+  ],
+  "query_text_counted_as_evidence": false,
+  "research_cycle": {
+    "candidate_rotation_enabled": true,
+    "deferred_task_count": 2,
+    "deployments_performed": false,
+    "evidence_artifacts_created": 0,
+    "external_messages_sent": false,
+    "financial_actions_performed": false,
+    "forced_promotion": false,
+    "global_runtime_blocked": false,
+    "healthy": true,
+    "last_cycle_unix": 1790011779.885977,
+    "outcomes": [
+      {
+        "candidate": "regional_construction_ai",
+        "reason": "no_web_search_provider",
+        "requirement": "pricing",
+        "status": "deferred"
+      },
+      {
+        "candidate": "regional_construction_ai",
+        "reason": "no_web_search_provider",
+        "requirement": "buyer_demand",
+        "status": "deferred"
+      }
+    ],
+    "pending_due_count": 2,
+    "provider_capabilities": {
+      "llm_inference": [
+        "cloudflare_workers_ai",
+        "openai"
+      ],
+      "public_code_research": [
+        "github_public_rest"
+      ],
+      "web_search": []
+    },
+    "schema": "companyos.multi_provider_research_pipeline.v69_28",
+    "selected_task_count": 2
+  },
+  "schema": "companyos.v69_28.multi_provider_research_free_resource_rotation.v1",
+  "synthetic_evidence_allowed": false,
+  "web_search_rotation": [
+    "tavily",
+    "brave_search"
+  ]
+}

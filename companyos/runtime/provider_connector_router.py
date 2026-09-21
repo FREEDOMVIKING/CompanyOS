@@ -81,6 +81,191 @@ def provider_status():
     for x in caps["llm_inference"]: reg.register(x,"ai_provider",["llm_inference"],True,{"source":"v69.27"})
     return out
 
+# COMPANYOS_V69_28_INTERNAL_INFERENCE_ROTATION
+def _provider_health_state():
+    path=RT/"provider_resource_health.json"
+    try:
+        data=json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data,dict) else {}
+    except Exception:
+        return {}
+
+def _save_provider_health(data):
+    atomic(RT/"provider_resource_health.json",data)
+
+def _health_row(name):
+    state=_provider_health_state()
+    return (state.get("providers") or {}).get(name) or {}
+
+def _cooldown_remaining(name):
+    row=_health_row(name)
+    try:
+        return max(0.0,float(row.get("blocked_until_unix") or 0.0)-time.time())
+    except Exception:
+        return 0.0
+
+def _mark_provider_success(name,latency_seconds=None):
+    state=_provider_health_state()
+    rows=state.setdefault("providers",{})
+    old=rows.get(name) if isinstance(rows.get(name),dict) else {}
+    rows[name]={
+        **old,
+        "last_success_at_unix":time.time(),
+        "last_error":None,
+        "consecutive_failures":0,
+        "blocked_until_unix":0.0,
+        "last_latency_seconds":latency_seconds,
+    }
+    state["updated_at_unix"]=time.time()
+    _save_provider_health(state)
+
+def _mark_provider_failure(name,error):
+    text=str(error or "").lower()
+    if "429" in text or "rate limit" in text:
+        cooldown=900.0
+    elif "credit" in text or "quota" in text or "insufficient" in text:
+        cooldown=21600.0
+    elif "401" in text or "403" in text or "unauthorized" in text or "forbidden" in text:
+        cooldown=3600.0
+    else:
+        cooldown=180.0
+
+    state=_provider_health_state()
+    rows=state.setdefault("providers",{})
+    old=rows.get(name) if isinstance(rows.get(name),dict) else {}
+    failures=int(old.get("consecutive_failures") or 0)+1
+    cooldown=min(43200.0,cooldown*min(4,failures))
+    rows[name]={
+        **old,
+        "last_failure_at_unix":time.time(),
+        "last_error":str(error)[:1200],
+        "consecutive_failures":failures,
+        "blocked_until_unix":time.time()+cooldown,
+    }
+    state["updated_at_unix"]=time.time()
+    _save_provider_health(state)
+
+def cloudflare_infer(prompt,max_tokens=160):
+    sec=secrets().get("cloudflare_workers_ai") or {}
+    token=sec.get("CLOUDFLARE_API_TOKEN") or sec.get("CF_API_TOKEN")
+    account=cf_account_id()
+    if not token:
+        raise RuntimeError("cloudflare_token_missing")
+    if not account:
+        raise RuntimeError("cloudflare_account_id_missing")
+
+    model=FREE_CF_MODEL
+    url=(
+        "https://api.cloudflare.com/client/v4/accounts/"
+        +urllib.parse.quote(str(account),safe="")
+        +"/ai/run/"
+        +urllib.parse.quote(model,safe="@/._-")
+    )
+    started=time.time()
+    status,data,_=http(
+        url,
+        method="POST",
+        headers={"Authorization":f"Bearer {token}"},
+        payload={
+            "messages":[{"role":"user","content":str(prompt)}],
+            "max_tokens":max(32,min(800,int(max_tokens))),
+        },
+        timeout=45,
+    )
+    latency=time.time()-started
+    if status!=200 or not bool((data or {}).get("success")):
+        raise RuntimeError(f"cloudflare_http_{status}:{json.dumps(data)[:1000]}")
+    result=(data or {}).get("result")
+    text=""
+    if isinstance(result,dict):
+        text=str(result.get("response") or result.get("text") or "")
+    elif isinstance(result,str):
+        text=result
+    return {
+        "provider":"cloudflare_workers_ai",
+        "model":model,
+        "text":text,
+        "latency_seconds":round(latency,3),
+        "external_action_performed":False,
+        "financial_action_performed":False,
+    }
+
+def openai_internal_infer(prompt,max_tokens=160):
+    from companyos.runtime import openai_web_evidence_fallback as ow
+
+    key,_source=ow.resolve_api_key()
+    if not key:
+        raise RuntimeError("openai_api_key_missing")
+
+    errors=[]
+    for model in ow._ordered_models():
+        if ow._model_cooldown_remaining(model)>0:
+            errors.append({"model":model,"status":"cooldown_skip"})
+            continue
+        payload={
+            "model":model,
+            "input":str(prompt),
+            "max_output_tokens":max(32,min(800,int(max_tokens))),
+        }
+        started=time.time()
+        try:
+            response=ow._request_json(payload,key,max_attempts=1)
+            text=ow._message_text(response)
+            ow._mark_model_success(model)
+            return {
+                "provider":"openai",
+                "model":model,
+                "text":text,
+                "latency_seconds":round(time.time()-started,3),
+                "external_action_performed":False,
+                "financial_action_performed":False,
+            }
+        except Exception as exc:
+            message=f"{type(exc).__name__}:{str(exc)[:1200]}"
+            errors.append({"model":model,"status":"failed","error":message})
+            if ow._is_429_error(message):
+                ow._mark_model_rate_limited(model,message)
+    raise RuntimeError("openai_internal_infer_failed:"+json.dumps(errors)[:1800])
+
+def infer_text(prompt,max_tokens=160):
+    status=provider_status()
+    available=(status.get("capabilities") or {}).get("llm_inference") or []
+    attempts=[]
+
+    for name,fn in (
+        ("cloudflare_workers_ai",cloudflare_infer),
+        ("openai",openai_internal_infer),
+    ):
+        if name not in available:
+            continue
+        remaining=_cooldown_remaining(name)
+        if remaining>0:
+            attempts.append({
+                "provider":name,
+                "status":"cooldown_skip",
+                "cooldown_remaining_seconds":round(remaining,2),
+            })
+            continue
+        try:
+            out=fn(prompt,max_tokens=max_tokens)
+            _mark_provider_success(name,out.get("latency_seconds"))
+            out["attempts"]=attempts+[{"provider":name,"status":"success"}]
+            return out
+        except Exception as exc:
+            message=f"{type(exc).__name__}:{str(exc)[:1000]}"
+            _mark_provider_failure(name,message)
+            attempts.append({"provider":name,"status":"failed","error":message})
+
+    return {
+        "provider":None,
+        "model":None,
+        "text":"",
+        "status":"no_usable_inference_provider",
+        "attempts":attempts,
+        "external_action_performed":False,
+        "financial_action_performed":False,
+    }
+
 def github_public_search(query,max_results=5):
     url="https://api.github.com/search/repositories?"+urllib.parse.urlencode({"q":query,"per_page":max(1,min(10,int(max_results)))})
     status,data,h=http(url)
