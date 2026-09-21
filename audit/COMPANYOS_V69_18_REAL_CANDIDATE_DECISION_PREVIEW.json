@@ -1,0 +1,44 @@
+{
+  "action_packet_id": "7145391a7e17cc9a1dee",
+  "candidate_name": "regional_construction_ai",
+  "candidate_score": 50,
+  "candidate_source": "/data/data/com.termux/files/home/.companyos_runtime/profit_first_candidates/regional_construction_ai_808fd4a161a024e2.json",
+  "decision": "continue_research",
+  "decision_persisted_by_test": false,
+  "evaluated_at_unix": 1789995059.8548527,
+  "evidence": {
+    "coverage": 0.5,
+    "critical_requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "missing_critical": [
+      "pricing"
+    ],
+    "observed": 1,
+    "observed_requirements": [
+      "buyer_demand"
+    ],
+    "requirements": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "total": 2
+  },
+  "external_action_performed_by_test": false,
+  "metrics": {
+    "probability": 0.0,
+    "profit": 50.0,
+    "readiness": 0.0,
+    "score": 0.0
+  },
+  "profit_action_dispatched_by_test": false,
+  "promotion_gate_allowed": false,
+  "promotion_gate_reason": "decision_not_promoted",
+  "readiness_threshold": 60.0,
+  "reasons": [
+    "evidence_coverage_below_threshold"
+  ],
+  "recalculated_readiness": 15.0,
+  "schema": "companyos.v69_18.real_candidate_decision_preview.v1"
+}

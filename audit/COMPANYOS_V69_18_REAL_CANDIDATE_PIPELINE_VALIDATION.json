@@ -1,0 +1,97 @@
+{
+  "blocking_failures": [],
+  "bridge": {
+    "action_packet_id": "7145391a7e17cc9a1dee",
+    "packet_created": false,
+    "top_candidate": "regional_construction_ai",
+    "top_candidate_score": 50
+  },
+  "decision_persisted_by_test": false,
+  "decision_preview": {
+    "action_packet_id": "7145391a7e17cc9a1dee",
+    "candidate_name": "regional_construction_ai",
+    "candidate_score": 50,
+    "candidate_source": "/data/data/com.termux/files/home/.companyos_runtime/profit_first_candidates/regional_construction_ai_808fd4a161a024e2.json",
+    "decision": "continue_research",
+    "decision_persisted_by_test": false,
+    "evaluated_at_unix": 1789995059.8548527,
+    "evidence": {
+      "coverage": 0.5,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "pricing"
+      ],
+      "observed": 1,
+      "observed_requirements": [
+        "buyer_demand"
+      ],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "external_action_performed_by_test": false,
+    "metrics": {
+      "probability": 0.0,
+      "profit": 50.0,
+      "readiness": 0.0,
+      "score": 0.0
+    },
+    "profit_action_dispatched_by_test": false,
+    "promotion_gate_allowed": false,
+    "promotion_gate_reason": "decision_not_promoted",
+    "readiness_threshold": 60.0,
+    "reasons": [
+      "evidence_coverage_below_threshold"
+    ],
+    "recalculated_readiness": 15.0,
+    "schema": "companyos.v69_18.real_candidate_decision_preview.v1"
+  },
+  "enrichment": {
+    "accepted": 50,
+    "rejected": 118,
+    "scanned": 168,
+    "unique_output_fingerprints": 50
+  },
+  "evidence": {
+    "created_count": 2,
+    "latest_candidate": "regional_construction_ai",
+    "observed_this_cycle": 1,
+    "task_summary": {
+      "observed": 1,
+      "research_required": 1,
+      "total": 2
+    }
+  },
+  "external_action_performed_by_test": false,
+  "generated_at_unix": 1789995059.907488,
+  "mode": "real_internal_data_no_external_action",
+  "overall_status": "PASS",
+  "post_counts": {
+    "action_packet_count": 1,
+    "candidate_json_count": 300,
+    "evidence_task_count": 2,
+    "research_json_count": 1402
+  },
+  "pre_counts": {
+    "action_packet_count": 1,
+    "candidate_json_count": 300,
+    "evidence_task_count": 0,
+    "research_json_count": 1402
+  },
+  "profit_action_dispatched_by_test": false,
+  "schema": "companyos.v69_18.real_candidate_pipeline_validation.v1",
+  "synthetic_candidate_used": false,
+  "synthetic_evidence_used": false,
+  "tracked_packet": {
+    "action_packet_id": "7145391a7e17cc9a1dee",
+    "candidate_name": "regional_construction_ai",
+    "candidate_score": 50,
+    "recommended_action_count": 1,
+    "status": "ready_for_guarded_execution"
+  }
+}
