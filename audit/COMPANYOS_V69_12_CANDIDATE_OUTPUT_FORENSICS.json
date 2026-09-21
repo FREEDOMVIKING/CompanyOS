@@ -1,0 +1,1818 @@
+{
+  "artifact_root_counts": {
+    "canonical_home_runtime": 36
+  },
+  "blocking_failures": [],
+  "candidate_shaped_artifacts": 0,
+  "candidate_shaped_stage_results": 0,
+  "candidate_summary": {
+    "canonical_home_candidates": {
+      "file_count": 0,
+      "path": "/data/data/com.termux/files/home/.companyos_runtime/profit_first_candidates"
+    },
+    "repo_local_candidates": {
+      "file_count": 8473,
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime/profit_first_candidates"
+    }
+  },
+  "completed_stage_tasks_inspected": 36,
+  "deployment_actions_performed": false,
+  "diagnoses": [
+    {
+      "code": "split_runtime_roots",
+      "effect": "Materializers/capture can miss the actual specialist outputs unless roots are bridged or explicitly scanned.",
+      "evidence": "CEO queue and specialist evidence use ~/.companyos_runtime while candidate/capture modules use ~/companyos/.companyos_runtime.",
+      "severity": "high"
+    },
+    {
+      "code": "research_handler_is_intake_validator_not_research_executor",
+      "effect": "A CEO research stage can complete without generating market/economic candidate evidence.",
+      "evidence": "default research specialist writes supplied evidence and external_research_performed=False.",
+      "severity": "high"
+    },
+    {
+      "code": "capture_scope_ends_at_orchestrator_start",
+      "effect": "Start-time capture occurs before research/planning/build stage handlers execute, so later specialist returns are not captured by that wrapper.",
+      "evidence": "research_output_capture wraps AutonomousCEOOrchestrator.start only.",
+      "severity": "high"
+    },
+    {
+      "code": "completed_tasks_without_candidate_shaped_output",
+      "effect": "Downstream candidate materializers have no qualifying economics-bearing records to normalize.",
+      "evidence": "36 completed stage tasks inspected; zero candidate-shaped task results and zero candidate-shaped artifacts.",
+      "severity": "high"
+    }
+  ],
+  "email_actions_performed": false,
+  "existing_materialization_reports": [
+    {
+      "candidate_count": null,
+      "candidate_files_written_or_repaired": null,
+      "candidate_files_written_or_updated": 49,
+      "candidate_objects_found": null,
+      "candidates_extracted": 49,
+      "generated_at_unix": 1789935433.2376769,
+      "keys": [
+        "candidate_directory",
+        "candidate_files_written_or_updated",
+        "candidates_extracted",
+        "generated_at_unix",
+        "written"
+      ],
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime/candidate_materialization_report.json"
+    },
+    {
+      "candidate_count": null,
+      "candidate_files_written_or_repaired": 24,
+      "candidate_files_written_or_updated": null,
+      "candidate_objects_found": 24,
+      "candidates_extracted": null,
+      "generated_at_unix": 1784780466.6076992,
+      "keys": [
+        "candidate_files_written_or_repaired",
+        "candidate_objects_found",
+        "generated_at_unix",
+        "lineage_repairs",
+        "raw_capture_file_count",
+        "written"
+      ],
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime/research_output_candidate_materializer_v2_report.json"
+    },
+    {
+      "candidate_count": null,
+      "candidate_files_written_or_repaired": 0,
+      "candidate_files_written_or_updated": null,
+      "candidate_objects_found": null,
+      "candidates_extracted": null,
+      "generated_at_unix": 1784778272.1993127,
+      "keys": [
+        "candidate_files_written_or_repaired",
+        "deduplicated_candidates_found",
+        "generated_at_unix",
+        "ok",
+        "orchestration_id",
+        "raw_candidate_objects_found",
+        "written"
+      ],
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime/orchestration_candidate_extractor_v2_report.json"
+    },
+    {
+      "candidate_count": 24,
+      "candidate_files_written_or_repaired": null,
+      "candidate_files_written_or_updated": null,
+      "candidate_objects_found": null,
+      "candidates_extracted": null,
+      "generated_at_unix": 1784780466.682903,
+      "keys": [
+        "business_model_count",
+        "business_models",
+        "candidate_count",
+        "generated_at_unix",
+        "ranking",
+        "research_requirements_met",
+        "sector_count",
+        "sectors"
+      ],
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime/profit_first_evidence_report.json"
+    }
+  ],
+  "external_actions_performed": false,
+  "financial_actions_performed": false,
+  "generated_at_unix": 1789951547.5767827,
+  "missing_artifact_count": 0,
+  "orchestrations": [
+    {
+      "created_at_unix": 1789933994.5778654,
+      "final_summary_present": true,
+      "orchestration_id": "daeb062a-ed67-43d0-a1d7-7125339fd0c0",
+      "root_goal_id": "daeb062a-ed67-43d0-a1d7-7125339fd0c0:goal:0",
+      "root_goal_preview": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=24\nsector_count=3\nbusiness_model_count=1\nqualified_count=0\n\nExisting candidates:\n[\n  {\n    \"name\": \"Affiliate Content Business Opportunity\",\n    \"sector\": \"affiliate_media\",\n    \"business_model\": \"content_media\",\n    \"evidence_confidence\": 28.0,\n    \"needs_enrichment\": true,\n    \"source\": \".companyos_runtime/profit_first_candidates/affiliate_content_business_opportunity_34770cf1b82fb266.json\"\n  },\n  {\n    \"name\": \"Ai Wor",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/3329a9cf-c62f-4d16-898c-d1c5bbdebfe6.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "daeb062a-ed67-43d0-a1d7-7125339fd0c0:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "3329a9cf-c62f-4d16-898c-d1c5bbdebfe6",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/3d17a359-4454-464b-a36e-e97e652ad4ec.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "daeb062a-ed67-43d0-a1d7-7125339fd0c0:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "3d17a359-4454-464b-a36e-e97e652ad4ec",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/422ccd65-e183-459e-8669-67b895e17c58.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "daeb062a-ed67-43d0-a1d7-7125339fd0c0:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "422ccd65-e183-459e-8669-67b895e17c58",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789935455.9586263
+    },
+    {
+      "created_at_unix": 1789935254.6156273,
+      "final_summary_present": true,
+      "orchestration_id": "cdf6de65-3826-4777-8028-789a2f40592a",
+      "root_goal_id": "cdf6de65-3826-4777-8028-789a2f40592a:goal:0",
+      "root_goal_preview": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=24\nsector_count=3\nbusiness_model_count=1\nqualified_count=0\n\nExisting candidates:\n[\n  {\n    \"name\": \"Affiliate Content Business Opportunity\",\n    \"sector\": \"affiliate_media\",\n    \"business_model\": \"content_media\",\n    \"evidence_confidence\": 28.0,\n    \"needs_enrichment\": true,\n    \"source\": \".companyos_runtime/profit_first_candidates/affiliate_content_business_opportunity_34770cf1b82fb266.json\"\n  },\n  {\n    \"name\": \"Ai Wor",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/bb810559-f0b6-48dc-947d-df76b360910d.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "cdf6de65-3826-4777-8028-789a2f40592a:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "bb810559-f0b6-48dc-947d-df76b360910d",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/8c69e73f-3b9d-4ba6-9248-e14f8cd21fd3.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "cdf6de65-3826-4777-8028-789a2f40592a:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "8c69e73f-3b9d-4ba6-9248-e14f8cd21fd3",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/ef5df092-a23f-4117-bc28-33e6f269209b.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "cdf6de65-3826-4777-8028-789a2f40592a:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "ef5df092-a23f-4117-bc28-33e6f269209b",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789935450.5388958
+    },
+    {
+      "created_at_unix": 1789935261.2661889,
+      "final_summary_present": true,
+      "orchestration_id": "255f5013-3f48-410e-9817-a34900ba54e2",
+      "root_goal_id": "255f5013-3f48-410e-9817-a34900ba54e2:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/949cd26e-a5dc-45b9-b755-1a1853b46861.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "255f5013-3f48-410e-9817-a34900ba54e2:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "949cd26e-a5dc-45b9-b755-1a1853b46861",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/bdbc12dc-a9d4-4446-a71c-67dff0736476.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "255f5013-3f48-410e-9817-a34900ba54e2:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "bdbc12dc-a9d4-4446-a71c-67dff0736476",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/76376074-f854-418a-ab82-b4a1b7ed22b4.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "255f5013-3f48-410e-9817-a34900ba54e2:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "76376074-f854-418a-ab82-b4a1b7ed22b4",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789935444.9661753
+    },
+    {
+      "created_at_unix": 1789934768.4225354,
+      "final_summary_present": true,
+      "orchestration_id": "11785928-2d3f-499f-a1ec-216089788c17",
+      "root_goal_id": "11785928-2d3f-499f-a1ec-216089788c17:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/23bb09aa-d79f-4836-b8c4-2face4781789.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "11785928-2d3f-499f-a1ec-216089788c17:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "23bb09aa-d79f-4836-b8c4-2face4781789",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/4257a476-4f25-4693-83a8-d6f4a6ad9a73.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "11785928-2d3f-499f-a1ec-216089788c17:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "4257a476-4f25-4693-83a8-d6f4a6ad9a73",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/51e9abcf-237e-47b4-9f9f-eb9377cf72eb.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "11785928-2d3f-499f-a1ec-216089788c17:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "51e9abcf-237e-47b4-9f9f-eb9377cf72eb",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789935270.1370127
+    },
+    {
+      "created_at_unix": 1789934747.9505036,
+      "final_summary_present": true,
+      "orchestration_id": "075d7962-daf8-46cc-b50f-5bbd4f0c5d4e",
+      "root_goal_id": "075d7962-daf8-46cc-b50f-5bbd4f0c5d4e:goal:0",
+      "root_goal_preview": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=24\nsector_count=3\nbusiness_model_count=1\nqualified_count=0\n\nExisting candidates:\n[\n  {\n    \"name\": \"Affiliate Content Business Opportunity\",\n    \"sector\": \"affiliate_media\",\n    \"business_model\": \"content_media\",\n    \"evidence_confidence\": 28.0,\n    \"needs_enrichment\": true,\n    \"source\": \".companyos_runtime/profit_first_candidates/affiliate_content_business_opportunity_34770cf1b82fb266.json\"\n  },\n  {\n    \"name\": \"Ai Wor",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/62b484ef-fb66-4e0f-aabc-363fd5640dd7.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "075d7962-daf8-46cc-b50f-5bbd4f0c5d4e:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "62b484ef-fb66-4e0f-aabc-363fd5640dd7",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/4da377df-78a5-4b4d-ba46-4664845895d3.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "075d7962-daf8-46cc-b50f-5bbd4f0c5d4e:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "4da377df-78a5-4b4d-ba46-4664845895d3",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/42efba98-450f-4d70-8f80-19844d135daf.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "075d7962-daf8-46cc-b50f-5bbd4f0c5d4e:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "42efba98-450f-4d70-8f80-19844d135daf",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789935262.579365
+    },
+    {
+      "created_at_unix": 1789933210.8538613,
+      "final_summary_present": true,
+      "orchestration_id": "cc0cfc13-09a3-4167-bc69-4e56acac136f",
+      "root_goal_id": "cc0cfc13-09a3-4167-bc69-4e56acac136f:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/0def5c44-7ec2-4e13-b27d-247110b65afc.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "cc0cfc13-09a3-4167-bc69-4e56acac136f:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "0def5c44-7ec2-4e13-b27d-247110b65afc",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/906f3716-5c5e-43dd-b94b-1e1aadfa9227.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "cc0cfc13-09a3-4167-bc69-4e56acac136f:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "906f3716-5c5e-43dd-b94b-1e1aadfa9227",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/2f6a396e-97fa-4a78-9e77-2d0332b13f58.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "cc0cfc13-09a3-4167-bc69-4e56acac136f:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "2f6a396e-97fa-4a78-9e77-2d0332b13f58",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789934770.3932316
+    },
+    {
+      "created_at_unix": 1789933204.4386864,
+      "final_summary_present": true,
+      "orchestration_id": "7deebbe9-3e1d-4be4-80b1-1d27a8676cc3",
+      "root_goal_id": "7deebbe9-3e1d-4be4-80b1-1d27a8676cc3:goal:0",
+      "root_goal_preview": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=24\nsector_count=3\nbusiness_model_count=1\nqualified_count=0\n\nExisting candidates:\n[\n  {\n    \"name\": \"Affiliate Content Business Opportunity\",\n    \"sector\": \"affiliate_media\",\n    \"business_model\": \"content_media\",\n    \"evidence_confidence\": 28.0,\n    \"needs_enrichment\": true,\n    \"source\": \".companyos_runtime/profit_first_candidates/affiliate_content_business_opportunity_34770cf1b82fb266.json\"\n  },\n  {\n    \"name\": \"Ai Wor",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/6cbf72e3-e5bf-4aec-8768-3d458d2f2a4f.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "7deebbe9-3e1d-4be4-80b1-1d27a8676cc3:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "6cbf72e3-e5bf-4aec-8768-3d458d2f2a4f",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/69ad66e5-5536-4e97-8950-04933cbc1e27.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "7deebbe9-3e1d-4be4-80b1-1d27a8676cc3:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "69ad66e5-5536-4e97-8950-04933cbc1e27",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/d996344d-bd81-43b5-9f91-a18a6dce7462.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "7deebbe9-3e1d-4be4-80b1-1d27a8676cc3:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "d996344d-bd81-43b5-9f91-a18a6dce7462",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789933997.393653
+    },
+    {
+      "created_at_unix": 1789932933.7121055,
+      "final_summary_present": true,
+      "orchestration_id": "intake-auto-profit-1789932929",
+      "root_goal_id": "intake-auto-profit-1789932929:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/75983e61-f60b-442a-8919-24f235244f6f.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "intake-auto-profit-1789932929:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "75983e61-f60b-442a-8919-24f235244f6f",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/0bae4838-2751-49be-8090-1c12e4631836.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "intake-auto-profit-1789932929:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "0bae4838-2751-49be-8090-1c12e4631836",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/5c75dfaf-3f34-4f23-99e4-ba0dee6ac249.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "intake-auto-profit-1789932929:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "5c75dfaf-3f34-4f23-99e4-ba0dee6ac249",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789932937.888408
+    },
+    {
+      "created_at_unix": 1789932884.3544297,
+      "final_summary_present": true,
+      "orchestration_id": "b4e9f36d-3380-43a3-98cd-b9e37135e78a",
+      "root_goal_id": "b4e9f36d-3380-43a3-98cd-b9e37135e78a:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/af498f79-0c67-4c46-8aa0-b6696fd81aa5.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "b4e9f36d-3380-43a3-98cd-b9e37135e78a:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "af498f79-0c67-4c46-8aa0-b6696fd81aa5",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/38e4b3d7-b47a-4440-825a-06e6a98465af.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "b4e9f36d-3380-43a3-98cd-b9e37135e78a:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "38e4b3d7-b47a-4440-825a-06e6a98465af",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/d80fa8fb-dc24-43eb-a887-fb2928931a1f.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "b4e9f36d-3380-43a3-98cd-b9e37135e78a:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "d80fa8fb-dc24-43eb-a887-fb2928931a1f",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789932897.8320293
+    },
+    {
+      "created_at_unix": 1789932875.83259,
+      "final_summary_present": true,
+      "orchestration_id": "1c7e825e-ee4e-4772-b6fd-ada7a17c985e",
+      "root_goal_id": "1c7e825e-ee4e-4772-b6fd-ada7a17c985e:goal:0",
+      "root_goal_preview": "PROFIT-FIRST OPPORTUNITY EXPANSION MISSION\n\nCurrent counts:\ncandidate_count=24\nsector_count=3\nbusiness_model_count=1\nqualified_count=0\n\nExisting candidates:\n[\n  {\n    \"name\": \"Affiliate Content Business Opportunity\",\n    \"sector\": \"affiliate_media\",\n    \"business_model\": \"content_media\",\n    \"evidence_confidence\": 28.0,\n    \"needs_enrichment\": true,\n    \"source\": \".companyos_runtime/profit_first_candidates/affiliate_content_business_opportunity_34770cf1b82fb266.json\"\n  },\n  {\n    \"name\": \"Ai Wor",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/0e006495-5559-4c9c-9aaf-ea188ef40780.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "1c7e825e-ee4e-4772-b6fd-ada7a17c985e:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "0e006495-5559-4c9c-9aaf-ea188ef40780",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/a2ceb660-06d9-42e5-83be-97c0f6199122.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "1c7e825e-ee4e-4772-b6fd-ada7a17c985e:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "a2ceb660-06d9-42e5-83be-97c0f6199122",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/7434b1b4-935b-4d58-aa78-aa04b08ae068.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "1c7e825e-ee4e-4772-b6fd-ada7a17c985e:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "7434b1b4-935b-4d58-aa78-aa04b08ae068",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789932892.008825
+    },
+    {
+      "created_at_unix": 1789932627.7046516,
+      "final_summary_present": true,
+      "orchestration_id": "intake-auto-profit-1789932619",
+      "root_goal_id": "intake-auto-profit-1789932619:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/07d8fe37-015d-4326-b302-91b27d6e0b0b.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "intake-auto-profit-1789932619:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "07d8fe37-015d-4326-b302-91b27d6e0b0b",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/bef9577a-b63c-4891-878d-aec306f65b24.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "intake-auto-profit-1789932619:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "bef9577a-b63c-4891-878d-aec306f65b24",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/464e9eb9-8f43-4bc7-97e9-90b6aefa8c0f.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "intake-auto-profit-1789932619:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "464e9eb9-8f43-4bc7-97e9-90b6aefa8c0f",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789932640.9520855
+    },
+    {
+      "created_at_unix": 1789932564.4599137,
+      "final_summary_present": true,
+      "orchestration_id": "b3f92149-d7e3-4e11-ada6-838207cf5e56",
+      "root_goal_id": "b3f92149-d7e3-4e11-ada6-838207cf5e56:goal:0",
+      "root_goal_preview": "COMPANYOS PRIMARY ECONOMIC DIRECTIVE\nMission: Maximize sustainable long-term risk-adjusted economic value by discovering, validating, launching, operating, and scaling the strongest legitimate ventures CompanyOS can execute.\n\nDo not optimize for number of companies created. Optimize for durable economic value and probability-adjusted profit.\n\nDISCOVERY:\n1. Research markets before building.\n2. Generate at least 20 materially different opportunities across at least 8 unrelated sectors and at least",
+      "state": "COMPLETED",
+      "task_count": 3,
+      "tasks": [
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/f64b1735-9d33-4cdf-8ac3-ad959ef0b925.research.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_research_performed",
+            "next_requirement",
+            "payload_sha256",
+            "schema",
+            "status",
+            "subject",
+            "supplied_evidence",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "b3f92149-d7e3-4e11-ada6-838207cf5e56:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_claims_invented",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "research",
+          "state": "COMPLETED",
+          "task_id": "f64b1735-9d33-4cdf-8ac3-ad959ef0b925",
+          "task_type": "research"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/7c4ad178-784a-416b-815e-da8b4e4e0e0b.plan.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "constraints",
+            "created_at_unix",
+            "goal",
+            "schema",
+            "status",
+            "steps",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "b3f92149-d7e3-4e11-ada6-838207cf5e56:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "status",
+            "step_count"
+          ],
+          "result_type": "dict",
+          "stage": "planning",
+          "state": "COMPLETED",
+          "task_id": "7c4ad178-784a-416b-815e-da8b4e4e0e0b",
+          "task_type": "planning"
+        },
+        {
+          "artifact": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence/d39e6335-6aff-4bb6-9f58-c350320b072d.build.json",
+          "artifact_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "artifact_exists": true,
+          "artifact_keys": [
+            "created_at_unix",
+            "external_deployment_performed",
+            "inputs",
+            "requested_artifact",
+            "schema",
+            "status",
+            "target",
+            "task_id",
+            "task_type"
+          ],
+          "artifact_location": "canonical_home_runtime",
+          "attempts": 1,
+          "goal_id": "b3f92149-d7e3-4e11-ada6-838207cf5e56:goal:0",
+          "result_candidate_shape": {
+            "looks_like_candidate": false,
+            "normalized_by_evidence_pipeline": false,
+            "normalized_by_materializer": false,
+            "numeric_field_count": 0
+          },
+          "result_keys": [
+            "agent",
+            "artifact",
+            "external_deployment_performed",
+            "status"
+          ],
+          "result_type": "dict",
+          "stage": "build",
+          "state": "COMPLETED",
+          "task_id": "d39e6335-6aff-4bb6-9f58-c350320b072d",
+          "task_type": "build"
+        }
+      ],
+      "updated_at_unix": 1789932592.9985273
+    }
+  ],
+  "overall_status": "PASS",
+  "parser_control": {
+    "looks_like_candidate": true,
+    "normalized_by_evidence_pipeline": true,
+    "normalized_by_materializer": true,
+    "numeric_field_count": 6
+  },
+  "primary_choke_point": "split_runtime_roots_plus_non_candidate_specialist_outputs",
+  "raw_capture_summary": {
+    "canonical_home_raw": {
+      "file_count": 0,
+      "files_tied_to_recent_completed_orchestrations": 0,
+      "files_with_return_events": 0,
+      "max_return_events": 0,
+      "path": "/data/data/com.termux/files/home/.companyos_runtime/canonical_research_outputs"
+    },
+    "repo_local_raw": {
+      "file_count": 5187,
+      "files_tied_to_recent_completed_orchestrations": 0,
+      "files_with_return_events": 0,
+      "max_return_events": 0,
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime/canonical_research_outputs"
+    }
+  },
+  "recent_completed_orchestration_count": 12,
+  "runtime_files_modified": false,
+  "runtime_roots": {
+    "autonomous_task_queue_root": "/data/data/com.termux/files/home/.companyos_runtime/task_queue",
+    "candidate_materialization_candidate_dir": "/data/data/com.termux/files/home/companyos/.companyos_runtime/profit_first_candidates",
+    "candidate_materialization_runtime": "/data/data/com.termux/files/home/companyos/.companyos_runtime",
+    "candidate_materializer_under_repo_runtime": true,
+    "canonical_and_repo_runtime_samefile": false,
+    "canonical_home_runtime": {
+      "exists": true,
+      "is_symlink": false,
+      "path": "/data/data/com.termux/files/home/.companyos_runtime",
+      "resolved": "/data/data/com.termux/files/home/.companyos_runtime"
+    },
+    "capture_under_repo_runtime": true,
+    "default_specialist_evidence_root": "/data/data/com.termux/files/home/.companyos_runtime/specialist_evidence",
+    "queue_under_canonical": true,
+    "repo_local_runtime": {
+      "exists": true,
+      "is_symlink": false,
+      "path": "/data/data/com.termux/files/home/companyos/.companyos_runtime",
+      "resolved": "/data/data/com.termux/files/home/companyos/.companyos_runtime"
+    },
+    "research_output_capture_raw_dir": "/data/data/com.termux/files/home/companyos/.companyos_runtime/canonical_research_outputs",
+    "research_output_capture_runtime": "/data/data/com.termux/files/home/companyos/.companyos_runtime",
+    "specialist_evidence_under_canonical": true
+  },
+  "schema": "companyos.v69_12.candidate_output_materialization_forensics.v1",
+  "stage_shape_counts": {
+    "build:artifact_candidate_shaped": 0,
+    "build:completed": 12,
+    "build:result_candidate_shaped": 0,
+    "planning:artifact_candidate_shaped": 0,
+    "planning:completed": 12,
+    "planning:result_candidate_shaped": 0,
+    "research:artifact_candidate_shaped": 0,
+    "research:completed": 12,
+    "research:result_candidate_shaped": 0
+  },
+  "static_findings": {
+    "candidate_bridge_searches_canonical_home_runtime": false,
+    "candidate_bridge_searches_repo_local_runtime": true,
+    "research_capture_wraps_orchestrator_cycle": false,
+    "research_capture_wraps_orchestrator_start": true,
+    "research_capture_wraps_run_until_terminal": false,
+    "research_specialist_explicitly_external_research_false": true,
+    "research_specialist_has_candidate_economic_fields": false,
+    "research_specialist_returns_artifact_pointer_only": true
+  }
+}
