@@ -1,0 +1,147 @@
+{
+  "automatic_purchase_performed": false,
+  "blocking_failures": [],
+  "captcha_bypass_performed": false,
+  "deployment_performed": false,
+  "external_message_sent": false,
+  "financial_action_performed": false,
+  "generated_at_unix": 1790007479.0520566,
+  "identity_fabrication_performed": false,
+  "kyc_bypass_performed": false,
+  "leaked_key_usage_performed": false,
+  "onboarding_queue_summary": {
+    "company_account_email_configured": true,
+    "rules": {
+      "accept_paid_plan_automatically": false,
+      "automatic_purchase": false,
+      "bypass_captcha": false,
+      "bypass_kyc": false,
+      "bypass_phone_verification": false,
+      "fabricate_identity": false,
+      "official_free_or_no_key_providers_first": true,
+      "print_secret_values": false,
+      "search_public_repositories_for_keys": false,
+      "use_leaked_or_third_party_keys": false
+    },
+    "task_count": 8
+  },
+  "overall_status": "PASS",
+  "phone_verification_bypass_performed": false,
+  "provider_state": {
+    "account_or_key_needed": [
+      "groq",
+      "gemini",
+      "huggingface",
+      "github_actions"
+    ],
+    "automatic_purchase_performed": false,
+    "catalog_path": "/data/data/com.termux/files/home/.companyos_runtime/provider_catalog.json",
+    "credential_inventory": {
+      "cloudflare_workers_ai": {
+        "credential_material_present": true,
+        "credential_refs": [
+          {
+            "fingerprint": "d20489de7709",
+            "name": "CLOUDFLARE_API_TOKEN",
+            "source": "process_env"
+          },
+          {
+            "fingerprint": "ec5171690d41",
+            "name": "CLOUDFLARE_ACCOUNT_ID",
+            "source": "process_env"
+          }
+        ]
+      },
+      "gemini": {
+        "credential_material_present": false,
+        "credential_refs": []
+      },
+      "github_actions": {
+        "credential_material_present": false,
+        "credential_refs": []
+      },
+      "github_models": {
+        "credential_material_present": false,
+        "credential_refs": []
+      },
+      "github_public_rest": {
+        "credential_material_present": false,
+        "credential_refs": []
+      },
+      "groq": {
+        "credential_material_present": false,
+        "credential_refs": []
+      },
+      "huggingface": {
+        "credential_material_present": false,
+        "credential_refs": []
+      },
+      "openai": {
+        "credential_material_present": true,
+        "credential_refs": [
+          {
+            "fingerprint": "d21fad8dd623",
+            "name": "OPENAI_API_KEY",
+            "source": "process_env"
+          }
+        ]
+      }
+    },
+    "credential_ready": [
+      "cloudflare_workers_ai",
+      "openai"
+    ],
+    "external_message_sent": false,
+    "financial_action_performed": false,
+    "generated_at_unix": 1790007478.781288,
+    "probes": {
+      "cloudflare_workers_ai": {
+        "authenticated": true,
+        "http_status": 200,
+        "probe": "token_verify"
+      },
+      "gemini": {
+        "probe": "skipped",
+        "reason": "credential_missing"
+      },
+      "github_actions": {
+        "probe": "skipped",
+        "reason": "credential_missing"
+      },
+      "github_public_rest": {
+        "authenticated": false,
+        "http_status": 200,
+        "limit": 60,
+        "reachable": true,
+        "remaining": 60,
+        "reset": 1790011077
+      },
+      "groq": {
+        "probe": "skipped",
+        "reason": "credential_missing"
+      },
+      "huggingface": {
+        "probe": "skipped",
+        "reason": "credential_missing"
+      },
+      "openai": {
+        "authenticated": true,
+        "http_status": 200,
+        "probe": "models"
+      }
+    },
+    "public_key_harvesting_performed": false,
+    "queue_path": "/data/data/com.termux/files/home/.companyos_runtime/provider_onboarding_queue.json",
+    "ready_no_key": [
+      "github_public_rest"
+    ],
+    "retired_skip": [
+      "github_models"
+    ],
+    "schema": "companyos.provider_acquisition_state.v69_26",
+    "secret_values_emitted": false
+  },
+  "public_key_harvesting_performed": false,
+  "schema": "companyos.v69_26.provider_acquisition_broker.v1",
+  "secret_values_emitted": false
+}
