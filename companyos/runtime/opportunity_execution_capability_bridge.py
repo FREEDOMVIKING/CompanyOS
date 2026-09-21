@@ -31,6 +31,13 @@ def num(v,default=0.0):
     try:return float(v)
     except Exception:return default
 
+def portable_source(path):
+    p=Path(path).resolve()
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
 def active_capabilities():
     fb=load(FEEDBACK,{})
     caps=fb.get("capabilities",{}) if isinstance(fb,dict) else {}
@@ -62,7 +69,7 @@ def load_candidates():
         x=load(p,None)
         if not isinstance(x,dict):continue
         name=str(x.get("name") or x.get("candidate_name") or x.get("venture_name") or p.stem)
-        rows.append({"name":name,"source":str(p.relative_to(ROOT)),"payload":x,"score":round(candidate_score(x),2)})
+        rows.append({"name":name,"source":portable_source(p),"payload":x,"score":round(candidate_score(x),2)})
     rows.sort(key=lambda r:r["score"],reverse=True)
     return rows
 
