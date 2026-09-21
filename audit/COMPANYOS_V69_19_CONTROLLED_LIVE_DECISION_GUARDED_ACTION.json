@@ -1,0 +1,84 @@
+{
+  "blocking_failures": [],
+  "controlled_action": {
+    "action_packet_id": "12abfa19d030f0618981",
+    "candidate_name": "regional_construction_ai",
+    "decision": "continue_research",
+    "gate_allowed": false,
+    "gate_reason": "decision_not_promoted",
+    "guarded_profit_action_dispatched": false,
+    "internal_research_remediation_dispatched": true,
+    "next_step": "V69_20_REAL_EVIDENCE_REVIEW_AND_REEVALUATION",
+    "remediation_final_state": "COMPLETED",
+    "remediation_orchestration_id": "fa9e78a6-1b1f-4595-94c7-e4bce57c4dfc",
+    "remediation_total_cycles": 1
+  },
+  "direct_deployment_by_script": false,
+  "direct_email_sent_by_script": false,
+  "direct_financial_action_by_script": false,
+  "direct_transaction_broadcast_by_script": false,
+  "execution_gate": {
+    "action_packet_id": "12abfa19d030f0618981",
+    "candidate_name": "regional_construction_ai",
+    "decision": "continue_research",
+    "gate_allowed": false,
+    "gate_reason": "decision_not_promoted"
+  },
+  "forced_promotion": false,
+  "generated_at_unix": 1789995410.5820491,
+  "overall_status": "PASS",
+  "persisted_decision": {
+    "candidate": "regional_construction_ai",
+    "decision": "continue_research",
+    "evidence": {
+      "coverage": 0.5,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "pricing"
+      ],
+      "observed": 1,
+      "observed_requirements": [
+        "buyer_demand"
+      ],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "healthy": true,
+    "last_cycle_unix": 1789995395.9836638,
+    "metrics": {
+      "probability": 0.0,
+      "profit": 50.0,
+      "readiness": 0.0,
+      "score": 0.0
+    },
+    "readiness_threshold": 60.0,
+    "reasons": [
+      "evidence_coverage_below_threshold"
+    ],
+    "recalculated_readiness": 15.0,
+    "running": true,
+    "status": "decision_evaluated"
+  },
+  "schema": "companyos.v69_19.controlled_live_decision_guarded_action.v1",
+  "synthetic_candidate_used": false,
+  "synthetic_evidence_used": false,
+  "tracked_packet": {
+    "action_packet_id": "12abfa19d030f0618981",
+    "candidate_name": "regional_construction_ai",
+    "candidate_score": 50,
+    "recommended_actions": [
+      {
+        "action": "Create the smallest reversible validation experiment with a measurable pass/fail criterion.",
+        "confidence": 65,
+        "source": "bridge_fallback"
+      }
+    ],
+    "status_before": "ready_for_guarded_execution"
+  }
+}
