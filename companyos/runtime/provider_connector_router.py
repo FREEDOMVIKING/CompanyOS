@@ -69,7 +69,7 @@ def provider_status():
     tavily=bool((private.get("tavily") or {}).get("TAVILY_API_KEY"))
     brave=bool((private.get("brave_search") or {}).get("BRAVE_SEARCH_API_KEY") or (private.get("brave_search") or {}).get("BRAVE_API_KEY"))
     caps={
-      "web_search":[x for x,v in (("tavily",tavily),("brave_search",brave)) if v],
+      "web_search":[x for x,v in (("tavily",tavily),("brave_search",brave),("public_research_mesh",True)) if v],
       "public_code_research":["github_public_rest"],
       "llm_inference":[x for x,v in (("cloudflare_workers_ai",cf_ready),("groq",bool((private.get("groq") or {}).get("GROQ_API_KEY"))),("gemini",bool((private.get("gemini") or {}).get("GEMINI_API_KEY") or (private.get("gemini") or {}).get("GOOGLE_API_KEY"))),("huggingface",bool((private.get("huggingface") or {}).get("HF_TOKEN") or (private.get("huggingface") or {}).get("HUGGINGFACE_TOKEN"))),("openai",bool((private.get("openai") or {}).get("OPENAI_API_KEY") or (private.get("openai") or {}).get("COMPANYOS_OPENAI_API_KEY")))) if v]
     }
@@ -372,10 +372,150 @@ def brave_search(query,max_results=5):
     rows=[{"title":x.get("title"),"url":x.get("url"),"content":x.get("description")} for x in ((data.get("web") or {}).get("results") or []) if isinstance(x,dict)]
     return {"provider":"brave_search","results":rows,"result_count":len(rows)}
 
+# COMPANYOS_V69_31_PUBLIC_RESEARCH_MESH
+def wikipedia_search(query,max_results=5):
+    count=max(1,min(10,int(max_results)))
+    url="https://en.wikipedia.org/w/rest.php/v1/search/page?"+urllib.parse.urlencode({
+        "q":str(query),
+        "limit":count,
+    })
+    status,data,_=http(
+        url,
+        headers={
+            "User-Agent":"CompanyOS/69.31 autonomous research",
+            "Accept":"application/json",
+        },
+        timeout=25,
+    )
+    if status!=200:
+        raise RuntimeError(f"wikipedia_http_{status}")
+
+    rows=[]
+    for x in ((data or {}).get("pages") or [])[:count]:
+        if not isinstance(x,dict):
+            continue
+        title=str(x.get("title") or "").strip()
+        key=str(x.get("key") or title.replace(" ","_")).strip()
+        excerpt=str(x.get("excerpt") or "").strip()
+        description=str(x.get("description") or "").strip()
+        content=" ".join(v for v in (description,excerpt) if v).strip()
+        rows.append({
+            "title":title,
+            "url":"https://en.wikipedia.org/wiki/"+urllib.parse.quote(key,safe="()_-'"),
+            "content":content,
+            "source":"wikipedia",
+            "metadata":{
+                "matched_title":x.get("matched_title"),
+                "description":description,
+            },
+        })
+    return {
+        "provider":"wikipedia",
+        "results":rows,
+        "result_count":len(rows),
+    }
+
+def gdelt_search(query,max_results=5):
+    count=max(1,min(20,int(max_results)))
+    url="https://api.gdeltproject.org/api/v2/doc/doc?"+urllib.parse.urlencode({
+        "query":str(query),
+        "mode":"ArtList",
+        "format":"json",
+        "maxrecords":count,
+        "sort":"HybridRel",
+    })
+    status,data,_=http(
+        url,
+        headers={
+            "User-Agent":"CompanyOS/69.31 autonomous research",
+            "Accept":"application/json",
+        },
+        timeout=35,
+    )
+    if status!=200:
+        raise RuntimeError(f"gdelt_http_{status}")
+
+    articles=[]
+    if isinstance(data,dict):
+        articles=data.get("articles") or data.get("results") or []
+
+    rows=[]
+    for x in (articles or [])[:count]:
+        if not isinstance(x,dict):
+            continue
+        link=str(x.get("url") or x.get("url_mobile") or "").strip()
+        title=str(x.get("title") or "").strip()
+        if not link and not title:
+            continue
+        rows.append({
+            "title":title,
+            "url":link,
+            "content":str(x.get("domain") or ""),
+            "source":"gdelt",
+            "metadata":{
+                "domain":x.get("domain"),
+                "seen_date":x.get("seendate"),
+                "language":x.get("language"),
+                "source_country":x.get("sourcecountry"),
+            },
+        })
+    return {
+        "provider":"gdelt",
+        "results":rows,
+        "result_count":len(rows),
+    }
+
+def public_research_mesh_search(query,max_results=5):
+    limit=max(1,min(12,int(max_results)))
+    collected=[]
+    source_errors=[]
+    providers_used=[]
+
+    for name,fn in (
+        ("gdelt",gdelt_search),
+        ("wikipedia",wikipedia_search),
+        ("github_public_rest",github_public_search),
+    ):
+        try:
+            out=fn(query,max_results=limit)
+            providers_used.append(name)
+            for row in out.get("results") or []:
+                if isinstance(row,dict):
+                    item=dict(row)
+                    item.setdefault("source",name)
+                    collected.append(item)
+        except Exception as exc:
+            source_errors.append({
+                "provider":name,
+                "error":f"{type(exc).__name__}:{str(exc)[:300]}",
+            })
+
+    dedup=[]
+    seen=set()
+    for row in collected:
+        key=(str(row.get("url") or "").strip().lower()
+             or str(row.get("title") or row.get("name") or "").strip().lower())
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        dedup.append(row)
+        if len(dedup)>=limit:
+            break
+
+    return {
+        "provider":"public_research_mesh",
+        "results":dedup,
+        "result_count":len(dedup),
+        "providers_used":providers_used,
+        "source_errors":source_errors,
+        "read_only":True,
+        "financial_action_performed":False,
+    }
+
 def search_web(query,max_results=5):
     available=(provider_status().get("capabilities") or {}).get("web_search") or []
     errors=[]
-    for name,fn in (("tavily",tavily_search),("brave_search",brave_search)):
+    for name,fn in (("tavily",tavily_search),("brave_search",brave_search),("public_research_mesh",public_research_mesh_search)):
         if name not in available: continue
         try:
             out=fn(query,max_results); out["attempts"]=errors+[{"provider":name,"status":"success"}]; return out

@@ -133,6 +133,70 @@ def _stackexchange(topic: str) -> list[ConnectorResult]:
         ))
     return out
 
+# COMPANYOS_V69_31_GDELT_WIKIPEDIA_CONNECTORS
+def _gdelt(topic: str) -> list[ConnectorResult]:
+    params = urllib.parse.urlencode({
+        "query": topic,
+        "mode": "ArtList",
+        "format": "json",
+        "maxrecords": max(1, min(10, PER_SOURCE)),
+        "sort": "HybridRel",
+    })
+    data = _get_json("https://api.gdeltproject.org/api/v2/doc/doc?" + params)
+    rows = data.get("articles") or data.get("results") or []
+    out = []
+    for row in rows[:PER_SOURCE]:
+        if not isinstance(row, dict):
+            continue
+        out.append(ConnectorResult(
+            source="gdelt",
+            title=row.get("title") or "",
+            summary=(
+                f"Recent news signal for '{topic}'. "
+                f"Domain={row.get('domain')}, country={row.get('sourcecountry')}."
+            ),
+            url=row.get("url") or "",
+            metadata={
+                "topic": topic,
+                "domain": row.get("domain"),
+                "seen_date": row.get("seendate"),
+                "language": row.get("language"),
+                "source_country": row.get("sourcecountry"),
+            },
+            captured_at=time.time(),
+        ))
+    return out
+
+def _wikipedia(topic: str) -> list[ConnectorResult]:
+    q = urllib.parse.urlencode({
+        "q": topic,
+        "limit": max(1, min(10, PER_SOURCE)),
+    })
+    data = _get_json("https://en.wikipedia.org/w/rest.php/v1/search/page?" + q)
+    out = []
+    for row in (data.get("pages") or [])[:PER_SOURCE]:
+        if not isinstance(row, dict):
+            continue
+        title = row.get("title") or ""
+        key = row.get("key") or str(title).replace(" ", "_")
+        out.append(ConnectorResult(
+            source="wikipedia",
+            title=title,
+            summary=" ".join(
+                x for x in (
+                    str(row.get("description") or "").strip(),
+                    str(row.get("excerpt") or "").strip(),
+                ) if x
+            ),
+            url="https://en.wikipedia.org/wiki/" + urllib.parse.quote(str(key), safe="()_-'"),
+            metadata={
+                "topic": topic,
+                "matched_title": row.get("matched_title"),
+            },
+            captured_at=time.time(),
+        ))
+    return out
+
 def collect_public_research() -> tuple[str, list[dict[str, Any]], list[str]]:
     topic = _next_topic()
     rows: list[dict[str, Any]] = []
@@ -142,6 +206,8 @@ def collect_public_research() -> tuple[str, list[dict[str, Any]], list[str]]:
         ("hackernews", _hn),
         ("github", _github),
         ("stackexchange", _stackexchange),
+        ("gdelt", _gdelt),
+        ("wikipedia", _wikipedia),
     ):
         try:
             for item in fn(topic):

@@ -144,7 +144,7 @@ def run_cycle():
         public_topic, public_rows, public_errors = collect_public_research()
         items.extend(public_rows)
         raw += len(public_rows)
-        checked += 3
+        checked += 5
         if public_errors:
             err = ";".join(public_errors)[:240]
     except Exception as exc:
@@ -189,3 +189,30 @@ def run_cycle():
     reason="cycle_completed" if checked else "no_enabled_external_sources"
     r=Cycle("read_only_external_research",available,False,reason,checked,raw,new,dupes,ok,bad,err,started,time.time())
     save_json(STATE,asdict(r)); return r
+
+# COMPANYOS_V69_31_CONTINUOUS_EXTERNAL_RESEARCH
+def run():
+    interval=max(
+        60,
+        int(os.getenv("COMPANYOS_EXTERNAL_RESEARCH_INTERVAL_SECONDS","180"))
+    )
+    stop=Path.home()/".companyos_runtime"/"STOP_CONTINUOUS"
+
+    while not stop.exists():
+        try:
+            run_cycle()
+        except Exception as exc:
+            save_json(
+                STATE,
+                {
+                    "mode":"read_only_external_research",
+                    "healthy":False,
+                    "last_error":f"{type(exc).__name__}:{str(exc)[:1000]}",
+                    "updated_at_unix":time.time(),
+                },
+            )
+        time.sleep(interval)
+
+if __name__=="__main__":
+    run()
+

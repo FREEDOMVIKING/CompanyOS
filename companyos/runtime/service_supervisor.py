@@ -95,6 +95,14 @@ class ServiceSupervisor:
             and (Path.home()/"companyos/companyos/runtime/self_evolution_runtime.py").exists()
         ):
             services.append(ManagedService("self_evolution_runtime", (python, "-m", "companyos.runtime.self_evolution_runtime")))
+        # COMPANYOS_V69_31_EXTERNAL_RESEARCH_SERVICE
+        if (Path.home()/"companyos/companyos/runtime/external_research_network_worker.py").exists():
+            services.append(
+                ManagedService(
+                    "external_research_network",
+                    (python, "-m", "companyos.runtime.external_research_network_worker"),
+                )
+            )
         if (Path.home()/"companyos/companyos/runtime/autonomous_diagnostics.py").exists():
             services.append(
                 ManagedService(
