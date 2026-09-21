@@ -37,7 +37,10 @@ STOPWORDS={
     "about","after","against","business","candidate","company","customer","evidence",
     "first","from","into","market","more","other","research","service","software",
     "their","there","these","this","through","using","with","would",
+    "regional","local","global","online","digital","platform",
 }
+
+# COMPANYOS_V69_32_LIVE_EVIDENCE_QUERY_BINDING
 
 def load(path,default=None):
     if default is None:
@@ -91,17 +94,20 @@ def _query(name,payload,requirement,guidance):
     customer=str(payload.get("target_customer") or "").strip()
     problem=str(payload.get("problem") or "").strip()
     offer=str(payload.get("offer") or "").strip()
+    business_model=str(payload.get("business_model") or "").strip()
 
     if requirement=="pricing":
-        focus="pricing price cost subscription fee"
+        focus="pricing price cost subscription fee quote"
     elif requirement=="buyer_demand":
-        focus="customers adoption demand buyers case study"
+        focus="customers adoption demand buyers usage case study"
     elif requirement=="competition":
-        focus="competitors alternatives pricing"
+        focus="competitors alternatives substitutes pricing"
+    elif requirement=="corroboration":
+        focus="independent report study sources"
     else:
         focus=requirement.replace("_"," ")
 
-    parts=[market,customer,problem,offer,focus]
+    parts=[name,market,business_model,customer,problem,offer,focus]
     return " ".join(x for x in parts if x)[:500]
 
 def _actual_evidence_text(row):
@@ -119,7 +125,8 @@ def _row_valid(row,anchors,requirement):
 
     text=_actual_evidence_text(row)
     hits={a for a in anchors if a in text}
-    if len(hits)<2:
+    required_anchor_hits=2 if len(anchors)>=3 else 1
+    if len(hits)<required_anchor_hits:
         return False
 
     terms=REQUIREMENT_TERMS.get(requirement)
@@ -134,12 +141,14 @@ def _normalize_rows(provider_result):
     for row in provider_result.get("results") or []:
         if not isinstance(row,dict):
             continue
+        actual_source=str(row.get("source") or provider or "unknown")
         out.append({
-            "source":provider,
-            "publisher":provider,
+            "source":actual_source,
+            "publisher":actual_source,
             "url":row.get("url"),
             "title":row.get("title") or row.get("name") or "",
-            "summary":row.get("content") or row.get("description") or "",
+            "summary":row.get("content") or row.get("description") or row.get("summary") or "",
+            "metadata":row.get("metadata") if isinstance(row.get("metadata"),dict) else {},
             "observed_at":time.time(),
             "evidence_method":"multi_provider_public_web_search",
             "research_provider":provider,
@@ -161,7 +170,7 @@ def _persist_artifact(candidate,requirement,query,provider_result,rows):
         "source_rows":rows,
         "source_row_count":len(rows),
         "filter_policy":{
-            "minimum_candidate_anchor_hits_in_actual_result_text":2,
+            "minimum_candidate_anchor_hits_in_actual_result_text":"2_when_3plus_anchors_else_1",
             "requirement_term_required_in_actual_result_text":True,
             "query_text_not_counted_as_evidence":True,
             "invented_evidence_allowed":False,

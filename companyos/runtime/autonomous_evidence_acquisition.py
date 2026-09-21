@@ -207,10 +207,12 @@ def _row_attributed(row):
     return any(str(row.get(k) or "").strip() for k in ("url","link","source","publisher","domain","author"))
 
 # COMPANYOS_V69_23_NO_INTERNAL_NAME_SHORTCUT
+# COMPANYOS_V69_32_SPARSE_ANCHOR_ALIGNMENT
 def _row_matches_candidate(row,candidate,anchors):
     text=_norm_text(json.dumps(row,default=str))
     hits={tok for tok in anchors if tok in text}
-    return len(hits)>=2
+    required=2 if len(anchors)>=3 else 1
+    return len(hits)>=required
 
 def _row_matches_requirement(row,requirement):
     text=_norm_text(json.dumps(row,default=str))

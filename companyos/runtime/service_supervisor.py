@@ -103,6 +103,14 @@ class ServiceSupervisor:
                     (python, "-m", "companyos.runtime.external_research_network_worker"),
                 )
             )
+        # COMPANYOS_V69_32_LIVE_MARKET_INTELLIGENCE_SERVICE
+        if (Path.home()/"companyos/companyos/runtime/live_market_intelligence.py").exists():
+            services.append(
+                ManagedService(
+                    "live_market_intelligence",
+                    (python, "-m", "companyos.runtime.live_market_intelligence", "run"),
+                )
+            )
         if (Path.home()/"companyos/companyos/runtime/autonomous_diagnostics.py").exists():
             services.append(
                 ManagedService(
