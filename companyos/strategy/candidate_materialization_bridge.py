@@ -80,6 +80,14 @@ ALIASES = {
     "unknowns": ["unknowns", "gaps", "open_questions"],
 }
 
+
+def _portable_path(path: Path) -> str:
+    p = Path(path)
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
 def load_json(path: Path, default: Any):
     try:
         return json.loads(path.read_text(encoding="utf-8", errors="ignore"))
@@ -231,7 +239,7 @@ def collect_recent_research_outputs() -> list[dict]:
         if not p.exists():
             continue
         for obj in read_jsonl(p):
-            walk(obj, str(p.relative_to(ROOT)), None, found)
+            walk(obj, _portable_path(p), None, found)
 
     # 2) JSON artifacts, excluding our already-materialized candidates/report files.
     scanned = 0
@@ -243,7 +251,7 @@ def collect_recent_research_outputs() -> list[dict]:
                 break
             scanned += 1
             try:
-                rel = str(p.relative_to(ROOT))
+                rel = _portable_path(p)
             except Exception:
                 rel = str(p)
             if "profit_first_candidates/" in rel or rel.endswith("candidate_materialization_report.json"):
@@ -274,13 +282,13 @@ def materialize() -> dict:
         if existing and float(existing.get("evidence_confidence", 0) or 0) > float(c.get("evidence_confidence", 0) or 0):
             continue
         save_json(path, c)
-        written.append(str(path.relative_to(ROOT)))
+        written.append(_portable_path(path))
 
     report = {
         "generated_at_unix": time.time(),
         "candidates_extracted": len(candidates),
         "candidate_files_written_or_updated": len(written),
-        "candidate_directory": str(CANDIDATE_DIR.relative_to(ROOT)),
+        "candidate_directory": _portable_path(CANDIDATE_DIR),
         "written": written[:200],
     }
     save_json(REPORT_PATH, report)

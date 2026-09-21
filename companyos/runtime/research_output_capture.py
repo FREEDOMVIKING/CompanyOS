@@ -33,6 +33,14 @@ INTERESTING_NAME_PARTS = (
 
 _tls = threading.local()
 
+
+def _portable_path(path: Path) -> str:
+    p = Path(path)
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
 def _safe(v: Any, depth: int = 0) -> Any:
     if depth > 6:
         return repr(v)[:2000]
@@ -173,7 +181,7 @@ def persist_capture(ctx: dict) -> dict:
     index_row = {
         "ts": time.time(),
         "orchestration_id": orchestration_id,
-        "path": str(path.relative_to(ROOT)),
+        "path": _portable_path(path),
         "captured_return_events": len(ctx.get("returns", [])),
         "had_error": bool(ctx.get("error")),
     }

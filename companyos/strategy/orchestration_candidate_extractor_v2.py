@@ -77,6 +77,14 @@ DEFAULTS = {
     "evidence_uncertainty": 75.0,
 }
 
+
+def _portable_path(path: Path) -> str:
+    p = Path(path)
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
 def load_json(path: Path, default: Any):
     try:
         return json.loads(path.read_text(encoding="utf-8", errors="ignore"))
@@ -256,11 +264,11 @@ def scan_journals(oid: str, out: list[dict]):
                 obj = json.loads(line)
             except Exception:
                 obj = {"raw": line}
-            walk_for_oid(obj, oid, str(p.relative_to(ROOT)), out)
+            walk_for_oid(obj, oid, _portable_path(p), out)
 
             # Raw line may contain serialized JSON/prose output.
             for pd in parse_candidate_blocks_from_text(line):
-                c = candidate_from_dict(pd, oid, str(p.relative_to(ROOT)), extracted_from_text=True)
+                c = candidate_from_dict(pd, oid, _portable_path(p), extracted_from_text=True)
                 if c:
                     out.append(c)
 
@@ -276,7 +284,7 @@ def scan_artifacts(oid: str, out: list[dict]):
                 continue
             scanned += 1
             try:
-                rel = str(p.relative_to(ROOT))
+                rel = _portable_path(p)
             except Exception:
                 rel = str(p)
 
@@ -351,14 +359,14 @@ def extract_for_orchestration(oid: str | None = None) -> dict:
                 if oid not in existing["source_orchestration_ids"]:
                     existing["source_orchestration_ids"].append(oid)
                 save_json(path, existing)
-                written.append(str(path.relative_to(ROOT)))
+                written.append(_portable_path(path))
                 continue
 
         c.setdefault("source_orchestration_ids", [])
         if oid not in c["source_orchestration_ids"]:
             c["source_orchestration_ids"].append(oid)
         save_json(path, c)
-        written.append(str(path.relative_to(ROOT)))
+        written.append(_portable_path(path))
 
     report = {
         "ok": True,

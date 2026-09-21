@@ -1,0 +1,18 @@
+{
+  "blocking_failures": [],
+  "cause": "The V69.14.1 patch inserted _portable_path and then its global replacement rewrote the helper's own return expression into _portable_path(p), producing infinite recursion.",
+  "deployment_actions_performed": false,
+  "email_actions_performed": false,
+  "financial_actions_performed": false,
+  "generated_at_unix": 1789955029.2848947,
+  "modules": [
+    "companyos/runtime/research_output_capture.py",
+    "companyos/strategy/candidate_materialization_bridge.py",
+    "companyos/strategy/orchestration_candidate_extractor_v2.py",
+    "companyos/strategy/profit_first_evidence_pipeline.py"
+  ],
+  "overall_status": "PASS",
+  "repair": "Restore helper body to Path.relative_to(ROOT) inside a ValueError guard; keep all call sites using _portable_path.",
+  "schema": "companyos.v69_14_2.portable_path_recursion_repair.v1",
+  "transaction_broadcasts_performed": false
+}

@@ -40,6 +40,14 @@ ALIASES = {
 
 IDENTITY_KEYS = ["name", "title", "venture", "opportunity", "idea", "business_name"]
 
+
+def _portable_path(path: Path) -> str:
+    p = Path(path)
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
 def _num(v: Any) -> float | None:
     try:
         if isinstance(v, str):
@@ -116,7 +124,7 @@ def collect_candidates(max_files: int = 1500) -> list[dict]:
                 obj = json.loads(p.read_text(encoding="utf-8", errors="ignore"))
             except Exception:
                 continue
-            _walk(obj, str(p.relative_to(ROOT)), found)
+            _walk(obj, _portable_path(p), found)
 
     # Deduplicate by normalized name + sector + business model.
     dedup: dict[tuple[str, str, str], dict] = {}
