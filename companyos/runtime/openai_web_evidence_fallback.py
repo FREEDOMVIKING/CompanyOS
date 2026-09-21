@@ -16,9 +16,16 @@ from companyos.runtime import targeted_public_evidence_research as base
 RT = Path.home()/".companyos_runtime"
 RESEARCH_DIR = RT/"canonical_research_outputs"
 STATE = RT/"openai_web_evidence_fallback_state.json"
+RATE_STATE = RT/"openai_web_search_model_rate_state.json"
 
 API_URL = os.getenv("COMPANYOS_OPENAI_RESPONSES_URL","https://api.openai.com/v1/responses").strip()
 MODEL = os.getenv("COMPANYOS_RESEARCH_OPENAI_MODEL","gpt-5.6-luna").strip()
+MODEL_CANDIDATES = tuple(
+    x.strip() for x in os.getenv(
+        "COMPANYOS_RESEARCH_OPENAI_MODELS",
+        "gpt-5.6-luna,gpt-5.6-terra,gpt-5.6-sol",
+    ).split(",") if x.strip()
+)
 TIMEOUT = max(15, int(os.getenv("COMPANYOS_OPENAI_WEB_SEARCH_TIMEOUT_SECONDS","90")))
 
 ENV_NAMES = (
@@ -84,9 +91,12 @@ def _retry_delay_from_error(exc, detail: str, attempt: int) -> float:
 
     return min(30.0, 1.5*(2**attempt))
 
-def _request_json(payload: dict[str,Any], api_key: str) -> dict[str,Any]:
+def _request_json(payload: dict[str,Any], api_key: str, max_attempts: int | None = None) -> dict[str,Any]:
     body=json.dumps(payload).encode("utf-8")
-    max_attempts=max(2,int(os.getenv("COMPANYOS_OPENAI_WEB_SEARCH_MAX_ATTEMPTS","6")))
+    if max_attempts is None:
+        max_attempts=max(1,int(os.getenv("COMPANYOS_OPENAI_WEB_SEARCH_MAX_ATTEMPTS","6")))
+    else:
+        max_attempts=max(1,int(max_attempts))
 
     last_error=None
     for attempt in range(max_attempts):
@@ -126,6 +136,152 @@ def _request_json(payload: dict[str,Any], api_key: str) -> dict[str,Any]:
             time.sleep(delay)
 
     raise RuntimeError(last_error or "openai_request_failed")
+
+# COMPANYOS_V69_25_MODEL_AWARE_FALLBACK
+def _parse_reset_seconds(detail: str) -> float | None:
+    text=str(detail or "").lower()
+
+    # Milliseconds must be recognized before the compact h/m/s parser,
+    # otherwise "2039ms" can be misread as 2039 minutes.
+    ms=re.search(r"try again in\s+([0-9.]+)\s*(ms|milliseconds?)\b", text, re.I)
+    if ms:
+        return float(ms.group(1))/1000.0
+
+    compact=re.search(r"try again in\s+((?:[0-9.]+\s*[dhms]\s*)+)", text, re.I)
+    if compact:
+        chunk=compact.group(1)
+        total=0.0
+        for value,unit in re.findall(r"([0-9.]+)\s*([dhms])", chunk, re.I):
+            value=float(value)
+            unit=unit.lower()
+            if unit=="d":
+                total += value*86400.0
+            elif unit=="h":
+                total += value*3600.0
+            elif unit=="m":
+                total += value*60.0
+            elif unit=="s":
+                total += value
+        if total>0:
+            return total
+
+    return None
+
+def _rate_state() -> dict[str,Any]:
+    try:
+        value=json.loads(RATE_STATE.read_text(encoding="utf-8"))
+        return value if isinstance(value,dict) else {}
+    except Exception:
+        return {}
+
+def _save_rate_state(state: dict[str,Any]) -> None:
+    base.atomic(RATE_STATE,state)
+
+def _is_429_error(message: str) -> bool:
+    text=str(message or "").lower()
+    return "openai_http_429" in text or '"code":"rate_limit_exceeded"' in text or "rate limit" in text
+
+def _mark_model_rate_limited(model: str, message: str) -> dict[str,Any]:
+    state=_rate_state()
+    models=state.setdefault("models",{})
+    reset=_parse_reset_seconds(message)
+    cooldown=max(30.0, float(reset if reset is not None else 300.0))
+    now=time.time()
+    models[model]={
+        "rate_limited_at_unix":now,
+        "reset_seconds":reset,
+        "blocked_until_unix":now+cooldown,
+        "last_error":str(message)[:1200],
+    }
+    state["updated_at_unix"]=now
+    _save_rate_state(state)
+    return models[model]
+
+def _mark_model_success(model: str) -> None:
+    state=_rate_state()
+    models=state.setdefault("models",{})
+    prior=models.get(model) if isinstance(models.get(model),dict) else {}
+    models[model]={
+        **prior,
+        "last_success_at_unix":time.time(),
+        "blocked_until_unix":0.0,
+        "last_error":None,
+    }
+    state["updated_at_unix"]=time.time()
+    _save_rate_state(state)
+
+def _model_cooldown_remaining(model: str) -> float:
+    state=_rate_state()
+    row=(state.get("models") or {}).get(model) or {}
+    try:
+        return max(0.0,float(row.get("blocked_until_unix") or 0.0)-time.time())
+    except Exception:
+        return 0.0
+
+def _ordered_models() -> list[str]:
+    out=[]
+    for model in (MODEL, *MODEL_CANDIDATES):
+        if model and model not in out:
+            out.append(model)
+    return out
+
+def _web_search_once(candidate: dict[str,Any], requirement: str, anchors: list[str], api_key: str) -> tuple[dict[str,Any] | None,list[dict[str,Any]],list[dict[str,Any]]]:
+    attempts=[]
+    for model in _ordered_models():
+        remaining=_model_cooldown_remaining(model)
+        if remaining>0:
+            attempts.append({
+                "model":model,
+                "status":"cooldown_skip",
+                "cooldown_remaining_seconds":round(remaining,2),
+            })
+            print(
+                f"MODEL_COOLDOWN_SKIP model={model} remaining_seconds={remaining:.1f}",
+                flush=True,
+            )
+            continue
+
+        payload={
+            "model":model,
+            "tools":[{"type":"web_search","search_context_size":"low"}],
+            "input":_prompt(candidate,requirement,anchors),
+            "max_output_tokens":800,
+        }
+
+        try:
+            response=_request_json(payload,api_key,max_attempts=1)
+            _mark_model_success(model)
+            attempts.append({
+                "model":model,
+                "status":"success",
+                "response_id":response.get("id"),
+            })
+            return response,attempts,[]
+        except Exception as exc:
+            message=f"{type(exc).__name__}:{str(exc)[:1400]}"
+            if _is_429_error(message):
+                cooldown=_mark_model_rate_limited(model,message)
+                attempts.append({
+                    "model":model,
+                    "status":"rate_limited",
+                    "reset_seconds":cooldown.get("reset_seconds"),
+                    "blocked_until_unix":cooldown.get("blocked_until_unix"),
+                    "error":message,
+                })
+                print(
+                    f"MODEL_RATE_LIMITED model={model} reset_seconds={cooldown.get('reset_seconds')}",
+                    flush=True,
+                )
+                continue
+
+            attempts.append({
+                "model":model,
+                "status":"error",
+                "error":message,
+            })
+            continue
+
+    return None,attempts,[{"error":"all_models_unavailable_or_failed"}]
 
 def _message_text(response: dict[str,Any]) -> str:
     if isinstance(response.get("output_text"),str) and response.get("output_text"):
@@ -242,47 +398,61 @@ def research_candidate(candidate_name: str, requirements: list[str]) -> dict[str
     started=time.time()
     source_rows=[]
     calls=[]
-    provider_error=None
+    provider_errors=[]
+    selected_models={}
 
     if not api_key:
-        provider_error="openai_api_key_not_found"
+        provider_errors.append("openai_api_key_not_found")
     else:
         for requirement in requirements:
-            payload={
-                "model":MODEL,
-                "tools":[{"type":"web_search","search_context_size":"medium"}],
-                "input":_prompt(candidate,requirement,anchors),
-                "max_output_tokens":1200,
-            }
-            try:
-                response=_request_json(payload,api_key)
-                memo=_message_text(response)
-                citations=_annotation_rows(response)
-                calls.append({
-                    "requirement":requirement,
-                    "response_id":response.get("id"),
-                    "model":response.get("model") or MODEL,
-                    "citation_count":len(citations),
-                    "memo_chars":len(memo),
-                    "status":response.get("status"),
-                })
+            response,attempts,errors=_web_search_once(
+                candidate,
+                requirement,
+                anchors,
+                api_key,
+            )
 
-                for citation in citations:
-                    domain=_domain(citation["url"]) or "openai_web_search"
-                    context=citation.get("context") or memo[:1500]
-                    source_rows.append({
-                        "source":domain,
-                        "publisher":domain,
-                        "url":citation["url"],
-                        "title":citation.get("title") or "",
-                        "summary":context,
-                        "observed_at":time.time(),
-                        "evidence_method":"openai_responses_web_search",
-                    })
-            except Exception as exc:
-                provider_error=f"{type(exc).__name__}:{str(exc)[:700]}"
-                calls.append({"requirement":requirement,"status":"error","error":provider_error})
-                break
+            call={
+                "requirement":requirement,
+                "attempts":attempts,
+            }
+
+            if response is None:
+                call["status"]="failed"
+                call["errors"]=errors
+                provider_errors.append(
+                    f"{requirement}:all_models_unavailable_or_failed"
+                )
+                calls.append(call)
+                continue
+
+            memo=_message_text(response)
+            citations=_annotation_rows(response)
+            model=str(response.get("model") or "")
+            selected_models[requirement]=model
+
+            call.update({
+                "status":response.get("status") or "completed",
+                "response_id":response.get("id"),
+                "model":model,
+                "citation_count":len(citations),
+                "memo_chars":len(memo),
+            })
+            calls.append(call)
+
+            for citation in citations:
+                domain=_domain(citation["url"]) or "openai_web_search"
+                context=citation.get("context") or memo[:1500]
+                source_rows.append({
+                    "source":domain,
+                    "publisher":domain,
+                    "url":citation["url"],
+                    "title":citation.get("title") or "",
+                    "summary":context,
+                    "observed_at":time.time(),
+                    "evidence_method":"openai_responses_web_search",
+                    "research_model":model,
+                })
 
     dedup=[]
     seen=set()
@@ -294,19 +464,23 @@ def research_candidate(candidate_name: str, requirements: list[str]) -> dict[str
         dedup.append(row)
     source_rows=dedup
 
+    provider_error=";".join(provider_errors) if provider_errors else None
+
     artifact={
-        "schema":"companyos.openai_web_evidence_fallback.v69_23",
+        "schema":"companyos.openai_web_evidence_fallback.v69_25",
         "candidate_name":candidate_name,
         "candidate_source":str(candidate_path),
         "candidate_anchors":anchors,
         "requirements_requested":requirements,
-        "model":MODEL,
+        "model_candidates":_ordered_models(),
+        "selected_models":selected_models,
         "api_key_available":bool(api_key),
         "api_key_source":key_source,
         "provider_error":provider_error,
         "calls":calls,
         "source_rows":source_rows,
         "source_row_count":len(source_rows),
+        "rate_state":_rate_state(),
         "started_at_unix":started,
         "finished_at_unix":time.time(),
         "external_action_performed":False,
@@ -316,20 +490,23 @@ def research_candidate(candidate_name: str, requirements: list[str]) -> dict[str
 
     RESEARCH_DIR.mkdir(parents=True,exist_ok=True)
     safe=re.sub(r"[^a-z0-9]+","_",candidate_name.lower()).strip("_")[:80] or "candidate"
-    out=RESEARCH_DIR/f"openai_web_evidence_v69_23_{safe}_{int(started*1000)}.json"
+    out=RESEARCH_DIR/f"openai_web_evidence_v69_25_{safe}_{int(started*1000)}.json"
     base.atomic(out,artifact)
 
     state={
-        "schema":"companyos.openai_web_evidence_fallback_state.v69_23",
+        "schema":"companyos.openai_web_evidence_fallback_state.v69_25",
         "healthy":provider_error is None,
         "candidate_name":candidate_name,
         "requirements_requested":requirements,
         "artifact":str(out),
         "source_row_count":len(source_rows),
+        "model_candidates":_ordered_models(),
+        "selected_models":selected_models,
         "api_key_available":bool(api_key),
         "api_key_source":key_source,
         "provider_error":provider_error,
         "calls":calls,
+        "rate_state":_rate_state(),
         "updated_at":time.time(),
     }
     base.atomic(STATE,state)

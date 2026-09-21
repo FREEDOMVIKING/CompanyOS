@@ -21,5 +21,8 @@ def test_retry_delay_parses_milliseconds():
 
 def test_web_search_token_budget_is_reduced():
     import inspect
-    src=inspect.getsource(ow.research_candidate)
-    assert '"max_output_tokens":1200' in src.replace(" ","")
+    import re
+    src=inspect.getsource(ow._web_search_once).replace(" ","")
+    match=re.search(r'"max_output_tokens":([0-9]+)',src)
+    assert match is not None
+    assert int(match.group(1)) <= 1200

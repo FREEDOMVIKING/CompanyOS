@@ -1,0 +1,205 @@
+{
+  "blocking_failures": [],
+  "cost_aware_model_order": [
+    "gpt-5.6-luna",
+    "gpt-5.6-terra",
+    "gpt-5.6-sol"
+  ],
+  "deployment_performed": false,
+  "evidence_revalidation": {
+    "candidate": "regional_construction_ai",
+    "evidence_summary": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "invalidated": 0,
+    "observed_this_cycle": 0
+  },
+  "external_send_performed": false,
+  "financial_action_performed": false,
+  "forced_promotion": false,
+  "generated_at_unix": 1790003893.7940948,
+  "guarded_action_dispatched_by_test": false,
+  "legacy_token_budget_test_made_forward_compatible": true,
+  "millisecond_reset_parser_fixed": true,
+  "next_step": {
+    "attempt_statuses": [
+      "rate_limited",
+      "rate_limited",
+      "rate_limited",
+      "cooldown_skip",
+      "cooldown_skip",
+      "cooldown_skip"
+    ],
+    "decision": "continue_research",
+    "missing_critical": [
+      "buyer_demand",
+      "pricing"
+    ],
+    "next_step": "V69_26_WAIT_FOR_MODEL_RATE_RESET_OR_RAISE_LIMIT",
+    "selected_models": {},
+    "source_rows": 0
+  },
+  "one_live_attempt_per_model_per_requirement": true,
+  "overall_status": "PASS",
+  "persistent_rate_limit_cooldown": true,
+  "provider_result": {
+    "api_key_available": true,
+    "api_key_source": "env:OPENAI_API_KEY",
+    "artifact": "/data/data/com.termux/files/home/.companyos_runtime/canonical_research_outputs/openai_web_evidence_v69_25_regional_construction_ai_1790003875108.json",
+    "calls": [
+      {
+        "attempts": [
+          {
+            "blocked_until_unix": 1790133294.8655522,
+            "error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"Rate limit reached for gpt-5.6-luna in organization org-D5OJVObqVoA1KVOAuTZOnXIF on tokens per min (TPM): Limit 100000, Used 100000, Requested 4993. Please try again in 35h56m58.56s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.\",\n    \"type\": \"tokens\",\n    \"param\": null,\n    \"code\": \"rate_limit_exceeded\"\n  }\n}",
+            "model": "gpt-5.6-luna",
+            "reset_seconds": 129418.56,
+            "status": "rate_limited"
+          },
+          {
+            "blocked_until_unix": 1790004177.7505481,
+            "error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n    \"type\": \"insufficient_quota\",\n    \"param\": null,\n    \"code\": \"credit_balance_exhausted\"\n  }\n}",
+            "model": "gpt-5.6-terra",
+            "reset_seconds": null,
+            "status": "rate_limited"
+          },
+          {
+            "blocked_until_unix": 1790004179.660562,
+            "error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n    \"type\": \"insufficient_quota\",\n    \"param\": null,\n    \"code\": \"credit_balance_exhausted\"\n  }\n}",
+            "model": "gpt-5.6-sol",
+            "reset_seconds": null,
+            "status": "rate_limited"
+          }
+        ],
+        "errors": [
+          {
+            "error": "all_models_unavailable_or_failed"
+          }
+        ],
+        "requirement": "pricing",
+        "status": "failed"
+      },
+      {
+        "attempts": [
+          {
+            "cooldown_remaining_seconds": 129415.2,
+            "model": "gpt-5.6-luna",
+            "status": "cooldown_skip"
+          },
+          {
+            "cooldown_remaining_seconds": 298.09,
+            "model": "gpt-5.6-terra",
+            "status": "cooldown_skip"
+          },
+          {
+            "cooldown_remaining_seconds": 300.0,
+            "model": "gpt-5.6-sol",
+            "status": "cooldown_skip"
+          }
+        ],
+        "errors": [
+          {
+            "error": "all_models_unavailable_or_failed"
+          }
+        ],
+        "requirement": "buyer_demand",
+        "status": "failed"
+      }
+    ],
+    "candidate_name": "regional_construction_ai",
+    "healthy": false,
+    "model_candidates": [
+      "gpt-5.6-luna",
+      "gpt-5.6-terra",
+      "gpt-5.6-sol"
+    ],
+    "provider_error": "pricing:all_models_unavailable_or_failed;buyer_demand:all_models_unavailable_or_failed",
+    "rate_state": {
+      "models": {
+        "gpt-5.6-luna": {
+          "blocked_until_unix": 1790133294.8655522,
+          "last_error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"Rate limit reached for gpt-5.6-luna in organization org-D5OJVObqVoA1KVOAuTZOnXIF on tokens per min (TPM): Limit 100000, Used 100000, Requested 4993. Please try again in 35h56m58.56s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.\",\n    \"type\": \"tokens\",\n    \"param\": null,\n    \"code\": \"rate_limit_exceeded\"\n  }\n}",
+          "rate_limited_at_unix": 1790003876.3055522,
+          "reset_seconds": 129418.56
+        },
+        "gpt-5.6-sol": {
+          "blocked_until_unix": 1790004179.660562,
+          "last_error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n    \"type\": \"insufficient_quota\",\n    \"param\": null,\n    \"code\": \"credit_balance_exhausted\"\n  }\n}",
+          "rate_limited_at_unix": 1790003879.660562,
+          "reset_seconds": null
+        },
+        "gpt-5.6-terra": {
+          "blocked_until_unix": 1790004177.7505481,
+          "last_error": "RuntimeError:openai_http_429:{\n  \"error\": {\n    \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n    \"type\": \"insufficient_quota\",\n    \"param\": null,\n    \"code\": \"credit_balance_exhausted\"\n  }\n}",
+          "rate_limited_at_unix": 1790003877.7505481,
+          "reset_seconds": null
+        }
+      },
+      "updated_at_unix": 1790003879.660562
+    },
+    "requirements_requested": [
+      "pricing",
+      "buyer_demand"
+    ],
+    "schema": "companyos.openai_web_evidence_fallback_state.v69_25",
+    "selected_models": {},
+    "source_row_count": 0,
+    "updated_at": 1790003879.6647189
+  },
+  "reevaluation": {
+    "action_packet_id": "12abfa19d030f0618981",
+    "candidate": "regional_construction_ai",
+    "decision": "continue_research",
+    "evidence": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "forced_promotion": false,
+    "guarded_action_dispatched_by_v69_25": false,
+    "guarded_gate_allowed": false,
+    "guarded_gate_reason": "decision_not_promoted",
+    "metrics": {
+      "probability": 0.0,
+      "profit": 50.0,
+      "readiness": 0.0,
+      "score": 0.0
+    },
+    "reasons": [
+      "evidence_coverage_below_threshold"
+    ],
+    "recalculated_readiness": 0.0,
+    "ts": 1790003880.190631
+  },
+  "repair_revision": "v69.25a",
+  "schema": "companyos.v69_25.model_aware_web_search_fallback.v1",
+  "transaction_broadcast_performed": false
+}
