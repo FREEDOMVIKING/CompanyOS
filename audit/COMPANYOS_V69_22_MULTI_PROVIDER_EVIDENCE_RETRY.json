@@ -1,0 +1,148 @@
+{
+  "blocking_failures": [],
+  "connector_probe": {
+    "diagnostics": [
+      {
+        "elapsed": 0.453,
+        "error": null,
+        "provider": "ddg_html",
+        "query": "\"south central\" \"south central\" pricing",
+        "results": 0
+      },
+      {
+        "elapsed": 0.415,
+        "error": null,
+        "provider": "ddg_lite",
+        "query": "\"south central\" \"south central\" pricing",
+        "results": 0
+      },
+      {
+        "elapsed": 0.619,
+        "error": null,
+        "provider": "bing",
+        "query": "\"south central\" \"south central\" pricing",
+        "results": 0
+      },
+      {
+        "elapsed": 0.352,
+        "error": "HTTPError:HTTP Error 429: Too Many Requests",
+        "provider": "brave",
+        "query": "\"south central\" \"south central\" pricing",
+        "results": 0
+      }
+    ],
+    "query": "\"south central\" \"south central\" pricing",
+    "rows": []
+  },
+  "deployment_performed": false,
+  "evidence": {
+    "candidate": "regional_construction_ai",
+    "invalidated": 0,
+    "observed": 0,
+    "summary": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    }
+  },
+  "external_send_performed": false,
+  "financial_action_performed": false,
+  "forced_promotion": false,
+  "generated_at_unix": 1790001463.0134478,
+  "guarded_action_dispatched_by_test": false,
+  "next_step": {
+    "next_step": "V69_23_SEARCH_PROVIDER_API_FALLBACK",
+    "providers_with_results": 0,
+    "source_rows": 0
+  },
+  "overall_status": "PASS",
+  "reevaluation": {
+    "action_packet_id": "12abfa19d030f0618981",
+    "candidate": "regional_construction_ai",
+    "decision": "continue_research",
+    "evidence": {
+      "coverage": 0.0,
+      "critical_requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "missing_critical": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "observed": 0,
+      "observed_requirements": [],
+      "requirements": [
+        "buyer_demand",
+        "pricing"
+      ],
+      "total": 2
+    },
+    "forced_promotion": false,
+    "guarded_action_dispatched_by_v69_22": false,
+    "guarded_gate_allowed": false,
+    "guarded_gate_reason": "decision_not_promoted",
+    "metrics": {
+      "probability": 0.0,
+      "profit": 50.0,
+      "readiness": 0.0,
+      "score": 0.0
+    },
+    "reasons": [
+      "evidence_coverage_below_threshold"
+    ],
+    "recalculated_readiness": 0.0,
+    "ts": 1790001462.055531
+  },
+  "research": {
+    "artifact": "/data/data/com.termux/files/home/.companyos_runtime/canonical_research_outputs/targeted_evidence_v69_22_regional_construction_ai_1790001436354.json",
+    "candidate_name": "regional_construction_ai",
+    "error_count": 0,
+    "healthy": true,
+    "page_count": 0,
+    "provider_summary": {
+      "bing": {
+        "errors": 0,
+        "queries": 16,
+        "results": 0
+      },
+      "brave": {
+        "errors": 16,
+        "queries": 16,
+        "results": 0
+      },
+      "ddg_html": {
+        "errors": 0,
+        "queries": 16,
+        "results": 0
+      },
+      "ddg_lite": {
+        "errors": 0,
+        "queries": 16,
+        "results": 0
+      }
+    },
+    "query_count": 64,
+    "rejection_summary": {},
+    "requirements_requested": [
+      "pricing",
+      "buyer_demand"
+    ],
+    "source_row_count": 0,
+    "updated_at": 1790001459.978273
+  },
+  "schema": "companyos.v69_22.multi_provider_evidence_retry.v1"
+}
