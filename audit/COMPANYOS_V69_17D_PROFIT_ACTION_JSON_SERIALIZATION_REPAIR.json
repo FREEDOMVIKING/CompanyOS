@@ -1,0 +1,21 @@
+{
+  "blocking_failures": [],
+  "generated_at_unix": 1789993805.831328,
+  "overall_status": "PASS",
+  "root_cause": "profit_to_action_closure atomic() and emit() wrote literal backslash-n instead of newline",
+  "runtime_repair": {
+    "events_malformed_history_preserved_if_present": true,
+    "fresh_last_cycle_unix": 1789993805.4019494,
+    "fresh_state_after_restart": true,
+    "fresh_status": "no_new_executable_packet",
+    "state_json_valid": true
+  },
+  "schema": "companyos.v69_17d.profit_action_json_serialization_repair.v1",
+  "source_fix": {
+    "atomic_real_newline": true,
+    "emit_real_newline": true
+  },
+  "synthetic_candidates_injected": false,
+  "synthetic_evidence_injected": false,
+  "test_dispatch_requested": false
+}
