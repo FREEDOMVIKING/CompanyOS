@@ -12,6 +12,11 @@ ALLOWED_KINDS={"smoke","research","pytest"}
 # report them as excluded rather than pretending they passed.
 REMOTE_LOCAL_ONLY_TESTS={"tests/test_core.py"}
 
+REMOTE_LOCAL_ONLY_NODES={
+    "tests/test_v68_5b_workspace_canonicalization.py::test_uppercase_container_keeps_progress_but_active_paths_are_symlinks",
+    "tests/test_v68_5b_workspace_canonicalization.py::test_progress_history_is_byte_preserved",
+}
+
 def prepare_remote_workspace()->dict[str,str|bool]:
     repo=Path.cwd().resolve()
     os.environ.setdefault("COMPANYOS_HOME",str(repo))
@@ -105,8 +110,17 @@ def execute(job_id:str,kind:str,payload:dict[str,Any],shard:int,shard_count:int)
             "skipped_local_only_tests":skipped_local_only,
             "stdout_tail":"NO_TESTS_ASSIGNED",
         }
+    selected_set={Path(x).as_posix() for x in selected}
+    deselected_local_only=sorted(
+        node for node in REMOTE_LOCAL_ONLY_NODES
+        if node.split("::",1)[0] in selected_set
+    )
+    pytest_argv=[sys.executable,"-m","pytest","-q"]
+    for node in deselected_local_only:
+        pytest_argv.extend(["--deselect",node])
+    pytest_argv.extend(selected)
     proc=subprocess.run(
-        [sys.executable,"-m","pytest","-q",*selected],
+        pytest_argv,
         stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,check=False,
         timeout=min(18000,max(60,int(payload.get("timeout_seconds") or 15000))),
     )
@@ -114,6 +128,7 @@ def execute(job_id:str,kind:str,payload:dict[str,Any],shard:int,shard_count:int)
         **common,"healthy":proc.returncode==0,"returncode":proc.returncode,
         "selected_test_files":selected,
         "skipped_local_only_tests":skipped_local_only,
+        "deselected_local_only_tests":deselected_local_only,
         "stdout_tail":proc.stdout[-12000:],
         "stderr_tail":proc.stderr[-8000:],
     }

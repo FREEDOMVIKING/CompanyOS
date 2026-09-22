@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib, json, os, time
 from pathlib import Path
 
-ROOT=Path.home()/"companyos"
+ROOT=(Path.home()/"companyos").resolve()
 RT=Path.home()/".companyos_runtime"
 STATE=RT/"opportunity_execution_capability_bridge_state.json"
 QUEUE=RT/"profit_execution_action_queue.json"
