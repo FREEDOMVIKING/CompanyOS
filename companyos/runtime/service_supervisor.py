@@ -113,6 +113,22 @@ class ServiceSupervisor:
                     ),
                 )
             )
+        # COMPANYOS_V69_35D3_OFFLOAD_CALIBRATION_RESUMER
+        if (
+            os.getenv("COMPANYOS_ENABLE_OFFLOAD_CALIBRATION_RESUMER","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/adaptive_offload_calibration_resumer.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "adaptive_offload_calibration_resumer",
+                    (
+                        python,
+                        "-m",
+                        "companyos.runtime.adaptive_offload_calibration_resumer",
+                        "loop",
+                    ),
+                )
+            )
         # COMPANYOS_V69_35C_DISTRIBUTED_COMPUTE_SCHEDULER
         if (
             os.getenv("COMPANYOS_ENABLE_DISTRIBUTED_SCHEDULER","1")=="1"
