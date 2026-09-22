@@ -7,6 +7,33 @@ os.environ["COMPANYOS_REMOTE_WORKER_LOCAL_ONLY"]="1"
 os.environ["COMPANYOS_GITHUB_ACTIONS_WORKER"]="1"
 ALLOWED_KINDS={"smoke","research","pytest"}
 
+# Tests that intentionally validate host-local legacy files outside the
+# tracked repository must stay on the phone/local runtime. Remote shards
+# report them as excluded rather than pretending they passed.
+REMOTE_LOCAL_ONLY_TESTS={"tests/test_core.py"}
+
+def prepare_remote_workspace()->dict[str,str|bool]:
+    repo=Path.cwd().resolve()
+    os.environ.setdefault("COMPANYOS_HOME",str(repo))
+    home_repo=Path.home()/"companyos"
+    linked=False
+    compatible=False
+    try:
+        if home_repo.exists() or home_repo.is_symlink():
+            compatible=home_repo.resolve()==repo
+        else:
+            home_repo.symlink_to(repo,target_is_directory=True)
+            linked=True
+            compatible=True
+    except Exception:
+        compatible=False
+    return {
+        "repo_root":str(repo),
+        "home_repo":str(home_repo),
+        "home_repo_linked":linked,
+        "home_repo_compatible":compatible,
+    }
+
 def decode_payload(value:str)->dict[str,Any]:
     obj=json.loads(base64.urlsafe_b64decode(value.encode()).decode())
     if not isinstance(obj,dict): raise ValueError("payload_must_be_object")
@@ -20,10 +47,12 @@ def shard_items(items:list[Any],shard:int,shard_count:int)->list[Any]:
 def execute(job_id:str,kind:str,payload:dict[str,Any],shard:int,shard_count:int)->dict[str,Any]:
     kind=kind.strip().lower()
     if kind not in ALLOWED_KINDS: raise ValueError("unsupported_task_kind")
+    workspace=prepare_remote_workspace()
     common={
         "job_id":job_id,"kind":kind,"shard":shard,"shard_count":shard_count,
         "external_messages_sent":False,"financial_actions_performed":False,
         "deployments_performed":False,"account_creation_performed":False,
+        "remote_workspace":workspace,
     }
     if kind=="smoke":
         return {**common,"healthy":True,"python":sys.version.split()[0],
@@ -58,12 +87,24 @@ def execute(job_id:str,kind:str,payload:dict[str,Any],shard:int,shard_count:int)
     requested=payload.get("test_paths") or []
     if requested and not isinstance(requested,list): raise ValueError("test_paths_must_be_list")
     if requested:
-        files=[str(Path(x)) for x in requested if str(x).startswith("tests") and Path(x).is_file()]
+        candidates=[str(Path(x)) for x in requested if str(x).startswith("tests") and Path(x).is_file()]
     else:
-        files=[str(x) for x in sorted(Path("tests").glob("test_*.py")) if x.is_file()]
+        candidates=[str(x) for x in sorted(Path("tests").glob("test_*.py")) if x.is_file()]
+    skipped_local_only=sorted(
+        x for x in candidates
+        if Path(x).as_posix() in REMOTE_LOCAL_ONLY_TESTS
+    )
+    files=[
+        x for x in candidates
+        if Path(x).as_posix() not in REMOTE_LOCAL_ONLY_TESTS
+    ]
     selected=shard_items(files,shard,shard_count)
     if not selected:
-        return {**common,"healthy":True,"returncode":0,"selected_test_files":[],"stdout_tail":"NO_TESTS_ASSIGNED"}
+        return {
+            **common,"healthy":True,"returncode":0,"selected_test_files":[],
+            "skipped_local_only_tests":skipped_local_only,
+            "stdout_tail":"NO_TESTS_ASSIGNED",
+        }
     proc=subprocess.run(
         [sys.executable,"-m","pytest","-q",*selected],
         stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,check=False,
@@ -71,7 +112,9 @@ def execute(job_id:str,kind:str,payload:dict[str,Any],shard:int,shard_count:int)
     )
     return {
         **common,"healthy":proc.returncode==0,"returncode":proc.returncode,
-        "selected_test_files":selected,"stdout_tail":proc.stdout[-12000:],
+        "selected_test_files":selected,
+        "skipped_local_only_tests":skipped_local_only,
+        "stdout_tail":proc.stdout[-12000:],
         "stderr_tail":proc.stderr[-8000:],
     }
 
