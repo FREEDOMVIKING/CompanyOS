@@ -1,0 +1,29 @@
+{
+  "architecture": {
+    "allowed_task_kinds": [
+      "smoke",
+      "research",
+      "pytest"
+    ],
+    "artifact_return": true,
+    "control_node": "android_termux",
+    "default_parallel_shards": 4,
+    "ephemeral_workers": true,
+    "evidence_import": true,
+    "max_inflight_workflows": 2,
+    "max_parallel_shards": 8,
+    "validation_queue_auto_seed": true,
+    "worker_platform": "github_actions"
+  },
+  "blocking_failures": [],
+  "generated_at_unix": 1790037807.2399158,
+  "overall_status": "PASS",
+  "schema": "companyos.v69_35b.github_actions_worker_pool.audit.v1",
+  "worker_restrictions": {
+    "account_creation": false,
+    "arbitrary_shell_payloads": false,
+    "deployments": false,
+    "external_messages": false,
+    "financial_actions": false
+  }
+}

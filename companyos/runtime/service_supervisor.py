@@ -113,6 +113,22 @@ class ServiceSupervisor:
                     ),
                 )
             )
+        # COMPANYOS_V69_35B_GITHUB_ACTIONS_WORKER_POOL
+        if (
+            os.getenv("COMPANYOS_ENABLE_GITHUB_ACTIONS_POOL","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/github_actions_worker_pool.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "github_actions_worker_pool",
+                    (
+                        python,
+                        "-m",
+                        "companyos.runtime.github_actions_worker_pool",
+                        "loop",
+                    ),
+                )
+            )
         if (Path.home()/"companyos/companyos/runtime/external_research_network_worker.py").exists():
             services.append(
                 ManagedService(
