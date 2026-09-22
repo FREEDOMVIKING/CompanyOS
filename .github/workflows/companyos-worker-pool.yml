@@ -1,0 +1,88 @@
+name: CompanyOS Distributed Worker Pool
+run-name: CompanyOS Worker ${{ inputs.job_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: "CompanyOS job identifier"
+        required: true
+        type: string
+      source_ref:
+        description: "CompanyOS source branch/ref"
+        required: true
+        default: "companyos-continuous-fix-2026-09-11"
+        type: string
+      task_kind:
+        description: "Bounded worker task kind"
+        required: true
+        type: choice
+        options: [smoke, research, pytest]
+      payload_b64:
+        description: "URL-safe base64 JSON payload"
+        required: true
+        type: string
+      shards_json:
+        description: "JSON array of shard numbers"
+        required: true
+        default: "[0]"
+        type: string
+      shard_count:
+        description: "Total shard count"
+        required: true
+        default: "1"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  worker:
+    name: shard-${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.shards_json) }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install bounded worker dependencies
+        run: python -m pip install --upgrade pip pytest
+
+      - name: Run CompanyOS worker
+        env:
+          JOB_ID: ${{ inputs.job_id }}
+          TASK_KIND: ${{ inputs.task_kind }}
+          PAYLOAD_B64: ${{ inputs.payload_b64 }}
+          SHARD: ${{ matrix.shard }}
+          SHARD_COUNT: ${{ inputs.shard_count }}
+          COMPANYOS_REMOTE_WORKER_LOCAL_ONLY: "1"
+          COMPANYOS_GITHUB_ACTIONS_WORKER: "1"
+        run: |
+          mkdir -p action-results
+          python -m companyos.runtime.github_actions_worker execute \
+            --job-id "$JOB_ID" \
+            --kind "$TASK_KIND" \
+            --payload-b64 "$PAYLOAD_B64" \
+            --shard "$SHARD" \
+            --shard-count "$SHARD_COUNT" \
+            --output action-results/result.json
+
+      - name: Upload result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: companyos-worker-${{ inputs.job_id }}-shard-${{ matrix.shard }}
+          path: action-results/result.json
+          if-no-files-found: error
+          retention-days: 7
