@@ -113,6 +113,22 @@ class ServiceSupervisor:
                     ),
                 )
             )
+        # COMPANYOS_V69_36_PERSISTENT_HOST_SCOUT
+        if (
+            os.getenv("COMPANYOS_ENABLE_PERSISTENT_HOST_SCOUT","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/persistent_host_scout.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "persistent_host_scout",
+                    (
+                        python,
+                        "-m",
+                        "companyos.runtime.persistent_host_scout",
+                        "loop",
+                    ),
+                )
+            )
         # COMPANYOS_V69_35D3_OFFLOAD_CALIBRATION_RESUMER
         if (
             os.getenv("COMPANYOS_ENABLE_OFFLOAD_CALIBRATION_RESUMER","1")=="1"
