@@ -76,7 +76,7 @@ def summarize(rows:list[dict[str,Any]])->dict[str,Any]:
 def wait_for_capacity(timeout_seconds:int=1800)->tuple[bool,str]:
     deadline=time.time()+timeout_seconds
     while time.time()<deadline:
-        allowed,reason=scheduler.can_enqueue()
+        allowed,reason=scheduler.can_enqueue(ignore_calibration_lock=True)
         if allowed:
             return True,"ready"
         if reason=="daily_cap":

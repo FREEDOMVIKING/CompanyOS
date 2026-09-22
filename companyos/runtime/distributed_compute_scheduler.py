@@ -18,6 +18,7 @@ STATE=RT/"distributed_compute_scheduler_state.json"
 HISTORY=RT/"distributed_compute_scheduler_history.json"
 VALIDATION_QUEUE=RT/"validation_experiment_queue.json"
 EVIDENCE_QUEUE=RT/"evidence_acquisition_queue.json"
+CALIBRATION_LOCK=RT/"adaptive_offload_calibration.lock"
 CALIBRATION_STATE=RT/"adaptive_offload_calibration_state.json"
 
 MAX_SHARDS=max(1,min(8,int(os.getenv("COMPANYOS_DISTRIBUTED_MAX_SHARDS","8"))))
@@ -80,7 +81,9 @@ def last_dispatch_unix()->float:
     times=[float(j.get("created_at_unix") or 0) for j in pool.queue_state().get("jobs") or [] if isinstance(j,dict)]
     return max(times) if times else 0.0
 
-def can_enqueue()->tuple[bool,str]:
+def can_enqueue(ignore_calibration_lock:bool=False)->tuple[bool,str]:
+    if CALIBRATION_LOCK.exists() and not ignore_calibration_lock:
+        return False,"calibration_lock"
     if len(active_jobs())>=MAX_INFLIGHT:return False,"inflight_cap"
     if dispatched_today()>=DAILY_CAP:return False,"daily_cap"
     if time.time()-last_dispatch_unix()<MIN_GAP:return False,"dispatch_gap"
