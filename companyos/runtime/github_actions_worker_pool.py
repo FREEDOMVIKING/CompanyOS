@@ -162,7 +162,10 @@ def collect(job):
             if isinstance(x,dict):shards.append(x)
         except Exception:pass
     job["import_summary"]=import_results(job,shards)
-    job["status"]="completed"; job["shard_results"]=len(shards); job["updated_at_unix"]=time.time()
+    job["status"]="completed"
+    job["shard_results"]=len(shards)
+    job["completed_at_unix"]=time.time()
+    job["updated_at_unix"]=job["completed_at_unix"]
     return job
 
 def seed_validation():
