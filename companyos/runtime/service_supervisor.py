@@ -96,6 +96,12 @@ class ServiceSupervisor:
         ):
             services.append(ManagedService("self_evolution_runtime", (python, "-m", "companyos.runtime.self_evolution_runtime")))
         # COMPANYOS_V69_31_EXTERNAL_RESEARCH_SERVICE
+        # COMPANYOS_V69_35E_LOCAL_LAN_HOST_DISCOVERY
+        if (
+            os.getenv("COMPANYOS_ENABLE_LOCAL_LAN_DISCOVERY","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/local_lan_host_discovery.py").exists()
+        ):
+            services.append(ManagedService("local_lan_host_discovery",(python,"-m","companyos.runtime.local_lan_host_discovery","loop")))
         # COMPANYOS_V69_35A_REMOTE_FABRIC_MONITOR
         remote_inventory=Path.home()/".companyos_runtime/remote_runtime_hosts.json"
         if (
