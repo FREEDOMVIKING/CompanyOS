@@ -113,6 +113,22 @@ class ServiceSupervisor:
                     ),
                 )
             )
+        # COMPANYOS_V69_35C_DISTRIBUTED_COMPUTE_SCHEDULER
+        if (
+            os.getenv("COMPANYOS_ENABLE_DISTRIBUTED_SCHEDULER","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/distributed_compute_scheduler.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "distributed_compute_scheduler",
+                    (
+                        python,
+                        "-m",
+                        "companyos.runtime.distributed_compute_scheduler",
+                        "loop",
+                    ),
+                )
+            )
         # COMPANYOS_V69_35B_GITHUB_ACTIONS_WORKER_POOL
         if (
             os.getenv("COMPANYOS_ENABLE_GITHUB_ACTIONS_POOL","1")=="1"

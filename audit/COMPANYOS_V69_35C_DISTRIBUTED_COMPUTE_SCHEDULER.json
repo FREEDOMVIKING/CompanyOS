@@ -1,0 +1,59 @@
+{
+  "blocking_failures": [],
+  "generated_at_unix": 1790039438.5707402,
+  "overall_status": "PASS",
+  "restrictions": {
+    "account_creation_from_workers": false,
+    "arbitrary_shell_payloads": false,
+    "deployments_from_workers": false,
+    "external_messages_from_workers": false,
+    "financial_actions_from_workers": false,
+    "quota_bypass": false
+  },
+  "sample_decision": {
+    "account_creation_allowed": false,
+    "active_jobs": 1,
+    "daily_dispatch_cap": 30,
+    "daily_dispatches": 1,
+    "decision": "pytest_new_sha",
+    "deployments_allowed": false,
+    "effectiveness": {
+      "evidence_attachments": 2,
+      "jobs_completed": 2,
+      "jobs_failed_or_blocked": 0,
+      "jobs_total": 3,
+      "research_artifacts_imported": 3,
+      "shard_results_collected": 7
+    },
+    "enqueue_allowed": true,
+    "enqueue_block_reason": null,
+    "evidence_backlog": 21,
+    "external_messages_allowed": false,
+    "financial_actions_allowed": false,
+    "gh_ready": true,
+    "healthy": true,
+    "last_pytest_sha": "7c3d5d855aa3b9f8716d4f26c8cf0dbdda892bff",
+    "max_inflight": 3,
+    "max_shards": 8,
+    "priority_score": 30,
+    "queued_job_id": "ga_ee072e9b59f3e1704f0f",
+    "queued_job_kind": "pytest",
+    "queued_job_shards": 8,
+    "recommended_shards": 2,
+    "schema": "companyos.distributed_compute_scheduler_state.v69_35c",
+    "updated_at_unix": 1790039402.5961144,
+    "validation_backlog": 3
+  },
+  "scheduler": {
+    "adaptive_shards_max": 8,
+    "adaptive_shards_min": 1,
+    "automatic_pytest_on_new_source_sha": true,
+    "automatic_validation_research": true,
+    "daily_dispatch_cap": 30,
+    "failed_job_retry_limit": 2,
+    "max_inflight_workflows": 3,
+    "minimum_dispatch_gap_seconds": 45,
+    "result_collection_owned_by_worker_pool": true
+  },
+  "schema": "companyos.v69_35c.distributed_compute_scheduler.audit.v1"
+}

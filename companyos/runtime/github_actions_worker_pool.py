@@ -175,8 +175,14 @@ def seed_validation():
 
 def cycle():
     auth=gh_ready()
-    try:seed_validation()
-    except Exception:pass
+    # COMPANYOS_V69_35C_SCHEDULER_OWNS_SEEDING
+    scheduler_owns_seeding=(
+        os.getenv("COMPANYOS_ENABLE_DISTRIBUTED_SCHEDULER","1")=="1"
+        and (ROOT/"companyos/runtime/distributed_compute_scheduler.py").exists()
+    )
+    if not scheduler_owns_seeding:
+        try:seed_validation()
+        except Exception:pass
     q=queue_state(); jobs=q["jobs"]
     inflight=sum(1 for j in jobs if isinstance(j,dict) and j.get("status") in {"submitted","running"})
     if auth["ready"]:
