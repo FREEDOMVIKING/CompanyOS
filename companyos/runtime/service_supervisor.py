@@ -113,6 +113,17 @@ class ServiceSupervisor:
                     ),
                 )
             )
+        # COMPANYOS_V69_37_OFFICIAL_PROVIDER_PROVISIONER
+        if (
+            os.getenv("COMPANYOS_ENABLE_PROVIDER_PROVISIONER","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/official_provider_provisioner.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "official_provider_provisioner",
+                    (python, "-m", "companyos.runtime.official_provider_provisioner", "loop"),
+                )
+            )
         # COMPANYOS_V69_36_PERSISTENT_HOST_SCOUT
         if (
             os.getenv("COMPANYOS_ENABLE_PERSISTENT_HOST_SCOUT","1")=="1"

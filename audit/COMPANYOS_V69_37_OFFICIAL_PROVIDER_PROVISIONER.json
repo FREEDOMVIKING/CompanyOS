@@ -1,0 +1,75 @@
+{
+  "blocking_failures": [],
+  "controls": {
+    "auto_adopt_default": false,
+    "auto_provision_default": false,
+    "handoff_after_successful_provision": true,
+    "monthly_cap_usd": 7.0,
+    "remote_health_required_before_local_stop": true,
+    "secrets_emitted": false
+  },
+  "generated_at_unix": 1790045420.5228264,
+  "initial_readiness": {
+    "account_creation_performed": false,
+    "action": {
+      "performed": false,
+      "reason": "no_credential_ready_provider"
+    },
+    "auto_adopt_enabled": false,
+    "auto_provision_enabled": false,
+    "credential_harvesting_performed": false,
+    "financial_action_performed": false,
+    "handoff": {
+      "attempted": false,
+      "reason": "no_new_primary"
+    },
+    "healthy": true,
+    "max_monthly_usd": 7.0,
+    "readiness": {
+      "adopt_existing_enabled": false,
+      "best_ready_provider": null,
+      "credential_ready_count": 0,
+      "max_monthly_usd": 7.0,
+      "providers": [
+        {
+          "credential_present": false,
+          "provider": "hetzner",
+          "ready": false,
+          "reason": "credential_missing"
+        },
+        {
+          "credential_present": false,
+          "provider": "digitalocean",
+          "ready": false,
+          "reason": "credential_missing"
+        }
+      ],
+      "provisioning_enabled": false,
+      "schema": "companyos.official_provider_readiness.v69_37",
+      "secret_values_emitted": false,
+      "updated_at_unix": 1790045384.0734947
+    },
+    "scan_seconds": 0.03,
+    "schema": "companyos.official_provider_provisioner.v69_37",
+    "secret_values_emitted": false,
+    "ssh_key_created": true,
+    "ssh_key_present": true,
+    "updated_at_unix": 1790045384.0735052
+  },
+  "overall_status": "PASS",
+  "providers": {
+    "digitalocean": {
+      "official_api": "https://api.digitalocean.com",
+      "supports_readiness": true,
+      "supports_server_create": true,
+      "supports_ssh_key_upload": true
+    },
+    "hetzner": {
+      "official_api": "https://api.hetzner.cloud",
+      "supports_readiness": true,
+      "supports_server_create": true,
+      "supports_ssh_key_upload": true
+    }
+  },
+  "schema": "companyos.v69_37.official_provider_provisioner.audit.v1"
+}
