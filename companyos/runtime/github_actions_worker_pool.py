@@ -85,7 +85,9 @@ def dispatch(job):
            "-f","shard_count="+str(shards)],60)
     if p.returncode:raise RuntimeError(p.stderr[-1200:] or "workflow_dispatch_failed")
     job["dispatch_attempts"]=int(job.get("dispatch_attempts") or 0)+1
-    job["status"]="submitted"; job["updated_at_unix"]=time.time()
+    job["status"]="submitted"
+    job["dispatched_at_unix"]=time.time()
+    job["updated_at_unix"]=job["dispatched_at_unix"]
     deadline=time.time()+45
     while time.time()<deadline:
         rows=gh_json(["run","list","--repo",REPO,"--workflow",WORKFLOW,"--event","workflow_dispatch",
@@ -142,7 +144,11 @@ def collect(job):
     if data.get("status")!="completed":
         job["status"]="running"; return job
     if data.get("conclusion")!="success":
-        job["status"]="failed"; job["github_conclusion"]=data.get("conclusion"); return job
+        job["status"]="failed"
+        job["github_conclusion"]=data.get("conclusion")
+        job["completed_at_unix"]=time.time()
+        job["updated_at_unix"]=job["completed_at_unix"]
+        return job
     target=RESULTS/job["job_id"]
     if target.exists():shutil.rmtree(target)
     target.mkdir(parents=True,exist_ok=True)
@@ -199,7 +205,7 @@ def cycle():
                 try:collect(j)
                 except Exception as exc:j["last_collect_error"]=f"{type(exc).__name__}:{str(exc)[:800]}"
     q["jobs"]=jobs[-300:]; atomic(QUEUE,q)
-    state={"schema":"companyos.github_actions_worker_pool_state.v69_35b","healthy":True,
+    state={"schema":"companyos.github_actions_worker_pool_state.v69_35d","healthy":True,
            "updated_at_unix":time.time(),"gh_ready":auth["ready"],"gh_reason":auth["reason"],
            "default_shards":DEFAULT_SHARDS,"max_inflight":MAX_INFLIGHT,
            "queued":sum(1 for j in jobs if isinstance(j,dict) and j.get("status")=="queued"),

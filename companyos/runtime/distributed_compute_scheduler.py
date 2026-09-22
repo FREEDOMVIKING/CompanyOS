@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from companyos.runtime import github_actions_worker_pool as pool
+from companyos.runtime import adaptive_offload_controller as offload
 
 ROOT=Path.home()/"companyos"
 RT=Path.home()/".companyos_runtime"
@@ -102,12 +103,20 @@ def evidence_backlog_count()->int:
     d=load(EVIDENCE_QUEUE,{"tasks":[]})
     return sum(1 for x in d.get("tasks") or [] if isinstance(x,dict) and x.get("status") in {"research_required","queued","inconclusive"})
 
-def shard_count(work_items:int)->int:
-    n=max(0,int(work_items))
-    if n<=1:return 1
-    if n<=3:return min(2,MAX_SHARDS,n)
-    if n<=7:return min(4,MAX_SHARDS,n)
-    return min(8,MAX_SHARDS,n)
+def shard_count(work_items:int,kind:str="research")->int:
+    n=max(1,int(work_items))
+    try:
+        return offload.recommend_shards(
+            kind=kind,
+            work_items=n,
+            queue=pool.queue_state(),
+            max_shards=MAX_SHARDS,
+        )
+    except Exception:
+        if n<=1:return 1
+        if n<=3:return min(2,MAX_SHARDS,n)
+        if n<=7:return min(4,MAX_SHARDS,n)
+        return min(8,MAX_SHARDS,n)
 
 def priority_score(validation_count:int,evidence_count:int)->int:
     return validation_count*3+evidence_count
@@ -119,7 +128,7 @@ def validation_dedupe(rows:list[dict[str,Any]])->str:
 def queue_validation(rows:list[dict[str,Any]])->dict[str,Any]|None:
     if not rows:return None
     batch=rows[:32]
-    job=pool.enqueue("research",{"queries":batch,"max_results":8,"source":"distributed_compute_scheduler_v69_35c"},shards=shard_count(len(batch)),dedupe_key=validation_dedupe(batch))
+    job=pool.enqueue("research",{"queries":batch,"max_results":8,"source":"distributed_compute_scheduler_v69_35c"},shards=shard_count(len(batch),"research"),dedupe_key=validation_dedupe(batch))
     record_dispatch(job,"validation_backlog")
     return job
 
@@ -134,7 +143,7 @@ def queue_pytest_if_needed(state:dict[str,Any])->dict[str,Any]|None:
     if tests<=0:
         state["last_pytest_sha"]=sha
         return None
-    job=pool.enqueue("pytest",{"timeout_seconds":15000},shards=shard_count(tests),dedupe_key="scheduler_pytest:"+sha)
+    job=pool.enqueue("pytest",{"timeout_seconds":15000},shards=shard_count(tests,"pytest"),dedupe_key="scheduler_pytest:"+sha)
     state["last_pytest_sha"]=sha
     record_dispatch(job,"new_source_sha")
     return job
@@ -194,8 +203,16 @@ def once()->dict[str,Any]:
                 job=queue_validation(validation)
                 decision="validation_research"
 
+    telemetry=offload.snapshot(
+        queue=pool.queue_state(),
+        validation_backlog=len(validation),
+        evidence_backlog=evidence,
+        active_jobs=len(active_jobs()),
+        max_shards=MAX_SHARDS,
+    )
+
     out={
-        "schema":"companyos.distributed_compute_scheduler_state.v69_35c",
+        "schema":"companyos.distributed_compute_scheduler_state.v69_35d",
         "updated_at_unix":time.time(),
         "healthy":True,
         "gh_ready":bool(auth.get("ready")),
@@ -205,7 +222,8 @@ def once()->dict[str,Any]:
         "validation_backlog":len(validation),
         "evidence_backlog":evidence,
         "priority_score":priority_score(len(validation),evidence),
-        "recommended_shards":shard_count(max(len(validation),1)),
+        "recommended_shards":shard_count(max(len(validation),1),"research"),
+        "adaptive_offload":telemetry,
         "active_jobs":len(active_jobs()),
         "max_inflight":MAX_INFLIGHT,
         "daily_dispatches":dispatched_today(),
@@ -228,7 +246,7 @@ def loop()->None:
     while True:
         try:once()
         except Exception as exc:
-            atomic(STATE,{"schema":"companyos.distributed_compute_scheduler_state.v69_35c","healthy":False,"updated_at_unix":time.time(),"error":f"{type(exc).__name__}:{str(exc)[:1000]}"})
+            atomic(STATE,{"schema":"companyos.distributed_compute_scheduler_state.v69_35d","healthy":False,"updated_at_unix":time.time(),"error":f"{type(exc).__name__}:{str(exc)[:1000]}"})
         time.sleep(INTERVAL)
 
 def main()->int:

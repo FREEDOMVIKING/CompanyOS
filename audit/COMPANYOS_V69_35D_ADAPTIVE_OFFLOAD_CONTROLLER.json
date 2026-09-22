@@ -1,0 +1,65 @@
+{
+  "blocking_failures": [],
+  "capabilities": {
+    "adaptive_shards": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "automatic_failure_throttling": true,
+    "automatic_high_pressure_acceleration": true,
+    "daily_dispatch_cap": 30,
+    "external_success_telemetry": true,
+    "jsonl_history": "/data/data/com.termux/files/home/.companyos_runtime/adaptive_offload_telemetry.jsonl",
+    "max_inflight_workflows": 4,
+    "max_shards": 8,
+    "phone_pressure_telemetry": true,
+    "turnaround_telemetry": true
+  },
+  "generated_at_unix": 1790041795.992886,
+  "overall_status": "PASS",
+  "restrictions": {
+    "account_creation_from_workers": false,
+    "arbitrary_shell_payloads": false,
+    "deployments_from_workers": false,
+    "financial_actions_from_workers": false,
+    "quota_bypass": false
+  },
+  "sample": {
+    "account_creation_allowed": false,
+    "arbitrary_shell_payloads_allowed": false,
+    "deployments_allowed": false,
+    "external": {
+      "average_turnaround_seconds": 58.04,
+      "current_inflight_jobs": 0,
+      "external_success_rate": 0.5,
+      "failed_or_blocked_jobs": 4,
+      "p95_turnaround_seconds": 117.37,
+      "recent_jobs": 8,
+      "successful_jobs": 4,
+      "terminal_jobs": 8
+    },
+    "financial_actions_allowed": false,
+    "kind": "research",
+    "mode": "cautious_external",
+    "phone": {
+      "cpu_count": 8,
+      "load1": 3.294,
+      "load_ratio": 0.4117,
+      "memory_used_ratio": 0.6117,
+      "phone_pressure_score": 0.4717
+    },
+    "quota_bypass_allowed": false,
+    "reason": {
+      "external_success_rate": 0.5,
+      "phone_pressure": 0.4717,
+      "terminal_samples": 8,
+      "turnaround_seconds": 58.04
+    },
+    "recommended_shards": 2,
+    "remote_share_hint": 0.66,
+    "work_items": 12
+  },
+  "schema": "companyos.v69_35d.adaptive_offload.audit.v1"
+}
