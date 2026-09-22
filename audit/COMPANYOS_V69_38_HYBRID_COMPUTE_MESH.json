@@ -1,0 +1,112 @@
+{
+  "blocking_failures": [],
+  "generated_at_unix": 1790046129.2669988,
+  "initial_snapshot": {
+    "capacity": {
+      "configured_github_burst_lane_ceiling": 32,
+      "github_concurrency_is_guaranteed": false,
+      "local_control_lanes": 0,
+      "persistent_remote_capacity_score": 0.0
+    },
+    "healthy": false,
+    "operating": {
+      "burst_compute_plane": "github_actions",
+      "fallback_control_plane": "none",
+      "mode": "phone_control_plus_github_burst",
+      "next_action": "continue_host_discovery_and_wait_for_official_provider_credentials",
+      "persistent_remote_available": false,
+      "primary_control_plane": "termux_local"
+    },
+    "planes": {
+      "adaptive_offload": {
+        "average_external_turnaround_seconds": 58.04,
+        "external_success_rate": 0.5,
+        "healthy": true,
+        "mode": "cautious_external",
+        "phone_pressure_score": 0.4693,
+        "plane": "adaptive_offload",
+        "recommended_shards": 2
+      },
+      "github": {
+        "completed_jobs": 4,
+        "configured_burst_lane_ceiling": 32,
+        "configured_max_inflight_workflows": 4,
+        "configured_max_shards_per_workflow": 8,
+        "ephemeral": true,
+        "failed_or_blocked_jobs": 4,
+        "gh_ready": true,
+        "guaranteed_concurrency": false,
+        "healthy": true,
+        "observed_success_rate": 0.5,
+        "plane": "github_actions_burst",
+        "queued_or_inflight_jobs": 0
+      },
+      "host_discovery": {
+        "active_host_search": true,
+        "dynamic_discoveries_count": 17,
+        "healthy": true,
+        "plane": "persistent_host_discovery",
+        "top_candidate": {
+          "always_on_expected": true,
+          "credential_present": false,
+          "host_id": "hetzner_cx23",
+          "kind": "vps",
+          "monthly_cost_usd": 6.49,
+          "provider": "hetzner",
+          "score": 98.0
+        }
+      },
+      "local": {
+        "configured_capacity_lanes": 1,
+        "healthy": false,
+        "plane": "termux_local",
+        "services_running": 0,
+        "services_total": 28,
+        "supervisor_running": false
+      },
+      "official_provider": {
+        "auto_provision_enabled": false,
+        "best_ready_provider": null,
+        "credential_ready_count": 0,
+        "financial_action_performed_by_mesh": false,
+        "healthy": true,
+        "last_action_performed": false,
+        "last_action_reason": "no_credential_ready_provider",
+        "max_monthly_usd": 7.0,
+        "plane": "official_provider_activation"
+      },
+      "persistent_remote": {
+        "enrolled_node_count": 0,
+        "healthy": false,
+        "healthy_capacity_score": 0.0,
+        "healthy_node_count": 0,
+        "healthy_primary_count": 0,
+        "nodes": [],
+        "persistent": true,
+        "plane": "persistent_remote_fabric"
+      }
+    },
+    "restrictions": {
+      "credential_harvesting": false,
+      "mesh_account_creation": false,
+      "mesh_deployment_actions": false,
+      "mesh_financial_actions": false,
+      "mesh_provider_signup": false,
+      "quota_bypass": false
+    },
+    "scan_seconds": 0.0007,
+    "schema": "companyos.hybrid_compute_mesh.v69_38",
+    "secret_values_emitted": false,
+    "updated_at_unix": 1790046093.4104648
+  },
+  "overall_status": "PASS",
+  "restrictions": {
+    "account_creation": false,
+    "credential_harvesting": false,
+    "deployment_action": false,
+    "financial_action": false,
+    "provider_signup": false,
+    "quota_bypass": false
+  },
+  "schema": "companyos.v69_38.hybrid_compute_mesh.audit.v1"
+}

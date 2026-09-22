@@ -113,6 +113,17 @@ class ServiceSupervisor:
                     ),
                 )
             )
+        # COMPANYOS_V69_38_HYBRID_COMPUTE_MESH
+        if (
+            os.getenv("COMPANYOS_ENABLE_HYBRID_COMPUTE_MESH","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/hybrid_compute_mesh_controller.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "hybrid_compute_mesh_controller",
+                    (python, "-m", "companyos.runtime.hybrid_compute_mesh_controller", "loop"),
+                )
+            )
         # COMPANYOS_V69_37_OFFICIAL_PROVIDER_PROVISIONER
         if (
             os.getenv("COMPANYOS_ENABLE_PROVIDER_PROVISIONER","1")=="1"
