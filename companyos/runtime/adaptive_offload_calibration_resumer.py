@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import fcntl
 import json
 import os
 import time
@@ -10,19 +9,11 @@ from typing import Any
 
 from companyos.runtime import adaptive_offload_calibration as calibration
 from companyos.runtime import distributed_compute_scheduler as scheduler
+from companyos.runtime import github_actions_worker_pool as pool
 
 RT=Path.home()/".companyos_runtime"
 STATE=RT/"adaptive_offload_calibration_resumer_state.json"
-LOCK=RT/"adaptive_offload_calibration_resumer.lock"
-POLL=max(15,int(os.getenv("COMPANYOS_OFFLOAD_CALIBRATION_RESUME_SECONDS","60")))
-REQUIRED_SLOTS=4
-
-
-def load(path:Path,default:Any):
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return default
+INTERVAL=max(30,int(os.getenv("COMPANYOS_OFFLOAD_CALIBRATION_RESUMER_SECONDS","60")))
 
 
 def atomic(path:Path,obj:Any)->None:
@@ -34,141 +25,149 @@ def atomic(path:Path,obj:Any)->None:
     except Exception:pass
 
 
-def utc_day()->str:
-    return time.strftime("%Y-%m-%d",time.gmtime())
+def seconds_until_utc_reset(now:float|None=None)->int:
+    ts=time.time() if now is None else float(now)
+    next_day=((int(ts)//86400)+1)*86400
+    return max(0,int(next_day-ts))
 
 
-def capacity_snapshot()->dict[str,Any]:
-    used=int(scheduler.dispatched_today())
-    cap=int(scheduler.DAILY_CAP)
-    return {
-        "utc_day":utc_day(),
-        "dispatches_used":used,
-        "daily_cap":cap,
-        "dispatch_slots_available":max(0,cap-used),
-        "required_calibration_slots":REQUIRED_SLOTS,
+def required_slots(cal_state:dict[str,Any])->int:
+    results=cal_state.get("results") if isinstance(cal_state.get("results"),list) else []
+    completed_shards={
+        int(r.get("requested_shards"))
+        for r in results
+        if isinstance(r,dict) and r.get("status")=="completed" and r.get("requested_shards") in calibration.PLAN
+    }
+    return max(0,len([x for x in calibration.PLAN if x not in completed_shards]))
+
+
+def resume_eligible_status(status:str)->bool:
+    return status in {
+        "blocked_daily_cap",
+        "pending_daily_cap",
+        "waiting_daily_cap",
+        "not_started",
     }
 
 
-def decide()->dict[str,Any]:
-    existing=load(calibration.STATE,{})
-    cap=capacity_snapshot()
+def once()->dict[str,Any]:
+    cal=calibration.status()
+    cal_status=str(cal.get("status") or "not_started")
+    used=scheduler.dispatched_today()
+    remaining=max(0,scheduler.DAILY_CAP-used)
+    needed=required_slots(cal)
+    auth=pool.gh_ready()
+    active=len(scheduler.active_jobs())
 
-    if existing.get("status")=="completed":
-        return {
-            "action":"sleep_completed",
-            "reason":"calibration_already_completed",
-            "calibration_status":"completed",
-            **cap,
-        }
-
-    if int(cap["dispatch_slots_available"]) < REQUIRED_SLOTS:
-        return {
-            "action":"wait",
-            "reason":"daily_dispatch_capacity",
-            "calibration_status":existing.get("status") or "not_started",
-            **cap,
-        }
-
-    if len(scheduler.active_jobs()) >= scheduler.MAX_INFLIGHT:
-        return {
-            "action":"wait",
-            "reason":"inflight_capacity",
-            "calibration_status":existing.get("status") or "not_started",
-            **cap,
-        }
-
-    return {
-        "action":"run_calibration",
-        "reason":"capacity_available",
-        "calibration_status":existing.get("status") or "not_started",
-        **cap,
-    }
-
-
-def once(run_when_ready:bool=True)->dict[str,Any]:
-    decision=decide()
     out={
         "schema":"companyos.adaptive_offload_calibration_resumer.v69_35d3",
         "healthy":True,
         "updated_at_unix":time.time(),
-        **decision,
+        "calibration_status":cal_status,
+        "dispatches_today":used,
+        "daily_dispatch_cap":scheduler.DAILY_CAP,
+        "remaining_dispatch_slots":remaining,
+        "required_calibration_slots":needed,
+        "active_jobs":active,
+        "gh_ready":bool(auth.get("ready")),
+        "seconds_until_utc_dispatch_reset":seconds_until_utc_reset(),
+        "cap_bypassed":False,
+        "cap_raised":False,
     }
 
-    if decision["action"]=="run_calibration" and run_when_ready:
-        atomic(STATE,{**out,"status":"starting_calibration"})
-        report=calibration.run()
-        out={
-            **out,
-            "status":"calibration_finished",
-            "calibration_report_status":(
-                "completed"
-                if (report.get("summary") or {}).get("completed")==len(calibration.PLAN)
-                else "incomplete"
-            ),
-            "report_path":str(calibration.REPORT),
-            "updated_at_unix":time.time(),
-        }
-    elif decision["action"]=="wait":
-        out["status"]="waiting_for_daily_cap_reset" if decision["reason"]=="daily_dispatch_capacity" else "waiting_for_capacity"
-    else:
+    if cal_status=="completed":
         out["status"]="completed"
+        out["decision"]="nothing_to_do"
+        atomic(STATE,out)
+        return out
 
+    if cal_status in {"running"}:
+        out["status"]="calibration_running"
+        out["decision"]="wait"
+        atomic(STATE,out)
+        return out
+
+    if not resume_eligible_status(cal_status):
+        out["status"]="manual_review"
+        out["decision"]="do_not_auto_retry_non_cap_failure"
+        atomic(STATE,out)
+        return out
+
+    if needed<=0:
+        out["status"]="completed"
+        out["decision"]="nothing_to_do"
+        atomic(STATE,out)
+        return out
+
+    if remaining<needed:
+        out["status"]="waiting_daily_cap"
+        out["decision"]="wait_for_utc_cap_reset"
+        atomic(STATE,out)
+        return out
+
+    if active>0:
+        out["status"]="waiting_for_idle"
+        out["decision"]="wait_for_clean_benchmark_window"
+        atomic(STATE,out)
+        return out
+
+    if not auth.get("ready"):
+        out["status"]="waiting_github"
+        out["decision"]="wait_for_github_auth"
+        atomic(STATE,out)
+        return out
+
+    out["status"]="launching"
+    out["decision"]="run_calibration"
+    atomic(STATE,out)
+
+    report=calibration.run()
+    final_status=str((calibration.status() or {}).get("status") or "unknown")
+    out.update({
+        "updated_at_unix":time.time(),
+        "status":"completed" if final_status=="completed" else "calibration_finished",
+        "calibration_status":final_status,
+        "decision":"calibration_finished",
+        "report_summary":report.get("summary") if isinstance(report,dict) else None,
+    })
     atomic(STATE,out)
     return out
 
 
 def loop()->None:
-    LOCK.parent.mkdir(parents=True,exist_ok=True)
-    with LOCK.open("a+") as lock:
+    while True:
         try:
-            fcntl.flock(lock.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)
-        except BlockingIOError:
+            once()
+        except Exception as exc:
             atomic(STATE,{
                 "schema":"companyos.adaptive_offload_calibration_resumer.v69_35d3",
-                "healthy":True,
-                "status":"already_running",
+                "healthy":False,
                 "updated_at_unix":time.time(),
+                "status":"error",
+                "error":f"{type(exc).__name__}:{str(exc)[:1000]}",
             })
-            return
-
-        while True:
-            try:
-                out=once(run_when_ready=True)
-                if out.get("status")=="calibration_finished":
-                    time.sleep(max(POLL,300))
-                else:
-                    time.sleep(POLL)
-            except Exception as exc:
-                atomic(STATE,{
-                    "schema":"companyos.adaptive_offload_calibration_resumer.v69_35d3",
-                    "healthy":False,
-                    "status":"error",
-                    "error":f"{type(exc).__name__}:{str(exc)[:1000]}",
-                    "updated_at_unix":time.time(),
-                })
-                time.sleep(POLL)
+        time.sleep(INTERVAL)
 
 
 def status()->dict[str,Any]:
-    return {
-        "resumer":load(STATE,{"status":"not_started"}),
-        "decision_now":decide(),
-        "calibration":load(calibration.STATE,{"status":"not_started"}),
-    }
+    try:
+        return json.loads(STATE.read_text(encoding="utf-8"))
+    except Exception:
+        return {"status":"not_run","state_path":str(STATE)}
 
 
 def main()->int:
     p=argparse.ArgumentParser()
     p.add_argument("command",choices=("once","loop","status"))
     a=p.parse_args()
-    if a.command=="loop":
+    if a.command=="once":
+        out=once()
+    elif a.command=="status":
+        out=status()
+    else:
         loop()
         return 0
-    if a.command=="once":
-        print(json.dumps(once(),indent=2,sort_keys=True,default=str))
-    else:
-        print(json.dumps(status(),indent=2,sort_keys=True,default=str))
+    print(json.dumps(out,indent=2,sort_keys=True,default=str))
     return 0
 
 

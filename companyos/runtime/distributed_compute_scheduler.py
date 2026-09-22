@@ -18,6 +18,7 @@ STATE=RT/"distributed_compute_scheduler_state.json"
 HISTORY=RT/"distributed_compute_scheduler_history.json"
 VALIDATION_QUEUE=RT/"validation_experiment_queue.json"
 EVIDENCE_QUEUE=RT/"evidence_acquisition_queue.json"
+CALIBRATION_STATE=RT/"adaptive_offload_calibration_state.json"
 
 MAX_SHARDS=max(1,min(8,int(os.getenv("COMPANYOS_DISTRIBUTED_MAX_SHARDS","8"))))
 MAX_INFLIGHT=max(1,min(4,int(os.getenv("COMPANYOS_DISTRIBUTED_MAX_INFLIGHT","3"))))
@@ -86,6 +87,22 @@ def can_enqueue()->tuple[bool,str]:
     auth=pool.gh_ready()
     if not auth.get("ready"):return False,str(auth.get("reason") or "gh_not_ready")
     return True,"ready"
+
+def calibration_reservation_active()->bool:
+    d=load(CALIBRATION_STATE,{})
+    status=str(d.get("status") or "")
+    if status not in {
+        "blocked_daily_cap",
+        "pending_daily_cap",
+        "waiting_daily_cap",
+        "running",
+    }:
+        return False
+    # Do not freeze normal work while the cap is exhausted. Once enough
+    # fresh daily capacity exists, reserve four dispatch slots for the
+    # controlled 1/2/4/8 calibration sequence.
+    remaining=max(0,DAILY_CAP-dispatched_today())
+    return status=="running" or remaining>=4
 
 def validation_backlog()->list[dict[str,Any]]:
     d=load(VALIDATION_QUEUE,{"experiments":[]})
@@ -190,8 +207,9 @@ def once()->dict[str,Any]:
     allowed,reason=can_enqueue()
     job=None
     decision="none"
+    calibration_reserved=calibration_reservation_active()
 
-    if allowed:
+    if allowed and not calibration_reserved:
         job=retry_failed_jobs()
         if job:
             decision="retry_failed_job"
@@ -202,6 +220,8 @@ def once()->dict[str,Any]:
             elif validation:
                 job=queue_validation(validation)
                 decision="validation_research"
+    elif calibration_reserved:
+        decision="calibration_reserved_capacity"
 
     telemetry=offload.snapshot(
         queue=pool.queue_state(),
@@ -219,6 +239,7 @@ def once()->dict[str,Any]:
         "decision":decision,
         "enqueue_allowed":allowed,
         "enqueue_block_reason":None if allowed else reason,
+        "calibration_capacity_reserved":calibration_reserved,
         "validation_backlog":len(validation),
         "evidence_backlog":evidence,
         "priority_score":priority_score(len(validation),evidence),
