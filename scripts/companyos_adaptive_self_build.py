@@ -138,67 +138,582 @@ def inventory():
         ) if (ROOT / ".env").exists() else [],
     }
 
-def validate_plan(plan):
+
+def _candidate_quality_errors(
+    root,
+    rel,
+    content,
+    baseline="",
+    planned_paths=None,
+    is_new=False,
+):
+    import ast as _ast
+    import difflib as _difflib
+    import re as _re
+
     errors = []
-
-    if not isinstance(plan, dict):
-        return ["plan_not_object"]
-
-    changes = plan.get("changes")
-    if not isinstance(changes, list):
-        return ["changes_not_list"]
-
-    action_aliases = {
-        "update": "replace",
-        "modify": "replace",
-        "edit": "replace",
-        "patch": "replace",
-        "rewrite": "replace",
-        "write": "replace",
-        "change": "replace",
-        "replace_file": "replace",
-        "add": "create",
-        "new": "create",
-        "create_file": "create",
+    planned_paths = {
+        str(x).replace("\\", "/")
+        for x in (planned_paths or set())
     }
 
-    for i, change in enumerate(changes):
-        if not isinstance(change, dict):
-            errors.append(f"change_{i}_not_object")
+    # --------------------------------------------------------
+    # New production files are opt-in while using a small
+    # local model. Tests may still be created freely.
+    # --------------------------------------------------------
+    if (
+        is_new
+        and not str(rel).startswith("tests/")
+        and os.getenv(
+            "COMPANYOS_SELF_EVOLUTION_ALLOW_NEW_PRODUCTION_FILES",
+            "0",
+        ) != "1"
+    ):
+        errors.append("new_production_file_requires_opt_in")
+
+    # --------------------------------------------------------
+    # Only judge newly-added text for filler markers so an
+    # unrelated pre-existing TODO doesn't block an improvement.
+    # --------------------------------------------------------
+    added = []
+    for line in _difflib.ndiff(
+        (baseline or "").splitlines(),
+        (content or "").splitlines(),
+    ):
+        if line.startswith("+ "):
+            added.append(line[2:])
+
+    added_text = "\n".join(added).lower()
+
+    markers = (
+        "placeholder for",
+        "simulate performance optimization",
+        "dummy implementation",
+        "implementation goes here",
+        "todo-only",
+        "fake success",
+    )
+
+    for marker in markers:
+        if marker in added_text:
+            errors.append("placeholder_or_stub:" + marker)
+
+    # --------------------------------------------------------
+    # Parse candidate and baseline
+    # --------------------------------------------------------
+    try:
+        tree = _ast.parse(content or "", filename=str(rel))
+    except SyntaxError as exc:
+        return errors + [
+            "invalid_python:"
+            + type(exc).__name__
+            + ":"
+            + str(exc)
+        ]
+
+    try:
+        old_tree = _ast.parse(
+            baseline or "",
+            filename=str(rel) + ":baseline",
+        )
+    except Exception:
+        old_tree = None
+
+    # Reject formatting-only, comment-only, or otherwise
+    # semantically identical Python replacements.
+    if baseline and old_tree is not None:
+        try:
+            new_ast = _ast.dump(
+                tree,
+                include_attributes=False,
+            )
+            old_ast = _ast.dump(
+                old_tree,
+                include_attributes=False,
+            )
+
+            if new_ast == old_ast:
+                errors.append("semantic_noop")
+        except Exception:
+            pass
+
+    # --------------------------------------------------------
+    # Helpers
+    # --------------------------------------------------------
+    def _local_module_exists(mod):
+        parts = str(mod).split(".")
+        base = root.joinpath(*parts)
+
+        if base.with_suffix(".py").is_file():
+            return True
+
+        if (base / "__init__.py").is_file():
+            return True
+
+        p1 = "/".join(parts) + ".py"
+        p2 = "/".join(parts) + "/__init__.py"
+
+        return p1 in planned_paths or p2 in planned_paths
+
+    def _imports(t):
+        found = set()
+
+        if t is None:
+            return found
+
+        for node in _ast.walk(t):
+            if isinstance(node, _ast.Import):
+                for alias in node.names:
+                    mod = alias.name
+
+                    if mod.startswith(
+                        ("companyos.", "companyos_modules.")
+                    ):
+                        found.add(mod)
+
+            elif isinstance(node, _ast.ImportFrom):
+                mod = node.module or ""
+
+                if mod.startswith(
+                    ("companyos.", "companyos_modules.")
+                ):
+                    found.add(mod)
+
+                elif mod in ("companyos", "companyos_modules"):
+                    for alias in node.names:
+                        if alias.name != "*":
+                            found.add(
+                                mod + "." + alias.name
+                            )
+
+        return found
+
+    # --------------------------------------------------------
+    # Newly introduced CompanyOS-local imports must exist.
+    # --------------------------------------------------------
+    new_imports = _imports(tree) - _imports(old_tree)
+
+    for mod in sorted(new_imports):
+        if not _local_module_exists(mod):
+            errors.append("missing_local_import:" + mod)
+
+    # --------------------------------------------------------
+    # Literal local script references must exist.
+    # Example:
+    # scripts/optimization_script.py
+    # --------------------------------------------------------
+    def _local_file_refs(t):
+        refs = set()
+
+        if t is None:
+            return refs
+
+        for node in _ast.walk(t):
+            if isinstance(node, _ast.Constant):
+                value = node.value
+
+                if not isinstance(value, str):
+                    continue
+
+                value = value.replace("\\", "/").strip()
+
+                if (
+                    value.startswith(
+                        (
+                            "scripts/",
+                            "companyos/",
+                            "companyos_modules/",
+                            "tests/",
+                            "templates/",
+                        )
+                    )
+                    and value.endswith((".py", ".sh"))
+                ):
+                    refs.add(value)
+
+        return refs
+
+    new_refs = _local_file_refs(tree) - _local_file_refs(old_tree)
+
+    for ref in sorted(new_refs):
+        if not (root / ref).exists() and ref not in planned_paths:
+            errors.append(
+                "missing_local_file_reference:" + ref
+            )
+
+    # --------------------------------------------------------
+    # Extract the static prefix of a path expression.
+    # Handles:
+    # "/opt/foo"
+    # f"/opt/foo/{x}"
+    # Path("/opt") / "foo"
+    # --------------------------------------------------------
+    def _path_prefix(node):
+        if node is None:
+            return None
+
+        if isinstance(node, _ast.Constant):
+            if isinstance(node.value, str):
+                return node.value
+
+        if isinstance(node, _ast.JoinedStr):
+            out = ""
+
+            for part in node.values:
+                if isinstance(part, _ast.Constant):
+                    if isinstance(part.value, str):
+                        out += part.value
+                else:
+                    break
+
+            return out or None
+
+        if isinstance(node, _ast.BinOp):
+            if isinstance(node.op, (_ast.Div, _ast.Add)):
+                return _path_prefix(node.left)
+
+        if isinstance(node, _ast.Call):
+            name = ""
+
+            if isinstance(node.func, _ast.Name):
+                name = node.func.id
+            elif isinstance(node.func, _ast.Attribute):
+                name = node.func.attr
+
+            if name == "Path" and node.args:
+                return _path_prefix(node.args[0])
+
+            if (
+                isinstance(node.func, _ast.Attribute)
+                and node.func.attr == "join"
+                and node.args
+            ):
+                return _path_prefix(node.args[0])
+
+        return None
+
+    def _dangerous_absolute(path):
+        if not path:
+            return False
+
+        p = str(path).replace("\\", "/")
+
+        if p.startswith(("/tmp/", "/var/tmp/")):
+            return False
+
+        if p.startswith("/"):
+            return True
+
+        if _re.match(r"^[A-Za-z]:/", p):
+            return True
+
+        return False
+
+    # --------------------------------------------------------
+    # Collect filesystem writes.
+    # --------------------------------------------------------
+    def _writes(t):
+        writes = set()
+
+        if t is None:
+            return writes
+
+        write_methods = {
+            "write_text",
+            "write_bytes",
+            "touch",
+            "mkdir",
+            "unlink",
+            "rmdir",
+        }
+
+        for node in _ast.walk(t):
+            if not isinstance(node, _ast.Call):
+                continue
+
+            fn = node.func
+
+            # builtin open(path, mode)
+            if isinstance(fn, _ast.Name) and fn.id == "open":
+                mode = "r"
+
+                if len(node.args) >= 2:
+                    if isinstance(node.args[1], _ast.Constant):
+                        mode = str(node.args[1].value)
+
+                for kw in node.keywords:
+                    if (
+                        kw.arg == "mode"
+                        and isinstance(kw.value, _ast.Constant)
+                    ):
+                        mode = str(kw.value.value)
+
+                if any(x in mode for x in ("w", "a", "x", "+")):
+                    p = (
+                        _path_prefix(node.args[0])
+                        if node.args
+                        else None
+                    )
+
+                    if p:
+                        writes.add(p)
+
+            # pathlib Path(...).write_text(), mkdir(), etc.
+            if (
+                isinstance(fn, _ast.Attribute)
+                and fn.attr in write_methods
+            ):
+                p = _path_prefix(fn.value)
+
+                if p:
+                    writes.add(p)
+
+            # os.mkdir/makedirs/remove/unlink/rmdir
+            if (
+                isinstance(fn, _ast.Attribute)
+                and isinstance(fn.value, _ast.Name)
+                and fn.value.id == "os"
+                and fn.attr
+                in {
+                    "mkdir",
+                    "makedirs",
+                    "remove",
+                    "unlink",
+                    "rmdir",
+                }
+                and node.args
+            ):
+                p = _path_prefix(node.args[0])
+
+                if p:
+                    writes.add(p)
+
+            # shutil copy/move destinations
+            if (
+                isinstance(fn, _ast.Attribute)
+                and isinstance(fn.value, _ast.Name)
+                and fn.value.id == "shutil"
+                and fn.attr
+                in {
+                    "copy",
+                    "copy2",
+                    "copyfile",
+                    "move",
+                }
+                and len(node.args) >= 2
+            ):
+                p = _path_prefix(node.args[1])
+
+                if p:
+                    writes.add(p)
+
+        return writes
+
+    new_writes = _writes(tree) - _writes(old_tree)
+
+    for path in sorted(new_writes):
+        if _dangerous_absolute(path):
+            errors.append(
+                "privileged_or_external_absolute_write:" + path
+            )
+
+    # --------------------------------------------------------
+    # subprocess quality checks.
+    # --------------------------------------------------------
+    def _subprocess_flags(t):
+        flags = set()
+
+        if t is None:
+            return flags
+
+        for node in _ast.walk(t):
+            if not isinstance(node, _ast.Call):
+                continue
+
+            fn = node.func
+
+            if not (
+                isinstance(fn, _ast.Attribute)
+                and isinstance(fn.value, _ast.Name)
+                and fn.value.id == "subprocess"
+                and fn.attr
+                in {
+                    "run",
+                    "Popen",
+                    "check_call",
+                    "check_output",
+                }
+            ):
+                continue
+
+            for kw in node.keywords:
+                if (
+                    kw.arg == "shell"
+                    and isinstance(kw.value, _ast.Constant)
+                    and kw.value.value is True
+                ):
+                    flags.add("subprocess_shell_true")
+
+            if node.args:
+                cmd = node.args[0]
+
+                if isinstance(cmd, (_ast.List, _ast.Tuple)):
+                    if cmd.elts:
+                        first = cmd.elts[0]
+
+                        if (
+                            isinstance(first, _ast.Constant)
+                            and first.value in ("python", "python3")
+                        ):
+                            flags.add(
+                                "hardcoded_python_executable"
+                            )
+
+        return flags
+
+    for flag in sorted(
+        _subprocess_flags(tree) - _subprocess_flags(old_tree)
+    ):
+        errors.append(flag)
+
+    return sorted(set(errors))
+
+
+def validate_plan(plan):
+    errors=[]
+
+    if not isinstance(plan,dict):
+        return ["plan_not_object"]
+
+    changes=plan.get("changes")
+
+    if not isinstance(changes,list):
+        return ["changes_not_list"]
+
+    action_aliases={
+        "update":"replace",
+        "modify":"replace",
+        "edit":"replace",
+        "patch":"replace",
+        "rewrite":"replace",
+        "write":"replace",
+        "change":"replace",
+        "replace_file":"replace",
+        "add":"create",
+        "new":"create",
+        "create_file":"create",
+    }
+
+    planned_paths={
+        str(x.get("path","")).strip().replace("\\","/")
+        for x in changes
+        if isinstance(x,dict)
+    }
+
+    for i,change in enumerate(changes):
+        if not isinstance(change,dict):
+            errors.append(
+                f"change_{i}_not_object"
+            )
             continue
 
-        path_value = str(change.get("path", "")).strip()
-        raw_action = str(change.get("action", "")).strip().lower()
-        content = str(change.get("content", ""))
+        path_value=str(
+            change.get("path","")
+        ).strip().replace("\\","/")
 
-        action = action_aliases.get(raw_action, raw_action)
+        raw_action=str(
+            change.get("action","")
+        ).strip().lower()
 
-        if action not in {"create", "replace"}:
-            target = ROOT / path_value if path_value else None
-            action = "replace" if target and target.exists() else "create"
+        content=str(
+            change.get("content","")
+        )
 
-        change["action"] = action
+        action=action_aliases.get(
+            raw_action,
+            raw_action
+        )
+
+        target=ROOT/path_value
+
+        if action not in {"create","replace"}:
+            action=(
+                "replace"
+                if target.exists()
+                else "create"
+            )
+
+        change["action"]=action
 
         if not path_value.startswith(ALLOWED_PREFIXES):
-            errors.append(f"change_{i}_path_not_allowed:{path_value}")
+            errors.append(
+                f"change_{i}_path_not_allowed:"
+                f"{path_value}"
+            )
 
         if path_value in PROTECTED_FILES:
-            errors.append(f"change_{i}_protected_file:{path_value}")
+            errors.append(
+                f"change_{i}_protected_file:"
+                f"{path_value}"
+            )
 
-        if ".." in Path(path_value).parts or path_value.startswith("/"):
-            errors.append(f"change_{i}_path_traversal:{path_value}")
+        if (
+            ".." in Path(path_value).parts
+            or path_value.startswith("/")
+        ):
+            errors.append(
+                f"change_{i}_path_traversal:"
+                f"{path_value}"
+            )
 
-        if len(content.encode("utf-8")) > 180_000:
-            errors.append(f"change_{i}_content_too_large:{path_value}")
+        if len(content.encode("utf-8")) > 180000:
+            errors.append(
+                f"change_{i}_content_too_large:"
+                f"{path_value}"
+            )
 
-        lower = content.lower()
+        lower=content.lower()
+
         for pattern in FORBIDDEN_PLAN_PATTERNS:
             if pattern in lower:
-                errors.append(f"change_{i}_forbidden_pattern:{path_value}")
+                errors.append(
+                    f"change_{i}_forbidden_pattern:"
+                    f"{path_value}"
+                )
 
         for term in PROTECTED_TERMS:
-            if term in content and "os.getenv" not in content:
-                errors.append(f"change_{i}_possible_secret_embedding:{term}")
+            if (
+                term in content
+                and "os.getenv" not in content
+            ):
+                errors.append(
+                    f"change_{i}_possible_secret_embedding:"
+                    f"{term}"
+                )
+
+        baseline=""
+
+        if target.is_file():
+            try:
+                baseline=target.read_text(
+                    encoding="utf-8"
+                )
+            except Exception:
+                baseline=""
+
+        qerrors=_candidate_quality_errors(
+            ROOT,
+            path_value,
+            content,
+            baseline=baseline,
+            planned_paths=planned_paths,
+            is_new=not target.exists(),
+        )
+
+        for err in qerrors:
+            errors.append(
+                f"change_{i}_{err}"
+            )
 
     return errors
 
@@ -230,6 +745,19 @@ You may design and write internal CompanyOS code with broad freedom, but you mus
 8. Generated Python files must compile.
 9. Prefer deterministic, inspectable modules with JSON state and receipts.
 10. Avoid claiming a feature works unless your tests verify it.
+11. Never generate placeholders, simulated work, dummy implementations, TODO-only code, or fake success messages.
+12. Never use time.sleep() to simulate useful work.
+13. Do not invent CompanyOS modules, classes, functions, or imports. Every CompanyOS-local dependency must already exist in the supplied inventory or be created by this same plan.
+14. Prefer a small real improvement to an EXISTING file over creating a speculative new subsystem.
+15. The resulting code must perform actual deterministic work that can be tested.
+16. Do not create new production files unless absolutely necessary; prefer improving an existing file.
+17. Never reference a local script, module, template, or helper that does not already exist in the supplied inventory or in the same plan.
+18. Never write generated state to privileged system paths such as /opt, /etc, /usr, /var, Windows system folders, or drive-root locations.
+19. Put runtime state under the existing CompanyOS runtime directory or use temporary directories only when appropriate.
+20. Never use shell=True for generated subprocess calls.
+21. Use sys.executable instead of hard-coded "python" or "python3" when launching Python subprocesses.
+22. Validate required environment variables before using them in paths, process arguments, identifiers, or external operations.
+
 
 Return exactly this schema:
 {{

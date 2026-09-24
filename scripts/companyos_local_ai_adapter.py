@@ -68,7 +68,10 @@ def _balanced_json_object(text: str) -> dict[str, Any]:
     raise ValueError("Model returned incomplete JSON")
 
 
-def model_request(prompt: str) -> dict[str, Any]:
+def model_request(
+    prompt: str,
+    response_mode: str = "json",
+) -> dict[str, Any]:
     configured_key = os.getenv("OPENAI_API_KEY", "").strip()
     configured_base = os.getenv("OPENAI_BASE_URL", "").strip().rstrip("/")
     configured_model = os.getenv("OPENAI_MODEL", "").strip()
@@ -103,14 +106,31 @@ def model_request(prompt: str) -> dict[str, Any]:
             + full_prompt[-tail_chars:]
         )
 
-    system_text = (
-        "You are the CompanyOS adaptive build planner. "
-        "Return one complete valid JSON object only. "
-        "Do not use markdown fences or commentary. "
-        "Implement real code, not placeholders or TODO-only text. "
-        "Never modify credentials, wallets, financial controls, approval gates, "
-        "security controls, deployment gates, or secrets."
-    )
+    response_mode = str(
+        response_mode or "json"
+    ).strip().lower()
+
+    if response_mode not in {"json", "text"}:
+        response_mode = "json"
+
+    if response_mode == "text":
+        system_text = (
+            "You are the CompanyOS adaptive code builder. "
+            "Return only the requested raw source text. "
+            "Do not use JSON, Markdown fences, headings, or commentary. "
+            "Implement real code, not placeholders or TODO-only text. "
+            "Never modify credentials, wallets, financial controls, approval gates, "
+            "security controls, deployment gates, or secrets."
+        )
+    else:
+        system_text = (
+            "You are the CompanyOS adaptive build planner. "
+            "Return one complete valid JSON object only. "
+            "Do not use markdown fences or commentary. "
+            "Implement real code, not placeholders or TODO-only text. "
+            "Never modify credentials, wallets, financial controls, approval gates, "
+            "security controls, deployment gates, or secrets."
+        )
 
     if has_cloud_key and localish:
         model = os.getenv("COMPANYOS_OPENAI_MODEL", "").strip()
@@ -195,8 +215,12 @@ def model_request(prompt: str) -> dict[str, Any]:
         "temperature": 0.1,
         "max_tokens": max_tokens,
         "stream": False,
-        "response_format": {"type": "json_object"},
     }
+
+    if response_mode == "json":
+        payload["response_format"] = {
+            "type": "json_object"
+        }
 
     endpoint = f"{base_url}/chat/completions"
 

@@ -13,6 +13,19 @@ EXACT_PROTECTED={
  "companyos/runtime/service_supervisor.py","companyos/runtime/runtime_control.py",
  "scripts/companyos_evolutionctl","scripts/companyos_adaptive_self_build.py",
 }
+
+# COMPANYOS_V69_35I_HOST_OPTIMIZATION_ALLOWLIST
+HOST_OPTIMIZATION_FILES={
+ "companyos/runtime/authorized_local_migration_controller.py",
+ "companyos/runtime/local_primary_registry.py",
+ "companyos/runtime/local_lan_host_discovery.py",
+ "companyos/runtime/local_host_capability_classifier.py",
+ "companyos/runtime/remote_runtime_fabric.py",
+ "companyos/runtime/hybrid_compute_mesh_controller.py",
+ "companyos/runtime/distributed_compute_scheduler.py",
+ "companyos/runtime/persistent_host_scout.py",
+ "companyos/runtime/adaptive_offload_calibration_resumer.py",
+}
 PROTECTED_WORDS=("wallet","finance","banking","payment","credential","secret","security","auth","approval","governance","guardrail","policy_gate","deployment_gate","connector","solana","private_key")
 PROTECTED_TERMS=("OPENAI_API_KEY","CLOUDFLARE_API_TOKEN","SOLANA_PRIVATE_KEY","SMTP_PASSWORD","SEED_PHRASE","MNEMONIC","COMPANYOS_DAILY_FINANCE_CAP_USD","COMPANYOS_SINGLE_FINANCE_CAP_USD","COMPANYOS_ENABLE_LIVE_FINANCE")
 FORBIDDEN=("rm -rf","chmod 777","curl | sh","wget | sh","disable gate","bypass gate","remove approval","ignore approval","exfiltrate")
@@ -45,6 +58,7 @@ def path_allowed(rel):
     if not rel or rel.startswith("/") or ".." in parts:return False,"path_traversal"
     if rel.startswith((".git/",".github/","config/")):return False,"protected_top_level"
     if rel in EXACT_PROTECTED:return False,"exact_protected"
+    if rel in HOST_OPTIMIZATION_FILES:return True,"authorized_host_optimization"
     if any(w in low for w in PROTECTED_WORDS):return False,"protected_path_word"
     if not rel.startswith(SAFE_PREFIXES):return False,"outside_safe_prefix"
     if rel.endswith((".pyc",".pyo",".so",".bin",".zip",".tar",".gz")):return False,"binary_or_archive"
@@ -86,8 +100,26 @@ def diagnose():
         if not row.get("running"):issues.append("service_not_running:"+name)
         if int(row.get("consecutive_failures") or 0):issues.append("service_failures:"+name)
     goal="Improve the highest-value bottleneck converting researched opportunities into deterministic executable business work with measurable completion and feedback. Improve reliability, execution quality, observability, customer/revenue operations, or agent coordination. Do not touch finance, wallets, credentials, approvals, security gates, connectors, deployment gates, supervisor, or self-evolution guard code."
-    if issues:goal="Improve reliability around observed runtime issues: "+", ".join(issues[:8])+". Preserve all protected controls."
-    return {"generated_at":time.time(),"services":sh,"issues":issues,"profit_state_present":bool(profit),"recommended_goal":goal,"dirty_files":len(dirty())}
+    host_objective=None
+
+    try:
+        from companyos.runtime.host_optimization_objective import build_objective
+        host_objective=build_objective()
+    except Exception:
+        host_objective=None
+    if issues:
+        goal="Improve reliability around observed runtime issues: "+", ".join(issues[:8])+". Preserve all protected controls."
+    elif isinstance(host_objective,dict) and host_objective.get("recommended_goal"):
+        goal=host_objective["recommended_goal"]
+    return {
+        "generated_at":time.time(),
+        "services":sh,
+        "issues":issues,
+        "profit_state_present":bool(profit),
+        "host_optimization":host_objective,
+        "recommended_goal":goal,
+        "dirty_files":len(dirty()),
+    }
 
 def today_count():
     day=datetime.now(timezone.utc).date().isoformat(); n=0
@@ -97,17 +129,555 @@ def today_count():
             except:pass
     return n
 
+
+def _candidate_quality_errors(
+    root,
+    rel,
+    content,
+    baseline="",
+    planned_paths=None,
+    is_new=False,
+):
+    import ast as _ast
+    import difflib as _difflib
+    import re as _re
+
+    errors = []
+    planned_paths = {
+        str(x).replace("\\", "/")
+        for x in (planned_paths or set())
+    }
+
+    # --------------------------------------------------------
+    # New production files are opt-in while using a small
+    # local model. Tests may still be created freely.
+    # --------------------------------------------------------
+    if (
+        is_new
+        and not str(rel).startswith("tests/")
+        and os.getenv(
+            "COMPANYOS_SELF_EVOLUTION_ALLOW_NEW_PRODUCTION_FILES",
+            "0",
+        ) != "1"
+    ):
+        errors.append("new_production_file_requires_opt_in")
+
+    # --------------------------------------------------------
+    # Only judge newly-added text for filler markers so an
+    # unrelated pre-existing TODO doesn't block an improvement.
+    # --------------------------------------------------------
+    added = []
+    for line in _difflib.ndiff(
+        (baseline or "").splitlines(),
+        (content or "").splitlines(),
+    ):
+        if line.startswith("+ "):
+            added.append(line[2:])
+
+    added_text = "\n".join(added).lower()
+
+    markers = (
+        "placeholder for",
+        "simulate performance optimization",
+        "dummy implementation",
+        "implementation goes here",
+        "todo-only",
+        "fake success",
+    )
+
+    for marker in markers:
+        if marker in added_text:
+            errors.append("placeholder_or_stub:" + marker)
+
+    # --------------------------------------------------------
+    # Parse candidate and baseline
+    # --------------------------------------------------------
+    try:
+        tree = _ast.parse(content or "", filename=str(rel))
+    except SyntaxError as exc:
+        return errors + [
+            "invalid_python:"
+            + type(exc).__name__
+            + ":"
+            + str(exc)
+        ]
+
+    try:
+        old_tree = _ast.parse(
+            baseline or "",
+            filename=str(rel) + ":baseline",
+        )
+    except Exception:
+        old_tree = None
+
+    # Reject formatting-only, comment-only, or otherwise
+    # semantically identical Python replacements.
+    if baseline and old_tree is not None:
+        try:
+            new_ast = _ast.dump(
+                tree,
+                include_attributes=False,
+            )
+            old_ast = _ast.dump(
+                old_tree,
+                include_attributes=False,
+            )
+
+            if new_ast == old_ast:
+                errors.append("semantic_noop")
+        except Exception:
+            pass
+
+    # --------------------------------------------------------
+    # Helpers
+    # --------------------------------------------------------
+    def _local_module_exists(mod):
+        parts = str(mod).split(".")
+        base = root.joinpath(*parts)
+
+        if base.with_suffix(".py").is_file():
+            return True
+
+        if (base / "__init__.py").is_file():
+            return True
+
+        p1 = "/".join(parts) + ".py"
+        p2 = "/".join(parts) + "/__init__.py"
+
+        return p1 in planned_paths or p2 in planned_paths
+
+    def _imports(t):
+        found = set()
+
+        if t is None:
+            return found
+
+        for node in _ast.walk(t):
+            if isinstance(node, _ast.Import):
+                for alias in node.names:
+                    mod = alias.name
+
+                    if mod.startswith(
+                        ("companyos.", "companyos_modules.")
+                    ):
+                        found.add(mod)
+
+            elif isinstance(node, _ast.ImportFrom):
+                mod = node.module or ""
+
+                if mod.startswith(
+                    ("companyos.", "companyos_modules.")
+                ):
+                    found.add(mod)
+
+                elif mod in ("companyos", "companyos_modules"):
+                    for alias in node.names:
+                        if alias.name != "*":
+                            found.add(
+                                mod + "." + alias.name
+                            )
+
+        return found
+
+    # --------------------------------------------------------
+    # Newly introduced CompanyOS-local imports must exist.
+    # --------------------------------------------------------
+    new_imports = _imports(tree) - _imports(old_tree)
+
+    for mod in sorted(new_imports):
+        if not _local_module_exists(mod):
+            errors.append("missing_local_import:" + mod)
+
+    # --------------------------------------------------------
+    # Literal local script references must exist.
+    # Example:
+    # scripts/optimization_script.py
+    # --------------------------------------------------------
+    def _local_file_refs(t):
+        refs = set()
+
+        if t is None:
+            return refs
+
+        for node in _ast.walk(t):
+            if isinstance(node, _ast.Constant):
+                value = node.value
+
+                if not isinstance(value, str):
+                    continue
+
+                value = value.replace("\\", "/").strip()
+
+                if (
+                    value.startswith(
+                        (
+                            "scripts/",
+                            "companyos/",
+                            "companyos_modules/",
+                            "tests/",
+                            "templates/",
+                        )
+                    )
+                    and value.endswith((".py", ".sh"))
+                ):
+                    refs.add(value)
+
+        return refs
+
+    new_refs = _local_file_refs(tree) - _local_file_refs(old_tree)
+
+    for ref in sorted(new_refs):
+        if not (root / ref).exists() and ref not in planned_paths:
+            errors.append(
+                "missing_local_file_reference:" + ref
+            )
+
+    # --------------------------------------------------------
+    # Extract the static prefix of a path expression.
+    # Handles:
+    # "/opt/foo"
+    # f"/opt/foo/{x}"
+    # Path("/opt") / "foo"
+    # --------------------------------------------------------
+    def _path_prefix(node):
+        if node is None:
+            return None
+
+        if isinstance(node, _ast.Constant):
+            if isinstance(node.value, str):
+                return node.value
+
+        if isinstance(node, _ast.JoinedStr):
+            out = ""
+
+            for part in node.values:
+                if isinstance(part, _ast.Constant):
+                    if isinstance(part.value, str):
+                        out += part.value
+                else:
+                    break
+
+            return out or None
+
+        if isinstance(node, _ast.BinOp):
+            if isinstance(node.op, (_ast.Div, _ast.Add)):
+                return _path_prefix(node.left)
+
+        if isinstance(node, _ast.Call):
+            name = ""
+
+            if isinstance(node.func, _ast.Name):
+                name = node.func.id
+            elif isinstance(node.func, _ast.Attribute):
+                name = node.func.attr
+
+            if name == "Path" and node.args:
+                return _path_prefix(node.args[0])
+
+            if (
+                isinstance(node.func, _ast.Attribute)
+                and node.func.attr == "join"
+                and node.args
+            ):
+                return _path_prefix(node.args[0])
+
+        return None
+
+    def _dangerous_absolute(path):
+        if not path:
+            return False
+
+        p = str(path).replace("\\", "/")
+
+        if p.startswith(("/tmp/", "/var/tmp/")):
+            return False
+
+        if p.startswith("/"):
+            return True
+
+        if _re.match(r"^[A-Za-z]:/", p):
+            return True
+
+        return False
+
+    # --------------------------------------------------------
+    # Collect filesystem writes.
+    # --------------------------------------------------------
+    def _writes(t):
+        writes = set()
+
+        if t is None:
+            return writes
+
+        write_methods = {
+            "write_text",
+            "write_bytes",
+            "touch",
+            "mkdir",
+            "unlink",
+            "rmdir",
+        }
+
+        for node in _ast.walk(t):
+            if not isinstance(node, _ast.Call):
+                continue
+
+            fn = node.func
+
+            # builtin open(path, mode)
+            if isinstance(fn, _ast.Name) and fn.id == "open":
+                mode = "r"
+
+                if len(node.args) >= 2:
+                    if isinstance(node.args[1], _ast.Constant):
+                        mode = str(node.args[1].value)
+
+                for kw in node.keywords:
+                    if (
+                        kw.arg == "mode"
+                        and isinstance(kw.value, _ast.Constant)
+                    ):
+                        mode = str(kw.value.value)
+
+                if any(x in mode for x in ("w", "a", "x", "+")):
+                    p = (
+                        _path_prefix(node.args[0])
+                        if node.args
+                        else None
+                    )
+
+                    if p:
+                        writes.add(p)
+
+            # pathlib Path(...).write_text(), mkdir(), etc.
+            if (
+                isinstance(fn, _ast.Attribute)
+                and fn.attr in write_methods
+            ):
+                p = _path_prefix(fn.value)
+
+                if p:
+                    writes.add(p)
+
+            # os.mkdir/makedirs/remove/unlink/rmdir
+            if (
+                isinstance(fn, _ast.Attribute)
+                and isinstance(fn.value, _ast.Name)
+                and fn.value.id == "os"
+                and fn.attr
+                in {
+                    "mkdir",
+                    "makedirs",
+                    "remove",
+                    "unlink",
+                    "rmdir",
+                }
+                and node.args
+            ):
+                p = _path_prefix(node.args[0])
+
+                if p:
+                    writes.add(p)
+
+            # shutil copy/move destinations
+            if (
+                isinstance(fn, _ast.Attribute)
+                and isinstance(fn.value, _ast.Name)
+                and fn.value.id == "shutil"
+                and fn.attr
+                in {
+                    "copy",
+                    "copy2",
+                    "copyfile",
+                    "move",
+                }
+                and len(node.args) >= 2
+            ):
+                p = _path_prefix(node.args[1])
+
+                if p:
+                    writes.add(p)
+
+        return writes
+
+    new_writes = _writes(tree) - _writes(old_tree)
+
+    for path in sorted(new_writes):
+        if _dangerous_absolute(path):
+            errors.append(
+                "privileged_or_external_absolute_write:" + path
+            )
+
+    # --------------------------------------------------------
+    # subprocess quality checks.
+    # --------------------------------------------------------
+    def _subprocess_flags(t):
+        flags = set()
+
+        if t is None:
+            return flags
+
+        for node in _ast.walk(t):
+            if not isinstance(node, _ast.Call):
+                continue
+
+            fn = node.func
+
+            if not (
+                isinstance(fn, _ast.Attribute)
+                and isinstance(fn.value, _ast.Name)
+                and fn.value.id == "subprocess"
+                and fn.attr
+                in {
+                    "run",
+                    "Popen",
+                    "check_call",
+                    "check_output",
+                }
+            ):
+                continue
+
+            for kw in node.keywords:
+                if (
+                    kw.arg == "shell"
+                    and isinstance(kw.value, _ast.Constant)
+                    and kw.value.value is True
+                ):
+                    flags.add("subprocess_shell_true")
+
+            if node.args:
+                cmd = node.args[0]
+
+                if isinstance(cmd, (_ast.List, _ast.Tuple)):
+                    if cmd.elts:
+                        first = cmd.elts[0]
+
+                        if (
+                            isinstance(first, _ast.Constant)
+                            and first.value in ("python", "python3")
+                        ):
+                            flags.add(
+                                "hardcoded_python_executable"
+                            )
+
+        return flags
+
+    for flag in sorted(
+        _subprocess_flags(tree) - _subprocess_flags(old_tree)
+    ):
+        errors.append(flag)
+
+    return sorted(set(errors))
+
+
 def tests(cwd,files):
     rows=[]
+
     for rel in files:
-        if rel.endswith(".py") and (cwd/rel).exists():
-            r=run([sys.executable,"-m","py_compile",rel],cwd,60); rows.append({"name":"compile:"+rel,"ok":r.returncode==0,"stderr":(r.stderr or "")[-1200:]})
+        p=cwd/rel
+
+        if not rel.endswith(".py") or not p.exists():
+            continue
+
+        content=p.read_text(errors="replace")
+
+        baseline=""
+
+        rbase=git(
+            ["show",f"HEAD:{rel}"],
+            cwd
+        )
+
+        if rbase.returncode==0:
+            baseline=rbase.stdout or ""
+
+        is_new=(
+            git(
+                ["ls-files","--error-unmatch",rel],
+                cwd
+            ).returncode != 0
+        )
+
+        quality_errors=_candidate_quality_errors(
+            cwd,
+            rel,
+            content,
+            baseline=baseline,
+            planned_paths=set(files),
+            is_new=is_new,
+        )
+
+        rows.append({
+            "name":"runtime_quality:"+rel,
+            "ok":not quality_errors,
+            "stderr":"; ".join(quality_errors),
+        })
+
+        r=run(
+            [sys.executable,"-m","py_compile",rel],
+            cwd,
+            60
+        )
+
+        rows.append({
+            "name":"compile:"+rel,
+            "ok":r.returncode==0,
+            "stderr":(r.stderr or "")[-1200:],
+        })
+
     if (cwd/"tests/test_self_evolution_guard.py").exists():
-        r=run([sys.executable,"-m","unittest","tests.test_self_evolution_guard"],cwd,90); rows.append({"name":"guard_tests","ok":r.returncode==0,"stderr":(r.stderr or "")[-1800:]})
-    if os.getenv("COMPANYOS_SELF_EVOLUTION_FULL_TESTS","1")=="1":
-        r=run([sys.executable,"-m","unittest","discover","-s","tests","-p","test*.py"],cwd,int(os.getenv("COMPANYOS_SELF_EVOLUTION_TEST_TIMEOUT","240")))
-        rows.append({"name":"unittest_discovery","ok":r.returncode==0,"stdout":(r.stdout or "")[-1200:],"stderr":(r.stderr or "")[-1800:]})
-    return {"ok":all(x["ok"] for x in rows) if rows else True,"results":rows}
+        r=run(
+            [
+                sys.executable,
+                "-m",
+                "unittest",
+                "tests.test_self_evolution_guard",
+            ],
+            cwd,
+            90
+        )
+
+        rows.append({
+            "name":"guard_tests",
+            "ok":r.returncode==0,
+            "stderr":(r.stderr or "")[-1800:],
+        })
+
+    if os.getenv(
+        "COMPANYOS_SELF_EVOLUTION_FULL_TESTS",
+        "1",
+    )=="1":
+        r=run(
+            [
+                sys.executable,
+                "-m",
+                "unittest",
+                "discover",
+                "-s",
+                "tests",
+                "-p",
+                "test*.py",
+            ],
+            cwd,
+            int(
+                os.getenv(
+                    "COMPANYOS_SELF_EVOLUTION_TEST_TIMEOUT",
+                    "240",
+                )
+            ),
+        )
+
+        rows.append({
+            "name":"unittest_discovery",
+            "ok":r.returncode==0,
+            "stdout":(r.stdout or "")[-1200:],
+            "stderr":(r.stderr or "")[-1800:],
+        })
+
+    return {
+        "ok":all(x["ok"] for x in rows) if rows else True,
+        "results":rows,
+    }
 
 def shadow(run_id):
     branch="companyos-evolution/"+run_id; parent=WT/run_id; wt=parent/"companyos"
@@ -123,154 +693,448 @@ def cleanup(wt,branch,keep=False):
 
 def _direct_generation_fallback(wt, goal):
     import json as _json
+    import re as _re
     import subprocess as _subprocess
     import sys as _sys
 
-    scripts_dir = wt / "scripts"
+    # Always use the trusted current adapter, not an older copy
+    # inside the temporary worktree.
+    scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in _sys.path:
         _sys.path.insert(0, str(scripts_dir))
 
     try:
-        from companyos_local_ai_adapter import model_request, extract_json
+        from companyos_local_ai_adapter import (
+            model_request,
+            extract_json,
+        )
     except Exception as exc:
-        return {"ok": False, "reason": "adapter_import_failed", "error": f"{type(exc).__name__}: {exc}"}
+        return {
+            "ok":False,
+            "reason":"adapter_import_failed",
+            "error":f"{type(exc).__name__}: {exc}",
+        }
 
-    blocked = (
-        "wallet","finance","banking","payment","credential","secret","security",
-        "approval","governance","guardrail","connector","solana","private_key",
-        "self_evolution","service_supervisor","runtime_control","deployment_gate",
-    )
-    exact = {
-        "scripts/companyos_evolutionctl",
-        "scripts/companyos_adaptive_self_build.py",
-        "companyos/runtime/self_evolution_engine.py",
-        "companyos/runtime/self_evolution_runtime.py",
-        "companyos/runtime/service_supervisor.py",
+    # Small local models perform much better when improving one
+    # real file they can actually see than when inventing a system.
+    stop_words={
+        "companyos","improve","improvement","autonomously",
+        "optimize","optimization","existing","authorized",
+        "every","candidate","modify","modules","tests",
+        "preserve","current","system","runtime",
     }
 
-    candidates=[]
-    for base in ("companyos","companyos_modules","scripts"):
-        root=wt/base
-        if not root.exists():
-            continue
-        for fp in root.rglob("*.py"):
-            try:
-                rel=str(fp.relative_to(wt)).replace(chr(92),"/")
-                low=rel.lower()
-                size=fp.stat().st_size
-                if rel in exact or any(x in low for x in blocked):
-                    continue
-                if 200 <= size <= 14000:
-                    candidates.append((size,rel))
-            except Exception:
-                pass
-    candidates=[r for _,r in sorted(candidates)[:60]]
-
-    prompts=[
-        (
-            "Goal:\n"+str(goal)+"\n\n"
-            "Produce ONE concrete CompanyOS source improvement. Return JSON only. "
-            "Do not return not_run, skip, no-op, or empty output. "
-            "Change exactly one file. Prefer a SMALL existing Python file from the list. "
-            "Return COMPLETE file content, not a diff. Keep it concise, preferably under 160 lines. "
-            "Python must compile. Never touch wallets, finance, payments, credentials, security, "
-            "approvals, governance, connectors, deployment gates, supervisor code, or self-evolution guard code. "
-            "Prefer reliability, observability, validation, recovery, or opportunity-to-execution progress.\n\n"
-            "Return exactly: "
-            "{\"path\":\"relative/file.py\",\"action\":\"replace\",\"content\":\"complete file contents\"}\n\n"
-            "Candidates:\n"+_json.dumps(candidates[:40],indent=2)
-        ),
-        (
-            "Goal:\n"+str(goal)+"\n\n"
-            "The previous answer was incomplete. Make the SMALLEST useful improvement possible. "
-            "Create one compact new Python helper under companyos_modules/. Maximum about 120 lines. "
-            "Return JSON only with path, action=create, and complete content. "
-            "Do not touch protected finance, wallet, credential, approval, connector, supervisor, "
-            "deployment-gate, or self-evolution code."
-        ),
+    goal_terms=[
+        x for x in _re.findall(
+            r"[a-z0-9_]{4,}",
+            str(goal).lower()
+        )
+        if x not in stop_words
     ]
 
-    last_error=None
-    for attempt,prompt in enumerate(prompts,1):
-        try:
-            raw=model_request(prompt)
-            if isinstance(raw,dict):
-                if raw.get("ok") is False:
-                    last_error={"reason":"adapter_failed","adapter_reason":raw.get("reason"),"attempt":attempt}
+    candidates=[]
+
+    for base in (
+        "companyos",
+        "companyos_modules",
+        "scripts",
+    ):
+        root=wt/base
+
+        if not root.exists():
+            continue
+
+        for fp in root.rglob("*.py"):
+            try:
+                rel=str(
+                    fp.relative_to(wt)
+                ).replace(chr(92),"/")
+
+                if rel.startswith("tests/"):
                     continue
-                text=raw.get("text")
-                plan=extract_json(text) if isinstance(text,str) else raw
-            elif isinstance(raw,str):
-                plan=extract_json(raw)
-            else:
-                plan=extract_json(str(raw))
+
+                ok,_=path_allowed(rel)
+                if not ok:
+                    continue
+
+                size=fp.stat().st_size
+
+                # Keep source small enough for a CPU-local 3B model
+                # to receive and return the entire file reliably.
+                if not (250 <= size <= 5000):
+                    continue
+
+                low=rel.lower()
+
+                score=sum(
+                    3 for term in goal_terms
+                    if term in low
+                )
+
+                # Mild preference for operational/runtime code.
+                for hint in (
+                    "host",
+                    "worker",
+                    "compute",
+                    "execution",
+                    "performance",
+                    "recovery",
+                    "runtime",
+                    "task",
+                    "state",
+                ):
+                    if hint in str(goal).lower() and hint in low:
+                        score += 2
+
+                candidates.append(
+                    (-score,size,rel)
+                )
+
+            except Exception:
+                pass
+
+    if not candidates:
+        return {
+            "ok":False,
+            "reason":"no_existing_safe_candidate",
+        }
+
+    candidates.sort()
+    _,_,target_rel=candidates[0]
+
+    target=wt/target_rel
+
+    try:
+        baseline=target.read_text(
+            encoding="utf-8"
+        )
+    except Exception as exc:
+        return {
+            "ok":False,
+            "reason":"target_read_failed",
+            "path":target_rel,
+            "error":f"{type(exc).__name__}: {exc}",
+        }
+
+    # Give the small local model nearby implementation context.
+    # This helps it understand real lifecycle and data invariants instead
+    # of guessing from one isolated file.
+    import re as _re
+
+    baseline_tokens=set(
+        _re.findall(r"[A-Za-z_][A-Za-z0-9_]{2,}", baseline)
+    )
+
+    related=[]
+
+    for sibling in target.parent.glob("*.py"):
+        if sibling == target:
+            continue
+
+        try:
+            text=sibling.read_text(
+                encoding="utf-8",
+                errors="replace",
+            )
+        except Exception:
+            continue
+
+        if len(text) > 5000:
+            continue
+
+        tokens=set(
+            _re.findall(
+                r"[A-Za-z_][A-Za-z0-9_]{2,}",
+                text,
+            )
+        )
+
+        score=len(baseline_tokens & tokens)
+
+        if score:
+            related.append(
+                (
+                    -score,
+                    sibling.name,
+                    text,
+                )
+            )
+
+    related.sort()
+
+    related_context=""
+
+    for _,name,text in related[:4]:
+        related_context += (
+            "\n--- RELATED FILE: "
+            + name
+            + " ---\n"
+            + text[:3000]
+            + "\n"
+        )
+
+    feedback=""
+
+    def _clean_generated_python(text):
+        import re as _re
+
+        text=str(text or "").strip()
+
+        # If the model wrapped the file in a Markdown Python fence,
+        # extract only the fenced source.
+        fenced=_re.search(
+            r"```(?:python|py)?[ \t]*\r?\n(.*?)```",
+            text,
+            flags=_re.IGNORECASE | _re.DOTALL,
+        )
+
+        if fenced:
+            text=fenced.group(1).strip()
+
+        # Some small models emit a bare language label before source.
+        low=text.lower()
+        if low.startswith("python\n"):
+            text=text.split("\n",1)[1].lstrip()
+        elif low.startswith("python\r\n"):
+            text=text.split("\r\n",1)[1].lstrip()
+
+        return text
+
+    for attempt in range(1,4):
+        prompt=(
+            "You are improving an existing CompanyOS Python file.\n\n"
+            "GOAL:\n"
+            + str(goal)
+            + "\n\n"
+            "TARGET FILE:\n"
+            + target_rel
+            + "\n\n"
+            "CURRENT COMPLETE SOURCE:\n"
+            "----- BEGIN SOURCE -----\n"
+            + baseline
+            + "\n----- END SOURCE -----\n\n"
+            + "RELATED READ-ONLY IMPLEMENTATION CONTEXT:\n"
+            + related_context
+            + "\nUse these neighboring modules to understand the real "
+            "data lifecycle and invariants. Do not modify them. "
+            "Do not invent new semantics that conflict with them. "
+            "In particular, preserve ownership, retry, lease, queue, "
+            "and worker-state consistency.\n\n"
+            "Make ONE small, concrete, useful improvement to THIS EXACT "
+            "FILE while preserving its existing public contract. "
+            "The change MUST alter real program behavior, validation, "
+            "observability, reliability, or efficiency. Formatting-only, "
+            "comment-only, rename-only, and semantically identical changes "
+            "will be rejected. "
+            "Do not create another file. Do not rename the file. "
+            "Do not invent CompanyOS modules, functions, classes, scripts, "
+            "or dependencies. Do not generate placeholders, simulated work, "
+            "TODO-only code, fake success output, or speculative subsystems. "
+            "Do not write to privileged absolute filesystem paths. "
+            "Do not use shell=True. If launching Python, use sys.executable. "
+            "Prefer reliability, validation, observability, efficiency, "
+            "error handling, or measurable execution improvements. "
+            "Return the COMPLETE replacement source, not a diff. "
+            "Inside the JSON content field return RAW Python source only. "
+            "Do NOT use Markdown code fences, ```python, commentary, "
+            "headings, explanations, or prose inside content. "
+            "The content value itself must be directly compilable Python. "
+            "The code must compile.\n\n"
+            "Return JSON only in exactly this shape:\n"
+            '{"path":"'
+            + target_rel
+            + '","action":"replace","content":"COMPLETE FILE"}'
+        )
+
+        if feedback:
+            prompt += (
+                "\n\nTHE PREVIOUS ATTEMPT WAS REJECTED FOR:\n"
+                + feedback
+                + "\nCorrect those exact problems."
+            )
+
+        prompt += (
+         "\n\nFINAL OUTPUT REQUIREMENT: "
+         "Return ONLY the complete replacement Python source. "
+         "Do not return JSON, Markdown fences, filenames, or prose. "
+         "Your complete response must be directly compilable Python."
+        )
+
+        try:
+            raw=model_request(prompt,response_mode="text")
+
+            if not isinstance(raw,dict) or raw.get("ok") is False:
+                feedback=str(
+                    (raw or {}).get(
+                        "reason",
+                        "model_request_failed"
+                    )
+                )
+                continue
+
+            content=_clean_generated_python(
+             raw.get("text") or ""
+            )
+
         except Exception as exc:
-            last_error={"reason":"generation_or_parse_failed","error":f"{type(exc).__name__}: {exc}","attempt":attempt}
+            feedback=(
+                "generation_or_parse_failed:"
+                + type(exc).__name__
+                + ":"
+                + str(exc)
+            )
             continue
 
-        if not isinstance(plan,dict):
-            last_error={"reason":"plan_not_object","attempt":attempt}
+        rel=target_rel
+        action="replace"
+
+        if rel != target_rel:
+            feedback=(
+                "wrong_path:must_modify_exactly:"
+                + target_rel
+            )
             continue
 
-        rel=str(plan.get("path") or "").strip().replace(chr(92),"/")
-        action=str(plan.get("action") or "replace").strip().lower()
-        content=str(plan.get("content") or "")
-
-        if not rel or not content.strip():
-            last_error={"reason":"empty_plan","attempt":attempt}
+        if action not in ("replace","update","modify","edit"):
+            feedback="action_must_be_replace"
             continue
 
-        low=rel.lower()
-        if (
-            rel.startswith("/") or ".." in Path(rel).parts or rel in exact
-            or any(x in low for x in blocked)
-            or not rel.startswith(("companyos/","companyos_modules/","scripts/","tests/"))
-        ):
-            last_error={"reason":"path_rejected","path":rel,"attempt":attempt}
+        if not content.strip():
+            feedback="empty_content"
             continue
 
-        target=wt/rel
-        if action not in {"replace","create"}:
-            action="replace" if target.exists() else "create"
-        if action=="replace" and not target.exists():
-            last_error={"reason":"replace_target_missing","path":rel,"attempt":attempt}
+        if content.rstrip() == baseline.rstrip():
+            feedback="no_actual_change"
             continue
 
         if len(content.encode("utf-8")) > 50000:
-            last_error={"reason":"content_too_large","path":rel,"attempt":attempt}
+            feedback="content_too_large"
             continue
 
-        if rel.endswith(".py"):
-            try:
-                compile(content,rel,"exec")
-            except Exception as exc:
-                last_error={"reason":"invalid_python","error":f"{type(exc).__name__}: {exc}","attempt":attempt}
-                continue
+        try:
+            compile(
+                content,
+                target_rel,
+                "exec"
+            )
+        except Exception as exc:
+            feedback=(
+                "invalid_python:"
+                + type(exc).__name__
+                + ":"
+                + str(exc)
+            )
+            continue
 
-        target.parent.mkdir(parents=True,exist_ok=True)
-        target.write_text(content.rstrip()+"\n",encoding="utf-8")
+        # Run the same hardened static gate BEFORE writing.
+        try:
+            qerrors=_candidate_quality_errors(
+                wt,
+                target_rel,
+                content,
+                baseline=baseline,
+                planned_paths={target_rel},
+                is_new=False,
+            )
+        except Exception as exc:
+            feedback=(
+                "quality_gate_exception:"
+                + type(exc).__name__
+                + ":"
+                + str(exc)
+            )
+            continue
 
-        cp=_subprocess.run(["git","status","--porcelain=v1"],cwd=str(wt),text=True,capture_output=True,timeout=30)
-        changed=[line[3:].strip() for line in cp.stdout.splitlines() if len(line)>=4]
-        if changed:
-            return {
-                "ok":True,
-                "status":"direct_candidate_written",
-                "generator":"direct_fallback_retrying",
-                "attempt":attempt,
-                "path":rel,
-                "action":action,
-                "changed_files":changed,
-            }
-        last_error={"reason":"no_change_after_write","attempt":attempt}
+        if qerrors:
+            feedback="; ".join(qerrors)
+            continue
 
-    return {"ok":False,"reason":"all_generation_attempts_failed","last_error":last_error}
+        target.write_text(
+            content.rstrip()+"\n",
+            encoding="utf-8",
+        )
 
+        cp=_subprocess.run(
+            ["git","status","--porcelain=v1"],
+            cwd=str(wt),
+            text=True,
+            capture_output=True,
+            timeout=30,
+        )
+
+        changed=[
+            line[3:].strip()
+            for line in cp.stdout.splitlines()
+            if len(line)>=4
+        ]
+
+        if target_rel not in changed:
+            feedback="write_produced_no_git_change"
+            continue
+
+        return {
+            "ok":True,
+            "status":"targeted_candidate_written",
+            "generator":"local_targeted_builder",
+            "attempt":attempt,
+            "path":target_rel,
+            "action":"replace",
+            "changed_files":changed,
+        }
+
+    return {
+        "ok":False,
+        "reason":"targeted_generation_attempts_failed",
+        "target":target_rel,
+        "last_error":feedback,
+    }
 
 def generate(wt, goal):
     import subprocess as _subprocess
 
-    script = wt / "scripts" / "companyos_adaptive_self_build.py"
+    configured_base=os.getenv(
+        "OPENAI_BASE_URL",""
+    ).strip().lower()
+
+    configured_key=os.getenv(
+        "OPENAI_API_KEY",""
+    ).strip().lower()
+
+    local_mode=(
+        configured_key=="companyos-local"
+        or "127.0.0.1" in configured_base
+        or "localhost" in configured_base
+    )
+
+    if local_mode:
+        targeted=_direct_generation_fallback(
+            wt,
+            goal,
+        )
+
+        status=_subprocess.run(
+            ["git","status","--porcelain=v1"],
+            cwd=str(wt),
+            text=True,
+            capture_output=True,
+            timeout=30,
+        )
+
+        changed_after=[
+            line[3:].strip()
+            for line in status.stdout.splitlines()
+            if len(line)>=4
+        ]
+
+        return {
+            "ok":bool(targeted.get("ok"))
+                 and bool(changed_after),
+            "generator":"local_targeted_builder",
+            "targeted":targeted,
+            "changed_files":changed_after,
+        }
+
+    script = ROOT / "scripts" / "companyos_adaptive_self_build.py"
     legacy = {"ok": False, "reason": "adaptive_self_build_missing"}
 
     if script.exists():
@@ -293,7 +1157,7 @@ def generate(wt, goal):
 
         try:
             proc = _subprocess.run(
-                [sys.executable, str(script)],
+                [sys.executable, str(script), "run"],
                 cwd=str(wt),
                 env=env,
                 text=True,
@@ -331,12 +1195,22 @@ def generate(wt, goal):
         if len(line) >= 4
     ]
 
-    legacy_text = json.dumps(legacy).lower()
+    legacy_receipt={}
+    for line in reversed(
+        (legacy.get("stdout_tail") or "").splitlines()
+    ):
+        try:
+            parsed=json.loads(line)
+            if isinstance(parsed,dict):
+                legacy_receipt=parsed
+                break
+        except Exception:
+            pass
+
     legacy_noop = (
         not changed
-        or "not_run" in legacy_text
-        or "no_changes" in legacy_text
-        or "no change" in legacy_text
+        or legacy_receipt.get("status")=="not_run"
+        or legacy_receipt.get("no_changes") is True
     )
 
     if legacy.get("ok") and changed and not legacy_noop:
