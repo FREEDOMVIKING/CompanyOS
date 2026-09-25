@@ -10,6 +10,7 @@ for p in (EV,WT,RC,BK): p.mkdir(parents=True,exist_ok=True)
 SAFE_PREFIXES=("companyos/","companyos_modules/","scripts/","tests/","templates/")
 EXACT_PROTECTED={
  "companyos/runtime/self_evolution_engine.py","companyos/runtime/self_evolution_runtime.py",
+ "companyos/runtime/self_evolution_hypothesis.py",
  "companyos/runtime/service_supervisor.py","companyos/runtime/runtime_control.py",
  "scripts/companyos_evolutionctl","scripts/companyos_adaptive_self_build.py",
 }
@@ -1005,6 +1006,11 @@ def _direct_generation_fallback(wt, goal):
     import subprocess as _subprocess
     import sys as _sys
 
+    from companyos.runtime.self_evolution_hypothesis import (
+        progress_event,
+        propose_hypothesis,
+    )
+
     scripts_dir=ROOT/"scripts"
 
     if str(scripts_dir) not in _sys.path:
@@ -1540,6 +1546,54 @@ def _direct_generation_fallback(wt, goal):
                     + "\nAvoid repeating that failed approach.\n"
                 )
 
+        progress_event(
+            "target_started",
+            target_number=target_number,
+            target_budget=len(selected_targets),
+            target=target_rel,
+            score=candidate.get(
+                "effective_score"
+            ),
+            behavior_score=candidate.get(
+                "behavior_score"
+            ),
+        )
+
+        hypothesis_result=propose_hypothesis(
+            ROOT,
+            goal,
+            target_rel,
+            baseline,
+            related_context,
+            history_note,
+            attempts=3,
+        )
+
+        if not hypothesis_result.get("ok"):
+            attempted_targets.append({
+                "path":target_rel,
+                "status":"hypothesis_failed",
+                "last_error":hypothesis_result.get(
+                    "last_error"
+                ),
+                "score":candidate[
+                    "effective_score"
+                ],
+            })
+
+            progress_event(
+                "target_rejected",
+                target=target_rel,
+                reason="hypothesis_failed",
+                error=hypothesis_result.get(
+                    "last_error"
+                ),
+            )
+
+            continue
+
+        hypothesis=hypothesis_result["plan"]
+
         feedback=""
         final_error=None
 
@@ -1547,6 +1601,13 @@ def _direct_generation_fallback(wt, goal):
             1,
             local_attempts+1,
         ):
+            progress_event(
+                "code_attempt",
+                target=target_rel,
+                attempt=attempt,
+                max_attempts=local_attempts,
+            )
+
             prompt=(
                 "You are improving one existing CompanyOS "
                 "Python file.\n\n"
@@ -1554,6 +1615,19 @@ def _direct_generation_fallback(wt, goal):
                 "SYSTEM IMPROVEMENT GOAL:\n"
                 + str(goal)
                 + "\n\n"
+
+                "SELECTED CAPABILITY HYPOTHESIS:\n"
+                + json.dumps(
+                    hypothesis,
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n\n"
+
+                "Implement THIS hypothesis specifically. "
+                "The resulting code must satisfy its acceptance "
+                "condition. Do not replace it with a cosmetic "
+                "or unrelated change.\n\n"
 
                 "TARGET FILE:\n"
                 + target_rel
@@ -1705,6 +1779,14 @@ def _direct_generation_fallback(wt, goal):
             if qerrors:
                 feedback="; ".join(qerrors)
                 final_error=feedback
+
+                progress_event(
+                    "candidate_rejected",
+                    target=target_rel,
+                    attempt=attempt,
+                    reason=feedback[:600],
+                )
+
                 continue
 
             target.write_text(
@@ -1740,6 +1822,13 @@ def _direct_generation_fallback(wt, goal):
                 final_error=feedback
                 continue
 
+            progress_event(
+                "candidate_written",
+                target=target_rel,
+                attempt=attempt,
+                hypothesis=hypothesis,
+            )
+
             attempted_targets.append({
                 "path":target_rel,
                 "status":"candidate_written",
@@ -1757,6 +1846,7 @@ def _direct_generation_fallback(wt, goal):
                 "target_number":target_number,
                 "path":target_rel,
                 "action":"replace",
+                "hypothesis":hypothesis,
                 "changed_files":changed_files,
                 "attempted_targets":attempted_targets,
                 "targets_considered":[
