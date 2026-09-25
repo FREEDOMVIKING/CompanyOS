@@ -12,6 +12,7 @@ EXACT_PROTECTED={
  "companyos/runtime/self_evolution_engine.py","companyos/runtime/self_evolution_runtime.py",
  "companyos/runtime/self_evolution_hypothesis.py",
  "companyos/runtime/self_evolution_backtest.py",
+ "companyos/runtime/self_evolution_probe_contract.py",
  "companyos/runtime/service_supervisor.py","companyos/runtime/runtime_control.py",
  "scripts/companyos_evolutionctl","scripts/companyos_adaptive_self_build.py",
 }

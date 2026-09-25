@@ -9,6 +9,13 @@ import sys
 import tempfile
 from pathlib import Path
 
+from companyos.runtime.self_evolution_probe_contract import (
+    callable_signatures,
+    resolve_probe_sandbox,
+    validate_call_signature,
+    validate_probe_paths,
+)
+
 
 ALLOWED_ASSERTIONS = {
     "no_exception",
@@ -204,6 +211,19 @@ def validate_probe(probe, candidate_source):
                 "probe_" + key + "_not_dict"
             )
 
+    errors.extend(
+        validate_call_signature(
+            probe,
+            candidate_source,
+        )
+    )
+
+    errors.extend(
+        validate_probe_paths(
+            probe
+        )
+    )
+
     assertion = probe.get("assertion")
 
     if not isinstance(assertion, dict):
@@ -295,6 +315,10 @@ def generate_probe(
         candidate_source
     )
 
+    signatures = callable_signatures(
+        candidate_source
+    )
+
     last_error = None
     correction = ""
 
@@ -337,6 +361,20 @@ def generate_probe(
                 sort_keys=True,
             )
             + "\n\n"
+
+            "CALL SIGNATURE REQUIREMENTS:\n"
+            + json.dumps(
+                signatures,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n\n"
+
+            "Supply every required constructor, function, "
+            "and method argument. If an isolated filesystem "
+            "home/root/path is required, use the literal "
+            "string __SANDBOX__. Never invent an absolute "
+            "filesystem path.\n\n"
 
             "ORIGINAL SOURCE:\n"
             "----- BEGIN ORIGINAL -----\n"
@@ -748,6 +786,11 @@ def run_probe(
         prefix="companyos_backtest_"
     ) as td:
         sandbox = Path(td)
+
+        probe = resolve_probe_sandbox(
+            probe,
+            sandbox,
+        )
 
         env = os.environ.copy()
 

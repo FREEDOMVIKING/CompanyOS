@@ -110,5 +110,104 @@ class BehavioralBacktestTests(
         )
 
 
+
+
+REQUIRES_HOME = """
+class ExecutionEvidenceLinker:
+    def __init__(self, home):
+        self.home = home
+
+    def run(self):
+        return {"ok": True}
+"""
+
+
+class ProbeSignatureTests(
+    unittest.TestCase
+):
+
+    def test_missing_constructor_arg_rejected(self):
+        probe={
+            "mode":"class_method",
+            "class_name":
+                "ExecutionEvidenceLinker",
+            "method_name":"run",
+            "constructor_args":[],
+            "constructor_kwargs":{},
+            "args":[],
+            "kwargs":{},
+            "assertion":{
+                "kind":"no_exception"
+            },
+        }
+
+        errors=validate_probe(
+            probe,
+            REQUIRES_HOME,
+        )
+
+        self.assertIn(
+            "constructor_missing_required_arg:home",
+            errors,
+        )
+
+    def test_sandbox_constructor_allowed(self):
+        probe={
+            "mode":"class_method",
+            "class_name":
+                "ExecutionEvidenceLinker",
+            "method_name":"run",
+            "constructor_args":[
+                "__SANDBOX__"
+            ],
+            "constructor_kwargs":{},
+            "args":[],
+            "kwargs":{},
+            "assertion":{
+                "kind":"no_exception"
+            },
+        }
+
+        self.assertEqual(
+            validate_probe(
+                probe,
+                REQUIRES_HOME,
+            ),
+            [],
+        )
+
+    def test_absolute_path_rejected(self):
+        probe={
+            "mode":"class_method",
+            "class_name":
+                "ExecutionEvidenceLinker",
+            "method_name":"run",
+            "constructor_args":[
+                "/real/system/path"
+            ],
+            "constructor_kwargs":{},
+            "args":[],
+            "kwargs":{},
+            "assertion":{
+                "kind":"no_exception"
+            },
+        }
+
+        errors=validate_probe(
+            probe,
+            REQUIRES_HOME,
+        )
+
+        self.assertTrue(
+            any(
+                x.startswith(
+                    "unsafe_probe_path:"
+                )
+                for x in errors
+            ),
+            errors,
+        )
+
+
 if __name__=="__main__":
     unittest.main()
