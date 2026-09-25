@@ -112,3 +112,74 @@ class GroundingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+from companyos.runtime.self_evolution_hypothesis import (
+    novelty_errors,
+)
+
+
+class NoveltyTests(unittest.TestCase):
+
+    def test_existing_duplicate_prevention_rejected(self):
+        source = """
+seen=set(st.get("seen_sha256", []))
+for item in discover():
+    if item["sha256"] in seen:
+        continue
+    process(item)
+    seen.add(item["sha256"])
+"""
+
+        plan = {
+            "problem":
+                "Duplicate work can be processed twice",
+            "location":
+                "<module>",
+            "evidence":
+                'seen=set(st.get("seen_sha256", []))',
+            "behavior_change":
+                "Prevent duplicate processing using SHA256 identity",
+            "acceptance":
+                "Each item is processed only once",
+        }
+
+        errors = novelty_errors(
+            plan,
+            source,
+        )
+
+        self.assertIn(
+            "capability_already_present:"
+            "duplicate_prevention",
+            errors,
+        )
+
+    def test_missing_duplicate_prevention_allowed(self):
+        source = """
+for item in discover():
+    process(item)
+"""
+
+        plan = {
+            "problem":
+                "Duplicate work can be processed twice",
+            "location":
+                "<module>",
+            "evidence":
+                "for item in discover():",
+            "behavior_change":
+                "Prevent duplicate processing",
+            "acceptance":
+                "Each item is processed only once",
+        }
+
+        errors = novelty_errors(
+            plan,
+            source,
+        )
+
+        self.assertNotIn(
+            "capability_already_present:"
+            "duplicate_prevention",
+            errors,
+        )

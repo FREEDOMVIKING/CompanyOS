@@ -101,6 +101,224 @@ def _source_facts(source):
     }
 
 
+
+def novelty_errors(plan, baseline):
+    """
+    Reject hypotheses whose proposed capability already appears
+    to be implemented in the target source.
+
+    This is intentionally conservative: it does not block the
+    target permanently. It only rejects the current hypothesis
+    so another missing capability can be considered.
+    """
+    errors=[]
+
+    source=str(baseline or "").lower()
+
+    claim=(
+        str(plan.get("problem") or "")
+        + " "
+        + str(plan.get("behavior_change") or "")
+        + " "
+        + str(plan.get("acceptance") or "")
+    ).lower()
+
+    # Duplicate / idempotency prevention already exists.
+    if any(
+        word in claim
+        for word in (
+            "duplicate",
+            "dedup",
+            "idempot",
+            "already processed",
+            "process only once",
+        )
+    ):
+        identity_signal=any(
+            word in source
+            for word in (
+                "seen",
+                "completed",
+                "processed",
+                "sha256",
+                "digest(",
+                "idempot",
+                "dedup",
+            )
+        )
+
+        skip_signal=any(
+            word in source
+            for word in (
+                "continue",
+                "return",
+                "if ",
+            )
+        )
+
+        if identity_signal and skip_signal:
+            errors.append(
+                "capability_already_present:"
+                "duplicate_prevention"
+            )
+
+    # Retry / bounded-attempt behavior already exists.
+    if any(
+        word in claim
+        for word in (
+            "retry",
+            "retries",
+            "backoff",
+            "multiple attempts",
+        )
+    ):
+        retry_signal=any(
+            word in source
+            for word in (
+                "retry",
+                "attempt",
+                "backoff",
+            )
+        )
+
+        loop_signal=any(
+            word in source
+            for word in (
+                "for ",
+                "while ",
+            )
+        )
+
+        if retry_signal and loop_signal:
+            errors.append(
+                "capability_already_present:"
+                "retry_handling"
+            )
+
+    # Validation already exists.
+    if any(
+        word in claim
+        for word in (
+            "validation",
+            "validate",
+            "invalid input",
+            "input checking",
+            "type check",
+        )
+    ):
+        if any(
+            word in source
+            for word in (
+                "isinstance(",
+                "raise valueerror",
+                "raise typeerror",
+                "assert ",
+            )
+        ):
+            errors.append(
+                "capability_already_present:"
+                "input_validation"
+            )
+
+    # Exception handling already exists.
+    if any(
+        word in claim
+        for word in (
+            "exception handling",
+            "handle exceptions",
+            "error handling",
+            "catch errors",
+        )
+    ):
+        if "try:" in source and "except" in source:
+            errors.append(
+                "capability_already_present:"
+                "exception_handling"
+            )
+
+    # File-existence protection already exists.
+    if any(
+        word in claim
+        for word in (
+            "file existence",
+            "missing file",
+            "check if file exists",
+            "ensure file exists",
+        )
+    ):
+        if ".exists()" in source:
+            errors.append(
+                "capability_already_present:"
+                "existence_check"
+            )
+
+    # Hash/digest integrity behavior already exists.
+    if any(
+        word in claim
+        for word in (
+            "hash",
+            "sha256",
+            "digest",
+            "integrity hash",
+        )
+    ):
+        if (
+            "sha256" in source
+            or "hashlib" in source
+            or "digest(" in source
+        ):
+            errors.append(
+                "capability_already_present:"
+                "hash_integrity"
+            )
+
+    # Locking already exists.
+    if any(
+        word in claim
+        for word in (
+            "locking",
+            "lock file",
+            "concurrency lock",
+            "prevent concurrent",
+        )
+    ):
+        if any(
+            word in source
+            for word in (
+                "flock",
+                "lock_ex",
+                "threading.lock",
+                "filelock",
+            )
+        ):
+            errors.append(
+                "capability_already_present:"
+                "locking"
+            )
+
+    # Atomic-write pattern already exists.
+    if any(
+        word in claim
+        for word in (
+            "atomic write",
+            "atomic save",
+            "safe write",
+            "partial write",
+        )
+    ):
+        if (
+            ".replace(" in source
+            or "with_suffix(\".tmp\")" in source
+            or "with_suffix('.tmp')" in source
+        ):
+            errors.append(
+                "capability_already_present:"
+                "atomic_write"
+            )
+
+    return errors
+
+
 def grounding_errors(
     plan,
     baseline,
@@ -374,6 +592,13 @@ def propose_hypothesis(
                 related_context,
             )
 
+            errors.extend(
+                novelty_errors(
+                    plan,
+                    baseline,
+                )
+            )
+
             if errors:
                 last_error = "; ".join(errors)
 
@@ -386,8 +611,10 @@ def propose_hypothesis(
                 correction = (
                     "\n\nPREVIOUS PLAN WAS REJECTED:\n"
                     + last_error
-                    + "\nReturn a new plan grounded only in "
-                      "the supplied source."
+                    + "\nReturn a DIFFERENT plan grounded only "
+                      "in the supplied source. If the rejected "
+                      "capability is already implemented, identify "
+                      "another genuinely missing behavior instead."
                 )
 
                 continue
