@@ -93,30 +93,150 @@ def guard(cwd,files):
     return {"ok":not errors,"errors":errors,"changed_files":files,"changed_lines":lines}
 
 def diagnose():
-    sup=load(RT/"service_supervisor_state.json",{}); profit=load(RT/"profit_opportunity_runtime_state.json",{})
-    services=sup.get("services") or {}; issues=[]; sh={}
+    sup=load(
+        RT/"service_supervisor_state.json",
+        {},
+    )
+    profit=load(
+        RT/"profit_opportunity_runtime_state.json",
+        {},
+    )
+
+    services=sup.get("services") or {}
+    issues=[]
+    sh={}
+
     for name,row in services.items():
-        sh[name]={"running":bool(row.get("running")),"restarts":int(row.get("restarts") or 0),"consecutive_failures":int(row.get("consecutive_failures") or 0)}
-        if not row.get("running"):issues.append("service_not_running:"+name)
-        if int(row.get("consecutive_failures") or 0):issues.append("service_failures:"+name)
-    goal="Improve the highest-value bottleneck converting researched opportunities into deterministic executable business work with measurable completion and feedback. Improve reliability, execution quality, observability, customer/revenue operations, or agent coordination. Do not touch finance, wallets, credentials, approvals, security gates, connectors, deployment gates, supervisor, or self-evolution guard code."
+        sh[name]={
+            "running":bool(row.get("running")),
+            "restarts":int(row.get("restarts") or 0),
+            "consecutive_failures":int(
+                row.get("consecutive_failures") or 0
+            ),
+        }
+
+        if not row.get("running"):
+            issues.append(
+                "service_not_running:"+name
+            )
+
+        if int(row.get("consecutive_failures") or 0):
+            issues.append(
+                "service_failures:"+name
+            )
+
     host_objective=None
 
     try:
-        from companyos.runtime.host_optimization_objective import build_objective
+        from companyos.runtime.host_optimization_objective import (
+            build_objective,
+        )
         host_objective=build_objective()
     except Exception:
         host_objective=None
+
+    protected=(
+        " Preserve existing security, credential, approval, "
+        "finance, wallet, deployment, connector, and "
+        "self-evolution protections."
+    )
+
+    portfolio=[
+        {
+            "domain":"execution_throughput",
+            "goal":(
+                "Improve deterministic CompanyOS execution throughput. "
+                "Reduce avoidable queue delay, stalled work, redundant work, "
+                "or poor task handoff while preserving public contracts."
+                + protected
+            ),
+        },
+        {
+            "domain":"opportunity_conversion",
+            "goal":(
+                "Improve the conversion of researched opportunities into "
+                "concrete executable business work with measurable outcomes, "
+                "clear completion state, and useful feedback."
+                + protected
+            ),
+        },
+        {
+            "domain":"agent_coordination",
+            "goal":(
+                "Improve coordination between CompanyOS workers and agents. "
+                "Reduce duplicate work, improve ownership, dependency handling, "
+                "handoffs, retry behavior, and useful completion."
+                + protected
+            ),
+        },
+        {
+            "domain":"recovery_resilience",
+            "goal":(
+                "Improve CompanyOS recovery, idempotency, failure handling, "
+                "state consistency, restart resilience, and observability "
+                "without hiding failures."
+                + protected
+            ),
+        },
+        {
+            "domain":"research_evidence",
+            "goal":(
+                "Improve how CompanyOS turns research and evidence into "
+                "higher-quality actionable decisions. Improve validation, "
+                "ranking, evidence linkage, or decision closure."
+                + protected
+            ),
+        },
+        {
+            "domain":"operational_efficiency",
+            "goal":(
+                "Improve useful work per unit of CPU, memory, storage, or "
+                "worker capacity. Remove unnecessary repeated processing and "
+                "improve bounded scheduling or state access."
+                + protected
+            ),
+        },
+    ]
+
+    if (
+        isinstance(host_objective,dict)
+        and host_objective.get("recommended_goal")
+    ):
+        portfolio.append({
+            "domain":"host_compute",
+            "goal":host_objective[
+                "recommended_goal"
+            ],
+        })
+
     if issues:
-        goal="Improve reliability around observed runtime issues: "+", ".join(issues[:8])+". Preserve all protected controls."
-    elif isinstance(host_objective,dict) and host_objective.get("recommended_goal"):
-        goal=host_objective["recommended_goal"]
+        domain="runtime_reliability"
+        goal=(
+            "Improve reliability around observed runtime issues: "
+            + ", ".join(issues[:8])
+            + ". Diagnose root causes, preserve existing contracts, "
+              "and make failure handling measurable."
+            + protected
+        )
+    else:
+        # Rotate domains across proposals instead of optimizing the
+        # same subsystem indefinitely.
+        slot=today_count() % len(portfolio)
+        selected=portfolio[slot]
+        domain=selected["domain"]
+        goal=selected["goal"]
+
     return {
         "generated_at":time.time(),
         "services":sh,
         "issues":issues,
         "profit_state_present":bool(profit),
         "host_optimization":host_objective,
+        "adaptation_domain":domain,
+        "adaptation_portfolio":[
+            row["domain"]
+            for row in portfolio
+        ],
         "recommended_goal":goal,
         "dirty_files":len(dirty()),
     }
@@ -692,45 +812,207 @@ def cleanup(wt,branch,keep=False):
 
 
 def _direct_generation_fallback(wt, goal):
-    import json as _json
     import re as _re
     import subprocess as _subprocess
     import sys as _sys
 
-    # Always use the trusted current adapter, not an older copy
-    # inside the temporary worktree.
-    scripts_dir = ROOT / "scripts"
+    scripts_dir=ROOT/"scripts"
+
     if str(scripts_dir) not in _sys.path:
-        _sys.path.insert(0, str(scripts_dir))
+        _sys.path.insert(
+            0,
+            str(scripts_dir),
+        )
 
     try:
         from companyos_local_ai_adapter import (
             model_request,
-            extract_json,
         )
     except Exception as exc:
         return {
             "ok":False,
             "reason":"adapter_import_failed",
-            "error":f"{type(exc).__name__}: {exc}",
+            "error":(
+                f"{type(exc).__name__}: {exc}"
+            ),
         }
 
-    # Small local models perform much better when improving one
-    # real file they can actually see than when inventing a system.
+    local_attempts=max(
+        3,
+        min(
+            8,
+            int(
+                os.getenv(
+                    "COMPANYOS_LOCAL_EVOLUTION_ATTEMPTS",
+                    "5",
+                )
+            ),
+        ),
+    )
+
+    target_budget=max(
+        1,
+        min(
+            8,
+            int(
+                os.getenv(
+                    "COMPANYOS_LOCAL_EVOLUTION_TARGETS_PER_CYCLE",
+                    "4",
+                )
+            ),
+        ),
+    )
+
+    max_source_bytes=max(
+        750,
+        min(
+            8000,
+            int(
+                os.getenv(
+                    "COMPANYOS_LOCAL_EVOLUTION_MAX_SOURCE_BYTES",
+                    "3000",
+                )
+            ),
+        ),
+    )
+
     stop_words={
-        "companyos","improve","improvement","autonomously",
-        "optimize","optimization","existing","authorized",
-        "every","candidate","modify","modules","tests",
-        "preserve","current","system","runtime",
+        "companyos",
+        "improve",
+        "improvement",
+        "autonomously",
+        "optimize",
+        "optimization",
+        "existing",
+        "authorized",
+        "every",
+        "candidate",
+        "modify",
+        "modules",
+        "tests",
+        "preserve",
+        "current",
+        "system",
+        "runtime",
     }
 
     goal_terms=[
-        x for x in _re.findall(
+        x
+        for x in _re.findall(
             r"[a-z0-9_]{4,}",
-            str(goal).lower()
+            str(goal).lower(),
         )
         if x not in stop_words
     ]
+
+    # --------------------------------------------------------
+    # Learn from previous evolution receipts.
+    # Repeatedly failing targets receive a temporary penalty.
+    # Previously successful targets remain eligible.
+    # --------------------------------------------------------
+
+    history={}
+
+    def _receipt_target(row):
+        generation=(
+            row.get("generation")
+            if isinstance(row,dict)
+            else None
+        ) or {}
+
+        possibilities=[]
+
+        for key in ("targeted","fallback"):
+            value=generation.get(key)
+
+            if isinstance(value,dict):
+                possibilities.append(value)
+
+                nested=value.get("targeted")
+                if isinstance(nested,dict):
+                    possibilities.append(nested)
+
+        for value in possibilities:
+            target=(
+                value.get("path")
+                or value.get("target")
+            )
+
+            if target:
+                return (
+                    str(target),
+                    value.get("last_error"),
+                )
+
+        return None,None
+
+    try:
+        receipt_files=sorted(
+            RC.glob("*.json"),
+            key=lambda x:x.stat().st_mtime,
+            reverse=True,
+        )[:80]
+    except Exception:
+        receipt_files=[]
+
+    failure_statuses={
+        "generation_failed",
+        "candidate_tests_failed",
+        "candidate_rejected_by_guard",
+        "candidate_commit_failed",
+        "exception",
+    }
+
+    success_statuses={
+        "qualified_pending_promotion",
+        "qualified_pending_overlap",
+        "promoted",
+        "promoted_push_pending",
+    }
+
+    for receipt_path in receipt_files:
+        try:
+            row=load(receipt_path,{})
+            target,last_error=_receipt_target(row)
+
+            if not target:
+                continue
+
+            h=history.setdefault(
+                target,
+                {
+                    "failures":0,
+                    "successes":0,
+                    "last_ts":0.0,
+                    "last_error":None,
+                },
+            )
+
+            status=str(
+                row.get("status") or ""
+            )
+
+            if status in failure_statuses:
+                h["failures"]+=1
+
+            if status in success_statuses:
+                h["successes"]+=1
+
+            ts=float(
+                row.get("finished_at")
+                or receipt_path.stat().st_mtime
+            )
+
+            if ts > h["last_ts"]:
+                h["last_ts"]=ts
+                h["last_error"]=last_error
+
+        except Exception:
+            continue
+
+    # --------------------------------------------------------
+    # Discover eligible real source targets.
+    # --------------------------------------------------------
 
     candidates=[]
 
@@ -748,40 +1030,31 @@ def _direct_generation_fallback(wt, goal):
             try:
                 rel=str(
                     fp.relative_to(wt)
-                ).replace(chr(92),"/")
+                ).replace("\\","/")
 
                 if rel.startswith("tests/"):
                     continue
 
                 ok,_=path_allowed(rel)
+
                 if not ok:
                     continue
 
                 size=fp.stat().st_size
 
-                # Keep source small enough for a CPU-local 3B model
-                # to receive and return the entire file reliably.
-                # Small local models must return the complete file.
-                # Keep targets comfortably below the generation budget so
-                # responses are not truncated halfway through Python syntax.
-                local_max_source_bytes=int(
-                    os.getenv(
-                        "COMPANYOS_LOCAL_EVOLUTION_MAX_SOURCE_BYTES",
-                        "3000",
-                    )
-                )
-
-                if not (250 <= size <= local_max_source_bytes):
+                if not (
+                    250 <= size <= max_source_bytes
+                ):
                     continue
 
                 low=rel.lower()
 
                 score=sum(
-                    3 for term in goal_terms
+                    3
+                    for term in goal_terms
                     if term in low
                 )
 
-                # Mild preference for operational/runtime code.
                 for hint in (
                     "host",
                     "worker",
@@ -792,16 +1065,69 @@ def _direct_generation_fallback(wt, goal):
                     "runtime",
                     "task",
                     "state",
+                    "research",
+                    "opportunity",
+                    "agent",
+                    "queue",
+                    "outcome",
+                    "evidence",
                 ):
-                    if hint in str(goal).lower() and hint in low:
-                        score += 2
+                    if (
+                        hint in str(goal).lower()
+                        and hint in low
+                    ):
+                        score+=2
 
-                candidates.append(
-                    (-score,size,rel)
+                h=history.get(rel,{})
+                failures=int(
+                    h.get("failures") or 0
+                )
+                successes=int(
+                    h.get("successes") or 0
                 )
 
+                effective=score
+
+                # Learn from repeated failures without permanently
+                # banning a target.
+                effective-=min(
+                    12,
+                    failures*3,
+                )
+
+                # A history of valid changes is a mild positive.
+                effective+=min(
+                    3,
+                    successes,
+                )
+
+                last_ts=float(
+                    h.get("last_ts") or 0
+                )
+
+                age=(
+                    time.time()-last_ts
+                    if last_ts
+                    else None
+                )
+
+                # Encourage exploration after a recent attempt.
+                if age is not None:
+                    if age < 21600:
+                        effective-=8
+                    elif age < 86400:
+                        effective-=4
+
+                candidates.append({
+                    "path":rel,
+                    "size":size,
+                    "score":score,
+                    "effective_score":effective,
+                    "history":h,
+                })
+
             except Exception:
-                pass
+                continue
 
     if not candidates:
         return {
@@ -809,294 +1135,421 @@ def _direct_generation_fallback(wt, goal):
             "reason":"no_existing_safe_candidate",
         }
 
-    candidates.sort()
-    _,_,target_rel=candidates[0]
-
-    target=wt/target_rel
-
-    try:
-        baseline=target.read_text(
-            encoding="utf-8"
+    candidates.sort(
+        key=lambda x:(
+            -x["effective_score"],
+            x["size"],
+            x["path"],
         )
-    except Exception as exc:
-        return {
-            "ok":False,
-            "reason":"target_read_failed",
-            "path":target_rel,
-            "error":f"{type(exc).__name__}: {exc}",
-        }
-
-    # Give the small local model nearby implementation context.
-    # This helps it understand real lifecycle and data invariants instead
-    # of guessing from one isolated file.
-    import re as _re
-
-    baseline_tokens=set(
-        _re.findall(r"[A-Za-z_][A-Za-z0-9_]{2,}", baseline)
     )
 
-    related=[]
+    # Rotate through a pool of strong candidates so identical
+    # healthy cycles don't keep selecting the same smallest file.
+    pool_size=min(
+        len(candidates),
+        max(
+            target_budget*3,
+            8,
+        ),
+    )
 
-    for sibling in target.parent.glob("*.py"):
-        if sibling == target:
-            continue
+    pool=candidates[:pool_size]
 
-        try:
-            text=sibling.read_text(
-                encoding="utf-8",
-                errors="replace",
-            )
-        except Exception:
-            continue
-
-        if len(text) > 5000:
-            continue
-
-        tokens=set(
-            _re.findall(
-                r"[A-Za-z_][A-Za-z0-9_]{2,}",
-                text,
-            )
+    if pool:
+        offset=today_count() % len(pool)
+        pool=(
+            pool[offset:]
+            + pool[:offset]
         )
 
-        score=len(baseline_tokens & tokens)
-
-        if score:
-            related.append(
-                (
-                    -score,
-                    sibling.name,
-                    text,
-                )
-            )
-
-    related.sort()
-
-    related_context=""
-
-    for _,name,text in related[:4]:
-        related_context += (
-            "\n--- RELATED FILE: "
-            + name
-            + " ---\n"
-            + text[:3000]
-            + "\n"
-        )
-
-    feedback=""
+    selected_targets=pool[:target_budget]
+    attempted_targets=[]
 
     def _clean_generated_python(text):
-        import re as _re
-
         text=str(text or "").strip()
 
-        # If the model wrapped the file in a Markdown Python fence,
-        # extract only the fenced source.
         fenced=_re.search(
-            r"```(?:python|py)?[ \t]*\r?\n(.*?)```",
+            r"```(?:python|py)?[ \t]*\r?\n"
+            r"(.*?)```",
             text,
-            flags=_re.IGNORECASE | _re.DOTALL,
+            flags=(
+                _re.IGNORECASE
+                | _re.DOTALL
+            ),
         )
 
         if fenced:
             text=fenced.group(1).strip()
 
-        # Some small models emit a bare language label before source.
         low=text.lower()
+
         if low.startswith("python\n"):
-            text=text.split("\n",1)[1].lstrip()
+            text=text.split(
+                "\n",
+                1,
+            )[1].lstrip()
+
         elif low.startswith("python\r\n"):
-            text=text.split("\r\n",1)[1].lstrip()
+            text=text.split(
+                "\r\n",
+                1,
+            )[1].lstrip()
 
         return text
 
-    for attempt in range(1,4):
-        prompt=(
-            "You are improving an existing CompanyOS Python file.\n\n"
-            "GOAL:\n"
-            + str(goal)
-            + "\n\n"
-            "TARGET FILE:\n"
-            + target_rel
-            + "\n\n"
-            "CURRENT COMPLETE SOURCE:\n"
-            "----- BEGIN SOURCE -----\n"
-            + baseline
-            + "\n----- END SOURCE -----\n\n"
-            + "RELATED READ-ONLY IMPLEMENTATION CONTEXT:\n"
-            + related_context
-            + "\nUse these neighboring modules to understand the real "
-            "data lifecycle and invariants. Do not modify them. "
-            "Do not invent new semantics that conflict with them. "
-            "In particular, preserve ownership, retry, lease, queue, "
-            "and worker-state consistency.\n\n"
-            "Make ONE small, concrete, useful improvement to THIS EXACT "
-            "FILE while preserving its existing public contract. "
-            "The change MUST alter real program behavior, validation, "
-            "observability, reliability, or efficiency. Formatting-only, "
-            "comment-only, rename-only, and semantically identical changes "
-            "will be rejected. "
-            "Do not create another file. Do not rename the file. "
-            "Do not invent CompanyOS modules, functions, classes, scripts, "
-            "or dependencies. Do not generate placeholders, simulated work, "
-            "TODO-only code, fake success output, or speculative subsystems. "
-            "Do not write to privileged absolute filesystem paths. "
-            "Do not use shell=True. If launching Python, use sys.executable. "
-            "Prefer reliability, validation, observability, efficiency, "
-            "error handling, or measurable execution improvements. "
-            "Return the COMPLETE replacement source, not a diff. "
-            "Inside the JSON content field return RAW Python source only. "
-            "Do NOT use Markdown code fences, ```python, commentary, "
-            "headings, explanations, or prose inside content. "
-            "The content value itself must be directly compilable Python. "
-            "The code must compile.\n\n"
-            "Return JSON only in exactly this shape:\n"
-            '{"path":"'
-            + target_rel
-            + '","action":"replace","content":"COMPLETE FILE"}'
-        )
-
-        if feedback:
-            prompt += (
-                "\n\nTHE PREVIOUS ATTEMPT WAS REJECTED FOR:\n"
-                + feedback
-                + "\nCorrect those exact problems."
-            )
-
-        prompt += (
-         "\n\nFINAL OUTPUT REQUIREMENT: "
-         "Return ONLY the complete replacement Python source. "
-         "Do not return JSON, Markdown fences, filenames, or prose. "
-         "Your complete response must be directly compilable Python."
-        )
+    for target_number,candidate in enumerate(
+        selected_targets,
+        1,
+    ):
+        target_rel=candidate["path"]
+        target=wt/target_rel
 
         try:
-            raw=model_request(prompt,response_mode="text")
+            baseline=target.read_text(
+                encoding="utf-8",
+            )
+        except Exception as exc:
+            attempted_targets.append({
+                "path":target_rel,
+                "status":"read_failed",
+                "last_error":(
+                    f"{type(exc).__name__}: {exc}"
+                ),
+            })
+            continue
 
-            if not isinstance(raw,dict) or raw.get("ok") is False:
-                feedback=str(
-                    (raw or {}).get(
-                        "reason",
-                        "model_request_failed"
-                    )
-                )
+        baseline_tokens=set(
+            _re.findall(
+                r"[A-Za-z_][A-Za-z0-9_]{2,}",
+                baseline,
+            )
+        )
+
+        related=[]
+
+        for sibling in target.parent.glob(
+            "*.py"
+        ):
+            if sibling == target:
                 continue
 
-            content=_clean_generated_python(
-             raw.get("text") or ""
+            try:
+                text=sibling.read_text(
+                    encoding="utf-8",
+                    errors="replace",
+                )
+            except Exception:
+                continue
+
+            if len(text) > 5000:
+                continue
+
+            tokens=set(
+                _re.findall(
+                    r"[A-Za-z_][A-Za-z0-9_]{2,}",
+                    text,
+                )
             )
 
-        except Exception as exc:
-            feedback=(
-                "generation_or_parse_failed:"
-                + type(exc).__name__
-                + ":"
-                + str(exc)
+            overlap=len(
+                baseline_tokens & tokens
             )
-            continue
 
-        rel=target_rel
-        action="replace"
+            if overlap:
+                related.append(
+                    (
+                        -overlap,
+                        sibling.name,
+                        text,
+                    )
+                )
 
-        if rel != target_rel:
-            feedback=(
-                "wrong_path:must_modify_exactly:"
+        related.sort()
+
+        related_context=""
+
+        for _,name,text in related[:2]:
+            related_context+=(
+                "\n--- RELATED FILE: "
+                + name
+                + " ---\n"
+                + text[:1800]
+                + "\n"
+            )
+
+        h=candidate.get("history") or {}
+
+        history_note=""
+
+        if h:
+            history_note=(
+                "\nRECENT ADAPTATION HISTORY FOR "
+                "THIS TARGET:\n"
+                f"failures={int(h.get('failures') or 0)}, "
+                f"successes={int(h.get('successes') or 0)}\n"
+            )
+
+            if h.get("last_error"):
+                history_note+=(
+                    "Last rejection: "
+                    + str(
+                        h.get("last_error")
+                    )[:900]
+                    + "\nAvoid repeating that failed approach.\n"
+                )
+
+        feedback=""
+        final_error=None
+
+        for attempt in range(
+            1,
+            local_attempts+1,
+        ):
+            prompt=(
+                "You are improving one existing CompanyOS "
+                "Python file.\n\n"
+
+                "SYSTEM IMPROVEMENT GOAL:\n"
+                + str(goal)
+                + "\n\n"
+
+                "TARGET FILE:\n"
                 + target_rel
+                + "\n\n"
+
+                "CURRENT COMPLETE SOURCE:\n"
+                "----- BEGIN SOURCE -----\n"
+                + baseline
+                + "\n----- END SOURCE -----\n\n"
+
+                "RELATED READ-ONLY IMPLEMENTATION "
+                "CONTEXT:\n"
+                + related_context
+                + history_note
+                + "\n"
+
+                "Make ONE small but meaningful behavioral "
+                "improvement to this exact file. Preserve "
+                "its public contract and existing working "
+                "behavior. Improve real reliability, "
+                "execution quality, observability, "
+                "validation, coordination, efficiency, "
+                "recovery, or measurable capability. "
+
+                "Do not create another file. Do not invent "
+                "CompanyOS modules, functions, classes, "
+                "scripts, APIs, or dependencies that do not "
+                "already exist in the supplied source or "
+                "related context. Do not return placeholders, "
+                "fake work, simulated success, TODO-only "
+                "changes, formatting-only changes, or comments "
+                "as the improvement. "
+
+                "Do not use shell=True. If launching Python, "
+                "use sys.executable. Preserve ownership, queue, "
+                "retry, state, dependency, and lifecycle "
+                "invariants visible in the surrounding code. "
+
+                "Return the COMPLETE replacement Python source. "
+                "Return RAW PYTHON ONLY. Do not return JSON. "
+                "Do not return Markdown fences. Do not return "
+                "a filename, explanation, heading, or prose. "
+                "The entire response must directly compile as "
+                "the replacement file."
             )
-            continue
 
-        if action not in ("replace","update","modify","edit"):
-            feedback="action_must_be_replace"
-            continue
+            if feedback:
+                prompt+=(
+                    "\n\nYOUR PREVIOUS ATTEMPT WAS "
+                    "REJECTED FOR:\n"
+                    + feedback[:1800]
+                    + "\nRepair those exact problems without "
+                      "discarding correct existing behavior."
+                )
 
-        if not content.strip():
-            feedback="empty_content"
-            continue
+            try:
+                raw=model_request(
+                    prompt,
+                    response_mode="text",
+                )
 
-        if content.rstrip() == baseline.rstrip():
-            feedback="no_actual_change"
-            continue
+                if (
+                    not isinstance(raw,dict)
+                    or raw.get("ok") is False
+                ):
+                    feedback=str(
+                        (raw or {}).get(
+                            "reason",
+                            "model_request_failed",
+                        )
+                    )
+                    final_error=feedback
+                    continue
 
-        if len(content.encode("utf-8")) > 50000:
-            feedback="content_too_large"
-            continue
+                content=_clean_generated_python(
+                    raw.get("text") or ""
+                )
 
-        try:
-            compile(
-                content,
-                target_rel,
-                "exec"
+            except Exception as exc:
+                feedback=(
+                    "generation_failed:"
+                    + type(exc).__name__
+                    + ":"
+                    + str(exc)
+                )
+                final_error=feedback
+                continue
+
+            if not content.strip():
+                feedback="empty_content"
+                final_error=feedback
+                continue
+
+            if (
+                content.rstrip()
+                == baseline.rstrip()
+            ):
+                feedback="no_actual_change"
+                final_error=feedback
+                continue
+
+            if (
+                len(
+                    content.encode("utf-8")
+                )
+                > 50000
+            ):
+                feedback="content_too_large"
+                final_error=feedback
+                continue
+
+            try:
+                compile(
+                    content,
+                    target_rel,
+                    "exec",
+                )
+            except Exception as exc:
+                feedback=(
+                    "invalid_python:"
+                    + type(exc).__name__
+                    + ":"
+                    + str(exc)
+                )
+                final_error=feedback
+                continue
+
+            try:
+                qerrors=_candidate_quality_errors(
+                    wt,
+                    target_rel,
+                    content,
+                    baseline=baseline,
+                    planned_paths={
+                        target_rel,
+                    },
+                    is_new=False,
+                )
+            except Exception as exc:
+                feedback=(
+                    "quality_gate_exception:"
+                    + type(exc).__name__
+                    + ":"
+                    + str(exc)
+                )
+                final_error=feedback
+                continue
+
+            if qerrors:
+                feedback="; ".join(qerrors)
+                final_error=feedback
+                continue
+
+            target.write_text(
+                content.rstrip()+"\n",
+                encoding="utf-8",
             )
-        except Exception as exc:
-            feedback=(
-                "invalid_python:"
-                + type(exc).__name__
-                + ":"
-                + str(exc)
+
+            cp=_subprocess.run(
+                [
+                    "git",
+                    "status",
+                    "--porcelain=v1",
+                ],
+                cwd=str(wt),
+                text=True,
+                capture_output=True,
+                timeout=30,
             )
-            continue
 
-        # Run the same hardened static gate BEFORE writing.
-        try:
-            qerrors=_candidate_quality_errors(
-                wt,
-                target_rel,
-                content,
-                baseline=baseline,
-                planned_paths={target_rel},
-                is_new=False,
-            )
-        except Exception as exc:
-            feedback=(
-                "quality_gate_exception:"
-                + type(exc).__name__
-                + ":"
-                + str(exc)
-            )
-            continue
+            changed_files=[
+                line[3:].strip()
+                for line in cp.stdout.splitlines()
+                if len(line)>=4
+            ]
 
-        if qerrors:
-            feedback="; ".join(qerrors)
-            continue
+            if (
+                target_rel
+                not in changed_files
+            ):
+                feedback=(
+                    "write_produced_no_git_change"
+                )
+                final_error=feedback
+                continue
 
-        target.write_text(
-            content.rstrip()+"\n",
-            encoding="utf-8",
-        )
+            attempted_targets.append({
+                "path":target_rel,
+                "status":"candidate_written",
+                "attempt":attempt,
+                "score":candidate[
+                    "effective_score"
+                ],
+            })
 
-        cp=_subprocess.run(
-            ["git","status","--porcelain=v1"],
-            cwd=str(wt),
-            text=True,
-            capture_output=True,
-            timeout=30,
-        )
+            return {
+                "ok":True,
+                "status":"targeted_candidate_written",
+                "generator":"local_targeted_builder_v2",
+                "attempt":attempt,
+                "target_number":target_number,
+                "path":target_rel,
+                "action":"replace",
+                "changed_files":changed_files,
+                "attempted_targets":attempted_targets,
+                "targets_considered":[
+                    x["path"]
+                    for x in selected_targets
+                ],
+            }
 
-        changed=[
-            line[3:].strip()
-            for line in cp.stdout.splitlines()
-            if len(line)>=4
-        ]
-
-        if target_rel not in changed:
-            feedback="write_produced_no_git_change"
-            continue
-
-        return {
-            "ok":True,
-            "status":"targeted_candidate_written",
-            "generator":"local_targeted_builder",
-            "attempt":attempt,
+        attempted_targets.append({
             "path":target_rel,
-            "action":"replace",
-            "changed_files":changed,
-        }
+            "status":"generation_failed",
+            "attempts":local_attempts,
+            "last_error":final_error,
+            "score":candidate[
+                "effective_score"
+            ],
+        })
 
     return {
         "ok":False,
-        "reason":"targeted_generation_attempts_failed",
-        "target":target_rel,
-        "last_error":feedback,
+        "reason":"all_target_generation_attempts_failed",
+        "attempts_per_target":local_attempts,
+        "target_budget":target_budget,
+        "attempted_targets":attempted_targets,
+        "targets_considered":[
+            x["path"]
+            for x in selected_targets
+        ],
+        "last_error":(
+            attempted_targets[-1].get(
+                "last_error"
+            )
+            if attempted_targets
+            else None
+        ),
     }
 
 def generate(wt, goal):
@@ -1273,22 +1726,217 @@ def restore(b):
         elif dst.is_file():dst.unlink()
 
 def promote(run_id,wt,branch,files,csha):
-    overlap=sorted(set(files)&dirty())
-    if overlap:return {"ok":False,"status":"promotion_pending_overlap","overlap":overlap,"candidate_branch":branch,"candidate_sha":csha}
-    patch=git(["diff","HEAD^","HEAD","--binary"],wt).stdout
-    chk=subprocess.run(["git","apply","--check","-"],cwd=str(ROOT),input=patch,text=True,capture_output=True)
-    if chk.returncode:return {"ok":False,"status":"patch_check_failed","stderr":(chk.stderr or "")[-1800:]}
-    b=backup(run_id,files); ap=subprocess.run(["git","apply","-"],cwd=str(ROOT),input=patch,text=True,capture_output=True)
-    if ap.returncode:restore(b); return {"ok":False,"status":"apply_failed"}
-    t=tests(ROOT,files)
-    if not t["ok"]:restore(b); return {"ok":False,"status":"live_tests_failed_rolled_back","tests":t}
-    git(["add","--",*files]); c=git(["commit","-m",f"Promote self-evolution candidate {run_id}"])
-    if c.returncode:git(["reset","--",*files]); restore(b); return {"ok":False,"status":"commit_failed_rolled_back"}
-    sha=git(["rev-parse","HEAD"]).stdout.strip(); push=None
-    if os.getenv("COMPANYOS_SELF_EVOLUTION_PUSH","1")=="1":
-        br=git(["branch","--show-current"]).stdout.strip()
-        if br:push=git(["push","origin",br],timeout=180).returncode==0
-    return {"ok":True,"status":"promoted","live_commit":sha,"backup":str(b),"tests":t,"push_ok":push}
+    overlap=sorted(
+        set(files) & dirty()
+    )
+
+    if overlap:
+        return {
+            "ok":False,
+            "status":"promotion_pending_overlap",
+            "overlap":overlap,
+            "candidate_branch":branch,
+            "candidate_sha":csha,
+        }
+
+    patch=git(
+        [
+            "diff",
+            "HEAD^",
+            "HEAD",
+            "--binary",
+        ],
+        wt,
+    ).stdout
+
+    chk=subprocess.run(
+        [
+            "git",
+            "apply",
+            "--check",
+            "-",
+        ],
+        cwd=str(ROOT),
+        input=patch,
+        text=True,
+        capture_output=True,
+    )
+
+    if chk.returncode:
+        return {
+            "ok":False,
+            "status":"patch_check_failed",
+            "stderr":(
+                chk.stderr or ""
+            )[-1800:],
+        }
+
+    b=backup(
+        run_id,
+        files,
+    )
+
+    ap=subprocess.run(
+        [
+            "git",
+            "apply",
+            "-",
+        ],
+        cwd=str(ROOT),
+        input=patch,
+        text=True,
+        capture_output=True,
+    )
+
+    if ap.returncode:
+        restore(b)
+        return {
+            "ok":False,
+            "status":"apply_failed",
+        }
+
+    t=tests(
+        ROOT,
+        files,
+    )
+
+    if not t["ok"]:
+        restore(b)
+        return {
+            "ok":False,
+            "status":"live_tests_failed_rolled_back",
+            "tests":t,
+        }
+
+    git(
+        [
+            "add",
+            "--",
+            *files,
+        ]
+    )
+
+    c=git([
+        "commit",
+        "-m",
+        f"Promote self-evolution candidate {run_id}",
+    ])
+
+    if c.returncode:
+        git(
+            [
+                "reset",
+                "--",
+                *files,
+            ]
+        )
+        restore(b)
+
+        return {
+            "ok":False,
+            "status":"commit_failed_rolled_back",
+        }
+
+    sha=git(
+        [
+            "rev-parse",
+            "HEAD",
+        ]
+    ).stdout.strip()
+
+    br=git(
+        [
+            "branch",
+            "--show-current",
+        ]
+    ).stdout.strip()
+
+    push_ok=None
+    remote_sha=None
+    push_attempts=[]
+
+    if (
+        os.getenv(
+            "COMPANYOS_SELF_EVOLUTION_PUSH",
+            "1",
+        )=="1"
+        and br
+    ):
+        for attempt in range(1,4):
+            pr=git(
+                [
+                    "push",
+                    "origin",
+                    br,
+                ],
+                timeout=180,
+            )
+
+            remote=git(
+                [
+                    "ls-remote",
+                    "--heads",
+                    "origin",
+                    br,
+                ],
+                timeout=60,
+            )
+
+            remote_sha=None
+
+            if remote.returncode==0:
+                line=(
+                    remote.stdout.strip()
+                    .splitlines()
+                )
+
+                if line:
+                    remote_sha=(
+                        line[0]
+                        .split()[0]
+                    )
+
+            verified=(
+                pr.returncode==0
+                and remote_sha==sha
+            )
+
+            push_attempts.append({
+                "attempt":attempt,
+                "returncode":pr.returncode,
+                "verified":verified,
+                "remote_sha":remote_sha,
+                "stderr":(
+                    pr.stderr or ""
+                )[-700:],
+            })
+
+            if verified:
+                push_ok=True
+                break
+
+            push_ok=False
+
+            if attempt < 3:
+                time.sleep(
+                    2*attempt
+                )
+
+    return {
+        "ok":True,
+        "status":(
+            "promoted"
+            if push_ok is not False
+            else "promoted_push_pending"
+        ),
+        "live_commit":sha,
+        "branch":br,
+        "backup":str(b),
+        "tests":t,
+        "push_ok":push_ok,
+        "remote_sha":remote_sha,
+        "push_attempts":push_attempts,
+    }
 
 def schedule_restart():
     ctl=ROOT/"scripts/companyosctl"
@@ -1334,7 +1982,32 @@ def cycle(force=False,proposal_only=False):
         pr=promote(run_id,wt,branch,files,csha); receipt["promotion"]=pr
         if pr.get("status")=="promotion_pending_overlap":keep=True; receipt["status"]="qualified_pending_overlap"; state_update(pending_candidate={"run_id":run_id,"branch":branch,"sha":csha,"changed_files":files,"overlap":pr.get("overlap")}); return {"ok":True,**receipt}
         if not pr.get("ok"):receipt["status"]=pr.get("status","promotion_failed"); return {"ok":False,**receipt}
-        receipt["status"]="promoted"; state_update(pending_candidate=None,last_promotion={"run_id":run_id,"candidate_sha":csha,"live_commit":pr.get("live_commit"),"changed_files":files,"backup":pr.get("backup"),"promoted_at":time.time(),"guard_passed":False}); ledger("promotion_complete",run_id=run_id,live_commit=pr.get("live_commit"),changed_files=files); receipt["restart_scheduled"]=schedule_restart(); return {"ok":True,**receipt}
+        receipt["status"]=pr.get("status","promoted")
+        state_update(
+            pending_candidate=None,
+            last_promotion={
+                "run_id":run_id,
+                "candidate_sha":csha,
+                "live_commit":pr.get("live_commit"),
+                "branch":pr.get("branch"),
+                "changed_files":files,
+                "backup":pr.get("backup"),
+                "promoted_at":time.time(),
+                "guard_passed":False,
+                "push_ok":pr.get("push_ok"),
+                "remote_sha":pr.get("remote_sha"),
+            },
+        )
+        ledger(
+            "promotion_complete",
+            run_id=run_id,
+            live_commit=pr.get("live_commit"),
+            changed_files=files,
+            push_ok=pr.get("push_ok"),
+            remote_sha=pr.get("remote_sha"),
+        )
+        receipt["restart_scheduled"]=schedule_restart()
+        return {"ok":True,**receipt}
     except Exception as e:receipt["status"]="exception"; receipt["error"]=f"{type(e).__name__}: {e}"; ledger("cycle_exception",run_id=run_id,error=receipt["error"]); return {"ok":False,**receipt}
     finally:
         receipt["finished_at"]=time.time(); save(RC/f"{run_id}.json",receipt); state_update(running=False,current_run=None,last_cycle_finished=time.time(),last_status=receipt.get("status"),last_receipt=str(RC/f"{run_id}.json"))
