@@ -11,6 +11,7 @@ SAFE_PREFIXES=("companyos/","companyos_modules/","scripts/","tests/","templates/
 EXACT_PROTECTED={
  "companyos/runtime/self_evolution_engine.py","companyos/runtime/self_evolution_runtime.py",
  "companyos/runtime/self_evolution_hypothesis.py",
+ "companyos/runtime/self_evolution_backtest.py",
  "companyos/runtime/service_supervisor.py","companyos/runtime/runtime_control.py",
  "scripts/companyos_evolutionctl","scripts/companyos_adaptive_self_build.py",
 }
@@ -588,6 +589,114 @@ def _candidate_quality_errors(
             "public_output_contract_changed:"
             "top_level_json_output_removed_or_guarded"
         )
+
+ # --------------------------------------------------------
+    # Runtime object-contract gate.
+    #
+    # Reject newly-read self attributes unless they existed
+    # already, are assigned by the candidate, or are methods
+    # defined by the candidate class.
+    # --------------------------------------------------------
+    if baseline and old_tree is not None:
+
+        def _self_attributes(t):
+            reads=set()
+            writes=set()
+
+            for node in _ast.walk(t):
+                if not isinstance(
+                    node,
+                    _ast.Attribute,
+                ):
+                    continue
+
+                if not (
+                    isinstance(
+                        node.value,
+                        _ast.Name,
+                    )
+                    and node.value.id=="self"
+                ):
+                    continue
+
+                if isinstance(
+                    getattr(
+                        node,
+                        "ctx",
+                        None,
+                    ),
+                    _ast.Store,
+                ):
+                    writes.add(
+                        node.attr
+                    )
+                else:
+                    reads.add(
+                        node.attr
+                    )
+
+            return reads,writes
+
+        def _methods(t):
+            result=set()
+
+            for node in getattr(
+                t,
+                "body",
+                [],
+            ):
+                if not isinstance(
+                    node,
+                    _ast.ClassDef,
+                ):
+                    continue
+
+                for child in node.body:
+                    if isinstance(
+                        child,
+                        (
+                            _ast.FunctionDef,
+                            _ast.AsyncFunctionDef,
+                        ),
+                    ):
+                        result.add(
+                            child.name
+                        )
+
+            return result
+
+        old_reads,old_writes=(
+            _self_attributes(
+                old_tree
+            )
+        )
+
+        new_reads,new_writes=(
+            _self_attributes(
+                tree
+            )
+        )
+
+        baseline_known=(
+            old_reads
+            | old_writes
+            | _methods(old_tree)
+        )
+
+        candidate_defined=(
+            new_writes
+            | _methods(tree)
+        )
+
+        for attr in sorted(
+            new_reads
+            - baseline_known
+            - candidate_defined
+        ):
+            errors.append(
+                "introduced_unbound_self_attribute:"
+                + attr
+            )
 
  # --------------------------------------------------------
     # Helpers
@@ -2359,6 +2468,35 @@ def cycle(force=False,proposal_only=False):
         if not gd["ok"]:receipt["status"]="candidate_rejected_by_guard"; ledger("candidate_rejected",run_id=run_id,guard=gd); return {"ok":False,**receipt}
         t=tests(wt,files); receipt["candidate_tests"]=t
         if not t["ok"]:receipt["status"]="candidate_tests_failed"; return {"ok":False,**receipt}
+
+        from companyos.runtime.self_evolution_backtest import behavioral_backtest
+
+        bt=behavioral_backtest(
+            ROOT,
+            wt,
+            files,
+            g,
+        )
+
+        receipt["behavioral_backtest"]=bt
+
+        if not bt.get("ok"):
+            receipt["status"]="candidate_backtest_failed"
+            ledger(
+                "candidate_backtest_failed",
+                run_id=run_id,
+                changed_files=files,
+                backtest=bt,
+            )
+            return {"ok":False,**receipt}
+
+        ledger(
+            "candidate_backtest_passed",
+            run_id=run_id,
+            changed_files=files,
+            backtest=bt,
+        )
+
         csha=commit_candidate(wt,run_id,files); receipt["candidate_sha"]=csha; receipt["changed_files"]=files
         if not csha:receipt["status"]="candidate_commit_failed"; return {"ok":False,**receipt}
         ledger("candidate_qualified",run_id=run_id,candidate_sha=csha,changed_files=files)
