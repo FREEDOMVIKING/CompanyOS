@@ -349,6 +349,194 @@ def _candidate_quality_errors(
             pass
 
     # --------------------------------------------------------
+    # Behavioral-impact gate.
+    #
+    # Reject candidates that only add labels, strings, statuses,
+    # or declarative steps while leaving executable behavior
+    # unchanged.
+    # --------------------------------------------------------
+    if baseline and old_tree is not None:
+
+        def _behavior_profile(t):
+            tracked=(
+                _ast.Call,
+                _ast.If,
+                _ast.For,
+                _ast.AsyncFor,
+                _ast.While,
+                _ast.Try,
+                _ast.With,
+                _ast.AsyncWith,
+                _ast.Raise,
+                _ast.Assert,
+                _ast.Compare,
+                _ast.BinOp,
+                _ast.BoolOp,
+                _ast.UnaryOp,
+                _ast.Assign,
+                _ast.AnnAssign,
+                _ast.AugAssign,
+                _ast.NamedExpr,
+                _ast.Await,
+                _ast.Yield,
+                _ast.YieldFrom,
+            )
+
+            result={}
+
+            for node in _ast.walk(t):
+                if isinstance(node,tracked):
+                    name=type(node).__name__
+                    result[name]=result.get(name,0)+1
+
+            return result
+
+        def _strings(t):
+            return {
+                node.value
+                for node in _ast.walk(t)
+                if (
+                    isinstance(node,_ast.Constant)
+                    and isinstance(node.value,str)
+                )
+            }
+
+        old_behavior=_behavior_profile(old_tree)
+        new_behavior=_behavior_profile(tree)
+
+        added_strings=_strings(tree)-_strings(old_tree)
+
+        if (
+            added_strings
+            and old_behavior == new_behavior
+        ):
+            errors.append(
+                "low_behavioral_impact:"
+                "string_or_label_only_change"
+            )
+
+        # ----------------------------------------------------
+        # Capability-novelty gate.
+        #
+        # Pure restructures of equivalent logic are not useful
+        # autonomous improvements.
+        # ----------------------------------------------------
+
+        from collections import Counter as _Counter
+
+        def _call_name(node):
+            fn=node.func
+
+            if isinstance(fn,_ast.Name):
+                return fn.id
+
+            if isinstance(fn,_ast.Attribute):
+                parts=[fn.attr]
+                cur=fn.value
+
+                while isinstance(cur,_ast.Attribute):
+                    parts.append(cur.attr)
+                    cur=cur.value
+
+                if isinstance(cur,_ast.Name):
+                    parts.append(cur.id)
+
+                return ".".join(reversed(parts))
+
+            return type(fn).__name__
+
+        def _capability_profile(t):
+            calls=_Counter()
+            comparisons=_Counter()
+
+            state_writes=0
+            raises=0
+            try_blocks=0
+            awaits=0
+            yields=0
+            assertions=0
+
+            for node in _ast.walk(t):
+
+                if isinstance(node,_ast.Call):
+                    calls[_call_name(node)]+=1
+
+                elif isinstance(
+                    node,
+                    (_ast.Attribute,_ast.Subscript),
+                ):
+                    if isinstance(
+                        getattr(node,"ctx",None),
+                        _ast.Store,
+                    ):
+                        state_writes+=1
+
+                elif isinstance(node,_ast.Raise):
+                    raises+=1
+
+                elif isinstance(node,_ast.Try):
+                    try_blocks+=1
+
+                elif isinstance(node,_ast.Await):
+                    awaits+=1
+
+                elif isinstance(
+                    node,
+                    (_ast.Yield,_ast.YieldFrom),
+                ):
+                    yields+=1
+
+                elif isinstance(node,_ast.Assert):
+                    assertions+=1
+
+                elif isinstance(node,_ast.Compare):
+                    for op in node.ops:
+                        comparisons[
+                            type(op).__name__
+                        ]+=1
+
+            return {
+                "calls":calls,
+                "comparisons":comparisons,
+                "state_writes":state_writes,
+                "raises":raises,
+                "try_blocks":try_blocks,
+                "awaits":awaits,
+                "yields":yields,
+                "assertions":assertions,
+            }
+
+        old_cap=_capability_profile(old_tree)
+        new_cap=_capability_profile(tree)
+
+        capability_gain=False
+
+        for name,count in new_cap["calls"].items():
+            if count > old_cap["calls"].get(name,0):
+                capability_gain=True
+
+        for name,count in new_cap["comparisons"].items():
+            if count > old_cap["comparisons"].get(name,0):
+                capability_gain=True
+
+        for key in (
+            "state_writes",
+            "raises",
+            "try_blocks",
+            "awaits",
+            "yields",
+            "assertions",
+        ):
+            if new_cap[key] > old_cap[key]:
+                capability_gain=True
+
+        if not capability_gain:
+            errors.append(
+                "low_capability_novelty:"
+                "no_new_executable_effect_detected"
+            )
+
+ # --------------------------------------------------------
     # Helpers
     # --------------------------------------------------------
     def _local_module_exists(mod):
@@ -812,6 +1000,7 @@ def cleanup(wt,branch,keep=False):
 
 
 def _direct_generation_fallback(wt, goal):
+    import ast as _ast
     import re as _re
     import subprocess as _subprocess
     import sys as _sys
@@ -1049,6 +1238,50 @@ def _direct_generation_fallback(wt, goal):
 
                 low=rel.lower()
 
+                try:
+                    source_text=fp.read_text(
+                        encoding="utf-8",
+                        errors="replace",
+                    )
+
+                    source_tree=_ast.parse(
+                        source_text,
+                        filename=rel,
+                    )
+
+                    behavioral_nodes=(
+                        _ast.Call,
+                        _ast.If,
+                        _ast.For,
+                        _ast.AsyncFor,
+                        _ast.While,
+                        _ast.Try,
+                        _ast.With,
+                        _ast.AsyncWith,
+                        _ast.Raise,
+                        _ast.Assert,
+                        _ast.Compare,
+                        _ast.BinOp,
+                        _ast.BoolOp,
+                        _ast.Assign,
+                        _ast.AugAssign,
+                        _ast.Await,
+                    )
+
+                    behavior_score=sum(
+                        1
+                        for node in _ast.walk(
+                            source_tree
+                        )
+                        if isinstance(
+                            node,
+                            behavioral_nodes,
+                        )
+                    )
+
+                except Exception:
+                    behavior_score=0
+
                 score=sum(
                     3
                     for term in goal_terms
@@ -1088,6 +1321,13 @@ def _direct_generation_fallback(wt, goal):
 
                 effective=score
 
+                # Prefer modules with actual executable behavior
+                # over tiny declarative/static planners.
+                effective+=min(
+                    10,
+                    behavior_score,
+                )
+
                 # Learn from repeated failures without permanently
                 # banning a target.
                 effective-=min(
@@ -1123,6 +1363,7 @@ def _direct_generation_fallback(wt, goal):
                     "size":size,
                     "score":score,
                     "effective_score":effective,
+                    "behavior_score":behavior_score,
                     "history":h,
                 })
 
@@ -1138,6 +1379,7 @@ def _direct_generation_fallback(wt, goal):
     candidates.sort(
         key=lambda x:(
             -x["effective_score"],
+            -x["behavior_score"],
             x["size"],
             x["path"],
         )
