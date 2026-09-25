@@ -29,21 +29,143 @@ def is_local_address(value:str)->bool:
     except ValueError:
         return value.endswith(".local") or value=="localhost"
 
-def local_networks():
-    if not shutil.which("ip"):return []
-    p=run(["ip","-o","-4","addr","show","scope","global"],10)
-    out=[]
-    for line in p.stdout.splitlines():
-        m=re.search(r"\binet\s+(\d+\.\d+\.\d+\.\d+/\d+)",line)
-        if not m:continue
+def _private_ipv4(value:str):
+    try:
+        ip=ipaddress.ip_address(str(value).strip())
+        return str(ip) if ip.version==4 and ip.is_private and not ip.is_loopback else None
+    except Exception:
+        return None
+
+def _safe24(ip_value:str):
+    ip=_private_ipv4(ip_value)
+    if not ip:return None
+    try:return str(ipaddress.ip_network(f"{ip}/24",strict=False))
+    except Exception:return None
+
+def _socket_source_ip():
+    # Android-safe fallback: choose the active route and read the local
+    # source address without needing root/netlink access.
+    for target in (("1.1.1.1",53),("8.8.8.8",53)):
+        sock=None
         try:
-            iface=ipaddress.ip_interface(m.group(1))
-            if not iface.ip.is_private:continue
-            net=iface.network
-            if net.prefixlen<24:net=ipaddress.ip_network(f"{iface.ip}/24",strict=False)
-            out.append(str(net))
-        except Exception:pass
-    return sorted(set(out))
+            sock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+            sock.settimeout(1.0)
+            sock.connect(target)
+            ip=sock.getsockname()[0]
+            good=_private_ipv4(ip)
+            if good:return good
+        except Exception:
+            pass
+        finally:
+            try:
+                if sock:sock.close()
+            except Exception:
+                pass
+    return None
+
+def _termux_wifi_ip():
+    cmd=shutil.which("termux-wifi-connectioninfo")
+    if not cmd:return None
+    try:
+        p=run([cmd],8)
+        if p.returncode:return None
+        data=json.loads(p.stdout or "{}")
+        for key in ("ip","ip_address","ipv4"):
+            good=_private_ipv4(data.get(key))
+            if good:return good
+    except Exception:
+        pass
+    return None
+
+def _getprop_ips():
+    vals=[]
+    gp=shutil.which("getprop")
+    if not gp:return vals
+    for key in (
+        "dhcp.wlan0.ipaddress",
+        "dhcp.wifi.ipaddress",
+        "dhcp.eth0.ipaddress",
+    ):
+        try:
+            p=run([gp,key],3)
+            good=_private_ipv4((p.stdout or "").strip())
+            if good:vals.append(good)
+        except Exception:
+            pass
+    return vals
+
+def _route_networks():
+    nets=[]
+    if not shutil.which("ip"):return nets
+
+    try:
+        p=run(["ip","-o","-4","addr","show"],8)
+        for line in p.stdout.splitlines():
+            m=re.search(r"\binet\s+(\d+\.\d+\.\d+\.\d+/\d+)",line)
+            if not m:continue
+            try:
+                iface=ipaddress.ip_interface(m.group(1))
+                if not iface.ip.is_private or iface.ip.is_loopback:continue
+                net=iface.network
+                if net.prefixlen < 24:
+                    net=ipaddress.ip_network(f"{iface.ip}/24",strict=False)
+                nets.append(str(net))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    try:
+        p=run(["ip","-4","route","show"],8)
+        for line in p.stdout.splitlines():
+            for token in line.split():
+                if "/" not in token:continue
+                try:
+                    net=ipaddress.ip_network(token,strict=False)
+                    if net.version!=4 or not net.is_private:continue
+                    if net.prefixlen < 24:
+                        src=None
+                        m=re.search(r"\bsrc\s+(\d+\.\d+\.\d+\.\d+)",line)
+                        if m:src=m.group(1)
+                        net=ipaddress.ip_network(f"{src or net.network_address}/24",strict=False)
+                    nets.append(str(net))
+                except Exception:
+                    pass
+    except Exception:
+        pass
+
+    return nets
+
+def local_networks():
+    nets=list(_route_networks())
+
+    wifi_ip=_termux_wifi_ip()
+    if wifi_ip:
+        n=_safe24(wifi_ip)
+        if n:nets.append(n)
+
+    for ip in _getprop_ips():
+        n=_safe24(ip)
+        if n:nets.append(n)
+
+    if not nets:
+        src=_socket_source_ip()
+        n=_safe24(src) if src else None
+        if n:nets.append(n)
+
+    clean=[]
+    for raw in nets:
+        try:
+            net=ipaddress.ip_network(raw,strict=False)
+            if net.version!=4 or not net.is_private:continue
+            if net.prefixlen < 24:
+                host=next(net.hosts())
+                net=ipaddress.ip_network(f"{host}/24",strict=False)
+            clean.append(str(net))
+        except Exception:
+            pass
+
+    return sorted(set(clean))
 
 def neighbor_rows():
     if not shutil.which("ip"):return []

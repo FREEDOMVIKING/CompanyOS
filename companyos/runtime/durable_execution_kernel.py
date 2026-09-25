@@ -9,14 +9,69 @@ class DurableExecutionKernel:
         self.runtime_root=runtime_root or Path.home()/".companyos_runtime"
         self.runtime_root.mkdir(parents=True,exist_ok=True)
         self.db_path=self.runtime_root/"execution_kernel.sqlite3"
+        self.journal_mode=self._configure_journal_mode()
         self._init()
 
+    def _configure_journal_mode(self):
+        """
+        Negotiate WAL once at kernel startup.
+
+        Multiple CompanyOS processes may initialize concurrently. Changing
+        SQLite journal mode on every connection can trigger locking-protocol
+        failures. If WAL cannot be enabled because another process/filesystem
+        rejects the transition, keep the database's existing journal mode.
+        """
+        c=sqlite3.connect(
+            self.db_path,
+            timeout=30,
+            isolation_level=None,
+        )
+
+        try:
+            c.execute("PRAGMA busy_timeout=30000")
+
+            try:
+                row=c.execute(
+                    "PRAGMA journal_mode=WAL"
+                ).fetchone()
+
+                return (
+                    str(row[0]).lower()
+                    if row
+                    else "unknown"
+                )
+
+            except sqlite3.OperationalError as exc:
+                msg=str(exc).lower()
+
+                recoverable=(
+                    "locking protocol" in msg
+                    or "database is locked" in msg
+                    or "database table is locked" in msg
+                )
+
+                if not recoverable:
+                    raise
+
+                # Close this connection and let normal connections use
+                # whatever journal mode SQLite already has configured.
+                return "existing"
+
+        finally:
+            c.close()
+
     def connect(self):
-        c=sqlite3.connect(self.db_path,timeout=30,isolation_level=None)
+        c=sqlite3.connect(
+            self.db_path,
+            timeout=30,
+            isolation_level=None,
+        )
         c.row_factory=sqlite3.Row
-        c.execute("PRAGMA journal_mode=WAL")
-        c.execute("PRAGMA synchronous=FULL")
+
+        # These are connection-local and safe to configure each time.
         c.execute("PRAGMA busy_timeout=30000")
+        c.execute("PRAGMA synchronous=FULL")
+
         return c
 
     @contextmanager

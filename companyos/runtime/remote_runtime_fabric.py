@@ -19,6 +19,8 @@ STATE_FILES=(
     "evidence_coverage_rescoring_state.json",
     "live_market_intelligence_state.json",
     "provider_discovered_metadata.json",
+    "authorized_local_migration_state.json",
+    "local_primary_host.json",
 )
 
 def load(path:Path,default:Any):

@@ -761,7 +761,17 @@ def _direct_generation_fallback(wt, goal):
 
                 # Keep source small enough for a CPU-local 3B model
                 # to receive and return the entire file reliably.
-                if not (250 <= size <= 5000):
+                # Small local models must return the complete file.
+                # Keep targets comfortably below the generation budget so
+                # responses are not truncated halfway through Python syntax.
+                local_max_source_bytes=int(
+                    os.getenv(
+                        "COMPANYOS_LOCAL_EVOLUTION_MAX_SOURCE_BYTES",
+                        "3000",
+                    )
+                )
+
+                if not (250 <= size <= local_max_source_bytes):
                     continue
 
                 low=rel.lower()

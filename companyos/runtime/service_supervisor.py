@@ -96,6 +96,28 @@ class ServiceSupervisor:
         ):
             services.append(ManagedService("self_evolution_runtime", (python, "-m", "companyos.runtime.self_evolution_runtime")))
         # COMPANYOS_V69_31_EXTERNAL_RESEARCH_SERVICE
+        # COMPANYOS_V69_35G_LOCAL_HOST_CAPABILITY
+        if (
+            os.getenv("COMPANYOS_ENABLE_LOCAL_HOST_CAPABILITY","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/local_host_capability_classifier.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "local_host_capability_classifier",
+                    (python,"-m","companyos.runtime.local_host_capability_classifier","loop"),
+                )
+            )
+        # COMPANYOS_V69_35H_AUTHORIZED_LOCAL_AUTO_MIGRATION
+        if (
+            os.getenv("COMPANYOS_ENABLE_AUTHORIZED_LOCAL_AUTOMIGRATION","1")=="1"
+            and (Path.home()/"companyos/companyos/runtime/authorized_local_migration_controller.py").exists()
+        ):
+            services.append(
+                ManagedService(
+                    "authorized_local_migration_controller",
+                    (python,"-m","companyos.runtime.authorized_local_migration_controller","loop"),
+                )
+            )
         # COMPANYOS_V69_35E_LOCAL_LAN_HOST_DISCOVERY
         if (
             os.getenv("COMPANYOS_ENABLE_LOCAL_LAN_DISCOVERY","1")=="1"
