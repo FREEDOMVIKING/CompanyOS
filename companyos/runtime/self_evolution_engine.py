@@ -538,6 +538,58 @@ def _candidate_quality_errors(
             )
 
  # --------------------------------------------------------
+    # Preserve obvious command/status output contracts.
+    #
+    # If an existing script unconditionally emits JSON at
+    # module level, an autonomous candidate may not move that
+    # output behind a branch or replace it with plain text.
+    # --------------------------------------------------------
+    def _top_level_json_print(t):
+        if t is None:
+            return False
+
+        for node in getattr(t, "body", []):
+            if not isinstance(node, _ast.Expr):
+                continue
+
+            call=node.value
+
+            if not (
+                isinstance(call, _ast.Call)
+                and isinstance(call.func, _ast.Name)
+                and call.func.id == "print"
+            ):
+                continue
+
+            for child in _ast.walk(call):
+                if (
+                    isinstance(child, _ast.Call)
+                    and isinstance(
+                        child.func,
+                        _ast.Attribute,
+                    )
+                    and child.func.attr == "dumps"
+                    and isinstance(
+                        child.func.value,
+                        _ast.Name,
+                    )
+                    and child.func.value.id == "json"
+                ):
+                    return True
+
+        return False
+
+    if (
+        old_tree is not None
+        and _top_level_json_print(old_tree)
+        and not _top_level_json_print(tree)
+    ):
+        errors.append(
+            "public_output_contract_changed:"
+            "top_level_json_output_removed_or_guarded"
+        )
+
+ # --------------------------------------------------------
     # Helpers
     # --------------------------------------------------------
     def _local_module_exists(mod):
