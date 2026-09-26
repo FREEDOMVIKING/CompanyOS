@@ -211,3 +211,43 @@ class ProbeSignatureTests(
 
 if __name__=="__main__":
     unittest.main()
+
+
+LONG_RUNNING = '''
+import time
+
+def main():
+    while True:
+        time.sleep(1)
+'''
+
+
+class LongRunningProbeTests(
+    unittest.TestCase
+):
+
+    def test_long_running_function_rejected(self):
+        probe={
+            "mode":"function",
+            "function_name":"main",
+            "args":[],
+            "kwargs":{},
+            "assertion":{
+                "kind":"no_exception"
+            },
+        }
+
+        errors=validate_probe(
+            probe,
+            LONG_RUNNING,
+        )
+
+        self.assertTrue(
+            any(
+                x.startswith(
+                    "probe_targets_long_running_callable:"
+                )
+                for x in errors
+            ),
+            errors,
+        )

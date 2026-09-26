@@ -120,6 +120,101 @@ def _source_symbols(source):
     }
 
 
+
+def _selected_callable_node(probe, source):
+    try:
+        tree=ast.parse(source)
+    except Exception:
+        return None
+
+    mode=probe.get("mode")
+
+    if mode=="function":
+        name=probe.get("function_name")
+
+        for node in tree.body:
+            if isinstance(
+                node,
+                (
+                    ast.FunctionDef,
+                    ast.AsyncFunctionDef,
+                ),
+            ) and node.name==name:
+                return node
+
+    elif mode=="class_method":
+        cls=probe.get("class_name")
+        method=probe.get("method_name")
+
+        for node in tree.body:
+            if not (
+                isinstance(node,ast.ClassDef)
+                and node.name==cls
+            ):
+                continue
+
+            for child in node.body:
+                if isinstance(
+                    child,
+                    (
+                        ast.FunctionDef,
+                        ast.AsyncFunctionDef,
+                    ),
+                ) and child.name==method:
+                    return child
+
+    return None
+
+
+def _long_running_probe_errors(
+    probe,
+    source,
+):
+    node=_selected_callable_node(
+        probe,
+        source,
+    )
+
+    if node is None:
+        return []
+
+    errors=[]
+
+    for child in ast.walk(node):
+
+        if isinstance(child,ast.While):
+            errors.append(
+                "probe_targets_long_running_callable:"
+                "while_loop"
+            )
+            break
+
+        if isinstance(child,ast.Call):
+            fn=child.func
+
+            name=None
+
+            if isinstance(fn,ast.Name):
+                name=fn.id
+
+            elif isinstance(fn,ast.Attribute):
+                name=fn.attr
+
+            if name in {
+                "sleep",
+                "serve_forever",
+                "run_forever",
+                "listen",
+            }:
+                errors.append(
+                    "probe_targets_long_running_callable:"
+                    + name
+                )
+                break
+
+    return errors
+
+
 def validate_probe(probe, candidate_source):
     errors = []
 
@@ -221,6 +316,13 @@ def validate_probe(probe, candidate_source):
     errors.extend(
         validate_probe_paths(
             probe
+        )
+    )
+
+    errors.extend(
+        _long_running_probe_errors(
+            probe,
+            candidate_source,
         )
     )
 
@@ -830,19 +932,69 @@ def run_probe(
             )
         )
 
-        proc = subprocess.run(
-            [
-                sys.executable,
-                "-B",
-                "-c",
-                _RUNNER,
-            ],
-            cwd=str(sandbox),
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=45,
+        timeout_seconds=max(
+            5,
+            min(
+                int(
+                    os.getenv(
+                        "COMPANYOS_SELF_EVOLUTION_BACKTEST_TIMEOUT_SECONDS",
+                        "15",
+                    )
+                ),
+                60,
+            ),
         )
+
+        try:
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-c",
+                    _RUNNER,
+                ],
+                cwd=str(sandbox),
+                env=env,
+                text=True,
+                capture_output=True,
+                timeout=timeout_seconds,
+            )
+
+        except subprocess.TimeoutExpired as exc:
+            return {
+                "accepted":False,
+                "returncode":None,
+                "timed_out":True,
+                "timeout_seconds":timeout_seconds,
+                "exception":{
+                    "type":"BacktestTimeout",
+                    "message":(
+                        "behavioral probe exceeded "
+                        + str(timeout_seconds)
+                        + " seconds"
+                    ),
+                },
+                "stdout":(
+                    exc.stdout.decode(
+                        errors="replace"
+                    )
+                    if isinstance(
+                        exc.stdout,
+                        bytes,
+                    )
+                    else (exc.stdout or "")
+                )[-1200:],
+                "stderr":(
+                    exc.stderr.decode(
+                        errors="replace"
+                    )
+                    if isinstance(
+                        exc.stderr,
+                        bytes,
+                    )
+                    else (exc.stderr or "")
+                )[-1200:],
+            }
 
         return _parse_runner_output(
             proc
