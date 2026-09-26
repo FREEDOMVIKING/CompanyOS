@@ -475,6 +475,12 @@ def propose_hypothesis(
         }
 
     facts = _source_facts(baseline)
+
+    allowed_locations=[
+        "<module>",
+        *facts.get("symbols",[]),
+    ]
+
     last_error = None
     correction = ""
 
@@ -501,6 +507,17 @@ def propose_hypothesis(
                 sort_keys=True,
             )
             + "\n\n"
+
+            "LEGAL LOCATION VALUES:\n"
+            + json.dumps(
+                allowed_locations,
+                indent=2,
+            )
+            + "\n"
+            "The location field MUST exactly equal one value "
+            "from LEGAL LOCATION VALUES. Do not return a call "
+            "expression, variable name, source-text fragment, "
+            "or a symbol from another file.\n\n"
 
             "CURRENT SOURCE:\n"
             "----- BEGIN SOURCE -----\n"
@@ -611,10 +628,13 @@ def propose_hypothesis(
                 correction = (
                     "\n\nPREVIOUS PLAN WAS REJECTED:\n"
                     + last_error
+                    + "\nLEGAL LOCATION VALUES ARE: "
+                    + json.dumps(allowed_locations)
                     + "\nReturn a DIFFERENT plan grounded only "
-                      "in the supplied source. If the rejected "
-                      "capability is already implemented, identify "
-                      "another genuinely missing behavior instead."
+                      "in the supplied source. The location must "
+                      "exactly equal one legal location. If the "
+                      "rejected capability is already implemented, "
+                      "identify another genuinely missing behavior."
                 )
 
                 continue

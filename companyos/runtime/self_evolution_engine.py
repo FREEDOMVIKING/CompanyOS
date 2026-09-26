@@ -1496,6 +1496,47 @@ def _direct_generation_fallback(wt, goal):
                     behavior_score,
                 )
 
+                # Production capability code is a stronger
+                # autonomous-adaptation target than maintenance,
+                # patch, status, or snapshot scripts. These files
+                # remain allowed; they are simply pushed behind
+                # substantive runtime modules in the target pool.
+                target_tier=0
+
+                if rel.startswith("scripts/"):
+                    target_tier=1
+                    effective-=10
+
+                filename=Path(rel).name.lower()
+
+                maintenance_markers=(
+                    "patch_",
+                    "_patch",
+                    "dashboard_snapshot",
+                    "_status",
+                    "migration_script",
+                    "test_import",
+                )
+
+                if any(
+                    marker in filename
+                    for marker in maintenance_markers
+                ):
+                    target_tier=2
+                    effective-=16
+
+                # Give modest preference to modules participating
+                # directly in live execution and coordination.
+                if rel.startswith((
+                    "companyos/runtime/",
+                    "companyos/workerops/",
+                    "companyos/liveexec/",
+                    "companyos/orchestrator/",
+                    "companyos/resilienceops/",
+                    "companyos/execution_",
+                )):
+                    effective+=5
+
                 # Learn from repeated failures without permanently
                 # banning a target.
                 effective-=min(
@@ -1532,6 +1573,7 @@ def _direct_generation_fallback(wt, goal):
                     "score":score,
                     "effective_score":effective,
                     "behavior_score":behavior_score,
+                    "target_tier":target_tier,
                     "history":h,
                 })
 
@@ -1546,6 +1588,7 @@ def _direct_generation_fallback(wt, goal):
 
     candidates.sort(
         key=lambda x:(
+            x.get("target_tier",0),
             -x["effective_score"],
             -x["behavior_score"],
             x["size"],
