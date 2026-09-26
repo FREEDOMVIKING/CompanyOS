@@ -204,7 +204,37 @@ def model_request(
 
     key = configured_key or "companyos-local"
     base_url = configured_base or local_default
-    model = configured_model or "companyos-local"
+
+    default_model = (
+        configured_model
+        or "companyos-local"
+    )
+
+    planner_model = (
+        os.getenv(
+            "COMPANYOS_LOCAL_AI_PLANNER_MODEL",
+            "",
+        ).strip()
+        or default_model
+    )
+
+    coder_model = (
+        os.getenv(
+            "COMPANYOS_LOCAL_AI_CODER_MODEL",
+            "",
+        ).strip()
+        or planner_model
+    )
+
+    # JSON requests are planning / diagnosis work.
+    # Raw-text requests are complete source-code generation.
+    # This lets a lightweight model handle normal reasoning
+    # while a stronger specialist writes autonomous code.
+    model = (
+        coder_model
+        if response_mode == "text"
+        else planner_model
+    )
 
     payload: dict[str, Any] = {
         "model": model,
@@ -273,9 +303,25 @@ def model_request(
             "model": model,
         }
 
+    clean_text = str(output).strip()
+
+    if response_mode == "text":
+        clean_text = re.sub(
+            r"^```(?:python|py)?[ \\t\\r\\n]*",
+            "",
+            clean_text,
+            flags=re.IGNORECASE,
+        )
+
+        clean_text = re.sub(
+            r"[ \\t\\r\\n]*```$",
+            "",
+            clean_text,
+        ).strip()
+
     return {
         "ok": True,
-        "text": str(output).strip(),
+        "text": clean_text,
         "raw_id": data.get("id"),
         "model": data.get("model", model),
         "endpoint": endpoint,
